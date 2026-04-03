@@ -2,7 +2,7 @@ const plans = [
   {
     name: "Aari Growth",
     split: "75/25",
-    monthlyFee: "$29",
+    monthlyFee: "$39",
     badge: null,
     availability: "Where every agent starts",
     yearlyFee: "$199/year",
@@ -21,7 +21,7 @@ const plans = [
   {
     name: "Aari Pro",
     split: "90/10",
-    monthlyFee: "$49",
+    monthlyFee: "$69",
     badge: "Most Popular",
     availability: "Available after 5 transactions",
     yearlyFee: "$199/year",
