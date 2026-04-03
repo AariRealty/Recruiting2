@@ -2,8 +2,8 @@ import {
   HiOutlineCurrencyDollar,
   HiOutlineAcademicCap,
   HiOutlineSupport,
-  HiOutlineChartBar,
   HiOutlineClipboardCheck,
+  HiOutlineDesktopComputer,
   HiOutlineSpeakerphone,
 } from "react-icons/hi";
 
@@ -12,7 +12,7 @@ const reasons = [
     icon: HiOutlineCurrencyDollar,
     title: "Commission That Rewards You",
     description:
-      "More deals = bigger splits. Your commission increases as you produce. Fair splits, no weird fine print.",
+      "75/25 to start, 90/10 as you grow, and 100% once you hit 11+ deals. Your commission increases as you produce.",
   },
   {
     icon: HiOutlineAcademicCap,
@@ -21,10 +21,10 @@ const reasons = [
       "Someone actually invested in your success. Not a call center, not an email chain — real, personalized guidance.",
   },
   {
-    icon: HiOutlineSupport,
-    title: "Weekly Coaching",
+    icon: HiOutlineDesktopComputer,
+    title: "Lofty CRM + SkySlope",
     description:
-      "Strategies you can actually use, not just fluff. Learn what works right now in today's market.",
+      "AI-powered CRM to manage your pipeline and SkySlope for seamless transaction management — all included.",
   },
   {
     icon: HiOutlineClipboardCheck,
@@ -33,16 +33,16 @@ const reasons = [
       "Covered. Less paperwork, more deals. We handle the details so you can focus on selling.",
   },
   {
-    icon: HiOutlineChartBar,
-    title: "CRM That Works",
+    icon: HiOutlineSpeakerphone,
+    title: "Marketing & Branding",
     description:
-      "A CRM that keeps you on track — because your brain has enough to handle already.",
+      "Canva Pro access, social media templates, and professional listing management so you look polished and sell faster.",
   },
   {
-    icon: HiOutlineSpeakerphone,
-    title: "Marketing Support",
+    icon: HiOutlineSupport,
+    title: "Weekly Coaching",
     description:
-      "Leads, listings, and branding — handled. Professional listing management so you look polished and sell faster.",
+      "Strategies you can actually use, not just fluff. Learn what works right now in today's market.",
   },
 ];
 
@@ -57,7 +57,7 @@ export default function WhySection() {
           <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
             Everything You Need. Nothing You Don&apos;t.
           </h2>
-          <p className="max-w-2xl mx-auto text-muted text-lg">
+          <p className="max-w-2xl mx-auto text-gray-500 text-lg">
             We built our brokerage around what agents actually need — not what
             looks good on a brochure.
           </p>
@@ -75,7 +75,9 @@ export default function WhySection() {
               <h3 className="text-xl font-bold text-black mb-3">
                 {reason.title}
               </h3>
-              <p className="text-muted leading-relaxed">{reason.description}</p>
+              <p className="text-gray-500 leading-relaxed">
+                {reason.description}
+              </p>
             </div>
           ))}
         </div>

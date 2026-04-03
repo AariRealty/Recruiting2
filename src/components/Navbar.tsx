@@ -6,8 +6,9 @@ import { HiMenu, HiX } from "react-icons/hi";
 const navLinks = [
   { label: "Why Aari Realty", href: "#why" },
   { label: "What You Get", href: "#benefits" },
+  { label: "Commission Plans", href: "#commission" },
   { label: "New Agents", href: "#new-agents" },
-  { label: "Testimonials", href: "#testimonials" },
+  { label: "Book a Meeting", href: "#calendar" },
 ];
 
 export default function Navbar() {
@@ -23,7 +24,6 @@ export default function Navbar() {
             </span>
           </a>
 
-          {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
@@ -42,7 +42,6 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile toggle */}
           <button
             className="lg:hidden text-white"
             onClick={() => setOpen(!open)}
@@ -53,7 +52,6 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile menu */}
       {open && (
         <div className="lg:hidden bg-black border-t border-white/10">
           <div className="px-4 py-4 flex flex-col gap-3">

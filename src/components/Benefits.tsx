@@ -1,6 +1,6 @@
 export default function Benefits() {
   return (
-    <section id="benefits" className="py-24 bg-section-alt">
+    <section id="benefits" className="py-24 bg-[#f9f9f9]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left content */}
@@ -11,7 +11,7 @@ export default function Benefits() {
             <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6">
               Tools & Support That Make a Difference
             </h2>
-            <p className="text-muted text-lg leading-relaxed mb-8">
+            <p className="text-gray-500 text-lg leading-relaxed mb-8">
               We give you everything you need to focus on what matters most —
               closing deals and growing your business. No hidden fees, no
               surprises.
@@ -35,40 +35,42 @@ export default function Benefits() {
           <div className="grid sm:grid-cols-2 gap-4">
             {[
               {
-                title: "CRM System",
-                description: "Stay organized and on track with a CRM built for agents",
+                title: "Lofty CRM",
+                description:
+                  "AI-powered CRM to manage leads, automate follow-ups, and keep your pipeline full",
               },
               {
-                title: "Marketing Support",
-                description: "Leads, listings, and branding — all handled for you",
+                title: "SkySlope",
+                description:
+                  "Streamlined transaction management — less paperwork, more deals",
+              },
+              {
+                title: "Canva Pro & Templates",
+                description:
+                  "Professional social media templates and Canva access for polished branding",
               },
               {
                 title: "Transaction Coordination",
-                description: "Less paperwork, more deals — we cover the details",
-              },
-              {
-                title: "Listing Management",
-                description: "Look polished and sell faster with professional support",
+                description:
+                  "We handle the details so you can focus on selling",
               },
               {
                 title: "Weekly Coaching",
-                description: "Real strategies you can actually use in today's market",
+                description:
+                  "Real strategies you can actually use in today's market",
               },
               {
                 title: "One-on-One Mentorship",
-                description: "Personalized guidance from someone invested in you",
+                description:
+                  "Personalized guidance from someone invested in you",
               },
             ].map((tool) => (
               <div
                 key={tool.title}
                 className="flex flex-col p-5 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow border border-gray-50"
               >
-                <h4 className="font-semibold text-black mb-1">
-                  {tool.title}
-                </h4>
-                <p className="text-sm text-muted">
-                  {tool.description}
-                </p>
+                <h4 className="font-semibold text-black mb-1">{tool.title}</h4>
+                <p className="text-sm text-gray-500">{tool.description}</p>
               </div>
             ))}
           </div>
