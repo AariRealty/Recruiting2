@@ -62,7 +62,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-4">Our Platforms</h4>
             <ul className="space-y-2.5">
-              <li className="text-white/40 text-sm">SkySlope Suite + Books</li>
+              <li className="text-white/40 text-sm">SkySlope + SkySlope Books</li>
               <li className="text-white/40 text-sm">Lofty CRM</li>
               <li className="text-white/40 text-sm">Canva Pro</li>
               <li className="text-white/40 text-sm">Koalendar Scheduling</li>

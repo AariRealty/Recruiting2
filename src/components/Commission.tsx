@@ -14,7 +14,7 @@ const plans = [
     includes: [
       "Full transaction coordination (all paperwork done for you)",
       "Hands-on broker engagement",
-      "SkySlope access",
+      "SkySlope + SkySlope Books access",
     ],
     highlighted: false,
   },
@@ -38,7 +38,7 @@ const plans = [
       "Accountability sessions",
       "One-on-one with broker",
       "Broker access for deal guidance",
-      "SkySlope access",
+      "SkySlope + SkySlope Books access",
     ],
     highlighted: true,
   },
@@ -55,7 +55,7 @@ const plans = [
     position: "Fully independent — complete autonomy over your business",
     capNote: null,
     includes: [
-      "SkySlope access",
+      "SkySlope + SkySlope Books access",
     ],
     highlighted: false,
   },

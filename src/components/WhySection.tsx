@@ -22,9 +22,9 @@ const reasons = [
   },
   {
     icon: HiOutlineDesktopComputer,
-    title: "SkySlope on Every Plan",
+    title: "SkySlope + Books on Every Plan",
     description:
-      "Transaction management and digital document handling included on all plans — no extra charge, no setup hassle.",
+      "Transaction management, digital documents, and SkySlope Books for accounting — included on all plans, no extra charge.",
   },
   {
     icon: HiOutlineClipboardCheck,
