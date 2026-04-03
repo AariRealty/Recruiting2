@@ -30,10 +30,11 @@ export default function JoinCTA() {
 
             <div className="space-y-4">
               {[
-                "Fair commission splits that reward your work",
-                "Full CRM and marketing support included",
-                "Transaction coordination covered",
+                "Commission plans from 75/25 up to 100%",
+                "SkySlope included on every plan",
+                "Marketing tools, CRM, and leads available",
                 "One-on-one mentorship and weekly coaching",
+                "Full transaction coordination on Growth plan",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
                   <svg
@@ -77,7 +78,7 @@ export default function JoinCTA() {
                 <h3 className="text-xl font-bold text-black mb-2">
                   Thank You!
                 </h3>
-                <p className="text-muted">
+                <p className="text-gray-500">
                   We&apos;ve received your information and will be in touch
                   within 24 hours.
                 </p>
@@ -87,7 +88,7 @@ export default function JoinCTA() {
                 <h3 className="text-2xl font-bold text-black mb-2">
                   Join Our Team
                 </h3>
-                <p className="text-muted mb-6">
+                <p className="text-gray-500 mb-6">
                   Fill out the form below and we&apos;ll reach out to schedule a
                   confidential conversation.
                 </p>
@@ -134,7 +135,7 @@ export default function JoinCTA() {
                     <input
                       type="tel"
                       className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all"
-                      placeholder="(555) 123-4567"
+                      placeholder="(239) 555-0100"
                     />
                   </div>
                   <div>

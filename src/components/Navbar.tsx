@@ -5,8 +5,8 @@ import { HiMenu, HiX } from "react-icons/hi";
 
 const navLinks = [
   { label: "Why Aari Realty", href: "#why" },
-  { label: "What You Get", href: "#benefits" },
   { label: "Commission Plans", href: "#commission" },
+  { label: "Business Tools", href: "#benefits" },
   { label: "New Agents", href: "#new-agents" },
   { label: "Book a Meeting", href: "#calendar" },
 ];

@@ -1,8 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhySection from "@/components/WhySection";
-import Benefits from "@/components/Benefits";
 import Commission from "@/components/Commission";
+import Benefits from "@/components/Benefits";
 import NewAgents from "@/components/NewAgents";
 import Testimonials from "@/components/Testimonials";
 import Calendar from "@/components/Calendar";
@@ -16,8 +16,8 @@ export default function Home() {
       <main>
         <Hero />
         <WhySection />
-        <Benefits />
         <Commission />
+        <Benefits />
         <NewAgents />
         <Testimonials />
         <Calendar />

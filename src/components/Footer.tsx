@@ -11,7 +11,7 @@ export default function Footer() {
               Aari <span className="font-light">Realty</span>
             </span>
             <p className="text-white/40 text-sm leading-relaxed mt-4">
-              Real estate services in the area of Southwest Florida.
+              Real estate services in Southwest Florida.
               Fair splits. Real training. Actual support.
             </p>
           </div>
@@ -22,10 +22,10 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {[
                 { label: "Why Aari Realty", href: "#why" },
-                { label: "What You Get", href: "#benefits" },
+                { label: "Commission Plans", href: "#commission" },
+                { label: "Business Tools", href: "#benefits" },
                 { label: "New Agents", href: "#new-agents" },
-                { label: "Testimonials", href: "#testimonials" },
-                { label: "Join Our Team", href: "#join" },
+                { label: "Book a Meeting", href: "#calendar" },
               ].map((link) => (
                 <li key={link.href}>
                   <a
@@ -58,19 +58,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* CTA */}
+          {/* Platforms */}
           <div>
-            <h4 className="font-semibold text-white mb-4">Ready to Join?</h4>
-            <p className="text-white/40 text-sm mb-4">
-              Take the first step toward a career where your hard work
-              actually pays off.
-            </p>
-            <a
-              href="#join"
-              className="inline-block rounded-full bg-white px-6 py-2.5 text-sm font-semibold text-black hover:bg-gray-200 transition-colors"
-            >
-              Get Started
-            </a>
+            <h4 className="font-semibold text-white mb-4">Our Platforms</h4>
+            <ul className="space-y-2.5">
+              <li className="text-white/40 text-sm">SkySlope Suite + Books</li>
+              <li className="text-white/40 text-sm">Lofty CRM</li>
+              <li className="text-white/40 text-sm">Canva Pro</li>
+              <li className="text-white/40 text-sm">Koalendar Scheduling</li>
+            </ul>
           </div>
         </div>
 

@@ -2,6 +2,7 @@ const plans = [
   {
     name: "Aari Growth",
     split: "75/25",
+    monthlyFee: "$29",
     badge: null,
     availability: "Where every agent starts",
     yearlyFee: "$199/year",
@@ -9,48 +10,53 @@ const plans = [
     transactionFee: "$299",
     transactionLabel: "Transaction Processing Fee (all transaction types)",
     position: "Full support environment to build and grow with broker engagement",
-    capAt: "Available after 5 transactions: upgrade to Pro or Max",
+    capNote: "Available after 5 transactions: upgrade to Pro or Max",
     includes: [
-      "Full transaction coordination support",
-      "All paperwork done for you",
+      "Full transaction coordination (all paperwork done for you)",
       "Hands-on broker engagement",
+      "SkySlope access",
     ],
     highlighted: false,
   },
   {
     name: "Aari Pro",
     split: "90/10",
+    monthlyFee: "$49",
     badge: "Most Popular",
     availability: "Available after 5 transactions",
     yearlyFee: "$199/year",
     yearlyLabel: "E&O + Compliance",
-    transactionFee: "$399",
+    transactionFee: "$299",
     transactionLabel: "Transaction Processing Fee (all transaction types)",
     position: "Independent with guidance when needed",
-    capAt: null,
+    capNote: null,
     includes: [
-      "Broker access for deal guidance",
       "Marketing tools included ($99/mo value)",
       "Video recording sessions",
       "Pop-by strategy + execution",
       "Social media planning & templates",
       "Accountability sessions",
       "One-on-one with broker",
+      "Broker access for deal guidance",
+      "SkySlope access",
     ],
     highlighted: true,
   },
   {
     name: "Aari Max",
     split: "100%",
+    monthlyFee: "$99",
     badge: null,
-    availability: "Available to any agent, anytime",
+    availability: "Keep 100% of your commission",
     yearlyFee: "$199/year",
     yearlyLabel: "E&O + Compliance",
-    transactionFee: "$499 Residential / $299 Vacant Land",
+    transactionFee: "$399",
     transactionLabel: "Transaction Processing Fee",
     position: "Fully independent — complete autonomy over your business",
-    capAt: null,
-    includes: [],
+    capNote: null,
+    includes: [
+      "SkySlope access",
+    ],
     highlighted: false,
   },
 ];
@@ -68,7 +74,8 @@ export default function Commission() {
           </h2>
           <p className="max-w-2xl mx-auto text-gray-500 text-lg">
             Choose the plan that fits your business. Start with full support or
-            go 100% from day one — it&apos;s your call.
+            go independent — every plan includes SkySlope and a clear path
+            forward.
           </p>
         </div>
 
@@ -99,7 +106,8 @@ export default function Commission() {
                 {plan.availability}
               </p>
 
-              <div className="mb-6">
+              {/* Split */}
+              <div className="mb-2">
                 <span
                   className={`text-5xl font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
                 >
@@ -114,13 +122,25 @@ export default function Commission() {
                 )}
               </div>
 
+              {/* Monthly fee */}
+              <p
+                className={`text-sm font-semibold mb-6 ${plan.highlighted ? "text-white/70" : "text-gray-600"}`}
+              >
+                {plan.monthlyFee}
+                <span
+                  className={`font-normal ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                >
+                  /month
+                </span>
+              </p>
+
               {/* Fees */}
               <div
                 className={`space-y-3 mb-6 pb-6 border-b ${plan.highlighted ? "border-white/10" : "border-gray-100"}`}
               >
                 <div>
                   <span
-                    className={`text-lg font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
+                    className={`text-base font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
                   >
                     {plan.yearlyFee}
                   </span>
@@ -132,7 +152,7 @@ export default function Commission() {
                 </div>
                 <div>
                   <span
-                    className={`text-lg font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
+                    className={`text-base font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
                   >
                     {plan.transactionFee}
                   </span>
@@ -145,54 +165,43 @@ export default function Commission() {
               </div>
 
               {/* Includes */}
-              <div className="mb-4">
+              <div className="mb-4 flex-1">
                 <p
-                  className={`text-xs font-semibold tracking-wider uppercase mb-2 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                  className={`text-xs font-semibold tracking-wider uppercase mb-3 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
                 >
                   Includes
                 </p>
-                {plan.includes.length > 0 ? (
-                  <ul className="space-y-2">
-                    {plan.includes.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-2 text-sm"
+                <ul className="space-y-2">
+                  {plan.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm">
+                      <svg
+                        className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlighted ? "text-white" : "text-black"}`}
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
                       >
-                        <svg
-                          className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlighted ? "text-white" : "text-black"}`}
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={2}
-                            d="M5 13l4 4L19 7"
-                          />
-                        </svg>
-                        <span
-                          className={
-                            plan.highlighted ? "text-white/80" : "text-gray-600"
-                          }
-                        >
-                          {item}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p
-                    className={`text-sm italic ${plan.highlighted ? "text-white/50" : "text-gray-400"}`}
-                  >
-                    No additional support — you run your business your way
-                  </p>
-                )}
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M5 13l4 4L19 7"
+                        />
+                      </svg>
+                      <span
+                        className={
+                          plan.highlighted ? "text-white/80" : "text-gray-600"
+                        }
+                      >
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Position */}
               <div
-                className={`mt-auto mb-6 p-3 rounded-lg ${plan.highlighted ? "bg-white/5" : "bg-gray-50"}`}
+                className={`mb-4 p-3 rounded-lg ${plan.highlighted ? "bg-white/5" : "bg-gray-50"}`}
               >
                 <p
                   className={`text-xs font-semibold tracking-wider uppercase mb-1 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
@@ -206,17 +215,17 @@ export default function Commission() {
                 </p>
               </div>
 
-              {/* Cap */}
-              {plan.capAt && (
+              {/* Cap note */}
+              {plan.capNote && (
                 <p
-                  className={`text-xs mb-6 italic ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                  className={`text-xs italic mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
                 >
-                  {plan.capAt}
+                  {plan.capNote}
                 </p>
               )}
 
               <a
-                href="#join"
+                href="#calendar"
                 className={`block text-center rounded-full py-3 font-semibold transition-all ${
                   plan.highlighted
                     ? "bg-white text-black hover:bg-gray-200"

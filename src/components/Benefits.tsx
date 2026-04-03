@@ -4,23 +4,28 @@ export default function Benefits() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-black/40 font-semibold tracking-widest uppercase text-sm mb-3">
-            Business Tools
+            Business Tools Add-On
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
-            Everything You Need to Grow
+            Level Up Your Business
           </h2>
           <p className="max-w-2xl mx-auto text-gray-500 text-lg">
-            Choose the package that fits your business. Both plans give you the
-            tools and support to close more deals.
+            Available to any agent on any plan. Aari Pro agents already get
+            Marketing Essentials included — upgrade to add CRM + Leads.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* $99/month plan */}
           <div className="flex flex-col rounded-2xl bg-white border border-gray-100 p-8 hover:shadow-lg transition-shadow">
-            <h3 className="text-lg font-bold text-black mb-1">
-              Marketing Essentials
-            </h3>
+            <div className="flex items-center justify-between mb-1">
+              <h3 className="text-lg font-bold text-black">
+                Marketing Essentials
+              </h3>
+              <span className="text-xs font-bold bg-black/5 text-black/60 px-3 py-1 rounded-full">
+                Included in Pro
+              </span>
+            </div>
             <p className="text-sm text-gray-500 mb-6">
               Access to brokerage marketing activities
             </p>
@@ -59,7 +64,7 @@ export default function Benefits() {
             </ul>
 
             <a
-              href="#join"
+              href="#calendar"
               className="block text-center rounded-full py-3 font-semibold bg-black text-white hover:bg-gray-800 transition-all"
             >
               Get Started
@@ -76,7 +81,7 @@ export default function Benefits() {
               Marketing + CRM + Leads
             </h3>
             <p className="text-sm text-white/60 mb-6">
-              Everything in Essentials plus CRM and lead generation
+              Everything in Essentials plus Lofty CRM and lead generation
             </p>
 
             <div className="mb-8">
@@ -91,8 +96,7 @@ export default function Benefits() {
                 "Lead generation",
                 "Video recording sessions",
                 "Pop-by strategy + execution",
-                "Social media planning",
-                "Social media templates",
+                "Social media planning & templates",
                 "Accountability sessions",
                 "One-on-one with broker",
               ].map((feature) => (
@@ -116,7 +120,7 @@ export default function Benefits() {
             </ul>
 
             <a
-              href="#join"
+              href="#calendar"
               className="block text-center rounded-full py-3 font-semibold bg-white text-black hover:bg-gray-200 transition-all"
             >
               Get Started

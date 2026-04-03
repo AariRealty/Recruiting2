@@ -12,37 +12,37 @@ const reasons = [
     icon: HiOutlineCurrencyDollar,
     title: "Commission That Rewards You",
     description:
-      "75/25 to start, 90/10 as you grow, and 100% once you hit 11+ deals. Your commission increases as you produce.",
+      "75/25 to start, 90/10 as you grow, and 100% when you're ready. Your commission increases as you produce — no caps on your potential.",
   },
   {
     icon: HiOutlineAcademicCap,
     title: "One-on-One Mentorship",
     description:
-      "Someone actually invested in your success. Not a call center, not an email chain — real, personalized guidance.",
+      "Someone actually invested in your success. Not a call center, not an email chain — real, personalized guidance from your broker.",
   },
   {
     icon: HiOutlineDesktopComputer,
-    title: "Lofty CRM + SkySlope",
+    title: "SkySlope on Every Plan",
     description:
-      "AI-powered CRM to manage your pipeline and SkySlope for seamless transaction management — all included.",
+      "Transaction management and digital document handling included on all plans — no extra charge, no setup hassle.",
   },
   {
     icon: HiOutlineClipboardCheck,
-    title: "Transaction Coordination",
+    title: "Full Transaction Coordination",
     description:
-      "Covered. Less paperwork, more deals. We handle the details so you can focus on selling.",
+      "On our Growth plan, all paperwork is done for you. Focus on selling while we handle the details from contract to close.",
   },
   {
     icon: HiOutlineSpeakerphone,
     title: "Marketing & Branding",
     description:
-      "Canva Pro access, social media templates, and professional listing management so you look polished and sell faster.",
+      "Video recording sessions, pop-by strategies, social media planning and templates — included in Pro or available as an add-on.",
   },
   {
     icon: HiOutlineSupport,
-    title: "Weekly Coaching",
+    title: "Lofty CRM + Leads",
     description:
-      "Strategies you can actually use, not just fluff. Learn what works right now in today's market.",
+      "AI-powered CRM and lead generation available through our Marketing + CRM + Leads package to keep your pipeline full.",
   },
 ];
 
