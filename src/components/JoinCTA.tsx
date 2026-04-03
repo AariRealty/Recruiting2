@@ -11,49 +11,33 @@ export default function JoinCTA() {
   }
 
   return (
-    <section
-      id="join"
-      className="py-24 bg-gradient-to-br from-primary-dark via-primary to-primary-light relative overflow-hidden"
-    >
-      {/* Background decoration */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 30% 70%, rgba(201,168,76,0.4) 0%, transparent 50%)",
-          }}
-        />
-      </div>
-
+    <section id="join" className="py-24 bg-black relative overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left content */}
           <div>
-            <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-3">
+            <p className="text-white/40 font-semibold tracking-widest uppercase text-sm mb-3">
               Ready to Get Started?
             </p>
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-6">
-              Take the First Step Toward Your{" "}
-              <span className="text-accent">Dream Career</span>
+              Take the First Step
             </h2>
-            <p className="text-white/70 text-lg leading-relaxed mb-8">
-              Whether you&apos;re a newly licensed agent or a seasoned
-              professional, Aari Realty has the tools, training, and support to
-              help you reach your goals. Fill out the form and a member of our
-              leadership team will be in touch within 24 hours.
+            <p className="text-white/50 text-lg leading-relaxed mb-8">
+              Whether you&apos;re newly licensed or a seasoned pro, Aari Realty
+              has the tools, training, and support to help you reach your goals.
+              Fill out the form and our team will be in touch within 24 hours.
             </p>
 
             <div className="space-y-4">
               {[
-                "No desk fees or hidden costs",
-                "Flexible commission plans starting day one",
-                "Full technology stack included",
-                "Personalized onboarding experience",
+                "Fair commission splits that reward your work",
+                "Full CRM and marketing support included",
+                "Transaction coordination covered",
+                "One-on-one mentorship and weekly coaching",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
                   <svg
-                    className="w-5 h-5 text-accent flex-shrink-0"
+                    className="w-5 h-5 text-white flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -65,7 +49,7 @@ export default function JoinCTA() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span className="text-white/80">{item}</span>
+                  <span className="text-white/60">{item}</span>
                 </div>
               ))}
             </div>
@@ -75,9 +59,9 @@ export default function JoinCTA() {
           <div className="bg-white rounded-2xl p-8 shadow-2xl">
             {submitted ? (
               <div className="text-center py-12">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <svg
-                    className="w-8 h-8 text-green-600"
+                    className="w-8 h-8 text-black"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -90,7 +74,7 @@ export default function JoinCTA() {
                     />
                   </svg>
                 </div>
-                <h3 className="text-xl font-bold text-primary-dark mb-2">
+                <h3 className="text-xl font-bold text-black mb-2">
                   Thank You!
                 </h3>
                 <p className="text-muted">
@@ -100,7 +84,7 @@ export default function JoinCTA() {
               </div>
             ) : (
               <>
-                <h3 className="text-2xl font-bold text-primary-dark mb-2">
+                <h3 className="text-2xl font-bold text-black mb-2">
                   Join Our Team
                 </h3>
                 <p className="text-muted mb-6">
@@ -110,86 +94,77 @@ export default function JoinCTA() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">
+                      <label className="block text-sm font-medium text-black mb-1.5">
                         First Name
                       </label>
                       <input
                         type="text"
                         required
-                        className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                        className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all"
                         placeholder="John"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-foreground mb-1.5">
+                      <label className="block text-sm font-medium text-black mb-1.5">
                         Last Name
                       </label>
                       <input
                         type="text"
                         required
-                        className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                        className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all"
                         placeholder="Doe"
                       />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">
+                    <label className="block text-sm font-medium text-black mb-1.5">
                       Email
                     </label>
                     <input
                       type="email"
                       required
-                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all"
                       placeholder="john@example.com"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">
+                    <label className="block text-sm font-medium text-black mb-1.5">
                       Phone
                     </label>
                     <input
                       type="tel"
-                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all"
+                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all"
                       placeholder="(555) 123-4567"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">
+                    <label className="block text-sm font-medium text-black mb-1.5">
                       Experience Level
                     </label>
                     <select
                       required
-                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all bg-white"
+                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all bg-white"
                     >
                       <option value="">Select your experience</option>
-                      <option value="new">
-                        Newly Licensed (0-1 years)
-                      </option>
-                      <option value="developing">
-                        Developing (1-3 years)
-                      </option>
-                      <option value="experienced">
-                        Experienced (3-7 years)
-                      </option>
-                      <option value="top-producer">
-                        Top Producer (7+ years)
-                      </option>
-                      <option value="team-leader">Team Leader</option>
+                      <option value="new">New to Real Estate</option>
+                      <option value="developing">1-3 Years</option>
+                      <option value="experienced">3-7 Years</option>
+                      <option value="top-producer">7+ Years</option>
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">
+                    <label className="block text-sm font-medium text-black mb-1.5">
                       Tell Us About Yourself
                     </label>
                     <textarea
                       rows={3}
-                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-accent focus:ring-2 focus:ring-accent/20 outline-none transition-all resize-none"
+                      className="w-full rounded-lg border border-gray-200 px-4 py-3 text-sm focus:border-black focus:ring-2 focus:ring-black/10 outline-none transition-all resize-none"
                       placeholder="What are you looking for in a brokerage?"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full rounded-full bg-accent py-3.5 font-semibold text-primary-dark hover:bg-accent-light transition-colors text-base"
+                    className="w-full rounded-full bg-black py-3.5 font-semibold text-white hover:bg-gray-800 transition-colors text-base"
                   >
                     Submit Application
                   </button>

@@ -1,9 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import WhySection from "@/components/WhySection";
-import Technology from "@/components/Technology";
-import Training from "@/components/Training";
-import Commission from "@/components/Commission";
+import Benefits from "@/components/Benefits";
+import NewAgents from "@/components/NewAgents";
 import Testimonials from "@/components/Testimonials";
 import JoinCTA from "@/components/JoinCTA";
 import Footer from "@/components/Footer";
@@ -15,9 +14,8 @@ export default function Home() {
       <main>
         <Hero />
         <WhySection />
-        <Technology />
-        <Training />
-        <Commission />
+        <Benefits />
+        <NewAgents />
         <Testimonials />
         <JoinCTA />
       </main>
