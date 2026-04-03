@@ -2,35 +2,53 @@ const plans = [
   {
     name: "Aari Growth",
     split: "75/25",
+    badge: null,
+    availability: "Where every agent starts",
     yearlyFee: "$199/year",
     yearlyLabel: "E&O + Compliance",
     transactionFee: "$299",
     transactionLabel: "Transaction Processing Fee (all transaction types)",
     position: "Full support environment to build and grow with broker engagement",
-    capAt: "5 transactions (then option to go Pro or Max)",
-    includes: ["Full transaction coordination support", "All paperwork done for you"],
+    capAt: "Available after 5 transactions: upgrade to Pro or Max",
+    includes: [
+      "Full transaction coordination support",
+      "All paperwork done for you",
+      "Hands-on broker engagement",
+    ],
     highlighted: false,
   },
   {
     name: "Aari Pro",
     split: "90/10",
+    badge: "Most Popular",
+    availability: "Available after 5 transactions",
     yearlyFee: "$199/year",
     yearlyLabel: "E&O + Compliance",
     transactionFee: "$399",
     transactionLabel: "Transaction Processing Fee (all transaction types)",
     position: "Independent with guidance when needed",
-    capAt: "10 transactions (then option to go Max)",
-    includes: ["Broker access for deal guidance"],
+    capAt: null,
+    includes: [
+      "Broker access for deal guidance",
+      "Marketing tools included ($99/mo value)",
+      "Video recording sessions",
+      "Pop-by strategy + execution",
+      "Social media planning & templates",
+      "Accountability sessions",
+      "One-on-one with broker",
+    ],
     highlighted: true,
   },
   {
     name: "Aari Max",
     split: "100%",
+    badge: null,
+    availability: "Available to any agent, anytime",
     yearlyFee: "$199/year",
     yearlyLabel: "E&O + Compliance",
     transactionFee: "$499 Residential / $299 Vacant Land",
     transactionLabel: "Transaction Processing Fee",
-    position: "Fully independent",
+    position: "Fully independent — complete autonomy over your business",
     capAt: null,
     includes: [],
     highlighted: false,
@@ -49,8 +67,8 @@ export default function Commission() {
             Your Commission Grows With You
           </h2>
           <p className="max-w-2xl mx-auto text-gray-500 text-lg">
-            Start at 75/25 and work your way to keeping 100%. No caps on your
-            potential — just clear tiers that reward production.
+            Choose the plan that fits your business. Start with full support or
+            go 100% from day one — it&apos;s your call.
           </p>
         </div>
 
@@ -64,9 +82,9 @@ export default function Commission() {
                   : "bg-white border border-gray-100 hover:shadow-lg"
               }`}
             >
-              {plan.highlighted && (
+              {plan.badge && (
                 <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">
-                  Most Popular
+                  {plan.badge}
                 </div>
               )}
 
@@ -75,8 +93,13 @@ export default function Commission() {
               >
                 {plan.name}
               </h3>
+              <p
+                className={`text-xs font-medium mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+              >
+                {plan.availability}
+              </p>
 
-              <div className="mt-4 mb-6">
+              <div className="mb-6">
                 <span
                   className={`text-5xl font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
                 >
@@ -122,13 +145,13 @@ export default function Commission() {
               </div>
 
               {/* Includes */}
-              {plan.includes.length > 0 ? (
-                <div className="mb-4">
-                  <p
-                    className={`text-xs font-semibold tracking-wider uppercase mb-2 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
-                  >
-                    Includes
-                  </p>
+              <div className="mb-4">
+                <p
+                  className={`text-xs font-semibold tracking-wider uppercase mb-2 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                >
+                  Includes
+                </p>
+                {plan.includes.length > 0 ? (
                   <ul className="space-y-2">
                     {plan.includes.map((item) => (
                       <li
@@ -158,21 +181,14 @@ export default function Commission() {
                       </li>
                     ))}
                   </ul>
-                </div>
-              ) : (
-                <div className="mb-4">
+                ) : (
                   <p
-                    className={`text-xs font-semibold tracking-wider uppercase mb-2 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                    className={`text-sm italic ${plan.highlighted ? "text-white/50" : "text-gray-400"}`}
                   >
-                    Includes
+                    No additional support — you run your business your way
                   </p>
-                  <p
-                    className={`text-sm ${plan.highlighted ? "text-white/50" : "text-gray-400"}`}
-                  >
-                    Self-service — no additional support included
-                  </p>
-                </div>
-              )}
+                )}
+              </div>
 
               {/* Position */}
               <div
@@ -193,9 +209,9 @@ export default function Commission() {
               {/* Cap */}
               {plan.capAt && (
                 <p
-                  className={`text-xs mb-6 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                  className={`text-xs mb-6 italic ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
                 >
-                  Cap at: {plan.capAt}
+                  {plan.capAt}
                 </p>
               )}
 
