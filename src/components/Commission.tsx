@@ -1,44 +1,36 @@
 const plans = [
   {
     name: "Aari Growth",
-    split: "75/25",
+    split: "75 / 25",
     monthlyFee: "$39",
-    badge: null,
-    availability: "Where every agent starts",
-    yearlyFee: "$199/year",
-    yearlyLabel: "E&O + Compliance",
     transactionFee: "$299",
-    transactionLabel: "Transaction Processing Fee (all transaction types)",
-    position: "Full support environment to build and grow with broker engagement",
-    capNote: "Available after 5 transactions: upgrade to Pro or Max",
+    badge: null,
+    callouts: [
+      "Full transaction coordination (all paperwork handled for you)",
+      "Marketing essentials",
+    ],
     includes: [
-      "Full transaction coordination (all paperwork done for you)",
-      "Hands-on broker engagement",
-      "SkySlope + SkySlope Books access",
+      "Accountability club",
+      "One-on-one with broker",
+      "SkySlope Suite",
+      "SkySlope Books",
     ],
     highlighted: false,
   },
   {
     name: "Aari Pro",
-    split: "90/10",
+    split: "90 / 10",
     monthlyFee: "$69",
-    badge: "Most Popular",
-    availability: "Available after 5 transactions",
-    yearlyFee: "$199/year",
-    yearlyLabel: "E&O + Compliance",
-    transactionFee: "$299",
-    transactionLabel: "Transaction Processing Fee (all transaction types)",
-    position: "Independent with guidance when needed",
-    capNote: null,
+    transactionFee: "$349",
+    badge: "Most Agents Start Here",
+    callouts: [
+      "90/10 commission split",
+      "More control over your business",
+    ],
     includes: [
-      "Marketing tools included ($99/mo value)",
-      "Video recording sessions",
-      "Pop-by strategy + execution",
-      "Social media planning & templates",
-      "Accountability sessions",
-      "One-on-one with broker",
-      "Broker access for deal guidance",
-      "SkySlope + SkySlope Books access",
+      "Marketing support",
+      "SkySlope Suite",
+      "SkySlope Books",
     ],
     highlighted: true,
   },
@@ -46,16 +38,16 @@ const plans = [
     name: "Aari Max",
     split: "100%",
     monthlyFee: "$99",
-    badge: null,
-    availability: "Keep 100% of your commission",
-    yearlyFee: "$199/year",
-    yearlyLabel: "E&O + Compliance",
     transactionFee: "$399",
-    transactionLabel: "Transaction Processing Fee",
-    position: "Fully independent — complete autonomy over your business",
-    capNote: null,
+    badge: null,
+    callouts: [
+      "100% commission",
+      "Full control of your business",
+    ],
     includes: [
-      "SkySlope + SkySlope Books access",
+      "SkySlope Suite",
+      "SkySlope Books",
+      "Broker support when needed",
     ],
     highlighted: false,
   },
@@ -65,18 +57,23 @@ export default function Commission() {
   return (
     <section id="commission" className="py-24 bg-[#f9f9f9]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-6">
           <p className="text-black/40 font-semibold tracking-widest uppercase text-sm mb-3">
-            Commission Plans
+            Step 01
           </p>
           <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
-            Your Commission Grows With You
+            Choose Your Structure
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-500 text-lg">
-            Choose the plan that fits your business. Start with full support or
-            go independent — every plan includes SkySlope and a clear path
-            forward.
-          </p>
+        </div>
+
+        {/* Compliance banner */}
+        <div className="max-w-6xl mx-auto mb-12">
+          <div className="bg-black text-white text-center rounded-xl px-6 py-4">
+            <p className="text-sm font-medium">
+              $199/year — E&amp;O + Compliance · Applies to all agents · Billed
+              after ICA is signed · Renews annually
+            </p>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -90,82 +87,50 @@ export default function Commission() {
               }`}
             >
               {plan.badge && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase whitespace-nowrap">
                   {plan.badge}
                 </div>
               )}
 
+              {/* Name */}
               <h3
-                className={`text-xl font-bold mb-1 ${plan.highlighted ? "text-white" : "text-black"}`}
+                className={`text-xl font-bold mb-4 ${plan.highlighted ? "text-white" : "text-black"}`}
               >
                 {plan.name}
               </h3>
-              <p
-                className={`text-xs font-medium mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
-              >
-                {plan.availability}
-              </p>
 
               {/* Split */}
-              <div className="mb-2">
+              <div className="mb-4">
                 <span
                   className={`text-5xl font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
                 >
                   {plan.split}
                 </span>
-                {plan.split !== "100%" && (
-                  <span
-                    className={`text-sm ml-2 ${plan.highlighted ? "text-white/50" : "text-gray-400"}`}
-                  >
-                    agent / brokerage
-                  </span>
-                )}
               </div>
 
-              {/* Monthly fee */}
+              {/* Monthly + Transaction Fee */}
               <p
-                className={`text-sm font-semibold mb-6 ${plan.highlighted ? "text-white/70" : "text-gray-600"}`}
+                className={`text-sm mb-6 ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}
               >
-                {plan.monthlyFee}
-                <span
-                  className={`font-normal ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
-                >
-                  /month
-                </span>
+                {plan.monthlyFee}/month · {plan.transactionFee} Transaction Fee
               </p>
 
-              {/* Fees */}
+              {/* Callouts */}
               <div
-                className={`space-y-3 mb-6 pb-6 border-b ${plan.highlighted ? "border-white/10" : "border-gray-100"}`}
+                className={`mb-6 pb-6 border-b ${plan.highlighted ? "border-white/10" : "border-gray-100"}`}
               >
-                <div>
-                  <span
-                    className={`text-base font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
-                  >
-                    {plan.yearlyFee}
-                  </span>
+                {plan.callouts.map((callout) => (
                   <p
-                    className={`text-xs ${plan.highlighted ? "text-white/50" : "text-gray-400"}`}
+                    key={callout}
+                    className={`text-sm font-semibold leading-relaxed ${plan.highlighted ? "text-white" : "text-black"}`}
                   >
-                    {plan.yearlyLabel}
+                    {callout}
                   </p>
-                </div>
-                <div>
-                  <span
-                    className={`text-base font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
-                  >
-                    {plan.transactionFee}
-                  </span>
-                  <p
-                    className={`text-xs ${plan.highlighted ? "text-white/50" : "text-gray-400"}`}
-                  >
-                    {plan.transactionLabel}
-                  </p>
-                </div>
+                ))}
               </div>
 
               {/* Includes */}
-              <div className="mb-4 flex-1">
+              <div className="mb-6 flex-1">
                 <p
                   className={`text-xs font-semibold tracking-wider uppercase mb-3 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
                 >
@@ -174,19 +139,11 @@ export default function Commission() {
                 <ul className="space-y-2">
                   {plan.includes.map((item) => (
                     <li key={item} className="flex items-start gap-2 text-sm">
-                      <svg
-                        className={`w-4 h-4 flex-shrink-0 mt-0.5 ${plan.highlighted ? "text-white" : "text-black"}`}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                      <span
+                        className={plan.highlighted ? "text-white/50" : "text-gray-400"}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M5 13l4 4L19 7"
-                        />
-                      </svg>
+                        →
+                      </span>
                       <span
                         className={
                           plan.highlighted ? "text-white/80" : "text-gray-600"
@@ -198,31 +155,6 @@ export default function Commission() {
                   ))}
                 </ul>
               </div>
-
-              {/* Position */}
-              <div
-                className={`mb-4 p-3 rounded-lg ${plan.highlighted ? "bg-white/5" : "bg-gray-50"}`}
-              >
-                <p
-                  className={`text-xs font-semibold tracking-wider uppercase mb-1 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
-                >
-                  Position
-                </p>
-                <p
-                  className={`text-sm font-medium ${plan.highlighted ? "text-white/80" : "text-gray-700"}`}
-                >
-                  {plan.position}
-                </p>
-              </div>
-
-              {/* Cap note */}
-              {plan.capNote && (
-                <p
-                  className={`text-xs italic mb-4 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
-                >
-                  {plan.capNote}
-                </p>
-              )}
 
               <a
                 href="#calendar"
