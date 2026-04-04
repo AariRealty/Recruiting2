@@ -382,7 +382,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .hero-left{padding:80px 24px 48px}
   .hero-right{display:none}
   .tagline-bar{padding:32px 24px}
-  .tiles-grid{grid-template-columns:1fr !important;padding:0 24px !important}
+  .tiles-section{padding:48px 24px !important}
+  .tiles-grid{grid-template-columns:1fr 1fr !important;gap:10px !important}
+  .tiles-grid > div{padding:20px 16px !important}
+  .tiles-grid h3{font-size:12px !important}
+  .tiles-grid p{font-size:10px !important;line-height:1.5 !important}
   .plans-section,.why-section,.broker-section,.culture-section,.apply-section{padding:72px 24px}
   .compliance-banner{flex-direction:column;align-items:flex-start;gap:10px}
   .compliance-banner-note{text-align:left}
@@ -483,8 +487,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 </div>
 
 <!-- TILES SECTION -->
-<section style="background:#0a0a0a;padding:80px 72px">
-  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:20px" class="tiles-grid">
+<section class="tiles-section" style="background:#0a0a0a;padding:60px 72px">
+  <p style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:28px;text-align:center">Included With Every Plan</p>
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:16px" class="tiles-grid">
     <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:36px 32px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
       <h3 style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#ffffff;margin:0 0 10px">Content Studio</h3>
       <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.7;margin:0">Branded templates and tools to create clean, consistent marketing</p>
