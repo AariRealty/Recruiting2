@@ -207,34 +207,41 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 
 /* CONFIRMATION — Step 4 */
 .conf-wrap{max-width:640px}
-.conf-check{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(10,10,10,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:36px}
-.conf-eyebrow{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:14px}
-.conf-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:300;color:var(--black);line-height:1.1;margin-bottom:12px}
-.conf-sub{font-size:12px;font-weight:400;color:rgba(10,10,10,0.45);line-height:1.8;margin-bottom:48px}
-.conf-selection{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(10,10,10,0.1);border-radius:8px;overflow:hidden;margin-bottom:40px}
-.conf-sel-item{padding:20px 24px;border-right:1px solid rgba(10,10,10,0.1)}
+.conf-check{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin-bottom:36px}
+.conf-eyebrow{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:14px}
+.conf-title{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,46px);font-weight:300;color:#ffffff;line-height:1.1;margin-bottom:12px}
+.conf-sub{font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin-bottom:48px}
+.conf-selection{display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(255,255,255,0.1);border-radius:8px;overflow:hidden;margin-bottom:40px}
+.conf-sel-item{padding:20px 24px;border-right:1px solid rgba(255,255,255,0.1)}
 .conf-sel-item:last-child{border-right:none}
-.conf-sel-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin-bottom:7px}
-.conf-sel-value{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:var(--black);line-height:1.2}
-.conf-fees{border:1px solid rgba(10,10,10,0.1);border-radius:8px;padding:32px;margin-bottom:48px}
-.conf-fees-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:5px}
-.conf-fees-when{font-size:10px;font-weight:400;color:rgba(10,10,10,0.4);line-height:1.6;margin-bottom:24px}
-.conf-fee-row{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(10,10,10,0.07)}
-.conf-fee-label{font-size:11px;font-weight:400;color:rgba(10,10,10,0.55)}
-.conf-fee-value{font-size:12px;font-weight:600;color:var(--black)}
-.conf-fee-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:20px;margin-top:6px;border-top:2px solid rgba(10,10,10,0.12)}
-.conf-fee-total-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--black)}
-.conf-fee-total-amount{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:300;color:var(--black)}
-.conf-next-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:28px}
+.conf-sel-label{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:7px}
+.conf-sel-value{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:300;color:#ffffff;line-height:1.2}
+.conf-receipt{background:#ffffff;border-radius:12px;padding:32px;margin-bottom:48px}
+.conf-receipt-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin-bottom:24px}
+.conf-fee-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0}
+.conf-fee-label{font-size:12px;font-weight:400;color:rgba(10,10,10,0.55)}
+.conf-fee-value{font-size:13px;font-weight:600;color:#0a0a0a}
+.conf-fee-sub{font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);margin-top:2px}
+.conf-fee-divider{border:none;border-top:1px solid rgba(10,10,10,0.1);margin:12px 0}
+.conf-due-box{background:rgba(45,106,79,0.06);border:1px solid rgba(45,106,79,0.12);border-radius:8px;padding:20px 24px;margin-top:16px}
+.conf-due-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:6px}
+.conf-due-amount{font-size:28px;font-weight:700;color:#0a0a0a;margin-bottom:4px}
+.conf-due-detail{font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);line-height:1.5}
+.conf-then-monthly{display:flex;justify-content:space-between;align-items:center;padding:14px 0;margin-top:12px}
+.conf-then-label{font-size:12px;font-weight:400;color:rgba(10,10,10,0.55)}
+.conf-then-value{font-size:14px;font-weight:700;color:#0a0a0a}
+.conf-then-breakdown{font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);text-align:right;margin-top:2px}
+.conf-receipt-note{font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);text-align:center;margin-top:16px}
+.conf-next-title{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:28px}
 .conf-step-list{list-style:none;display:flex;flex-direction:column;margin-bottom:48px}
-.conf-step-item{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid rgba(10,10,10,0.07)}
+.conf-step-item{display:flex;gap:24px;padding:24px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
 .conf-step-item:last-child{border-bottom:none}
-.conf-step-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:rgba(10,10,10,0.12);flex-shrink:0;line-height:1;padding-top:2px}
-.conf-step-name{font-size:11px;font-weight:700;color:var(--black);margin-bottom:5px;letter-spacing:0.3px}
-.conf-step-desc{font-size:11px;font-weight:400;color:rgba(10,10,10,0.5);line-height:1.75}
+.conf-step-num{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:rgba(255,255,255,0.12);flex-shrink:0;line-height:1;padding-top:2px}
+.conf-step-name{font-size:11px;font-weight:700;color:#ffffff;margin-bottom:5px;letter-spacing:0.3px}
+.conf-step-desc{font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.75}
 .conf-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
-.conf-btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--black);color:var(--white);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 32px;border-radius:4px;transition:all 0.3s}
-.conf-btn-primary:hover{background:transparent;color:var(--black);outline:1px solid rgba(10,10,10,0.4)}
+.conf-btn-primary{display:inline-flex;align-items:center;gap:10px;background:#ffffff;color:#0a0a0a;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 32px;border-radius:4px;transition:all 0.3s}
+.conf-btn-primary:hover{background:transparent;color:#ffffff;outline:1px solid rgba(255,255,255,0.4)}
 .conf-btn-wa{display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;text-decoration:none;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 32px;border-radius:4px;transition:all 0.3s}
 .conf-btn-wa:hover{background:#1ebe5a}
 .plan{padding:48px 44px;border-right:1px solid rgba(255,255,255,0.1);transition:background 0.3s ease;position:relative}
@@ -453,9 +460,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .pr-fee-item,.pr-total-box{padding:18px 20px}
   .pr-total-amount{font-size:42px}
   .conf-selection{grid-template-columns:1fr}
-  .conf-sel-item{border-right:none;border-bottom:1px solid rgba(10,10,10,0.1)}
+  .conf-sel-item{border-right:none;border-bottom:1px solid rgba(255,255,255,0.1)}
   .conf-sel-item:last-child{border-bottom:none}
-  .conf-fee-total-amount{font-size:32px}
+  .conf-due-amount{font-size:24px}
   .conf-actions{flex-direction:column;align-items:stretch}
   .conf-btn-primary,.conf-btn-wa{justify-content:center}
   .why-header{grid-template-columns:1fr;gap:40px}
@@ -1010,19 +1017,19 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 </section>
 
-<!-- CONFIRMATION — Step 4 (shown after form submission, replaces Stripe redirect) -->
-<section class="apply-section apply-step-hidden" id="confirmation-section">
+<!-- CONFIRMATION — shown after form submission -->
+<section class="apply-section apply-step-hidden" id="confirmation-section" style="background:#0a0a0a">
   <div class="conf-wrap">
 
     <div class="conf-check">
       <svg width="18" height="14" viewBox="0 0 18 14" fill="none">
-        <path d="M1.5 7l5 5L16.5 1" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M1.5 7l5 5L16.5 1" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
 
     <p class="conf-eyebrow">Application Received</p>
     <h2 class="conf-title">You're one step<br/>closer, <span id="conf-name">—</span>.</h2>
-    <p class="conf-sub">Your application has been submitted. Here's a summary of your selections and exactly what happens next.</p>
+    <p class="conf-sub">Your ICA will be sent to your email shortly. Here's a summary of your selections and what to expect.</p>
 
     <!-- Selections -->
     <div class="conf-selection">
@@ -1031,27 +1038,48 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <p class="conf-sel-value" id="conf-plan">—</p>
       </div>
       <div class="conf-sel-item">
-        <p class="conf-sel-label">Business Tools</p>
+        <p class="conf-sel-label">Add-Ons</p>
         <p class="conf-sel-value" id="conf-tools">—</p>
       </div>
     </div>
 
-    <!-- Activation fees — shown for transparency, not charged today -->
-    <div class="conf-fees">
-      <p class="conf-fees-title">Your Activation Fees</p>
-      <p class="conf-fees-when">These fees are due after your ICA is signed. No payment is collected today.</p>
+    <!-- Receipt-style summary matching Step 03 -->
+    <div class="conf-receipt">
+      <p class="conf-receipt-title">Summary</p>
+
       <div class="conf-fee-row">
-        <span class="conf-fee-label">Annual Compliance Fee (E&amp;O + Compliance)</span>
-        <span class="conf-fee-value">$199.00/year</span>
+        <span class="conf-fee-label">Monthly Fee</span>
+        <span class="conf-fee-value" id="conf-monthly-fee">$0/month</span>
       </div>
-      <div class="conf-fee-row" id="conf-tools-fee-row">
-        <span class="conf-fee-label" id="conf-tools-fee-label">Business Tools</span>
-        <span class="conf-fee-value" id="conf-tools-fee-value">$0/month</span>
+      <div class="conf-fee-row">
+        <span class="conf-fee-label">Annual Compliance</span>
+        <span class="conf-fee-value">$199/year</span>
       </div>
-      <div class="conf-fee-total">
-        <span class="conf-fee-total-label">Total Due After ICA</span>
-        <span class="conf-fee-total-amount" id="conf-total">$250.00</span>
+      <div class="conf-fee-row" id="conf-tools-fee-row" style="display:none">
+        <div>
+          <span class="conf-fee-label" id="conf-tools-fee-label">Add-ons</span>
+          <p class="conf-fee-sub" id="conf-tools-fee-sub"></p>
+        </div>
+        <span class="conf-fee-value" id="conf-tools-fee-value">$0/mo</span>
       </div>
+
+      <hr class="conf-fee-divider" />
+
+      <div class="conf-due-box">
+        <p class="conf-due-label">Due at Signing</p>
+        <p class="conf-due-amount" id="conf-total">$0.00</p>
+        <p class="conf-due-detail" id="conf-due-detail"></p>
+      </div>
+
+      <div class="conf-then-monthly">
+        <span class="conf-then-label">Then monthly</span>
+        <div style="text-align:right">
+          <p class="conf-then-value" id="conf-then-monthly">$0/month</p>
+          <p class="conf-then-breakdown" id="conf-then-breakdown"></p>
+        </div>
+      </div>
+
+      <p class="conf-receipt-note">Fees begin after ICA is signed. No payment collected today.</p>
     </div>
 
     <!-- What happens next -->
@@ -1437,18 +1465,20 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var planDisplay = planCard ? planCard.getAttribute('data-plan') : (planValue || '—');
     document.getElementById("conf-plan").textContent = planDisplay;
 
-    // Tools display
+    // Add-ons display
     var addons2 = getSelectedAddons();
     var toolsName2 = addons2.length > 0 ? addons2.map(function(a){ return a.name; }).join(' + ') : 'None';
     var totalMonthly2 = 0;
     addons2.forEach(function(a){ totalMonthly2 += a.monthly; });
-    document.getElementById("conf-tools").textContent = addons2.length > 0 ? toolsName2 + " — $" + totalMonthly2 + "/mo" : "None";
+    document.getElementById("conf-tools").textContent = addons2.length > 0 ? toolsName2 : "None";
 
-    // Prorate first month (plan + addons)
+    // Plan monthly fee
     var planMonthlyEl2 = planCard ? planCard.querySelector('.pc-monthly') : null;
     var planMonthlyText2 = planMonthlyEl2 ? planMonthlyEl2.textContent.trim() : '';
     var planMonthlyNum2 = parseInt(planMonthlyText2.replace(/[^0-9]/g, '')) || 0;
+    document.getElementById("conf-monthly-fee").textContent = planMonthlyText2 || '$0/month';
 
+    // Prorate first month (plan + addons)
     var today2         = new Date();
     var daysInMonth2   = new Date(today2.getFullYear(), today2.getMonth() + 1, 0).getDate();
     var daysRemaining2 = daysInMonth2 - today2.getDate() + 1;
@@ -1463,15 +1493,27 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var totalDue  = annualFee + proratedTotal2;
     var fullMonthly2 = planMonthlyNum2 + totalMonthly2;
 
+    // Add-ons row
     if (totalMonthly2 > 0) {
-      document.getElementById("conf-tools-fee-label").textContent = toolsName2;
-      document.getElementById("conf-tools-fee-value").textContent =
-        "$" + proratedAddons2.toFixed(2) + " (prorated " + daysRemaining2 + "/" + daysInMonth2 + " days) · then $" + totalMonthly2 + "/mo";
+      document.getElementById("conf-tools-fee-label").textContent = "Add-ons";
+      document.getElementById("conf-tools-fee-sub").textContent = addons2.map(function(a){ return a.name + ' ($' + a.monthly + '/mo)'; }).join(', ');
+      document.getElementById("conf-tools-fee-value").textContent = "$" + totalMonthly2 + "/mo";
       document.getElementById("conf-tools-fee-row").style.display = "flex";
     } else {
       document.getElementById("conf-tools-fee-row").style.display = "none";
     }
-    document.getElementById("conf-total").textContent = "$" + totalDue.toFixed(2) + " ($199 + $" + proratedTotal2.toFixed(2) + " prorated " + daysRemaining2 + "/" + daysInMonth2 + " days · then $" + fullMonthly2 + "/mo)";
+
+    // Due at signing
+    document.getElementById("conf-total").textContent = "$" + totalDue.toFixed(2);
+    document.getElementById("conf-due-detail").textContent = "$199 compliance + $" + proratedTotal2.toFixed(2) + " prorated (" + daysRemaining2 + " of " + daysInMonth2 + " days)";
+
+    // Then monthly
+    document.getElementById("conf-then-monthly").textContent = "$" + fullMonthly2 + "/month";
+    if (totalMonthly2 > 0) {
+      document.getElementById("conf-then-breakdown").textContent = "($" + planMonthlyNum2 + " + $" + totalMonthly2 + ")";
+    } else {
+      document.getElementById("conf-then-breakdown").textContent = ""
+    }
 
     // Hide application form, show confirmation
     document.getElementById("apply").classList.add("apply-step-hidden");
