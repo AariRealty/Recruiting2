@@ -87,7 +87,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .step-header{margin-bottom:0}
 .step-num{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);padding:8px 16px;border-radius:20px;transition:all 0.3s;white-space:nowrap}
 .step-num.active{color:var(--white);background:rgba(255,255,255,0.18)}
-.step-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55)}.plan-selector{display:grid;grid-template-columns:1fr 1.12fr 1fr;gap:20px;align-items:start}
+.step-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55)}.plan-selector{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start}
 .plan-card{padding:24px 20px;border:1px solid rgba(10,10,10,0.12);cursor:pointer;transition:all 0.3s ease;display:flex;flex-direction:column;gap:11px;border-radius:10px;background:#ffffff;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
 .plan-card:hover{border-color:rgba(10,10,10,0.35);background:#ffffff;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
 .plan-card.selected{border-color:#0a0a0a;background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
@@ -132,7 +132,53 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .tools-select-btn:hover{border-color:rgba(255,255,255,0.5);color:#ffffff}
 .tools-option.selected .tools-select-btn{background:#ffffff;color:#0a0a0a;border-color:#ffffff}
 
-/* PLANS SECTION — dark bg, no overrides needed */
+/* PLAN CARDS V2 */
+.plan-card-v2{background:#ffffff;border:1px solid rgba(10,10,10,0.08);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:0;cursor:pointer;transition:all 0.3s}
+.plan-card-v2:hover{border-color:rgba(10,10,10,0.2);box-shadow:0 4px 20px rgba(0,0,0,0.08)}
+.plan-card-v2.selected{border-color:#0a0a0a;box-shadow:0 4px 24px rgba(0,0,0,0.12)}
+.plan-card-v2-featured{background:#0a0a0a;border-color:rgba(255,255,255,0.1);position:relative}
+.plan-card-v2-featured:hover{border-color:rgba(255,255,255,0.25);box-shadow:0 4px 20px rgba(0,0,0,0.3)}
+.plan-card-v2-featured.selected{border-color:rgba(255,255,255,0.5)}
+.pc-badge{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;display:inline-block;padding:6px 16px;border-radius:20px;margin:0 auto 20px;text-align:center;align-self:center}
+.pc-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:#0a0a0a;margin:0 0 4px}
+.plan-card-v2-featured .pc-name{color:#ffffff}
+.pc-subtitle{font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.45);margin:0 0 20px}
+.plan-card-v2-featured .pc-subtitle{color:rgba(255,255,255,0.45)}
+.pc-split{font-family:'Montserrat',sans-serif;font-size:52px;font-weight:900;color:#0a0a0a;line-height:1;margin:0 0 2px}
+.plan-card-v2-featured .pc-split{color:#ffffff}
+.pc-split-label{font-family:'Lato',sans-serif;font-size:14px;font-weight:400;color:rgba(10,10,10,0.4)}
+.plan-card-v2-featured .pc-split-label{color:rgba(255,255,255,0.4)}
+.pc-monthly{font-family:'Lato',sans-serif;font-size:14px;font-weight:400;color:rgba(10,10,10,0.5);margin:0 0 16px}
+.pc-monthly strong{font-weight:700;color:rgba(10,10,10,0.7)}
+.plan-card-v2-featured .pc-monthly{color:rgba(255,255,255,0.5)}
+.plan-card-v2-featured .pc-monthly strong{color:rgba(255,255,255,0.8)}
+.pc-fees{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.pc-fee-row{display:flex;flex-direction:column;gap:1px}
+.pc-fee-row strong{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:#0a0a0a}
+.pc-fee-row span{font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.45)}
+.plan-card-v2-featured .pc-fee-row strong{color:#ffffff}
+.plan-card-v2-featured .pc-fee-row span{color:rgba(255,255,255,0.45)}
+.pc-divider{height:1px;background:rgba(10,10,10,0.1);margin:4px 0 20px}
+.plan-card-v2-featured .pc-divider{background:rgba(255,255,255,0.12)}
+.pc-includes-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin:0 0 12px}
+.plan-card-v2-featured .pc-includes-label{color:rgba(255,255,255,0.4)}
+.pc-includes{list-style:none;display:flex;flex-direction:column;gap:8px;margin:0 0 20px}
+.pc-includes li{font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(10,10,10,0.7);line-height:1.4;display:flex;align-items:flex-start;gap:8px}
+.pc-includes li::before{content:"✓";font-size:12px;color:rgba(10,10,10,0.35);flex-shrink:0;margin-top:1px}
+.plan-card-v2-featured .pc-includes li{color:rgba(255,255,255,0.8)}
+.plan-card-v2-featured .pc-includes li::before{color:rgba(255,255,255,0.4)}
+.pc-position-box{background:rgba(10,10,10,0.04);border-radius:8px;padding:16px 18px;margin:0 0 16px}
+.plan-card-v2-featured .pc-position-box{background:rgba(255,255,255,0.08)}
+.pc-position-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin:0 0 6px}
+.plan-card-v2-featured .pc-position-label{color:rgba(255,255,255,0.35)}
+.pc-position-text{font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(10,10,10,0.65);line-height:1.5;margin:0}
+.plan-card-v2-featured .pc-position-text{color:rgba(255,255,255,0.7)}
+.pc-note{font-family:'Lato',sans-serif;font-size:11px;font-weight:400;font-style:italic;color:rgba(10,10,10,0.4);margin:0 0 16px}
+.plan-card-v2 .select-bubble{width:100%;text-align:center;padding:14px 20px;border-radius:40px;background:#0a0a0a;color:#ffffff;font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;border:none;cursor:pointer;transition:all 0.3s;margin-top:auto}
+.plan-card-v2:hover .select-bubble{background:#1a1a1a}
+.plan-card-v2.selected .select-bubble{background:#0a0a0a}
+.plan-card-v2-featured .select-bubble{background:#ffffff !important;color:#0a0a0a !important}
+.plan-card-v2-featured:hover .select-bubble{background:#f0f0f0 !important}
 
 /* PRICING REVIEW */
 .pricing-review{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);max-height:0;overflow:hidden;transition:max-height 0.6s ease,padding 0.5s ease;padding:0 80px}
@@ -536,49 +582,81 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     </div>
     <div class="plan-selector">
 
-      <!-- ANNUAL FEE NOTE — spans all columns, sits above cards -->
-      <div class="compliance-banner">
-        <div>
-          <p class="compliance-banner-label">Applies to all agents</p>
-          <p class="compliance-banner-fee">$199/year &mdash; E&amp;O + Compliance</p>
+      <!-- GROWTH -->
+      <div class="plan-card plan-card-v2" data-plan="Aari Growth — 75/25" onclick="selectPlan(this)">
+        <h3 class="pc-name">Aari Growth</h3>
+        <p class="pc-subtitle">Where every agent starts</p>
+        <p class="pc-split">75/25 <span class="pc-split-label">agent / brokerage</span></p>
+        <p class="pc-monthly"><strong>$39</strong>/month</p>
+        <div class="pc-fees">
+          <div class="pc-fee-row"><strong>$199/year</strong><span>E&amp;O + Compliance</span></div>
+          <div class="pc-fee-row"><strong>$299</strong><span>Transaction Processing Fee (all transaction types)</span></div>
         </div>
-        <p class="compliance-banner-note">Billed after ICA is signed &middot; Renews annually</p>
+        <div class="pc-divider"></div>
+        <p class="pc-includes-label">INCLUDES</p>
+        <ul class="pc-includes">
+          <li>Full transaction coordination (all paperwork done for you)</li>
+          <li>Hands-on broker engagement</li>
+          <li>SkySlope + SkySlope Books access</li>
+        </ul>
+        <div class="pc-position-box">
+          <p class="pc-position-label">POSITION</p>
+          <p class="pc-position-text">Full support environment to build and grow with broker engagement</p>
+        </div>
+        <p class="pc-note">Available after 5 transactions: upgrade to Pro or Max</p>
+        <span class="select-bubble">Get Started →</span>
       </div>
 
-      <div class="plan-card" data-plan="Aari Growth — 75/25" onclick="selectPlan(this)">
-        <h3 class="plan-card-name">Aari Growth</h3>
-        <p class="plan-card-split">75 / 25</p>
-        <p class="plan-card-tag" style="font-size:11px;text-transform:none;letter-spacing:0">$39/month &nbsp;&middot;&nbsp; $299 Transaction Fee</p>
-        <ul class="plan-card-details">
-          <li>⭐️⭐️ Transaction Coordination (done for you)</li>
-          <li>⭐️ Marketing Essentials</li>
-          <li>Accountability club</li>
+      <!-- PRO — MOST POPULAR -->
+      <div class="plan-card plan-card-v2 plan-card-v2-featured" data-plan="Aari Pro — 90/10" onclick="selectPlan(this)">
+        <p class="pc-badge">MOST POPULAR</p>
+        <h3 class="pc-name">Aari Pro</h3>
+        <p class="pc-subtitle">Available after 5 transactions</p>
+        <p class="pc-split">90/10 <span class="pc-split-label">agent / brokerage</span></p>
+        <p class="pc-monthly"><strong>$69</strong>/month</p>
+        <div class="pc-fees">
+          <div class="pc-fee-row"><strong>$199/year</strong><span>E&amp;O + Compliance</span></div>
+          <div class="pc-fee-row"><strong>$299</strong><span>Transaction Processing Fee (all transaction types)</span></div>
+        </div>
+        <div class="pc-divider"></div>
+        <p class="pc-includes-label">INCLUDES</p>
+        <ul class="pc-includes">
+          <li>Marketing tools included ($99/mo value)</li>
+          <li>Video recording sessions</li>
+          <li>Pop-by strategy + execution</li>
+          <li>Social media planning &amp; templates</li>
+          <li>Accountability sessions</li>
           <li>One-on-one with broker</li>
+          <li>Broker access for deal guidance</li>
+          <li>SkySlope + SkySlope Books access</li>
         </ul>
-        <span class="select-bubble">Select Plan →</span>
+        <div class="pc-position-box">
+          <p class="pc-position-label">POSITION</p>
+          <p class="pc-position-text">Independent with guidance when needed</p>
+        </div>
+        <span class="select-bubble">Get Started →</span>
       </div>
 
-      <div class="plan-card plan-card-featured" data-plan="Aari Pro — 90/10" onclick="selectPlan(this)">
-        <p class="plan-card-badge">Most agents start here</p>
-        <h3 class="plan-card-name">Aari Pro</h3>
-        <p class="plan-card-split">90 / 10</p>
-        <p class="plan-card-tag" style="font-size:11px;text-transform:none;letter-spacing:0">$69/month &nbsp;&middot;&nbsp; $349 Transaction Fee</p>
-        <ul class="plan-card-details">
-          <li>⭐️ Deal support when you need it</li>
-          <li>More control over your business</li>
+      <!-- MAX -->
+      <div class="plan-card plan-card-v2" data-plan="Aari Max — 100%" onclick="selectPlan(this)">
+        <h3 class="pc-name">Aari Max</h3>
+        <p class="pc-subtitle">Keep 100% of your commission</p>
+        <p class="pc-split">100% <span class="pc-split-label"></span></p>
+        <p class="pc-monthly"><strong>$99</strong>/month</p>
+        <div class="pc-fees">
+          <div class="pc-fee-row"><strong>$199/year</strong><span>E&amp;O + Compliance</span></div>
+          <div class="pc-fee-row"><strong>$399</strong><span>Transaction Processing Fee</span></div>
+        </div>
+        <div class="pc-divider"></div>
+        <p class="pc-includes-label">INCLUDES</p>
+        <ul class="pc-includes">
+          <li>SkySlope + SkySlope Books access</li>
         </ul>
-        <span class="select-bubble">Select Plan →</span>
-      </div>
-
-      <div class="plan-card" data-plan="Aari Max — 100%" onclick="selectPlan(this)">
-        <h3 class="plan-card-name">Aari Max</h3>
-        <p class="plan-card-split">100%</p>
-        <p class="plan-card-tag" style="font-size:11px;text-transform:none;letter-spacing:0">$99/month &nbsp;&middot;&nbsp; $399 Transaction Fee</p>
-        <ul class="plan-card-details">
-          <li>Fully independent</li>
-          <li>Just brokerage access</li>
-        </ul>
-        <span class="select-bubble">Select Plan →</span>
+        <div class="pc-position-box">
+          <p class="pc-position-label">POSITION</p>
+          <p class="pc-position-text">Fully independent &mdash; complete autonomy over your business</p>
+        </div>
+        <span class="select-bubble">Get Started →</span>
       </div>
 
     </div>
