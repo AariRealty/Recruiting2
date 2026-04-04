@@ -1208,7 +1208,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       invalid: { color: '#c0392b' }
     }
   });
-  cardElement.mount('#stripe-card-element');
+  var cardMounted = false;
   cardElement.on('change', function(event) {
     var errEl = document.getElementById('card-error');
     if (event.error) {
@@ -1429,9 +1429,14 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     // Reveal Step 3 and scroll to it
     var applySection = document.getElementById('apply');
     applySection.classList.remove('apply-step-hidden');
+    // Mount Stripe card element after section is visible
+    if (!cardMounted) {
+      setTimeout(function() { cardElement.mount('#stripe-card-element'); }, 50);
+      cardMounted = true;
+    }
     setTimeout(function() {
       applySection.scrollIntoView({behavior: 'smooth'});
-    }, 50);
+    }, 100);
   }
 
   function backToPlans() {
