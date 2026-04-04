@@ -86,16 +86,27 @@
     .plan-card.dark .plan-btn { background: #fff; color: #000; }
     .plan-card.dark .plan-btn:hover { background: #e5e5e5; }
 
-    /* BUSINESS TOOLS */
-    .tools-card { max-width: 480px; margin: 0 auto; background: #fff; border: 1px solid #f0f0f0; border-radius: 16px; padding: 32px; }
-    .tools-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
-    .tools-name { font-size: 18px; font-weight: 700; margin-bottom: 16px; color: #000; }
-    .tools-price { font-size: 48px; font-weight: 700; color: #000; margin-bottom: 4px; }
-    .tools-price-label { font-size: 14px; color: #9ca3af; margin-bottom: 24px; }
-    .tools-feature { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #4b5563; margin-bottom: 8px; }
-    .tools-arrow { color: #9ca3af; flex-shrink: 0; }
-    .tools-btn { display: block; text-align: center; padding: 12px; border-radius: 99px; font-size: 14px; font-weight: 600; background: #000; color: #fff; text-decoration: none; margin-top: 24px; transition: background 0.2s; }
-    .tools-btn:hover { background: #333; }
+    /* TILES */
+    .tiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .tile { border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); padding: 32px; transition: border-color 0.3s; }
+    .tile:hover { border-color: rgba(255,255,255,0.25); }
+    .tile h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .tile p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+    /* ADD-ONS */
+    .addons-wrap { max-width: 1100px; margin: 0 auto; display: none; }
+    .addons-wrap.visible { display: block; }
+    .addons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 640px; margin: 0 auto; }
+    .addon-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 16px; padding: 32px; transition: box-shadow 0.3s; }
+    .addon-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    .addon-name { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 16px; }
+    .addon-price { font-size: 40px; font-weight: 700; color: #000; }
+    .addon-price-label { font-size: 14px; color: #9ca3af; margin-bottom: 24px; }
+    .addon-feature { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #4b5563; margin-bottom: 8px; }
+    .addon-arrow { color: #9ca3af; flex-shrink: 0; }
+
+    .plan-card.selected { outline: 2px solid #000; outline-offset: 2px; }
+    .plan-card.dark.selected { outline-color: #fff; }
 
     /* NEW AGENTS */
     .new-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 960px; margin: 0 auto 48px; }
@@ -137,11 +148,11 @@
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .plans-grid, .test-grid, .new-grid { grid-template-columns: 1fr 1fr; }
+      .plans-grid, .test-grid, .new-grid, .tiles-grid { grid-template-columns: 1fr 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 768px) {
-      .plans-grid, .test-grid, .new-grid { grid-template-columns: 1fr; }
+      .plans-grid, .test-grid, .new-grid, .tiles-grid, .addons-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .plan-card.dark { transform: none; }
     }
@@ -188,88 +199,115 @@
     <div class="learn-more"><a href="#plans">Learn more about our plans ↓</a></div>
   </div>
 
-  <!-- STEP 01 — COMMISSION PLANS -->
-  <section id="plans" class="section section-alt">
+  <!-- TILES -->
+  <section id="plans" class="section section-black">
     <div class="section-inner">
-      <p class="section-step">Step 01</p>
-      <h2 class="section-title">Choose Your Structure</h2>
-      <div class="compliance"><div class="compliance-inner">$199/year — E&amp;O + Compliance · Applies to all agents · Billed after ICA is signed · Renews annually</div></div>
-      <div class="plans-grid">
-
-        <!-- GROWTH -->
-        <div class="plan-card light">
-          <div class="plan-name">Aari Growth</div>
-          <div class="plan-split">75 / 25</div>
-          <p class="plan-pricing">$39/month · $299 Transaction Fee</p>
-          <div class="plan-callouts">
-            <p class="plan-callout">Full transaction coordination (all paperwork handled for you)</p>
-            <p class="plan-callout">Marketing essentials</p>
-          </div>
-          <div class="plan-includes">
-            <p class="plan-includes-label">Includes</p>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Accountability club</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>One-on-one with broker</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>SkySlope Suite</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>SkySlope Books</span></div>
-          </div>
-          <a href="#inline-widget-meet-with-marlenyi" class="plan-btn">Get Started</a>
+      <div class="tiles-grid">
+        <div class="tile">
+          <h3>Content Studio</h3>
+          <p>Branded templates and tools to create clean, consistent marketing</p>
         </div>
-
-        <!-- PRO -->
-        <div class="plan-card dark">
-          <div class="plan-badge">Most Agents Start Here</div>
-          <div class="plan-name">Aari Pro</div>
-          <div class="plan-split">90 / 10</div>
-          <p class="plan-pricing">$69/month · $349 Transaction Fee</p>
-          <div class="plan-callouts">
-            <p class="plan-callout">90/10 commission split</p>
-            <p class="plan-callout">More control over your business</p>
-          </div>
-          <div class="plan-includes">
-            <p class="plan-includes-label">Includes</p>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Marketing support</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>SkySlope Suite</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>SkySlope Books</span></div>
-          </div>
-          <a href="#inline-widget-meet-with-marlenyi" class="plan-btn">Get Started</a>
+        <div class="tile">
+          <h3>Accountability Club</h3>
+          <p>Stay consistent with content, follow-through, and execution</p>
         </div>
-
-        <!-- MAX -->
-        <div class="plan-card light">
-          <div class="plan-name">Aari Max</div>
-          <div class="plan-split">100%</div>
-          <p class="plan-pricing">$99/month · $399 Transaction Fee</p>
-          <div class="plan-callouts">
-            <p class="plan-callout">100% commission</p>
-            <p class="plan-callout">Full control of your business</p>
-          </div>
-          <div class="plan-includes">
-            <p class="plan-includes-label">Includes</p>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>SkySlope Suite</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>SkySlope Books</span></div>
-            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Broker support when needed</span></div>
-          </div>
-          <a href="#inline-widget-meet-with-marlenyi" class="plan-btn">Get Started</a>
+        <div class="tile">
+          <h3>Lead Distribution</h3>
+          <p>Inbound leads routed through brokerage systems when available</p>
         </div>
-
+        <div class="tile">
+          <h3>SkySlope Suite</h3>
+          <p>Manage transactions, documents, and compliance in one place</p>
+        </div>
+        <div class="tile">
+          <h3>SkySlope Books</h3>
+          <p>Track commissions, payouts, and production in real time</p>
+        </div>
+        <div class="tile">
+          <h3>File Compliance Review</h3>
+          <p>Every file is reviewed for accuracy, completeness, and compliance</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- STEP 02 — BUSINESS TOOLS -->
-  <section class="section section-alt" style="padding-top:0">
+  <!-- COMMISSION STRUCTURE -->
+  <section class="section section-alt">
     <div class="section-inner">
-      <p class="section-step">Step 02</p>
-      <h2 class="section-title" style="margin-bottom:48px">Business Tools</h2>
-      <div class="tools-card">
-        <div class="tools-name">Marketing + CRM System</div>
-        <div class="tools-price">$50</div>
-        <p class="tools-price-label">/month</p>
-        <div class="tools-feature"><span class="tools-arrow">→</span><span>Video recording sessions</span></div>
-        <div class="tools-feature"><span class="tools-arrow">→</span><span>Pop-by strategy + execution</span></div>
-        <div class="tools-feature"><span class="tools-arrow">→</span><span>Social media planning</span></div>
-        <div class="tools-feature"><span class="tools-arrow">→</span><span>Social media templates</span></div>
-        <a href="#inline-widget-meet-with-marlenyi" class="tools-btn">Add to Any Plan</a>
+      <p class="section-step" style="color:rgba(0,0,0,0.35)">Aari Realty</p>
+      <h2 class="section-title">Commission Structure</h2>
+      <div class="compliance"><div class="compliance-inner">$199/year — E&amp;O + Compliance (all agents)</div></div>
+      <p style="text-align:center;font-size:13px;color:rgba(0,0,0,0.35);margin-bottom:48px;">One flat transaction fee per plan</p>
+      <div class="plans-grid">
+
+        <!-- GROWTH -->
+        <div class="plan-card light" data-plan="growth" onclick="selectPlan('growth')">
+          <div class="plan-name">Aari Growth</div>
+          <div class="plan-split">75 / 25</div>
+          <p class="plan-pricing">$39/month · $299 per transaction</p>
+          <div class="plan-includes">
+            <p class="plan-includes-label">Includes</p>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>⭐️⭐️ Transaction Coordination (done for you)</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>⭐️ Marketing Essentials</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Accountability club</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>One-on-one with broker</span></div>
+          </div>
+          <button class="plan-btn" onclick="selectPlan('growth')">Select Plan</button>
+        </div>
+
+        <!-- PRO -->
+        <div class="plan-card dark" data-plan="pro" onclick="selectPlan('pro')">
+          <div class="plan-badge">Most Agents Start Here</div>
+          <div class="plan-name">Aari Pro</div>
+          <div class="plan-split">90 / 10</div>
+          <p class="plan-pricing">$69/month · $349 per transaction</p>
+          <div class="plan-includes">
+            <p class="plan-includes-label">Includes</p>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>⭐️ Deal support when you need it</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>More control over your business</span></div>
+          </div>
+          <button class="plan-btn" onclick="selectPlan('pro')">Select Plan</button>
+        </div>
+
+        <!-- MAX -->
+        <div class="plan-card light" data-plan="max" onclick="selectPlan('max')">
+          <div class="plan-name">Aari Max</div>
+          <div class="plan-split">100%</div>
+          <p class="plan-pricing">$99/month · $399 per transaction</p>
+          <div class="plan-includes">
+            <p class="plan-includes-label">Includes</p>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Clean transaction structure</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Independent workflow</span></div>
+          </div>
+          <button class="plan-btn" onclick="selectPlan('max')">Select Plan</button>
+        </div>
+
+      </div>
+
+      <!-- ADD-ONS (hidden until plan selected) -->
+      <div class="addons-wrap" id="addons-section">
+        <div style="text-align:center;margin-top:64px;margin-bottom:32px;">
+          <p class="section-step" style="color:rgba(0,0,0,0.35)">Optional</p>
+          <h3 style="font-size:28px;font-weight:700;color:#000;">Add-Ons</h3>
+        </div>
+        <div class="addons-grid">
+          <div class="addon-card">
+            <div class="addon-name">CRM System</div>
+            <div class="addon-price">$49</div>
+            <p class="addon-price-label">/month</p>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Manage contacts, track activity, and stay organized</span></div>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Marketing System</div>
+            <div class="addon-price">$49</div>
+            <p class="addon-price-label">/month</p>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Video recording sessions</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Pop-by strategy + execution</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Social media planning</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Social media templates</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Accountability club</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -376,6 +414,36 @@
   <script>window.Koalendar=window.Koalendar||function(){(Koalendar.props=Koalendar.props||[]).push(arguments)};</script>
   <script async src="https://koalendar.com/assets/widget.js"></script>
   <script>Koalendar('inline', {"url":"https://koalendar.com/e/meet-with-marlenyi","selector":"#inline-widget-meet-with-marlenyi"});</script>
+
+  <!-- Plan selection -->
+  <script>
+    var currentPlan = null;
+    function selectPlan(id) {
+      var cards = document.querySelectorAll('.plan-card');
+      var addons = document.getElementById('addons-section');
+      if (currentPlan === id) {
+        currentPlan = null;
+        cards.forEach(function(c) { c.classList.remove('selected'); });
+        var btns = document.querySelectorAll('.plan-btn');
+        btns.forEach(function(b) { b.textContent = 'Select Plan'; });
+        addons.classList.remove('visible');
+        return;
+      }
+      currentPlan = id;
+      cards.forEach(function(c) {
+        var btn = c.querySelector('.plan-btn');
+        if (c.getAttribute('data-plan') === id) {
+          c.classList.add('selected');
+          btn.textContent = 'Selected ✓';
+        } else {
+          c.classList.remove('selected');
+          btn.textContent = 'Select Plan';
+        }
+      });
+      addons.classList.add('visible');
+      addons.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
 
 </body>
 </html>
