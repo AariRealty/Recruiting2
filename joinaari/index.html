@@ -1017,9 +1017,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <div class="q-divider" style="height:1px;background:rgba(10,10,10,0.08);margin:28px 0"></div>
     <div id="payment-section">
       <p class="q-label" style="margin-bottom:6px">Payment</p>
-      <div id="payment-due-box" style="background:#0a0a0a;border-radius:8px;padding:18px 20px;margin:0 0 16px;display:flex;justify-content:space-between;align-items:center">
-        <span style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.6);letter-spacing:0.5px;text-transform:uppercase">Due Today</span>
-        <span id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:22px;font-weight:700;color:#fff">$0.00</span>
+      <div id="payment-due-box" style="background:rgba(10,10,10,0.04);border-radius:8px;padding:18px 20px;margin:0 0 20px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#0a0a0a">Due Today</span>
+          <span id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:700;color:#0a0a0a">$0.00</span>
+        </div>
+        <p id="payment-due-breakdown" style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:6px 0 0;line-height:1.4"></p>
       </div>
       <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount due today. Future monthly and annual fees will be billed automatically to this card.</p>
       <div id="stripe-card-element" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:14px 12px"></div>
@@ -1433,6 +1436,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     // Update the "Due Today" amount in the payment section
     var dueAmountEl = document.getElementById('payment-due-amount');
     if (dueAmountEl) dueAmountEl.textContent = '$' + totalDue;
+    var dueBreakdownEl = document.getElementById('payment-due-breakdown');
+    if (dueBreakdownEl) dueBreakdownEl.textContent = '$199 compliance + $' + proratedTotal.toFixed(2) + ' prorated (' + daysRemaining + ' of ' + daysInMonth + ' days)';
 
     // Reveal Step 3 and scroll to it
     var applySection = document.getElementById('apply');
