@@ -21,7 +21,7 @@ export default function Calendar() {
 
         {/* Koalendar Inline Embed */}
         <div
-          id="inline-widget-meet-with-marlenyi-paredes-2"
+          id="inline-widget-meet-with-marlenyi"
           className="min-h-[500px]"
         />
         <Script
@@ -37,8 +37,8 @@ export default function Calendar() {
           onLoad={() => {
             // @ts-expect-error Koalendar is loaded via external script
             window.Koalendar("inline", {
-              url: "https://koalendar.com/e/meet-with-marlenyi-paredes-2",
-              selector: "#inline-widget-meet-with-marlenyi-paredes-2",
+              url: "https://koalendar.com/e/meet-with-marlenyi",
+              selector: "#inline-widget-meet-with-marlenyi",
             });
           }}
         />
