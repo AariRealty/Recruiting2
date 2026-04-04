@@ -1,42 +1,91 @@
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
-      {/* Subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
-
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center py-32">
-        <p className="animate-fade-in-up text-white/50 font-medium tracking-widest uppercase text-sm mb-6">
-          Southwest Florida&apos;s Modern Brokerage
+    <section className="min-h-screen bg-[#0a0a0a] grid grid-cols-1 lg:grid-cols-[55%_45%] relative pt-[76px] overflow-hidden">
+      {/* Left content */}
+      <div className="flex flex-col justify-center px-6 sm:px-10 lg:px-20 py-20 relative z-[2]">
+        <p className="text-[9px] font-semibold tracking-[3.5px] uppercase text-white/35 mb-9">
+          Aari Realty &middot; Agent Recruiting &middot; Fort Myers, FL
         </p>
-        <h1 className="animate-fade-in-up animate-delay-200 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8">
-          You Work Hard.
+        <h1 className="font-[family-name:var(--font-serif)] text-[clamp(52px,6.5vw,88px)] font-light leading-[1.02] text-white mb-7">
+          Your business.
           <br />
-          <span className="font-light">You Should Get Paid.</span>
+          Your rules.
+          <br />
+          <em>Real support.</em>
         </h1>
-        <p className="animate-fade-in-up animate-delay-400 max-w-2xl mx-auto text-lg sm:text-xl text-white/50 mb-12 leading-relaxed">
-          Fair splits. Real training. Actual support. No weird fine print.
-          Focus on closing deals while keeping more of what you earn.
+        <p className="text-xs font-normal leading-[1.85] text-white/50 max-w-[400px] mb-13">
+          A boutique brokerage in Southwest Florida built for agents who want
+          structure without rigidity, support without micromanagement, and a
+          brand worth being part of.
         </p>
-        <div className="animate-fade-in-up animate-delay-600 flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex items-center gap-6 flex-wrap">
           <a
-            href="#join"
-            className="rounded-full bg-white px-8 py-4 text-lg font-semibold text-black hover:bg-gray-200 transition-all hover:scale-105 shadow-lg"
+            href="#apply"
+            className="inline-flex items-center gap-2.5 bg-white text-[#0a0a0a] no-underline text-[9px] font-bold tracking-[2.5px] uppercase px-8 py-4 rounded transition-all duration-300 hover:bg-transparent hover:text-white hover:outline hover:outline-1 hover:outline-white/50 group"
           >
-            Join Our Team
+            Apply Now
+            <svg
+              width="14"
+              height="10"
+              viewBox="0 0 14 10"
+              fill="none"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
+              <path
+                d="M1 5h12M8 1l4 4-4 4"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </a>
-          <a
-            href="#why"
-            className="rounded-full border-2 border-white/20 px-8 py-4 text-lg font-semibold text-white hover:bg-white/10 transition-all"
-          >
-            Learn More
-          </a>
+          <p className="text-[10px] font-normal text-white/35">
+            New agent?{" "}
+            <a
+              href="#mentorship-section"
+              className="text-white/70 underline underline-offset-[3px] cursor-pointer"
+            >
+              We have a path for you.
+            </a>
+          </p>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center pt-2">
-          <div className="w-1.5 h-3 rounded-full bg-white/60" />
+      {/* Right stats panel */}
+      <div className="relative overflow-hidden hidden lg:flex flex-col justify-end">
+        {/* Grid background */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "repeating-linear-gradient(0deg,transparent,transparent 59px,rgba(255,255,255,0.025) 59px,rgba(255,255,255,0.025) 60px),repeating-linear-gradient(90deg,transparent,transparent 59px,rgba(255,255,255,0.025) 59px,rgba(255,255,255,0.025) 60px)",
+          }}
+        />
+        <div className="relative z-[1] p-[60px_60px_80px_40px]">
+          {[
+            { label: "Available Plans", value: "2" },
+            { label: "Max Commission", value: "100%" },
+            { label: "Markets Served", value: "5+" },
+            { label: "Business Entities", value: "4" },
+          ].map((stat, i) => (
+            <div
+              key={stat.label}
+              className="border-t border-white/8 py-5 flex justify-between items-baseline last:border-b last:border-white/8"
+              style={{
+                opacity: 0,
+                transform: "translateY(16px)",
+                animation: `fadeUp 0.6s ease forwards ${0.4 + i * 0.15}s`,
+              }}
+            >
+              <span className="text-[9px] font-medium tracking-[2px] uppercase text-white/35">
+                {stat.label}
+              </span>
+              <span className="font-[family-name:var(--font-serif)] text-[38px] font-light text-white">
+                {stat.value}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,82 +1,69 @@
-import {
-  HiOutlineCurrencyDollar,
-  HiOutlineAcademicCap,
-  HiOutlineSupport,
-  HiOutlineClipboardCheck,
-  HiOutlineDesktopComputer,
-  HiOutlineSpeakerphone,
-} from "react-icons/hi";
-
 const reasons = [
   {
-    icon: HiOutlineCurrencyDollar,
-    title: "Commission That Rewards You",
-    description:
-      "75/25 to start, 90/10 as you grow, and 100% when you're ready. Your commission increases as you produce — no caps on your potential.",
+    num: "01",
+    title: "Compliance First",
+    text: "Every system is built around FREC and DBPR compliance. Clear, defensible operations that protect you and your clients.",
   },
   {
-    icon: HiOutlineAcademicCap,
-    title: "One-on-One Mentorship",
-    description:
-      "Someone actually invested in your success. Not a call center, not an email chain — real, personalized guidance from your broker.",
+    num: "02",
+    title: "Real Broker Access",
+    text: "Not a voicemail box. Direct access to the qualifying broker for contract questions, negotiations, and everything in between.",
   },
   {
-    icon: HiOutlineDesktopComputer,
-    title: "SkySlope + Books on Every Plan",
-    description:
-      "Transaction management, digital documents, and SkySlope Books for accounting — included on all plans, no extra charge.",
+    num: "03",
+    title: "Systems Built In",
+    text: "Aari operates across four entities. You plug into a working infrastructure — no reinventing the wheel, just execution.",
   },
   {
-    icon: HiOutlineClipboardCheck,
-    title: "Full Transaction Coordination",
-    description:
-      "On our Growth plan, all paperwork is done for you. Focus on selling while we handle the details from contract to close.",
+    num: "04",
+    title: "Boutique Advantage",
+    text: "You are not a number. The brokerage is intentionally small — faster decisions, tighter community, a brand that stands for something specific.",
   },
   {
-    icon: HiOutlineSpeakerphone,
-    title: "Marketing & Branding",
-    description:
-      "Video recording sessions, pop-by strategies, social media planning and templates — included in Pro or available as an add-on.",
+    num: "05",
+    title: "Transaction Support",
+    text: "Aari Transactions keeps your deals clean, on schedule, and compliant from contract to close. Built into the ecosystem.",
   },
   {
-    icon: HiOutlineSupport,
-    title: "Lofty CRM + Leads",
-    description:
-      "AI-powered CRM and lead generation available through our Marketing + CRM + Leads package to keep your pipeline full.",
+    num: "06",
+    title: "SW Florida Focused",
+    text: "Lehigh Acres. Fort Myers. Cape Coral. Growth markets. Aari is rooted here — not a franchise with a national playbook.",
   },
 ];
 
 export default function WhySection() {
   return (
-    <section id="why" className="py-24 bg-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-black/40 font-semibold tracking-widest uppercase text-sm mb-3">
-            Why Aari Realty
+    <section id="why" className="bg-[#f0f0f0] px-6 lg:px-20 py-24">
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-20 items-start">
+        {/* Left title */}
+        <div className="lg:sticky lg:top-10 reveal">
+          <p className="text-[9px] font-semibold tracking-[3px] uppercase text-[rgba(10,10,10,0.4)] mb-3.5">
+            The Difference
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
-            Everything You Need. Nothing You Don&apos;t.
+          <h2 className="font-[family-name:var(--font-serif)] text-[clamp(36px,4vw,54px)] font-light leading-[1.08] text-[#0a0a0a]">
+            Why agents
+            <br />
+            choose
+            <br />
+            Aari.
           </h2>
-          <p className="max-w-2xl mx-auto text-gray-500 text-lg">
-            We built our brokerage around what agents actually need — not what
-            looks good on a brochure.
-          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Right grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-[rgba(10,10,10,0.08)] reveal">
           {reasons.map((reason) => (
             <div
-              key={reason.title}
-              className="group p-8 rounded-2xl border border-gray-100 hover:border-black/20 hover:shadow-xl transition-all duration-300"
+              key={reason.num}
+              className="bg-[#f0f0f0] p-7 sm:p-9 transition-colors duration-300 hover:bg-white"
             >
-              <div className="w-14 h-14 rounded-xl bg-black/5 flex items-center justify-center mb-5 group-hover:bg-black transition-colors">
-                <reason.icon className="w-7 h-7 text-black group-hover:text-white transition-colors" />
+              <div className="font-[family-name:var(--font-serif)] text-[44px] font-light text-[rgba(10,10,10,0.08)] leading-none mb-4">
+                {reason.num}
               </div>
-              <h3 className="text-xl font-bold text-black mb-3">
+              <h4 className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#0a0a0a] mb-2.5">
                 {reason.title}
-              </h3>
-              <p className="text-gray-500 leading-relaxed">
-                {reason.description}
+              </h4>
+              <p className="text-[11px] font-normal text-[#5a5a5a] leading-[1.75]">
+                {reason.text}
               </p>
             </div>
           ))}
