@@ -734,20 +734,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <!-- Divider -->
       <div style="height:1px;background:rgba(10,10,10,0.08);margin:8px 2px 20px"></div>
 
-      <!-- Due Today -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;margin-bottom:20px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Due Today</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:#0a0a0a;margin:0">$0.00</p>
+      <!-- Due at Signing — highlighted box -->
+      <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:18px 20px;margin-bottom:12px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:600;color:rgba(10,10,10,0.55);margin:0">Due at Signing</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:#0a0a0a;margin:0" id="pr-due-at-signing">$0.00</p>
+        </div>
+        <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);margin:6px 0 0" id="pr-proration-detail"></p>
       </div>
 
-      <!-- Monthly Total — highlighted box -->
-      <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:18px 20px;margin-bottom:20px">
-        <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:600;color:rgba(10,10,10,0.55);margin:0">Monthly Total</p>
-          <p style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:#0a0a0a;margin:0" id="pr-monthly-total">$69/month</p>
-        </div>
-        <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);margin:6px 0 0;text-align:right" id="pr-monthly-breakdown"></p>
+      <!-- Recurring Monthly -->
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;margin-bottom:4px">
+        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0">Then monthly</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:rgba(10,10,10,0.6);margin:0" id="pr-monthly-total">$69/month</p>
       </div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.3);margin:0 0 20px;padding:0 2px;text-align:right" id="pr-monthly-breakdown"></p>
 
       <!-- Note -->
       <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);line-height:1.6;margin:0;text-align:center">Fees begin after ICA is signed. No payment collected today.</p>
@@ -1218,9 +1219,26 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       addonsReceipt.style.display = 'none';
     }
 
-    // Monthly total box
+    // Proration calculation
     var planMonthlyNum = parseInt(planMonthlyText.replace(/[^0-9]/g, '')) || 0;
     var recurringTotal = planMonthlyNum + totalAddonMonthly;
+    var today = new Date();
+    var daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    var daysRemaining = daysInMonth - today.getDate() + 1;
+    var proratedPlan = parseFloat((planMonthlyNum * daysRemaining / daysInMonth).toFixed(2));
+    var proratedAddons = totalAddonMonthly > 0 ? parseFloat((totalAddonMonthly * daysRemaining / daysInMonth).toFixed(2)) : 0;
+    var proratedTotal = parseFloat((proratedPlan + proratedAddons).toFixed(2));
+    var dueAtSigning = 199 + proratedTotal;
+
+    // Due at Signing
+    var dueEl = document.getElementById('pr-due-at-signing');
+    if (dueEl) dueEl.textContent = '$' + dueAtSigning.toFixed(2);
+    var detailEl = document.getElementById('pr-proration-detail');
+    if (detailEl) {
+      detailEl.textContent = '$199 compliance + $' + proratedTotal.toFixed(2) + ' prorated (' + daysRemaining + ' of ' + daysInMonth + ' days)';
+    }
+
+    // Monthly total
     var totalEl = document.getElementById('pr-monthly-total');
     if (totalEl) totalEl.textContent = '$' + recurringTotal + '/month';
     var breakdownEl = document.getElementById('pr-monthly-breakdown');
@@ -1233,7 +1251,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }
 
     // Legacy hidden elements for form compatibility
-    document.getElementById('pr-total-amount').textContent = '$0.00';
+    document.getElementById('pr-total-amount').textContent = '$' + dueAtSigning.toFixed(2);
   }
 
   function openPricingReview() {
@@ -1282,16 +1300,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var totalMonthly = 0;
     addons.forEach(function(a){ totalMonthly += a.monthly; });
 
+    var planMonthlyEl = selectedPlan.querySelector('.pc-monthly');
+    var planMonthlyText = planMonthlyEl ? planMonthlyEl.textContent.trim() : '';
+    var planMonthlyNum = parseInt(planMonthlyText.replace(/[^0-9]/g, '')) || 0;
+    var fullMonthly = planMonthlyNum + totalMonthly;
+
     var today           = new Date();
     var daysInMonth     = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
     var daysRemaining   = daysInMonth - today.getDate() + 1;
-    var proratedMonthly = totalMonthly > 0 ? parseFloat((totalMonthly * daysRemaining / daysInMonth).toFixed(2)) : 0;
-    var totalDue        = (199 + proratedMonthly).toFixed(2);
+    var proratedTotal   = parseFloat((fullMonthly * daysRemaining / daysInMonth).toFixed(2));
+    var totalDue        = (199 + proratedTotal).toFixed(2);
 
     document.getElementById('selected-plan-input').value    = planValue;
     document.getElementById('selected-tools-input').value   = toolsName + (totalMonthly > 0 ? ' ($' + totalMonthly + '/mo)' : '');
     document.getElementById('activation-total-input').value =
-      '$199 annual compliance' + (totalMonthly > 0 ? ' + $' + proratedMonthly.toFixed(2) + ' prorated ' + toolsName + ' (' + daysRemaining + '/' + daysInMonth + ' days of $' + totalMonthly + '/mo)' : '') + ' = $' + totalDue + ' total due after ICA';
+      '$199 annual compliance + $' + proratedTotal.toFixed(2) + ' prorated monthly (' + daysRemaining + '/' + daysInMonth + ' days of $' + fullMonthly + '/mo' + (totalMonthly > 0 ? ' incl. ' + toolsName : '') + ') = $' + totalDue + ' due at signing';
 
     var toolsInput = document.getElementById('business-tools-input');
     if (toolsInput) toolsInput.value = toolsName + (totalMonthly > 0 ? ' ($' + totalMonthly + '/mo)' : '');
@@ -1399,27 +1422,34 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     addons2.forEach(function(a){ totalMonthly2 += a.monthly; });
     document.getElementById("conf-tools").textContent = addons2.length > 0 ? toolsName2 + " — $" + totalMonthly2 + "/mo" : "None";
 
-    // Prorate first month
+    // Prorate first month (plan + addons)
+    var planMonthlyEl2 = planCard ? planCard.querySelector('.pc-monthly') : null;
+    var planMonthlyText2 = planMonthlyEl2 ? planMonthlyEl2.textContent.trim() : '';
+    var planMonthlyNum2 = parseInt(planMonthlyText2.replace(/[^0-9]/g, '')) || 0;
+
     var today2         = new Date();
     var daysInMonth2   = new Date(today2.getFullYear(), today2.getMonth() + 1, 0).getDate();
     var daysRemaining2 = daysInMonth2 - today2.getDate() + 1;
-    var proratedMonthly2 = totalMonthly2 > 0
+    var proratedPlan2 = parseFloat((planMonthlyNum2 * daysRemaining2 / daysInMonth2).toFixed(2));
+    var proratedAddons2 = totalMonthly2 > 0
       ? parseFloat((totalMonthly2 * daysRemaining2 / daysInMonth2).toFixed(2))
       : 0;
+    var proratedTotal2 = parseFloat((proratedPlan2 + proratedAddons2).toFixed(2));
 
     // Fees
     var annualFee = 199;
-    var totalDue  = annualFee + proratedMonthly2;
+    var totalDue  = annualFee + proratedTotal2;
+    var fullMonthly2 = planMonthlyNum2 + totalMonthly2;
 
     if (totalMonthly2 > 0) {
       document.getElementById("conf-tools-fee-label").textContent = toolsName2;
       document.getElementById("conf-tools-fee-value").textContent =
-        "$" + proratedMonthly2.toFixed(2) + " (prorated " + daysRemaining2 + "/" + daysInMonth2 + " days) · then $" + totalMonthly2 + "/mo";
+        "$" + proratedAddons2.toFixed(2) + " (prorated " + daysRemaining2 + "/" + daysInMonth2 + " days) · then $" + totalMonthly2 + "/mo";
       document.getElementById("conf-tools-fee-row").style.display = "flex";
     } else {
       document.getElementById("conf-tools-fee-row").style.display = "none";
     }
-    document.getElementById("conf-total").textContent = "$" + totalDue.toFixed(2);
+    document.getElementById("conf-total").textContent = "$" + totalDue.toFixed(2) + " ($199 + $" + proratedTotal2.toFixed(2) + " prorated " + daysRemaining2 + "/" + daysInMonth2 + " days · then $" + fullMonthly2 + "/mo)";
 
     // Hide application form, show confirmation
     document.getElementById("apply").classList.add("apply-step-hidden");
