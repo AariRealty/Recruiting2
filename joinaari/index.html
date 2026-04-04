@@ -1215,7 +1215,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     // Recurring monthly total
     var planMonthlyNum = parseInt(planMonthlyText.replace(/[^0-9]/g, '')) || 0;
     var recurringTotal = planMonthlyNum + totalAddonMonthly;
-    document.getElementById('pr-recurring-monthly').textContent = '$' + recurringTotal + '/mo';
+    var recurringEl = document.getElementById('pr-recurring-monthly');
+    if (recurringEl) recurringEl.textContent = '$' + recurringTotal + '/mo';
 
     // Legacy hidden elements for form compatibility
     document.getElementById('pr-total-amount').textContent = '$0.00';
