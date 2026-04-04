@@ -429,9 +429,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .hero-right{display:none}
   .tagline-bar{padding:32px 24px}
   .tiles-section{padding:48px 24px !important}
-  .tiles-list > div{flex-direction:column !important;align-items:flex-start !important;gap:8px !important}
-  .tiles-list h3{font-size:20px !important}
-  .tiles-list p{text-align:left !important}
+  .tiles-list{grid-template-columns:1fr !important;gap:36px !important}
   .plans-section,.why-section,.broker-section,.culture-section,.apply-section{padding:72px 24px}
   .compliance-banner{flex-direction:column;align-items:flex-start;gap:10px}
   .compliance-banner-note{text-align:left}
@@ -534,30 +532,36 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 <!-- TILES SECTION -->
 <section class="tiles-section" style="background:#0a0a0a;padding:60px 72px">
   <p style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:28px;text-align:center">Included With Every Plan</p>
-  <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0" class="tiles-list">
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">Content Studio</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Branded templates and tools to create clean, consistent marketing</p>
+  <div style="max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px 80px" class="tiles-list">
+    <div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);margin:0 0 8px">→</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#ffffff;margin:0 0 10px;line-height:1.2">Content Studio</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin:0">Branded templates and tools to create clean, consistent marketing</p>
     </div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">Accountability Club</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Stay consistent with content, follow-through, and execution</p>
+    <div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);margin:0 0 8px">→</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#ffffff;margin:0 0 10px;line-height:1.2">Accountability Club</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin:0">Stay consistent with content, follow-through, and execution</p>
     </div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">Lead Distribution</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Inbound leads routed through brokerage systems when available</p>
+    <div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);margin:0 0 8px">→</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#ffffff;margin:0 0 10px;line-height:1.2">Lead Distribution</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin:0">Inbound leads routed through brokerage systems when available</p>
     </div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">SkySlope Suite</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Manage transactions, documents, and compliance in one place</p>
+    <div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);margin:0 0 8px">→</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#ffffff;margin:0 0 10px;line-height:1.2">SkySlope Suite</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin:0">Manage transactions, documents, and compliance in one place</p>
     </div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">SkySlope Books</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Track commissions, payouts, and production in real time</p>
+    <div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);margin:0 0 8px">→</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#ffffff;margin:0 0 10px;line-height:1.2">SkySlope Books</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin:0">Track commissions, payouts, and production in real time</p>
     </div>
-    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0">
-      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">File Compliance Review</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Every file is reviewed for accuracy, completeness, and compliance</p>
+    <div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.2);margin:0 0 8px">→</p>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:400;color:#ffffff;margin:0 0 10px;line-height:1.2">File Compliance Review</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.8;margin:0">Every file is reviewed for accuracy, completeness, and compliance</p>
     </div>
   </div>
 </section>
