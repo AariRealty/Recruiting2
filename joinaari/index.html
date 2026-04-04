@@ -706,54 +706,45 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <p class="pr-joining-tools" id="pr-joining-tools" style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.38);margin:0 0 32px;display:none">With Marketing Package</p>
 
     <!-- Receipt container -->
-    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:32px 28px">
+    <div style="background:#ffffff;border-radius:12px;padding:32px 28px">
 
-      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 24px">🧾 &nbsp;Summary</p>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin:0 0 24px">🧾 &nbsp;Summary</p>
 
-      <!-- Monthly Fee -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);margin:0">Monthly Fee</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#ffffff;margin:0" id="pr-monthly-fee">$69/month</p>
+      <!-- Monthly Fee — highlighted -->
+      <div style="background:rgba(10,10,10,0.03);border:1px solid rgba(10,10,10,0.06);border-radius:8px;padding:18px 20px;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:600;color:rgba(10,10,10,0.6);margin:0">Monthly Fee</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:#0a0a0a;margin:0" id="pr-monthly-fee">$69/month</p>
+        </div>
       </div>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);margin:0 0 20px;padding-left:2px">Prorated first month based on start date</p>
 
       <!-- Annual Compliance -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);margin:0">Annual Compliance</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#ffffff;margin:0">$199/year</p>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;margin-bottom:16px">
+        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Annual Compliance</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0">$199/year</p>
       </div>
 
       <!-- Add-ons (shown only if selected) -->
-      <div id="pr-addons-receipt" style="display:none;margin-bottom:16px">
+      <div id="pr-addons-receipt" style="display:none;padding:0 2px;margin-bottom:16px">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);margin:0">Add-ons</p>
-          <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#ffffff;margin:0" id="pr-addons-price"></p>
+          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Add-ons</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-addons-price"></p>
         </div>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.35);margin:4px 0 0" id="pr-addons-list"></p>
+        <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);margin:4px 0 0" id="pr-addons-list"></p>
       </div>
 
       <!-- Divider -->
-      <div style="height:1px;background:rgba(255,255,255,0.1);margin:8px 0 20px"></div>
+      <div style="height:1px;background:rgba(10,10,10,0.08);margin:8px 2px 20px"></div>
 
       <!-- Due Today -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);margin:0">Due Today</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:#ffffff;margin:0">$0.00</p>
-      </div>
-
-      <!-- Recurring Monthly -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);margin:0">Recurring Monthly</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#ffffff;margin:0" id="pr-recurring-monthly">$69/mo</p>
-      </div>
-
-      <!-- Annual -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:20px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);margin:0">Annual</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#ffffff;margin:0">$199/year</p>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;margin-bottom:20px">
+        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Due Today</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:#0a0a0a;margin:0">$0.00</p>
       </div>
 
       <!-- Note -->
-      <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.3);line-height:1.6;margin:0;text-align:center">Fees begin after ICA is signed. No payment collected today.</p>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);line-height:1.6;margin:0;text-align:center">Fees begin after ICA is signed. No payment collected today.</p>
 
     </div>
 
