@@ -1,40 +1,53 @@
 const plans = [
   {
-    name: "Growth Plan",
-    split: "70/30",
-    description: "Perfect for new agents building their pipeline",
-    features: [
-      "All technology included",
-      "Full training access",
-      "Mentor program",
-      "Marketing support",
-      "Office space access",
+    name: "Aari Growth",
+    split: "75 / 25",
+    monthlyFee: "$39",
+    transactionFee: "$299",
+    badge: null,
+    callouts: [
+      "Full transaction coordination (all paperwork handled for you)",
+      "Marketing essentials",
+    ],
+    includes: [
+      "Accountability club",
+      "One-on-one with broker",
+      "SkySlope Suite",
+      "SkySlope Books",
     ],
     highlighted: false,
   },
   {
-    name: "Professional Plan",
-    split: "80/20",
-    description: "For agents ready to accelerate their business",
-    features: [
-      "Everything in Growth",
-      "Advanced coaching sessions",
-      "Priority lead routing",
-      "Enhanced marketing budget",
-      "Transaction coordinator support",
+    name: "Aari Pro",
+    split: "90 / 10",
+    monthlyFee: "$69",
+    transactionFee: "$349",
+    badge: "Most Agents Start Here",
+    callouts: [
+      "90/10 commission split",
+      "More control over your business",
+    ],
+    includes: [
+      "Marketing support",
+      "SkySlope Suite",
+      "SkySlope Books",
     ],
     highlighted: true,
   },
   {
-    name: "100% Plan",
+    name: "Aari Max",
     split: "100%",
-    description: "For top producers who want to keep it all",
-    features: [
-      "Keep 100% of your commission",
-      "All technology included",
-      "Small monthly flat fee",
-      "Full brokerage support",
-      "Complete autonomy",
+    monthlyFee: "$99",
+    transactionFee: "$399",
+    badge: null,
+    callouts: [
+      "100% commission",
+      "Full control of your business",
+    ],
+    includes: [
+      "SkySlope Suite",
+      "SkySlope Books",
+      "Broker support when needed",
     ],
     highlighted: false,
   },
@@ -42,96 +55,113 @@ const plans = [
 
 export default function Commission() {
   return (
-    <section id="commission" className="py-24 bg-section-alt">
+    <section id="commission" className="py-24 bg-[#f9f9f9]">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-3">
-            Commission Plans
+        <div className="text-center mb-6">
+          <p className="text-black/40 font-semibold tracking-widest uppercase text-sm mb-3">
+            Step 01
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-dark mb-4">
-            Flexible Plans That Grow With You
+          <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
+            Choose Your Structure
           </h2>
-          <p className="max-w-2xl mx-auto text-muted text-lg">
-            Choose the commission structure that fits your business today, and
-            change it as often as every 90 days as your needs evolve.
-          </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {/* Compliance banner */}
+        <div className="max-w-6xl mx-auto mb-12">
+          <div className="bg-black text-white text-center rounded-xl px-6 py-4">
+            <p className="text-sm font-medium">
+              $199/year — E&amp;O + Compliance · Applies to all agents · Billed
+              after ICA is signed · Renews annually
+            </p>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {plans.map((plan) => (
             <div
               key={plan.name}
               className={`relative flex flex-col rounded-2xl p-8 transition-shadow duration-300 ${
                 plan.highlighted
-                  ? "bg-primary text-white shadow-2xl shadow-primary/25 scale-105"
+                  ? "bg-black text-white shadow-2xl shadow-black/25 lg:scale-105"
                   : "bg-white border border-gray-100 hover:shadow-lg"
               }`}
             >
-              {plan.highlighted && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-accent text-primary-dark text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase">
-                  Most Popular
+              {plan.badge && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-white text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase whitespace-nowrap">
+                  {plan.badge}
                 </div>
               )}
 
+              {/* Name */}
               <h3
-                className={`text-lg font-bold mb-1 ${plan.highlighted ? "text-white" : "text-primary-dark"}`}
+                className={`text-xl font-bold mb-4 ${plan.highlighted ? "text-white" : "text-black"}`}
               >
                 {plan.name}
               </h3>
-              <p
-                className={`text-sm mb-6 ${plan.highlighted ? "text-white/70" : "text-muted"}`}
-              >
-                {plan.description}
-              </p>
 
-              <div className="mb-8">
+              {/* Split */}
+              <div className="mb-4">
                 <span
-                  className={`text-5xl font-bold ${plan.highlighted ? "text-accent" : "text-primary"}`}
+                  className={`text-5xl font-bold ${plan.highlighted ? "text-white" : "text-black"}`}
                 >
                   {plan.split}
                 </span>
-                {plan.split !== "100%" && (
-                  <span
-                    className={`text-sm ml-2 ${plan.highlighted ? "text-white/60" : "text-muted"}`}
-                  >
-                    agent/brokerage
-                  </span>
-                )}
               </div>
 
-              <ul className="space-y-3 mb-8 flex-1">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm">
-                    <svg
-                      className={`w-5 h-5 flex-shrink-0 mt-0.5 ${plan.highlighted ? "text-accent" : "text-accent"}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span
-                      className={
-                        plan.highlighted ? "text-white/90" : "text-foreground/80"
-                      }
-                    >
-                      {feature}
-                    </span>
-                  </li>
+              {/* Monthly + Transaction Fee */}
+              <p
+                className={`text-sm mb-6 ${plan.highlighted ? "text-white/60" : "text-gray-500"}`}
+              >
+                {plan.monthlyFee}/month · {plan.transactionFee} Transaction Fee
+              </p>
+
+              {/* Callouts */}
+              <div
+                className={`mb-6 pb-6 border-b ${plan.highlighted ? "border-white/10" : "border-gray-100"}`}
+              >
+                {plan.callouts.map((callout) => (
+                  <p
+                    key={callout}
+                    className={`text-sm font-semibold leading-relaxed ${plan.highlighted ? "text-white" : "text-black"}`}
+                  >
+                    {callout}
+                  </p>
                 ))}
-              </ul>
+              </div>
+
+              {/* Includes */}
+              <div className="mb-6 flex-1">
+                <p
+                  className={`text-xs font-semibold tracking-wider uppercase mb-3 ${plan.highlighted ? "text-white/40" : "text-gray-400"}`}
+                >
+                  Includes
+                </p>
+                <ul className="space-y-2">
+                  {plan.includes.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm">
+                      <span
+                        className={plan.highlighted ? "text-white/50" : "text-gray-400"}
+                      >
+                        →
+                      </span>
+                      <span
+                        className={
+                          plan.highlighted ? "text-white/80" : "text-gray-600"
+                        }
+                      >
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
               <a
-                href="#join"
+                href="#calendar"
                 className={`block text-center rounded-full py-3 font-semibold transition-all ${
                   plan.highlighted
-                    ? "bg-accent text-primary-dark hover:bg-accent-light"
-                    : "bg-primary text-white hover:bg-primary-light"
+                    ? "bg-white text-black hover:bg-gray-200"
+                    : "bg-black text-white hover:bg-gray-800"
                 }`}
               >
                 Get Started

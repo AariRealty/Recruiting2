@@ -1,48 +1,48 @@
 import {
-  HiOutlineLightBulb,
-  HiOutlineUserGroup,
   HiOutlineCurrencyDollar,
   HiOutlineAcademicCap,
-  HiOutlineChartBar,
   HiOutlineSupport,
+  HiOutlineClipboardCheck,
+  HiOutlineDesktopComputer,
+  HiOutlineSpeakerphone,
 } from "react-icons/hi";
 
 const reasons = [
   {
-    icon: HiOutlineLightBulb,
-    title: "Cutting-Edge Technology",
+    icon: HiOutlineCurrencyDollar,
+    title: "Commission That Rewards You",
     description:
-      "Access industry-leading tools and platforms that top-producing agents rely on to close more deals and serve clients better.",
+      "75/25 to start, 90/10 as you grow, and 100% when you're ready. Your commission increases as you produce — no caps on your potential.",
   },
   {
     icon: HiOutlineAcademicCap,
-    title: "Superior Training",
+    title: "One-on-One Mentorship",
     description:
-      "Proprietary training programs designed for every career stage — from brand new agents to seasoned professionals looking to level up.",
+      "Someone actually invested in your success. Not a call center, not an email chain — real, personalized guidance from your broker.",
   },
   {
-    icon: HiOutlineCurrencyDollar,
-    title: "Flexible Commission Plans",
+    icon: HiOutlineDesktopComputer,
+    title: "SkySlope + Books on Every Plan",
     description:
-      "Choose the commission structure that works best for you, with the ability to adjust your plan as your business grows.",
+      "Transaction management, digital documents, and SkySlope Books for accounting — included on all plans, no extra charge.",
   },
   {
-    icon: HiOutlineUserGroup,
-    title: "Supportive Culture",
+    icon: HiOutlineClipboardCheck,
+    title: "Full Transaction Coordination",
     description:
-      "Join a collaborative community of driven agents who share knowledge, celebrate wins, and support each other's growth.",
+      "On our Growth plan, all paperwork is done for you. Focus on selling while we handle the details from contract to close.",
   },
   {
-    icon: HiOutlineChartBar,
-    title: "Business Growth",
+    icon: HiOutlineSpeakerphone,
+    title: "Marketing & Branding",
     description:
-      "We provide the systems, accountability, and coaching you need to build a scalable, sustainable real estate business.",
+      "Video recording sessions, pop-by strategies, social media planning and templates — included in Pro or available as an add-on.",
   },
   {
     icon: HiOutlineSupport,
-    title: "Dedicated Support",
+    title: "Lofty CRM + Leads",
     description:
-      "From transaction coordination to marketing assistance, our support team ensures you can focus on what you do best — selling.",
+      "AI-powered CRM and lead generation available through our Marketing + CRM + Leads package to keep your pipeline full.",
   },
 ];
 
@@ -51,16 +51,15 @@ export default function WhySection() {
     <section id="why" className="py-24 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-3">
-            Why Choose Us
+          <p className="text-black/40 font-semibold tracking-widest uppercase text-sm mb-3">
+            Why Aari Realty
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-primary-dark mb-4">
-            Why Aari Realty?
+          <h2 className="text-3xl sm:text-4xl font-bold text-black mb-4">
+            Everything You Need. Nothing You Don&apos;t.
           </h2>
-          <p className="max-w-2xl mx-auto text-muted text-lg">
-            We built our brokerage with a clear purpose — to redefine what it
-            means to support real estate agents and position them for long-term
-            success.
+          <p className="max-w-2xl mx-auto text-gray-500 text-lg">
+            We built our brokerage around what agents actually need — not what
+            looks good on a brochure.
           </p>
         </div>
 
@@ -68,15 +67,17 @@ export default function WhySection() {
           {reasons.map((reason) => (
             <div
               key={reason.title}
-              className="group p-8 rounded-2xl border border-gray-100 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-300"
+              className="group p-8 rounded-2xl border border-gray-100 hover:border-black/20 hover:shadow-xl transition-all duration-300"
             >
-              <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-accent/10 transition-colors">
-                <reason.icon className="w-7 h-7 text-primary group-hover:text-accent transition-colors" />
+              <div className="w-14 h-14 rounded-xl bg-black/5 flex items-center justify-center mb-5 group-hover:bg-black transition-colors">
+                <reason.icon className="w-7 h-7 text-black group-hover:text-white transition-colors" />
               </div>
-              <h3 className="text-xl font-bold text-primary-dark mb-3">
+              <h3 className="text-xl font-bold text-black mb-3">
                 {reason.title}
               </h3>
-              <p className="text-muted leading-relaxed">{reason.description}</p>
+              <p className="text-gray-500 leading-relaxed">
+                {reason.description}
+              </p>
             </div>
           ))}
         </div>
