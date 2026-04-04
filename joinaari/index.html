@@ -494,7 +494,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .broker-cta-actions{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px}
 }
 </style>
-<script src="https://payload.co/Payload.js"></script>
+<script src="https://payload.com/Payload.js"></script>
 </head>
 <body>
 
@@ -1018,7 +1018,23 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <div id="payment-section">
       <p class="q-label" style="margin-bottom:6px">Payment</p>
       <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount due today. Future monthly and annual fees will be billed automatically to this card.</p>
-      <div id="pl-card-input" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:14px 12px;min-height:44px;transition:border-color 0.3s"></div>
+      <form id="pl-card-form" pl-form="payment_method" style="margin:0">
+        <input type="hidden" pl-input="customer_id" id="pl-customer-id" value="" />
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <div style="flex:3;min-width:180px">
+            <label style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:4px">Card Number</label>
+            <div pl-input="card_number" class="pl-input-sec" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:12px;min-height:20px"></div>
+          </div>
+          <div style="flex:1;min-width:80px">
+            <label style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:4px">Expiry</label>
+            <div pl-input="expiry" class="pl-input-sec" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:12px;min-height:20px"></div>
+          </div>
+          <div style="flex:1;min-width:60px">
+            <label style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:4px">CVC</label>
+            <div pl-input="card_code" class="pl-input-sec" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:12px;min-height:20px"></div>
+          </div>
+        </div>
+      </form>
       <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
     </div>
   </form>
@@ -1194,47 +1210,37 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   },{threshold:0.08});
   document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 
-  // Payload.js initialization — secure card input
-  var plReady = false;
-  function initPayloadCard(clientToken) {
+  // Payload.js initialization — secure card inputs
+  var plFormInstance = null;
+
+  function initPayloadForm(clientToken) {
+    if (typeof Payload === 'undefined') {
+      console.warn('[Payload.js] Library not loaded yet');
+      return;
+    }
     try {
+      // Initialize Payload with client token
       if (clientToken) {
         Payload(clientToken);
       }
-      var cardContainer = document.getElementById('pl-card-input');
-      if (cardContainer && !plReady) {
-        // Create secure card input inside the container
-        Payload.Form({
-          container: cardContainer,
-          form_type: 'payment_method',
-          styles: {
-            base: {
-              fontFamily: "'Montserrat', sans-serif",
-              fontSize: '14px',
-              color: '#0a0a0a'
-            }
-          }
-        }).then(function(form) {
-          window._plSecureForm = form;
-          plReady = true;
-        }).catch(function(err) {
-          // Fallback: Payload may use a different init pattern
-          console.warn('[Payload.js] Form init via Promise failed, trying direct:', err);
-          window._plSecureForm = null;
-          plReady = true;
-        });
+      // Create Payload.Form on the card form element
+      var formEl = document.getElementById('pl-card-form');
+      if (formEl && !plFormInstance) {
+        plFormInstance = new Payload.Form(formEl);
+        console.log('[Payload.js] Secure form initialized');
       }
     } catch(e) {
-      console.warn('[Payload.js] Init error:', e);
-      plReady = true;
+      console.warn('[Payload.js] Init error:', e.message);
     }
   }
 
-  // Try initializing with the test client key (will be replaced with ephemeral tokens in production)
-  try {
-    initPayloadCard(null);
-  } catch(e) {
-    console.warn('[Payload.js] Deferred init');
+  // Wait for Payload.js to load, then initialize
+  if (document.readyState === 'complete') {
+    setTimeout(function() { initPayloadForm(null); }, 500);
+  } else {
+    window.addEventListener('load', function() {
+      setTimeout(function() { initPayloadForm(null); }, 500);
+    });
   }
 
   function toggleGrowthPlan(btn) {
@@ -1542,30 +1548,29 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       var custData = await custResp.json();
       if (!custResp.ok) throw new Error(custData.error || "Failed to create customer");
 
-      // Step 2: Capture card via Payload.js Secure Input
-      var plForm = document.querySelector('[pl-form]');
-      if (plForm && plForm._plFormInstance) {
-        // Set customer_id on the form
-        var custInput = document.getElementById('pl-customer-id');
-        if (custInput) custInput.value = custData.customer_id;
+      // Step 2: Set customer_id and submit Payload.js secure form to capture card
+      document.getElementById('pl-customer-id').value = custData.customer_id;
+
+      // Re-initialize form if needed (with client token from server)
+      if (!plFormInstance && custData.client_token) {
+        initPayloadForm(custData.client_token);
       }
 
-      // Submit Payload.js secure form to capture payment method
       var paymentMethodId = await new Promise(function(resolve, reject) {
-        if (window._plSecureForm) {
-          window._plSecureForm.submit(function(err, result) {
-            if (err) return reject(new Error(err.message || "Card capture failed"));
-            resolve(result.id || result.payment_method_id || result);
-          });
-        } else {
-          // Fallback: try Payload global submit
-          Payload.form(document.getElementById('pl-card-input')).submit({
-            customer_id: custData.customer_id
-          }, function(err, result) {
-            if (err) return reject(new Error(err.message || "Card capture failed"));
-            resolve(result.id || result.payment_method_id || result);
-          });
+        if (!plFormInstance) {
+          // Fallback: try creating form instance now
+          try {
+            var formEl = document.getElementById('pl-card-form');
+            plFormInstance = new Payload.Form(formEl);
+          } catch(e) {
+            return reject(new Error("Payment form not initialized. Please refresh and try again."));
+          }
         }
+        plFormInstance.submit(function(err, result) {
+          if (err) return reject(new Error(err.message || "Card capture failed. Please check your card details."));
+          var pmId = result.id || (result.object && result.object.id) || result;
+          resolve(pmId);
+        });
       });
 
       // Step 3: Charge the total amount + set up recurring
