@@ -2,6 +2,6 @@
   "name": "joinaari",
   "private": true,
   "dependencies": {
-    "payload-api": "latest"
+    "stripe": "^14.0.0"
   }
 }

@@ -494,7 +494,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .broker-cta-actions{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px}
 }
 </style>
-<script src="https://payload.com/Payload.js"></script>
+<script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -1018,23 +1018,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <div id="payment-section">
       <p class="q-label" style="margin-bottom:6px">Payment</p>
       <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount due today. Future monthly and annual fees will be billed automatically to this card.</p>
-      <form id="pl-card-form" pl-form="payment_method" style="margin:0">
-        <input type="hidden" pl-input="customer_id" id="pl-customer-id" value="" />
-        <div style="display:flex;gap:10px;flex-wrap:wrap">
-          <div style="flex:3;min-width:180px">
-            <label style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:4px">Card Number</label>
-            <div pl-input="card_number" class="pl-input-sec" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:12px;min-height:20px"></div>
-          </div>
-          <div style="flex:1;min-width:80px">
-            <label style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:4px">Expiry</label>
-            <div pl-input="expiry" class="pl-input-sec" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:12px;min-height:20px"></div>
-          </div>
-          <div style="flex:1;min-width:60px">
-            <label style="font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:4px">CVC</label>
-            <div pl-input="card_code" class="pl-input-sec" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:12px;min-height:20px"></div>
-          </div>
-        </div>
-      </form>
+      <div id="stripe-card-element" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:14px 12px"></div>
       <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
     </div>
   </form>
@@ -1210,35 +1194,30 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   },{threshold:0.08});
   document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 
-  // Payload.js initialization — secure card inputs
-  var plFormInstance = null;
-  var PL_CLIENT_KEY = 'test_client_key_12iNYyO3THeRLlwhaq66GyWLTb2i';
-
-  function initPayloadForm() {
-    if (typeof Payload === 'undefined') {
-      console.warn('[Payload.js] Library not loaded yet, retrying...');
-      setTimeout(initPayloadForm, 1000);
-      return;
+  // Stripe initialization
+  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
+  var elements = stripe.elements();
+  var cardElement = elements.create('card', {
+    style: {
+      base: {
+        fontFamily: "'Montserrat', sans-serif",
+        fontSize: '14px',
+        color: '#0a0a0a',
+        '::placeholder': { color: 'rgba(10,10,10,0.3)' }
+      },
+      invalid: { color: '#c0392b' }
     }
-    try {
-      Payload(PL_CLIENT_KEY);
-      var formEl = document.getElementById('pl-card-form');
-      if (formEl && !plFormInstance) {
-        plFormInstance = new Payload.Form(formEl);
-        console.log('[Payload.js] Secure form initialized');
-      }
-    } catch(e) {
-      console.warn('[Payload.js] Init error:', e.message);
+  });
+  cardElement.mount('#stripe-card-element');
+  cardElement.on('change', function(event) {
+    var errEl = document.getElementById('card-error');
+    if (event.error) {
+      errEl.textContent = event.error.message;
+      errEl.style.display = 'block';
+    } else {
+      errEl.style.display = 'none';
     }
-  }
-
-  // Initialize as soon as Payload.js loads
-  var plScript = document.querySelector('script[src*="Payload.js"]');
-  if (plScript) {
-    plScript.addEventListener('load', function() { initPayloadForm(); });
-    plScript.addEventListener('error', function() { console.error('[Payload.js] Failed to load script'); });
-  }
-  if (typeof Payload !== 'undefined') { initPayloadForm(); }
+  });
 
   function toggleGrowthPlan(btn) {
     var card = document.getElementById('growth-plan-card');
@@ -1531,60 +1510,42 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var planName = planCard ? planCard.getAttribute('data-plan') : '';
 
     try {
-      // Step 1: Create customer in Payload
-      var custResp = await fetch("/api/create-customer", {
+      // Step 1: Create Stripe PaymentIntent + Customer on server
+      var intentResp = await fetch("/api/create-payment-intent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           first_name: firstName,
           last_name: lastName,
           email: email,
-          phone: form.querySelector('[name="phone"]').value.trim()
+          phone: form.querySelector('[name="phone"]').value.trim(),
+          amount: amounts.totalDueToday,
+          plan_name: planName
         })
       });
-      var custData = await custResp.json();
-      if (!custResp.ok) throw new Error(custData.error || "Failed to create customer");
+      var intentData = await intentResp.json();
+      if (!intentResp.ok) throw new Error(intentData.error || "Failed to initialize payment");
 
-      // Step 2: Set customer_id and submit Payload.js secure form to capture card
-      document.getElementById('pl-customer-id').value = custData.customer_id;
-
-      // Re-initialize form if needed (with client token from server)
-      if (!plFormInstance && custData.client_token) {
-        initPayloadForm(custData.client_token);
-      }
-
-      var paymentMethodId = await new Promise(function(resolve, reject) {
-        if (!plFormInstance) {
-          // Fallback: try creating form instance now
-          try {
-            var formEl = document.getElementById('pl-card-form');
-            plFormInstance = new Payload.Form(formEl);
-          } catch(e) {
-            return reject(new Error("Payment form not initialized. Please refresh and try again."));
-          }
-        }
-        plFormInstance.submit(function(err, result) {
-          if (err) return reject(new Error(err.message || "Card capture failed. Please check your card details."));
-          var pmId = result.id || (result.object && result.object.id) || result;
-          resolve(pmId);
-        });
+      // Step 2: Confirm the card payment via Stripe.js
+      var result = await stripe.confirmCardPayment(intentData.client_secret, {
+        payment_method: { card: cardElement }
       });
+      if (result.error) throw new Error(result.error.message);
 
-      // Step 3: Charge the total amount + set up recurring
-      var payResp = await fetch("/api/process-payment", {
+      // Step 3: Set up recurring billing on server
+      var recurResp = await fetch("/api/setup-recurring", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          customer_id: custData.customer_id,
-          payment_method_id: paymentMethodId,
-          total_due_today: amounts.totalDueToday,
+          customer_id: intentData.customer_id,
+          payment_method_id: result.paymentIntent.payment_method,
           monthly_amount: amounts.monthlyAmount,
           plan_name: planName,
           addons: addons.map(function(a) { return a.name; })
         })
       });
-      var payData = await payResp.json();
-      if (!payResp.ok) throw new Error(payData.error || "Payment failed");
+      var recurData = await recurResp.json();
+      if (!recurResp.ok) console.warn("[recurring] Setup warning:", recurData.error);
 
       // Step 4: Send to Formspree for email notification (non-blocking)
       var formData = {
@@ -1598,7 +1559,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         closings: form.querySelector('[name="closings"]').value,
         business_tools: businessTools,
         amount_charged: "$" + amounts.totalDueToday.toFixed(2),
-        payment_id: payData.payment_id
+        payment_id: result.paymentIntent.id
       };
       try {
         await fetch("https://formspree.io/f/mpqopwga", {
