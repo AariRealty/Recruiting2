@@ -1,8 +1,8 @@
 "use client";
 
 import Script from "next/script";
+import Tiles from "@/components/Tiles";
 import Commission from "@/components/Commission";
-import Benefits from "@/components/Benefits";
 import NewAgents from "@/components/NewAgents";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
@@ -94,8 +94,8 @@ export default function Home() {
 
         {/* Detailed sections */}
         <div id="plans">
+          <Tiles />
           <Commission />
-          <Benefits />
           <NewAgents />
           <Testimonials />
         </div>

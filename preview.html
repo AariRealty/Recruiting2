@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aari Realty | Join Our Team</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: #000; color: #fff; min-height: 100vh;
+    }
+
+    /* HEADER */
+    .header { padding: 64px 16px 48px; text-align: center; }
+    .logo { font-size: 32px; font-weight: 700; letter-spacing: 1px; margin-bottom: 8px; }
+    .logo span { font-weight: 300; }
+    .subtitle { font-size: 12px; color: rgba(255,255,255,0.35); letter-spacing: 4px; text-transform: uppercase; }
+
+    /* HERO */
+    .hero { max-width: 640px; margin: 0 auto; padding: 0 16px; }
+    .hero-headline { text-align: center; margin-bottom: 48px; }
+    .hero-headline h2 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+    .hero-headline p { font-size: 18px; color: rgba(255,255,255,0.45); }
+    .bullets { max-width: 420px; margin: 0 auto 64px; }
+    .bullet { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px; }
+    .bullet-arrow { color: rgba(255,255,255,0.25); margin-top: 2px; }
+    .bullet-text { font-size: 14px; color: rgba(255,255,255,0.65); line-height: 1.5; }
+
+    /* CALENDAR */
+    .cal-header { text-align: center; margin-bottom: 24px; }
+    .cal-header h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .cal-header p { font-size: 13px; color: rgba(255,255,255,0.35); }
+    .cal-embed { background: #fff; border-radius: 16px; overflow: hidden; min-height: 500px; margin-bottom: 48px; }
+    .learn-more { text-align: center; margin-bottom: 64px; }
+    .learn-more a { font-size: 13px; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+    .learn-more a:hover { color: rgba(255,255,255,0.6); }
+
+    /* SECTIONS */
+    .section { padding: 96px 16px; }
+    .section-alt { background: #f9f9f9; color: #000; }
+    .section-white { background: #fff; color: #000; }
+    .section-black { background: #000; color: #fff; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-step { font-size: 12px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; text-align: center; }
+    .section-alt .section-step { color: rgba(0,0,0,0.35); }
+    .section-black .section-step { color: rgba(255,255,255,0.35); }
+    .section-white .section-step { color: rgba(0,0,0,0.35); }
+    .section-title { font-size: 32px; font-weight: 700; text-align: center; margin-bottom: 24px; }
+
+    /* COMPLIANCE BANNER */
+    .compliance { max-width: 1100px; margin: 0 auto 48px; }
+    .compliance-inner { background: #000; color: #fff; text-align: center; border-radius: 12px; padding: 16px 24px; font-size: 13px; font-weight: 500; }
+
+    /* PLAN CARDS */
+    .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .plan-card { border-radius: 16px; padding: 32px; display: flex; flex-direction: column; position: relative; transition: box-shadow 0.3s; }
+    .plan-card.light { background: #fff; border: 1px solid #f0f0f0; }
+    .plan-card.light:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    .plan-card.dark { background: #000; color: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
+    .plan-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; font-size: 11px; font-weight: 700; padding: 6px 16px; border-radius: 99px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+    .plan-name { font-size: 20px; font-weight: 700; margin-bottom: 16px; }
+    .plan-split { font-size: 48px; font-weight: 700; margin-bottom: 4px; }
+    .plan-pricing { font-size: 13px; margin-bottom: 24px; }
+    .plan-card.light .plan-pricing { color: #6b7280; }
+    .plan-card.dark .plan-pricing { color: rgba(255,255,255,0.5); }
+    .plan-callouts { margin-bottom: 24px; padding-bottom: 24px; }
+    .plan-card.light .plan-callouts { border-bottom: 1px solid #f0f0f0; }
+    .plan-card.dark .plan-callouts { border-bottom: 1px solid rgba(255,255,255,0.1); }
+    .plan-callout { font-size: 14px; font-weight: 600; line-height: 1.6; }
+    .plan-card.dark .plan-callout { color: #fff; }
+    .plan-includes-label { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .plan-card.light .plan-includes-label { color: #9ca3af; }
+    .plan-card.dark .plan-includes-label { color: rgba(255,255,255,0.35); }
+    .plan-include { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; margin-bottom: 8px; }
+    .plan-include-arrow { flex-shrink: 0; }
+    .plan-card.light .plan-include-arrow { color: #9ca3af; }
+    .plan-card.dark .plan-include-arrow { color: rgba(255,255,255,0.4); }
+    .plan-card.light .plan-include span { color: #4b5563; }
+    .plan-card.dark .plan-include span { color: rgba(255,255,255,0.75); }
+    .plan-includes { flex: 1; margin-bottom: 24px; }
+    .plan-btn { display: block; text-align: center; padding: 12px; border-radius: 99px; font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+    .plan-card.light .plan-btn { background: #000; color: #fff; }
+    .plan-card.light .plan-btn:hover { background: #333; }
+    .plan-card.dark .plan-btn { background: #fff; color: #000; }
+    .plan-card.dark .plan-btn:hover { background: #e5e5e5; }
+
+    /* TILES */
+    .tiles-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .tile { border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); padding: 32px; transition: border-color 0.3s; }
+    .tile:hover { border-color: rgba(255,255,255,0.25); }
+    .tile h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .tile p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+    /* ADD-ONS */
+    .addons-wrap { max-width: 1100px; margin: 0 auto; display: none; }
+    .addons-wrap.visible { display: block; }
+    .addons-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 640px; margin: 0 auto; }
+    .addon-card { background: #fff; border: 1px solid #f0f0f0; border-radius: 16px; padding: 32px; transition: box-shadow 0.3s; }
+    .addon-card:hover { box-shadow: 0 8px 30px rgba(0,0,0,0.08); }
+    .addon-name { font-size: 18px; font-weight: 700; color: #000; margin-bottom: 16px; }
+    .addon-price { font-size: 40px; font-weight: 700; color: #000; }
+    .addon-price-label { font-size: 14px; color: #9ca3af; margin-bottom: 24px; }
+    .addon-feature { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #4b5563; margin-bottom: 8px; }
+    .addon-arrow { color: #9ca3af; flex-shrink: 0; }
+
+    .plan-card.selected { outline: 2px solid #000; outline-offset: 2px; }
+    .plan-card.dark.selected { outline-color: #fff; }
+
+    /* NEW AGENTS */
+    .new-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 960px; margin: 0 auto 48px; }
+    .new-card { padding: 32px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); transition: border-color 0.3s; }
+    .new-card:hover { border-color: rgba(255,255,255,0.25); }
+    .new-step { font-size: 48px; font-weight: 700; color: rgba(255,255,255,0.08); }
+    .new-card h3 { font-size: 20px; font-weight: 700; margin: 16px 0 12px; }
+    .new-card p { color: rgba(255,255,255,0.45); font-size: 14px; line-height: 1.7; }
+    .new-cta { text-align: center; }
+    .new-cta a { display: inline-block; background: #fff; color: #000; padding: 14px 32px; border-radius: 99px; font-size: 16px; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+    .new-cta a:hover { background: #e5e5e5; transform: scale(1.03); }
+
+    /* TESTIMONIALS */
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .test-card { padding: 32px; border-radius: 16px; background: #f9f9f9; border: 1px solid #f0f0f0; display: flex; flex-direction: column; }
+    .test-quote { font-size: 60px; font-family: Georgia, serif; color: rgba(0,0,0,0.08); line-height: 1; margin-bottom: 16px; }
+    .test-card blockquote { color: rgba(0,0,0,0.65); font-size: 14px; line-height: 1.7; flex: 1; margin-bottom: 24px; }
+    .test-author { display: flex; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid #e5e7eb; }
+    .test-avatar { width: 40px; height: 40px; border-radius: 50%; background: #000; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 12px; }
+    .test-name { font-weight: 600; font-size: 13px; color: #000; }
+    .test-role { font-size: 11px; color: #6b7280; }
+
+    /* FOOTER */
+    .footer { background: #000; color: #fff; border-top: 1px solid rgba(255,255,255,0.08); padding: 64px 16px 32px; }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    .footer-brand span { font-weight: 300; }
+    .footer-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.7; }
+    .footer h4 { font-weight: 600; margin-bottom: 16px; font-size: 14px; }
+    .footer ul { list-style: none; }
+    .footer ul li { margin-bottom: 8px; font-size: 13px; color: rgba(255,255,255,0.35); }
+    .footer ul li a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color 0.2s; }
+    .footer ul li a:hover { color: #fff; }
+    .footer-bottom { padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 11px; color: rgba(255,255,255,0.2); }
+    .footer-bottom a { font-size: 11px; color: rgba(255,255,255,0.2); text-decoration: none; margin-left: 24px; transition: color 0.2s; }
+    .footer-bottom a:hover { color: #fff; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .plans-grid, .test-grid, .new-grid, .tiles-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .plans-grid, .test-grid, .new-grid, .tiles-grid, .addons-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .plan-card.dark { transform: none; }
+    }
+    @media (min-width: 640px) {
+      .logo { font-size: 36px; }
+      .hero-headline h2 { font-size: 32px; }
+    }
+    @media (min-width: 1024px) {
+      .plan-card.dark { transform: scale(1.05); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">Aari <span>Realty</span></div>
+    <p class="subtitle">Southwest Florida</p>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-headline">
+      <h2>Join Our Team</h2>
+      <p>Fair splits. Real support. No weird fine print.</p>
+    </div>
+    <div class="bullets">
+      <div class="bullet"><span class="bullet-arrow">→</span><span class="bullet-text">Commission plans from 75/25 up to 100%</span></div>
+      <div class="bullet"><span class="bullet-arrow">→</span><span class="bullet-text">Full transaction coordination on Growth plan</span></div>
+      <div class="bullet"><span class="bullet-arrow">→</span><span class="bullet-text">SkySlope Suite + SkySlope Books on every plan</span></div>
+      <div class="bullet"><span class="bullet-arrow">→</span><span class="bullet-text">Marketing support, CRM, and lead generation available</span></div>
+      <div class="bullet"><span class="bullet-arrow">→</span><span class="bullet-text">One-on-one mentorship and accountability</span></div>
+      <div class="bullet"><span class="bullet-arrow">→</span><span class="bullet-text">Weekly coaching and video recording sessions</span></div>
+    </div>
+
+    <!-- CALENDAR -->
+    <div class="cal-header">
+      <h3>Book a Consultation</h3>
+      <p>Pick a time that works for you — confidential, no pressure.</p>
+    </div>
+    <div class="cal-embed">
+      <div id="inline-widget-meet-with-marlenyi"></div>
+    </div>
+    <div class="learn-more"><a href="#plans">Learn more about our plans ↓</a></div>
+  </div>
+
+  <!-- TILES -->
+  <section id="plans" class="section section-black">
+    <div class="section-inner">
+      <div class="tiles-grid">
+        <div class="tile">
+          <h3>Content Studio</h3>
+          <p>Branded templates and tools to create clean, consistent marketing</p>
+        </div>
+        <div class="tile">
+          <h3>Accountability Club</h3>
+          <p>Stay consistent with content, follow-through, and execution</p>
+        </div>
+        <div class="tile">
+          <h3>Lead Distribution</h3>
+          <p>Inbound leads routed through brokerage systems when available</p>
+        </div>
+        <div class="tile">
+          <h3>SkySlope Suite</h3>
+          <p>Manage transactions, documents, and compliance in one place</p>
+        </div>
+        <div class="tile">
+          <h3>SkySlope Books</h3>
+          <p>Track commissions, payouts, and production in real time</p>
+        </div>
+        <div class="tile">
+          <h3>File Compliance Review</h3>
+          <p>Every file is reviewed for accuracy, completeness, and compliance</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMISSION STRUCTURE -->
+  <section class="section section-alt">
+    <div class="section-inner">
+      <p class="section-step" style="color:rgba(0,0,0,0.35)">Aari Realty</p>
+      <h2 class="section-title">Commission Structure</h2>
+      <div class="compliance"><div class="compliance-inner">$199/year — E&amp;O + Compliance (all agents)</div></div>
+      <p style="text-align:center;font-size:13px;color:rgba(0,0,0,0.35);margin-bottom:48px;">One flat transaction fee per plan</p>
+      <div class="plans-grid">
+
+        <!-- GROWTH -->
+        <div class="plan-card light" data-plan="growth" onclick="selectPlan('growth')">
+          <div class="plan-name">Aari Growth</div>
+          <div class="plan-split">75 / 25</div>
+          <p class="plan-pricing">$39/month · $299 per transaction</p>
+          <div class="plan-includes">
+            <p class="plan-includes-label">Includes</p>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>⭐️⭐️ Transaction Coordination (done for you)</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>⭐️ Marketing Essentials</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Accountability club</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>One-on-one with broker</span></div>
+          </div>
+          <button class="plan-btn" onclick="selectPlan('growth')">Select Plan</button>
+        </div>
+
+        <!-- PRO -->
+        <div class="plan-card dark" data-plan="pro" onclick="selectPlan('pro')">
+          <div class="plan-badge">Most Agents Start Here</div>
+          <div class="plan-name">Aari Pro</div>
+          <div class="plan-split">90 / 10</div>
+          <p class="plan-pricing">$69/month · $349 per transaction</p>
+          <div class="plan-includes">
+            <p class="plan-includes-label">Includes</p>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>⭐️ Deal support when you need it</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>More control over your business</span></div>
+          </div>
+          <button class="plan-btn" onclick="selectPlan('pro')">Select Plan</button>
+        </div>
+
+        <!-- MAX -->
+        <div class="plan-card light" data-plan="max" onclick="selectPlan('max')">
+          <div class="plan-name">Aari Max</div>
+          <div class="plan-split">100%</div>
+          <p class="plan-pricing">$99/month · $399 per transaction</p>
+          <div class="plan-includes">
+            <p class="plan-includes-label">Includes</p>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Clean transaction structure</span></div>
+            <div class="plan-include"><span class="plan-include-arrow">→</span><span>Independent workflow</span></div>
+          </div>
+          <button class="plan-btn" onclick="selectPlan('max')">Select Plan</button>
+        </div>
+
+      </div>
+
+      <!-- ADD-ONS (hidden until plan selected) -->
+      <div class="addons-wrap" id="addons-section">
+        <div style="text-align:center;margin-top:64px;margin-bottom:32px;">
+          <p class="section-step" style="color:rgba(0,0,0,0.35)">Optional</p>
+          <h3 style="font-size:28px;font-weight:700;color:#000;">Add-Ons</h3>
+        </div>
+        <div class="addons-grid">
+          <div class="addon-card">
+            <div class="addon-name">CRM System</div>
+            <div class="addon-price">$49</div>
+            <p class="addon-price-label">/month</p>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Manage contacts, track activity, and stay organized</span></div>
+          </div>
+          <div class="addon-card">
+            <div class="addon-name">Marketing System</div>
+            <div class="addon-price">$49</div>
+            <p class="addon-price-label">/month</p>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Video recording sessions</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Pop-by strategy + execution</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Social media planning</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Social media templates</span></div>
+            <div class="addon-feature"><span class="addon-arrow">→</span><span>Accountability club</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW AGENTS -->
+  <section class="section section-black">
+    <div class="section-inner">
+      <p class="section-step">New to Real Estate?</p>
+      <h2 class="section-title" style="margin-bottom:48px">Fast-Track Your Success</h2>
+      <div class="new-grid">
+        <div class="new-card">
+          <div class="new-step">01</div>
+          <h3>Real Training</h3>
+          <p>Hands-on training that teaches you what works right now in today's market. No outdated textbook theory.</p>
+        </div>
+        <div class="new-card">
+          <div class="new-step">02</div>
+          <h3>Real Support</h3>
+          <p>One-on-one mentorship with someone actually invested in your success. Weekly coaching with actionable strategies.</p>
+        </div>
+        <div class="new-card">
+          <div class="new-step">03</div>
+          <h3>Real Compensation</h3>
+          <p>A commission plan that rewards growth. More deals = bigger splits. You work hard — you should get paid accordingly.</p>
+        </div>
+      </div>
+      <div class="new-cta"><a href="#inline-widget-meet-with-marlenyi">Start Your Career</a></div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section section-white">
+    <div class="section-inner">
+      <p class="section-step">Testimonials</p>
+      <h2 class="section-title" style="margin-bottom:48px">What Our Agents Say</h2>
+      <div class="test-grid">
+        <div class="test-card">
+          <div class="test-quote">&ldquo;</div>
+          <blockquote>The mentorship program at Aari Realty changed everything for me. I went from zero closings to a thriving business in under a year. The support is real.</blockquote>
+          <div class="test-author">
+            <div class="test-avatar">SM</div>
+            <div><div class="test-name">Sarah M.</div><div class="test-role">Residential Agent</div></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-quote">&ldquo;</div>
+          <blockquote>No hidden fees, no games. The commission structure is exactly what they promise — fair splits that reward hard work. Best move I ever made.</blockquote>
+          <div class="test-author">
+            <div class="test-avatar">JR</div>
+            <div><div class="test-name">James R.</div><div class="test-role">Senior Agent</div></div>
+          </div>
+        </div>
+        <div class="test-card">
+          <div class="test-quote">&ldquo;</div>
+          <blockquote>The transaction coordination alone saves me hours every week. Add in the CRM, marketing support, and coaching — it's everything I needed to grow.</blockquote>
+          <div class="test-author">
+            <div class="test-avatar">MG</div>
+            <div><div class="test-name">Maria G.</div><div class="test-role">Top Producer</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Aari <span>Realty</span></div>
+          <p class="footer-desc">Real estate services in Southwest Florida. Fair splits. Real training. Actual support.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#plans">Commission Plans</a></li>
+            <li><a href="#inline-widget-meet-with-marlenyi">Book a Meeting</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact Us</h4>
+          <ul>
+            <li>careers@aarirealty.com</li>
+            <li>Southwest Florida</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Our Platforms</h4>
+          <ul>
+            <li>SkySlope + SkySlope Books</li>
+            <li>Lofty CRM</li>
+            <li>Canva Pro</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Aari Realty. All rights reserved.</p>
+        <div><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Koalendar -->
+  <script>window.Koalendar=window.Koalendar||function(){(Koalendar.props=Koalendar.props||[]).push(arguments)};</script>
+  <script async src="https://koalendar.com/assets/widget.js"></script>
+  <script>Koalendar('inline', {"url":"https://koalendar.com/e/meet-with-marlenyi","selector":"#inline-widget-meet-with-marlenyi"});</script>
+
+  <!-- Plan selection -->
+  <script>
+    var currentPlan = null;
+    function selectPlan(id) {
+      var cards = document.querySelectorAll('.plan-card');
+      var addons = document.getElementById('addons-section');
+      if (currentPlan === id) {
+        currentPlan = null;
+        cards.forEach(function(c) { c.classList.remove('selected'); });
+        var btns = document.querySelectorAll('.plan-btn');
+        btns.forEach(function(b) { b.textContent = 'Select Plan'; });
+        addons.classList.remove('visible');
+        return;
+      }
+      currentPlan = id;
+      cards.forEach(function(c) {
+        var btn = c.querySelector('.plan-btn');
+        if (c.getAttribute('data-plan') === id) {
+          c.classList.add('selected');
+          btn.textContent = 'Selected ✓';
+        } else {
+          c.classList.remove('selected');
+          btn.textContent = 'Select Plan';
+        }
+      });
+      addons.classList.add('visible');
+      addons.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  </script>
+
+</body>
+</html>
