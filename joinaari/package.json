@@ -1,4 +1,7 @@
 {
   "name": "joinaari",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "payload-api": "latest"
+  }
 }
