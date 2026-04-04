@@ -1212,18 +1212,16 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   // Payload.js initialization — secure card inputs
   var plFormInstance = null;
+  var PL_CLIENT_KEY = 'test_client_key_12iNYyO3THeRLlwhaq66GyWLTb2i';
 
-  function initPayloadForm(clientToken) {
+  function initPayloadForm() {
     if (typeof Payload === 'undefined') {
-      console.warn('[Payload.js] Library not loaded yet');
+      console.warn('[Payload.js] Library not loaded yet, retrying...');
+      setTimeout(initPayloadForm, 1000);
       return;
     }
     try {
-      // Initialize Payload with client token
-      if (clientToken) {
-        Payload(clientToken);
-      }
-      // Create Payload.Form on the card form element
+      Payload(PL_CLIENT_KEY);
       var formEl = document.getElementById('pl-card-form');
       if (formEl && !plFormInstance) {
         plFormInstance = new Payload.Form(formEl);
@@ -1234,14 +1232,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }
   }
 
-  // Wait for Payload.js to load, then initialize
-  if (document.readyState === 'complete') {
-    setTimeout(function() { initPayloadForm(null); }, 500);
-  } else {
-    window.addEventListener('load', function() {
-      setTimeout(function() { initPayloadForm(null); }, 500);
-    });
+  // Initialize as soon as Payload.js loads
+  var plScript = document.querySelector('script[src*="Payload.js"]');
+  if (plScript) {
+    plScript.addEventListener('load', function() { initPayloadForm(); });
+    plScript.addEventListener('error', function() { console.error('[Payload.js] Failed to load script'); });
   }
+  if (typeof Payload !== 'undefined') { initPayloadForm(); }
 
   function toggleGrowthPlan(btn) {
     var card = document.getElementById('growth-plan-card');

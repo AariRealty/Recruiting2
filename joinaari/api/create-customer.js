@@ -15,6 +15,10 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'first_name, last_name, and email are required' });
     }
 
+    if (!process.env.PAYLOAD_SECRET_KEY) {
+      return res.status(500).json({ error: 'PAYLOAD_SECRET_KEY not configured' });
+    }
+
     const pl = payload.Session(process.env.PAYLOAD_SECRET_KEY);
 
     // Create customer in Payload
@@ -24,15 +28,11 @@ module.exports = async function handler(req, res) {
       phone_number: phone || undefined
     }));
 
-    // Generate a client token for frontend secure input
-    const clientToken = await pl.create(pl.ClientToken());
-
     return res.status(200).json({
-      customer_id: customer.id,
-      client_token: clientToken.id || clientToken.token || clientToken
+      customer_id: customer.id
     });
   } catch (err) {
-    console.error('[create-customer] Error:', err);
+    console.error('[create-customer] Error:', err.message, err.stack);
     return res.status(500).json({ error: 'Failed to create customer', detail: err.message });
   }
 };
