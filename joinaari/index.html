@@ -429,10 +429,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .hero-right{display:none}
   .tagline-bar{padding:32px 24px}
   .tiles-section{padding:48px 24px !important}
-  .tiles-grid{grid-template-columns:1fr 1fr !important;gap:14px !important}
-  .tiles-grid > div{padding:28px 20px !important}
-  .tiles-grid h3{font-size:14px !important;margin-bottom:10px !important}
-  .tiles-grid p{font-size:11px !important;line-height:1.7 !important}
+  .tiles-list > div{flex-direction:column !important;align-items:flex-start !important;gap:8px !important}
+  .tiles-list h3{font-size:20px !important}
+  .tiles-list p{text-align:left !important}
   .plans-section,.why-section,.broker-section,.culture-section,.apply-section{padding:72px 24px}
   .compliance-banner{flex-direction:column;align-items:flex-start;gap:10px}
   .compliance-banner-note{text-align:left}
@@ -535,30 +534,30 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 <!-- TILES SECTION -->
 <section class="tiles-section" style="background:#0a0a0a;padding:60px 72px">
   <p style="font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:28px;text-align:center">Included With Every Plan</p>
-  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px" class="tiles-grid">
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:44px 36px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 16px">Content Studio</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.9;margin:0">Branded templates and tools to create clean, consistent marketing</p>
+  <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0" class="tiles-list">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">Content Studio</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Branded templates and tools to create clean, consistent marketing</p>
     </div>
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:44px 36px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 16px">Accountability Club</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.9;margin:0">Stay consistent with content, follow-through, and execution</p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">Accountability Club</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Stay consistent with content, follow-through, and execution</p>
     </div>
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:44px 36px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 16px">Lead Distribution</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.9;margin:0">Inbound leads routed through brokerage systems when available</p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">Lead Distribution</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Inbound leads routed through brokerage systems when available</p>
     </div>
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:44px 36px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 16px">SkySlope Suite</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.9;margin:0">Manage transactions, documents, and compliance in one place</p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">SkySlope Suite</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Manage transactions, documents, and compliance in one place</p>
     </div>
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:44px 36px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 16px">SkySlope Books</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.9;margin:0">Track commissions, payouts, and production in real time</p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">SkySlope Books</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Track commissions, payouts, and production in real time</p>
     </div>
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:44px 36px;transition:border-color 0.3s" onmouseover="this.style.borderColor='rgba(255,255,255,0.2)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)'">
-      <h3 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 16px">File Compliance Review</h3>
-      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.9;margin:0">Every file is reviewed for accuracy, completeness, and compliance</p>
+    <div style="display:flex;align-items:baseline;justify-content:space-between;gap:20px;padding:28px 0">
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#ffffff;margin:0;flex-shrink:0">File Compliance Review</h3>
+      <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.4);line-height:1.7;margin:0;text-align:right">Every file is reviewed for accuracy, completeness, and compliance</p>
     </div>
   </div>
 </section>
