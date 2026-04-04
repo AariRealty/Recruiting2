@@ -111,7 +111,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 
 /* TOOLS STEP */
 .tools-step{max-height:0;overflow:hidden;transition:max-height 0.5s ease,padding 0.4s ease;padding:0}
-.tools-step.open{max-height:600px;padding:48px 0 0}
+.tools-step.open{max-height:900px;padding:48px 0 0}
 .tools-header{margin-bottom:32px}
 .tools-headline{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.2vw,32px);font-weight:400;color:#ffffff;margin:0 0 6px;line-height:1.1}
 .tools-subline{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:400;color:rgba(255,255,255,0.38);line-height:1.8;margin:0}
@@ -444,9 +444,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .step-num{font-size:12px;padding:9px 18px}
   .step-title{font-size:16px;letter-spacing:1px}
   .plan-selector{grid-template-columns:1fr}
-  .tools-option{flex-wrap:nowrap;gap:12px;padding:20px 0;align-items:center}
-  .tools-option-info{flex:1;min-width:0}
-  .tools-value-line{font-size:11px;line-height:1.5}
+  .tools-selector{grid-template-columns:1fr !important}
+  .tools-option{padding:24px 20px !important}
   .tools-price{font-size:26px;min-width:auto;flex-shrink:0}
   .tools-select-btn{padding:8px 14px;font-size:8px}
   .pricing-review.open{padding:40px 24px;max-height:2000px}
@@ -668,24 +667,20 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <h3 class="tools-headline">Optional Add-Ons</h3>
       <p class="tools-subline">Select any add-ons you'd like, or skip this step.</p>
     </div>
-    <div class="tools-selector">
+    <div class="tools-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:none">
 
-      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)">
-        <div class="tools-option-info">
-          <p class="tools-name">CRM System</p>
-          <p class="tools-value-line">Manage contacts, track activity, and stay organized</p>
-        </div>
-        <p class="tools-price">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
-        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))">Add →</button>
+      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;border-bottom:none;cursor:pointer;transition:all 0.3s">
+        <p class="tools-name" style="margin:0">CRM System</p>
+        <p class="tools-value-line" style="margin:0;font-size:12px;line-height:1.7">Manage contacts, track activity, and stay organized</p>
+        <p class="tools-price" style="margin:0;font-size:28px">$49<span style="font-size:13px;font-weight:300">/mo</span></p>
+        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="align-self:flex-start;margin-top:4px">Add →</button>
       </div>
 
-      <div class="tools-option" data-tools="Marketing System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)">
-        <div class="tools-option-info">
-          <p class="tools-name">Marketing System</p>
-          <p class="tools-value-line">Video recording sessions &middot; Pop-by strategy + execution &middot; Social media planning &middot; Social media templates &middot; Accountability club</p>
-        </div>
-        <p class="tools-price">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
-        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))">Add →</button>
+      <div class="tools-option" data-tools="Marketing System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:28px 24px;display:flex;flex-direction:column;gap:12px;border-bottom:none;cursor:pointer;transition:all 0.3s">
+        <p class="tools-name" style="margin:0">Marketing System</p>
+        <p class="tools-value-line" style="margin:0;font-size:12px;line-height:1.7">Video recording sessions &middot; Pop-by strategy + execution &middot; Social media planning &middot; Social media templates &middot; Accountability club</p>
+        <p class="tools-price" style="margin:0;font-size:28px">$49<span style="font-size:13px;font-weight:300">/mo</span></p>
+        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="align-self:flex-start;margin-top:4px">Add →</button>
       </div>
 
     </div>
