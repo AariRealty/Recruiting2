@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Independent Contractor Agreement – Aari Realty LLC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f5f5;
+      font-family: 'Lato', sans-serif;
+      color: #0a0a0a;
+    }
+
+    .ica-header {
+      background: #0a0a0a;
+      padding: 40px;
+      text-align: center;
+      color: #fff;
+    }
+
+    .ica-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .ica-section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 32px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    }
+
+    .ica-section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(10, 10, 10, 0.35);
+      margin-bottom: 24px;
+    }
+
+    .ica-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin: 24px 0 12px;
+    }
+
+    .ica-subheading {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      margin: 20px 0 8px;
+    }
+
+    .ica-text {
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(10, 10, 10, 0.75);
+      margin-bottom: 12px;
+    }
+
+    .ica-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 12px;
+    }
+
+    .ica-table th {
+      background: #0a0a0a;
+      color: #fff;
+      padding: 10px 12px;
+      text-align: left;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .ica-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+    }
+
+    .ica-initials-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 20px 0;
+      padding: 16px;
+      background: rgba(10, 10, 10, 0.03);
+      border-radius: 6px;
+    }
+
+    .ica-initials-row input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #0a0a0a;
+    }
+
+    .ica-initials-row label {
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .ica-signature-box {
+      border: 2px solid #0a0a0a;
+      border-radius: 8px;
+      padding: 24px;
+      margin: 16px 0;
+    }
+
+    .ica-sig-input {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid rgba(10, 10, 10, 0.15);
+      padding: 12px 0;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      outline: none;
+    }
+
+    .ica-sig-input:focus {
+      border-bottom-color: #0a0a0a;
+    }
+
+    .ica-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 16px;
+    }
+
+    .ica-field label {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(10, 10, 10, 0.4);
+    }
+
+    .ica-field input,
+    .ica-field select {
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      padding: 10px 12px;
+      border: 1px solid rgba(10, 10, 10, 0.15);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .ica-field input[readonly] {
+      background: rgba(10, 10, 10, 0.03);
+      color: rgba(10, 10, 10, 0.6);
+    }
+
+    .ica-submit-btn {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      background: #0a0a0a;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .ica-submit-btn:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    .ica-broker-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px;
+      font-style: italic;
+      color: #0a0a0a;
+    }
+
+    .ica-footer {
+      text-align: center;
+      padding: 40px 24px;
+      font-family: 'Lato', sans-serif;
+      font-size: 11px;
+      color: rgba(10, 10, 10, 0.35);
+    }
+
+    .ica-print-link {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #0a0a0a;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+
+    .ica-doc-list {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0;
+    }
+
+    .ica-doc-list li {
+      padding: 6px 0;
+      font-size: 13px;
+      color: rgba(10, 10, 10, 0.7);
+      border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+    }
+
+    .ica-doc-list li::before {
+      content: "\00B7\00A0\00A0";
+      font-weight: bold;
+    }
+
+    @media print {
+      .ica-print-link,
+      .ica-submit-btn,
+      .ica-header {
+        display: none;
+      }
+      body {
+        background: #fff;
+      }
+      .ica-section {
+        box-shadow: none;
+        border: 1px solid #eee;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .ica-container {
+        padding: 16px;
+      }
+      .ica-section {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<a href="javascript:window.print()" class="ica-print-link">Print Document</a>
+
+<div class="ica-header">
+  <p style="font-family:'Montserrat';font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 16px">Aari Realty LLC &middot; Florida Licensed Brokerage</p>
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,42px);font-weight:300;color:#fff;margin:0 0 8px">Independent Contractor Agreement Package</h1>
+  <p style="font-family:'Lato';font-size:13px;color:rgba(255,255,255,0.4);margin:0">Aari Realty LLC &middot; State of Florida</p>
+</div>
+
+<div class="ica-container">
+  <form id="ica-form">
+
+    <!-- ASSOCIATE INFORMATION -->
+    <div class="ica-section">
+      <div class="ica-section-title">Associate Information</div>
+
+      <div class="ica-field">
+        <label for="associate-name">Full Legal Name</label>
+        <input type="text" id="associate-name" readonly>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-license">Florida Real Estate License Number</label>
+        <input type="text" id="associate-license" readonly>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-state">Primary State</label>
+        <input type="text" id="associate-state" value="Florida" readonly>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-email">Email Address</label>
+        <input type="email" id="associate-email" readonly>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-date">Effective Date</label>
+        <input type="text" id="associate-date" readonly>
+      </div>
+    </div>
+
+    <!-- INCORPORATED DOCUMENTS -->
+    <div class="ica-section">
+      <div class="ica-section-title">Incorporated Documents</div>
+
+      <ul class="ica-doc-list">
+        <li>Independent Contractor Agreement (ICA)</li>
+        <li>Commission Structure Addendum (CSA)</li>
+        <li>Exhibit A – Commission Fee Schedule</li>
+        <li>Operations &amp; Compliance Manual</li>
+        <li>Transaction File Requirements Addendum</li>
+        <li>Fair Housing Policy</li>
+        <li>Advertising Policy</li>
+        <li>Social Media Policy</li>
+        <li>Errors &amp; Omissions Insurance Addendum</li>
+        <li>Record Retention &amp; Confidentiality Policy</li>
+        <li>Referral Bonus Policy</li>
+        <li>Indemnification, Defense &amp; Offsets Addendum</li>
+        <li>Statement of Understanding &amp; Policy Acknowledgment</li>
+      </ul>
+
+      <p class="ica-text"><strong>NOTICE &amp; AMENDMENT:</strong> Written notice may be provided by email or electronic posting in the Company's document portal. Unless a different effective date is stated, amendments take effect seven (7) days after notice is issued. Continued affiliation after the effective date constitutes acceptance of all updated or newly incorporated documents.</p>
+    </div>
+
+    <!-- ICA SECTIONS 1–10 -->
+    <div class="ica-section">
+      <div class="ica-section-title">Independent Contractor Agreement</div>
+
+      <!-- Section 1 -->
+      <div class="ica-heading">1. Independent Contractor Relationship</div>
+      <p class="ica-text">The Associate is engaged as an independent contractor, not an employee. The Broker will not withhold taxes, provide employee benefits, or control the Associate's daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, and maintaining required insurance. The Associate must complete a W-9 form and will receive a 1099-NEC for tax purposes.</p>
+
+      <div class="ica-subheading">No Authority to Bind</div>
+      <p class="ica-text">The Associate has no authority to bind the Company, enter contracts, or incur obligations on the Company's behalf without a specific written Power of Attorney executed by the Broker for each transaction.</p>
+
+      <!-- Section 2 -->
+      <div class="ica-heading">2. Exclusive Brokerage Affiliation</div>
+      <p class="ica-text">The Associate affirms they are not licensed with or actively affiliated with any other real estate brokerage or conducting brokerage activity outside of Aari Realty LLC. Limited outside affiliations (such as referral-only licenses in other states) require prior written approval from the Broker and must comply with Florida law. Engaging in unapproved brokerage activity constitutes immediate termination for cause and may result in forfeiture of pending commissions until compliance is verified.</p>
+
+      <!-- Section 3 -->
+      <div class="ica-heading">3. Associate Responsibilities</div>
+
+      <div class="ica-subheading">Licensure</div>
+      <p class="ica-text">The Associate must maintain an active, current Florida real estate license at all times during the term of this Agreement.</p>
+
+      <div class="ica-subheading">Compliance with Laws and Rules</div>
+      <p class="ica-text">The Associate shall comply with all applicable federal, state, and local laws, rules, and regulations governing real estate practice in Florida.</p>
+
+      <div class="ica-subheading">Incorporated Documents</div>
+      <p class="ica-text">The Associate shall comply with all policies, procedures, and standards set forth in the Incorporated Documents listed in this Agreement.</p>
+
+      <div class="ica-subheading">Cybersecurity &amp; Data Breach Reporting</div>
+      <p class="ica-text">The Associate must report any known or suspected data breach, unauthorized access, or cybersecurity incident to the Broker within four (4) hours of discovery.</p>
+
+      <div class="ica-subheading">Wire Safety</div>
+      <p class="ica-text">The Associate shall never transmit wire instructions via email or text message. Violation of this policy constitutes grounds for immediate termination.</p>
+
+      <div class="ica-subheading">Escrow Handling</div>
+      <p class="ica-text">The Associate shall not maintain or operate any escrow accounts. All escrow deposits must be handled in accordance with Company policy and Florida law.</p>
+
+      <div class="ica-subheading">MLS Compliance / Clear Cooperation</div>
+      <p class="ica-text">The Associate must enter all listings into the MLS within twenty-four (24) hours as required by MLS rules and the Clear Cooperation Policy.</p>
+
+      <div class="ica-subheading">Social Media &amp; Advertising</div>
+      <p class="ica-text">All advertising and social media content related to real estate must receive prior Broker approval before publication or distribution.</p>
+
+      <div class="ica-subheading">TCPA Compliance</div>
+      <p class="ica-text">The Associate must comply with the Telephone Consumer Protection Act (TCPA) and all related federal and state telemarketing regulations.</p>
+
+      <div class="ica-subheading">Transaction Coordination &amp; File Organization</div>
+      <p class="ica-text">The Associate shall organize and submit all transaction files in accordance with Company standards. Aari Transactions LLC, an affiliated entity, provides transaction coordination services.</p>
+
+      <!-- Section 4 -->
+      <div class="ica-heading">4. Fair Housing Compliance</div>
+      <p class="ica-text">The Associate must comply with the Fair Housing Policy incorporated into this Agreement. Discriminatory practices of any kind are strictly prohibited. Violations may result in immediate termination and reporting to the Florida Real Estate Commission (FREC).</p>
+
+      <!-- Section 5 -->
+      <div class="ica-heading">5. Confidentiality</div>
+
+      <div class="ica-subheading">Definition</div>
+      <p class="ica-text">Confidential Information includes all non-public information obtained during the Associate's affiliation with the Company, including but not limited to client data, business strategies, proprietary systems, and financial information.</p>
+
+      <div class="ica-subheading">Use Restriction</div>
+      <p class="ica-text">The Associate shall not copy, disclose, or distribute any Confidential Information to any third party without the prior written consent of the Broker.</p>
+
+      <div class="ica-subheading">Post-Termination Restrictions</div>
+      <p class="ica-text">Upon termination of this Agreement, the Associate shall immediately cease all use of Confidential Information, return all Company property within five (5) days, and certify the deletion of all electronic copies of Confidential Information.</p>
+
+      <div class="ica-subheading">Survival</div>
+      <p class="ica-text">Confidentiality obligations survive termination of this Agreement indefinitely with respect to trade secrets, and for a reasonable period for all other Confidential Information.</p>
+
+      <!-- Section 6 -->
+      <div class="ica-heading">6. Errors &amp; Omissions (E&amp;O) Insurance</div>
+      <p class="ica-text">The Broker maintains an Errors &amp; Omissions insurance policy covering the brokerage. The Associate is included under this policy at no upfront cost. The Associate agrees to pay the applicable deductible for any claim arising from the Associate's own conduct. The Associate must report any potential claim to the Broker within twenty-four (24) hours of becoming aware of the circumstances giving rise to such claim.</p>
+
+      <!-- Section 7 -->
+      <div class="ica-heading">7. Compensation</div>
+
+      <div class="ica-subheading">Commission Basis</div>
+      <p class="ica-text">The Associate's compensation shall be on a commission basis as set forth in the Commission Structure Addendum (CSA). The Associate shall receive no salary, draw, or guaranteed minimum compensation.</p>
+
+      <div class="ica-subheading">Conditions Precedent</div>
+      <p class="ica-text">Payment of commission is subject to the following conditions precedent: the transaction file is complete, the Broker has granted approval, funds have cleared, and the Associate is in Good Standing.</p>
+
+      <div class="ica-subheading">Cleared Funds</div>
+      <p class="ica-text">Wire transfers are considered cleared the same or next business day. Checks require three (3) to ten (10) business days to clear. Commission disbursement will occur within three (3) business days after all conditions precedent are satisfied.</p>
+
+      <div class="ica-subheading">Broker Authorization</div>
+      <p class="ica-text">The Broker has five (5) business days to grant or deny file approval. If approval is denied, the Associate has a three (3) day cure period to correct deficiencies.</p>
+
+      <div class="ica-subheading">Good Standing</div>
+      <p class="ica-text">Good Standing requires an active license, all fees paid, no suspension or disciplinary action, and all transaction files submitted in accordance with Company policy.</p>
+
+      <div class="ica-subheading">Post-Termination Compensation Floor</div>
+      <p class="ica-text">After termination, the Associate shall receive a minimum of fifty percent (50%) of the net commission on any pending transaction that closes, provided the Associate's file is complete and compliant.</p>
+
+      <div class="ica-subheading">Personal Transactions</div>
+      <p class="ica-text">The Associate must obtain prior Broker approval before engaging in any personal real estate transaction.</p>
+
+      <div class="ica-subheading">Overpayments &amp; Deductions</div>
+      <p class="ica-text">Any overpayment must be repaid within five (5) days of notification. The Company may offset future commissions, up to a maximum of fifty percent (50%) per disbursement, without the Associate's prior consent.</p>
+
+      <!-- Section 8 -->
+      <div class="ica-heading">8. Transaction Compliance</div>
+      <p class="ica-text">The Associate must comply with the Operations &amp; Compliance Manual for all transactions. No commission shall be paid until the transaction file has been reviewed and approved by the Broker. Compliance with the Manual is a condition precedent to the payment of any compensation.</p>
+
+      <!-- Section 9 -->
+      <div class="ica-heading">9. Client Ownership</div>
+
+      <div class="ica-subheading">Personally Generated Clients</div>
+      <p class="ica-text">Clients personally generated by the Associate through the Associate's own efforts, relationships, and marketing are considered the Associate's property, subject to exclusions defined in this Agreement.</p>
+
+      <div class="ica-subheading">Company-Generated Leads</div>
+      <p class="ica-text">Leads generated through Company systems, marketing, or resources are classified as Company-generated leads, as determined by the Broker in its sole discretion.</p>
+
+      <div class="ica-subheading">Lead Classification Appeal</div>
+      <p class="ica-text">The Associate may appeal a lead classification determination in writing within seven (7) calendar days. The Broker shall respond to the appeal within ten (10) business days.</p>
+
+      <!-- Section 10 -->
+      <div class="ica-heading">10. Referral &amp; Co-Agent Commission Disputes</div>
+      <p class="ica-text">The Company shall not be responsible for referral or co-agent commission disputes unless the referral or co-agent agreement is in writing, signed by all parties, and approved by the Broker. All disputes shall be resolved through MLS arbitration and NAR dispute resolution procedures. The Company may withhold disputed commission amounts pending resolution.</p>
+
+      <!-- Initials Checkbox -->
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-ica" required>
+        <label for="init-ica">I have read and understand the Independent Contractor Agreement (Sections 1–20)</label>
+      </div>
+    </div>
+
+    <!-- SECTIONS 11-20 (continued inside the same ica-section as 1-10) -->
+    <div class="ica-section">
+      <div class="ica-section-title">Independent Contractor Agreement — Sections 11–20</div>
+
+      <div class="ica-heading">11. Indemnification</div>
+      <p class="ica-text">See Indemnification, Defense, and Offsets Addendum, incorporated by reference.</p>
+
+      <div class="ica-heading">12. Term &amp; Termination</div>
+      <p class="ica-text">Effective one (1) year, auto-renews annually. Either party may terminate at any time with written notice, effective immediately.</p>
+
+      <div class="ica-heading">13. Post-Termination Obligations</div>
+      <p class="ica-text">Return Company property within 5 calendar days. Cease use of logos/branding. Complete compliance files. Update online profiles within 5 days.</p>
+
+      <div class="ica-heading">14. Non-Solicitation</div>
+      <p class="ica-text">During affiliation and 12 months after, shall not solicit or recruit Aari Realty Associates. Does not include general public advertising.</p>
+
+      <div class="ica-heading">15. Dispute Resolution</div>
+      <p class="ica-text">Internal disputes: written to Broker, 10 calendar days. Other disputes: mediation first in Lee County, FL, then binding arbitration. Prevailing party recovers fees. Jury trial waiver.</p>
+
+      <div class="ica-heading">16. Governing Law</div>
+      <p class="ica-text">State of Florida.</p>
+
+      <div class="ica-heading">17. Force Majeure</div>
+      <p class="ica-text">Neither party liable for events beyond control. Deadlines extended. Written notice within 48 hours.</p>
+
+      <div class="ica-heading">18. Entire Agreement</div>
+      <p class="ica-text">ICA + Incorporated Documents = entire agreement. Amendments 7 days after notice. Order of precedence: ICA &rarr; CSA &rarr; Exhibit A.</p>
+
+      <div class="ica-heading">19. Severability; No Waiver</div>
+      <p class="ica-text">Invalid provisions modified to minimum extent. No waiver unless in writing.</p>
+
+      <div class="ica-heading">20. Electronic Signatures</div>
+      <p class="ica-text">Same force as original under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
+    </div>
+
+    <!-- COMMISSION STRUCTURE ADDENDUM (CSA) -->
+    <div class="ica-section">
+      <div class="ica-section-title">Commission Structure Addendum</div>
+
+      <div class="ica-heading">1–2. Purpose and Hierarchy</div>
+      <p class="ica-text">Establishes commission processing mechanics. ICA governs relationship, CSA governs calculation/disbursement, Exhibit A governs fees/pricing.</p>
+
+      <div class="ica-heading">3. Commission Earned vs. Payable</div>
+      <p class="ica-text">Not earned until: transaction closed, funds cleared, docs approved, compliance met, Broker authorized. Earned &ne; automatically payable.</p>
+
+      <div class="ica-heading">4. Application Order</div>
+      <p class="ica-text">Compliance holds &rarr; Company fees &rarr; Referral obligations &rarr; Offsets &rarr; Net to Associate.</p>
+
+      <div class="ica-heading">5. Offsets &amp; Deductions</div>
+      <p class="ica-text">Company authorized to offset unpaid balances, fees, chargebacks, fines from commissions. Survives termination.</p>
+
+      <div class="ica-heading">6. Plan Application</div>
+      <p class="ica-text">Plan at time of contract execution, not closing. Changes apply prospectively only.</p>
+
+      <div class="ica-heading">7. Referrals</div>
+      <p class="ica-text">Subject to written agreements, cleared funds, and compliance with laws.</p>
+
+      <div class="ica-heading">8. Personal Transactions</div>
+      <p class="ica-text">Qualifying: Associate or spouse on title. Standard transaction fee applies, no commission split. Growth plan exception: standard Growth split applies due to additional broker support.</p>
+
+      <div class="ica-heading">9. License Status</div>
+      <p class="ica-text">Must hold active license during negotiation, execution, closing, and disbursement.</p>
+
+      <div class="ica-heading">10–13. General</div>
+      <p class="ica-text">No employment relationship. Provisions survive termination. Amendments per ICA. Constitutes entire agreement re: commission structure.</p>
+
+      <div class="ica-heading">14. Internal Deal Handling</div>
+      <p class="ica-text">Company Assisted Transactions: 50/50 split (Company/assigned Associate). Original Associate not entitled to compensation upon reassignment.</p>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-csa" required>
+        <label for="init-csa">I have read and understand the Commission Structure Addendum (Sections 1–14)</label>
+      </div>
+    </div>
+
+    <!-- COMMISSION FEE SCHEDULE — EXHIBIT A -->
+    <div class="ica-section">
+      <div class="ica-section-title">Commission Fee Schedule — Exhibit A</div>
+
+      <p class="ica-subheading">Commission Plans</p>
+      <table class="ica-table">
+        <thead>
+          <tr>
+            <th>Plan</th>
+            <th>Split</th>
+            <th>Txn Fee</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Growth</td>
+            <td>70% / 30%</td>
+            <td>$299</td>
+            <td>Full support: TC, marketing, Brand Builder 6 months</td>
+          </tr>
+          <tr>
+            <td>Pro</td>
+            <td>90% / 10%</td>
+            <td>$349</td>
+            <td>Deal support when needed. Independent.</td>
+          </tr>
+          <tr>
+            <td>Max</td>
+            <td>100%</td>
+            <td>$399</td>
+            <td>Fully independent. Just brokerage access.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="ica-subheading">Plan Selection</p>
+      <p class="ica-text">The Associate's selected plan based on their application:</p>
+      <div style="display:flex;flex-direction:column;gap:12px;margin:16px 0;padding:16px;background:rgba(10,10,10,0.03);border-radius:6px;">
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
+          <input type="radio" name="selected_plan" id="plan-growth" value="Growth (70/30)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <strong>Growth</strong> — 70/30 Split
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
+          <input type="radio" name="selected_plan" id="plan-pro" value="Pro (90/10)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <strong>Pro</strong> — 90/10 Split
+        </label>
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
+          <input type="radio" name="selected_plan" id="plan-max" value="Max (100%)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <strong>Max</strong> — 100% Split
+        </label>
+      </div>
+
+      <p class="ica-subheading">Recurring Fees</p>
+      <table class="ica-table">
+        <thead>
+          <tr>
+            <th>Fee</th>
+            <th>Amount</th>
+            <th>Schedule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Brokerage Access</td>
+            <td>$99/month</td>
+            <td>Monthly, prorated at onboarding</td>
+          </tr>
+          <tr>
+            <td>E&amp;O + Compliance</td>
+            <td>$199/year</td>
+            <td>Annual, due on anniversary</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="ica-subheading">Administrative &amp; Conditional Fees</p>
+      <table class="ica-table">
+        <thead>
+          <tr>
+            <th>Fee</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Personal Transaction (Residential)</td><td>$399</td></tr>
+          <tr><td>Personal Transaction (Land)</td><td>$299</td></tr>
+          <tr><td>Admin Cost Rate</td><td>$150/hour</td></tr>
+          <tr><td>Late Payment</td><td>$25</td></tr>
+          <tr><td>Returned Payment</td><td>$25</td></tr>
+          <tr><td>Reactivation</td><td>$50</td></tr>
+          <tr><td>Sign Replacement (Open House)</td><td>$25</td></tr>
+          <tr><td>Sign Replacement (For Sale)</td><td>$35</td></tr>
+        </tbody>
+      </table>
+
+      <p class="ica-subheading">Optional Add-Ons</p>
+      <table class="ica-table">
+        <thead>
+          <tr>
+            <th>Add-On</th>
+            <th>Amount</th>
+            <th>Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CRM System (Lofty)</td>
+            <td>$49/mo</td>
+            <td>AI-powered CRM, lead tracking, IDX, dialer, texting</td>
+          </tr>
+          <tr>
+            <td>Brand Builder</td>
+            <td>$79/mo</td>
+            <td>Content planning, video, social media strategy</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="ica-subheading">Referral Compensation</p>
+      <p class="ica-text">Admin fee: 10% of referral payment, minimum $100. Recruiting Incentive: $100.</p>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-exhibit-a" required>
+        <label for="init-exhibit-a">I have read and understand the Commission Fee Schedule — Exhibit A (Sections 1–8)</label>
+      </div>
+    </div>
+
+    <!-- OPERATIONS & COMPLIANCE MANUAL (SUMMARY) -->
+    <div class="ica-section">
+      <div class="ica-section-title">Operations &amp; Compliance Manual — Summary</div>
+
+      <p class="ica-text">The complete Operations &amp; Compliance Manual contains 31 sections. Key provisions include:</p>
+
+      <ul class="ica-doc-list">
+        <li>Commissions &amp; Collections — Company may withhold disputed amounts</li>
+        <li>Company Property — All transaction docs are Company property</li>
+        <li>Wire &amp; Funds Handling — Prohibited from transmitting wire instructions</li>
+        <li>Regulatory Compliance — Florida Statute Ch. 475, FREC, DBPR, MLS, NAR</li>
+        <li>Transaction Documentation — Upload within 48 hours, complete file 7 days before closing</li>
+        <li>Broker Review — Contracts submitted for approval before execution</li>
+        <li>Prohibited Conduct — Fraud, discrimination, unauthorized practice, commingling</li>
+        <li>Fair Housing — Full compliance required, training within 14 days</li>
+        <li>Advertising &amp; Social Media — Company name required on all materials</li>
+        <li>E&amp;O Insurance — Claims reported within 24 hours, auto insurance $100k/$300k</li>
+        <li>Record Retention — 5-year minimum, client confidentiality</li>
+        <li>Referral Bonus — $100 recruiting reward, 30-day active requirement</li>
+        <li>Company Leads — 50/50 split, service level minimums apply</li>
+        <li>Personal Transactions — Standard fees, full compliance required</li>
+        <li>MLS &amp; Brand Standards — Clear Cooperation, Broker ID on all advertising</li>
+        <li>Teams — Roster changes within 48 hours, intra-team splits on file</li>
+        <li>Billing &amp; Proration — Fees non-refundable, 5-day grace period</li>
+        <li>Termination — Access removed within 24 hours, property returned in 3 days</li>
+        <li>Indemnification — Associate indemnifies Broker, survives termination</li>
+        <li>Post-Departure — Procuring cause belongs to brokerage, protection periods survive</li>
+        <li>Dispute Resolution — Written appeal within 10 business days</li>
+      </ul>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-ops" required>
+        <label for="init-ops">I have read and understand the Operations &amp; Compliance Manual (Sections 1–31)</label>
+      </div>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-fair-housing" required>
+        <label for="init-fair-housing">I have read and understand the Fair Housing Policy</label>
+      </div>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-advertising" required>
+        <label for="init-advertising">I have read and understand the Advertising &amp; Social Media Policy</label>
+      </div>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-eo" required>
+        <label for="init-eo">I have read and understand the Errors &amp; Omissions Insurance Addendum</label>
+      </div>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-retention" required>
+        <label for="init-retention">I have read and understand the Record Retention &amp; Confidentiality Policy</label>
+      </div>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-indemnification" required>
+        <label for="init-indemnification">I have read and understand the Indemnification, Defense &amp; Offsets Addendum</label>
+      </div>
+
+      <div class="ica-initials-row">
+        <input type="checkbox" id="init-post-departure" required>
+        <label for="init-post-departure">I have read and understand the Post-Departure Compensation Addendum</label>
+      </div>
+    </div>
+
+    <!-- ADDITIONAL ONBOARDING DOCUMENTS -->
+    <div class="ica-section">
+      <div class="ica-section-title">Additional Onboarding Documents</div>
+
+      <p class="ica-text">By signing this Agreement, you also acknowledge receipt and understanding of the following onboarding documents:</p>
+
+      <ul class="ica-doc-list">
+        <li>W-9 Collection &amp; Tax Acknowledgment</li>
+        <li>License Verification &amp; Active Status Acknowledgment</li>
+        <li>Affiliated Business Disclosure (RESPA Compliance)</li>
+        <li>MLS Rules Acknowledgment</li>
+        <li>Buyer Brokerage Agreement Policy Acknowledgment</li>
+        <li>Wire Fraud &amp; Cybersecurity Acknowledgment</li>
+      </ul>
+    </div>
+
+    <!-- EXECUTION / SIGNATURE -->
+    <div class="ica-section">
+      <div class="ica-section-title">Execution</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <!-- Broker Column -->
+        <div>
+          <p class="ica-subheading">AARI REALTY LLC — QUALIFYING BROKER</p>
+          <div class="ica-signature-box">
+            <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(10,10,10,0.4);margin-bottom:8px;">Signature</p>
+            <p class="ica-broker-sig">Marlenyi Paredes</p>
+          </div>
+          <div class="ica-field">
+            <label>Printed Name</label>
+            <input type="text" value="Marlenyi Paredes" readonly>
+          </div>
+          <div class="ica-field">
+            <label>License No.</label>
+            <input type="text" value="BK3530153" readonly>
+          </div>
+          <div class="ica-field">
+            <label>Title</label>
+            <input type="text" value="Qualifying Broker | Owner" readonly>
+          </div>
+        </div>
+
+        <!-- Associate Column -->
+        <div>
+          <p class="ica-subheading">ASSOCIATE</p>
+          <div class="ica-signature-box">
+            <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(10,10,10,0.4);margin-bottom:8px;">Signature</p>
+            <input type="text" class="ica-sig-input" id="associate-signature" placeholder="Type your full legal name" required>
+          </div>
+          <div class="ica-field">
+            <label>Printed Name</label>
+            <input type="text" id="sig-printed-name" readonly>
+          </div>
+          <div class="ica-field">
+            <label>Date</label>
+            <input type="text" id="sig-date" readonly>
+          </div>
+          <div class="ica-field">
+            <label>License No.</label>
+            <input type="text" id="sig-license" readonly>
+          </div>
+          <div class="ica-field">
+            <label>Title</label>
+            <input type="text" class="ica-field" placeholder="e.g., Sales Associate">
+          </div>
+        </div>
+      </div>
+
+      <p class="ica-text" style="margin-top:24px;font-size:11px;color:rgba(10,10,10,0.5);">This Agreement may be executed electronically. Electronic signatures shall have the same legal effect as original signatures under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes). Each party acknowledges that they have received, read, and understood this Agreement in its entirety prior to signing.</p>
+
+      <div class="ica-initials-row" style="margin-top:20px;">
+        <input type="checkbox" id="ica-agree" required>
+        <label for="ica-agree">I, the undersigned Associate, confirm that I have received, reviewed, and understood each document listed above in its entirety. I acknowledge that all documents are incorporated into my Independent Contractor Agreement with Aari Realty LLC and are binding upon me as of the Effective Date.</label>
+      </div>
+
+      <button type="submit" class="ica-submit-btn" id="ica-submit-btn" disabled>Sign &amp; Continue to Payment &rarr;</button>
+    </div>
+
+    <style>
+      @media (max-width: 768px) {
+        .ica-section > div[style*="grid-template-columns"] {
+          grid-template-columns: 1fr !important;
+        }
+      }
+    </style>
+
+  </form>
+</div>
+
+<div class="ica-footer">
+  <p>Aari Realty LLC &middot; Licensed Real Estate Brokerage &middot; State of Florida</p>
+  <p>3620 Colonial Blvd, Suite 130 &middot; Fort Myers, FL 33966 &middot; 239.688.1770</p>
+</div>
+
+<script>
+(function() {
+  const params = new URLSearchParams(window.location.search);
+
+  const firstName = params.get('first_name') || '';
+  const lastName = params.get('last_name') || '';
+  const email = params.get('email') || '';
+  const phone = params.get('phone') || '';
+  const license = params.get('license') || '';
+  const planName = params.get('plan_name') || '';
+
+  const fullName = [firstName, lastName].filter(Boolean).join(' ');
+
+  const today = new Date();
+  const effectiveDate = params.get('effective_date') ||
+    today.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  // Populate Associate Information fields
+  const nameField = document.getElementById('associate-name');
+  const licenseField = document.getElementById('associate-license');
+  const emailField = document.getElementById('associate-email');
+  const dateField = document.getElementById('associate-date');
+
+  if (nameField) nameField.value = fullName;
+  if (licenseField) licenseField.value = license;
+  if (emailField) emailField.value = email;
+  if (dateField) dateField.value = effectiveDate;
+
+  // Populate signature fields
+  const sigPrintedName = document.getElementById('sig-printed-name');
+  const sigLicense = document.getElementById('sig-license');
+  const sigDate = document.getElementById('sig-date');
+
+  if (sigPrintedName) sigPrintedName.value = fullName;
+  if (sigLicense) sigLicense.value = license;
+  if (sigDate) sigDate.value = effectiveDate;
+
+  // Pre-select plan radio button based on URL param
+  if (planName) {
+    const planLower = planName.toLowerCase();
+    if (planLower.includes('growth')) {
+      const el = document.getElementById('plan-growth');
+      if (el) el.checked = true;
+    } else if (planLower.includes('pro')) {
+      const el = document.getElementById('plan-pro');
+      if (el) el.checked = true;
+    } else if (planLower.includes('max')) {
+      const el = document.getElementById('plan-max');
+      if (el) el.checked = true;
+    }
+  }
+
+  // Enable/disable submit button based on all checkboxes + signature
+  const allCheckboxes = document.querySelectorAll('.ica-initials-row input[type="checkbox"]');
+  const agreeCheckbox = document.getElementById('ica-agree');
+  const signatureInput = document.getElementById('associate-signature');
+  const submitBtn = document.getElementById('ica-submit-btn');
+
+  function validateForm() {
+    let allChecked = true;
+    allCheckboxes.forEach(function(cb) {
+      if (!cb.checked) allChecked = false;
+    });
+    const hasSig = signatureInput && signatureInput.value.trim().length > 0;
+    if (submitBtn) {
+      submitBtn.disabled = !(allChecked && hasSig);
+    }
+  }
+
+  allCheckboxes.forEach(function(cb) {
+    cb.addEventListener('change', validateForm);
+  });
+  if (signatureInput) {
+    signatureInput.addEventListener('input', validateForm);
+  }
+
+  // Form submission
+  var form = document.getElementById('ica-form');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      var selectedPlan = '';
+      var planRadio = document.querySelector('input[name="selected_plan"]:checked');
+      if (planRadio) selectedPlan = planRadio.value;
+
+      var data = {
+        name: fullName,
+        license: license,
+        email: email,
+        plan: selectedPlan,
+        signature: signatureInput ? signatureInput.value.trim() : '',
+        date: effectiveDate,
+        _subject: 'ICA Signed - ' + fullName
+      };
+
+      fetch('https://formspree.io/f/mpqopwga', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function(response) {
+        if (response.ok) {
+          sessionStorage.setItem('ica_signed', 'true');
+          sessionStorage.setItem('ica_data', JSON.stringify(data));
+          window.location.href = '/index.html?ica_signed=true';
+        } else {
+          alert('There was an error submitting the form. Please try again.');
+        }
+      }).catch(function(err) {
+        alert('There was an error submitting the form. Please try again.');
+      });
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
