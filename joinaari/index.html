@@ -495,6 +495,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 }
 </style>
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 </head>
 <body>
 
@@ -778,7 +779,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.3);margin:0 0 20px;padding:0 2px;text-align:right" id="pr-monthly-breakdown"></p>
 
       <!-- Note -->
-      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);line-height:1.6;margin:0;text-align:center">Your card is charged today. Future monthly and annual fees will be billed automatically.</p>
+      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);line-height:1.6;margin:0;text-align:center">Prorated amount covers remaining days in the current month.</p>
 
     </div>
 
@@ -1148,12 +1149,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <p class="conf-next-title">Now, Schedule Your Onboarding</p>
     <p style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.45);line-height:1.6;margin:0 0 32px;text-align:center;max-width:420px;margin-left:auto;margin-right:auto">Book a quick call with your broker to get set up, walk through your tools, and hit the ground running.</p>
 
-    <!-- CTAs -->
+    <!-- Embedded Calendly -->
+    <div style="background:#fff;border-radius:12px;overflow:hidden;margin:0 0 24px">
+      <div class="calendly-inline-widget" data-url="https://calendly.com/join-aarirealty/30min?hide_gdpr_banner=1&background_color=ffffff&text_color=0a0a0a&primary_color=0a0a0a" style="min-width:280px;height:660px"></div>
+    </div>
+
     <div class="conf-actions">
-      <a href="https://calendar.app.google/EZfFjEVsR6zorfAL7" target="_blank" rel="noopener" class="conf-btn-primary">
-        Schedule Onboarding Call
-        <svg width="12" height="9" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
       <a href="https://wa.me/12392018950" target="_blank" rel="noopener" class="conf-btn-wa">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.116.554 4.103 1.523 5.824L0 24l6.335-1.502A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.807 9.807 0 01-5.032-1.387l-.361-.214-3.762.892.947-3.653-.235-.374A9.808 9.808 0 012.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
         Questions? Text Us
