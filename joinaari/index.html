@@ -783,7 +783,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     </div>
 
     <!-- CTA outside receipt -->
-    <button class="pr-cta" onclick="proceedToApply()" style="margin-top:24px">Activate My Account &rarr;</button>
+    <button class="pr-cta" onclick="proceedToICA()" style="margin-top:24px">Continue &rarr;</button>
 
   </div>
 
@@ -970,17 +970,58 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </script>
 </section>
 
+<!-- ICA REVIEW & SIGN STEP -->
+<section class="apply-section apply-step-hidden" id="ica-step" style="background:#0a0a0a">
+  <div class="apply-header reveal">
+    <div>
+      <div class="apply-step-badge">
+        <span class="apply-step-num" style="color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0.15)">STEP 03</span>
+        <button class="apply-step-back" onclick="backFromICA()" style="color:rgba(255,255,255,0.4)">← Back</button>
+      </div>
+      <p class="section-eyebrow" style="color:rgba(255,255,255,0.4)">Independent Contractor Agreement</p>
+      <h2 class="section-title" style="color:#fff">Review & Sign Your ICA</h2>
+    </div>
+    <p class="apply-header-note" style="color:rgba(255,255,255,0.5)">Before making your payment, please review and sign the Aari Realty Independent Contractor Agreement through PandaDoc.</p>
+  </div>
+
+  <div style="max-width:540px;margin:0 auto;padding:0 24px">
+    <div style="background:#fff;border-radius:12px;padding:36px 28px;text-align:center">
+      <div style="margin-bottom:24px">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom:16px">
+          <rect width="48" height="48" rx="12" fill="rgba(10,10,10,0.05)"/>
+          <path d="M16 18h16M16 24h16M16 30h10" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h3 style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0 0 8px">Aari Realty Complete Onboarding Package</h3>
+        <p style="font-family:'Lato',sans-serif;font-size:12px;color:rgba(10,10,10,0.45);margin:0;line-height:1.5">This agreement outlines the terms, commission structure, and responsibilities between you and Aari Realty LLC.</p>
+      </div>
+
+      <a href="https://app.pandadoc.com/document/v2?token=3d437af51a4463c710761b9bdedbd9c722415627" target="_blank" rel="noopener" class="pr-cta" style="display:inline-block;text-decoration:none;margin-bottom:16px;width:100%">Open & Sign ICA ↗</a>
+
+      <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.35);margin:0 0 24px;line-height:1.5">Opens in PandaDoc — review the full agreement and sign electronically.</p>
+
+      <div style="height:1px;background:rgba(10,10,10,0.08);margin:0 0 24px"></div>
+
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;text-align:left" id="ica-confirm-label">
+        <input type="checkbox" id="ica-signed-checkbox" style="margin-top:2px;width:16px;height:16px;accent-color:#0a0a0a;flex-shrink:0" onchange="toggleICAButton()">
+        <span style="font-family:'Lato',sans-serif;font-size:12px;color:rgba(10,10,10,0.6);line-height:1.5">I have reviewed and signed the Independent Contractor Agreement through PandaDoc.</span>
+      </label>
+    </div>
+
+    <button class="pr-cta" id="ica-continue-btn" onclick="proceedToApply()" style="margin-top:24px;width:100%;opacity:0.3;pointer-events:none">Proceed to Payment &rarr;</button>
+  </div>
+</section>
+
 <section class="apply-section apply-step-hidden" id="apply">
   <div class="apply-header reveal">
     <div>
       <div class="apply-step-badge">
         <span class="apply-step-num">STEP 04</span>
-        <button class="apply-step-back" onclick="backToPlans()">← Back to Plans</button>
+        <button class="apply-step-back" onclick="backToICA()">← Back</button>
       </div>
-      <p class="section-eyebrow dark">Next Steps</p>
-      <h2 class="section-title dark">You're almost in.</h2>
+      <p class="section-eyebrow dark">Almost Done</p>
+      <h2 class="section-title dark">Complete Your Payment</h2>
     </div>
-    <p class="apply-header-note">Fill this out and we'll send your drafted ICA to review and sign.</p>
+    <p class="apply-header-note">Your ICA has been signed. Enter your details and payment to activate your account.</p>
   </div>
   <div class="prefill-bar" id="prefill-bar">
     <div class="prefill-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1452,8 +1493,34 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }, 100);
   }
 
+  function proceedToICA() {
+    var icaSection = document.getElementById('ica-step');
+    icaSection.classList.remove('apply-step-hidden');
+    setTimeout(function() {
+      icaSection.scrollIntoView({behavior: 'smooth'});
+    }, 50);
+  }
+
+  function backFromICA() {
+    document.getElementById('ica-step').classList.add('apply-step-hidden');
+    document.getElementById('plans').scrollIntoView({behavior: 'smooth'});
+  }
+
+  function backToICA() {
+    document.getElementById('apply').classList.add('apply-step-hidden');
+    document.getElementById('ica-step').scrollIntoView({behavior: 'smooth'});
+  }
+
+  function toggleICAButton() {
+    var btn = document.getElementById('ica-continue-btn');
+    var checked = document.getElementById('ica-signed-checkbox').checked;
+    btn.style.opacity = checked ? '1' : '0.3';
+    btn.style.pointerEvents = checked ? 'auto' : 'none';
+  }
+
   function backToPlans() {
     document.getElementById('apply').classList.add('apply-step-hidden');
+    document.getElementById('ica-step').classList.add('apply-step-hidden');
     document.getElementById('prefill-bar').classList.remove('visible');
     document.getElementById('plans').scrollIntoView({behavior: 'smooth'});
   }
