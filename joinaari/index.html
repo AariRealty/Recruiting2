@@ -915,13 +915,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <a href="#" id="open-ica-btn" onclick="openICA(event)" class="pr-cta" style="display:block;text-decoration:none;text-align:center;margin-bottom:16px;width:100%;font-size:12px;padding:18px 24px;">Review & Sign ICA &rarr;</a>
 
     <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);margin:0 0 24px;line-height:1.6;text-align:center">Your information will be pre-filled. Review, initial, and sign electronically.</p>
-
-    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;text-align:left" id="ica-confirm-label">
-      <input type="checkbox" id="ica-signed-checkbox" style="margin-top:2px;width:16px;height:16px;accent-color:#fff;flex-shrink:0" onchange="toggleICAButton()">
-      <span style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5">I have reviewed and signed the ICA.</span>
-    </label>
-
-    <button class="pr-cta" id="ica-continue-btn" onclick="proceedToApply()" style="margin-top:24px;width:100%;opacity:0.3;pointer-events:none">Proceed to Payment &rarr;</button>
   </div>
 </section>
 
@@ -1160,10 +1153,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           });
         } catch(e) {}
       }
-      // 3. Auto-check the ICA checkbox and enable payment button
-      var cb = document.getElementById('ica-signed-checkbox');
-      if (cb) { cb.checked = true; toggleICAButton(); }
-      // 4. Show ICA step
+      // 3. Show ICA step
       var icaSection = document.getElementById('ica-step');
       if (icaSection) icaSection.classList.remove('apply-step-hidden');
       // 5. Restore form data from URL params + sessionStorage
@@ -1472,7 +1462,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   function backFromICA() {
     document.getElementById('ica-step').classList.add('apply-step-hidden');
-    document.getElementById('plans').scrollIntoView({behavior: 'smooth'});
+    document.getElementById('tools-step').scrollIntoView({behavior: 'smooth'});
   }
 
   function backToICA() {
@@ -1481,10 +1471,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   }
 
   function toggleICAButton() {
-    var btn = document.getElementById('ica-continue-btn');
-    var checked = document.getElementById('ica-signed-checkbox').checked;
-    btn.style.opacity = checked ? '1' : '0.3';
-    btn.style.pointerEvents = checked ? 'auto' : 'none';
+    // Legacy stub — checkbox removed
   }
 
   function backToPlans() {
