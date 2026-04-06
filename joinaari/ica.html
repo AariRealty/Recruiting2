@@ -618,7 +618,9 @@
 
       <div class="ica-field">
         <label for="associate-license-input">Florida License Number</label>
-        <input type="text" id="associate-license-input" placeholder="e.g., SL3XXXXXX">
+        <input type="text" id="associate-license-input" placeholder="SL3XXXXXX or BK3XXXXXX" style="text-transform:uppercase">
+        <p id="license-hint" style="font-size:10px;color:rgba(10,10,10,0.4);margin:4px 0 0;line-height:1.4">Must start with <strong>SL</strong> (Sales Associate) or <strong>BK</strong> (Broker Associate) followed by your license number.</p>
+        <p id="license-error" style="display:none;font-size:11px;color:#c0392b;margin:4px 0 0;font-weight:500"></p>
       </div>
 
       <div class="ica-field">
@@ -1612,6 +1614,23 @@
 
 <script>
 // ========== SUB-STEP NAVIGATION (within Step 1) ==========
+// License input — auto uppercase and live validation hint
+(function() {
+  var licInput = document.getElementById('associate-license-input');
+  if (licInput) {
+    licInput.addEventListener('input', function() {
+      this.value = this.value.toUpperCase();
+      var licError = document.getElementById('license-error');
+      if (licError && licError.style.display === 'block') {
+        if (/^(SL|BK)\d+$/.test(this.value.trim())) {
+          licError.style.display = 'none';
+          this.style.borderColor = '';
+        }
+      }
+    });
+  }
+})();
+
 // Phone number formatting
 (function() {
   var phoneInput = document.getElementById('associate-phone');
@@ -1685,13 +1704,32 @@ function handleLicenseAnswer() {
 
 function validateLicenseFields() {
   var lic = document.getElementById('associate-license-input');
+  var licError = document.getElementById('license-error');
   var title = document.getElementById('associate-title');
-  if (!lic || !lic.value.trim()) {
+
+  // Force uppercase
+  if (lic) lic.value = lic.value.toUpperCase();
+  var licVal = lic ? lic.value.trim() : '';
+
+  if (!licVal) {
     lic.style.borderColor = '#c0392b';
+    licError.textContent = 'Please enter your Florida license number.';
+    licError.style.display = 'block';
     lic.focus();
     return;
   }
+
+  // Validate SL or BK prefix
+  if (!/^(SL|BK)\d+$/i.test(licVal)) {
+    lic.style.borderColor = '#c0392b';
+    licError.textContent = 'License must start with SL or BK followed by numbers (e.g. SL3527289).';
+    licError.style.display = 'block';
+    lic.focus();
+    return;
+  }
+
   lic.style.borderColor = '';
+  licError.style.display = 'none';
   if (!title || !title.value) {
     title.style.borderColor = '#c0392b';
     title.focus();
