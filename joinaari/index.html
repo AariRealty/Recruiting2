@@ -1637,7 +1637,22 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         console.warn("[submit] Formspree notification failed:", fErr.message);
       }
 
-      // Step 5: Show confirmation
+      // Step 5: Send payment receipt email to agent (non-blocking)
+      fetch("/api/send-payment-receipt", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          plan: formData.plan,
+          amount: amounts.totalDueToday,
+          payment_id: result.paymentIntent.id,
+          addons: businessTools,
+          monthly_amount: amounts.monthlyAmount
+        })
+      }).catch(function() { /* silent */ });
+
+      // Step 6: Show confirmation
       showConfirmation(name, formData.plan, businessTools);
 
     } catch (err) {
