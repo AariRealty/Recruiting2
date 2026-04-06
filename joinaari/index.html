@@ -15,6 +15,7 @@
 :root{--black:#0a0a0a;--white:#fafafa;--gl:#f0f0f0;--gm:#c0c0c0;--gd:#5a5a5a;--bd:rgba(255,255,255,0.1);--bl:rgba(10,10,10,0.1)}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden}
+#mid-cta,#plans,#tools-step,#pricing-review,#ica-step,#apply,#confirmation-section{scroll-margin-top:80px}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
@@ -181,7 +182,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .plan-card-v2-featured:hover .select-bubble{background:#f0f0f0 !important}
 
 /* PRICING REVIEW */
-.pricing-review{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);max-height:0;overflow:hidden;transition:max-height 0.6s ease,padding 0.5s ease;padding:0 80px}
+.pricing-review{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);max-height:0;overflow:hidden;transition:max-height 0.6s ease,padding 0.5s ease;padding:0 80px;scroll-margin-top:80px}
 .pricing-review.open{max-height:1000px;padding:56px 80px}
 .pr-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:48px}
 .pr-header-left{display:flex;flex-direction:column;gap:10px}
@@ -971,7 +972,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   <div class="prefill-bar" id="prefill-bar">
     <div class="prefill-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <p class="prefill-text">Plan pre-selected: <strong id="prefill-plan-label">—</strong><span id="prefill-tools-label"></span></p>
-    <span class="prefill-change" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'center'})">Change</span>
+    <span class="prefill-change" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'start'})">Change</span>
   </div>
   <form id="apply-form" class="reveal">
     <input type="hidden" name="selected_plan"    id="selected-plan-input" />
@@ -1254,7 +1255,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }
     var toolsStep = document.getElementById('tools-step');
     toolsStep.classList.add('open');
-    setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'center'}); }, 60);
+    setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
   }
 
   function toggleAddon(option) {
@@ -1360,7 +1361,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   function openPricingReview() {
     var planCard = document.querySelector('.plan-card.selected');
     if (!planCard) {
-      document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'center'});
+      document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'start'});
       return;
     }
 
@@ -1368,7 +1369,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
     var review = document.getElementById('pricing-review');
     review.classList.add('open');
-    setTimeout(function() { review.scrollIntoView({behavior:'smooth', block:'center'}); }, 60);
+    setTimeout(function() { review.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
   }
 
   function closePricingReview() {
@@ -1382,7 +1383,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
     // Guard: must have selected a plan
     if (!selectedPlan) {
-      document.getElementById('plans').scrollIntoView({behavior: 'smooth', block: 'center'});
+      document.getElementById('plans').scrollIntoView({behavior: 'smooth', block: 'start'});
       return;
     }
 
@@ -1446,7 +1447,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       cardMounted = true;
     }
     setTimeout(function() {
-      applySection.scrollIntoView({behavior: 'smooth', block: 'center'});
+      applySection.scrollIntoView({behavior: 'smooth', block: 'start'});
     }, 100);
   }
 
@@ -1454,7 +1455,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var icaSection = document.getElementById('ica-step');
     icaSection.classList.remove('apply-step-hidden');
     setTimeout(function() {
-      icaSection.scrollIntoView({behavior: 'smooth', block: 'center'});
+      icaSection.scrollIntoView({behavior: 'smooth', block: 'start'});
     }, 50);
   }
 
@@ -1491,7 +1492,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   function backToICA() {
     document.getElementById('apply').classList.add('apply-step-hidden');
-    document.getElementById('ica-step').scrollIntoView({behavior: 'smooth', block: 'center'});
+    document.getElementById('ica-step').scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
   function toggleICAButton() {
@@ -1502,7 +1503,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.getElementById('apply').classList.add('apply-step-hidden');
     document.getElementById('ica-step').classList.add('apply-step-hidden');
     document.getElementById('prefill-bar').classList.remove('visible');
-    document.getElementById('plans').scrollIntoView({behavior: 'smooth', block: 'center'});
+    document.getElementById('plans').scrollIntoView({behavior: 'smooth', block: 'start'});
   }
 
   function selectRadio(label, name) {
@@ -1719,7 +1720,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.getElementById("apply").classList.add("apply-step-hidden");
     var conf = document.getElementById("confirmation-section");
     conf.classList.remove("apply-step-hidden");
-    setTimeout(function() { conf.scrollIntoView({behavior: "smooth", block: "center"}); }, 50);
+    setTimeout(function() { conf.scrollIntoView({behavior: "smooth", block: "start"}); }, 50);
   }
 </script>
 </body>
