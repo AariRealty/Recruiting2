@@ -1612,13 +1612,44 @@
 
 <script>
 // ========== SUB-STEP NAVIGATION (within Step 1) ==========
+// Phone number formatting
+(function() {
+  var phoneInput = document.getElementById('associate-phone');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function(e) {
+      var digits = this.value.replace(/\D/g, '');
+      if (digits.length > 10) digits = digits.substring(0, 10);
+      var formatted = '';
+      if (digits.length > 0) formatted = '(' + digits.substring(0, 3);
+      if (digits.length >= 3) formatted += ') ';
+      if (digits.length > 3) formatted += digits.substring(3, 6);
+      if (digits.length >= 6) formatted += '-' + digits.substring(6, 10);
+      this.value = formatted;
+    });
+  }
+})();
+
+function isValidEmail(email) {
+  var re = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  return re.test(email);
+}
+
 function goSubstep(id) {
   // Validate before moving forward
   if (id === '1b') {
     var name = document.getElementById('associate-name').value.trim();
     var email = document.getElementById('associate-email').value.trim();
-    if (!name || !email) {
-      alert('Please enter your name and email to continue.');
+    var phone = document.getElementById('associate-phone').value.trim();
+    if (!name) {
+      alert('Please enter your full legal name.');
+      return;
+    }
+    if (!email || !isValidEmail(email)) {
+      alert('Please enter a valid email address (e.g. name@gmail.com).');
+      return;
+    }
+    if (!phone || phone.replace(/\D/g, '').length < 10) {
+      alert('Please enter a valid 10-digit phone number.');
       return;
     }
   }
