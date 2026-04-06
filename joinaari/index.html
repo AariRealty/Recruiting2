@@ -60,6 +60,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .stat-value{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--white)}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
+/* PAIN SECTION */
+.pain-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.pain-left{position:sticky;top:120px}
+.pain-right{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pain-card{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:28px 24px;transition:border-color 0.3s,background 0.3s}
+.pain-card:hover{border-color:rgba(255,255,255,0.2);background:rgba(255,255,255,0.06)}
+.pain-num{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,0.2);display:block;margin-bottom:12px}
+.pain-card p{font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,0.55);line-height:1.7;margin:0}
+@media(max-width:768px){
+  .pain-section{padding:72px 24px !important}
+  .pain-layout{grid-template-columns:1fr !important;gap:40px !important}
+  .pain-left{position:static;text-align:center}
+  .pain-left p{margin:0 auto}
+  .pain-right{grid-template-columns:1fr !important;gap:12px}
+}
+
 /* TAGLINE BAR */
 .tagline-bar{background:var(--white);padding:36px 80px;display:flex;align-items:center;gap:48px}
 .tagline-line{flex:0 0 1px;height:48px;background:rgba(10,10,10,0.15)}
@@ -495,7 +511,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   .broker-cta-actions{flex-direction:row;align-items:center;flex-wrap:wrap;gap:12px}
 }
     @media (max-width: 768px) {
-      .pain-grid { grid-template-columns: 1fr !important; }
     }
 </style>
 <script src="https://js.stripe.com/v3/"></script>
@@ -544,17 +559,33 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
 
 <!-- PAIN AGITATION — BLACK -->
-<section style="background:#0a0a0a;padding:80px 72px">
-  <div style="max-width:700px;margin:0 auto;text-align:center">
-    <p class="section-eyebrow" style="margin-bottom:16px">Sound Familiar?</p>
-    <h2 class="section-title reveal" style="margin-bottom:32px">You didn&rsquo;t get licensed<br/>to feel stuck.</h2>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px 48px;text-align:left;margin-bottom:40px" class="pain-grid reveal">
-      <p style="font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;border-left:2px solid rgba(255,255,255,0.12);padding-left:20px">You close deals, but someone else decides what you keep.</p>
-      <p style="font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;border-left:2px solid rgba(255,255,255,0.12);padding-left:20px">You have questions, but your broker is unreachable.</p>
-      <p style="font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;border-left:2px solid rgba(255,255,255,0.12);padding-left:20px">You pay monthly fees, but you&rsquo;re not sure what they cover.</p>
-      <p style="font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,0.5);line-height:1.8;border-left:2px solid rgba(255,255,255,0.12);padding-left:20px">You&rsquo;re told you have &ldquo;support&rdquo; &mdash; but it&rsquo;s just a group chat.</p>
+<section style="background:#0a0a0a;padding:100px 72px" class="pain-section">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="pain-layout reveal">
+      <div class="pain-left">
+        <p class="section-eyebrow" style="margin-bottom:16px">Sound Familiar?</p>
+        <h2 class="section-title" style="margin-bottom:24px">You didn&rsquo;t get<br/>licensed to<br/>feel stuck.</h2>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2vw,24px);font-weight:300;color:rgba(255,255,255,0.6);line-height:1.5;max-width:360px">There&rsquo;s a better way to run your business. And it starts with who you&rsquo;re building next to.</p>
+      </div>
+      <div class="pain-right">
+        <div class="pain-card">
+          <span class="pain-num">01</span>
+          <p>You close deals, but someone else decides what you keep.</p>
+        </div>
+        <div class="pain-card">
+          <span class="pain-num">02</span>
+          <p>You have questions, but your broker is unreachable.</p>
+        </div>
+        <div class="pain-card">
+          <span class="pain-num">03</span>
+          <p>You pay monthly fees, but you&rsquo;re not sure what they cover.</p>
+        </div>
+        <div class="pain-card">
+          <span class="pain-num">04</span>
+          <p>You&rsquo;re told you have &ldquo;support&rdquo; &mdash; but it&rsquo;s just a group chat.</p>
+        </div>
+      </div>
     </div>
-    <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(20px,2.5vw,28px);font-weight:300;color:#ffffff;line-height:1.5" class="reveal">There&rsquo;s a better way to run your business.<br/>And it starts with who you&rsquo;re building next to.</p>
   </div>
 </section>
 
