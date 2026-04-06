@@ -666,7 +666,7 @@
 
       <div class="ica-nav-row">
         <button type="button" class="ica-nav-btn" onclick="goSubstep('1b')">&larr; Back</button>
-        <button type="button" class="ica-nav-btn primary" onclick="syncLicensedFields(); goSubstep('1d')">Next &rarr;</button>
+        <button type="button" class="ica-nav-btn primary" onclick="validateLicenseFields()">Next &rarr;</button>
       </div>
     </div>
 
@@ -1653,6 +1653,25 @@ function handleLicenseAnswer() {
     document.getElementById('associate-mls').value = 'N/A';
     goSubstep('1e');
   }
+}
+
+function validateLicenseFields() {
+  var lic = document.getElementById('associate-license-input');
+  var title = document.getElementById('associate-title');
+  if (!lic || !lic.value.trim()) {
+    lic.style.borderColor = '#c0392b';
+    lic.focus();
+    return;
+  }
+  lic.style.borderColor = '';
+  if (!title || !title.value) {
+    title.style.borderColor = '#c0392b';
+    title.focus();
+    return;
+  }
+  title.style.borderColor = '';
+  syncLicensedFields();
+  goSubstep('1d');
 }
 
 // Sync licensed-agent fields into hidden fields before moving forward

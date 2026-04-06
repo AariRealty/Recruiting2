@@ -1114,7 +1114,32 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   },{threshold:0.08});
   document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 
-  // Check if returning from ICA signing
+  // Stripe initialization
+  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
+  var elements = stripe.elements();
+  var cardElement = elements.create('card', {
+    style: {
+      base: {
+        fontFamily: "'Montserrat', sans-serif",
+        fontSize: '14px',
+        color: '#0a0a0a',
+        '::placeholder': { color: 'rgba(10,10,10,0.3)' }
+      },
+      invalid: { color: '#c0392b' }
+    }
+  });
+  var cardMounted = false;
+  cardElement.on('change', function(event) {
+    var errEl = document.getElementById('card-error');
+    if (event.error) {
+      errEl.textContent = event.error.message;
+      errEl.style.display = 'block';
+    } else {
+      errEl.style.display = 'none';
+    }
+  });
+
+  // Check if returning from ICA signing (must be after Stripe init)
   (function() {
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('ica_signed') === 'true') {
@@ -1142,7 +1167,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       // 3. Show ICA step
       var icaSection = document.getElementById('ica-step');
       if (icaSection) icaSection.classList.remove('apply-step-hidden');
-      // 5. Restore form data from URL params + sessionStorage
+      // 4. Restore form data from URL params
       var form = document.getElementById('apply-form');
       var fn = urlParams.get('first_name') || '';
       var ln = urlParams.get('last_name') || '';
@@ -1154,37 +1179,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         if (em) { var emEl = form.querySelector('[name="email"]'); if (emEl) emEl.value = em; }
         if (lic) { var licEl = form.querySelector('[name="license"]'); if (licEl) licEl.value = lic; }
       }
-      // 6. Go straight to payment
+      // 5. Go straight to payment
       proceedToApply();
-      // 7. Clean up URL
+      // 6. Clean up URL
       window.history.replaceState({}, '', window.location.pathname);
     }
   })();
-
-  // Stripe initialization
-  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
-  var elements = stripe.elements();
-  var cardElement = elements.create('card', {
-    style: {
-      base: {
-        fontFamily: "'Montserrat', sans-serif",
-        fontSize: '14px',
-        color: '#0a0a0a',
-        '::placeholder': { color: 'rgba(10,10,10,0.3)' }
-      },
-      invalid: { color: '#c0392b' }
-    }
-  });
-  var cardMounted = false;
-  cardElement.on('change', function(event) {
-    var errEl = document.getElementById('card-error');
-    if (event.error) {
-      errEl.textContent = event.error.message;
-      errEl.style.display = 'block';
-    } else {
-      errEl.style.display = 'none';
-    }
-  });
 
   function toggleGrowthPlan(btn) {
     var card = document.getElementById('growth-plan-card');
