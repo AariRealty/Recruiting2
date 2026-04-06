@@ -1576,7 +1576,7 @@
 
         <div class="ica-nav-row" style="margin-top:24px;">
           <button type="button" class="ica-nav-btn" onclick="goToStep(2)">&larr; Back</button>
-          <button type="submit" class="ica-nav-btn primary" id="ica-submit-btn" disabled>Continue to Payment &rarr;</button>
+          <button type="button" class="ica-nav-btn primary" id="ica-submit-btn" disabled onclick="submitICA()">Continue to Payment &rarr;</button>
         </div>
       </div>
     </div>
@@ -1868,10 +1868,9 @@ function initialAllPages() {
   if (signatureInput) signatureInput.addEventListener('input', validateForm);
 
   // Form submission
-  var form = document.getElementById('ica-form');
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
+  window.submitICA = function() {
+      var btn = document.getElementById('ica-submit-btn');
+      if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'; }
 
       var selectedPlan = '';
       var planRadio = document.querySelector('input[name="selected_plan"]:checked');
@@ -1909,7 +1908,6 @@ function initialAllPages() {
         if (response.ok) {
           sessionStorage.setItem('ica_signed', 'true');
           sessionStorage.setItem('ica_data', JSON.stringify(data));
-          // Pass data back so payment form can pre-fill
           var returnParams = new URLSearchParams();
           returnParams.set('ica_signed', 'true');
           var nameParts = formName.split(' ');
@@ -1920,12 +1918,13 @@ function initialAllPages() {
           window.location.href = '/index.html?' + returnParams.toString();
         } else {
           alert('There was an error submitting the form. Please try again.');
+          if (btn) { btn.disabled = false; btn.textContent = 'Continue to Payment \u2192'; }
         }
       }).catch(function(err) {
         alert('There was an error submitting the form. Please try again.');
+        if (btn) { btn.disabled = false; btn.textContent = 'Continue to Payment \u2192'; }
       });
-    });
-  }
+  };
 })();
 </script>
 
