@@ -601,8 +601,7 @@
         <select id="associate-has-license" onchange="handleLicenseAnswer()">
           <option value="" disabled selected>Select one</option>
           <option value="yes">Yes, I have an active license</option>
-          <option value="pending">My license is pending</option>
-          <option value="no">No, I&rsquo;m not yet licensed</option>
+          <option value="no">No, not yet</option>
         </select>
       </div>
 
@@ -1642,7 +1641,7 @@ function handleLicenseAnswer() {
     goSubstep('1c');
   } else {
     isLicensed = false;
-    document.getElementById('associate-license').value = val === 'pending' ? 'Pending' : 'N/A';
+    document.getElementById('associate-license').value = 'N/A';
     document.getElementById('associate-years').value = 'Not yet licensed';
     document.getElementById('associate-closings').value = 'N/A';
     document.getElementById('associate-mls').value = 'N/A';
