@@ -104,7 +104,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .step-header{margin-bottom:0}
 .step-num{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.08);padding:8px 16px;border-radius:20px;transition:all 0.3s;white-space:nowrap}
 .step-num.active{color:var(--white);background:rgba(255,255,255,0.18)}
-.step-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55)}.plan-selector{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:start}
+.step-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.55)}.plan-selector{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:end}
 .plan-card{padding:24px 20px;border:1px solid rgba(10,10,10,0.12);cursor:pointer;transition:all 0.3s ease;display:flex;flex-direction:column;gap:11px;border-radius:10px;background:#ffffff;box-shadow:0 1px 6px rgba(0,0,0,0.06)}
 .plan-card:hover{border-color:rgba(10,10,10,0.35);background:#ffffff;box-shadow:0 4px 16px rgba(0,0,0,0.1)}
 .plan-card.selected{border-color:#0a0a0a;background:#ffffff;box-shadow:0 4px 20px rgba(0,0,0,0.12)}
@@ -761,7 +761,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <div class="pc-position-box">
           <p class="pc-position-text">Full support environment to build and grow with broker engagement</p>
         </div>
-        <span class="select-bubble">Get Started →</span>
+        <span class="select-bubble">My Pick</span>
       </div>
 
       <!-- PRO — MOST POPULAR -->
@@ -783,7 +783,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <div class="pc-position-box">
           <p class="pc-position-text">Operate independently<br/>Stay in control of your deals</p>
         </div>
-        <span class="select-bubble">Get Started →</span>
+        <span class="select-bubble">My Pick</span>
       </div>
 
       <!-- MAX -->
@@ -803,7 +803,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <div class="pc-position-box">
           <p class="pc-position-text">Fully independent<br/>Self-managed transactions</p>
         </div>
-        <span class="select-bubble">Get Started →</span>
+        <span class="select-bubble">My Pick</span>
       </div>
 
     </div>
@@ -817,35 +817,41 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <h3 class="tools-headline">Optional Add-Ons</h3>
       <p class="tools-subline">Select any add-ons you'd like, or skip this step.</p>
     </div>
-    <div class="tools-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:none">
+    <div class="tools-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:none;align-items:stretch">
 
-      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s">
-        <span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;align-self:flex-start">Most Popular</span>
-        <p class="tools-name" style="margin:0">CRM System</p>
-        <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">Powered by Lofty</p>
-        <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">AI-powered CRM built for real estate</p>
-        <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Track and manage all your leads in one place</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Automated follow-up and smart campaigns</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> IDX website + property alerts</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Built-in dialer, texting, and mobile app</li>
-        </ul>
-        <p class="tools-price" style="margin:8px 0 0;font-size:32px">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
-        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan →</button>
+      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:0;display:flex;flex-direction:column;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
+        <div style="background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Most Popular</div>
+        <div style="padding:28px 32px 36px;display:flex;flex-direction:column;gap:16px;flex:1">
+          <p class="tools-name" style="margin:0">CRM System</p>
+          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">Powered by Lofty</p>
+          <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">AI-powered CRM built for real estate</p>
+          <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Track and manage all your leads in one place</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Automated follow-up and smart campaigns</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> IDX website + property alerts</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Built-in dialer, texting, and mobile app</li>
+          </ul>
+          <p class="tools-price" style="margin:8px 0 0;font-size:32px">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
+          <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+        </div>
       </div>
 
-      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
-        <div id="bb-included-banner" style="display:none;position:absolute;top:0;left:0;right:0;background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;border-radius:0;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Included &amp; covered for 6 months</div>
-        <p class="tools-name" style="margin:0" id="bb-title">Brand Builder</p>
-        <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">Work directly with us to build your content</p>
-        <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> In-person content planning sessions</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Video recording + execution support</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Social media strategy tailored to your business</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Templates + structure so you stay consistent</li>
-        </ul>
-        <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
-        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan →</button>
+      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:0;display:flex;flex-direction:column;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
+        <div id="bb-included-banner" style="display:none;background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Included &amp; covered for 6 months</div>
+        <div id="bb-spacer" style="display:none;height:37px"></div>
+        <div style="padding:28px 32px 36px;display:flex;flex-direction:column;gap:16px;flex:1">
+          <p class="tools-name" style="margin:0" id="bb-title">Brand Builder</p>
+          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">&nbsp;</p>
+          <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">Work directly with us to build your content</p>
+          <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> In-person content planning sessions</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Video recording + execution support</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Social media strategy tailored to your business</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Templates + structure so you stay consistent</li>
+          </ul>
+          <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
+          <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+        </div>
       </div>
 
     </div>
@@ -1334,11 +1340,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.querySelectorAll('.plan-card').forEach(function(c) {
       c.classList.remove('selected');
       var bubble = c.querySelector('.select-bubble');
-      if (bubble) bubble.textContent = 'Select Plan →';
+      if (bubble) bubble.textContent = 'My Pick';
     });
     card.classList.add('selected');
     var bubble = card.querySelector('.select-bubble');
-    if (bubble) bubble.textContent = '✓ Selected';
+    if (bubble) bubble.textContent = '✓ My Pick';
     // Show Brand Builder with 'Included' banner if Growth, otherwise normal
     var bbAddon = document.getElementById('brand-builder-addon');
     var bbBanner = document.getElementById('bb-included-banner');
@@ -1353,7 +1359,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         var bbBtn = bbAddon.querySelector('.tools-select-btn');
         if (bbBtn) bbBtn.style.display = 'none';
         if (bbBanner) bbBanner.style.display = 'block';
-        bbAddon.style.paddingTop = '52px';
+        var bbSpacer = document.getElementById('bb-spacer');
+        if (bbSpacer) bbSpacer.style.display = 'none';
       } else {
         bbAddon.classList.remove('bb-included');
         bbAddon.style.pointerEvents = '';
@@ -1362,7 +1369,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         var bbBtn = bbAddon.querySelector('.tools-select-btn');
         if (bbBtn) bbBtn.style.display = '';
         if (bbBanner) bbBanner.style.display = 'none';
-        bbAddon.style.paddingTop = '36px';
+        var bbSpacer = document.getElementById('bb-spacer');
+        if (bbSpacer) bbSpacer.style.display = 'block';
       }
     }
     var toolsStep = document.getElementById('tools-step');
