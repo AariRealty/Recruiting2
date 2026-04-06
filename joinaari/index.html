@@ -833,7 +833,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="align-self:flex-start;margin-top:4px">Add to plan →</button>
       </div>
 
-      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:12px;padding:32px 28px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s">
+      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:12px;padding:32px 28px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative">
+        <div id="bb-included-banner" style="display:none;position:absolute;top:0;left:0;right:0;background:#2d6a4f;color:#ffffff;text-align:center;padding:8px 12px;border-radius:12px 12px 0 0;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Included &amp; covered for 6 months</div>
         <p class="tools-name" style="margin:0;color:rgba(255,255,255,0.9)">Brand Builder</p>
         <p style="margin:0;font-size:12px;font-weight:400;color:rgba(255,255,255,0.5);line-height:1.3">Work directly with us to build your content</p>
         <ul style="margin:0;padding:0;list-style:none;font-size:12px;font-weight:400;color:rgba(255,255,255,0.45);line-height:2">
@@ -847,9 +848,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
 
     </div>
-    <div style="text-align:center;margin-top:32px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
-      <button id="addons-continue-btn" style="display:none;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;border:none;padding:16px 36px;border-radius:4px;cursor:pointer;transition:all 0.2s" onclick="openPricingReview()">Continue With Add-Ons →</button>
-      <button style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);background:none;border:1px solid rgba(255,255,255,0.15);padding:14px 32px;border-radius:4px;cursor:pointer;transition:all 0.2s" onclick="skipAddons()" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)';this.style.color='#ffffff'" onmouseout="this.style.borderColor='rgba(255,255,255,0.15)';this.style.color='rgba(255,255,255,0.45)'">Skip &mdash; Continue Without Add-Ons →</button>
+    <div style="text-align:center;margin-top:32px">
+      <button id="addons-summary-btn" style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;border:none;padding:18px 48px;border-radius:4px;cursor:pointer;transition:all 0.2s" onclick="openPricingReview()">Skip to Summary &rarr;</button>
     </div>
   </div>
 
@@ -900,18 +900,16 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <div style="height:1px;background:rgba(10,10,10,0.08);margin:8px 2px 20px"></div>
 
       <!-- Due Today — highlighted box -->
-      <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:18px 20px;margin-bottom:12px">
-        <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:600;color:rgba(10,10,10,0.55);margin:0">Due Today</p>
-          <p style="font-family:'Montserrat',sans-serif;font-size:20px;font-weight:800;color:#0a0a0a;margin:0" id="pr-due-at-signing">$0.00</p>
-        </div>
-        <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);margin:6px 0 0" id="pr-proration-detail"></p>
+      <div style="background:#0a0a0a;border-radius:10px;padding:24px;margin-bottom:16px">
+        <p style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 8px">Due Today</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:32px;font-weight:800;color:#ffffff;margin:0" id="pr-due-at-signing">$0.00</p>
+        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.35);margin:8px 0 0" id="pr-proration-detail"></p>
       </div>
 
-      <!-- Recurring Monthly -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;margin-bottom:4px">
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0">Then monthly</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:rgba(10,10,10,0.6);margin:0" id="pr-monthly-total">$69/month</p>
+      <!-- Then, recurring monthly -->
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 2px;margin-bottom:4px">
+        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:500;color:rgba(10,10,10,0.5);margin:0">Then, recurring monthly</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-total">$69/month</p>
       </div>
       <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.3);margin:0 0 20px;padding:0 2px;text-align:right" id="pr-monthly-breakdown"></p>
 
@@ -1327,17 +1325,28 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     card.classList.add('selected');
     var bubble = card.querySelector('.select-bubble');
     if (bubble) bubble.textContent = '✓ Selected';
-    // Hide Brand Builder addon if Growth is selected (already included)
+    // Show Brand Builder with 'Included' banner if Growth, otherwise normal
     var bbAddon = document.getElementById('brand-builder-addon');
+    var bbBanner = document.getElementById('bb-included-banner');
     if (bbAddon) {
       var planName = card.getAttribute('data-plan') || '';
       if (planName.indexOf('Growth') !== -1) {
-        bbAddon.style.display = 'none';
         bbAddon.classList.remove('selected');
+        bbAddon.classList.add('bb-included');
+        bbAddon.style.pointerEvents = 'none';
+        bbAddon.style.opacity = '0.7';
+        bbAddon.setAttribute('data-monthly', '0');
         var bbBtn = bbAddon.querySelector('.tools-select-btn');
-        if (bbBtn) bbBtn.textContent = 'Add to plan →';
+        if (bbBtn) bbBtn.style.display = 'none';
+        if (bbBanner) bbBanner.style.display = 'block';
       } else {
-        bbAddon.style.display = '';
+        bbAddon.classList.remove('bb-included');
+        bbAddon.style.pointerEvents = '';
+        bbAddon.style.opacity = '';
+        bbAddon.setAttribute('data-monthly', '79');
+        var bbBtn = bbAddon.querySelector('.tools-select-btn');
+        if (bbBtn) bbBtn.style.display = '';
+        if (bbBanner) bbBanner.style.display = 'none';
       }
     }
     var toolsStep = document.getElementById('tools-step');
@@ -1353,19 +1362,15 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     } else {
       btn.textContent = 'Add to plan →';
     }
-    // Show/hide continue button
+    // Update summary button text
     var anySelected = document.querySelectorAll('.tools-option.selected').length > 0;
-    var contBtn = document.getElementById('addons-continue-btn');
-    if (contBtn) contBtn.style.display = anySelected ? 'inline-flex' : 'none';
+    var summBtn = document.getElementById('addons-summary-btn');
+    if (summBtn) summBtn.textContent = anySelected ? 'Continue to Summary \u2192' : 'Skip to Summary \u2192';
     if (document.getElementById('pricing-review').classList.contains('open')) {
       refreshPricingDisplay();
     }
   }
 
-  function skipAddons() {
-    document.querySelectorAll('.tools-option').forEach(function(o) { o.classList.remove('selected'); var b = o.querySelector('.tools-select-btn'); if(b) b.textContent = 'Add to plan →'; });
-    setTimeout(openPricingReview, 400);
-  }
 
   function getSelectedAddons() {
     var addons = [];
