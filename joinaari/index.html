@@ -940,30 +940,16 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <input type="hidden" name="selected_tools"   id="selected-tools-input" />
     <input type="hidden" name="activation_total" id="activation-total-input" />
     <input type="hidden" name="business_tools"   id="business-tools-input" />
-    <div class="q-row"><label class="q-label">First Name</label><input class="q-input" type="text" name="first_name" placeholder="First name" /></div>
-    <div class="q-row"><label class="q-label">Last Name</label><input class="q-input" type="text" name="last_name" placeholder="Last name" /></div>
-    <div class="q-row"><label class="q-label">Email Address</label><input class="q-input" type="email" name="email" placeholder="your@email.com" /><span class="q-hint">We'll send your drafted ICA and plan details to this email</span></div>
-    <div class="q-row"><label class="q-label">Phone Number</label><input class="q-input" type="tel" name="phone" placeholder="(239) 000-0000" /></div>
-    <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:0 0 20px;padding:0 2px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you via phone, email, or text regarding your application and onboarding.</p>
-    <div class="q-row"><label class="q-label">Florida License #</label><input class="q-input" type="text" name="license" placeholder="SL or BK number (or pending)" /></div>
-    <div class="q-row">
-      <label class="q-label">Primary MLS</label>
-      <select class="q-select" name="market"><option value="" disabled selected>Select your MLS</option><option>Royal Palm MLS</option><option>Miami MLS</option><option>Stellar MLS</option></select>
-    </div>
-    <div class="q-row">
-      <label class="q-label">Years Licensed</label>
-      <select class="q-select" name="years"><option value="" disabled selected>Select years licensed</option><option>Not yet licensed</option><option>Less than 1 year</option><option>1-3 years</option><option>3+ years</option></select>
-    </div>
-    <div class="q-row q-row-hidden">
-      <label class="q-label">Plan of Interest</label>
-      <select class="q-select" name="plan"><option value="" selected disabled>Select a plan</option><option value="Aari Max - 100%">Aari Max — 100%</option><option value="Aari Pro - 90/10">Aari Pro — 90/10</option><option value="Aari Growth - 70/30">Aari Growth — 70/30</option><option value="Not sure yet">Not sure yet</option></select>
-    </div>
-    <div class="q-row">
-      <label class="q-label">Closings Last 12 Months</label>
-      <select class="q-select" name="closings"><option value="" disabled selected>Select range</option><option>0 - Getting started</option><option>1-3</option><option>4-10</option><option>11-20</option><option>20+</option></select>
-    </div>
+    <input type="hidden" name="first_name" />
+    <input type="hidden" name="last_name" />
+    <input type="hidden" name="email" />
+    <input type="hidden" name="phone" />
+    <input type="hidden" name="license" />
+    <input type="hidden" name="market" />
+    <input type="hidden" name="years" />
+    <input type="hidden" name="closings" />
+    <input type="hidden" name="plan" />
     <!-- Payment Card Section -->
-    <div class="q-divider" style="height:1px;background:rgba(10,10,10,0.08);margin:28px 0"></div>
     <div id="payment-section">
       <p class="q-label" style="margin-bottom:6px">Payment</p>
       <div id="payment-due-box" style="background:rgba(10,10,10,0.04);border-radius:8px;padding:18px 20px;margin:0 0 20px">
