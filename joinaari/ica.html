@@ -524,13 +524,13 @@
       </div>
     </div>
 
-    <!-- SUB-STEP 1B: License Info -->
+    <!-- SUB-STEP 1B: License Question -->
     <div class="ica-section ica-substep" id="substep-1b" style="display:none;">
-      <div class="ica-section-title">License Information</div>
+      <div class="ica-section-title">License Status</div>
 
       <div class="ica-field">
         <label for="associate-has-license">Do you currently have a Florida real estate license?</label>
-        <select id="associate-has-license" onchange="toggleLicenseField()">
+        <select id="associate-has-license" onchange="handleLicenseAnswer()">
           <option value="" disabled selected>Select one</option>
           <option value="yes">Yes, I have an active license</option>
           <option value="pending">My license is pending</option>
@@ -538,35 +538,39 @@
         </select>
       </div>
 
-      <div class="ica-field" id="license-number-field" style="display:none;">
-        <label for="associate-license">Florida License Number</label>
-        <input type="text" id="associate-license" placeholder="e.g., SL3XXXXXX">
+      <!-- Hidden fields for non-licensed defaults -->
+      <input type="hidden" id="associate-license" value="">
+      <input type="hidden" id="associate-years" value="">
+      <input type="hidden" id="associate-closings" value="">
+      <input type="hidden" id="associate-mls" value="">
+
+      <div class="ica-step-nav">
+        <button type="button" class="ica-step-nav-btn secondary" onclick="goSubstep('1a')">&larr; Back</button>
+      </div>
+    </div>
+
+    <!-- SUB-STEP 1C: Licensed Agent Details (only shown if yes) -->
+    <div class="ica-section ica-substep" id="substep-1c" style="display:none;">
+      <div class="ica-section-title">License &amp; Experience Details</div>
+
+      <div class="ica-field">
+        <label for="associate-license-input">Florida License Number</label>
+        <input type="text" id="associate-license-input" placeholder="e.g., SL3XXXXXX">
       </div>
 
       <div class="ica-field">
-        <label for="associate-years">How long have you been licensed?</label>
-        <select id="associate-years">
+        <label for="associate-years-select">How long have you been licensed?</label>
+        <select id="associate-years-select">
           <option value="" disabled selected>Select</option>
-          <option>Not yet licensed</option>
           <option>Less than 1 year</option>
           <option>1-3 years</option>
           <option>3+ years</option>
         </select>
       </div>
 
-      <div class="ica-step-nav">
-        <button type="button" class="ica-step-nav-btn secondary" onclick="goSubstep('1a')">&larr; Back</button>
-        <button type="button" class="ica-step-nav-btn" onclick="goSubstep('1c')">Next &rarr;</button>
-      </div>
-    </div>
-
-    <!-- SUB-STEP 1C: Experience & MLS -->
-    <div class="ica-section ica-substep" id="substep-1c" style="display:none;">
-      <div class="ica-section-title">Your Experience</div>
-
       <div class="ica-field">
-        <label for="associate-closings">Closings in the Last 12 Months</label>
-        <select id="associate-closings">
+        <label for="associate-closings-select">Closings in the Last 12 Months</label>
+        <select id="associate-closings-select">
           <option value="" disabled selected>Select range</option>
           <option>0 - Getting started</option>
           <option>1-3</option>
@@ -577,14 +581,24 @@
       </div>
 
       <div class="ica-field">
-        <label for="associate-mls">Primary MLS</label>
-        <select id="associate-mls">
+        <label for="associate-mls-select">Primary MLS</label>
+        <select id="associate-mls-select">
           <option value="" disabled selected>Select your MLS</option>
           <option>Royal Palm MLS</option>
           <option>Miami MLS</option>
           <option>Stellar MLS</option>
         </select>
       </div>
+
+      <div class="ica-step-nav">
+        <button type="button" class="ica-step-nav-btn secondary" onclick="goSubstep('1b')">&larr; Back</button>
+        <button type="button" class="ica-step-nav-btn" onclick="syncLicensedFields(); goSubstep('1d')">Next &rarr;</button>
+      </div>
+    </div>
+
+    <!-- SUB-STEP 1D: Final confirmation -->
+    <div class="ica-section ica-substep" id="substep-1d" style="display:none;">
+      <div class="ica-section-title">Almost Ready</div>
 
       <div class="ica-field">
         <label for="associate-state">Primary State</label>
@@ -597,7 +611,7 @@
       </div>
 
       <div class="ica-step-nav">
-        <button type="button" class="ica-step-nav-btn secondary" onclick="goSubstep('1b')">&larr; Back</button>
+        <button type="button" class="ica-step-nav-btn secondary" id="substep-1d-back" onclick="goSubstep('1c')">&larr; Back</button>
         <button type="button" class="ica-step-nav-btn" onclick="goToStep(2)">Continue to Review ICA &rarr;</button>
       </div>
     </div>
@@ -1541,15 +1555,39 @@ function goSubstep(id) {
   window.scrollTo({ top: document.getElementById('step-1').offsetTop - 20, behavior: 'smooth' });
 }
 
-function toggleLicenseField() {
+function handleLicenseAnswer() {
   var sel = document.getElementById('associate-has-license');
-  var field = document.getElementById('license-number-field');
-  if (sel.value === 'yes') {
-    field.style.display = 'block';
+  var val = sel.value;
+
+  if (val === 'yes') {
+    // Licensed: show license details substep
+    document.getElementById('associate-license').value = '';
+    document.getElementById('associate-years').value = '';
+    document.getElementById('associate-closings').value = '';
+    document.getElementById('associate-mls').value = '';
+    goSubstep('1c');
   } else {
-    field.style.display = 'none';
-    document.getElementById('associate-license').value = sel.value === 'pending' ? 'Pending' : 'N/A';
+    // Not licensed or pending: set defaults, skip to final
+    document.getElementById('associate-license').value = val === 'pending' ? 'Pending' : 'N/A';
+    document.getElementById('associate-years').value = 'Not yet licensed';
+    document.getElementById('associate-closings').value = 'N/A';
+    document.getElementById('associate-mls').value = 'N/A';
+    // Set the back button on 1d to go back to 1b (not 1c)
+    document.getElementById('substep-1d-back').setAttribute('onclick', "goSubstep('1b')");
+    goSubstep('1d');
   }
+}
+
+// Sync licensed-agent fields into hidden fields before moving forward
+function syncLicensedFields() {
+  var licInput = document.getElementById('associate-license-input');
+  var yearsSelect = document.getElementById('associate-years-select');
+  var closingsSelect = document.getElementById('associate-closings-select');
+  var mlsSelect = document.getElementById('associate-mls-select');
+  if (licInput) document.getElementById('associate-license').value = licInput.value;
+  if (yearsSelect) document.getElementById('associate-years').value = yearsSelect.value;
+  if (closingsSelect) document.getElementById('associate-closings').value = closingsSelect.value;
+  if (mlsSelect) document.getElementById('associate-mls').value = mlsSelect.value;
 }
 
 // ========== STEP NAVIGATION ==========
@@ -1566,7 +1604,7 @@ function goToStep(step) {
     }
     // Sync info to signature fields
     document.getElementById('sig-printed-name').value = nameVal;
-    document.getElementById('sig-license').value = licVal;
+    document.getElementById('sig-license').value = document.getElementById('associate-license').value || '';
     document.getElementById('sig-date').value = document.getElementById('associate-date').value;
   }
 
@@ -1712,13 +1750,13 @@ function initialAllPages() {
       if (planRadio) selectedPlan = planRadio.value;
 
       var formName = document.getElementById('associate-name').value.trim();
-      var formLicense = document.getElementById('associate-license').value.trim();
+      var formLicense = document.getElementById('associate-license').value.trim() || 'N/A';
       var formEmail = document.getElementById('associate-email').value.trim();
       var formPhone = document.getElementById('associate-phone').value.trim();
-      var formHasLicense = document.getElementById('associate-has-license').value;
-      var formMls = document.getElementById('associate-mls').value;
-      var formYears = document.getElementById('associate-years').value;
-      var formClosings = document.getElementById('associate-closings').value;
+      var formHasLicense = document.getElementById('associate-has-license').value || '';
+      var formMls = document.getElementById('associate-mls').value || 'N/A';
+      var formYears = document.getElementById('associate-years').value || 'N/A';
+      var formClosings = document.getElementById('associate-closings').value || 'N/A';
 
       var data = {
         name: formName,
