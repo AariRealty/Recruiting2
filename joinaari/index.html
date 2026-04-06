@@ -991,12 +991,29 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <!-- Payment Card Section -->
     <div id="payment-section">
       <p class="q-label" style="margin-bottom:6px">Payment</p>
+      <!-- Coupon Code -->
+      <div id="coupon-section" style="margin:0 0 16px">
+        <label style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:6px">Coupon Code</label>
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="text" id="coupon-input" placeholder="Enter code" style="flex:1;font-family:'Montserrat',sans-serif;font-size:13px;padding:10px 14px;border:1px solid rgba(10,10,10,0.15);border-radius:6px;outline:none;text-transform:uppercase;letter-spacing:1px" />
+          <button type="button" id="coupon-apply-btn" onclick="applyCoupon()" style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:11px 20px;border:1px solid #0a0a0a;border-radius:6px;background:#0a0a0a;color:#fff;cursor:pointer;white-space:nowrap">Apply</button>
+        </div>
+        <p id="coupon-msg" style="display:none;font-size:11px;margin-top:6px;font-weight:500"></p>
+      </div>
+
       <div id="payment-due-box" style="background:rgba(10,10,10,0.04);border-radius:8px;padding:18px 20px;margin:0 0 20px">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#0a0a0a">Due Today</span>
           <span id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:700;color:#0a0a0a">$0.00</span>
         </div>
         <p id="payment-due-breakdown" style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:6px 0 0;line-height:1.4"></p>
+        <div id="coupon-discount-row" style="display:none;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(10,10,10,0.1)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:#27ae60">Coupon Applied</span>
+            <span id="coupon-discount-amount" style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#27ae60">-$0.00</span>
+          </div>
+          <p id="coupon-discount-detail" style="font-family:'Lato',sans-serif;font-size:10px;color:#27ae60;margin:2px 0 0"></p>
+        </div>
       </div>
       <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
       <div id="stripe-payment-element" style="margin-bottom:8px"></div>
@@ -1564,6 +1581,104 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   }
 
   // Calculate payment amounts from current selections
+  // Coupon state
+  var activeCoupon = null; // { code, type, value, label }
+
+  window.applyCoupon = async function() {
+    var input = document.getElementById('coupon-input');
+    var msg = document.getElementById('coupon-msg');
+    var btn = document.getElementById('coupon-apply-btn');
+    var code = input.value.trim();
+
+    if (!code) {
+      msg.textContent = 'Please enter a coupon code.';
+      msg.style.color = '#c0392b';
+      msg.style.display = 'block';
+      return;
+    }
+
+    btn.textContent = 'Checking...';
+    btn.disabled = true;
+
+    try {
+      var resp = await fetch('/api/validate-coupon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code })
+      });
+      var data = await resp.json();
+
+      if (!resp.ok || !data.valid) {
+        msg.textContent = data.error || 'Invalid coupon code.';
+        msg.style.color = '#c0392b';
+        msg.style.display = 'block';
+        activeCoupon = null;
+      } else {
+        activeCoupon = data;
+        msg.textContent = '✓ ' + data.label;
+        msg.style.color = '#27ae60';
+        msg.style.display = 'block';
+        input.style.borderColor = '#27ae60';
+        input.disabled = true;
+        btn.textContent = 'Remove';
+        btn.disabled = false;
+        btn.style.background = 'transparent';
+        btn.style.color = '#c0392b';
+        btn.style.borderColor = '#c0392b';
+        btn.onclick = removeCoupon;
+        refreshDueToday();
+        return;
+      }
+    } catch (err) {
+      msg.textContent = 'Could not validate coupon. Try again.';
+      msg.style.color = '#c0392b';
+      msg.style.display = 'block';
+      activeCoupon = null;
+    }
+
+    btn.textContent = 'Apply';
+    btn.disabled = false;
+  };
+
+  window.removeCoupon = function() {
+    activeCoupon = null;
+    var input = document.getElementById('coupon-input');
+    var msg = document.getElementById('coupon-msg');
+    var btn = document.getElementById('coupon-apply-btn');
+    input.value = '';
+    input.disabled = false;
+    input.style.borderColor = 'rgba(10,10,10,0.15)';
+    msg.style.display = 'none';
+    btn.textContent = 'Apply';
+    btn.style.background = '#0a0a0a';
+    btn.style.color = '#fff';
+    btn.style.borderColor = '#0a0a0a';
+    btn.onclick = applyCoupon;
+    refreshDueToday();
+  };
+
+  function refreshDueToday() {
+    var amounts = getPaymentAmounts();
+    var dueAmountEl = document.getElementById('payment-due-amount');
+    var dueBreakdownEl = document.getElementById('payment-due-breakdown');
+    var discountRow = document.getElementById('coupon-discount-row');
+
+    if (dueAmountEl) dueAmountEl.textContent = '$' + amounts.totalDueToday.toFixed(2);
+
+    var today = new Date();
+    var daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    var daysRemaining = daysInMonth - today.getDate() + 1;
+    if (dueBreakdownEl) dueBreakdownEl.textContent = '$199 compliance + $' + amounts.proratedTotal.toFixed(2) + ' prorated (' + daysRemaining + ' of ' + daysInMonth + ' days)';
+
+    if (activeCoupon && amounts.discount > 0) {
+      discountRow.style.display = 'block';
+      document.getElementById('coupon-discount-amount').textContent = '-$' + amounts.discount.toFixed(2);
+      document.getElementById('coupon-discount-detail').textContent = activeCoupon.label;
+    } else {
+      discountRow.style.display = 'none';
+    }
+  }
+
   function getPaymentAmounts() {
     var planCard = document.querySelector('.plan-card.selected');
     var planMonthlyEl = planCard ? planCard.querySelector('.pc-monthly') : null;
@@ -1579,7 +1694,32 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
     var daysRemaining = daysInMonth - today.getDate() + 1;
     var proratedTotal = parseFloat((fullMonthly * daysRemaining / daysInMonth).toFixed(2));
-    var totalDueToday = parseFloat((199 + proratedTotal).toFixed(2));
+    var annualFee = 199;
+    var subtotal = parseFloat((annualFee + proratedTotal).toFixed(2));
+
+    // Apply coupon discount
+    var discount = 0;
+    if (activeCoupon) {
+      switch (activeCoupon.type) {
+        case 'waive_all':
+          discount = subtotal;
+          break;
+        case 'waive_annual':
+          discount = annualFee;
+          break;
+        case 'waive_monthly':
+          discount = proratedTotal;
+          break;
+        case 'percent_off':
+          discount = parseFloat((subtotal * activeCoupon.value / 100).toFixed(2));
+          break;
+        case 'flat_off':
+          discount = Math.min(activeCoupon.value, subtotal);
+          break;
+      }
+    }
+
+    var totalDueToday = parseFloat(Math.max(0, subtotal - discount).toFixed(2));
 
     return {
       totalDueToday: totalDueToday,
@@ -1587,7 +1727,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       proratedTotal: proratedTotal,
       planMonthlyNum: planMonthlyNum,
       addonMonthly: totalAddonMonthly,
-      addons: addons
+      addons: addons,
+      discount: discount,
+      couponCode: activeCoupon ? activeCoupon.code : null
     };
   }
 
@@ -1679,6 +1821,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         closings: form.querySelector('[name="closings"]').value,
         business_tools: businessTools,
         amount_charged: "$" + amounts.totalDueToday.toFixed(2),
+        coupon_code: amounts.couponCode || 'None',
+        discount: amounts.discount > 0 ? '-$' + amounts.discount.toFixed(2) : 'None',
         payment_id: result.paymentIntent.id
       };
       try {
