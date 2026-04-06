@@ -1500,17 +1500,14 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     // Mount Stripe Payment Element after section is visible
     if (!paymentMounted) {
       setTimeout(function() {
-        // We need name/email for the PaymentIntent — use prefilled values or placeholder
         var form = document.getElementById('apply-form');
         var fn = form ? form.querySelector('[name="first_name"]').value.trim() : '';
         var ln = form ? form.querySelector('[name="last_name"]').value.trim() : '';
         var em = form ? form.querySelector('[name="email"]').value.trim() : '';
         var ph = form ? form.querySelector('[name="phone"]').value.trim() : '';
-        if (fn && ln && em) {
-          initPaymentElement(totalDue, fn, ln, em, ph, planValue).catch(function(err) {
-            console.warn('[stripe] Payment Element init deferred:', err.message);
-          });
-        }
+        initPaymentElement(totalDue, fn || 'Agent', ln || 'Pending', em || 'pending@aarirealty.com', ph, planValue).catch(function(err) {
+          console.warn('[stripe] Payment Element init error:', err.message);
+        });
       }, 100);
     }
     setTimeout(function() {
@@ -1677,6 +1674,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     } else {
       discountRow.style.display = 'none';
     }
+
+    // Hide/show payment element based on total
+    var peEl = document.getElementById('stripe-payment-element');
+    var submitBtn = document.getElementById('submit-btn');
+    if (amounts.totalDueToday <= 0) {
+      if (peEl) peEl.style.display = 'none';
+      if (submitBtn) submitBtn.textContent = 'Join Aari Realty \u2192';
+    } else {
+      if (peEl) peEl.style.display = 'block';
+      if (submitBtn) submitBtn.innerHTML = 'Pay & Join Aari Realty <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    }
   }
 
   function getPaymentAmounts() {
@@ -1768,7 +1776,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var planName = planCard ? planCard.getAttribute('data-plan') : '';
 
     try {
-      // Step 1: Initialize Payment Element if not already done
+      // Step 1: Initialize Payment Element if not already done, or update amount
       if (!currentClientSecret) {
         await initPaymentElement(
           amounts.totalDueToday,
@@ -1776,23 +1784,45 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           form.querySelector('[name="phone"]').value.trim(),
           planName
         );
+      } else {
+        // Update the PaymentIntent amount (coupon may have changed it)
+        await fetch("/api/update-payment-intent", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            client_secret: currentClientSecret,
+            amount: amounts.totalDueToday,
+            customer_id: currentCustomerId,
+            first_name: firstName,
+            last_name: lastName,
+            email: email
+          })
+        });
+        // Update elements to reflect new amount
+        stripeElements.update({ amount: Math.round(amounts.totalDueToday * 100) });
       }
 
-      // Step 2: Confirm payment via Stripe Payment Element
-      var result = await stripe.confirmPayment({
-        elements: stripeElements,
-        confirmParams: {
-          return_url: window.location.origin + '/index.html',
-          payment_method_data: {
-            billing_details: {
-              name: name,
-              email: email
+      // Step 2: Confirm payment (or skip if $0 coupon)
+      var result;
+      if (amounts.totalDueToday <= 0) {
+        // $0 due — skip Stripe payment, just record the signup
+        result = { paymentIntent: { id: 'coupon_waived_' + Date.now(), payment_method: null } };
+      } else {
+        result = await stripe.confirmPayment({
+          elements: stripeElements,
+          confirmParams: {
+            return_url: window.location.origin + '/index.html',
+            payment_method_data: {
+              billing_details: {
+                name: name,
+                email: email
+              }
             }
-          }
-        },
-        redirect: 'if_required'
-      });
-      if (result.error) throw new Error(result.error.message);
+          },
+          redirect: 'if_required'
+        });
+        if (result.error) throw new Error(result.error.message);
+      }
 
       // Step 3: Set up recurring billing on server
       var recurResp = await fetch("/api/setup-recurring", {
