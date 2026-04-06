@@ -906,12 +906,63 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.35);margin:8px 0 0" id="pr-proration-detail"></p>
       </div>
 
-      <!-- Then, recurring monthly -->
-      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 2px;margin-bottom:4px">
-        <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:500;color:rgba(10,10,10,0.5);margin:0">Then, recurring monthly</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-total">$69/month</p>
+      <!-- Recurring monthly — first 6 months (Growth plan with Brand Builder) -->
+      <div id="pr-recurring-growth" style="display:none">
+        <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:16px 18px;margin-bottom:12px">
+          <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin:0 0 10px">First 6 Months</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+            <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Monthly Fee</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-growth-monthly-fee">$99/month</p>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+            <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Brand Builder <span style="color:#2d6a4f;font-weight:600">(included)</span></p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#2d6a4f;margin:0">$0/mo</p>
+          </div>
+          <div id="pr-growth-extra-addons" style="display:none;margin-bottom:6px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0" id="pr-growth-extra-label">Add-ons</p>
+              <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-growth-extra-price"></p>
+            </div>
+          </div>
+          <div style="height:1px;background:rgba(10,10,10,0.08);margin:8px 0"></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px">
+            <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#0a0a0a;margin:0">Recurring Monthly</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:#0a0a0a;margin:0" id="pr-growth-total-6mo">$99/month</p>
+          </div>
+        </div>
+
+        <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:16px 18px;margin-bottom:20px">
+          <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin:0 0 10px">After 6 Months</p>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+            <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Monthly Fee</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-growth-monthly-fee-after">$99/month</p>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">
+            <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Brand Builder</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0">$79/mo</p>
+          </div>
+          <div id="pr-growth-extra-addons-after" style="display:none;margin-bottom:6px">
+            <div style="display:flex;justify-content:space-between;align-items:baseline">
+              <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0" id="pr-growth-extra-label-after">Add-ons</p>
+              <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-growth-extra-price-after"></p>
+            </div>
+          </div>
+          <div style="height:1px;background:rgba(10,10,10,0.08);margin:8px 0"></div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px">
+            <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;color:#0a0a0a;margin:0">Recurring Monthly</p>
+            <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;color:#0a0a0a;margin:0" id="pr-growth-total-after">$178/month</p>
+          </div>
+        </div>
       </div>
-      <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.3);margin:0 0 20px;padding:0 2px;text-align:right" id="pr-monthly-breakdown"></p>
+
+      <!-- Recurring monthly — standard (non-Growth plans) -->
+      <div id="pr-recurring-standard">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 2px;margin-bottom:4px">
+          <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:500;color:rgba(10,10,10,0.5);margin:0">Then, recurring monthly</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-total">$69/month</p>
+        </div>
+        <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.3);margin:0 0 20px;padding:0 2px;text-align:right" id="pr-monthly-breakdown"></p>
+      </div>
 
       <!-- Note -->
       <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.35);line-height:1.6;margin:0;text-align:center">Prorated amount covers remaining days in the current month.</p>
@@ -1403,10 +1454,22 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.getElementById('pr-monthly-fee').textContent = planMonthlyText;
 
     // Add-ons
+    var isGrowthPlan = planName.indexOf('Growth') !== -1;
     var totalAddonMonthly = 0;
     addons.forEach(function(a){ totalAddonMonthly += a.monthly; });
     var addonsReceipt = document.getElementById('pr-addons-receipt');
-    if (totalAddonMonthly > 0) {
+
+    // For Growth plan, show Brand Builder as included at $0 in the add-ons line
+    if (isGrowthPlan) {
+      addonsReceipt.style.display = '';
+      var otherAddons = addons.filter(function(a) { return a.name !== 'Brand Builder'; });
+      var otherTotal = 0;
+      otherAddons.forEach(function(a) { otherTotal += a.monthly; });
+      var addonItems = ['Brand Builder (included — $0)'];
+      otherAddons.forEach(function(a) { addonItems.push(a.name + ' ($' + a.monthly + '/mo)'); });
+      document.getElementById('pr-addons-price').textContent = otherTotal > 0 ? '$' + otherTotal + '/mo' : '$0/mo';
+      document.getElementById('pr-addons-list').textContent = addonItems.join(' · ');
+    } else if (totalAddonMonthly > 0) {
       addonsReceipt.style.display = '';
       document.getElementById('pr-addons-price').textContent = '$' + totalAddonMonthly + '/mo';
       document.getElementById('pr-addons-list').textContent = addons.map(function(a){ return a.name + ' ($' + a.monthly + '/mo)'; }).join(' · ');
@@ -1433,15 +1496,58 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       detailEl.textContent = '$199 compliance + $' + proratedTotal.toFixed(2) + ' prorated (' + daysRemaining + ' of ' + daysInMonth + ' days)';
     }
 
-    // Monthly total
-    var totalEl = document.getElementById('pr-monthly-total');
-    if (totalEl) totalEl.textContent = '$' + recurringTotal + '/month';
-    var breakdownEl = document.getElementById('pr-monthly-breakdown');
-    if (breakdownEl) {
-      if (totalAddonMonthly > 0) {
-        breakdownEl.textContent = '($' + planMonthlyNum + ' + $' + totalAddonMonthly + ')';
+    // Recurring monthly — Growth plan vs standard
+    var isGrowth = planName.indexOf('Growth') !== -1;
+    var growthSection = document.getElementById('pr-recurring-growth');
+    var standardSection = document.getElementById('pr-recurring-standard');
+
+    if (isGrowth) {
+      growthSection.style.display = 'block';
+      standardSection.style.display = 'none';
+
+      // Other addons beyond Brand Builder (Brand Builder is included at $0 for Growth)
+      var otherAddons = addons.filter(function(a) { return a.name !== 'Brand Builder'; });
+      var otherAddonMonthly = 0;
+      otherAddons.forEach(function(a) { otherAddonMonthly += a.monthly; });
+
+      // First 6 months
+      document.getElementById('pr-growth-monthly-fee').textContent = '$' + planMonthlyNum + '/month';
+      var first6Total = planMonthlyNum + otherAddonMonthly;
+      document.getElementById('pr-growth-total-6mo').textContent = '$' + first6Total + '/month';
+
+      // After 6 months
+      document.getElementById('pr-growth-monthly-fee-after').textContent = '$' + planMonthlyNum + '/month';
+      var after6Total = planMonthlyNum + 79 + otherAddonMonthly;
+      document.getElementById('pr-growth-total-after').textContent = '$' + after6Total + '/month';
+
+      // Extra addons rows (CRM etc)
+      var extraRow6 = document.getElementById('pr-growth-extra-addons');
+      var extraRowAfter = document.getElementById('pr-growth-extra-addons-after');
+      if (otherAddonMonthly > 0) {
+        var otherNames = otherAddons.map(function(a) { return a.name; }).join(' + ');
+        extraRow6.style.display = 'block';
+        document.getElementById('pr-growth-extra-label').textContent = otherNames;
+        document.getElementById('pr-growth-extra-price').textContent = '$' + otherAddonMonthly + '/mo';
+        extraRowAfter.style.display = 'block';
+        document.getElementById('pr-growth-extra-label-after').textContent = otherNames;
+        document.getElementById('pr-growth-extra-price-after').textContent = '$' + otherAddonMonthly + '/mo';
       } else {
-        breakdownEl.textContent = '';
+        extraRow6.style.display = 'none';
+        extraRowAfter.style.display = 'none';
+      }
+    } else {
+      growthSection.style.display = 'none';
+      standardSection.style.display = 'block';
+
+      var totalEl = document.getElementById('pr-monthly-total');
+      if (totalEl) totalEl.textContent = '$' + recurringTotal + '/month';
+      var breakdownEl = document.getElementById('pr-monthly-breakdown');
+      if (breakdownEl) {
+        if (totalAddonMonthly > 0) {
+          breakdownEl.textContent = '($' + planMonthlyNum + ' + $' + totalAddonMonthly + ')';
+        } else {
+          breakdownEl.textContent = '';
+        }
       }
     }
 
