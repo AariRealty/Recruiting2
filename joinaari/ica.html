@@ -1514,51 +1514,35 @@
     <!-- ===================== STEP 3: SIGN ===================== -->
     <div class="ica-step-panel" id="step-3">
 
-    <!-- INITIALS INPUT AT TOP -->
-    <div class="ica-section" id="initials-section">
-      <div class="ica-section-title">Master Signature &amp; Acknowledgment Page</div>
-      <p class="ica-text">By signing below, the Associate confirms they have received, read, and agree to be legally bound by each document in this Onboarding Package.</p>
-
-      <div style="display:flex;align-items:flex-end;gap:16px;margin:24px 0;padding:20px;background:rgba(10,10,10,0.03);border-radius:8px;flex-wrap:wrap;">
-        <div class="ica-field" style="margin:0;flex:0 0 120px;">
-          <label for="initials-input">Your Initials</label>
-          <input type="text" id="initials-input" placeholder="e.g., MP" maxlength="5" style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;">
-        </div>
-        <button type="button" class="ica-nav-btn primary" id="initial-all-btn" onclick="initialAllPages()" style="white-space:nowrap;">Initial All Pages</button>
-      </div>
-
-      <div id="ack-list">
-        <div class="ica-ack-row"><span class="ica-ack-num">1.</span><span class="ica-ack-label">Independent Contractor Agreement (ICA) &mdash; Sections 1&ndash;20</span><span class="ica-ack-initial" id="ack-initial-1"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">2.</span><span class="ica-ack-label">Commission Structure Addendum (CSA) &mdash; Sections 1&ndash;14</span><span class="ica-ack-initial" id="ack-initial-2"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">3.</span><span class="ica-ack-label">Commission Fee Schedule &mdash; Exhibit A &mdash; Sections 1&ndash;8</span><span class="ica-ack-initial" id="ack-initial-3"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">4.</span><span class="ica-ack-label">Operations &amp; Compliance Manual &mdash; Sections 1&ndash;31</span><span class="ica-ack-initial" id="ack-initial-4"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">5.</span><span class="ica-ack-label">W-9 Collection &amp; Tax Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-5"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">6.</span><span class="ica-ack-label">License Verification &amp; Active Status Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-6"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">7.</span><span class="ica-ack-label">Affiliated Business Disclosure &mdash; RESPA Compliance</span><span class="ica-ack-initial" id="ack-initial-7"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">8.</span><span class="ica-ack-label">MLS Rules Acknowledgment &mdash; All Boards</span><span class="ica-ack-initial" id="ack-initial-8"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">9.</span><span class="ica-ack-label">Buyer Brokerage Agreement Policy Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-9"></span></div>
-        <div class="ica-ack-row"><span class="ica-ack-num">10.</span><span class="ica-ack-label">Wire Fraud &amp; Cybersecurity Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-10"></span></div>
-      </div>
-    </div>
-
-    <!-- LICENSED: BINDING SIGNATURE -->
+    <!-- MASTER SIGNATURE & ACKNOWLEDGMENT PAGE -->
     <div id="licensed-signature">
-      <div class="ica-section" id="execution-section">
-        <div class="ica-section-title">Associate &mdash; Binding Signature</div>
+      <div class="ica-section" id="initials-section">
+        <div class="ica-section-title">Master Signature &amp; Acknowledgment Page</div>
+        <p class="ica-text">By signing below, the Associate confirms they have received, read, and agree to be bound by each document in this Onboarding Package. This signature, together with execution of the Independent Contractor Agreement, constitutes full execution of all incorporated and supplemental onboarding documents.</p>
 
-        <p class="ica-text">I, the undersigned Associate, confirm that I have received, reviewed, and agree to be legally bound by all documents listed above as part of my affiliation with Aari Realty LLC.</p>
-
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px;">
-          <div>
-            <p class="ica-subheading">AARI REALTY LLC &mdash; QUALIFYING BROKER</p>
-            <div class="ica-signature-box">
-              <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(10,10,10,0.4);margin-bottom:8px;">Signature</p>
-              <p class="ica-broker-sig">Marlenyi Paredes</p>
-            </div>
-            <div class="ica-field"><label>Printed Name</label><input type="text" value="Marlenyi Paredes" readonly></div>
-            <div class="ica-field"><label>License No.</label><input type="text" value="BK3530153" readonly></div>
-            <div class="ica-field"><label>Title</label><input type="text" value="Qualifying Broker | Owner" readonly></div>
+        <div style="display:flex;align-items:flex-end;gap:16px;margin:24px 0;padding:20px;background:rgba(10,10,10,0.03);border-radius:8px;flex-wrap:wrap;">
+          <div class="ica-field" style="margin:0;flex:0 0 120px;">
+            <label for="initials-input">Your Initials</label>
+            <input type="text" id="initials-input" placeholder="e.g., MP" maxlength="5" style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:20px;font-style:italic;">
           </div>
+          <button type="button" class="ica-nav-btn primary" id="initial-all-btn" onclick="initialAllPages()" style="white-space:nowrap;">Initial All Pages</button>
+        </div>
+
+        <div id="ack-list">
+          <div class="ica-ack-row"><span class="ica-ack-num">1.</span><span class="ica-ack-label">Independent Contractor Agreement (ICA)</span><span class="ica-ack-initial" id="ack-initial-1"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">2.</span><span class="ica-ack-label">Commission Structure Addendum (CSA)</span><span class="ica-ack-initial" id="ack-initial-2"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">3.</span><span class="ica-ack-label">Commission Fee Schedule &mdash; Exhibit A</span><span class="ica-ack-initial" id="ack-initial-3"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">4.</span><span class="ica-ack-label">Operations &amp; Compliance Manual &mdash; All Addendums</span><span class="ica-ack-initial" id="ack-initial-4"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">5.</span><span class="ica-ack-label">License Verification &amp; Active Status Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-5"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">6.</span><span class="ica-ack-label">Affiliated Business Disclosure &mdash; RESPA Compliance</span><span class="ica-ack-initial" id="ack-initial-6"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">7.</span><span class="ica-ack-label">MLS Rules Acknowledgment &mdash; All Boards</span><span class="ica-ack-initial" id="ack-initial-7"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">8.</span><span class="ica-ack-label">Buyer Brokerage Agreement Policy Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-8"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-num">9.</span><span class="ica-ack-label">Wire Fraud &amp; Cybersecurity Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-9"></span></div>
+        </div>
+
+        <p class="ica-text" style="margin-top:32px;">I confirm receipt, review, and agreement to all documents listed above as part of my affiliation with Aari Realty LLC. All documents are binding as of the Effective Date of my Independent Contractor Agreement.</p>
+
+        <div id="execution-section" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:24px;">
           <div>
             <p class="ica-subheading">ASSOCIATE</p>
             <div class="ica-signature-box">
@@ -1566,9 +1550,12 @@
               <input type="text" class="ica-sig-input" id="associate-signature" placeholder="Type your full legal name">
             </div>
             <div class="ica-field"><label>Printed Name</label><input type="text" id="sig-printed-name" readonly></div>
-            <div class="ica-field"><label>Date</label><input type="text" id="sig-date" readonly></div>
             <div class="ica-field"><label>License No.</label><input type="text" id="sig-license" readonly></div>
             <div class="ica-field"><label>Title</label><input type="text" id="sig-title" readonly></div>
+          </div>
+          <div>
+            <p class="ica-subheading">DATE</p>
+            <div class="ica-field"><label>Date</label><input type="text" id="sig-date" readonly></div>
           </div>
         </div>
 
@@ -1775,7 +1762,7 @@ function goToStep(step) {
 function initialAllPages() {
   var initials = document.getElementById('initials-input').value.trim();
   if (!initials) { alert('Please enter your initials first.'); return; }
-  for (var i = 1; i <= 10; i++) {
+  for (var i = 1; i <= 9; i++) {
     var span = document.getElementById('ack-initial-' + i);
     if (span) span.textContent = initials;
   }
@@ -1855,7 +1842,7 @@ function initialAllPages() {
 
   window.validateForm = function() {
     var allInitialed = true;
-    for (var i = 1; i <= 10; i++) {
+    for (var i = 1; i <= 9; i++) {
       var span = document.getElementById('ack-initial-' + i);
       if (!span || !span.textContent.trim()) { allInitialed = false; break; }
     }
