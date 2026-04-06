@@ -34,6 +34,7 @@ module.exports = async function handler(req, res) {
       currency: 'usd',
       customer: customer.id,
       setup_future_usage: 'off_session',
+      automatic_payment_methods: { enabled: true },
       description: 'Aari Realty Onboarding — ' + (plan_name || 'Commission Plan'),
       metadata: {
         plan: plan_name || '',

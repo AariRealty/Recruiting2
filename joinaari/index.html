@@ -999,7 +999,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <p id="payment-due-breakdown" style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:6px 0 0;line-height:1.4"></p>
       </div>
       <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
-      <div id="stripe-card-element" style="border:1px solid rgba(10,10,10,0.15);border-radius:6px;padding:14px 12px"></div>
+      <div id="stripe-payment-element" style="margin-bottom:8px"></div>
       <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
     </div>
   </form>
@@ -1155,28 +1155,67 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   // Stripe initialization
   var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
-  var elements = stripe.elements();
-  var cardElement = elements.create('card', {
-    style: {
-      base: {
-        fontFamily: "'Montserrat', sans-serif",
-        fontSize: '14px',
-        color: '#0a0a0a',
-        '::placeholder': { color: 'rgba(10,10,10,0.3)' }
-      },
-      invalid: { color: '#c0392b' }
-    }
-  });
-  var cardMounted = false;
-  cardElement.on('change', function(event) {
-    var errEl = document.getElementById('card-error');
-    if (event.error) {
-      errEl.textContent = event.error.message;
-      errEl.style.display = 'block';
-    } else {
-      errEl.style.display = 'none';
-    }
-  });
+  var stripeElements = null;
+  var paymentElement = null;
+  var paymentMounted = false;
+  var currentClientSecret = null;
+  var currentCustomerId = null;
+
+  async function initPaymentElement(amount, firstName, lastName, email, phone, planName) {
+    // Create PaymentIntent on server
+    var resp = await fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        phone: phone || '',
+        amount: amount,
+        plan_name: planName || ''
+      })
+    });
+    var data = await resp.json();
+    if (!resp.ok) throw new Error(data.error || "Failed to initialize payment");
+
+    currentClientSecret = data.client_secret;
+    currentCustomerId = data.customer_id;
+
+    // Create Elements instance with the client secret
+    stripeElements = stripe.elements({
+      clientSecret: currentClientSecret,
+      appearance: {
+        theme: 'stripe',
+        variables: {
+          fontFamily: "'Montserrat', sans-serif",
+          colorPrimary: '#0a0a0a',
+          colorText: '#0a0a0a',
+          colorDanger: '#c0392b',
+          borderRadius: '6px'
+        }
+      }
+    });
+
+    // Create and mount the Payment Element
+    paymentElement = stripeElements.create('payment', {
+      layout: {
+        type: 'tabs',
+        defaultCollapsed: false
+      }
+    });
+    paymentElement.mount('#stripe-payment-element');
+    paymentMounted = true;
+
+    paymentElement.on('change', function(event) {
+      var errEl = document.getElementById('card-error');
+      if (event.error) {
+        errEl.textContent = event.error.message;
+        errEl.style.display = 'block';
+      } else {
+        errEl.style.display = 'none';
+      }
+    });
+  }
 
   // Check if returning from ICA signing (must be after Stripe init)
   (function() {
@@ -1441,10 +1480,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     // Reveal Step 3 and scroll to it
     var applySection = document.getElementById('apply');
     applySection.classList.remove('apply-step-hidden');
-    // Mount Stripe card element after section is visible
-    if (!cardMounted) {
-      setTimeout(function() { cardElement.mount('#stripe-card-element'); }, 50);
-      cardMounted = true;
+    // Mount Stripe Payment Element after section is visible
+    if (!paymentMounted) {
+      setTimeout(function() {
+        // We need name/email for the PaymentIntent — use prefilled values or placeholder
+        var form = document.getElementById('apply-form');
+        var fn = form ? form.querySelector('[name="first_name"]').value.trim() : '';
+        var ln = form ? form.querySelector('[name="last_name"]').value.trim() : '';
+        var em = form ? form.querySelector('[name="email"]').value.trim() : '';
+        var ph = form ? form.querySelector('[name="phone"]').value.trim() : '';
+        if (fn && ln && em) {
+          initPaymentElement(totalDue, fn, ln, em, ph, planValue).catch(function(err) {
+            console.warn('[stripe] Payment Element init deferred:', err.message);
+          });
+        }
+      }, 100);
     }
     setTimeout(function() {
       applySection.scrollIntoView({behavior: 'smooth', block: 'start'});
@@ -1576,25 +1626,29 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var planName = planCard ? planCard.getAttribute('data-plan') : '';
 
     try {
-      // Step 1: Create Stripe PaymentIntent + Customer on server
-      var intentResp = await fetch("/api/create-payment-intent", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          phone: form.querySelector('[name="phone"]').value.trim(),
-          amount: amounts.totalDueToday,
-          plan_name: planName
-        })
-      });
-      var intentData = await intentResp.json();
-      if (!intentResp.ok) throw new Error(intentData.error || "Failed to initialize payment");
+      // Step 1: Initialize Payment Element if not already done
+      if (!currentClientSecret) {
+        await initPaymentElement(
+          amounts.totalDueToday,
+          firstName, lastName, email,
+          form.querySelector('[name="phone"]').value.trim(),
+          planName
+        );
+      }
 
-      // Step 2: Confirm the card payment via Stripe.js
-      var result = await stripe.confirmCardPayment(intentData.client_secret, {
-        payment_method: { card: cardElement }
+      // Step 2: Confirm payment via Stripe Payment Element
+      var result = await stripe.confirmPayment({
+        elements: stripeElements,
+        confirmParams: {
+          return_url: window.location.origin + '/index.html',
+          payment_method_data: {
+            billing_details: {
+              name: name,
+              email: email
+            }
+          }
+        },
+        redirect: 'if_required'
       });
       if (result.error) throw new Error(result.error.message);
 
@@ -1603,7 +1657,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          customer_id: intentData.customer_id,
+          customer_id: currentCustomerId,
           payment_method_id: result.paymentIntent.payment_method,
           monthly_amount: amounts.monthlyAmount,
           plan_name: planName,
