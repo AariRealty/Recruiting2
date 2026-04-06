@@ -1202,9 +1202,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           });
         } catch(e) {}
       }
-      // 3. Show ICA step
+      // 3. Hide ICA step, go straight to payment
       var icaSection = document.getElementById('ica-step');
-      if (icaSection) icaSection.classList.remove('apply-step-hidden');
+      if (icaSection) icaSection.classList.add('apply-step-hidden');
       // 4. Restore form data from URL params
       var form = document.getElementById('apply-form');
       var fn = urlParams.get('first_name') || '';
