@@ -911,27 +911,15 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </div>
 
   <div style="max-width:540px;margin:0 auto;padding:0 24px">
-    <div style="background:#fff;border-radius:12px;padding:36px 28px;text-align:center">
-      <div style="margin-bottom:24px">
-        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="margin-bottom:16px">
-          <rect width="48" height="48" rx="12" fill="rgba(10,10,10,0.05)"/>
-          <path d="M16 18h16M16 24h16M16 30h10" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <h3 style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0 0 8px">Aari Realty Complete Onboarding Package</h3>
-        <p style="font-family:'Lato',sans-serif;font-size:12px;color:rgba(10,10,10,0.45);margin:0;line-height:1.5">This agreement outlines the terms, commission structure, and responsibilities between you and Aari Realty LLC.</p>
-      </div>
 
-      <a href="#" id="open-ica-btn" onclick="openICA(event)" class="pr-cta" style="display:inline-block;text-decoration:none;margin-bottom:16px;width:100%">Review & Sign ICA →</a>
+    <a href="#" id="open-ica-btn" onclick="openICA(event)" class="pr-cta" style="display:block;text-decoration:none;text-align:center;margin-bottom:16px;width:100%;font-size:12px;padding:18px 24px;">Review & Sign ICA &rarr;</a>
 
-      <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.35);margin:0 0 24px;line-height:1.5">Your information will be pre-filled. Review each section, initial, and sign electronically.</p>
+    <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);margin:0 0 24px;line-height:1.6;text-align:center">Your information will be pre-filled. Review, initial, and sign electronically.</p>
 
-      <div style="height:1px;background:rgba(10,10,10,0.08);margin:0 0 24px"></div>
-
-      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;text-align:left" id="ica-confirm-label">
-        <input type="checkbox" id="ica-signed-checkbox" style="margin-top:2px;width:16px;height:16px;accent-color:#0a0a0a;flex-shrink:0" onchange="toggleICAButton()">
-        <span style="font-family:'Lato',sans-serif;font-size:12px;color:rgba(10,10,10,0.6);line-height:1.5">I have reviewed and signed the Independent Contractor Agreement.</span>
-      </label>
-    </div>
+    <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;text-align:left" id="ica-confirm-label">
+      <input type="checkbox" id="ica-signed-checkbox" style="margin-top:2px;width:16px;height:16px;accent-color:#fff;flex-shrink:0" onchange="toggleICAButton()">
+      <span style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5">I have reviewed and signed the ICA.</span>
+    </label>
 
     <button class="pr-cta" id="ica-continue-btn" onclick="proceedToApply()" style="margin-top:24px;width:100%;opacity:0.3;pointer-events:none">Proceed to Payment &rarr;</button>
   </div>
@@ -963,6 +951,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <div class="q-row"><label class="q-label">Last Name</label><input class="q-input" type="text" name="last_name" placeholder="Last name" /></div>
     <div class="q-row"><label class="q-label">Email Address</label><input class="q-input" type="email" name="email" placeholder="your@email.com" /><span class="q-hint">We'll send your drafted ICA and plan details to this email</span></div>
     <div class="q-row"><label class="q-label">Phone Number</label><input class="q-input" type="tel" name="phone" placeholder="(239) 000-0000" /></div>
+    <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:0 0 20px;padding:0 2px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you via phone, email, or text regarding your application and onboarding.</p>
     <div class="q-row"><label class="q-label">Florida License #</label><input class="q-input" type="text" name="license" placeholder="SL or BK number (or pending)" /></div>
     <div class="q-row">
       <label class="q-label">Primary MLS</label>
