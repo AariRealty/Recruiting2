@@ -403,10 +403,89 @@
       .ica-ack-row { flex-wrap: wrap; }
     }
 
+    /* COVER PAGE */
+    .ica-cover {
+      background: #fff;
+      border-radius: 8px;
+      padding: 48px 40px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      border-top: 3px solid #0a0a0a;
+    }
+    .ica-cover-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 300;
+      text-align: center;
+      color: #0a0a0a;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+    .ica-cover-sub {
+      text-align: center;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      color: rgba(10,10,10,0.4);
+      margin-bottom: 32px;
+    }
+    .ica-cover-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 32px;
+      padding: 24px;
+      background: rgba(10,10,10,0.02);
+      border: 1px solid rgba(10,10,10,0.08);
+      border-radius: 6px;
+      margin-bottom: 32px;
+    }
+    .ica-cover-field label {
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(10,10,10,0.35);
+      margin-bottom: 4px;
+    }
+    .ica-cover-field .val {
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      color: #0a0a0a;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(10,10,10,0.12);
+      min-height: 24px;
+    }
+
+    /* FLOATING CONTINUE BUTTON */
+    .ica-float-btn {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 80;
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 40px;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+      transition: all 0.2s;
+      display: none;
+    }
+    .ica-float-btn:hover { background: #222; transform: translateX(-50%) translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+
     @media print {
       .ica-print-link,
       .ica-submit-btn,
       .ica-top-banner,
+      .ica-float-btn,
       .ica-header {
         display: none;
       }
@@ -607,6 +686,26 @@
     <div class="ica-top-banner" id="unlicensed-banner" style="display:none;">
       <a href="https://calendly.com/join-aarirealty/30min" target="_blank">Meet Your Future Broker</a>
       <a href="https://wa.me/12396881770?text=Hi%20Marlenyi!" target="_blank" class="wa-btn">Text Marlenyi</a>
+    </div>
+
+    <!-- COVER PAGE -->
+    <div class="ica-cover">
+      <div style="text-align:center;margin-bottom:24px;">
+        <p style="font-family:'Montserrat';font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,0.3);margin-bottom:16px;">Aari Realty LLC &middot; Florida Licensed Brokerage</p>
+      </div>
+      <h1 class="ica-cover-title">Independent Contractor<br>Agreement Package</h1>
+      <p class="ica-cover-sub">Aari Realty LLC &middot; State of Florida</p>
+
+      <p style="font-family:'Montserrat';font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#0a0a0a;color:#fff;padding:8px 16px;display:inline-block;border-radius:3px;margin-bottom:16px;">Associate Information</p>
+
+      <div class="ica-cover-grid">
+        <div class="ica-cover-field"><label>Name of Associate</label><div class="val" id="cover-name"></div></div>
+        <div class="ica-cover-field"><label>Primary State Licensed</label><div class="val">Florida</div></div>
+        <div class="ica-cover-field"><label>Florida License Number</label><div class="val" id="cover-license"></div></div>
+        <div class="ica-cover-field"><label>Email Address</label><div class="val" id="cover-email"></div></div>
+        <div class="ica-cover-field"><label>Phone</label><div class="val" id="cover-phone"></div></div>
+        <div class="ica-cover-field"><label>Effective Date</label><div class="val" id="cover-date"></div></div>
+      </div>
     </div>
 
     <!-- INCORPORATED DOCUMENTS -->
@@ -1476,6 +1575,9 @@
   </form>
 </div>
 
+<!-- FLOATING CONTINUE BUTTON (visible during Step 2 for licensed agents) -->
+<button type="button" class="ica-float-btn" id="float-continue-btn" onclick="goToStep(3)">Continue to Sign &rarr;</button>
+
 <div class="ica-footer">
   <p>Aari Realty LLC &middot; Licensed Real Estate Brokerage &middot; State of Florida</p>
   <p>3620 Colonial Blvd, Suite 130 &middot; Fort Myers, FL 33966 &middot; 239.688.1770</p>
@@ -1568,10 +1670,29 @@ function goToStep(step) {
   var unlicCta = document.getElementById('step2-unlicensed-cta');
   var licSig = document.getElementById('licensed-signature');
   var unlicStep3 = document.getElementById('unlicensed-step3-cta');
+  var floatBtn = document.getElementById('float-continue-btn');
   if (step === 2) {
     if (banner) banner.style.display = isLicensed ? 'none' : 'flex';
     if (signBtn) signBtn.style.display = isLicensed ? '' : 'none';
     if (unlicCta) unlicCta.style.display = isLicensed ? 'none' : 'block';
+    if (floatBtn) floatBtn.style.display = isLicensed ? 'block' : 'none';
+    // Populate cover page
+    var cn = document.getElementById('cover-name');
+    var cl = document.getElementById('cover-license');
+    var ce = document.getElementById('cover-email');
+    var cp = document.getElementById('cover-phone');
+    var cd = document.getElementById('cover-date');
+    if (cn) cn.textContent = document.getElementById('associate-name').value.trim();
+    if (cl) cl.textContent = document.getElementById('associate-license').value || '';
+    if (ce) ce.textContent = document.getElementById('associate-email').value.trim();
+    if (cp) cp.textContent = document.getElementById('associate-phone').value.trim();
+    var dateVal = document.getElementById('associate-date').value;
+    if (cd && dateVal) {
+      var dd = new Date(dateVal + 'T12:00:00');
+      cd.textContent = dd.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    }
+  } else {
+    if (floatBtn) floatBtn.style.display = 'none';
   }
   if (step === 3) {
     if (licSig) licSig.style.display = isLicensed ? '' : 'none';
