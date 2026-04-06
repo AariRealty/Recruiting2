@@ -1139,27 +1139,48 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   (function() {
     var urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('ica_signed') === 'true') {
-      // Auto-check the ICA checkbox and enable payment button
-      var cb = document.getElementById('ica-signed-checkbox');
-      if (cb) { cb.checked = true; toggleICAButton(); }
-      // Show ICA step and auto-proceed to payment
-      var icaSection = document.getElementById('ica-step');
-      if (icaSection) icaSection.classList.remove('apply-step-hidden');
-      // Restore form data from sessionStorage
-      var icaData = sessionStorage.getItem('ica_data');
-      if (icaData) {
+      // 1. Restore selected plan from sessionStorage
+      var savedPlan = sessionStorage.getItem('selected_plan');
+      if (savedPlan) {
+        document.querySelectorAll('.plan-card').forEach(function(c) {
+          if (c.getAttribute('data-plan') === savedPlan) {
+            selectPlan(c);
+          }
+        });
+      }
+      // 2. Restore selected tools from sessionStorage
+      var savedTools = sessionStorage.getItem('selected_tools');
+      if (savedTools) {
         try {
-          var data = JSON.parse(icaData);
-          var form = document.getElementById('apply-form');
-          if (form && data.first_name) form.querySelector('[name="first_name"]').value = data.first_name;
-          if (form && data.last_name) form.querySelector('[name="last_name"]').value = data.last_name;
-          if (form && data.email) form.querySelector('[name="email"]').value = data.email;
-          if (form && data.license) form.querySelector('[name="license"]').value = data.license;
+          var toolIds = JSON.parse(savedTools);
+          toolIds.forEach(function(tid) {
+            document.querySelectorAll('.tools-option').forEach(function(el) {
+              if (el.getAttribute('data-tool') === tid) el.classList.add('selected');
+            });
+          });
         } catch(e) {}
       }
-      // Go straight to payment
+      // 3. Auto-check the ICA checkbox and enable payment button
+      var cb = document.getElementById('ica-signed-checkbox');
+      if (cb) { cb.checked = true; toggleICAButton(); }
+      // 4. Show ICA step
+      var icaSection = document.getElementById('ica-step');
+      if (icaSection) icaSection.classList.remove('apply-step-hidden');
+      // 5. Restore form data from URL params + sessionStorage
+      var form = document.getElementById('apply-form');
+      var fn = urlParams.get('first_name') || '';
+      var ln = urlParams.get('last_name') || '';
+      var em = urlParams.get('email') || '';
+      var lic = urlParams.get('license') || '';
+      if (form) {
+        if (fn) { var fnEl = form.querySelector('[name="first_name"]'); if (fnEl) fnEl.value = fn; }
+        if (ln) { var lnEl = form.querySelector('[name="last_name"]'); if (lnEl) lnEl.value = ln; }
+        if (em) { var emEl = form.querySelector('[name="email"]'); if (emEl) emEl.value = em; }
+        if (lic) { var licEl = form.querySelector('[name="license"]'); if (licEl) licEl.value = lic; }
+      }
+      // 6. Go straight to payment
       proceedToApply();
-      // Clean up URL
+      // 7. Clean up URL
       window.history.replaceState({}, '', window.location.pathname);
     }
   })();
@@ -1433,6 +1454,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var license = form ? form.querySelector('[name="license"]').value.trim() : '';
     var planCard = document.querySelector('.plan-card.selected');
     var planName = planCard ? planCard.getAttribute('data-plan') : '';
+    // Save selected plan + tools to sessionStorage so we can restore after ICA
+    sessionStorage.setItem('selected_plan', planName);
+    var selectedToolEls = document.querySelectorAll('.tools-option.selected');
+    var toolIds = [];
+    selectedToolEls.forEach(function(el) { toolIds.push(el.getAttribute('data-tool') || ''); });
+    sessionStorage.setItem('selected_tools', JSON.stringify(toolIds));
     var params = new URLSearchParams();
     if (firstName) params.set('first_name', firstName);
     if (lastName) params.set('last_name', lastName);
