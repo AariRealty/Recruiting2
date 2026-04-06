@@ -10,9 +10,9 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: #f5f5f5;
+      background: #0a0a0a;
       font-family: 'Lato', sans-serif;
-      color: #0a0a0a;
+      color: #ffffff;
     }
 
     .ica-header {
@@ -27,11 +27,11 @@
     }
 
     .ica-section {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       padding: 32px;
       margin-bottom: 24px;
-      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
     }
 
     .ica-section-title {
@@ -40,7 +40,7 @@
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: rgba(10, 10, 10, 0.35);
+      color: rgba(255, 255, 255, 0.4);
       margin-bottom: 24px;
     }
 
@@ -61,7 +61,7 @@
     .ica-text {
       font-size: 13px;
       line-height: 1.8;
-      color: rgba(10, 10, 10, 0.75);
+      color: rgba(255, 255, 255, 0.7);
       margin-bottom: 12px;
     }
 
@@ -85,7 +85,8 @@
 
     .ica-table td {
       padding: 10px 12px;
-      border-bottom: 1px solid rgba(10, 10, 10, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .ica-initials-row {
@@ -94,14 +95,14 @@
       gap: 10px;
       margin: 20px 0;
       padding: 16px;
-      background: rgba(10, 10, 10, 0.03);
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 6px;
     }
 
     .ica-initials-row input[type="checkbox"] {
       width: 18px;
       height: 18px;
-      accent-color: #0a0a0a;
+      accent-color: #ffffff;
     }
 
     .ica-initials-row label {
@@ -111,7 +112,7 @@
     }
 
     .ica-signature-box {
-      border: 2px solid #0a0a0a;
+      border: 2px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
       padding: 24px;
       margin: 16px 0;
@@ -120,16 +121,18 @@
     .ica-sig-input {
       width: 100%;
       border: none;
-      border-bottom: 2px solid rgba(10, 10, 10, 0.15);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
       padding: 12px 0;
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px;
       font-style: italic;
       outline: none;
+      background: transparent;
+      color: #ffffff;
     }
 
     .ica-sig-input:focus {
-      border-bottom-color: #0a0a0a;
+      border-bottom-color: #ffffff;
     }
 
     .ica-field {
@@ -145,7 +148,7 @@
       font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(10, 10, 10, 0.4);
+      color: rgba(255, 255, 255, 0.45);
     }
 
     .ica-field input,
@@ -153,32 +156,42 @@
       font-family: 'Lato', sans-serif;
       font-size: 14px;
       padding: 10px 12px;
-      border: 1px solid rgba(10, 10, 10, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 6px;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
       -webkit-appearance: none;
       appearance: none;
     }
 
+    .ica-field input::placeholder {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
     .ica-field select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230a0a0a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
       padding-right: 36px;
       cursor: pointer;
     }
 
+    .ica-field select option {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+
     .ica-field input[readonly] {
-      background: rgba(10, 10, 10, 0.03);
-      color: rgba(10, 10, 10, 0.6);
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.5);
     }
 
     .ica-submit-btn {
       display: block;
       width: 100%;
       padding: 18px;
-      background: #0a0a0a;
-      color: #fff;
+      background: #ffffff;
+      color: #0a0a0a;
       border: none;
       border-radius: 8px;
       font-family: 'Montserrat', sans-serif;
@@ -198,7 +211,7 @@
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px;
       font-style: italic;
-      color: #0a0a0a;
+      color: #ffffff;
     }
 
     .ica-footer {
@@ -206,14 +219,14 @@
       padding: 40px 24px;
       font-family: 'Lato', sans-serif;
       font-size: 11px;
-      color: rgba(10, 10, 10, 0.35);
+      color: rgba(255, 255, 255, 0.35);
     }
 
     .ica-print-link {
       position: fixed;
       top: 16px;
       right: 16px;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.1);
       padding: 8px 16px;
       border-radius: 6px;
       font-family: 'Montserrat', sans-serif;
@@ -222,8 +235,8 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       text-decoration: none;
-      color: #0a0a0a;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       z-index: 100;
     }
 
@@ -236,8 +249,8 @@
     .ica-doc-list li {
       padding: 6px 0;
       font-size: 13px;
-      color: rgba(10, 10, 10, 0.7);
-      border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+      color: rgba(255, 255, 255, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .ica-doc-list li::before {
@@ -253,16 +266,16 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       padding: 10px 20px;
-      border: 1px solid rgba(10,10,10,0.15);
+      border: 1px solid rgba(255,255,255,0.2);
       border-radius: 4px;
       background: transparent;
-      color: #0a0a0a;
+      color: #ffffff;
       cursor: pointer;
       transition: all 0.2s;
     }
-    .ica-nav-btn:hover { background: #0a0a0a; color: #fff; }
-    .ica-nav-btn.primary { background: #0a0a0a; color: #fff; border-color: #0a0a0a; }
-    .ica-nav-btn.primary:hover { background: #222; }
+    .ica-nav-btn:hover { background: #ffffff; color: #0a0a0a; }
+    .ica-nav-btn.primary { background: #ffffff; color: #0a0a0a; border-color: #ffffff; }
+    .ica-nav-btn.primary:hover { background: #e0e0e0; }
     .ica-nav-btn:disabled { opacity: 0.3; pointer-events: none; }
     .ica-nav-row { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
 
@@ -315,18 +328,18 @@
       content: '';
       flex: 1;
       height: 2px;
-      background: rgba(10,10,10,0.12);
+      background: rgba(255,255,255,0.15);
       margin: 0 8px;
     }
     .ica-step-item.active:not(:last-child)::after {
-      background: #0a0a0a;
+      background: #ffffff;
     }
     .ica-step-num {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: rgba(10,10,10,0.08);
-      color: rgba(10,10,10,0.35);
+      background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.35);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -337,8 +350,8 @@
       transition: all 0.3s;
     }
     .ica-step-item.active .ica-step-num {
-      background: #0a0a0a;
-      color: #fff;
+      background: #ffffff;
+      color: #0a0a0a;
     }
     .ica-step-item.completed .ica-step-num {
       background: #27ae60;
@@ -350,11 +363,11 @@
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: rgba(10,10,10,0.35);
+      color: rgba(255,255,255,0.35);
       white-space: nowrap;
     }
     .ica-step-item.active .ica-step-label {
-      color: #0a0a0a;
+      color: #ffffff;
     }
     .ica-step-item.completed .ica-step-label {
       color: #27ae60;
@@ -370,7 +383,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(10,10,10,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
       gap: 16px;
     }
     .ica-ack-row:last-child { border-bottom: none; }
@@ -378,21 +391,21 @@
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      color: #0a0a0a;
+      color: #ffffff;
       min-width: 32px;
     }
     .ica-ack-label {
       flex: 1;
       font-family: 'Lato', sans-serif;
       font-size: 13px;
-      color: rgba(10,10,10,0.75);
+      color: rgba(255,255,255,0.7);
       line-height: 1.5;
     }
     .ica-ack-initial {
       font-family: 'Cormorant Garamond', serif;
       font-size: 16px;
       font-style: italic;
-      color: #0a0a0a;
+      color: #ffffff;
       min-width: 70px;
       text-align: right;
     }
@@ -405,19 +418,19 @@
 
     /* COVER PAGE */
     .ica-cover {
-      background: #fff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 8px;
       padding: 48px 40px;
       margin-bottom: 24px;
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      border-top: 3px solid #0a0a0a;
+      border-top: 3px solid #ffffff;
     }
     .ica-cover-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(28px, 4vw, 42px);
       font-weight: 300;
       text-align: center;
-      color: #0a0a0a;
+      color: #ffffff;
       line-height: 1.15;
       margin-bottom: 8px;
     }
@@ -425,7 +438,7 @@
       text-align: center;
       font-family: 'Lato', sans-serif;
       font-size: 12px;
-      color: rgba(10,10,10,0.4);
+      color: rgba(255,255,255,0.4);
       margin-bottom: 32px;
     }
     .ica-cover-grid {
@@ -433,8 +446,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 16px 32px;
       padding: 24px;
-      background: rgba(10,10,10,0.02);
-      border: 1px solid rgba(10,10,10,0.08);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
       border-radius: 6px;
       margin-bottom: 32px;
     }
@@ -445,15 +458,15 @@
       font-weight: 600;
       letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: rgba(10,10,10,0.35);
+      color: rgba(255,255,255,0.4);
       margin-bottom: 4px;
     }
     .ica-cover-field .val {
       font-family: 'Lato', sans-serif;
       font-size: 14px;
-      color: #0a0a0a;
+      color: #ffffff;
       padding-bottom: 6px;
-      border-bottom: 1px solid rgba(10,10,10,0.12);
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       min-height: 24px;
     }
 
@@ -464,8 +477,8 @@
       left: 50%;
       transform: translateX(-50%);
       z-index: 80;
-      background: #0a0a0a;
-      color: #fff;
+      background: #ffffff;
+      color: #0a0a0a;
       font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 600;
@@ -559,7 +572,7 @@
         <input type="tel" id="associate-phone" placeholder="(239) 000-0000">
       </div>
 
-      <p class="ica-text" style="font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:0 0 16px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you via phone, email, or text regarding your application and onboarding.</p>
+      <p class="ica-text" style="font-size:10px;color:rgba(255,255,255,0.35);line-height:1.6;margin:0 0 16px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you via phone, email, or text regarding your application and onboarding.</p>
 
       <div class="ica-nav-row">
         <button type="button" class="ica-nav-btn primary" onclick="goSubstep('1b')">Next &rarr;</button>
@@ -659,7 +672,7 @@
       <div class="ica-field">
         <label for="associate-date">Effective Date</label>
         <input type="date" id="associate-date">
-        <span style="font-size:11px;color:rgba(10,10,10,0.4);margin-top:2px;">Leave as today or pick a future start date</span>
+        <span style="font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px;">Leave as today or pick a future start date</span>
       </div>
 
       <div class="ica-nav-row">
@@ -693,7 +706,7 @@
     <!-- COVER PAGE -->
     <div class="ica-cover">
       <div style="text-align:center;margin-bottom:24px;">
-        <p style="font-family:'Montserrat';font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(10,10,10,0.3);margin-bottom:16px;">Aari Realty LLC &middot; Florida Licensed Brokerage</p>
+        <p style="font-family:'Montserrat';font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:16px;">Aari Realty LLC &middot; Florida Licensed Brokerage</p>
       </div>
       <h1 class="ica-cover-title">Independent Contractor<br>Agreement Package</h1>
       <p class="ica-cover-sub">Aari Realty LLC &middot; State of Florida</p>
@@ -1001,15 +1014,15 @@
       <p class="ica-text">The Associate's selected plan based on their application:</p>
       <div style="display:flex;flex-direction:column;gap:12px;margin:16px 0;padding:16px;background:rgba(10,10,10,0.03);border-radius:6px;">
         <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
-          <input type="radio" name="selected_plan" id="plan-growth" value="Growth (70/30)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <input type="radio" name="selected_plan" id="plan-growth" value="Growth (70/30)" style="width:18px;height:18px;accent-color:#ffffff;">
           <strong>Growth</strong> — 70/30 Split
         </label>
         <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
-          <input type="radio" name="selected_plan" id="plan-pro" value="Pro (90/10)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <input type="radio" name="selected_plan" id="plan-pro" value="Pro (90/10)" style="width:18px;height:18px;accent-color:#ffffff;">
           <strong>Pro</strong> — 90/10 Split
         </label>
         <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
-          <input type="radio" name="selected_plan" id="plan-max" value="Max (100%)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <input type="radio" name="selected_plan" id="plan-max" value="Max (100%)" style="width:18px;height:18px;accent-color:#ffffff;">
           <strong>Max</strong> — 100% Split
         </label>
       </div>
@@ -1523,7 +1536,7 @@
           <div>
             <p class="ica-subheading">AARI REALTY LLC &mdash; QUALIFYING BROKER</p>
             <div class="ica-signature-box">
-              <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(10,10,10,0.4);margin-bottom:8px;">Signature</p>
+              <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Signature</p>
               <p class="ica-broker-sig">Marlenyi Paredes</p>
             </div>
             <div class="ica-field"><label>Printed Name</label><input type="text" value="Marlenyi Paredes" readonly></div>
@@ -1533,7 +1546,7 @@
           <div>
             <p class="ica-subheading">ASSOCIATE</p>
             <div class="ica-signature-box">
-              <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(10,10,10,0.4);margin-bottom:8px;">Signature</p>
+              <p style="font-size:10px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Signature</p>
               <input type="text" class="ica-sig-input" id="associate-signature" placeholder="Type your full legal name" required>
             </div>
             <div class="ica-field"><label>Printed Name</label><input type="text" id="sig-printed-name" readonly></div>
@@ -1543,7 +1556,7 @@
           </div>
         </div>
 
-        <p class="ica-text" style="margin-top:24px;font-size:11px;color:rgba(10,10,10,0.5);">Electronic signatures carry the same legal weight as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
+        <p class="ica-text" style="margin-top:24px;font-size:11px;color:rgba(255,255,255,0.5);">Electronic signatures carry the same legal weight as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
 
         <div class="ica-nav-row" style="margin-top:24px;">
           <button type="button" class="ica-nav-btn" onclick="goToStep(2)">&larr; Back</button>
