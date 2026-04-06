@@ -5,7 +5,7 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
 <meta http-equiv="Pragma" content="no-cache" />
 <meta http-equiv="Expires" content="0" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Join Aari Realty | Fort Myers, FL</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -971,7 +971,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   <div class="prefill-bar" id="prefill-bar">
     <div class="prefill-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4l3 3 5-6" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <p class="prefill-text">Plan pre-selected: <strong id="prefill-plan-label">—</strong><span id="prefill-tools-label"></span></p>
-    <span class="prefill-change" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth'})">Change</span>
+    <span class="prefill-change" onclick="document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'center'})">Change</span>
   </div>
   <form id="apply-form" class="reveal">
     <input type="hidden" name="selected_plan"    id="selected-plan-input" />
@@ -1254,7 +1254,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }
     var toolsStep = document.getElementById('tools-step');
     toolsStep.classList.add('open');
-    setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+    setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'center'}); }, 60);
   }
 
   function toggleAddon(option) {
@@ -1360,7 +1360,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   function openPricingReview() {
     var planCard = document.querySelector('.plan-card.selected');
     if (!planCard) {
-      document.getElementById('plans').scrollIntoView({behavior:'smooth'});
+      document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'center'});
       return;
     }
 
@@ -1368,12 +1368,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
     var review = document.getElementById('pricing-review');
     review.classList.add('open');
-    setTimeout(function() { review.scrollIntoView({behavior:'smooth'}); }, 60);
+    setTimeout(function() { review.scrollIntoView({behavior:'smooth', block:'center'}); }, 60);
   }
 
   function closePricingReview() {
     document.getElementById('pricing-review').classList.remove('open');
-    document.getElementById('tools-step').scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('tools-step').scrollIntoView({behavior:'smooth', block:'center'});
   }
 
   function proceedToApply() {
@@ -1382,7 +1382,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
     // Guard: must have selected a plan
     if (!selectedPlan) {
-      document.getElementById('plans').scrollIntoView({behavior: 'smooth'});
+      document.getElementById('plans').scrollIntoView({behavior: 'smooth', block: 'center'});
       return;
     }
 
@@ -1446,7 +1446,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       cardMounted = true;
     }
     setTimeout(function() {
-      applySection.scrollIntoView({behavior: 'smooth'});
+      applySection.scrollIntoView({behavior: 'smooth', block: 'center'});
     }, 100);
   }
 
@@ -1454,7 +1454,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var icaSection = document.getElementById('ica-step');
     icaSection.classList.remove('apply-step-hidden');
     setTimeout(function() {
-      icaSection.scrollIntoView({behavior: 'smooth'});
+      icaSection.scrollIntoView({behavior: 'smooth', block: 'center'});
     }, 50);
   }
 
@@ -1486,12 +1486,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   function backFromICA() {
     document.getElementById('ica-step').classList.add('apply-step-hidden');
-    document.getElementById('tools-step').scrollIntoView({behavior: 'smooth'});
+    document.getElementById('tools-step').scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 
   function backToICA() {
     document.getElementById('apply').classList.add('apply-step-hidden');
-    document.getElementById('ica-step').scrollIntoView({behavior: 'smooth'});
+    document.getElementById('ica-step').scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 
   function toggleICAButton() {
@@ -1502,7 +1502,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.getElementById('apply').classList.add('apply-step-hidden');
     document.getElementById('ica-step').classList.add('apply-step-hidden');
     document.getElementById('prefill-bar').classList.remove('visible');
-    document.getElementById('plans').scrollIntoView({behavior: 'smooth'});
+    document.getElementById('plans').scrollIntoView({behavior: 'smooth', block: 'center'});
   }
 
   function selectRadio(label, name) {
@@ -1719,7 +1719,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.getElementById("apply").classList.add("apply-step-hidden");
     var conf = document.getElementById("confirmation-section");
     conf.classList.remove("apply-step-hidden");
-    setTimeout(function() { conf.scrollIntoView({behavior: "smooth"}); }, 50);
+    setTimeout(function() { conf.scrollIntoView({behavior: "smooth", block: "center"}); }, 50);
   }
 </script>
 </body>
