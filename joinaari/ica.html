@@ -194,21 +194,6 @@
       color: rgba(10, 10, 10, 0.6);
     }
 
-    /* Guided field highlighting */
-    .ica-field.dimmed { opacity: 0.35; pointer-events: none; transition: opacity 0.3s; }
-    .ica-field.active-field { opacity: 1; pointer-events: auto; transition: opacity 0.3s; }
-    .ica-field.active-field input,
-    .ica-field.active-field select {
-      border-color: #0a0a0a;
-      box-shadow: 0 0 0 3px rgba(10,10,10,0.08);
-    }
-    .ica-field.completed-field { opacity: 1; pointer-events: auto; }
-    .ica-field.completed-field label::after {
-      content: ' ✓';
-      color: #27ae60;
-      font-size: 11px;
-    }
-
     .ica-submit-btn {
       display: block;
       width: 100%;
@@ -765,6 +750,11 @@
     <!-- SUB-STEP 1D: Final confirmation (licensed) -->
     <div class="ica-section ica-substep" id="substep-1d" style="display:none;">
       <div class="ica-section-title">Almost Ready</div>
+
+      <div class="ica-field">
+        <label>Title / Designation</label>
+        <input type="text" id="associate-title-display" readonly>
+      </div>
 
       <div class="ica-field">
         <label for="associate-state">Primary State</label>
@@ -1800,8 +1790,6 @@ function goSubstep(id) {
   }
   window.scrollTo({ top: document.getElementById('step-1').offsetTop - 20, behavior: 'smooth' });
   setTimeout(function() { pulseNextButtons(target); }, 400);
-  // Activate guided field flow for this substep
-  setTimeout(function() { guideFields(target); }, 200);
 }
 
 var isLicensed = true;
@@ -1959,73 +1947,6 @@ function filterAssociations() {
 }
 // Populate all associations on load
 filterAssociations();
-
-// ========== GUIDED FIELD FLOW ==========
-function guideFields(container) {
-  if (!container) return;
-  var fields = container.querySelectorAll('.ica-field');
-  if (!fields.length) return;
-
-  function getInput(field) {
-    return field.querySelector('input:not([type="hidden"]):not([type="file"])') || field.querySelector('select');
-  }
-
-  function isFilled(field) {
-    var inp = getInput(field);
-    if (!inp) return true;
-    if (inp.type === 'file') return true;
-    if (inp.tagName === 'SELECT') return inp.value && !inp.options[inp.selectedIndex].disabled;
-    return inp.value.trim() !== '';
-  }
-
-  // Special: skip upload area (not an input/select)
-  function isUploadField(field) {
-    return !!field.querySelector('#license-upload-area');
-  }
-
-  function updateHighlights() {
-    var foundActive = false;
-    for (var i = 0; i < fields.length; i++) {
-      var f = fields[i];
-      f.classList.remove('dimmed', 'active-field', 'completed-field');
-
-      // Upload fields — always enabled, don't dim
-      if (isUploadField(f)) {
-        f.classList.add('completed-field');
-        continue;
-      }
-
-      if (isFilled(f)) {
-        f.classList.add('completed-field');
-      } else if (!foundActive) {
-        foundActive = true;
-        f.classList.add('active-field');
-        var inp = getInput(f);
-        if (inp) setTimeout(function(el) { el.focus(); el.scrollIntoView({behavior:'smooth', block:'center'}); }, 150, inp);
-      } else {
-        f.classList.add('dimmed');
-      }
-    }
-    // If all filled, remove all classes (everything enabled)
-    if (!foundActive) {
-      for (var j = 0; j < fields.length; j++) {
-        fields[j].classList.remove('dimmed', 'active-field', 'completed-field');
-      }
-    }
-  }
-
-  // Listen for input/change on all fields
-  for (var i = 0; i < fields.length; i++) {
-    var inp = getInput(fields[i]);
-    if (inp) {
-      inp.addEventListener('input', updateHighlights);
-      inp.addEventListener('change', updateHighlights);
-    }
-  }
-
-  // Initial highlight
-  setTimeout(updateHighlights, 100);
-}
 
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
@@ -2257,8 +2178,6 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
           }
         }
       }
-      // Refresh guided fields after auto-fill
-      setTimeout(function() { guideFields(document.getElementById('substep-1c')); }, 300);
     } else {
       statusEl.textContent = origText + ' — could not auto-read, please fill in manually';
       statusEl.style.color = '#e67e22';
@@ -2393,6 +2312,10 @@ function validateLicenseFields() {
   assocSel.style.borderColor = '';
 
   syncLicensedFields();
+  // Show title on the confirmation step
+  var titleDisplay = document.getElementById('associate-title-display');
+  var titleSelect = document.getElementById('associate-title');
+  if (titleDisplay && titleSelect) titleDisplay.value = titleSelect.value || '';
   goSubstep('1d');
 }
 
@@ -2679,9 +2602,6 @@ function initialAllPages() {
         if (btn) { btn.disabled = false; btn.textContent = 'Continue to Payment \u2192'; }
       });
   };
-
-  // Start guided flow on initial substep
-  guideFields(document.getElementById('substep-1a'));
 })();
 </script>
 
