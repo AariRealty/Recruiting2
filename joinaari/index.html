@@ -544,7 +544,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <p style="font-size:11px;font-weight:400;letter-spacing:0.3px;color:rgba(255,255,255,0.4);margin-bottom:28px;line-height:1.7">Built for agents ready to stop playing small with their business.</p>
     <p class="hero-sub">Built for agents who want more control, more clarity, and a structure that actually supports how they grow.</p><p class="hero-sub" style="margin-top:12px">If your current brokerage still dictates how you operate, splits your income, and limits your upside — it’s time to move differently.</p>
     <div class="hero-actions">
-      <a href="#plans" class="btn-primary">Choose Your Plan <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="#plans" class="btn-primary" id="hero-cta-btn">Choose Your Plan <svg width="14" height="10" viewBox="0 0 14 10" fill="none"><path d="M1 5h12M8 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <p class="hero-new-agent">New or experienced — there’s a structure here that fits how you want to grow.</p>
     </div>
   </div>
@@ -834,7 +834,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
             <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Built-in dialer, texting, and mobile app</li>
           </ul>
           <p class="tools-price" style="margin:8px 0 0;font-size:32px">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
-          <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+          <button class="tools-select-btn" id="crm-add-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
         </div>
       </div>
 
@@ -1225,6 +1225,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     el.classList.add('cta-pulse');
   }
 
+  // Pulse "Choose Your Plan" hero button on page load
+  setTimeout(function() { pulseBtn(document.getElementById('hero-cta-btn')); }, 800);
+
   // Pulse "My Pick" buttons when plans section scrolls into view
   var plansPulsed = false;
   var plansObs = new IntersectionObserver(function(entries) {
@@ -1396,7 +1399,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var toolsStep = document.getElementById('tools-step');
     toolsStep.classList.add('open');
     setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
-    setTimeout(function() { pulseBtn(document.getElementById('addons-summary-btn')); }, 600);
+    setTimeout(function() {
+      pulseBtn(document.getElementById('crm-add-btn'));
+      pulseBtn(document.getElementById('addons-summary-btn'));
+    }, 600);
   }
 
   function toggleAddon(option) {
