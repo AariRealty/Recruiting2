@@ -853,7 +853,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           </ul>
           <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
           <p id="bb-enrollment-note" style="display:none;margin:4px 0 0;font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.4">Enrollment required after 6 months to continue using this add-on.</p>
-          <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+          <button class="tools-select-btn" id="bb-add-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
         </div>
       </div>
 
@@ -1401,6 +1401,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
     setTimeout(function() {
       pulseBtn(document.getElementById('crm-add-btn'));
+      pulseBtn(document.getElementById('bb-add-btn'));
       pulseBtn(document.getElementById('addons-summary-btn'));
     }, 600);
   }
