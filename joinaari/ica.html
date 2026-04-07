@@ -1776,7 +1776,9 @@ function handleLicenseUpload(input) {
   var sizeKB = (file.size / 1024).toFixed(0);
   sizeEl.textContent = file.size > 1024 * 1024 ? sizeMB + ' MB' : sizeKB + ' KB';
 
-  if (file.type.indexOf('image') !== -1) {
+  var isImage = file.type.indexOf('image') !== -1;
+
+  if (isImage) {
     iconEl.textContent = '🖼️';
     var reader = new FileReader();
     reader.onload = function(e) {
@@ -1792,6 +1794,137 @@ function handleLicenseUpload(input) {
   preview.style.display = 'block';
   document.getElementById('license-upload-area').style.borderColor = 'rgba(10,10,10,0.08)';
   document.getElementById('license-upload-area').style.background = 'rgba(10,10,10,0.01)';
+
+  // Send to OCR API to extract name and license number
+  parseLicenseFile(file);
+}
+
+function parseLicenseFile(file) {
+  var statusEl = document.getElementById('license-file-size');
+  var origText = statusEl.textContent;
+  statusEl.textContent = 'Reading license... please wait';
+  statusEl.style.color = '#2980b9';
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var base64 = e.target.result.split(',')[1];
+    var mediaType = file.type || 'image/jpeg';
+
+    // For PDFs, we need to render to image first via canvas
+    if (file.type === 'application/pdf') {
+      renderPdfToImage(base64, function(imgBase64) {
+        if (imgBase64) {
+          sendToParseAPI(imgBase64, 'image/png', statusEl, origText);
+        } else {
+          statusEl.textContent = origText;
+          statusEl.style.color = 'rgba(10,10,10,0.4)';
+        }
+      });
+    } else {
+      sendToParseAPI(base64, mediaType, statusEl, origText);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function renderPdfToImage(base64Data, callback) {
+  // Load pdf.js from CDN if not already loaded
+  if (typeof pdfjsLib === 'undefined') {
+    var script = document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+    script.onload = function() {
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+      doRenderPdf(base64Data, callback);
+    };
+    script.onerror = function() { callback(null); };
+    document.head.appendChild(script);
+  } else {
+    doRenderPdf(base64Data, callback);
+  }
+}
+
+function doRenderPdf(base64Data, callback) {
+  try {
+    var binaryStr = atob(base64Data);
+    var bytes = new Uint8Array(binaryStr.length);
+    for (var i = 0; i < binaryStr.length; i++) bytes[i] = binaryStr.charCodeAt(i);
+
+    pdfjsLib.getDocument({ data: bytes }).promise.then(function(pdf) {
+      pdf.getPage(1).then(function(page) {
+        var scale = 2;
+        var viewport = page.getViewport({ scale: scale });
+        var canvas = document.createElement('canvas');
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+        var ctx = canvas.getContext('2d');
+        page.render({ canvasContext: ctx, viewport: viewport }).promise.then(function() {
+          var imgBase64 = canvas.toDataURL('image/png').split(',')[1];
+          callback(imgBase64);
+        });
+      });
+    }).catch(function() { callback(null); });
+  } catch(e) { callback(null); }
+}
+
+function sendToParseAPI(base64, mediaType, statusEl, origText) {
+  fetch('/api/parse-license', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ image: base64, media_type: mediaType })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    statusEl.style.color = 'rgba(10,10,10,0.4)';
+
+    if (data.full_name || data.license_number) {
+      statusEl.textContent = 'License verified';
+      statusEl.style.color = '#27ae60';
+
+      // Auto-fill name on license
+      if (data.full_name) {
+        var nameOnCard = document.getElementById('license-name-on-card');
+        if (nameOnCard) {
+          nameOnCard.value = data.full_name;
+          nameOnCard.style.borderColor = '';
+        }
+        // Check name match immediately
+        var applicantName = (document.getElementById('associate-name').value || '').trim().toLowerCase();
+        var licenseName = data.full_name.toLowerCase();
+        var nameWarning = document.getElementById('license-name-warning');
+        if (applicantName && licenseName && applicantName !== licenseName) {
+          nameOnCard.style.borderColor = '#e67e22';
+          nameWarning.innerHTML = '⚠ The name on your license (<strong>' + data.full_name + '</strong>) does not match the name you entered earlier (<strong>' + document.getElementById('associate-name').value.trim() + '</strong>). Please ensure your legal name is consistent across all fields.';
+          nameWarning.style.display = 'block';
+        } else if (applicantName && licenseName) {
+          nameWarning.style.display = 'none';
+          nameOnCard.style.borderColor = '#27ae60';
+        }
+      }
+
+      // Auto-fill license number
+      if (data.license_number) {
+        var licInput = document.getElementById('associate-license-input');
+        if (licInput) {
+          licInput.value = data.license_number.toUpperCase();
+          licInput.style.borderColor = '#27ae60';
+          // Auto-select title based on SL or BK
+          var titleSelect = document.getElementById('associate-title');
+          if (titleSelect && data.license_number.toUpperCase().indexOf('SL') === 0) {
+            titleSelect.value = 'Sales Associate';
+          } else if (titleSelect && data.license_number.toUpperCase().indexOf('BK') === 0) {
+            titleSelect.value = 'Broker Associate';
+          }
+        }
+      }
+    } else {
+      statusEl.textContent = origText + ' — could not auto-read, please fill in manually';
+      statusEl.style.color = '#e67e22';
+    }
+  })
+  .catch(function() {
+    statusEl.textContent = origText;
+    statusEl.style.color = 'rgba(10,10,10,0.4)';
+  });
 }
 
 function removeLicenseUpload() {
