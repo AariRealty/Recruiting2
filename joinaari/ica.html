@@ -617,6 +617,35 @@
       <div class="ica-section-title">License &amp; Experience Details</div>
 
       <div class="ica-field">
+        <label>Upload Your Florida Real Estate License <span style="font-weight:400;color:rgba(10,10,10,0.4)">(image or PDF)</span></label>
+        <div id="license-upload-area" style="border:2px dashed rgba(10,10,10,0.15);border-radius:10px;padding:28px 20px;text-align:center;cursor:pointer;transition:all 0.2s;background:rgba(10,10,10,0.02)" onclick="document.getElementById('license-file-input').click()">
+          <input type="file" id="license-file-input" accept="image/*,.pdf" style="display:none" onchange="handleLicenseUpload(this)">
+          <p style="margin:0 0 6px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:rgba(10,10,10,0.5)">Tap to upload or take a photo</p>
+          <p style="margin:0;font-size:10px;color:rgba(10,10,10,0.3)">JPG, PNG, or PDF accepted</p>
+        </div>
+        <div id="license-upload-preview" style="display:none;margin-top:12px;padding:14px 16px;background:rgba(10,10,10,0.03);border-radius:8px;border:1px solid rgba(10,10,10,0.08)">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0">
+              <span style="font-size:20px" id="license-file-icon">📄</span>
+              <div style="min-width:0">
+                <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:#0a0a0a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis" id="license-file-name"></p>
+                <p style="margin:2px 0 0;font-size:10px;color:rgba(10,10,10,0.4)" id="license-file-size"></p>
+              </div>
+            </div>
+            <button type="button" onclick="removeLicenseUpload()" style="background:none;border:none;font-size:16px;color:rgba(10,10,10,0.3);cursor:pointer;padding:4px 8px">&times;</button>
+          </div>
+          <img id="license-img-preview" style="display:none;margin-top:10px;max-width:100%;border-radius:6px;border:1px solid rgba(10,10,10,0.08)">
+        </div>
+        <p id="license-upload-error" style="display:none;font-size:11px;color:#c0392b;margin:4px 0 0;font-weight:500"></p>
+      </div>
+
+      <div class="ica-field">
+        <label for="license-name-on-card">Full Name as It Appears on License</label>
+        <input type="text" id="license-name-on-card" placeholder="Exactly as shown on your license">
+        <p id="license-name-warning" style="display:none;font-size:11px;color:#e67e22;margin:6px 0 0;font-weight:500;line-height:1.4"></p>
+      </div>
+
+      <div class="ica-field">
         <label for="associate-license-input">Florida License Number</label>
         <input type="text" id="associate-license-input" placeholder="SL3XXXXXX or BK3XXXXXX" style="text-transform:uppercase">
         <p id="license-hint" style="font-size:10px;color:rgba(10,10,10,0.4);margin:4px 0 0;line-height:1.4">Must start with <strong>SL</strong> (Sales Associate) or <strong>BK</strong> (Broker Associate) followed by your license number.</p>
@@ -1691,6 +1720,10 @@ function handleLicenseAnswer() {
     document.getElementById('associate-years').value = '';
     document.getElementById('associate-closings').value = '';
     document.getElementById('associate-mls').value = '';
+    // Pre-fill name on license from applicant name
+    var appName = document.getElementById('associate-name').value.trim();
+    var nameOnCard = document.getElementById('license-name-on-card');
+    if (nameOnCard && appName && !nameOnCard.value) nameOnCard.value = appName;
     goSubstep('1c');
   } else {
     isLicensed = false;
@@ -1702,10 +1735,113 @@ function handleLicenseAnswer() {
   }
 }
 
+// ========== LICENSE UPLOAD ==========
+var licenseFileData = null;
+
+function handleLicenseUpload(input) {
+  var file = input.files[0];
+  var uploadError = document.getElementById('license-upload-error');
+  uploadError.style.display = 'none';
+
+  if (!file) return;
+
+  // Validate file type
+  var validTypes = ['image/jpeg', 'image/png', 'image/heic', 'image/heif', 'image/webp', 'application/pdf'];
+  if (validTypes.indexOf(file.type) === -1 && !file.name.match(/\.(jpg|jpeg|png|heic|heif|webp|pdf)$/i)) {
+    uploadError.textContent = 'Please upload an image (JPG, PNG) or PDF file.';
+    uploadError.style.display = 'block';
+    input.value = '';
+    return;
+  }
+
+  // Validate file size (max 10MB)
+  if (file.size > 10 * 1024 * 1024) {
+    uploadError.textContent = 'File is too large. Maximum size is 10MB.';
+    uploadError.style.display = 'block';
+    input.value = '';
+    return;
+  }
+
+  licenseFileData = file;
+
+  // Show preview
+  var preview = document.getElementById('license-upload-preview');
+  var nameEl = document.getElementById('license-file-name');
+  var sizeEl = document.getElementById('license-file-size');
+  var iconEl = document.getElementById('license-file-icon');
+  var imgPreview = document.getElementById('license-img-preview');
+
+  nameEl.textContent = file.name;
+  var sizeMB = (file.size / 1024 / 1024).toFixed(1);
+  var sizeKB = (file.size / 1024).toFixed(0);
+  sizeEl.textContent = file.size > 1024 * 1024 ? sizeMB + ' MB' : sizeKB + ' KB';
+
+  if (file.type.indexOf('image') !== -1) {
+    iconEl.textContent = '🖼️';
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      imgPreview.src = e.target.result;
+      imgPreview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+  } else {
+    iconEl.textContent = '📄';
+    imgPreview.style.display = 'none';
+  }
+
+  preview.style.display = 'block';
+  document.getElementById('license-upload-area').style.borderColor = 'rgba(10,10,10,0.08)';
+  document.getElementById('license-upload-area').style.background = 'rgba(10,10,10,0.01)';
+}
+
+function removeLicenseUpload() {
+  licenseFileData = null;
+  document.getElementById('license-file-input').value = '';
+  document.getElementById('license-upload-preview').style.display = 'none';
+  document.getElementById('license-img-preview').style.display = 'none';
+  document.getElementById('license-upload-area').style.borderColor = 'rgba(10,10,10,0.15)';
+  document.getElementById('license-upload-area').style.background = 'rgba(10,10,10,0.02)';
+}
+
 function validateLicenseFields() {
+  var uploadError = document.getElementById('license-upload-error');
   var lic = document.getElementById('associate-license-input');
   var licError = document.getElementById('license-error');
   var title = document.getElementById('associate-title');
+
+  // Require license upload
+  if (!licenseFileData) {
+    uploadError.textContent = 'Please upload a copy of your Florida real estate license.';
+    uploadError.style.display = 'block';
+    document.getElementById('license-upload-area').style.borderColor = '#c0392b';
+    document.getElementById('license-upload-area').scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+  uploadError.style.display = 'none';
+  document.getElementById('license-upload-area').style.borderColor = 'rgba(10,10,10,0.08)';
+
+  // Validate name on license
+  var nameOnCard = document.getElementById('license-name-on-card');
+  var nameWarning = document.getElementById('license-name-warning');
+  var licenseNameVal = nameOnCard ? nameOnCard.value.trim() : '';
+  if (!licenseNameVal) {
+    nameOnCard.style.borderColor = '#c0392b';
+    nameWarning.textContent = 'Please enter the full name as it appears on your license.';
+    nameWarning.style.display = 'block';
+    nameOnCard.focus();
+    return;
+  }
+  var applicantName = (document.getElementById('associate-name').value || '').trim().toLowerCase();
+  var licenseName = licenseNameVal.toLowerCase();
+  if (applicantName && licenseName && applicantName !== licenseName) {
+    nameOnCard.style.borderColor = '#e67e22';
+    nameWarning.innerHTML = '⚠ The name on your license (<strong>' + licenseNameVal + '</strong>) does not match the name you entered earlier (<strong>' + document.getElementById('associate-name').value.trim() + '</strong>). Please make sure your legal name is consistent. Go back to correct it or update the name above.';
+    nameWarning.style.display = 'block';
+    nameOnCard.focus();
+    return;
+  }
+  nameOnCard.style.borderColor = '';
+  nameWarning.style.display = 'none';
 
   // Force uppercase
   if (lic) lic.value = lic.value.toUpperCase();
