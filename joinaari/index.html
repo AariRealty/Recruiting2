@@ -999,6 +999,30 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   <div style="max-width:540px;margin:0 auto;padding:0 24px">
 
+    <!-- Selection Summary -->
+    <div id="ica-selection-summary" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:24px 28px;margin-bottom:24px">
+      <p style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin:0 0 16px">Your Selection</p>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.5)">Plan</span>
+        <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#fff" id="ica-sum-plan">—</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.5)">Add-Ons</span>
+        <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#fff" id="ica-sum-addons">None</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.08)">
+        <span style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.5)">Monthly</span>
+        <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#fff" id="ica-sum-monthly">$0/mo</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding:8px 0">
+        <span style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.5)">Due Today (est.)</span>
+        <span style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#fff" id="ica-sum-due">$0.00</span>
+      </div>
+      <div style="text-align:center;margin-top:16px">
+        <button type="button" onclick="backFromICA()" style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.5);background:transparent;border:1px solid rgba(255,255,255,0.2);border-radius:4px;padding:10px 24px;cursor:pointer;transition:all 0.2s">&larr; Back to Adjust Selections</button>
+      </div>
+    </div>
+
     <a href="#" id="open-ica-btn" onclick="openICA(event)" class="pr-cta" style="display:block;text-decoration:none;text-align:center;margin-bottom:16px;width:100%;font-size:12px;padding:18px 24px;">Review &amp; Sign Agreement &rarr;</a>
 
     <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);margin:0 0 24px;line-height:1.6;text-align:center">You&rsquo;ll fill in your details, review the full agreement, then initial and sign electronically.</p>
@@ -1648,6 +1672,31 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   }
 
   function proceedToICA() {
+    // Populate selection summary
+    var planCard = document.querySelector('.plan-card.selected');
+    var planName = planCard ? planCard.getAttribute('data-plan') : '—';
+    var addons = getSelectedAddons();
+    var addonNames = addons.length > 0 ? addons.map(function(a) { return a.name; }).join(', ') : 'None';
+    var planMonthlyEl = planCard ? planCard.querySelector('.pc-monthly') : null;
+    var planMonthly = planMonthlyEl ? parseInt(planMonthlyEl.textContent.replace(/[^0-9]/g, '')) || 0 : 0;
+    var addonMonthly = 0;
+    addons.forEach(function(a) { addonMonthly += a.monthly; });
+    var fullMonthly = planMonthly + addonMonthly;
+    var today = new Date();
+    var daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
+    var daysRemaining = daysInMonth - today.getDate() + 1;
+    var prorated = parseFloat((fullMonthly * daysRemaining / daysInMonth).toFixed(2));
+    var dueToday = (199 + prorated).toFixed(2);
+
+    var sp = document.getElementById('ica-sum-plan');
+    var sa = document.getElementById('ica-sum-addons');
+    var sm = document.getElementById('ica-sum-monthly');
+    var sd = document.getElementById('ica-sum-due');
+    if (sp) sp.textContent = planName;
+    if (sa) sa.textContent = addonNames;
+    if (sm) sm.textContent = '$' + fullMonthly + '/mo';
+    if (sd) sd.textContent = '$' + dueToday;
+
     var icaSection = document.getElementById('ica-step');
     icaSection.classList.remove('apply-step-hidden');
     setTimeout(function() {

@@ -124,12 +124,23 @@ module.exports = async function handler(req, res) {
 </body>
 </html>`;
 
+    // Send to broker
     await resend.emails.send({
       from: 'Aari Realty <noreply@aarirealty.com>',
       to: 'join@aarirealty.com',
       subject: `New Agent Signed — ${name} (${plan || 'N/A'})`,
       html: html
     });
+
+    // Send copy to applicant
+    if (email) {
+      await resend.emails.send({
+        from: 'Aari Realty <noreply@aarirealty.com>',
+        to: email,
+        subject: `Welcome to Aari Realty — Your Onboarding Summary`,
+        html: html
+      });
+    }
 
     return res.status(200).json({ success: true });
   } catch (err) {
