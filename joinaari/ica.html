@@ -1911,16 +1911,21 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ image: base64, media_type: mediaType })
   })
-  .then(function(r) {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
+  .then(function(r) { return r.json(); })
   .then(function(data) {
     statusEl.style.color = 'rgba(10,10,10,0.4)';
 
-    if (data.error === 'ANTHROPIC_API_KEY not configured') {
-      statusEl.textContent = origText + ' — service not configured';
+    // Handle specific errors from the API
+    if (data.error) {
+      if (data.error === 'missing_api_key') {
+        statusEl.textContent = origText + ' — auto-read not configured yet';
+      } else if (data.error === 'api_error') {
+        statusEl.textContent = origText + ' — auto-read unavailable, fill in manually';
+      } else {
+        statusEl.textContent = origText + ' — please fill in manually';
+      }
       statusEl.style.color = '#e67e22';
+      console.log('License parse error:', data.error, data.detail || data.raw || '');
       return;
     }
 

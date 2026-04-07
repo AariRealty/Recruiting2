@@ -5,16 +5,23 @@ module.exports = async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(500).json({ error: "ANTHROPIC_API_KEY not configured" });
+    return res.status(200).json({
+      full_name: null,
+      license_number: null,
+      error: "missing_api_key",
+    });
   }
 
   try {
     const { image, media_type } = req.body;
     if (!image || !media_type) {
-      return res.status(400).json({ error: "Missing image or media_type" });
+      return res.status(200).json({
+        full_name: null,
+        license_number: null,
+        error: "missing_payload",
+      });
     }
 
-    // Use fetch to call the Anthropic API directly (no SDK needed, avoids dependency issues)
     const response = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
@@ -50,24 +57,29 @@ module.exports = async function handler(req, res) {
     if (!response.ok) {
       const errText = await response.text();
       console.error("Anthropic API error:", response.status, errText);
-      return res
-        .status(200)
-        .json({ full_name: null, license_number: null, error: "api_error" });
+      return res.status(200).json({
+        full_name: null,
+        license_number: null,
+        error: "api_error",
+        detail: "Anthropic API returned " + response.status,
+      });
     }
 
     const result = await response.json();
     const responseText =
       result.content && result.content[0] ? result.content[0].text.trim() : "";
 
-    // Parse the JSON from Claude's response
     let parsed;
     try {
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
       parsed = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
     } catch (e) {
-      return res
-        .status(200)
-        .json({ full_name: null, license_number: null, raw: responseText });
+      return res.status(200).json({
+        full_name: null,
+        license_number: null,
+        error: "parse_error",
+        raw: responseText,
+      });
     }
 
     return res.status(200).json({
@@ -76,8 +88,11 @@ module.exports = async function handler(req, res) {
     });
   } catch (err) {
     console.error("License parse error:", err);
-    return res
-      .status(200)
-      .json({ full_name: null, license_number: null, error: "server_error" });
+    return res.status(200).json({
+      full_name: null,
+      license_number: null,
+      error: "server_error",
+      detail: err.message,
+    });
   }
 };
