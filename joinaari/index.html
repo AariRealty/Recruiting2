@@ -59,6 +59,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .stat-label{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)}
 .stat-value{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--white)}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+@keyframes ctaPulse{0%,100%{transform:scale(1);box-shadow:none}50%{transform:scale(1.07);box-shadow:0 0 14px 4px rgba(255,255,255,0.25)}}
+.cta-pulse{animation:ctaPulse 0.6s ease-in-out 3}
 
 /* PAIN SECTION */
 .pain-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -937,7 +939,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     </div>
 
     <!-- CTA outside receipt -->
-    <button class="pr-cta" onclick="proceedToICA()" style="margin-top:24px">Continue &rarr;</button>
+    <button class="pr-cta" id="pr-continue-btn" onclick="proceedToICA()" style="margin-top:24px">Continue &rarr;</button>
 
   </div>
 
@@ -1216,6 +1218,26 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   },{threshold:0.08});
   document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 
+  function pulseBtn(el) {
+    if (!el) return;
+    el.classList.remove('cta-pulse');
+    void el.offsetWidth;
+    el.classList.add('cta-pulse');
+  }
+
+  // Pulse "My Pick" buttons when plans section scrolls into view
+  var plansPulsed = false;
+  var plansObs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting && !plansPulsed) {
+        plansPulsed = true;
+        document.querySelectorAll('.select-bubble').forEach(function(b) { pulseBtn(b); });
+      }
+    });
+  }, {threshold: 0.3});
+  var plansEl = document.getElementById('plans');
+  if (plansEl) plansObs.observe(plansEl);
+
   // Stripe initialization
   var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
   var stripeElements = null;
@@ -1374,6 +1396,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var toolsStep = document.getElementById('tools-step');
     toolsStep.classList.add('open');
     setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+    setTimeout(function() { pulseBtn(document.getElementById('addons-summary-btn')); }, 600);
   }
 
   function toggleAddon(option) {
@@ -1515,6 +1538,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var review = document.getElementById('pricing-review');
     review.classList.add('open');
     setTimeout(function() { review.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+    setTimeout(function() { pulseBtn(document.getElementById('pr-continue-btn')); }, 600);
   }
 
   function closePricingReview() {
@@ -1610,6 +1634,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     setTimeout(function() {
       icaSection.scrollIntoView({behavior: 'smooth', block: 'start'});
     }, 50);
+    setTimeout(function() { pulseBtn(document.getElementById('open-ica-btn')); }, 600);
   }
 
   function openICA(e) {
