@@ -756,7 +756,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           <li>Marketing Essentials</li>
           <li>Accountability club</li>
           <li>One-on-one with broker</li>
-          <li><strong>Brand Builder included for first 6 months</strong></li>
+          <li><strong>Brand Builder complementary for 6 months</strong></li>
         </ul>
         <div class="pc-position-box">
           <p class="pc-position-text">Full support environment to build and grow with broker engagement</p>
@@ -835,7 +835,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
 
       <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
-        <div id="bb-included-banner" style="display:none;position:absolute;top:0;left:0;right:0;background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Included &amp; covered for 6 months</div>
+        <div id="bb-included-banner" style="display:none;position:absolute;top:0;left:0;right:0;background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Complementary for 6 months</div>
         <span id="bb-badge-spacer" style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:3px;align-self:flex-start;visibility:hidden">&nbsp;</span>
         <p class="tools-name" style="margin:0" id="bb-title">Brand Builder</p>
         <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">&nbsp;</p>
@@ -847,6 +847,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Templates + structure so you stay consistent</li>
         </ul>
         <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
+        <p id="bb-enrollment-note" style="display:none;margin:4px 0 0;font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.4">Enrollment required after 6 months to continue using this add-on.</p>
         <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
       </div>
 
@@ -1356,6 +1357,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         if (bbBtn) bbBtn.style.display = 'none';
         if (bbBanner) bbBanner.style.display = 'block';
         bbAddon.style.paddingTop = '52px';
+        var bbNote = document.getElementById('bb-enrollment-note');
+        if (bbNote) bbNote.style.display = 'block';
       } else {
         bbAddon.classList.remove('bb-included');
         bbAddon.style.pointerEvents = '';
@@ -1365,6 +1368,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         if (bbBtn) bbBtn.style.display = '';
         if (bbBanner) bbBanner.style.display = 'none';
         bbAddon.style.paddingTop = '36px';
+        var bbNote = document.getElementById('bb-enrollment-note');
+        if (bbNote) bbNote.style.display = 'none';
       }
     }
     var toolsStep = document.getElementById('tools-step');
@@ -1427,16 +1432,16 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     addons.forEach(function(a){ totalAddonMonthly += a.monthly; });
     var addonsReceipt = document.getElementById('pr-addons-receipt');
 
-    // For Growth plan, show Brand Builder as included at $0 in the add-ons line
+    // For Growth plan, show Brand Builder as complementary for 6 months
     if (isGrowthPlan) {
       addonsReceipt.style.display = '';
       var otherAddons = addons.filter(function(a) { return a.name !== 'Brand Builder'; });
       var otherTotal = 0;
       otherAddons.forEach(function(a) { otherTotal += a.monthly; });
-      var addonItems = ['Brand Builder (included — $0)'];
+      var addonItems = ['Brand Builder (complementary for 6 months)'];
       otherAddons.forEach(function(a) { addonItems.push(a.name + ' ($' + a.monthly + '/mo)'); });
       document.getElementById('pr-addons-price').textContent = otherTotal > 0 ? '$' + otherTotal + '/mo' : '$0/mo';
-      document.getElementById('pr-addons-list').textContent = addonItems.join(' · ');
+      document.getElementById('pr-addons-list').innerHTML = addonItems.join(' &middot; ') + '<br><span style="font-style:italic;color:rgba(10,10,10,0.3)">Enrollment required after 6 months to continue Brand Builder.</span>';
     } else if (totalAddonMonthly > 0) {
       addonsReceipt.style.display = '';
       document.getElementById('pr-addons-price').textContent = '$' + totalAddonMonthly + '/mo';
