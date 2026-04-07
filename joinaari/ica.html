@@ -588,6 +588,21 @@
         <input type="tel" id="associate-phone" placeholder="(239) 000-0000">
       </div>
 
+      <div class="ica-field">
+        <label for="associate-hear-about">How Did You Hear About Us?</label>
+        <select id="associate-hear-about">
+          <option value="" disabled selected>Select one</option>
+          <option value="ChatGPT">ChatGPT</option>
+          <option value="Email">Email</option>
+          <option value="Job Posting">Job Posting</option>
+          <option value="Print Media">Print Media</option>
+          <option value="Referral">Referral</option>
+          <option value="Returning Agent">Returning Agent</option>
+          <option value="Search Engine (Google etc.)">Search Engine (Google etc.)</option>
+          <option value="Social Media">Social Media</option>
+        </select>
+      </div>
+
       <p class="ica-text" style="font-size:10px;color:rgba(10,10,10,0.4);line-height:1.6;margin:0 0 16px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you via phone, email, or text regarding your application and onboarding.</p>
 
       <div class="ica-nav-row">
@@ -613,6 +628,8 @@
       <input type="hidden" id="associate-years" value="">
       <input type="hidden" id="associate-closings" value="">
       <input type="hidden" id="associate-mls" value="">
+      <input type="hidden" id="associate-region-val" value="">
+      <input type="hidden" id="associate-association-val" value="">
 
       <div class="ica-nav-row">
         <button type="button" class="ica-nav-btn" onclick="goSubstep('1a')">&larr; Back</button>
@@ -698,6 +715,29 @@
           <option>Royal Palm MLS</option>
           <option>Miami MLS</option>
           <option>Stellar MLS</option>
+        </select>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-region">Region</label>
+        <select id="associate-region" onchange="filterAssociations()">
+          <option value="" disabled selected>Select one</option>
+          <option value="Southwest Florida">Southwest Florida</option>
+          <option value="Florida Keys">Florida Keys</option>
+          <option value="Northwest Florida">Northwest Florida</option>
+          <option value="Central Florida">Central Florida</option>
+          <option value="Southeast Florida">Southeast Florida</option>
+          <option value="Northeast Florida">Northeast Florida</option>
+          <option value="East Florida">East Florida</option>
+          <option value="West Florida">West Florida</option>
+          <option value="Treasure Coast">Treasure Coast</option>
+        </select>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-association">Realtor Association</label>
+        <select id="associate-association">
+          <option value="" disabled selected>Select region first</option>
         </select>
       </div>
 
@@ -1762,6 +1802,83 @@ function scrollToSign() {
   }
 }
 
+// ========== REGION & ASSOCIATION FILTER ==========
+var associationsByRegion = {
+  'Southwest Florida': [
+    'Royal Palm Coast Realtor Association',
+    'Naples Area Board of Realtors',
+    'Punta Gorda-Port Charlotte-North Port Association of Realtors'
+  ],
+  'Florida Keys': [
+    'Florida Keys Board of Realtors (FKBOR)',
+    'Key West Association of Realtors (KWAR)',
+    'Marathon and Lower Keys Association of Realtors (MLKAR)'
+  ],
+  'Northwest Florida': [
+    'Central Panhandle Association of Realtors (CPAR)',
+    'Emerald Coast Association of Realtors (ECAR)',
+    'Pensacola Association of Realtors',
+    'Tallahassee Board of Realtors (TBOR)'
+  ],
+  'Central Florida': [
+    'Orlando Regional Realtor Association',
+    'Osceola County Association of Realtors (OSCAR)',
+    'Lakeland REALTORS',
+    'Realtor Association of Lake and Sumter Counties (RALSC)',
+    'Ocala Marion County Association of Realtors (OMCAR)',
+    'Gainesville Alachua County Association of Realtors'
+  ],
+  'Southeast Florida': [
+    'Miami Association of Realtors',
+    'Broward, Palm Beaches, and Saint Lucie Realtors (RWORLD)',
+    'Jupiter Tequesta Hobe Sound (JTHS-MIAMI)'
+  ],
+  'Northeast Florida': [
+    'Northeast Florida Association of Realtors',
+    'Flagler County Association of Realtors (FCAR)',
+    'Daytona Beach Area Association of Realtors (DBAAR)'
+  ],
+  'East Florida': [
+    'Space Coast Association of Realtors (SCAR)',
+    'Realtor Association of Indian River County (RAIRC)',
+    'West Volusia Association of Realtors'
+  ],
+  'West Florida': [
+    'Suncoast Tampa Association of Realtors (GTAR)',
+    'Pinellas Realtor Organization',
+    'Realtor Association of Sarasota and Manatee',
+    'Venice Area Board of Realtors',
+    'Heartland Association of Realtors'
+  ],
+  'Treasure Coast': [
+    'Martin County Association of Realtors',
+    'Realtor Association of Indian River County (RAIRC)',
+    'Dixie Gilchrist Levy Association of Realtors'
+  ]
+};
+
+function filterAssociations() {
+  var region = document.getElementById('associate-region').value;
+  var assocSelect = document.getElementById('associate-association');
+  assocSelect.innerHTML = '<option value="" disabled selected>Select one</option>';
+  var list = associationsByRegion[region] || [];
+  for (var i = 0; i < list.length; i++) {
+    var opt = document.createElement('option');
+    opt.value = list[i];
+    opt.textContent = list[i];
+    assocSelect.appendChild(opt);
+  }
+  // Always add the two generic options at the end
+  var noPlan = document.createElement('option');
+  noPlan.value = "Don't Plan on Joining One";
+  noPlan.textContent = "Don't Plan on Joining One";
+  assocSelect.appendChild(noPlan);
+  var noBoard = document.createElement('option');
+  noBoard.value = 'No Board but Plan on Joining';
+  noBoard.textContent = 'No Board but Plan on Joining';
+  assocSelect.appendChild(noBoard);
+}
+
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
 
@@ -2078,6 +2195,25 @@ function validateLicenseFields() {
     return;
   }
   title.style.borderColor = '';
+
+  // Validate region & association
+  var regionSel = document.getElementById('associate-region');
+  if (!regionSel.value) {
+    regionSel.style.borderColor = '#c0392b';
+    regionSel.focus();
+    alert('Please select your region.');
+    return;
+  }
+  regionSel.style.borderColor = '';
+  var assocSel = document.getElementById('associate-association');
+  if (!assocSel.value) {
+    assocSel.style.borderColor = '#c0392b';
+    assocSel.focus();
+    alert('Please select a Realtor Association.');
+    return;
+  }
+  assocSel.style.borderColor = '';
+
   syncLicensedFields();
   goSubstep('1d');
 }
@@ -2092,6 +2228,10 @@ function syncLicensedFields() {
   if (yearsSelect) document.getElementById('associate-years').value = yearsSelect.value;
   if (closingsSelect) document.getElementById('associate-closings').value = closingsSelect.value;
   if (mlsSelect) document.getElementById('associate-mls').value = mlsSelect.value;
+  var regionSel = document.getElementById('associate-region');
+  var assocSel = document.getElementById('associate-association');
+  if (regionSel) document.getElementById('associate-region-val').value = regionSel.value;
+  if (assocSel) document.getElementById('associate-association-val').value = assocSel.value;
 }
 
 // ========== STEP NAVIGATION ==========
@@ -2301,6 +2441,9 @@ function initialAllPages() {
       var formMls = document.getElementById('associate-mls').value || 'N/A';
       var formYears = document.getElementById('associate-years').value || 'N/A';
       var formClosings = document.getElementById('associate-closings').value || 'N/A';
+      var formRegion = document.getElementById('associate-region-val').value || 'N/A';
+      var formAssociation = document.getElementById('associate-association-val').value || 'N/A';
+      var formHearAbout = document.getElementById('associate-hear-about').value || 'N/A';
 
       var data = {
         name: formName,
@@ -2311,6 +2454,9 @@ function initialAllPages() {
         mls: formMls,
         years_licensed: formYears,
         closings_last_12_months: formClosings,
+        region: formRegion,
+        realtor_association: formAssociation,
+        how_did_you_hear: formHearAbout,
         plan: selectedPlan,
         signature: signatureInput ? signatureInput.value.trim() : '',
         date: document.getElementById('associate-date').value,
