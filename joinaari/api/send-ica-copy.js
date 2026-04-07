@@ -8,7 +8,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { name, email, license, phone, plan, signature, date, mls, years_licensed, closings_last_12_months } = req.body;
+    const { name, email, license, phone, plan, signature, date, mls, years_licensed, closings_last_12_months, region, realtor_association } = req.body;
 
     if (!email || !name || !signature) {
       return res.status(400).json({ error: 'email, name, and signature are required' });
@@ -61,6 +61,8 @@ module.exports = async function handler(req, res) {
       <div class="row"><span class="label">MLS</span><span class="value">${mls || 'N/A'}</span></div>
       <div class="row"><span class="label">Years Licensed</span><span class="value">${years_licensed || 'N/A'}</span></div>
       <div class="row"><span class="label">Closings (Last 12 Mo.)</span><span class="value">${closings_last_12_months || 'N/A'}</span></div>
+      ${region && region !== 'N/A' ? `<div class="row"><span class="label">Region</span><span class="value">${region}</span></div>` : ''}
+      ${realtor_association && realtor_association !== 'N/A' ? `<div class="row"><span class="label">Realtor Association</span><span class="value">${realtor_association}</span></div>` : ''}
       <div class="row"><span class="label">Selected Plan</span><span class="value">${plan || 'N/A'}</span></div>
       <div class="row"><span class="label">Effective Date</span><span class="value">${formattedDate}</span></div>
 

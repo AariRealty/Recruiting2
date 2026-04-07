@@ -1284,11 +1284,15 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       }
     });
 
-    // Create and mount the Payment Element
+    // Create and mount the Payment Element (card, Apple Pay, Google Pay)
     paymentElement = stripeElements.create('payment', {
       layout: {
         type: 'tabs',
         defaultCollapsed: false
+      },
+      wallets: {
+        applePay: 'auto',
+        googlePay: 'auto'
       }
     });
     paymentElement.mount('#stripe-payment-element');
@@ -1338,15 +1342,23 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       var fn = urlParams.get('first_name') || '';
       var ln = urlParams.get('last_name') || '';
       var em = urlParams.get('email') || '';
+      var ph = urlParams.get('phone') || '';
       var lic = urlParams.get('license') || '';
       if (form) {
         if (fn) { var fnEl = form.querySelector('[name="first_name"]'); if (fnEl) fnEl.value = fn; }
         if (ln) { var lnEl = form.querySelector('[name="last_name"]'); if (lnEl) lnEl.value = ln; }
         if (em) { var emEl = form.querySelector('[name="email"]'); if (emEl) emEl.value = em; }
+        if (ph) { var phEl = form.querySelector('[name="phone"]'); if (phEl) phEl.value = ph; }
         if (lic) { var licEl = form.querySelector('[name="license"]'); if (licEl) licEl.value = lic; }
       }
-      // 5. Go straight to payment
-      proceedToApply();
+      // 5. Go straight to payment (delay to let plan/tools restore first)
+      setTimeout(function() {
+        proceedToApply();
+        // Scroll directly to payment section after a brief delay
+        setTimeout(function() {
+          document.getElementById('apply').scrollIntoView({behavior: 'smooth', block: 'start'});
+        }, 300);
+      }, 200);
       // 6. Clean up URL
       window.history.replaceState({}, '', window.location.pathname);
     }
@@ -2001,7 +2013,36 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         })
       }).catch(function() { /* silent */ });
 
-      // Step 6: Show confirmation
+      // Step 6: Send broker summary with signed ICA, receipt, and plan details
+      var icaDataRaw = sessionStorage.getItem('ica_data');
+      var icaInfo = {};
+      try { icaInfo = icaDataRaw ? JSON.parse(icaDataRaw) : {}; } catch(e) {}
+      fetch("/api/send-broker-summary", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          phone: form.querySelector('[name="phone"]').value.trim(),
+          license: form.querySelector('[name="license"]').value.trim(),
+          plan: planName,
+          addons: businessTools,
+          amount: amounts.totalDueToday,
+          monthly_amount: amounts.monthlyAmount,
+          payment_id: result.paymentIntent.id,
+          coupon_code: amounts.couponCode || 'None',
+          signature: icaInfo.signature || name,
+          ica_date: icaInfo.date || '',
+          mls: icaInfo.mls || '',
+          years_licensed: icaInfo.years_licensed || '',
+          closings: icaInfo.closings_last_12_months || '',
+          region: icaInfo.region || '',
+          realtor_association: icaInfo.realtor_association || '',
+          how_did_you_hear: icaInfo.how_did_you_hear || ''
+        })
+      }).catch(function() { /* silent */ });
+
+      // Step 7: Show confirmation
       showConfirmation(name, formData.plan, businessTools);
 
     } catch (err) {

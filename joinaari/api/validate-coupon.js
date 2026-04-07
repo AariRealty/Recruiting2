@@ -9,7 +9,12 @@ module.exports = async function handler(req, res) {
     const { code } = req.body;
     if (!code) return res.status(400).json({ error: 'Coupon code is required' });
 
-    // Coupon codes from environment variable
+    // Built-in coupon codes
+    const coupons = {
+      'VIP': { type: 'percent_off', value: 50 }
+    };
+
+    // Additional coupon codes from environment variable
     // Format: CODE1:type:value, CODE2:type:value
     // Types:
     //   waive_all        — waive annual + prorated monthly ($0 due today)
@@ -17,14 +22,7 @@ module.exports = async function handler(req, res) {
     //   waive_monthly    — waive prorated monthly fee only
     //   percent_off:N    — N% off total due today
     //   flat_off:N       — $N off total due today
-    //
-    // Example env: WELCOME:waive_all, NOFEE:waive_annual, SAVE50:percent_off:50, SAVE25:flat_off:25
     const raw = process.env.COUPON_CODES || '';
-    if (!raw.trim()) {
-      return res.status(404).json({ error: 'No coupon codes configured' });
-    }
-
-    const coupons = {};
     raw.split(',').forEach(function(entry) {
       const parts = entry.trim().split(':');
       if (parts.length >= 2) {

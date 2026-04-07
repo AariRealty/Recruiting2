@@ -824,6 +824,8 @@
         <div class="ica-cover-field"><label>Name of Associate</label><div class="val" id="cover-name"></div></div>
         <div class="ica-cover-field"><label>Primary State Licensed</label><div class="val">Florida</div></div>
         <div class="ica-cover-field"><label>Florida License Number</label><div class="val" id="cover-license"></div></div>
+        <div class="ica-cover-field"><label>Email Address</label><div class="val" id="cover-email"></div></div>
+        <div class="ica-cover-field"><label>Phone Number</label><div class="val" id="cover-phone"></div></div>
         <div class="ica-cover-field"><label>Effective Date</label><div class="val" id="cover-date"></div></div>
       </div>
     </div>
@@ -2509,6 +2511,7 @@ function initialAllPages() {
           returnParams.set('first_name', nameParts[0] || '');
           returnParams.set('last_name', nameParts.slice(1).join(' ') || '');
           returnParams.set('email', formEmail);
+          returnParams.set('phone', formPhone);
           returnParams.set('license', formLicense);
           window.location.href = '/index.html?' + returnParams.toString();
         } else {
