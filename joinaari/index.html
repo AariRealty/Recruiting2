@@ -988,27 +988,29 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
 <!-- ICA REVIEW & SIGN STEP -->
 <section class="apply-section apply-step-hidden" id="ica-step" style="background:#0a0a0a">
-  <div class="apply-header reveal">
-    <div>
-      <div class="apply-step-badge">
-        <span class="apply-step-num" style="color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0.15)">STEP 04</span>
-        <button class="apply-step-back" onclick="backFromICA()" style="color:rgba(255,255,255,0.4)">← Back</button>
-      </div>
-      <h2 class="section-title" style="color:#fff">Independent Contractor Agreement</h2>
+  <div style="max-width:680px;margin:0 auto;padding:60px 24px 48px;">
+
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:48px;">
+      <span class="apply-step-num" style="color:rgba(255,255,255,0.5);border-color:rgba(255,255,255,0.15)">STEP 04</span>
+      <button class="apply-step-back" onclick="backFromICA()" style="color:rgba(255,255,255,0.4)">&#8592; Back</button>
     </div>
-    <p class="apply-header-note" style="color:rgba(255,255,255,0.5)">Before making your payment, review and sign your Independent Contractor Agreement with Aari Realty LLC.</p>
-  </div>
 
-  <div style="max-width:540px;margin:0 auto;padding:0 24px">
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(32px,5vw,48px);font-weight:300;color:#ffffff;margin:0 0 12px;line-height:1.1">Independent Contractor<br>Agreement</h2>
+    <p style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.4);margin:0 0 40px;line-height:1.6;">Review and sign your ICA with Aari Realty LLC before completing payment.</p>
 
-    <p id="ica-selection-summary" style="font-family:'Lato',sans-serif;font-size:14px;color:rgba(255,255,255,0.7);line-height:1.7;margin:0 0 24px;text-align:center">
-      You selected <strong style="color:#fff" id="ica-sum-plan">—</strong><span id="ica-sum-addons-wrap"></span> &mdash; <span id="ica-sum-monthly">$0/mo</span> monthly and $199/year compliance fee.
-      <br><a href="#" onclick="backFromICA();return false;" style="color:rgba(255,255,255,0.45);font-size:12px">Need to make changes? Go back</a>
-    </p>
+    <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:28px 32px;margin-bottom:32px;">
+      <p style="font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0 0 12px;">Your Selection</p>
+      <p id="ica-selection-summary" style="font-family:'Lato',sans-serif;font-size:15px;color:rgba(255,255,255,0.85);line-height:1.7;margin:0;">
+        <strong style="color:#fff" id="ica-sum-plan">&mdash;</strong><span id="ica-sum-addons-wrap"></span>
+        <br><span style="font-size:13px;color:rgba(255,255,255,0.5);"><span id="ica-sum-monthly">$0/mo</span> monthly &middot; $199/year compliance fee</span>
+      </p>
+      <a href="#" onclick="backFromICA();return false;" style="display:inline-block;margin-top:12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1px;color:rgba(255,255,255,0.35);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.35)'">&larr; Need to make changes?</a>
+    </div>
 
-    <a href="#" id="open-ica-btn" onclick="openICA(event)" class="pr-cta" style="display:block;text-decoration:none;text-align:center;margin-bottom:16px;width:100%;font-size:12px;padding:18px 24px;">Review &amp; Sign Agreement &rarr;</a>
+    <a href="#" id="open-ica-btn" onclick="openICA(event)" style="display:flex;align-items:center;justify-content:center;gap:10px;text-decoration:none;background:#ffffff;color:#0a0a0a;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:20px 32px;border-radius:50px;transition:all 0.25s;margin-bottom:14px;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(255,255,255,0.12)'" onmouseout="this.style.transform='none';this.style.boxShadow='none'">Review &amp; Sign Agreement <span style="font-size:16px;">&rarr;</span></a>
 
-    <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);margin:0 0 24px;line-height:1.6;text-align:center">You&rsquo;ll fill in your details, review the full agreement, then initial and sign electronically.</p>
+    <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);margin:0;line-height:1.6;text-align:center">Fill in your details, review the full agreement, then initial and sign electronically.</p>
+
   </div>
 </section>
 
