@@ -616,6 +616,7 @@
 
       <div class="ica-nav-row">
         <button type="button" class="ica-nav-btn" onclick="goSubstep('1a')">&larr; Back</button>
+        <button type="button" class="ica-nav-btn primary" id="license-next-btn" style="display:none" onclick="handleLicenseAnswer()">Next &rarr;</button>
       </div>
     </div>
 
@@ -1641,7 +1642,7 @@
 </div>
 
 <!-- FLOATING CONTINUE BUTTON (visible during Step 2 for licensed agents) -->
-<button type="button" class="ica-float-btn" id="float-continue-btn" onclick="goToStep(3)">Continue to Sign &rarr;</button>
+<button type="button" class="ica-float-btn" id="float-continue-btn" onclick="scrollToSign()">Continue to Sign &rarr;</button>
 
 <div class="ica-footer">
   <p>Aari Realty LLC &middot; Licensed Real Estate Brokerage &middot; State of Florida</p>
@@ -1712,6 +1713,12 @@ function goSubstep(id) {
   for (var i = 0; i < subs.length; i++) subs[i].style.display = 'none';
   var target = document.getElementById('substep-' + id);
   if (target) target.style.display = 'block';
+  // Show Next button on 1b if a value is already selected (e.g. navigating back)
+  if (id === '1b') {
+    var licSel = document.getElementById('associate-has-license');
+    var nextBtn = document.getElementById('license-next-btn');
+    if (nextBtn) nextBtn.style.display = (licSel && licSel.value) ? '' : 'none';
+  }
   window.scrollTo({ top: document.getElementById('step-1').offsetTop - 20, behavior: 'smooth' });
 }
 
@@ -1720,6 +1727,9 @@ var isLicensed = true;
 function handleLicenseAnswer() {
   var sel = document.getElementById('associate-has-license');
   var val = sel.value;
+  // Show Next button once a selection is made
+  var nextBtn = document.getElementById('license-next-btn');
+  if (nextBtn) nextBtn.style.display = val ? '' : 'none';
 
   if (val === 'yes') {
     isLicensed = true;
@@ -1739,6 +1749,16 @@ function handleLicenseAnswer() {
     document.getElementById('associate-closings').value = 'N/A';
     document.getElementById('associate-mls').value = 'N/A';
     goSubstep('1e');
+  }
+}
+
+// ========== SCROLL TO SIGN (floating button) ==========
+function scrollToSign() {
+  var signBtn = document.getElementById('step2-sign-btn');
+  if (signBtn) {
+    signBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } else {
+    goToStep(3);
   }
 }
 
