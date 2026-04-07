@@ -1941,25 +1941,20 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
       statusEl.textContent = 'License verified';
       statusEl.style.color = '#27ae60';
 
-      // Auto-fill name on license
+      // Auto-fill name on license and update applicant name to match
       if (data.full_name) {
         var nameOnCard = document.getElementById('license-name-on-card');
         if (nameOnCard) {
           nameOnCard.value = data.full_name;
-          nameOnCard.style.borderColor = '';
-        }
-        // Check name match immediately
-        var applicantName = (document.getElementById('associate-name').value || '').trim().toLowerCase();
-        var licenseName = data.full_name.toLowerCase();
-        var nameWarning = document.getElementById('license-name-warning');
-        if (applicantName && licenseName && applicantName !== licenseName) {
-          nameOnCard.style.borderColor = '#e67e22';
-          nameWarning.innerHTML = '⚠ The name on your license (<strong>' + data.full_name + '</strong>) does not match the name you entered earlier (<strong>' + document.getElementById('associate-name').value.trim() + '</strong>). Please ensure your legal name is consistent across all fields.';
-          nameWarning.style.display = 'block';
-        } else if (applicantName && licenseName) {
-          nameWarning.style.display = 'none';
           nameOnCard.style.borderColor = '#27ae60';
         }
+        // Update the applicant name (step 1a) to match the license
+        var associateName = document.getElementById('associate-name');
+        if (associateName) {
+          associateName.value = data.full_name;
+        }
+        var nameWarning = document.getElementById('license-name-warning');
+        if (nameWarning) nameWarning.style.display = 'none';
       }
 
       // Auto-fill license number
@@ -2026,14 +2021,10 @@ function validateLicenseFields() {
     nameOnCard.focus();
     return;
   }
-  var applicantName = (document.getElementById('associate-name').value || '').trim().toLowerCase();
-  var licenseName = licenseNameVal.toLowerCase();
-  if (applicantName && licenseName && applicantName !== licenseName) {
-    nameOnCard.style.borderColor = '#e67e22';
-    nameWarning.innerHTML = '⚠ The name on your license (<strong>' + licenseNameVal + '</strong>) does not match the name you entered earlier (<strong>' + document.getElementById('associate-name').value.trim() + '</strong>). Please make sure your legal name is consistent. Go back to correct it or update the name above.';
-    nameWarning.style.display = 'block';
-    nameOnCard.focus();
-    return;
+  // Sync applicant name to match what's on the license
+  var associateName = document.getElementById('associate-name');
+  if (associateName) {
+    associateName.value = licenseNameVal;
   }
   nameOnCard.style.borderColor = '';
   nameWarning.style.display = 'none';
