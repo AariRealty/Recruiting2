@@ -1917,15 +1917,16 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
 
     // Handle specific errors from the API
     if (data.error) {
-      if (data.error === 'missing_api_key') {
-        statusEl.textContent = origText + ' — auto-read not configured yet';
-      } else if (data.error === 'api_error') {
-        statusEl.textContent = origText + ' — auto-read unavailable, fill in manually';
-      } else {
-        statusEl.textContent = origText + ' — please fill in manually';
-      }
+      var errMsg = 'please fill in manually';
+      if (data.error === 'missing_api_key') errMsg = 'auto-read not configured yet';
+      else if (data.error === 'api_error') errMsg = 'API error' + (data.detail ? ': ' + data.detail.substring(0, 80) : '');
+      else if (data.error === 'missing_payload') errMsg = 'upload error — try again';
+      else if (data.error === 'parse_error') errMsg = 'could not read — fill in manually';
+      else if (data.error === 'server_error') errMsg = 'server error' + (data.detail ? ': ' + data.detail.substring(0, 80) : '');
+      else if (data.error === 'empty_response') errMsg = 'no data found — fill in manually';
+      statusEl.textContent = origText + ' — ' + errMsg;
       statusEl.style.color = '#e67e22';
-      console.log('License parse error:', data.error, data.detail || data.raw || '');
+      console.log('License parse response:', JSON.stringify(data));
       return;
     }
 

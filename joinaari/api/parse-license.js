@@ -1,6 +1,15 @@
 module.exports = async function handler(req, res) {
+  // Allow CORS
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
+
   if (req.method !== "POST") {
-    return res.status(405).json({ error: "Method not allowed" });
+    return res.status(200).json({ full_name: null, license_number: null, error: "method_not_allowed" });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
@@ -13,16 +22,17 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { image, media_type } = req.body;
+    const { image, media_type } = req.body || {};
     if (!image || !media_type) {
       return res.status(200).json({
         full_name: null,
         license_number: null,
         error: "missing_payload",
+        detail: "image: " + (image ? "yes (" + image.length + " chars)" : "no") + ", media_type: " + (media_type || "none"),
       });
     }
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const apiResponse = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,7 +41,7 @@ module.exports = async function handler(req, res) {
       },
       body: JSON.stringify({
         model: "claude-sonnet-4-20250514",
-        max_tokens: 256,
+        max_tokens: 200,
         messages: [
           {
             role: "user",
@@ -46,7 +56,7 @@ module.exports = async function handler(req, res) {
               },
               {
                 type: "text",
-                text: 'This is a Florida real estate license. Extract the following information and return ONLY a JSON object with no other text:\n{\n  "full_name": "the licensee full name exactly as printed",\n  "license_number": "the license number including the SL or BK prefix"\n}\n\nIf you cannot find a field, use null for its value. Return ONLY the JSON object.',
+                text: 'Extract from this Florida real estate license: 1) the full name of the licensee, 2) the license number (starts with SL or BK). Reply with ONLY this JSON: {"full_name":"...","license_number":"..."}'
               },
             ],
           },
@@ -54,20 +64,28 @@ module.exports = async function handler(req, res) {
       }),
     });
 
-    if (!response.ok) {
-      const errText = await response.text();
-      console.error("Anthropic API error:", response.status, errText);
+    if (!apiResponse.ok) {
+      let errDetail = "";
+      try { errDetail = await apiResponse.text(); } catch(e) {}
       return res.status(200).json({
         full_name: null,
         license_number: null,
         error: "api_error",
-        detail: "Anthropic API returned " + response.status,
+        detail: "HTTP " + apiResponse.status + ": " + errDetail.substring(0, 200),
       });
     }
 
-    const result = await response.json();
+    const result = await apiResponse.json();
     const responseText =
       result.content && result.content[0] ? result.content[0].text.trim() : "";
+
+    if (!responseText) {
+      return res.status(200).json({
+        full_name: null,
+        license_number: null,
+        error: "empty_response",
+      });
+    }
 
     let parsed;
     try {
@@ -78,7 +96,7 @@ module.exports = async function handler(req, res) {
         full_name: null,
         license_number: null,
         error: "parse_error",
-        raw: responseText,
+        raw: responseText.substring(0, 300),
       });
     }
 
@@ -87,7 +105,6 @@ module.exports = async function handler(req, res) {
       license_number: parsed.license_number || null,
     });
   } catch (err) {
-    console.error("License parse error:", err);
     return res.status(200).json({
       full_name: null,
       license_number: null,
