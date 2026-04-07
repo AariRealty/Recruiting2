@@ -915,16 +915,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:500;color:rgba(10,10,10,0.5);margin:0">Total recurring monthly</p>
           <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:rgba(10,10,10,0.3);margin:0;text-decoration:line-through" id="pr-growth-total-full">$227/month</p>
         </div>
-        <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:10px;padding:16px 20px;display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 4px">First 6 months special promotion</p>
-            <p style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin:0" id="pr-growth-total-6mo">$148<span style="font-size:13px;font-weight:400;color:rgba(255,255,255,0.5)">/month</span></p>
-          </div>
-          <span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 10px;border-radius:3px">Save $79/mo</span>
-        </div>
-        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px">
-          <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0">After 6 months</p>
-          <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;color:rgba(10,10,10,0.5);margin:0" id="pr-growth-total-after">$227/month</p>
+        <div style="background:linear-gradient(135deg,#0a0a0a,#1a1a1a);border-radius:10px;padding:16px 20px">
+          <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 4px">First 6 months special promotion</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:800;color:#ffffff;margin:0" id="pr-growth-total-6mo">$148<span style="font-size:13px;font-weight:400;color:rgba(255,255,255,0.5)">/month</span></p>
         </div>
       </div>
 
@@ -1486,18 +1479,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
       var first6Total = planMonthlyNum + otherAddonMonthly;
       var after6Total = planMonthlyNum + 79 + otherAddonMonthly;
-      var savings = after6Total - first6Total;
       document.getElementById('pr-growth-total-full').textContent = '$' + after6Total + '/month';
       document.getElementById('pr-growth-total-6mo').innerHTML = '$' + first6Total + '<span style="font-size:13px;font-weight:400;color:rgba(255,255,255,0.5)">/month</span>';
-      document.getElementById('pr-growth-total-after').textContent = '$' + after6Total + '/month';
-      var saveBadge = document.querySelector('#pr-recurring-growth .save-badge');
-      if (!saveBadge) {
-        var badges = document.querySelectorAll('#pr-recurring-growth span');
-        for (var i = 0; i < badges.length; i++) {
-          if (badges[i].textContent.indexOf('Save') !== -1) { saveBadge = badges[i]; break; }
-        }
-      }
-      if (saveBadge) saveBadge.textContent = 'Save $' + savings + '/mo';
     } else {
       growthSection.style.display = 'none';
       standardSection.style.display = 'block';
