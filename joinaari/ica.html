@@ -283,6 +283,16 @@
     .ica-nav-btn:hover { background: #0a0a0a; color: #ffffff; }
     .ica-nav-btn.primary { background: #0a0a0a; color: #ffffff; border-color: #0a0a0a; }
     .ica-nav-btn.primary:hover { background: #222; }
+    @keyframes btn-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(10,10,10,0.4); }
+      50% { transform: scale(1.07); box-shadow: 0 0 12px 4px rgba(10,10,10,0.25); }
+    }
+    @keyframes float-pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+      50% { transform: translateX(-50%) scale(1.1); box-shadow: 0 4px 24px rgba(0,0,0,0.4); }
+    }
+    .ica-nav-btn.pulse { animation: btn-pulse 0.6s ease-in-out 3; }
+    .ica-float-btn.pulse { animation: float-pulse 0.6s ease-in-out 3; }
     .ica-nav-btn:disabled { opacity: 0.3; pointer-events: none; }
     .ica-nav-row { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
 
@@ -1730,6 +1740,15 @@ function isValidEmail(email) {
   return re.test(email);
 }
 
+function pulseNextButtons(container) {
+  var btns = (container || document).querySelectorAll('.ica-nav-btn.primary');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].classList.remove('pulse');
+    void btns[i].offsetWidth; // reflow to restart animation
+    btns[i].classList.add('pulse');
+  }
+}
+
 function goSubstep(id) {
   // Validate before moving forward
   if (id === '1b') {
@@ -1760,6 +1779,7 @@ function goSubstep(id) {
     if (nextBtn) nextBtn.style.display = (licSel && licSel.value) ? '' : 'none';
   }
   window.scrollTo({ top: document.getElementById('step-1').offsetTop - 20, behavior: 'smooth' });
+  setTimeout(function() { pulseNextButtons(target); }, 400);
 }
 
 var isLicensed = true;
@@ -2272,7 +2292,10 @@ function goToStep(step) {
     if (banner) banner.style.display = isLicensed ? 'none' : 'flex';
     if (signBtn) signBtn.style.display = isLicensed ? '' : 'none';
     if (unlicCta) unlicCta.style.display = isLicensed ? 'none' : 'block';
-    if (floatBtn) floatBtn.style.display = isLicensed ? 'block' : 'none';
+    if (floatBtn) {
+      floatBtn.style.display = isLicensed ? 'block' : 'none';
+      if (isLicensed) { floatBtn.classList.remove('pulse'); void floatBtn.offsetWidth; floatBtn.classList.add('pulse'); }
+    }
     // Populate cover page
     var cn = document.getElementById('cover-name');
     var cl = document.getElementById('cover-license');
@@ -2321,6 +2344,7 @@ function goToStep(step) {
 
   currentStep = step;
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  setTimeout(function() { pulseNextButtons(target); }, 400);
 }
 
 // ========== INITIAL ALL PAGES ==========
