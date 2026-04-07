@@ -1805,26 +1805,65 @@ function parseLicenseFile(file) {
   statusEl.textContent = 'Reading license... please wait';
   statusEl.style.color = '#2980b9';
 
-  var reader = new FileReader();
-  reader.onload = function(e) {
-    var base64 = e.target.result.split(',')[1];
-    var mediaType = file.type || 'image/jpeg';
-
-    // For PDFs, we need to render to image first via canvas
-    if (file.type === 'application/pdf') {
+  // For PDFs, render to image first
+  if (file.type === 'application/pdf') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var base64 = e.target.result.split(',')[1];
       renderPdfToImage(base64, function(imgBase64) {
         if (imgBase64) {
           sendToParseAPI(imgBase64, 'image/png', statusEl, origText);
         } else {
-          statusEl.textContent = origText;
-          statusEl.style.color = 'rgba(10,10,10,0.4)';
+          statusEl.textContent = origText + ' — could not read PDF';
+          statusEl.style.color = '#e67e22';
         }
       });
-    } else {
-      sendToParseAPI(base64, mediaType, statusEl, origText);
+    };
+    reader.readAsDataURL(file);
+  } else {
+    // For images: compress via canvas to ensure reasonable size and JPEG format
+    compressImage(file, function(base64) {
+      if (base64) {
+        sendToParseAPI(base64, 'image/jpeg', statusEl, origText);
+      } else {
+        // Fallback: send as-is
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          var b64 = e.target.result.split(',')[1];
+          var mt = file.type || 'image/jpeg';
+          sendToParseAPI(b64, mt, statusEl, origText);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  }
+}
+
+function compressImage(file, callback) {
+  var img = new Image();
+  var url = URL.createObjectURL(file);
+  img.onload = function() {
+    URL.revokeObjectURL(url);
+    var maxDim = 1600;
+    var w = img.width;
+    var h = img.height;
+    if (w > maxDim || h > maxDim) {
+      if (w > h) { h = Math.round(h * maxDim / w); w = maxDim; }
+      else { w = Math.round(w * maxDim / h); h = maxDim; }
     }
+    var canvas = document.createElement('canvas');
+    canvas.width = w;
+    canvas.height = h;
+    var ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, w, h);
+    var dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+    callback(dataUrl.split(',')[1]);
   };
-  reader.readAsDataURL(file);
+  img.onerror = function() {
+    URL.revokeObjectURL(url);
+    callback(null);
+  };
+  img.src = url;
 }
 
 function renderPdfToImage(base64Data, callback) {
@@ -1872,9 +1911,18 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ image: base64, media_type: mediaType })
   })
-  .then(function(r) { return r.json(); })
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
   .then(function(data) {
     statusEl.style.color = 'rgba(10,10,10,0.4)';
+
+    if (data.error === 'ANTHROPIC_API_KEY not configured') {
+      statusEl.textContent = origText + ' — service not configured';
+      statusEl.style.color = '#e67e22';
+      return;
+    }
 
     if (data.full_name || data.license_number) {
       statusEl.textContent = 'License verified';
@@ -1921,9 +1969,10 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
       statusEl.style.color = '#e67e22';
     }
   })
-  .catch(function() {
-    statusEl.textContent = origText;
-    statusEl.style.color = 'rgba(10,10,10,0.4)';
+  .catch(function(err) {
+    console.error('License parse error:', err);
+    statusEl.textContent = origText + ' — please fill in manually';
+    statusEl.style.color = '#e67e22';
   });
 }
 

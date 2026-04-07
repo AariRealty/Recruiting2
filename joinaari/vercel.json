@@ -1,5 +1,19 @@
 {
   "buildCommand": "",
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "functions": {
+    "api/parse-license.js": {
+      "maxDuration": 30
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/parse-license",
+      "methods": ["POST"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
+  ]
 }
