@@ -1069,7 +1069,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         </div>
       </div>
       <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
-      <div id="stripe-payment-element" style="margin-bottom:8px"></div>
+      <div id="stripe-payment-element" style="margin-bottom:8px;min-height:100px">
+        <p id="stripe-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:32px 0">Loading payment options...</p>
+      </div>
       <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
     </div>
   </form>
@@ -1289,7 +1291,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       }
     });
 
-    // Create and mount the Payment Element (card, Apple Pay, Google Pay)
+    // Create and mount the Payment Element (card, Apple Pay, Google Pay, PayPal)
     paymentElement = stripeElements.create('payment', {
       layout: {
         type: 'tabs',
@@ -1298,8 +1300,13 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       wallets: {
         applePay: 'auto',
         googlePay: 'auto'
-      }
+      },
+      paymentMethodOrder: ['card', 'apple_pay', 'google_pay', 'paypal']
     });
+    // Clear loading message
+    var loadMsg = document.getElementById('stripe-loading-msg');
+    if (loadMsg) loadMsg.style.display = 'none';
+
     paymentElement.mount('#stripe-payment-element');
     paymentMounted = true;
 
@@ -1356,14 +1363,17 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         if (ph) { var phEl = form.querySelector('[name="phone"]'); if (phEl) phEl.value = ph; }
         if (lic) { var licEl = form.querySelector('[name="license"]'); if (licEl) licEl.value = lic; }
       }
-      // 5. Go straight to payment (delay to let plan/tools restore first)
+      // 5. Go straight to payment (suppress plan scroll, delay to let restore finish)
+      window._suppressPlanScroll = true;
       setTimeout(function() {
         proceedToApply();
-        // Scroll directly to payment section after a brief delay
+        window._suppressPlanScroll = false;
+        // Scroll directly to payment section
         setTimeout(function() {
-          document.getElementById('apply').scrollIntoView({behavior: 'smooth', block: 'start'});
-        }, 300);
-      }, 200);
+          window.scrollTo(0, 0);
+          document.getElementById('apply').scrollIntoView({behavior: 'auto', block: 'start'});
+        }, 200);
+      }, 300);
       // 6. Clean up URL
       window.history.replaceState({}, '', window.location.pathname);
     }
@@ -1415,12 +1425,14 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }
     var toolsStep = document.getElementById('tools-step');
     toolsStep.classList.add('open');
-    setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
-    setTimeout(function() {
-      pulseBtn(document.getElementById('crm-add-btn'));
-      pulseBtn(document.getElementById('bb-add-btn'));
-      pulseBtn(document.getElementById('addons-summary-btn'));
-    }, 600);
+    if (!window._suppressPlanScroll) {
+      setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
+      setTimeout(function() {
+        pulseBtn(document.getElementById('crm-add-btn'));
+        pulseBtn(document.getElementById('bb-add-btn'));
+        pulseBtn(document.getElementById('addons-summary-btn'));
+      }, 600);
+    }
   }
 
   function toggleAddon(option) {
@@ -1644,12 +1656,14 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         var ph = form ? form.querySelector('[name="phone"]').value.trim() : '';
         initPaymentElement(totalDue, fn || 'Agent', ln || 'Pending', em || 'pending@aarirealty.com', ph, planValue).catch(function(err) {
           console.warn('[stripe] Payment Element init error:', err.message);
+          var loadMsg = document.getElementById('stripe-loading-msg');
+          if (loadMsg) {
+            loadMsg.textContent = 'Unable to load payment form. Please refresh the page.';
+            loadMsg.style.color = '#c0392b';
+          }
         });
       }, 100);
     }
-    setTimeout(function() {
-      applySection.scrollIntoView({behavior: 'smooth', block: 'start'});
-    }, 100);
   }
 
   function proceedToICA() {
