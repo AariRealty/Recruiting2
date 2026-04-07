@@ -792,7 +792,7 @@
 
       <div style="border-top:1px solid rgba(10,10,10,0.08);padding-top:24px;margin-top:28px;">
         <p style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.45);margin-bottom:12px;">Already have your license? Oops &mdash; go back and let&rsquo;s get you signed up.</p>
-        <button type="button" class="ica-nav-btn" onclick="goSubstep('1c')">&larr; I have my license, take me back</button>
+        <button type="button" class="ica-nav-btn" onclick="returnAsLicensed()">&larr; I have my license, take me back</button>
       </div>
     </div>
 
@@ -1820,6 +1820,23 @@ function handleLicenseAnswer() {
     document.getElementById('associate-mls').value = 'N/A';
     goSubstep('1e');
   }
+}
+
+function returnAsLicensed() {
+  isLicensed = true;
+  // Reset fields that were set to N/A for unlicensed path
+  document.getElementById('associate-license').value = '';
+  document.getElementById('associate-years').value = '';
+  document.getElementById('associate-closings').value = '';
+  document.getElementById('associate-mls').value = '';
+  // Update license dropdown to reflect "yes"
+  var sel = document.getElementById('associate-has-license');
+  if (sel) sel.value = 'yes';
+  // Pre-fill name on license card
+  var appName = document.getElementById('associate-name').value.trim();
+  var nameOnCard = document.getElementById('license-name-on-card');
+  if (nameOnCard && appName && !nameOnCard.value) nameOnCard.value = appName;
+  goSubstep('1c');
 }
 
 // ========== SCROLL TO SIGN (floating button) ==========
