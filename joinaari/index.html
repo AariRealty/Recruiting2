@@ -819,36 +819,40 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     </div>
     <div class="tools-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:none;align-items:stretch">
 
-      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s">
-        <span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;align-self:flex-start">Most Popular</span>
-        <p class="tools-name" style="margin:0">CRM System</p>
-        <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">Powered by Lofty</p>
-        <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">AI-powered CRM built for real estate</p>
-        <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Track and manage all your leads in one place</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Automated follow-up and smart campaigns</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> IDX website + property alerts</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Built-in dialer, texting, and mobile app</li>
-        </ul>
-        <p class="tools-price" style="margin:8px 0 0;font-size:32px">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
-        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:0;display:flex;flex-direction:column;border-bottom:none;cursor:pointer;transition:all 0.3s">
+        <div style="padding:5px 12px;margin:0"><span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;display:inline-block">Most Popular</span></div>
+        <div style="padding:0 32px 36px;display:flex;flex-direction:column;gap:16px;flex:1">
+          <p class="tools-name" style="margin:0">CRM System</p>
+          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">Powered by Lofty</p>
+          <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">AI-powered CRM built for real estate</p>
+          <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Track and manage all your leads in one place</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Automated follow-up and smart campaigns</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> IDX website + property alerts</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Built-in dialer, texting, and mobile app</li>
+          </ul>
+          <p class="tools-price" style="margin:8px 0 0;font-size:32px">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
+          <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+        </div>
       </div>
 
-      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:36px 32px;display:flex;flex-direction:column;gap:16px;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
-        <div id="bb-included-banner" style="display:none;position:absolute;top:0;left:0;right:0;background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Complementary for 6 months</div>
-        <span id="bb-badge-spacer" style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 12px;border-radius:3px;align-self:flex-start;visibility:hidden">&nbsp;</span>
-        <p class="tools-name" style="margin:0" id="bb-title">Brand Builder</p>
-        <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">&nbsp;</p>
-        <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">Work directly with us to build your content</p>
-        <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> In-person content planning sessions</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Video recording + execution support</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Social media strategy tailored to your business</li>
-          <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Templates + structure so you stay consistent</li>
-        </ul>
-        <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
-        <p id="bb-enrollment-note" style="display:none;margin:4px 0 0;font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.4">Enrollment required after 6 months to continue using this add-on.</p>
-        <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:0;display:flex;flex-direction:column;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
+        <div id="bb-included-banner" style="display:none;background:#ffffff;color:#0a0a0a;text-align:center;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase">Complementary for 6 months</div>
+        <div id="bb-top-spacer" style="display:block;padding:5px 12px;margin:0"><span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;visibility:hidden">&nbsp;</span></div>
+        <div style="padding:0 32px 36px;display:flex;flex-direction:column;gap:16px;flex:1">
+          <p class="tools-name" style="margin:0" id="bb-title">Brand Builder</p>
+          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">&nbsp;</p>
+          <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">Work directly with us to build your content</p>
+          <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> In-person content planning sessions</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Video recording + execution support</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Social media strategy tailored to your business</li>
+            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Templates + structure so you stay consistent</li>
+          </ul>
+          <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
+          <p id="bb-enrollment-note" style="display:none;margin:4px 0 0;font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.4">Enrollment required after 6 months to continue using this add-on.</p>
+          <button class="tools-select-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
+        </div>
       </div>
 
     </div>
@@ -1344,27 +1348,26 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     var bbBanner = document.getElementById('bb-included-banner');
     if (bbAddon) {
       var planName = card.getAttribute('data-plan') || '';
+      var bbSpacer = document.getElementById('bb-top-spacer');
       if (planName.indexOf('Growth') !== -1) {
         bbAddon.classList.remove('selected');
         bbAddon.classList.add('bb-included');
         bbAddon.style.pointerEvents = 'none';
-        bbAddon.style.opacity = '0.7';
         bbAddon.setAttribute('data-monthly', '0');
         var bbBtn = bbAddon.querySelector('.tools-select-btn');
         if (bbBtn) bbBtn.style.display = 'none';
         if (bbBanner) bbBanner.style.display = 'block';
-        bbAddon.style.paddingTop = '52px';
+        if (bbSpacer) bbSpacer.style.display = 'none';
         var bbNote = document.getElementById('bb-enrollment-note');
         if (bbNote) bbNote.style.display = 'block';
       } else {
         bbAddon.classList.remove('bb-included');
         bbAddon.style.pointerEvents = '';
-        bbAddon.style.opacity = '';
         bbAddon.setAttribute('data-monthly', '79');
         var bbBtn = bbAddon.querySelector('.tools-select-btn');
         if (bbBtn) bbBtn.style.display = '';
         if (bbBanner) bbBanner.style.display = 'none';
-        bbAddon.style.paddingTop = '36px';
+        if (bbSpacer) bbSpacer.style.display = 'block';
         var bbNote = document.getElementById('bb-enrollment-note');
         if (bbNote) bbNote.style.display = 'none';
       }
