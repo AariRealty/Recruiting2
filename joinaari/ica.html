@@ -747,7 +747,7 @@
       <div class="ica-field">
         <label for="associate-association">Realtor Association</label>
         <select id="associate-association">
-          <option value="" disabled selected>Select region first</option>
+          <option value="" disabled selected>Select one</option>
         </select>
       </div>
 
@@ -1827,9 +1827,9 @@ function scrollToSign() {
 // ========== REGION & ASSOCIATION FILTER ==========
 var associationsByRegion = {
   'Southwest Florida': [
-    'Royal Palm Coast Realtor Association',
     'Naples Area Board of Realtors',
-    'Punta Gorda-Port Charlotte-North Port Association of Realtors'
+    'Punta Gorda-Port Charlotte-North Port Association of Realtors',
+    'Royal Palm Coast Realtor Association'
   ],
   'Florida Keys': [
     'Florida Keys Board of Realtors (FKBOR)',
@@ -1843,47 +1843,84 @@ var associationsByRegion = {
     'Tallahassee Board of Realtors (TBOR)'
   ],
   'Central Florida': [
+    'Gainesville Alachua County Association of Realtors',
+    'Heartland Association of Realtors',
+    'Lakeland REALTORS',
+    'Ocala Marion County Association of Realtors (OMCAR)',
     'Orlando Regional Realtor Association',
     'Osceola County Association of Realtors (OSCAR)',
-    'Lakeland REALTORS',
-    'Realtor Association of Lake and Sumter Counties (RALSC)',
-    'Ocala Marion County Association of Realtors (OMCAR)',
-    'Gainesville Alachua County Association of Realtors'
+    'Realtor Association of Lake and Sumter Counties (RALSC)'
   ],
   'Southeast Florida': [
-    'Miami Association of Realtors',
     'Broward, Palm Beaches, and Saint Lucie Realtors (RWORLD)',
-    'Jupiter Tequesta Hobe Sound (JTHS-MIAMI)'
+    'Jupiter Tequesta Hobe Sound (JTHS-MIAMI)',
+    'Miami Association of Realtors'
   ],
   'Northeast Florida': [
-    'Northeast Florida Association of Realtors',
+    'Daytona Beach Area Association of Realtors (DBAAR)',
     'Flagler County Association of Realtors (FCAR)',
-    'Daytona Beach Area Association of Realtors (DBAAR)'
+    'Northeast Florida Association of Realtors'
   ],
   'East Florida': [
-    'Space Coast Association of Realtors (SCAR)',
     'Realtor Association of Indian River County (RAIRC)',
+    'Space Coast Association of Realtors (SCAR)',
     'West Volusia Association of Realtors'
   ],
   'West Florida': [
-    'Suncoast Tampa Association of Realtors (GTAR)',
     'Pinellas Realtor Organization',
     'Realtor Association of Sarasota and Manatee',
-    'Venice Area Board of Realtors',
-    'Heartland Association of Realtors'
+    'Suncoast Tampa Association of Realtors (GTAR)',
+    'Venice Area Board of Realtors'
   ],
   'Treasure Coast': [
+    'Dixie Gilchrist Levy Association of Realtors',
     'Martin County Association of Realtors',
-    'Realtor Association of Indian River County (RAIRC)',
-    'Dixie Gilchrist Levy Association of Realtors'
+    'Realtor Association of Indian River County (RAIRC)'
   ]
 };
+
+// All associations in alphabetical order (for showing all when no region selected)
+var allAssociations = [
+  'Broward, Palm Beaches, and Saint Lucie Realtors (RWORLD)',
+  'Central Panhandle Association of Realtors (CPAR)',
+  'Daytona Beach Area Association of Realtors (DBAAR)',
+  'Dixie Gilchrist Levy Association of Realtors',
+  'Emerald Coast Association of Realtors (ECAR)',
+  'Flagler County Association of Realtors (FCAR)',
+  'Florida Keys Board of Realtors (FKBOR)',
+  'Gainesville Alachua County Association of Realtors',
+  'Heartland Association of Realtors',
+  'Jupiter Tequesta Hobe Sound (JTHS-MIAMI)',
+  'Key West Association of Realtors (KWAR)',
+  'Lakeland REALTORS',
+  'Marathon and Lower Keys Association of Realtors (MLKAR)',
+  'Martin County Association of Realtors',
+  'Miami Association of Realtors',
+  'Naples Area Board of Realtors',
+  'Northeast Florida Association of Realtors',
+  'Ocala Marion County Association of Realtors (OMCAR)',
+  'Orlando Regional Realtor Association',
+  'Osceola County Association of Realtors (OSCAR)',
+  'Pensacola Association of Realtors',
+  'Pinellas Realtor Organization',
+  'Punta Gorda-Port Charlotte-North Port Association of Realtors',
+  'Realtor Association of Indian River County (RAIRC)',
+  'Realtor Association of Lake and Sumter Counties (RALSC)',
+  'Realtor Association of Sarasota and Manatee',
+  'Royal Palm Coast Realtor Association',
+  'Space Coast Association of Realtors (SCAR)',
+  'Suncoast Tampa Association of Realtors (GTAR)',
+  'Tallahassee Board of Realtors (TBOR)',
+  'Venice Area Board of Realtors',
+  'West Volusia Association of Realtors'
+];
 
 function filterAssociations() {
   var region = document.getElementById('associate-region').value;
   var assocSelect = document.getElementById('associate-association');
+  var currentVal = assocSelect.value;
   assocSelect.innerHTML = '<option value="" disabled selected>Select one</option>';
-  var list = associationsByRegion[region] || [];
+  var list = region ? (associationsByRegion[region] || []) : allAssociations;
   for (var i = 0; i < list.length; i++) {
     var opt = document.createElement('option');
     opt.value = list[i];
@@ -1900,6 +1937,8 @@ function filterAssociations() {
   noBoard.textContent = 'No Board but Plan on Joining';
   assocSelect.appendChild(noBoard);
 }
+// Populate all associations on load
+filterAssociations();
 
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
