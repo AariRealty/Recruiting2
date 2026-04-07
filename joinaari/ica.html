@@ -444,9 +444,10 @@
       background: #ffffff;
       border: none;
       border-radius: 8px;
-      padding: 48px 40px;
+      padding: 56px 40px 48px;
       margin-bottom: 24px;
       border-top: 3px solid #0a0a0a;
+      text-align: center;
     }
     .ica-cover-title {
       font-family: 'Cormorant Garamond', serif;
@@ -455,7 +456,7 @@
       text-align: center;
       color: #0a0a0a;
       line-height: 1.15;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .ica-cover-sub {
       text-align: center;
@@ -464,33 +465,22 @@
       color: rgba(10,10,10,0.4);
       margin-bottom: 32px;
     }
-    .ica-cover-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px 32px;
-      padding: 24px;
-      background: rgba(10,10,10,0.02);
-      border: 1px solid rgba(10,10,10,0.08);
-      border-radius: 6px;
-      margin-bottom: 32px;
-    }
-    .ica-cover-field label {
-      display: block;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(10,10,10,0.35);
-      margin-bottom: 4px;
-    }
-    .ica-cover-field .val {
+    .ica-cover-detail {
       font-family: 'Lato', sans-serif;
-      font-size: 14px;
+      font-size: 13px;
+      color: rgba(10,10,10,0.5);
+      line-height: 2.2;
+      margin: 0;
+    }
+    .ica-cover-detail strong {
       color: #0a0a0a;
-      padding-bottom: 6px;
-      border-bottom: 1px solid rgba(10,10,10,0.12);
-      min-height: 24px;
+      font-weight: 600;
+    }
+    .ica-cover-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(10,10,10,0.15);
+      margin: 24px auto;
     }
 
     /* FLOATING CONTINUE BUTTON */
@@ -814,20 +804,17 @@
 
     <!-- COVER PAGE -->
     <div class="ica-cover">
-      <div class="ica-nav-row" style="margin-top:0;margin-bottom:24px;">
+      <div class="ica-nav-row" style="margin-top:0;margin-bottom:32px;justify-content:center;">
         <button type="button" class="ica-nav-btn" onclick="goToStep(1)">&larr; Back</button>
         <button type="button" class="ica-nav-btn primary" onclick="goToStep(3)">Continue to Sign &rarr;</button>
       </div>
       <h1 class="ica-cover-title">Independent Contractor<br>Agreement</h1>
-
-      <div class="ica-cover-grid">
-        <div class="ica-cover-field"><label>Name of Associate</label><div class="val" id="cover-name"></div></div>
-        <div class="ica-cover-field"><label>Primary State Licensed</label><div class="val">Florida</div></div>
-        <div class="ica-cover-field"><label>Florida License Number</label><div class="val" id="cover-license"></div></div>
-        <div class="ica-cover-field"><label>Email Address</label><div class="val" id="cover-email"></div></div>
-        <div class="ica-cover-field"><label>Phone Number</label><div class="val" id="cover-phone"></div></div>
-        <div class="ica-cover-field"><label>Effective Date</label><div class="val" id="cover-date"></div></div>
-      </div>
+      <div class="ica-cover-divider"></div>
+      <p class="ica-cover-detail"><strong id="cover-name"></strong></p>
+      <p class="ica-cover-detail">Florida &middot; License <strong id="cover-license"></strong></p>
+      <p class="ica-cover-detail">Effective <strong id="cover-date"></strong></p>
+      <div class="ica-cover-divider"></div>
+      <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.3);margin:0">Aari Realty LLC</p>
     </div>
 
     <!-- INCORPORATED DOCUMENTS -->
@@ -1583,6 +1570,16 @@
 
       <div class="ica-heading">4. Consequences of Violation</div>
       <p class="ica-text">Violation of any provision of this Acknowledgment constitutes an immediate termination event under Section 12 of the Independent Contractor Agreement. The Associate may be held personally liable for all losses, damages, investigation costs, remediation expenses, legal fees, and regulatory fines arising from their violation of these protocols, as set forth in the Indemnification &amp; Defense Addendum.</p>
+    </div>
+
+    <!-- CONTACT CONFIRMATION -->
+    <div class="ica-section">
+      <div class="ica-section-title">Confirmation of Communication</div>
+      <p class="ica-text">By signing this Agreement, the Associate confirms that all notices, disclosures, and communications from Aari Realty LLC may be delivered electronically to the email address and phone number provided below. The Associate is responsible for ensuring this contact information remains current and agrees to notify the Brokerage in writing of any changes.</p>
+      <div style="background:rgba(10,10,10,0.03);border:1px solid rgba(10,10,10,0.08);border-radius:6px;padding:20px 24px;margin-top:16px">
+        <p style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.5);margin:0 0 6px;line-height:1.6">Email: <strong style="color:#0a0a0a" id="cover-email"></strong></p>
+        <p style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.5);margin:0;line-height:1.6">Phone: <strong style="color:#0a0a0a" id="cover-phone"></strong></p>
+      </div>
     </div>
 
     <div class="ica-section" style="text-align:center;">
