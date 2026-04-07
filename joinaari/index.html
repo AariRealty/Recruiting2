@@ -59,8 +59,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .stat-label{font-size:9px;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35)}
 .stat-value{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:var(--white)}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-@keyframes ctaPulse{0%,100%{transform:scale(1);box-shadow:none}50%{transform:scale(1.07);box-shadow:0 0 14px 4px rgba(255,255,255,0.25)}}
-.cta-pulse{animation:ctaPulse 0.6s ease-in-out 3}
+@keyframes ctaPulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(10,10,10,0.4)}50%{transform:scale(1.08);box-shadow:0 0 18px 6px rgba(10,10,10,0.25)}}
+@keyframes ctaPulseLight{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,255,255,0.4)}50%{transform:scale(1.08);box-shadow:0 0 18px 6px rgba(255,255,255,0.35)}}
+.cta-pulse{animation:ctaPulse 0.7s ease-in-out 3}
+.cta-pulse-light{animation:ctaPulseLight 0.7s ease-in-out 3}
 
 /* PAIN SECTION */
 .pain-layout{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
@@ -1225,15 +1227,16 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   },{threshold:0.08});
   document.querySelectorAll(".reveal").forEach(el => obs.observe(el));
 
-  function pulseBtn(el) {
+  function pulseBtn(el, light) {
     if (!el) return;
     el.classList.remove('cta-pulse');
+    el.classList.remove('cta-pulse-light');
     void el.offsetWidth;
-    el.classList.add('cta-pulse');
+    el.classList.add(light ? 'cta-pulse-light' : 'cta-pulse');
   }
 
   // Pulse "Choose Your Plan" hero button on page load
-  setTimeout(function() { pulseBtn(document.getElementById('hero-cta-btn')); }, 800);
+  setTimeout(function() { pulseBtn(document.getElementById('hero-cta-btn'), true); }, 800);
 
   // Pulse "My Pick" buttons when plans section scrolls into view
   var plansPulsed = false;
@@ -1241,7 +1244,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     entries.forEach(function(e) {
       if (e.isIntersecting && !plansPulsed) {
         plansPulsed = true;
-        document.querySelectorAll('.select-bubble').forEach(function(b) { pulseBtn(b); });
+        document.querySelectorAll('.select-bubble').forEach(function(b) { pulseBtn(b, true); });
       }
     });
   }, {threshold: 0.3});
