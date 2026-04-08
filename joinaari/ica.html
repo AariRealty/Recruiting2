@@ -501,35 +501,59 @@
       margin: 24px auto;
     }
 
-    /* FLOATING CONTINUE BUTTON */
-    .ica-float-btn {
+    /* FLOATING CONTINUE BAR */
+    .ica-float-bar {
       position: fixed;
       bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 80;
-      background: #0a0a0a;
-      color: #ffffff;
+      display: none;
+      gap: 8px;
+      align-items: center;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
+      padding: 8px;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+    }
+    .ica-float-btn {
+      background: #ffffff;
+      color: #0a0a0a;
       font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 2px;
       text-transform: uppercase;
-      padding: 14px 28px;
+      padding: 12px 24px;
       border: none;
       border-radius: 40px;
       cursor: pointer;
       box-shadow: 0 4px 20px rgba(0,0,0,0.25);
       transition: all 0.2s;
-      display: none;
     }
-    .ica-float-btn:hover { background: #222; transform: translateX(-50%) translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+    .ica-float-btn:hover { background: #f0f0f0; }
+    .ica-float-btn-secondary {
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 12px 20px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .ica-float-btn-secondary:hover { color: #ffffff; border-color: rgba(255,255,255,0.4); }
 
     @media print {
       .ica-print-link,
       .ica-submit-btn,
       .ica-top-banner,
-      .ica-float-btn,
+      .ica-float-bar,
       .ica-header {
         display: none;
       }
@@ -1777,8 +1801,11 @@
   </form>
 </div>
 
-<!-- FLOATING CONTINUE BUTTON (visible during Step 2 for licensed agents) -->
-<button type="button" class="ica-float-btn" id="float-continue-btn" onclick="scrollToSign()">Continue to Sign &rarr;</button>
+<!-- FLOATING BAR (visible during Step 2 for licensed agents) -->
+<div class="ica-float-bar" id="float-continue-btn">
+  <button type="button" class="ica-float-btn" onclick="goToStep(3)">Continue to Sign &rarr;</button>
+  <button type="button" class="ica-float-btn-secondary" onclick="scrollToBottom()">Scroll to Bottom &darr;</button>
+</div>
 
 <div class="ica-footer">
   <p>Aari Realty LLC &middot; Licensed Real Estate Brokerage &middot; State of Florida</p>
@@ -1923,11 +1950,15 @@ function returnAsLicensed() {
 
 // ========== SCROLL TO SIGN (floating button) ==========
 function scrollToSign() {
+  goToStep(3);
+}
+
+function scrollToBottom() {
   var signBtn = document.getElementById('step2-sign-btn');
   if (signBtn) {
     signBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
-    goToStep(3);
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
 }
 
@@ -2473,7 +2504,7 @@ function goToStep(step) {
     if (signBtn) signBtn.style.display = isLicensed ? '' : 'none';
     if (unlicCta) unlicCta.style.display = isLicensed ? 'none' : 'block';
     if (floatBtn) {
-      floatBtn.style.display = isLicensed ? 'block' : 'none';
+      floatBtn.style.display = isLicensed ? 'flex' : 'none';
       if (isLicensed) { floatBtn.classList.remove('pulse'); void floatBtn.offsetWidth; floatBtn.classList.add('pulse'); }
     }
     // Populate cover page
