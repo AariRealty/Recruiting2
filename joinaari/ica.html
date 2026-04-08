@@ -755,8 +755,8 @@
       <div class="ica-field">
         <label for="associate-region">Region</label>
         <select id="associate-region" onchange="filterAssociations()">
-          <option value="" disabled selected>Select your region</option>
-          <option value="Southwest Florida">Southwest Florida</option>
+          <option value="" disabled>Select your region</option>
+          <option value="Southwest Florida" selected>Southwest Florida</option>
           <option value="Southeast Florida">Southeast Florida</option>
           <option value="Central Florida">Central Florida</option>
           <option value="Northeast Florida">Northeast Florida</option>
@@ -768,15 +768,15 @@
 
       <div class="ica-field">
         <label for="associate-association">REALTOR&reg; Association</label>
-        <select id="associate-association" onchange="filterMLS()" disabled>
-          <option value="" disabled selected>Select region first</option>
+        <select id="associate-association" onchange="filterMLS()">
+          <option value="" disabled>Select your association</option>
         </select>
       </div>
 
       <div class="ica-field">
         <label for="associate-mls-select">MLS Access</label>
-        <select id="associate-mls-select" disabled>
-          <option value="" disabled selected>Select association first</option>
+        <select id="associate-mls-select">
+          <option value="" disabled>Select your MLS</option>
         </select>
       </div>
 
@@ -1983,15 +1983,15 @@ var floridaData = {
   }
 };
 
-function filterAssociations() {
+function filterAssociations(defaultAssoc) {
   var region = document.getElementById('associate-region').value;
   var assocSelect = document.getElementById('associate-association');
   var mlsSelect = document.getElementById('associate-mls-select');
 
   // Reset association
-  assocSelect.innerHTML = '<option value="" disabled selected>Select your association</option>';
+  assocSelect.innerHTML = '<option value="" disabled>Select your association</option>';
   // Reset MLS
-  mlsSelect.innerHTML = '<option value="" disabled selected>Select association first</option>';
+  mlsSelect.innerHTML = '<option value="" disabled>Select association first</option>';
   mlsSelect.disabled = true;
 
   if (!region || !floridaData[region]) {
@@ -2004,6 +2004,7 @@ function filterAssociations() {
     var opt = document.createElement('option');
     opt.value = associations[i];
     opt.textContent = associations[i];
+    if (defaultAssoc && associations[i] === defaultAssoc) opt.selected = true;
     assocSelect.appendChild(opt);
   }
 
@@ -2018,6 +2019,9 @@ function filterAssociations() {
   assocSelect.appendChild(noBoard);
 
   assocSelect.disabled = false;
+
+  // Auto-trigger MLS filter if a default was set
+  if (defaultAssoc) filterMLS();
 }
 
 function filterMLS() {
@@ -2026,7 +2030,7 @@ function filterMLS() {
   var mlsSelect = document.getElementById('associate-mls-select');
   var assocVal = assocSelect.value;
 
-  mlsSelect.innerHTML = '<option value="" disabled selected>Select your MLS</option>';
+  mlsSelect.innerHTML = '<option value="" disabled>Select your MLS</option>';
 
   if (!region || !assocVal || !floridaData[region] || !floridaData[region][assocVal]) {
     // Generic selection or no MLS mapping
@@ -2043,6 +2047,9 @@ function filterMLS() {
   mlsSelect.appendChild(opt);
   mlsSelect.disabled = false;
 }
+
+// Pre-fill defaults on load: Southwest Florida → Royal Palm Coast → Florida Gulf Coast MLS
+filterAssociations('Royal Palm Coast Realtor Association');
 
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
