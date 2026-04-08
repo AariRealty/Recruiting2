@@ -1995,14 +1995,15 @@ function filterAssociations() {
   var assocSelect = document.getElementById('associate-association');
   var mlsSelect = document.getElementById('associate-mls-select');
 
-  // Reset association
-  assocSelect.innerHTML = '<option value="" disabled>Select your association</option>';
-  // Reset MLS
-  mlsSelect.innerHTML = '<option value="" disabled>Select association first</option>';
+  // Reset
+  assocSelect.innerHTML = '';
+  mlsSelect.innerHTML = '';
   mlsSelect.disabled = true;
 
   if (!region || !floridaData[region]) {
+    assocSelect.innerHTML = '<option value="" disabled selected>Select region first</option>';
     assocSelect.disabled = true;
+    mlsSelect.innerHTML = '<option value="" disabled selected>Select association first</option>';
     return;
   }
 
@@ -2011,6 +2012,7 @@ function filterAssociations() {
     var opt = document.createElement('option');
     opt.value = associations[i];
     opt.textContent = associations[i];
+    if (i === 0) opt.selected = true;
     assocSelect.appendChild(opt);
   }
 
@@ -2025,6 +2027,9 @@ function filterAssociations() {
   assocSelect.appendChild(noBoard);
 
   assocSelect.disabled = false;
+
+  // Auto-select MLS for the first association
+  filterMLS();
 }
 
 function filterMLS() {
@@ -2033,10 +2038,9 @@ function filterMLS() {
   var mlsSelect = document.getElementById('associate-mls-select');
   var assocVal = assocSelect.value;
 
-  mlsSelect.innerHTML = '<option value="" disabled>Select your MLS</option>';
+  mlsSelect.innerHTML = '';
 
   if (!region || !assocVal || !floridaData[region] || !floridaData[region][assocVal]) {
-    // Generic selection or no MLS mapping
     mlsSelect.innerHTML = '<option value="N/A" selected>N/A</option>';
     mlsSelect.disabled = true;
     return;
@@ -2051,15 +2055,8 @@ function filterMLS() {
   mlsSelect.disabled = false;
 }
 
-// Pre-fill defaults on load: Southwest Florida → Royal Palm Coast → Florida Gulf Coast MLS
-(function initDefaults() {
-  var regionSel = document.getElementById('associate-region');
-  regionSel.value = 'Southwest Florida';
-  filterAssociations();
-  var assocSel = document.getElementById('associate-association');
-  assocSel.value = 'Royal Palm Coast Realtor Association';
-  filterMLS();
-})();
+// Pre-fill defaults on load
+filterAssociations();
 
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
