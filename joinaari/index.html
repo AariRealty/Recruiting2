@@ -1373,6 +1373,37 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       // 6. Clean up URL
       window.history.replaceState({}, '', window.location.pathname);
     }
+
+    // Handle back from ICA page — show ICA step section
+    if (urlParams.get('from') === 'ica') {
+      var savedPlan = sessionStorage.getItem('selected_plan');
+      if (savedPlan) {
+        document.querySelectorAll('.plan-card').forEach(function(c) {
+          if (c.getAttribute('data-plan') === savedPlan) selectPlan(c);
+        });
+      }
+      var savedTools = sessionStorage.getItem('selected_tools');
+      if (savedTools) {
+        try {
+          JSON.parse(savedTools).forEach(function(tid) {
+            document.querySelectorAll('.tools-option').forEach(function(el) {
+              if (el.getAttribute('data-tool') === tid) el.classList.add('selected');
+            });
+          });
+        } catch(e) {}
+      }
+      window._suppressPlanScroll = true;
+      setTimeout(function() {
+        refreshDueToday();
+        var icaSec = document.getElementById('ica-step');
+        if (icaSec) {
+          icaSec.classList.remove('apply-step-hidden');
+          icaSec.scrollIntoView({behavior: 'smooth', block: 'start'});
+        }
+        window._suppressPlanScroll = false;
+      }, 200);
+      window.history.replaceState({}, '', window.location.pathname);
+    }
   })();
 
   function toggleGrowthPlan(btn) {
