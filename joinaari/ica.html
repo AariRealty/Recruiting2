@@ -856,7 +856,8 @@
     </div>
 
     <!-- COVER PAGE -->
-    <div class="ica-cover">
+    <div class="ica-cover" style="position:relative;">
+      <button type="button" class="ica-nav-btn" onclick="goToStep(1)" style="position:absolute;top:20px;right:20px;">Back</button>
       <h1 class="ica-cover-title">Independent Contractor<br>Agreement</h1>
       <div class="ica-cover-divider"></div>
       <p class="ica-cover-detail"><strong id="cover-name"></strong></p>
@@ -1652,7 +1653,10 @@
 
       <!-- PART 1: INITIAL DOCUMENTS -->
       <div class="ica-section" id="initials-section">
-        <div class="ica-section-title" style="margin-bottom:4px;">Initial &amp; Acknowledge</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="ica-section-title" style="margin-bottom:4px;">Initial &amp; Acknowledge</div>
+          <button type="button" class="ica-nav-btn" onclick="goToStep(2)" style="flex-shrink:0;">Back</button>
+        </div>
         <p class="ica-text" style="color:rgba(10,10,10,0.45);font-size:12px;">Enter your initials, then click each document or use the button to initial all at once.</p>
 
         <!-- Initials input row -->
@@ -1736,7 +1740,10 @@
     <!-- ===================== STEP 4: PAYMENT ===================== -->
     <div class="ica-step-panel" id="step-4">
       <div class="ica-section">
-        <div class="ica-section-title">Complete Your Payment</div>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div class="ica-section-title" style="margin-bottom:0;">Complete Your Payment</div>
+          <button type="button" class="ica-nav-btn" onclick="goToStep(3)" style="flex-shrink:0;">Back</button>
+        </div>
         <p class="ica-text" style="margin-bottom:24px;">Your ICA has been signed. Enter your payment details to activate your account.</p>
 
         <!-- Coupon Code -->
