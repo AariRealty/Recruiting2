@@ -1777,9 +1777,6 @@
         <div id="paypal-button-container" style="min-height:150px;"></div>
         <p id="paypal-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:24px 0">Loading payment options...</p>
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
-
-        <script src="https://www.paypal.com/sdk/js?client-id=AeQLr2FHD6cLvIHXH4akQ-ZcCWZpCOywBWrbb3GiOBwEudyxKlhRLX-GNuNElWAKSklyAz-XLcw6tExw&currency=USD&intent=capture&components=buttons"
-          onload="if(typeof initPaymentElement==='function')initPaymentElement()"></script>
       </div>
     </div><!-- end step-4 -->
 
@@ -2801,15 +2798,37 @@ function initialAllPages() {
 
     if (paypalMounted) return;
 
-    // Wait for PayPal SDK to load
-    if (typeof paypal === 'undefined') {
-      console.log('[paypal] SDK not loaded yet, will init when SDK loads via onload callback');
+    // If PayPal SDK already loaded, render buttons
+    if (typeof paypal !== 'undefined') {
+      renderPayPalButtons();
       return;
     }
+
+    // Dynamically load PayPal SDK
+    console.log('[paypal] Loading SDK...');
+    var script = document.createElement('script');
+    script.src = 'https://www.paypal.com/sdk/js?client-id=AeQLr2FHD6cLvIHXH4akQ-ZcCWZpCOywBWrbb3GiOBwEudyxKlhRLX-GNuNElWAKSklyAz-XLcw6tExw&currency=USD&intent=capture&components=buttons';
+    script.onload = function() {
+      console.log('[paypal] SDK loaded successfully');
+      renderPayPalButtons();
+    };
+    script.onerror = function() {
+      console.error('[paypal] SDK failed to load');
+      var loadMsg = document.getElementById('paypal-loading-msg');
+      if (loadMsg) {
+        loadMsg.innerHTML = '<span style="color:#c0392b;font-weight:500">Unable to load PayPal. Please refresh and try again.</span>';
+      }
+    };
+    document.head.appendChild(script);
+  }
+
+  function renderPayPalButtons() {
+    if (paypalMounted) return;
 
     var loadMsg = document.getElementById('paypal-loading-msg');
     if (loadMsg) loadMsg.style.display = 'none';
 
+    var params = new URLSearchParams(window.location.search);
     var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
     var planName = data.plan || params.get('plan_name') || 'Aari Realty Onboarding';
 
