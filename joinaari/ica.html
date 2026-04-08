@@ -753,35 +753,30 @@
       </div>
 
       <div class="ica-field">
-        <label for="associate-mls-select">Primary MLS</label>
-        <select id="associate-mls-select">
-          <option value="" disabled selected>Select your MLS</option>
-          <option>Royal Palm MLS</option>
-          <option>Miami MLS</option>
-          <option>Stellar MLS</option>
-        </select>
-      </div>
-
-      <div class="ica-field">
         <label for="associate-region">Region</label>
         <select id="associate-region" onchange="filterAssociations()">
-          <option value="" disabled selected>Select one</option>
+          <option value="" disabled selected>Select your region</option>
           <option value="Southwest Florida">Southwest Florida</option>
-          <option value="Florida Keys">Florida Keys</option>
-          <option value="Northwest Florida">Northwest Florida</option>
-          <option value="Central Florida">Central Florida</option>
           <option value="Southeast Florida">Southeast Florida</option>
+          <option value="Central Florida">Central Florida</option>
           <option value="Northeast Florida">Northeast Florida</option>
-          <option value="East Florida">East Florida</option>
-          <option value="West Florida">West Florida</option>
-          <option value="Treasure Coast">Treasure Coast</option>
+          <option value="Northwest Florida (Panhandle)">Northwest Florida (Panhandle)</option>
+          <option value="North Florida / Capital Region">North Florida / Capital Region</option>
+          <option value="Keys / Specialty">Keys / Specialty</option>
         </select>
       </div>
 
       <div class="ica-field">
-        <label for="associate-association">Realtor Association</label>
-        <select id="associate-association">
-          <option value="" disabled selected>Select one</option>
+        <label for="associate-association">REALTOR&reg; Association</label>
+        <select id="associate-association" onchange="filterMLS()" disabled>
+          <option value="" disabled selected>Select region first</option>
+        </select>
+      </div>
+
+      <div class="ica-field">
+        <label for="associate-mls-select">MLS Access</label>
+        <select id="associate-mls-select" disabled>
+          <option value="" disabled selected>Select association first</option>
         </select>
       </div>
 
@@ -1954,109 +1949,65 @@ function scrollToBottom() {
 }
 
 // ========== REGION & ASSOCIATION FILTER ==========
-var associationsByRegion = {
-  'Southwest Florida': [
-    'Naples Area Board of Realtors',
-    'Punta Gorda-Port Charlotte-North Port Association of Realtors',
-    'Royal Palm Coast Realtor Association'
-  ],
-  'Florida Keys': [
-    'Florida Keys Board of Realtors (FKBOR)',
-    'Key West Association of Realtors (KWAR)',
-    'Marathon and Lower Keys Association of Realtors (MLKAR)'
-  ],
-  'Northwest Florida': [
-    'Central Panhandle Association of Realtors (CPAR)',
-    'Emerald Coast Association of Realtors (ECAR)',
-    'Pensacola Association of Realtors',
-    'Tallahassee Board of Realtors (TBOR)'
-  ],
-  'Central Florida': [
-    'Gainesville Alachua County Association of Realtors',
-    'Heartland Association of Realtors',
-    'Lakeland REALTORS',
-    'Ocala Marion County Association of Realtors (OMCAR)',
-    'Orlando Regional Realtor Association',
-    'Osceola County Association of Realtors (OSCAR)',
-    'Realtor Association of Lake and Sumter Counties (RALSC)'
-  ],
-  'Southeast Florida': [
-    'Broward, Palm Beaches, and Saint Lucie Realtors (RWORLD)',
-    'Jupiter Tequesta Hobe Sound (JTHS-MIAMI)',
-    'Miami Association of Realtors'
-  ],
-  'Northeast Florida': [
-    'Daytona Beach Area Association of Realtors (DBAAR)',
-    'Flagler County Association of Realtors (FCAR)',
-    'Northeast Florida Association of Realtors'
-  ],
-  'East Florida': [
-    'Realtor Association of Indian River County (RAIRC)',
-    'Space Coast Association of Realtors (SCAR)',
-    'West Volusia Association of Realtors'
-  ],
-  'West Florida': [
-    'Pinellas Realtor Organization',
-    'Realtor Association of Sarasota and Manatee',
-    'Suncoast Tampa Association of Realtors (GTAR)',
-    'Venice Area Board of Realtors'
-  ],
-  'Treasure Coast': [
-    'Dixie Gilchrist Levy Association of Realtors',
-    'Martin County Association of Realtors',
-    'Realtor Association of Indian River County (RAIRC)'
-  ]
+// ========== FLORIDA REGION → ASSOCIATION → MLS DATA ==========
+var floridaData = {
+  'Southwest Florida': {
+    'Royal Palm Coast Realtor Association': 'Florida Gulf Coast MLS',
+    'Naples Area Board of REALTORS': 'Naples Area Board of REALTORS MLS',
+    'Bonita Springs Estero REALTORS': 'Bonita Springs Estero MLS'
+  },
+  'Southeast Florida': {
+    'MIAMI REALTORS': 'MIAMI REALTORS MLS',
+    'Broward Miami Association of REALTORS': 'MIAMI REALTORS MLS',
+    'Palm Beach Board of REALTORS': 'BeachesMLS',
+    'Greater Fort Lauderdale REALTORS': 'BeachesMLS'
+  },
+  'Central Florida': {
+    'Orlando Regional REALTOR Association': 'Stellar MLS'
+  },
+  'Northeast Florida': {
+    'Northeast Florida Association of REALTORS': 'realMLS',
+    'St Johns County Board of REALTORS': 'realMLS'
+  },
+  'Northwest Florida (Panhandle)': {
+    'Emerald Coast Association of REALTORS': 'Emerald Coast Association of REALTORS MLS',
+    'Central Panhandle Association of REALTORS': 'Central Panhandle Association of REALTORS MLS',
+    'Pensacola Association of REALTORS': 'Pensacola Association of REALTORS MLS'
+  },
+  'North Florida / Capital Region': {
+    'Tallahassee Board of REALTORS': 'Capital Area Technology Services MLS'
+  },
+  'Keys / Specialty': {
+    'Florida Keys Board of REALTORS': 'Florida Keys MLS',
+    'Ocean Reef Club': 'Ocean Reef MLS'
+  }
 };
-
-// All associations in alphabetical order (for showing all when no region selected)
-var allAssociations = [
-  'Broward, Palm Beaches, and Saint Lucie Realtors (RWORLD)',
-  'Central Panhandle Association of Realtors (CPAR)',
-  'Daytona Beach Area Association of Realtors (DBAAR)',
-  'Dixie Gilchrist Levy Association of Realtors',
-  'Emerald Coast Association of Realtors (ECAR)',
-  'Flagler County Association of Realtors (FCAR)',
-  'Florida Keys Board of Realtors (FKBOR)',
-  'Gainesville Alachua County Association of Realtors',
-  'Heartland Association of Realtors',
-  'Jupiter Tequesta Hobe Sound (JTHS-MIAMI)',
-  'Key West Association of Realtors (KWAR)',
-  'Lakeland REALTORS',
-  'Marathon and Lower Keys Association of Realtors (MLKAR)',
-  'Martin County Association of Realtors',
-  'Miami Association of Realtors',
-  'Naples Area Board of Realtors',
-  'Northeast Florida Association of Realtors',
-  'Ocala Marion County Association of Realtors (OMCAR)',
-  'Orlando Regional Realtor Association',
-  'Osceola County Association of Realtors (OSCAR)',
-  'Pensacola Association of Realtors',
-  'Pinellas Realtor Organization',
-  'Punta Gorda-Port Charlotte-North Port Association of Realtors',
-  'Realtor Association of Indian River County (RAIRC)',
-  'Realtor Association of Lake and Sumter Counties (RALSC)',
-  'Realtor Association of Sarasota and Manatee',
-  'Royal Palm Coast Realtor Association',
-  'Space Coast Association of Realtors (SCAR)',
-  'Suncoast Tampa Association of Realtors (GTAR)',
-  'Tallahassee Board of Realtors (TBOR)',
-  'Venice Area Board of Realtors',
-  'West Volusia Association of Realtors'
-];
 
 function filterAssociations() {
   var region = document.getElementById('associate-region').value;
   var assocSelect = document.getElementById('associate-association');
-  var currentVal = assocSelect.value;
-  assocSelect.innerHTML = '<option value="" disabled selected>Select one</option>';
-  var list = region ? (associationsByRegion[region] || []) : allAssociations;
-  for (var i = 0; i < list.length; i++) {
+  var mlsSelect = document.getElementById('associate-mls-select');
+
+  // Reset association
+  assocSelect.innerHTML = '<option value="" disabled selected>Select your association</option>';
+  // Reset MLS
+  mlsSelect.innerHTML = '<option value="" disabled selected>Select association first</option>';
+  mlsSelect.disabled = true;
+
+  if (!region || !floridaData[region]) {
+    assocSelect.disabled = true;
+    return;
+  }
+
+  var associations = Object.keys(floridaData[region]);
+  for (var i = 0; i < associations.length; i++) {
     var opt = document.createElement('option');
-    opt.value = list[i];
-    opt.textContent = list[i];
+    opt.value = associations[i];
+    opt.textContent = associations[i];
     assocSelect.appendChild(opt);
   }
-  // Always add the two generic options at the end
+
+  // Add generic options
   var noPlan = document.createElement('option');
   noPlan.value = "Don't Plan on Joining One";
   noPlan.textContent = "Don't Plan on Joining One";
@@ -2065,9 +2016,33 @@ function filterAssociations() {
   noBoard.value = 'No Board but Plan on Joining';
   noBoard.textContent = 'No Board but Plan on Joining';
   assocSelect.appendChild(noBoard);
+
+  assocSelect.disabled = false;
 }
-// Populate all associations on load
-filterAssociations();
+
+function filterMLS() {
+  var region = document.getElementById('associate-region').value;
+  var assocSelect = document.getElementById('associate-association');
+  var mlsSelect = document.getElementById('associate-mls-select');
+  var assocVal = assocSelect.value;
+
+  mlsSelect.innerHTML = '<option value="" disabled selected>Select your MLS</option>';
+
+  if (!region || !assocVal || !floridaData[region] || !floridaData[region][assocVal]) {
+    // Generic selection or no MLS mapping
+    mlsSelect.innerHTML = '<option value="N/A" selected>N/A</option>';
+    mlsSelect.disabled = true;
+    return;
+  }
+
+  var mls = floridaData[region][assocVal];
+  var opt = document.createElement('option');
+  opt.value = mls;
+  opt.textContent = mls;
+  opt.selected = true;
+  mlsSelect.appendChild(opt);
+  mlsSelect.disabled = false;
+}
 
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
@@ -2405,16 +2380,7 @@ function validateLicenseFields() {
   }
   closingsSel.style.borderColor = '';
 
-  var mlsSel = document.getElementById('associate-mls-select');
-  if (!mlsSel.value) {
-    mlsSel.style.borderColor = '#c0392b';
-    mlsSel.focus();
-    alert('Please select your primary MLS.');
-    return;
-  }
-  mlsSel.style.borderColor = '';
-
-  // Validate region & association
+  // Validate region → association → MLS (cascading order)
   var regionSel = document.getElementById('associate-region');
   if (!regionSel.value) {
     regionSel.style.borderColor = '#c0392b';
@@ -2423,14 +2389,24 @@ function validateLicenseFields() {
     return;
   }
   regionSel.style.borderColor = '';
+
   var assocSel = document.getElementById('associate-association');
   if (!assocSel.value) {
     assocSel.style.borderColor = '#c0392b';
     assocSel.focus();
-    alert('Please select a Realtor Association.');
+    alert('Please select your REALTOR\u00AE Association.');
     return;
   }
   assocSel.style.borderColor = '';
+
+  var mlsSel = document.getElementById('associate-mls-select');
+  if (!mlsSel.value) {
+    mlsSel.style.borderColor = '#c0392b';
+    mlsSel.focus();
+    alert('Please select your MLS access.');
+    return;
+  }
+  mlsSel.style.borderColor = '';
 
   syncLicensedFields();
   // Show title on the confirmation step
