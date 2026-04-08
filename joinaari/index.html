@@ -1663,6 +1663,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   }
 
   function proceedToICA() {
+    // Calculate and store amounts for ICA payment step
+    refreshDueToday();
     // Populate selection summary
     var planCard = document.querySelector('.plan-card.selected');
     var planName = planCard ? planCard.getAttribute('data-plan') : '—';
@@ -1717,6 +1719,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     if (phone) params.set('phone', phone);
     if (license) params.set('license', license);
     if (planName) params.set('plan_name', planName);
+    // Pass payment amount
+    var amounts = window._lastAmounts || {};
+    if (amounts.totalDueToday) params.set('total_due', amounts.totalDueToday.toFixed(2));
+    if (amounts.monthlyTotal) params.set('monthly', amounts.monthlyTotal.toFixed(2));
     window.location.href = '/ica.html?' + params.toString();
   }
 
@@ -1829,6 +1835,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   function refreshDueToday() {
     var amounts = getPaymentAmounts();
+    window._lastAmounts = amounts;
     var dueAmountEl = document.getElementById('payment-due-amount');
     var dueBreakdownEl = document.getElementById('payment-due-breakdown');
     var discountRow = document.getElementById('coupon-discount-row');

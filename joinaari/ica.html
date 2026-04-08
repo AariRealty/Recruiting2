@@ -552,6 +552,7 @@
     }
   </style>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -579,6 +580,11 @@
   <div class="ica-step-item" data-step="3">
     <div class="ica-step-num">3</div>
     <span class="ica-step-label">Sign</span>
+  </div>
+  <div class="ica-step-connector" id="connector-3-4"></div>
+  <div class="ica-step-item" data-step="4">
+    <div class="ica-step-num">4</div>
+    <span class="ica-step-label">Payment</span>
   </div>
 </div>
 
@@ -1710,6 +1716,56 @@
 
     </div><!-- end step-3 -->
 
+    <!-- ===================== STEP 4: PAYMENT ===================== -->
+    <div class="ica-step-panel" id="step-4" style="display:none;">
+      <div class="ica-section">
+        <div class="ica-section-title">Complete Your Payment</div>
+        <p class="ica-text" style="margin-bottom:24px;">Your ICA has been signed. Enter your payment details to activate your account.</p>
+
+        <!-- Coupon Code -->
+        <div id="coupon-section" style="margin:0 0 20px">
+          <label style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:6px">Coupon Code</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="text" id="coupon-input" placeholder="Enter code" style="flex:1;font-family:'Montserrat',sans-serif;font-size:13px;padding:10px 14px;border:1px solid rgba(10,10,10,0.15);border-radius:6px;outline:none;text-transform:uppercase;letter-spacing:1px" />
+            <button type="button" id="coupon-apply-btn" onclick="applyCoupon()" style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:11px 20px;border:1px solid #0a0a0a;border-radius:6px;background:#0a0a0a;color:#fff;cursor:pointer;white-space:nowrap">Apply</button>
+          </div>
+          <p id="coupon-msg" style="display:none;font-size:11px;margin-top:6px;font-weight:500"></p>
+        </div>
+
+        <!-- Due Today Box -->
+        <div id="payment-due-box" style="background:rgba(10,10,10,0.04);border-radius:8px;padding:18px 20px;margin:0 0 20px">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#0a0a0a">Due Today</span>
+            <span id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:700;color:#0a0a0a">$0.00</span>
+          </div>
+          <p id="payment-due-breakdown" style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:6px 0 0;line-height:1.4"></p>
+          <div id="coupon-discount-row" style="display:none;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(10,10,10,0.1)">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <span style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:#27ae60">Coupon Applied</span>
+              <span id="coupon-discount-amount" style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#27ae60">-$0.00</span>
+            </div>
+            <p id="coupon-discount-detail" style="font-family:'Lato',sans-serif;font-size:10px;color:#27ae60;margin:2px 0 0"></p>
+          </div>
+        </div>
+
+        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
+
+        <!-- Stripe Payment Element -->
+        <div id="stripe-payment-element" style="margin-bottom:8px;min-height:100px">
+          <p id="stripe-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:32px 0">Loading payment options...</p>
+        </div>
+        <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
+
+        <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:16px 0 20px;text-align:center">By submitting, your card will be charged the total due today. Recurring billing will be set up separately during onboarding.</p>
+
+        <div class="ica-nav-row" style="margin-top:16px;">
+          <button type="button" class="ica-nav-btn" onclick="goToStep(3)">Back</button>
+          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:200px;">Pay &amp; Join Aari Realty &rarr;</button>
+        </div>
+        <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
+      </div>
+    </div><!-- end step-4 -->
+
     <style>
       @media (max-width: 768px) {
         .ica-section > div[style*="grid-template-columns"] {
@@ -2463,8 +2519,15 @@ function goToStep(step) {
   // Update connectors
   var c12 = document.getElementById('connector-1-2');
   var c23 = document.getElementById('connector-2-3');
+  var c34 = document.getElementById('connector-3-4');
   if (c12) { if (step > 1) c12.classList.add('done'); else c12.classList.remove('done'); }
   if (c23) { if (step > 2) c23.classList.add('done'); else c23.classList.remove('done'); }
+  if (c34) { if (step > 3) c34.classList.add('done'); else c34.classList.remove('done'); }
+
+  // Initialize payment when entering step 4
+  if (step === 4 && !paymentMounted) {
+    initPaymentElement();
+  }
 
   currentStep = step;
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2652,40 +2715,228 @@ function initialAllPages() {
         _subject: 'ICA Signed - ' + formName
       };
 
+      // Save ICA data for payment step
+      window._icaData = data;
+      sessionStorage.setItem('ica_signed', 'true');
+      sessionStorage.setItem('ica_data', JSON.stringify(data));
+
+      // Submit form data to Formspree (non-blocking)
       fetch('https://formspree.io/f/mpqopwga', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify(data)
-      }).then(function(response) {
-        if (response.ok) {
-          sessionStorage.setItem('ica_signed', 'true');
-          sessionStorage.setItem('ica_data', JSON.stringify(data));
+      }).catch(function() { /* silent fail */ });
 
-          // Send executed ICA copy to agent's email (non-blocking)
-          fetch('/api/send-ica-copy', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-          }).catch(function() { /* silent fail — don't block redirect */ });
+      // Send executed ICA copy to agent's email (non-blocking)
+      fetch('/api/send-ica-copy', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).catch(function() { /* silent fail */ });
 
-          var returnParams = new URLSearchParams();
-          returnParams.set('ica_signed', 'true');
-          var nameParts = formName.split(' ');
-          returnParams.set('first_name', nameParts[0] || '');
-          returnParams.set('last_name', nameParts.slice(1).join(' ') || '');
-          returnParams.set('email', formEmail);
-          returnParams.set('phone', formPhone);
-          returnParams.set('license', formLicense);
-          window.location.href = '/index.html?' + returnParams.toString();
-        } else {
-          alert('There was an error submitting the form. Please try again.');
-          if (btn) { btn.disabled = false; btn.textContent = 'Continue to Payment \u2192'; }
-        }
-      }).catch(function(err) {
-        alert('There was an error submitting the form. Please try again.');
-        if (btn) { btn.disabled = false; btn.textContent = 'Continue to Payment \u2192'; }
-      });
+      // Calculate payment amount from URL params
+      var params = new URLSearchParams(window.location.search);
+      var totalDue = parseFloat(params.get('total_due') || '0');
+      if (totalDue > 0) {
+        var dueEl = document.getElementById('payment-due-amount');
+        var breakdownEl = document.getElementById('payment-due-breakdown');
+        if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
+        if (breakdownEl) breakdownEl.textContent = '$199 compliance + prorated monthly';
+      }
+
+      // Move to Step 4 (payment)
+      if (btn) { btn.disabled = false; btn.textContent = 'Continue to Payment \u2192'; }
+      goToStep(4);
   };
+
+  // ========== STRIPE PAYMENT ==========
+  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
+  var stripeElements = null;
+  var paymentElement = null;
+  var paymentMounted = false;
+  var currentClientSecret = null;
+  var currentCustomerId = null;
+  var appliedCoupon = null;
+
+  async function initPaymentElement() {
+    var data = window._icaData || {};
+    var params = new URLSearchParams(window.location.search);
+    var totalDue = parseFloat(params.get('total_due') || '278.20');
+    var nameParts = (data.name || '').split(' ');
+    var firstName = nameParts[0] || params.get('first_name') || '';
+    var lastName = nameParts.slice(1).join(' ') || params.get('last_name') || '';
+    var email = data.email || params.get('email') || '';
+    var phone = data.phone || params.get('phone') || '';
+    var planName = data.plan || params.get('plan_name') || '';
+
+    // Update due display
+    var dueEl = document.getElementById('payment-due-amount');
+    if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
+
+    try {
+      var resp = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          phone: phone,
+          amount: totalDue,
+          plan_name: planName
+        })
+      });
+      var result = await resp.json();
+      if (!resp.ok) throw new Error(result.error || 'Failed to initialize payment');
+
+      currentClientSecret = result.client_secret;
+      currentCustomerId = result.customer_id;
+
+      stripeElements = stripe.elements({
+        clientSecret: currentClientSecret,
+        appearance: {
+          theme: 'stripe',
+          variables: {
+            fontFamily: "'Montserrat', sans-serif",
+            colorPrimary: '#0a0a0a',
+            colorText: '#0a0a0a',
+            colorDanger: '#c0392b',
+            borderRadius: '6px'
+          }
+        }
+      });
+
+      paymentElement = stripeElements.create('payment', {
+        layout: { type: 'tabs', defaultCollapsed: false },
+        wallets: { applePay: 'auto', googlePay: 'auto' },
+        paymentMethodOrder: ['card', 'apple_pay', 'google_pay', 'paypal']
+      });
+
+      var loadMsg = document.getElementById('stripe-loading-msg');
+      if (loadMsg) loadMsg.style.display = 'none';
+
+      paymentElement.mount('#stripe-payment-element');
+      paymentMounted = true;
+
+      paymentElement.on('change', function(event) {
+        var errEl = document.getElementById('card-error');
+        if (event.error) { errEl.textContent = event.error.message; errEl.style.display = 'block'; }
+        else { errEl.style.display = 'none'; }
+      });
+
+    } catch (err) {
+      console.error('[stripe] Payment Element init error:', err.message);
+      var loadMsg = document.getElementById('stripe-loading-msg');
+      if (loadMsg) { loadMsg.textContent = 'Unable to load payment form. Please refresh the page.'; loadMsg.style.color = '#c0392b'; }
+    }
+  }
+
+  window.applyCoupon = async function() {
+    var code = document.getElementById('coupon-input').value.trim().toUpperCase();
+    var msg = document.getElementById('coupon-msg');
+    if (!code) { msg.textContent = 'Please enter a coupon code.'; msg.style.color = '#c0392b'; msg.style.display = 'block'; return; }
+
+    try {
+      var resp = await fetch('/api/validate-coupon', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code: code })
+      });
+      var data = await resp.json();
+      if (!resp.ok || !data.valid) {
+        msg.textContent = 'Invalid coupon code.';
+        msg.style.color = '#c0392b';
+        msg.style.display = 'block';
+        return;
+      }
+      appliedCoupon = data;
+      msg.textContent = 'Coupon applied: ' + (data.type === 'percent_off' ? data.value + '% off' : '$' + data.value + ' off');
+      msg.style.color = '#27ae60';
+      msg.style.display = 'block';
+
+      // Recalculate
+      var params = new URLSearchParams(window.location.search);
+      var totalDue = parseFloat(params.get('total_due') || '278.20');
+      var discount = data.type === 'percent_off' ? totalDue * (data.value / 100) : data.value;
+      var newTotal = Math.max(0, totalDue - discount);
+
+      document.getElementById('payment-due-amount').textContent = '$' + newTotal.toFixed(2);
+      document.getElementById('coupon-discount-amount').textContent = '-$' + discount.toFixed(2);
+      document.getElementById('coupon-discount-row').style.display = 'block';
+
+      // Update Stripe amount
+      if (stripeElements && newTotal > 0) {
+        stripeElements.update({ amount: Math.round(newTotal * 100) });
+      }
+    } catch (err) {
+      msg.textContent = 'Error validating coupon.';
+      msg.style.color = '#c0392b';
+      msg.style.display = 'block';
+    }
+  };
+
+  window.processPayment = async function() {
+    var payBtn = document.getElementById('pay-btn');
+    var formMsg = document.getElementById('form-msg');
+    payBtn.disabled = true;
+    payBtn.textContent = 'Processing...';
+    formMsg.style.display = 'none';
+
+    try {
+      var result = await stripe.confirmPayment({
+        elements: stripeElements,
+        confirmParams: { return_url: window.location.origin + '/index.html?payment_success=true' },
+        redirect: 'if_required'
+      });
+
+      if (result.error) {
+        formMsg.textContent = result.error.message;
+        formMsg.style.color = '#c0392b';
+        formMsg.style.display = 'block';
+        payBtn.disabled = false;
+        payBtn.textContent = 'Pay & Join Aari Realty \u2192';
+        return;
+      }
+
+      // Payment succeeded
+      payBtn.textContent = 'Payment Successful!';
+      payBtn.style.background = '#27ae60';
+      payBtn.style.borderColor = '#27ae60';
+
+      // Send broker summary (non-blocking)
+      var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+      fetch('/api/send-broker-summary', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          agent: icaData,
+          payment: {
+            amount: document.getElementById('payment-due-amount').textContent,
+            method: 'card',
+            customer_id: currentCustomerId
+          }
+        })
+      }).catch(function() { /* silent */ });
+
+      // Redirect to confirmation
+      setTimeout(function() {
+        var params = new URLSearchParams(window.location.search);
+        var returnParams = new URLSearchParams();
+        returnParams.set('payment_success', 'true');
+        returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
+        returnParams.set('email', icaData.email || '');
+        window.location.href = '/index.html?' + returnParams.toString();
+      }, 1500);
+
+    } catch (err) {
+      formMsg.textContent = 'Payment failed. Please try again.';
+      formMsg.style.color = '#c0392b';
+      formMsg.style.display = 'block';
+      payBtn.disabled = false;
+      payBtn.textContent = 'Pay & Join Aari Realty \u2192';
+    }
+  };
+
 })();
 </script>
 
