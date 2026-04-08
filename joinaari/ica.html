@@ -1768,6 +1768,9 @@
           <p id="stripe-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:32px 0">Loading payment options...</p>
         </div>
         <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
+        <div id="stripe-retry-box" style="display:none;text-align:center;margin:16px 0">
+          <button type="button" onclick="retryPaymentInit()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:10px 24px;border:1px solid #0a0a0a;border-radius:6px;background:#fff;color:#0a0a0a;cursor:pointer">Retry Loading Payment</button>
+        </div>
 
         <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:16px 0 20px;text-align:center">By submitting, your card will be charged the total due today. Recurring billing will be set up separately during onboarding.</p>
 
@@ -2786,11 +2789,21 @@ function initialAllPages() {
   var appliedCoupon = null;
 
   async function initPaymentElement() {
-    var data = window._icaData || {};
+    var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
     var params = new URLSearchParams(window.location.search);
-    var totalDue = parseFloat(params.get('total_due') || '278.20');
+    var totalDue = parseFloat(params.get('total_due')) || 0;
+    // Fallback: try to calculate from plan if total_due is missing
+    if (totalDue <= 0) {
+      var monthly = parseFloat(params.get('monthly')) || 0;
+      var compliance = 199;
+      if (monthly > 0) totalDue = monthly + compliance;
+      else totalDue = 278.20; // safe default
+    }
+    // Stripe requires at least $0.50
+    if (totalDue < 0.50) totalDue = 0.50;
+
     var nameParts = (data.name || '').split(' ');
-    var firstName = nameParts[0] || params.get('first_name') || '';
+    var firstName = nameParts[0] || params.get('first_name') || 'Agent';
     var lastName = nameParts.slice(1).join(' ') || params.get('last_name') || '';
     var email = data.email || params.get('email') || '';
     var phone = data.phone || params.get('phone') || '';
@@ -2800,7 +2813,13 @@ function initialAllPages() {
     var dueEl = document.getElementById('payment-due-amount');
     if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
 
+    var loadMsg = document.getElementById('stripe-loading-msg');
+    var retryBox = document.getElementById('stripe-retry-box');
+    if (loadMsg) { loadMsg.textContent = 'Loading payment options...'; loadMsg.style.color = 'rgba(10,10,10,0.4)'; loadMsg.style.display = 'block'; }
+    if (retryBox) retryBox.style.display = 'none';
+
     try {
+      console.log('[stripe] Creating payment intent for $' + totalDue.toFixed(2));
       var resp = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2813,11 +2832,23 @@ function initialAllPages() {
           plan_name: planName
         })
       });
-      var result = await resp.json();
-      if (!resp.ok) throw new Error(result.error || 'Failed to initialize payment');
+
+      var result;
+      try { result = await resp.json(); } catch (e) {
+        throw new Error('Server returned invalid response (status ' + resp.status + ')');
+      }
+      console.log('[stripe] API response:', resp.status, result);
+      if (!resp.ok) throw new Error(result.error || result.detail || 'Server error (status ' + resp.status + ')');
 
       currentClientSecret = result.client_secret;
       currentCustomerId = result.customer_id;
+
+      // Clear any previous Stripe mount
+      var mountEl = document.getElementById('stripe-payment-element');
+      if (paymentElement) { paymentElement.destroy(); paymentElement = null; }
+      // Remove any leftover iframes
+      var iframes = mountEl.querySelectorAll('iframe');
+      for (var i = 0; i < iframes.length; i++) iframes[i].remove();
 
       stripeElements = stripe.elements({
         clientSecret: currentClientSecret,
@@ -2836,14 +2867,17 @@ function initialAllPages() {
       paymentElement = stripeElements.create('payment', {
         layout: { type: 'tabs', defaultCollapsed: false },
         wallets: { applePay: 'auto', googlePay: 'auto' },
-        paymentMethodOrder: ['card', 'apple_pay', 'google_pay', 'paypal']
+        paymentMethodOrder: ['card', 'apple_pay', 'google_pay']
       });
 
-      var loadMsg = document.getElementById('stripe-loading-msg');
       if (loadMsg) loadMsg.style.display = 'none';
 
       paymentElement.mount('#stripe-payment-element');
       paymentMounted = true;
+
+      paymentElement.on('ready', function() {
+        console.log('[stripe] Payment Element ready');
+      });
 
       paymentElement.on('change', function(event) {
         var errEl = document.getElementById('card-error');
@@ -2853,10 +2887,19 @@ function initialAllPages() {
 
     } catch (err) {
       console.error('[stripe] Payment Element init error:', err.message);
-      var loadMsg = document.getElementById('stripe-loading-msg');
-      if (loadMsg) { loadMsg.textContent = 'Unable to load payment form. Please refresh the page.'; loadMsg.style.color = '#c0392b'; }
+      if (loadMsg) {
+        loadMsg.innerHTML = '<span style="color:#c0392b;font-weight:500">Unable to load payment form</span><br><span style="font-size:11px;color:rgba(10,10,10,0.45);margin-top:4px;display:inline-block">' + err.message + '</span>';
+        loadMsg.style.display = 'block';
+      }
+      if (retryBox) retryBox.style.display = 'block';
+      paymentMounted = false;
     }
   }
+
+  window.retryPaymentInit = function() {
+    paymentMounted = false;
+    initPaymentElement();
+  };
 
   window.applyCoupon = async function() {
     var code = document.getElementById('coupon-input').value.trim().toUpperCase();

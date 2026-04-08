@@ -8,17 +8,25 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { first_name, last_name, email, phone, amount, plan_name } = req.body;
+    const { first_name, last_name, email, phone, amount, plan_name } = req.body || {};
 
     if (!first_name || !last_name || !email || !amount) {
       return res.status(400).json({ error: 'first_name, last_name, email, and amount are required' });
     }
 
     if (!process.env.STRIPE_SECRET_KEY) {
-      return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
+      return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured. Add it in Vercel Environment Variables.' });
+    }
+
+    // Validate the key format
+    if (!process.env.STRIPE_SECRET_KEY.startsWith('sk_')) {
+      return res.status(500).json({ error: 'STRIPE_SECRET_KEY is invalid. It must start with sk_test_ or sk_live_.' });
     }
 
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+    // Ensure amount is valid (Stripe minimum is $0.50)
+    const amountCents = Math.max(50, Math.round(parseFloat(amount) * 100));
 
     // Create or find Stripe customer
     const customer = await stripe.customers.create({
@@ -27,15 +35,14 @@ module.exports = async function handler(req, res) {
       phone: phone || undefined
     });
 
-    // Create PaymentIntent — setup_future_usage saves the card for recurring
-    const amountCents = Math.round(parseFloat(amount) * 100);
+    // Create PaymentIntent with card explicitly enabled
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountCents,
       currency: 'usd',
       customer: customer.id,
       setup_future_usage: 'off_session',
       automatic_payment_methods: { enabled: true },
-      description: 'Aari Realty Onboarding — ' + (plan_name || 'Commission Plan'),
+      description: 'Aari Realty Onboarding: ' + (plan_name || 'Commission Plan'),
       metadata: {
         plan: plan_name || '',
         agent_name: first_name + ' ' + last_name,
@@ -48,7 +55,10 @@ module.exports = async function handler(req, res) {
       customer_id: customer.id
     });
   } catch (err) {
-    console.error('[create-payment-intent] Error:', err.message);
-    return res.status(500).json({ error: 'Failed to create payment intent', detail: err.message });
+    console.error('[create-payment-intent] Error:', err.type, err.message);
+    const detail = err.type === 'StripeAuthenticationError'
+      ? 'Invalid Stripe API key. Check STRIPE_SECRET_KEY in Vercel.'
+      : err.message;
+    return res.status(500).json({ error: 'Failed to create payment intent', detail: detail });
   }
 };
