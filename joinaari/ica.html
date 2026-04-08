@@ -2547,7 +2547,7 @@ function goToStep(step) {
   if (c34) { if (step > 3) c34.classList.add('done'); else c34.classList.remove('done'); }
 
   // Initialize payment when entering step 4
-  if (step === 4 && !paypalMounted) {
+  if (step === 4 && !window.paypalMounted) {
     initPaymentElement();
   }
 
@@ -2771,7 +2771,7 @@ function initialAllPages() {
   };
 
   // ========== PAYPAL PAYMENT ==========
-  var paypalMounted = false;
+  window.paypalMounted = false;
   var appliedCoupon = null;
 
   function getPaymentTotal() {
@@ -2790,13 +2790,13 @@ function initialAllPages() {
     return totalDue;
   }
 
-  function initPaymentElement() {
+  window.initPaymentElement = function() {
     var params = new URLSearchParams(window.location.search);
     var totalDue = getPaymentTotal();
     var dueEl = document.getElementById('payment-due-amount');
     if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
 
-    if (paypalMounted) return;
+    if (window.paypalMounted) return;
 
     // If PayPal SDK already loaded, render buttons
     if (typeof paypal !== 'undefined') {
@@ -2823,7 +2823,7 @@ function initialAllPages() {
   }
 
   function renderPayPalButtons() {
-    if (paypalMounted) return;
+    if (window.paypalMounted) return;
 
     var loadMsg = document.getElementById('paypal-loading-msg');
     if (loadMsg) loadMsg.style.display = 'none';
@@ -2913,7 +2913,7 @@ function initialAllPages() {
       }
     }).render('#paypal-button-container');
 
-    paypalMounted = true;
+    window.paypalMounted = true;
   }
 
   window.applyCoupon = async function() {
