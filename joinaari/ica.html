@@ -407,38 +407,32 @@
     .ica-ack-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(10,10,10,0.08);
-      gap: 16px;
+      padding: 12px 16px;
+      gap: 14px;
+      border-radius: 6px;
+      margin-bottom: 4px;
+      transition: background 0.15s;
+      cursor: pointer;
     }
-    .ica-ack-row:last-child { border-bottom: none; }
-    .ica-ack-num {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      color: #0a0a0a;
-      min-width: 32px;
-    }
+    .ica-ack-row:hover { background: rgba(10,10,10,0.03); }
     .ica-ack-label {
       flex: 1;
       font-family: 'Lato', sans-serif;
       font-size: 13px;
-      color: rgba(10,10,10,0.75);
-      line-height: 1.5;
+      color: rgba(10,10,10,0.7);
+      line-height: 1.4;
     }
     .ica-ack-initial {
       font-family: 'Lato', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
-      color: #0a0a0a;
-      min-width: 52px;
-      width: 52px;
-      height: 28px;
-      line-height: 28px;
+      color: rgba(10,10,10,0.3);
+      width: 44px;
+      height: 44px;
+      line-height: 44px;
       text-align: center;
-      border: 1.5px dashed rgba(10,10,10,0.25);
-      border-radius: 4px;
+      border: 2px dashed rgba(10,10,10,0.15);
+      border-radius: 50%;
       cursor: pointer;
       transition: all 0.2s;
       flex-shrink: 0;
@@ -446,9 +440,9 @@
     .ica-ack-initial:hover { border-color: #0a0a0a; background: rgba(10,10,10,0.03); }
     .ica-ack-initial.initialed {
       border-style: solid;
-      border-color: #27ae60;
-      background: rgba(39,174,96,0.06);
-      color: #27ae60;
+      border-color: #0a0a0a;
+      background: #0a0a0a;
+      color: #ffffff;
     }
 
     @media (max-width: 768px) {
@@ -1659,68 +1653,71 @@
 
     <!-- MASTER SIGNATURE & ACKNOWLEDGMENT PAGE -->
     <div id="licensed-signature">
+
+      <!-- PART 1: INITIAL DOCUMENTS -->
       <div class="ica-section" id="initials-section">
-        <div class="ica-section-title">Master Signature &amp; Acknowledgment Page</div>
-        <p class="ica-text">By signing below, the Associate confirms they have received, read, and agree to be bound by each document in this Onboarding Package. This signature, together with execution of the Independent Contractor Agreement, constitutes full execution of all incorporated and supplemental onboarding documents.</p>
+        <div class="ica-section-title" style="margin-bottom:4px;">Initial &amp; Acknowledge</div>
+        <p class="ica-text" style="color:rgba(10,10,10,0.45);font-size:12px;">Enter your initials, then click each document or use the button to initial all at once.</p>
 
-        <div style="display:flex;align-items:center;gap:14px;margin:24px 0;padding:16px 20px;background:rgba(10,10,10,0.03);border-radius:8px;flex-wrap:wrap;">
-          <div class="ica-field" style="margin:0;flex:0 0 90px;">
-            <label for="initials-input" style="font-size:9px;">Your Initials</label>
-            <input type="text" id="initials-input" placeholder="MP" maxlength="5" style="text-align:center;font-family:'Lato',sans-serif;font-size:16px;font-weight:700;padding:6px 8px;">
-          </div>
-          <div style="display:flex;flex-direction:column;gap:2px;">
-            <span style="font-family:'Montserrat',sans-serif;font-size:8px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);">Initial All Pages</span>
-            <button type="button" class="ica-nav-btn primary" id="initial-all-btn" onclick="initialAllPages()" style="white-space:nowrap;font-size:10px;padding:8px 20px;">Initial All Pages</button>
-          </div>
-          <span style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin-left:auto;">or click each box individually</span>
+        <!-- Initials input row -->
+        <div style="display:flex;align-items:center;gap:12px;margin:20px 0 24px;flex-wrap:wrap;">
+          <input type="text" id="initials-input" placeholder="Your initials" maxlength="5" style="width:100px;text-align:center;font-family:'Lato',sans-serif;font-size:18px;font-weight:700;padding:10px 12px;border:2px solid #0a0a0a;border-radius:6px;outline:none;">
+          <button type="button" class="ica-nav-btn primary" id="initial-all-btn" onclick="initialAllPages()" style="white-space:nowrap;font-size:10px;padding:10px 24px;">Initial All Pages</button>
         </div>
 
+        <!-- Document list -->
         <div id="ack-list">
-          <div class="ica-ack-row"><span class="ica-ack-num">1.</span><span class="ica-ack-label">Independent Contractor Agreement (ICA)</span><span class="ica-ack-initial" id="ack-initial-1"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">2.</span><span class="ica-ack-label">Commission Structure Addendum (CSA)</span><span class="ica-ack-initial" id="ack-initial-2"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">3.</span><span class="ica-ack-label">Commission Fee Schedule: Exhibit A</span><span class="ica-ack-initial" id="ack-initial-3"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">4.</span><span class="ica-ack-label">Operations &amp; Compliance Manual: All Addendums</span><span class="ica-ack-initial" id="ack-initial-4"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">5.</span><span class="ica-ack-label">License Verification &amp; Active Status Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-5"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">6.</span><span class="ica-ack-label">Affiliated Business Disclosure: RESPA Compliance</span><span class="ica-ack-initial" id="ack-initial-6"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">7.</span><span class="ica-ack-label">MLS Rules Acknowledgment: All Boards</span><span class="ica-ack-initial" id="ack-initial-7"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">8.</span><span class="ica-ack-label">Buyer Brokerage Agreement Policy Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-8"></span></div>
-          <div class="ica-ack-row"><span class="ica-ack-num">9.</span><span class="ica-ack-label">Wire Fraud &amp; Cybersecurity Acknowledgment</span><span class="ica-ack-initial" id="ack-initial-9"></span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-1"></span><span class="ica-ack-label">Independent Contractor Agreement (ICA)</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-2"></span><span class="ica-ack-label">Commission Structure Addendum (CSA)</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-3"></span><span class="ica-ack-label">Commission Fee Schedule: Exhibit A</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-4"></span><span class="ica-ack-label">Operations &amp; Compliance Manual: All Addendums</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-5"></span><span class="ica-ack-label">License Verification &amp; Active Status Acknowledgment</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-6"></span><span class="ica-ack-label">Affiliated Business Disclosure: RESPA Compliance</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-7"></span><span class="ica-ack-label">MLS Rules Acknowledgment: All Boards</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-8"></span><span class="ica-ack-label">Buyer Brokerage Agreement Policy Acknowledgment</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-9"></span><span class="ica-ack-label">Wire Fraud &amp; Cybersecurity Acknowledgment</span></div>
         </div>
+      </div>
 
-        <p class="ica-text" style="margin-top:32px;">I confirm receipt, review, and agreement to all documents listed above as part of my affiliation with Aari Realty LLC. All documents are binding as of the Effective Date of my Independent Contractor Agreement.</p>
+      <!-- PART 2: YOUR SIGNATURE -->
+      <div class="ica-section" id="execution-section">
+        <div class="ica-section-title" style="margin-bottom:4px;">Your Signature</div>
+        <p class="ica-text" style="color:rgba(10,10,10,0.45);font-size:12px;margin-bottom:20px;">Type your full legal name below to sign this agreement.</p>
 
-        <div id="execution-section" style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;margin-top:24px;">
-          <!-- ASSOCIATE — highlighted -->
-          <div style="background:#0a0a0a;color:#ffffff;border-radius:10px;padding:28px 24px;">
-            <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:16px;">Associate</p>
-            <div style="border:2px solid rgba(255,255,255,0.3);border-radius:8px;padding:20px;margin-bottom:16px;">
-              <p style="font-size:9px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.4);margin-bottom:8px;">Signature</p>
-              <input type="text" class="ica-sig-input" id="associate-signature" placeholder="Type your full legal name" style="color:#ffffff;border-bottom-color:rgba(255,255,255,0.25);">
-            </div>
-            <div class="ica-field" style="margin-bottom:10px;"><label style="color:rgba(255,255,255,0.45);">Printed Name</label><input type="text" id="sig-printed-name" readonly style="background:rgba(255,255,255,0.08);color:#ffffff;border-color:rgba(255,255,255,0.12);"></div>
-            <div class="ica-field" style="margin-bottom:10px;"><label style="color:rgba(255,255,255,0.45);">License No.</label><input type="text" id="sig-license" readonly style="background:rgba(255,255,255,0.08);color:#ffffff;border-color:rgba(255,255,255,0.12);"></div>
-            <div class="ica-field" style="margin-bottom:10px;"><label style="color:rgba(255,255,255,0.45);">Title</label><input type="text" id="sig-title" readonly style="background:rgba(255,255,255,0.08);color:#ffffff;border-color:rgba(255,255,255,0.12);"></div>
-            <div class="ica-field" style="margin-bottom:0;"><label style="color:rgba(255,255,255,0.45);">Date</label><input type="text" id="sig-date" readonly style="background:rgba(255,255,255,0.08);color:#ffffff;border-color:rgba(255,255,255,0.12);"></div>
-          </div>
-          <!-- QUALIFYING BROKER — subtle -->
-          <div style="padding:28px 0 28px 24px;border-left:1px solid rgba(10,10,10,0.1);">
-            <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin-bottom:16px;">Qualifying Broker</p>
-            <div style="border:1.5px solid rgba(10,10,10,0.12);border-radius:8px;padding:20px;margin-bottom:16px;">
-              <p style="font-size:9px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1px;color:rgba(10,10,10,0.35);margin-bottom:8px;">Signature</p>
-              <p class="ica-broker-sig" style="margin:0;padding:4px 0;">Marlenyi Paredes</p>
-              <div style="border-top:1px solid rgba(10,10,10,0.1);margin-top:4px;"></div>
-            </div>
-            <div class="ica-field" style="margin-bottom:10px;"><label>Printed Name</label><input type="text" value="Marlenyi Paredes" readonly style="background:#f5f5f5;"></div>
-            <div class="ica-field" style="margin-bottom:10px;"><label>License No.</label><input type="text" value="BK3527289" readonly style="background:#f5f5f5;"></div>
-            <div class="ica-field" style="margin-bottom:10px;"><label>Title</label><input type="text" value="Qualifying Broker" readonly style="background:#f5f5f5;"></div>
-            <div class="ica-field" style="margin-bottom:0;"><label>Date</label><input type="text" id="broker-date" readonly style="background:#f5f5f5;"></div>
+        <div style="border:2px solid #0a0a0a;border-radius:10px;padding:24px;margin-bottom:24px;">
+          <p style="font-size:9px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:rgba(10,10,10,0.35);margin:0 0 12px;">Sign Here</p>
+          <input type="text" class="ica-sig-input" id="associate-signature" placeholder="Type your full legal name" style="font-size:32px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px;">
+            <div class="ica-field" style="margin:0;"><label>Printed Name</label><input type="text" id="sig-printed-name" readonly></div>
+            <div class="ica-field" style="margin:0;"><label>License No.</label><input type="text" id="sig-license" readonly></div>
+            <div class="ica-field" style="margin:0;"><label>Title</label><input type="text" id="sig-title" readonly></div>
+            <div class="ica-field" style="margin:0;"><label>Date</label><input type="text" id="sig-date" readonly></div>
           </div>
         </div>
 
-        <p class="ica-text" style="margin-top:24px;font-size:11px;color:rgba(10,10,10,0.5);">Electronic signatures carry the same legal weight as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
+        <!-- Broker countersignature (compact) -->
+        <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:20px 24px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+            <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.3);margin:0;">Qualifying Broker</p>
+            <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0;">Countersigned</p>
+          </div>
+          <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
+            <div style="flex:1;min-width:180px;">
+              <p class="ica-broker-sig" style="margin:0;font-size:24px;">Marlenyi Paredes</p>
+              <div style="border-top:1px solid rgba(10,10,10,0.1);margin-top:4px;padding-top:6px;">
+                <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0;">BK3527289 &middot; Qualifying Broker</p>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0;" id="broker-date"></p>
+            </div>
+          </div>
+        </div>
+
+        <p class="ica-text" style="margin-top:20px;font-size:10px;color:rgba(10,10,10,0.4);">Electronic signatures carry the same legal weight as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
 
         <div class="ica-nav-row" style="margin-top:24px;">
-          <button type="button" class="ica-nav-btn" onclick="goToStep(2)">&larr; Back</button>
+          <button type="button" class="ica-nav-btn" onclick="goToStep(2)">Back</button>
           <button type="button" class="ica-nav-btn primary" id="ica-submit-btn" disabled onclick="submitICA()">Continue to Payment &rarr;</button>
         </div>
       </div>
@@ -2566,29 +2563,28 @@ function goToStep(step) {
 }
 
 // ========== INITIAL ALL PAGES ==========
-// Individual initial click
+// Individual initial click (on circle or row)
 (function() {
-  for (var i = 1; i <= 9; i++) {
-    (function(idx) {
-      var span = document.getElementById('ack-initial-' + idx);
-      if (span) {
-        span.addEventListener('click', function() {
-          var initials = document.getElementById('initials-input').value.trim();
-          if (!initials) { alert('Please enter your initials first.'); document.getElementById('initials-input').focus(); return; }
-          if (this.classList.contains('initialed')) {
-            // Toggle off
-            this.textContent = '';
-            this.classList.remove('initialed');
-          } else {
-            this.textContent = initials;
-            this.classList.add('initialed');
-          }
-          checkAllInitialed();
-          validateForm();
-        });
-      }
-    })(i);
+  function handleInitialClick(span) {
+    var initials = document.getElementById('initials-input').value.trim();
+    if (!initials) { alert('Please enter your initials first.'); document.getElementById('initials-input').focus(); return; }
+    if (span.classList.contains('initialed')) {
+      span.textContent = '';
+      span.classList.remove('initialed');
+    } else {
+      span.textContent = initials;
+      span.classList.add('initialed');
+    }
+    checkAllInitialed();
+    validateForm();
   }
+  var rows = document.querySelectorAll('.ica-ack-row');
+  rows.forEach(function(row) {
+    row.addEventListener('click', function() {
+      var span = this.querySelector('.ica-ack-initial');
+      if (span) handleInitialClick(span);
+    });
+  });
 })();
 
 function checkAllInitialed() {
