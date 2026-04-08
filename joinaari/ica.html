@@ -570,7 +570,7 @@
     }
   </style>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
-  <script src="https://js.stripe.com/v3/"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=AeQLr2FHD6cLvIHXH4akQ-ZcCWZpCOywBWrbb3GiOBwEudyxKlhRLX-GNuNElWAKSklyAz-XLcw6tExw&currency=USD&intent=capture&components=buttons" defer></script>
 </head>
 <body>
 
@@ -1772,22 +1772,11 @@
           </div>
         </div>
 
-        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
+        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 20px;line-height:1.6">Pay securely with PayPal or debit/credit card. Recurring billing will be set up separately during onboarding.</p>
 
-        <!-- Stripe Payment Element -->
-        <div id="stripe-payment-element" style="margin-bottom:8px;min-height:100px">
-          <p id="stripe-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:32px 0">Loading payment options...</p>
-        </div>
-        <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
-        <div id="stripe-retry-box" style="display:none;text-align:center;margin:16px 0">
-          <button type="button" onclick="retryPaymentInit()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:10px 24px;border:1px solid #0a0a0a;border-radius:6px;background:#fff;color:#0a0a0a;cursor:pointer">Retry Loading Payment</button>
-        </div>
-
-        <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:16px 0 20px;text-align:center">By submitting, your card will be charged the total due today. Recurring billing will be set up separately during onboarding.</p>
-
-        <div class="ica-nav-row" style="margin-top:16px;justify-content:center;">
-          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:240px;">Pay &amp; Join Aari Realty &rarr;</button>
-        </div>
+        <!-- PayPal Buttons -->
+        <div id="paypal-button-container" style="min-height:150px;"></div>
+        <p id="paypal-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:24px 0">Loading payment options...</p>
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
       </div>
     </div><!-- end step-4 -->
@@ -2562,7 +2551,7 @@ function goToStep(step) {
   if (c34) { if (step > 3) c34.classList.add('done'); else c34.classList.remove('done'); }
 
   // Initialize payment when entering step 4
-  if (step === 4 && !paymentMounted) {
+  if (step === 4 && !paypalMounted) {
     initPaymentElement();
   }
 
@@ -2785,127 +2774,130 @@ function initialAllPages() {
       goToStep(4);
   };
 
-  // ========== STRIPE PAYMENT ==========
-  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
-  var stripeElements = null;
-  var paymentElement = null;
-  var paymentMounted = false;
-  var currentClientSecret = null;
-  var currentCustomerId = null;
+  // ========== PAYPAL PAYMENT ==========
+  var paypalMounted = false;
   var appliedCoupon = null;
 
-  async function initPaymentElement() {
-    var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+  function getPaymentTotal() {
     var params = new URLSearchParams(window.location.search);
     var totalDue = parseFloat(params.get('total_due')) || 0;
-    // Fallback: try to calculate from plan if total_due is missing
     if (totalDue <= 0) {
       var monthly = parseFloat(params.get('monthly')) || 0;
-      var compliance = 199;
-      if (monthly > 0) totalDue = monthly + compliance;
-      else totalDue = 278.20; // safe default
+      if (monthly > 0) totalDue = monthly + 199;
+      else totalDue = 278.20;
     }
-    // Stripe requires at least $0.50
-    if (totalDue < 0.50) totalDue = 0.50;
+    // Apply coupon if active
+    if (appliedCoupon) {
+      var discount = appliedCoupon.type === 'percent_off' ? totalDue * (appliedCoupon.value / 100) : appliedCoupon.value;
+      totalDue = Math.max(0, totalDue - discount);
+    }
+    return totalDue;
+  }
 
-    var nameParts = (data.name || '').split(' ');
-    var firstName = nameParts[0] || params.get('first_name') || 'Agent';
-    var lastName = nameParts.slice(1).join(' ') || params.get('last_name') || '';
-    var email = data.email || params.get('email') || '';
-    var phone = data.phone || params.get('phone') || '';
-    var planName = data.plan || params.get('plan_name') || '';
-
-    // Update due display
+  function initPaymentElement() {
+    var params = new URLSearchParams(window.location.search);
+    var totalDue = getPaymentTotal();
     var dueEl = document.getElementById('payment-due-amount');
     if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
 
-    var loadMsg = document.getElementById('stripe-loading-msg');
-    var retryBox = document.getElementById('stripe-retry-box');
-    if (loadMsg) { loadMsg.textContent = 'Loading payment options...'; loadMsg.style.color = 'rgba(10,10,10,0.4)'; loadMsg.style.display = 'block'; }
-    if (retryBox) retryBox.style.display = 'none';
+    if (paypalMounted) return;
 
-    try {
-      console.log('[stripe] Creating payment intent for $' + totalDue.toFixed(2));
-      var resp = await fetch('/api/create-payment-intent', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-          phone: phone,
-          amount: totalDue,
-          plan_name: planName
-        })
-      });
-
-      var result;
-      try { result = await resp.json(); } catch (e) {
-        throw new Error('Server returned invalid response (status ' + resp.status + ')');
-      }
-      console.log('[stripe] API response:', resp.status, result);
-      if (!resp.ok) throw new Error(result.error || result.detail || 'Server error (status ' + resp.status + ')');
-
-      currentClientSecret = result.client_secret;
-      currentCustomerId = result.customer_id;
-
-      // Clear any previous Stripe mount
-      var mountEl = document.getElementById('stripe-payment-element');
-      if (paymentElement) { paymentElement.destroy(); paymentElement = null; }
-      // Remove any leftover iframes
-      var iframes = mountEl.querySelectorAll('iframe');
-      for (var i = 0; i < iframes.length; i++) iframes[i].remove();
-
-      stripeElements = stripe.elements({
-        clientSecret: currentClientSecret,
-        appearance: {
-          theme: 'stripe',
-          variables: {
-            fontFamily: "'Montserrat', sans-serif",
-            colorPrimary: '#0a0a0a',
-            colorText: '#0a0a0a',
-            colorDanger: '#c0392b',
-            borderRadius: '6px'
-          }
-        }
-      });
-
-      paymentElement = stripeElements.create('payment', {
-        layout: { type: 'tabs', defaultCollapsed: false },
-        wallets: { applePay: 'auto', googlePay: 'auto' },
-        paymentMethodOrder: ['card', 'apple_pay', 'google_pay']
-      });
-
-      if (loadMsg) loadMsg.style.display = 'none';
-
-      paymentElement.mount('#stripe-payment-element');
-      paymentMounted = true;
-
-      paymentElement.on('ready', function() {
-        console.log('[stripe] Payment Element ready');
-      });
-
-      paymentElement.on('change', function(event) {
-        var errEl = document.getElementById('card-error');
-        if (event.error) { errEl.textContent = event.error.message; errEl.style.display = 'block'; }
-        else { errEl.style.display = 'none'; }
-      });
-
-    } catch (err) {
-      console.error('[stripe] Payment Element init error:', err.message);
-      if (loadMsg) {
-        loadMsg.innerHTML = '<span style="color:#c0392b;font-weight:500">Unable to load payment form</span><br><span style="font-size:11px;color:rgba(10,10,10,0.45);margin-top:4px;display:inline-block">' + err.message + '</span>';
-        loadMsg.style.display = 'block';
-      }
-      if (retryBox) retryBox.style.display = 'block';
-      paymentMounted = false;
+    // Wait for PayPal SDK to load
+    if (typeof paypal === 'undefined') {
+      console.log('[paypal] SDK not loaded yet, retrying...');
+      setTimeout(initPaymentElement, 500);
+      return;
     }
-  }
 
-  window.retryPaymentInit = function() {
-    paymentMounted = false;
-    initPaymentElement();
-  };
+    var loadMsg = document.getElementById('paypal-loading-msg');
+    if (loadMsg) loadMsg.style.display = 'none';
+
+    var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+    var planName = data.plan || params.get('plan_name') || 'Aari Realty Onboarding';
+
+    paypal.Buttons({
+      style: {
+        layout: 'vertical',
+        color: 'black',
+        shape: 'rect',
+        label: 'pay',
+        height: 48
+      },
+      createOrder: function(data, actions) {
+        var amount = getPaymentTotal();
+        return actions.order.create({
+          purchase_units: [{
+            description: 'Aari Realty Onboarding: ' + planName,
+            amount: {
+              currency_code: 'USD',
+              value: amount.toFixed(2)
+            }
+          }],
+          application_context: {
+            brand_name: 'Aari Realty LLC',
+            shipping_preference: 'NO_SHIPPING'
+          }
+        });
+      },
+      onApprove: function(data, actions) {
+        var formMsg = document.getElementById('form-msg');
+        formMsg.textContent = 'Processing your payment...';
+        formMsg.style.color = '#0a0a0a';
+        formMsg.style.display = 'block';
+
+        return actions.order.capture().then(function(details) {
+          console.log('[paypal] Payment captured:', details);
+          formMsg.textContent = 'Payment successful! Welcome to Aari Realty.';
+          formMsg.style.color = '#0a0a0a';
+          formMsg.style.fontWeight = '700';
+
+          // Hide PayPal buttons after success
+          var btnContainer = document.getElementById('paypal-button-container');
+          if (btnContainer) btnContainer.style.display = 'none';
+
+          // Send broker summary (non-blocking)
+          var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+          fetch('/api/send-broker-summary', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              agent: icaData,
+              payment: {
+                amount: document.getElementById('payment-due-amount').textContent,
+                method: 'paypal',
+                transaction_id: details.id,
+                payer_email: details.payer && details.payer.email_address ? details.payer.email_address : ''
+              }
+            })
+          }).catch(function() { /* silent */ });
+
+          // Redirect to confirmation
+          setTimeout(function() {
+            var returnParams = new URLSearchParams();
+            returnParams.set('payment_success', 'true');
+            returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
+            returnParams.set('email', icaData.email || '');
+            window.location.href = '/index.html?' + returnParams.toString();
+          }, 2000);
+        });
+      },
+      onError: function(err) {
+        console.error('[paypal] Error:', err);
+        var formMsg = document.getElementById('form-msg');
+        formMsg.textContent = 'Payment failed. Please try again.';
+        formMsg.style.color = '#c0392b';
+        formMsg.style.display = 'block';
+      },
+      onCancel: function() {
+        var formMsg = document.getElementById('form-msg');
+        formMsg.textContent = 'Payment cancelled. You can try again when ready.';
+        formMsg.style.color = 'rgba(10,10,10,0.5)';
+        formMsg.style.display = 'block';
+      }
+    }).render('#paypal-button-container');
+
+    paypalMounted = true;
+  }
 
   window.applyCoupon = async function() {
     var code = document.getElementById('coupon-input').value.trim().toUpperCase();
@@ -2930,86 +2922,19 @@ function initialAllPages() {
       msg.style.color = '#27ae60';
       msg.style.display = 'block';
 
-      // Recalculate
+      // Recalculate display
+      var newTotal = getPaymentTotal();
       var params = new URLSearchParams(window.location.search);
-      var totalDue = parseFloat(params.get('total_due') || '278.20');
-      var discount = data.type === 'percent_off' ? totalDue * (data.value / 100) : data.value;
-      var newTotal = Math.max(0, totalDue - discount);
+      var originalTotal = parseFloat(params.get('total_due') || '278.20');
+      var discount = originalTotal - newTotal;
 
       document.getElementById('payment-due-amount').textContent = '$' + newTotal.toFixed(2);
       document.getElementById('coupon-discount-amount').textContent = '-$' + discount.toFixed(2);
       document.getElementById('coupon-discount-row').style.display = 'block';
-
-      // Update Stripe amount
-      if (stripeElements && newTotal > 0) {
-        stripeElements.update({ amount: Math.round(newTotal * 100) });
-      }
     } catch (err) {
       msg.textContent = 'Error validating coupon.';
       msg.style.color = '#c0392b';
       msg.style.display = 'block';
-    }
-  };
-
-  window.processPayment = async function() {
-    var payBtn = document.getElementById('pay-btn');
-    var formMsg = document.getElementById('form-msg');
-    payBtn.disabled = true;
-    payBtn.textContent = 'Processing...';
-    formMsg.style.display = 'none';
-
-    try {
-      var result = await stripe.confirmPayment({
-        elements: stripeElements,
-        confirmParams: { return_url: window.location.origin + '/index.html?payment_success=true' },
-        redirect: 'if_required'
-      });
-
-      if (result.error) {
-        formMsg.textContent = result.error.message;
-        formMsg.style.color = '#c0392b';
-        formMsg.style.display = 'block';
-        payBtn.disabled = false;
-        payBtn.textContent = 'Pay & Join Aari Realty \u2192';
-        return;
-      }
-
-      // Payment succeeded
-      payBtn.textContent = 'Payment Successful!';
-      payBtn.style.background = '#0a0a0a';
-      payBtn.style.borderColor = '#0a0a0a';
-
-      // Send broker summary (non-blocking)
-      var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
-      fetch('/api/send-broker-summary', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          agent: icaData,
-          payment: {
-            amount: document.getElementById('payment-due-amount').textContent,
-            method: 'card',
-            customer_id: currentCustomerId
-          }
-        })
-      }).catch(function() { /* silent */ });
-
-      // Redirect to confirmation
-      setTimeout(function() {
-        var params = new URLSearchParams(window.location.search);
-        var returnParams = new URLSearchParams();
-        returnParams.set('payment_success', 'true');
-        returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
-        returnParams.set('email', icaData.email || '');
-        window.location.href = '/index.html?' + returnParams.toString();
-      }, 1500);
-
-    } catch (err) {
-      formMsg.textContent = 'Payment failed. Please try again.';
-      formMsg.style.color = '#c0392b';
-      formMsg.style.display = 'block';
-      payBtn.disabled = false;
-      payBtn.textContent = 'Pay & Join Aari Realty \u2192';
     }
   };
 
