@@ -676,7 +676,7 @@
       <input type="hidden" id="associate-association-val" value="">
 
       <div class="ica-nav-row">
-        <button type="button" class="ica-nav-btn" onclick="goSubstep('1a')">&larr; Back</button>
+        <button type="button" class="ica-nav-btn" onclick="goSubstep('1a')">Back</button>
         <button type="button" class="ica-nav-btn primary" id="license-next-btn" style="display:none" onclick="handleLicenseAnswer()">Next &rarr;</button>
       </div>
     </div>
@@ -786,7 +786,7 @@
       </div>
 
       <div class="ica-nav-row">
-        <button type="button" class="ica-nav-btn" onclick="goSubstep('1b')">&larr; Back</button>
+        <button type="button" class="ica-nav-btn" onclick="goSubstep('1b')">Back</button>
         <button type="button" class="ica-nav-btn primary" onclick="validateLicenseFields()">Next &rarr;</button>
       </div>
     </div>
@@ -812,7 +812,7 @@
       </div>
 
       <div class="ica-nav-row">
-        <button type="button" class="ica-nav-btn" id="substep-1d-back" onclick="goSubstep('1c')">&larr; Back</button>
+        <button type="button" class="ica-nav-btn" id="substep-1d-back" onclick="goSubstep('1c')">Back</button>
         <button type="button" class="ica-nav-btn primary" onclick="goToStep(2)">Continue to Review ICA &rarr;</button>
       </div>
     </div>
@@ -1723,7 +1723,7 @@
           <a href="https://calendly.com/join-aarirealty/30min" target="_blank" class="ica-nav-btn primary" style="text-decoration:none;">Meet Your Future Broker</a>
           <a href="https://wa.me/12396881770?text=Hi%20Marlenyi!" target="_blank" class="ica-nav-btn" style="text-decoration:none;background:#25D366;color:#fff;border-color:#25D366;">Text Marlenyi</a>
         </div>
-        <button type="button" class="ica-nav-btn" onclick="goToStep(2)">&larr; Back to Review</button>
+        <button type="button" class="ica-nav-btn" onclick="goToStep(2)">Back</button>
       </div>
     </div>
 
@@ -1774,9 +1774,8 @@
 
         <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:16px 0 20px;text-align:center">By submitting, your card will be charged the total due today. Recurring billing will be set up separately during onboarding.</p>
 
-        <div class="ica-nav-row" style="margin-top:16px;">
-          <button type="button" class="ica-nav-btn" onclick="goToStep(3)">Back</button>
-          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:200px;">Pay &amp; Join Aari Realty &rarr;</button>
+        <div class="ica-nav-row" style="margin-top:16px;justify-content:center;">
+          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:240px;">Pay &amp; Join Aari Realty &rarr;</button>
         </div>
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
       </div>
@@ -2461,6 +2460,11 @@ function syncLicensedFields() {
 var currentStep = 1;
 
 function goBackOneStep() {
+  if (currentStep === 4) {
+    // Don't leave payment step — scroll to top instead
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    return;
+  }
   if (currentStep > 1) {
     goToStep(currentStep - 1);
   } else {
