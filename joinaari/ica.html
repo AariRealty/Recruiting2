@@ -357,7 +357,7 @@
       min-width: 40px;
     }
     .ica-step-connector.done {
-      background: #27ae60;
+      background: #ffffff;
     }
     .ica-step-num {
       width: 28px;
@@ -380,8 +380,8 @@
       color: #0a0a0a;
     }
     .ica-step-item.completed .ica-step-num {
-      background: #27ae60;
-      color: #fff;
+      background: #ffffff;
+      color: #0a0a0a;
     }
     .ica-step-label {
       font-family: 'Montserrat', sans-serif;
@@ -396,7 +396,7 @@
       color: #ffffff;
     }
     .ica-step-item.completed .ica-step-label {
-      color: #27ae60;
+      color: #ffffff;
     }
 
     /* STEP PANELS */
@@ -1738,7 +1738,7 @@
     </div><!-- end step-3 -->
 
     <!-- ===================== STEP 4: PAYMENT ===================== -->
-    <div class="ica-step-panel" id="step-4" style="display:none;">
+    <div class="ica-step-panel" id="step-4">
       <div class="ica-section">
         <div class="ica-section-title">Complete Your Payment</div>
         <p class="ica-text" style="margin-bottom:24px;">Your ICA has been signed. Enter your payment details to activate your account.</p>
@@ -2603,8 +2603,8 @@ function checkAllInitialed() {
   }
   var btn = document.getElementById('initial-all-btn');
   if (btn && allDone) {
-    btn.style.background = '#27ae60';
-    btn.style.borderColor = '#27ae60';
+    btn.style.background = '#0a0a0a';
+    btn.style.borderColor = '#0a0a0a';
     btn.style.color = '#fff';
     btn.textContent = '\u2713 All Pages Initialed';
     btn.style.pointerEvents = 'none';
@@ -2620,8 +2620,8 @@ function initialAllPages() {
   }
   var btn = document.getElementById('initial-all-btn');
   if (btn) {
-    btn.style.background = '#27ae60';
-    btn.style.borderColor = '#27ae60';
+    btn.style.background = '#0a0a0a';
+    btn.style.borderColor = '#0a0a0a';
     btn.style.color = '#fff';
     btn.textContent = '\u2713 All Pages Initialed';
     btn.style.pointerEvents = 'none';
@@ -2935,8 +2935,8 @@ function initialAllPages() {
 
       // Payment succeeded
       payBtn.textContent = 'Payment Successful!';
-      payBtn.style.background = '#27ae60';
-      payBtn.style.borderColor = '#27ae60';
+      payBtn.style.background = '#0a0a0a';
+      payBtn.style.borderColor = '#0a0a0a';
 
       // Send broker summary (non-blocking)
       var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
