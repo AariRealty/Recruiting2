@@ -1986,7 +1986,7 @@ var floridaData = {
   }
 };
 
-function filterAssociations(defaultAssoc) {
+function filterAssociations() {
   var region = document.getElementById('associate-region').value;
   var assocSelect = document.getElementById('associate-association');
   var mlsSelect = document.getElementById('associate-mls-select');
@@ -2007,7 +2007,6 @@ function filterAssociations(defaultAssoc) {
     var opt = document.createElement('option');
     opt.value = associations[i];
     opt.textContent = associations[i];
-    if (defaultAssoc && associations[i] === defaultAssoc) opt.selected = true;
     assocSelect.appendChild(opt);
   }
 
@@ -2022,9 +2021,6 @@ function filterAssociations(defaultAssoc) {
   assocSelect.appendChild(noBoard);
 
   assocSelect.disabled = false;
-
-  // Auto-trigger MLS filter if a default was set
-  if (defaultAssoc) filterMLS();
 }
 
 function filterMLS() {
@@ -2052,7 +2048,14 @@ function filterMLS() {
 }
 
 // Pre-fill defaults on load: Southwest Florida → Royal Palm Coast → Florida Gulf Coast MLS
-filterAssociations('Royal Palm Coast Realtor Association');
+(function initDefaults() {
+  var regionSel = document.getElementById('associate-region');
+  regionSel.value = 'Southwest Florida';
+  filterAssociations();
+  var assocSel = document.getElementById('associate-association');
+  assocSel.value = 'Royal Palm Coast Realtor Association';
+  filterMLS();
+})();
 
 // ========== LICENSE UPLOAD ==========
 var licenseFileData = null;
