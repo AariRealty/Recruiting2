@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Aari Realty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0a0a0a; color: #ffffff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
+  body {
+    font-family: 'Lato', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+  }
+  .wrap {
+    width: 100%;
+    max-width: 640px;
+    text-align: center;
+  }
+
+  /* Brand */
+  .brand {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 48px;
+  }
+
+  /* Checkmark */
+  .check {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.9);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 32px;
+  }
+  .check svg { width: 22px; height: 17px; }
+
+  /* Eyebrow */
+  .eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+
+  /* Heading */
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.05;
+    color: #ffffff;
+    margin-bottom: 28px;
+  }
+  h1 .name {
+    font-style: italic;
+    font-weight: 400;
+  }
+
+  /* Message card */
+  .message {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 32px 28px;
+    margin: 36px 0 28px;
+    text-align: left;
+  }
+  .message p {
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.85);
+  }
+  .message p + p { margin-top: 14px; }
+  .message strong {
+    color: #ffffff;
+    font-weight: 700;
+  }
+
+  /* Next steps list */
+  .next-steps {
+    text-align: left;
+    margin: 0 0 40px;
+  }
+  .next-steps-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .step {
+    display: flex;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.3);
+    flex-shrink: 0;
+    min-width: 22px;
+  }
+  .step-text {
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
+  }
+  .step-text strong { color: #ffffff; font-weight: 600; }
+
+  /* Contact */
+  .contact {
+    font-family: 'Lato', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 24px;
+    line-height: 1.7;
+  }
+  .contact a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 1px;
+  }
+  .contact a:hover { color: #ffffff; border-bottom-color: #ffffff; }
+
+  /* Home link */
+  .home {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    padding: 14px 28px;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 50px;
+    transition: all 0.25s;
+  }
+  .home:hover {
+    color: #ffffff;
+    border-color: rgba(255,255,255,0.4);
+  }
+
+  @media (max-width: 520px) {
+    .message { padding: 24px 20px; }
+    .message p { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <p class="brand">AARI.</p>
+
+    <div class="check">
+      <svg viewBox="0 0 22 17" fill="none">
+        <path d="M1.5 8.5l6.5 6.5L20.5 1.5" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <p class="eyebrow">Payment Received</p>
+    <h1>Welcome aboard<span id="name-wrap">, <span class="name" id="first-name">friend</span></span>.</h1>
+
+    <div class="message">
+      <p>Our office will be sending you confirmation of your license change. Please allow <strong>24&ndash;48 hours</strong> and your onboarding will begin.</p>
+      <p>We're so excited to have you on the Aari Realty team.</p>
+    </div>
+
+    <div class="next-steps">
+      <p class="next-steps-title">What happens next</p>
+      <div class="step">
+        <span class="step-num">01</span>
+        <p class="step-text">Check your inbox for your <strong>executed Independent Contractor Agreement</strong> and <strong>payment receipt</strong>.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <p class="step-text">Our office submits your <strong>license change</strong> with the Florida DBPR.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <p class="step-text">Within <strong>24&ndash;48 hours</strong>, Marlenyi will reach out personally to kick off your onboarding and get you plugged into all your tools and systems.</p>
+      </div>
+    </div>
+
+    <p class="contact">
+      Questions? Text or call Marlenyi directly at <a href="tel:+12396881770">(239) 688-1770</a><br>
+      or email <a href="mailto:join@aarirealty.com">join@aarirealty.com</a>
+    </p>
+
+    <a href="/index.html" class="home">
+      Back to Home
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+        <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+
+  </div>
+
+<script>
+  (function() {
+    // Populate first name from URL params
+    var params = new URLSearchParams(window.location.search);
+    var firstName = (params.get('first_name') || '').trim();
+    if (firstName) {
+      // Basic sanitization: strip any HTML-ish characters
+      firstName = firstName.replace(/[<>"'&]/g, '');
+      var el = document.getElementById('first-name');
+      if (el) el.textContent = firstName;
+    } else {
+      // Hide the ", Name" portion if no name provided
+      var wrap = document.getElementById('name-wrap');
+      if (wrap) wrap.textContent = '';
+    }
+    // Clean URL (remove tracking params) without reloading
+    window.history.replaceState({}, '', window.location.pathname);
+  })();
+</script>
+
+</body>
+</html>

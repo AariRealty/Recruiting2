@@ -2949,10 +2949,9 @@ function initialAllPages() {
             redirected = true;
             setTimeout(function() {
               var returnParams = new URLSearchParams();
-              returnParams.set('payment_success', 'true');
               returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
               returnParams.set('email', icaData.email || '');
-              window.location.href = '/index.html?' + returnParams.toString();
+              window.location.href = '/thank-you.html?' + returnParams.toString();
             }, 1500);
           }
 
