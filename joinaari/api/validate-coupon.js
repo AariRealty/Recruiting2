@@ -11,7 +11,8 @@ module.exports = async function handler(req, res) {
 
     // Built-in coupon codes
     const coupons = {
-      'VIP': { type: 'percent_off', value: 50 }
+      'VIP': { type: 'percent_off', value: 50 },
+      'TEST1': { type: 'set_total', value: 1 }
     };
 
     // Additional coupon codes from environment variable
@@ -43,6 +44,9 @@ module.exports = async function handler(req, res) {
     // Build response
     var label = '';
     switch (coupon.type) {
+      case 'set_total':
+        label = 'Total set to $' + coupon.value.toFixed(2) + ' (test)';
+        break;
       case 'waive_all':
         label = 'Annual compliance + prorated monthly waived';
         break;

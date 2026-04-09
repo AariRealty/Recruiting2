@@ -2788,8 +2788,12 @@ function initialAllPages() {
     }
     // Apply coupon if active
     if (appliedCoupon) {
-      var discount = appliedCoupon.type === 'percent_off' ? totalDue * (appliedCoupon.value / 100) : appliedCoupon.value;
-      totalDue = Math.max(0, totalDue - discount);
+      if (appliedCoupon.type === 'set_total') {
+        totalDue = appliedCoupon.value;
+      } else {
+        var discount = appliedCoupon.type === 'percent_off' ? totalDue * (appliedCoupon.value / 100) : appliedCoupon.value;
+        totalDue = Math.max(0, totalDue - discount);
+      }
     }
     return totalDue;
   }
@@ -2878,6 +2882,10 @@ function initialAllPages() {
 
           // Send broker summary (non-blocking)
           var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+          var paidAmount = getPaymentTotal();
+          var monthlyParam = parseFloat(new URLSearchParams(window.location.search).get('monthly')) || 0;
+          var addonsParam = new URLSearchParams(window.location.search).get('addons') || 'None';
+
           fetch('/api/send-broker-summary', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -2889,6 +2897,21 @@ function initialAllPages() {
                 transaction_id: details.id,
                 payer_email: details.payer && details.payer.email_address ? details.payer.email_address : ''
               }
+            })
+          }).catch(function() { /* silent */ });
+
+          // Send payment receipt to agent (non-blocking)
+          fetch('/api/send-payment-receipt', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              name: icaData.name || '',
+              email: icaData.email || '',
+              plan: icaData.plan || '',
+              amount: paidAmount,
+              payment_id: details.id,
+              addons: addonsParam,
+              monthly_amount: monthlyParam
             })
           }).catch(function() { /* silent */ });
 
@@ -2939,7 +2962,11 @@ function initialAllPages() {
         return;
       }
       appliedCoupon = data;
-      msg.textContent = 'Coupon applied: ' + (data.type === 'percent_off' ? data.value + '% off' : '$' + data.value + ' off');
+      var appliedLabel;
+      if (data.type === 'percent_off') appliedLabel = data.value + '% off';
+      else if (data.type === 'set_total') appliedLabel = 'total set to $' + data.value.toFixed(2);
+      else appliedLabel = '$' + data.value + ' off';
+      msg.textContent = 'Coupon applied: ' + appliedLabel;
       msg.style.color = '#27ae60';
       msg.style.display = 'block';
 
