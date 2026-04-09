@@ -2745,17 +2745,10 @@ function initialAllPages() {
       sessionStorage.setItem('ica_signed', 'true');
       sessionStorage.setItem('ica_data', JSON.stringify(data));
 
-      // Submit form data to Formspree (non-blocking)
+      // Submit form data to Formspree (non-blocking backup)
       fetch('https://formspree.io/f/mpqopwga', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data)
-      }).catch(function() { /* silent fail */ });
-
-      // Send executed ICA copy to agent's email (non-blocking)
-      fetch('/api/send-ica-copy', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       }).catch(function() { /* silent fail */ });
 
@@ -2872,7 +2865,7 @@ function initialAllPages() {
 
         return actions.order.capture().then(function(details) {
           console.log('[paypal] Payment captured:', details);
-          formMsg.textContent = 'Payment successful! Welcome to Aari Realty.';
+          formMsg.textContent = 'Payment successful! Sending confirmations...';
           formMsg.style.color = '#0a0a0a';
           formMsg.style.fontWeight = '700';
 
@@ -2880,49 +2873,103 @@ function initialAllPages() {
           var btnContainer = document.getElementById('paypal-button-container');
           if (btnContainer) btnContainer.style.display = 'none';
 
-          // Send broker summary (non-blocking)
+          // Build shared payload context
           var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
           var paidAmount = getPaymentTotal();
-          var monthlyParam = parseFloat(new URLSearchParams(window.location.search).get('monthly')) || 0;
-          var addonsParam = new URLSearchParams(window.location.search).get('addons') || 'None';
+          var urlParams = new URLSearchParams(window.location.search);
+          var monthlyParam = parseFloat(urlParams.get('monthly')) || 0;
+          var addonsParam = urlParams.get('addons') || 'None';
+          var couponCode = appliedCoupon && appliedCoupon.code ? appliedCoupon.code : 'None';
+          var paymentId = details.id;
 
-          fetch('/api/send-broker-summary', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              agent: icaData,
-              payment: {
-                amount: document.getElementById('payment-due-amount').textContent,
-                method: 'paypal',
-                transaction_id: details.id,
-                payer_email: details.payer && details.payer.email_address ? details.payer.email_address : ''
+          // Helper: POST with keepalive and response.ok verification.
+          // keepalive lets the request survive the post-payment redirect.
+          function sendEmail(endpoint, payload) {
+            return fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+              keepalive: true
+            }).then(function(resp) {
+              if (!resp.ok) {
+                return resp.json().catch(function() { return {}; }).then(function(err) {
+                  throw new Error(endpoint + ' -> ' + resp.status + ' ' + (err.error || 'unknown'));
+                });
               }
-            })
-          }).catch(function() { /* silent */ });
+              return resp.json().catch(function() { return {}; });
+            });
+          }
 
-          // Send payment receipt to agent (non-blocking)
-          fetch('/api/send-payment-receipt', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              name: icaData.name || '',
-              email: icaData.email || '',
-              plan: icaData.plan || '',
-              amount: paidAmount,
-              payment_id: details.id,
-              addons: addonsParam,
-              monthly_amount: monthlyParam
-            })
-          }).catch(function() { /* silent */ });
+          // Email 1: executed ICA copy to agent (CC: broker)
+          var icaPromise = sendEmail('/api/send-ica-copy', icaData)
+            .then(function() { console.log('[email] ICA copy sent'); return null; })
+            .catch(function(err) { console.error('[email] ICA copy FAILED:', err.message); return 'ica'; });
 
-          // Redirect to confirmation
-          setTimeout(function() {
-            var returnParams = new URLSearchParams();
-            returnParams.set('payment_success', 'true');
-            returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
-            returnParams.set('email', icaData.email || '');
-            window.location.href = '/index.html?' + returnParams.toString();
-          }, 2000);
+          // Email 2: payment receipt to agent (CC: broker)
+          var receiptPromise = sendEmail('/api/send-payment-receipt', {
+            name: icaData.name || '',
+            email: icaData.email || '',
+            plan: icaData.plan || '',
+            amount: paidAmount,
+            payment_id: paymentId,
+            addons: addonsParam,
+            monthly_amount: monthlyParam
+          })
+            .then(function() { console.log('[email] Receipt sent'); return null; })
+            .catch(function(err) { console.error('[email] Receipt FAILED:', err.message); return 'receipt'; });
+
+          // Email 3: broker summary (flat payload matching send-broker-summary.js)
+          var brokerPromise = sendEmail('/api/send-broker-summary', {
+            name: icaData.name || '',
+            email: icaData.email || '',
+            phone: icaData.phone || '',
+            license: icaData.license || '',
+            plan: icaData.plan || '',
+            addons: addonsParam,
+            amount: paidAmount,
+            monthly_amount: monthlyParam,
+            payment_id: paymentId,
+            coupon_code: couponCode,
+            signature: icaData.signature || '',
+            ica_date: icaData.date || '',
+            mls: icaData.mls || '',
+            years_licensed: icaData.years_licensed || '',
+            closings: icaData.closings_last_12_months || '',
+            region: icaData.region || '',
+            realtor_association: icaData.realtor_association || '',
+            how_did_you_hear: icaData.how_did_you_hear || ''
+          })
+            .then(function() { console.log('[email] Broker summary sent'); return null; })
+            .catch(function(err) { console.error('[email] Broker summary FAILED:', err.message); return 'broker'; });
+
+          // Wait for all three emails, then redirect with a failsafe timeout.
+          var redirected = false;
+          function doRedirect() {
+            if (redirected) return;
+            redirected = true;
+            setTimeout(function() {
+              var returnParams = new URLSearchParams();
+              returnParams.set('payment_success', 'true');
+              returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
+              returnParams.set('email', icaData.email || '');
+              window.location.href = '/index.html?' + returnParams.toString();
+            }, 1500);
+          }
+
+          Promise.all([icaPromise, receiptPromise, brokerPromise]).then(function(results) {
+            var failed = results.filter(function(r) { return r !== null; });
+            if (failed.length === 0) {
+              formMsg.textContent = 'Payment successful! Welcome to Aari Realty.';
+            } else {
+              console.warn('[email] Failed deliveries:', failed);
+              formMsg.textContent = 'Payment successful! Our team will follow up within 24 hours.';
+            }
+            doRedirect();
+          });
+
+          // Failsafe: if email APIs hang, redirect after 6 seconds. keepalive
+          // ensures in-flight requests still complete after navigation.
+          setTimeout(doRedirect, 6000);
         });
       },
       onError: function(err) {
