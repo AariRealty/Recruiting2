@@ -12,7 +12,8 @@ module.exports = async function handler(req, res) {
     // Built-in coupon codes
     const coupons = {
       'VIP': { type: 'percent_off', value: 50 },
-      'TEST1': { type: 'set_total', value: 1 }
+      'TEST1': { type: 'set_total', value: 1 },
+      'AARIVIP100': { type: 'set_total', value: 0 }
     };
 
     // Additional coupon codes from environment variable

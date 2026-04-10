@@ -1780,6 +1780,13 @@
         <!-- PayPal Buttons -->
         <div id="paypal-button-container" style="min-height:150px;"></div>
         <p id="paypal-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:24px 0">Loading payment options...</p>
+
+        <!-- $0 signup path (shown when coupon waives the total) -->
+        <div id="comp-signup-wrap" style="display:none;text-align:center;padding:12px 0 4px">
+          <button type="button" id="comp-signup-btn" onclick="completeCompSignup()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:18px 36px;border:none;border-radius:50px;background:#0a0a0a;color:#ffffff;cursor:pointer;transition:all 0.25s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Complete Signup &rarr;</button>
+          <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:12px 0 0">No payment required &mdash; your coupon covers today's fees.</p>
+        </div>
+
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
       </div>
     </div><!-- end step-4 -->
@@ -3025,11 +3032,125 @@ function initialAllPages() {
       document.getElementById('payment-due-amount').textContent = '$' + newTotal.toFixed(2);
       document.getElementById('coupon-discount-amount').textContent = '-$' + discount.toFixed(2);
       document.getElementById('coupon-discount-row').style.display = 'block';
+
+      // If the coupon brings the total to $0, swap PayPal for the comp signup button
+      var paypalWrap = document.getElementById('paypal-button-container');
+      var paypalLoadMsg = document.getElementById('paypal-loading-msg');
+      var compWrap = document.getElementById('comp-signup-wrap');
+      if (newTotal <= 0) {
+        if (paypalWrap) paypalWrap.style.display = 'none';
+        if (paypalLoadMsg) paypalLoadMsg.style.display = 'none';
+        if (compWrap) compWrap.style.display = 'block';
+      } else {
+        if (paypalWrap) paypalWrap.style.display = '';
+        if (compWrap) compWrap.style.display = 'none';
+      }
     } catch (err) {
       msg.textContent = 'Error validating coupon.';
       msg.style.color = '#c0392b';
       msg.style.display = 'block';
     }
+  };
+
+  // ========== COMP SIGNUP ($0 path) ==========
+  // Runs the same post-payment flow as PayPal onApprove but with a synthetic
+  // payment_id since no real transaction exists.
+  window.completeCompSignup = function() {
+    var btn = document.getElementById('comp-signup-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Processing...'; }
+
+    var formMsg = document.getElementById('form-msg');
+    formMsg.textContent = 'Finalizing your signup...';
+    formMsg.style.color = '#0a0a0a';
+    formMsg.style.fontWeight = '700';
+    formMsg.style.display = 'block';
+
+    var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+    var urlParams = new URLSearchParams(window.location.search);
+    var monthlyParam = parseFloat(urlParams.get('monthly')) || 0;
+    var addonsParam = urlParams.get('addons') || 'None';
+    var couponCode = appliedCoupon && appliedCoupon.code ? appliedCoupon.code : 'None';
+    var paymentId = 'comp_waived_' + Date.now();
+
+    function sendEmail(endpoint, payload) {
+      return fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true
+      }).then(function(resp) {
+        if (!resp.ok) {
+          return resp.json().catch(function() { return {}; }).then(function(err) {
+            throw new Error(endpoint + ' -> ' + resp.status + ' ' + (err.error || 'unknown'));
+          });
+        }
+        return resp.json().catch(function() { return {}; });
+      });
+    }
+
+    var icaPromise = sendEmail('/api/send-ica-copy', icaData)
+      .then(function() { console.log('[email] ICA copy sent'); return null; })
+      .catch(function(err) { console.error('[email] ICA copy FAILED:', err.message); return 'ica'; });
+
+    var receiptPromise = sendEmail('/api/send-payment-receipt', {
+      name: icaData.name || '',
+      email: icaData.email || '',
+      plan: icaData.plan || '',
+      amount: 0,
+      payment_id: paymentId,
+      addons: addonsParam,
+      monthly_amount: monthlyParam
+    })
+      .then(function() { console.log('[email] Receipt sent'); return null; })
+      .catch(function(err) { console.error('[email] Receipt FAILED:', err.message); return 'receipt'; });
+
+    var brokerPromise = sendEmail('/api/send-broker-summary', {
+      name: icaData.name || '',
+      email: icaData.email || '',
+      phone: icaData.phone || '',
+      license: icaData.license || '',
+      plan: icaData.plan || '',
+      addons: addonsParam,
+      amount: 0,
+      monthly_amount: monthlyParam,
+      payment_id: paymentId,
+      coupon_code: couponCode,
+      signature: icaData.signature || '',
+      ica_date: icaData.date || '',
+      mls: icaData.mls || '',
+      years_licensed: icaData.years_licensed || '',
+      closings: icaData.closings_last_12_months || '',
+      region: icaData.region || '',
+      realtor_association: icaData.realtor_association || '',
+      how_did_you_hear: icaData.how_did_you_hear || ''
+    })
+      .then(function() { console.log('[email] Broker summary sent'); return null; })
+      .catch(function(err) { console.error('[email] Broker summary FAILED:', err.message); return 'broker'; });
+
+    var redirected = false;
+    function doRedirect() {
+      if (redirected) return;
+      redirected = true;
+      setTimeout(function() {
+        var returnParams = new URLSearchParams();
+        returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
+        returnParams.set('email', icaData.email || '');
+        window.location.href = '/thank-you.html?' + returnParams.toString();
+      }, 1500);
+    }
+
+    Promise.all([icaPromise, receiptPromise, brokerPromise]).then(function(results) {
+      var failed = results.filter(function(r) { return r !== null; });
+      if (failed.length === 0) {
+        formMsg.textContent = 'Welcome to Aari Realty! Redirecting...';
+      } else {
+        console.warn('[email] Failed deliveries:', failed);
+        formMsg.textContent = "You're signed up! Our team will follow up within 24 hours.";
+      }
+      doRedirect();
+    });
+
+    setTimeout(doRedirect, 6000);
   };
 
 })();
