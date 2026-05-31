@@ -745,14 +745,15 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     <div class="plan-selector">
 
       <!-- GROWTH -->
-      <div class="plan-card plan-card-v2" data-plan="Aari Growth 70/30" onclick="selectPlan(this)">
+      <div class="plan-card plan-card-v2" data-plan="Aari Growth 85/15" onclick="selectPlan(this)">
         <h3 class="pc-name">Aari Growth</h3>
-        <p class="pc-subtitle">We've got you</p>
-        <p class="pc-split">70/30</p>
+        <p class="pc-subtitle">More control. Still supported.</p>
+        <p class="pc-split">85/15</p>
         <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0 0 4px">agent / brokerage</p>
-        <p class="pc-monthly" style="display:none"><strong>$99</strong>/month</p>
+        <p class="pc-monthly" style="display:none"><strong>$89</strong>/month</p>
         <div class="pc-fees">
-          <div class="pc-fee-row"><strong>$299</strong><span>Transaction Processing Fee</span></div>
+          <div class="pc-fee-row"><strong>$299</strong><span>Residential Transaction Fee</span></div>
+          <div class="pc-fee-row"><strong>$499</strong><span>Vacant Land Transaction Fee</span></div>
         </div>
         <div class="pc-divider"></div>
         <p class="pc-includes-label">INCLUDES</p>
@@ -769,30 +770,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <span class="select-bubble">My Pick</span>
       </div>
 
-      <!-- PRO — MOST POPULAR -->
-      <div class="plan-card plan-card-v2 plan-card-v2-featured" data-plan="Aari Pro 90/10" onclick="selectPlan(this)">
-        <p class="pc-badge">MOST POPULAR</p>
-        <h3 class="pc-name">Aari Pro</h3>
-        <p class="pc-subtitle">More control. Still supported</p>
-        <p class="pc-split">90/10</p>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0 0 4px">agent / brokerage</p>
-        <p class="pc-monthly" style="display:none"><strong>$99</strong>/month</p>
-        <div class="pc-fees">
-          <div class="pc-fee-row"><strong>$399</strong><span>Transaction Processing Fee</span></div>
-          <p style="font-size:9px;color:rgba(255,255,255,0.3);margin:2px 0 0;line-height:1.4">Vacant land transactions: $299</p>
-        </div>
-        <div class="pc-divider"></div>
-        <p class="pc-includes-label">INCLUDES</p>
-        <ul class="pc-includes">
-          <li><strong>Deal support when you need it</strong></li>
-          <li>More control over your business</li>
-        </ul>
-        <div class="pc-position-box">
-          <p class="pc-position-text">Operate independently<br/>Stay in control of your deals</p>
-        </div>
-        <span class="select-bubble">My Pick</span>
-      </div>
-
       <!-- MAX -->
       <div class="plan-card plan-card-v2" data-plan="Aari Max 100%" onclick="selectPlan(this)">
         <h3 class="pc-name">Aari Max</h3>
@@ -800,8 +777,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <p class="pc-split">100%</p>
         <p class="pc-monthly" style="display:none"><strong>$99</strong>/month</p>
         <div class="pc-fees">
-          <div class="pc-fee-row"><strong>$499</strong><span>Transaction Processing Fee</span></div>
-          <p style="font-size:9px;color:rgba(10,10,10,0.3);margin:2px 0 0;line-height:1.4">Vacant land transactions: $299</p>
+          <div class="pc-fee-row"><strong>$499</strong><span>Residential Transaction Fee</span></div>
+          <div class="pc-fee-row"><strong>$299</strong><span>Vacant Land Transaction Fee</span></div>
         </div>
         <div class="pc-divider"></div>
         <p class="pc-includes-label">INCLUDES</p>
@@ -815,6 +792,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
 
     </div>
+
+    <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.35);text-align:center;max-width:560px;margin:24px auto 0;line-height:1.7">All new agents begin on the 75/25 Mentorship Path. Advancement to Aari Growth or Aari Max is based on transaction requirements defined in the ICA.</p>
 
   </div>
 
@@ -883,7 +862,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <button class="pr-back" onclick="closePricingReview()">Back</button>
     </div>
 
-    <p class="pr-joining-line" id="pr-joining-line" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#ffffff;line-height:1.1;margin:0 0 6px">You're joining Aari Pro 90/10</p>
+    <p class="pr-joining-line" id="pr-joining-line" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#ffffff;line-height:1.1;margin:0 0 6px">You're joining Aari Growth 85/15</p>
     <p class="pr-joining-tools" id="pr-joining-tools" style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.38);margin:0 0 32px;display:none">With Marketing Package</p>
 
     <!-- Receipt container -->
@@ -894,7 +873,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <!-- Monthly Fee -->
       <div style="display:flex;justify-content:space-between;align-items:baseline;padding:0 2px;margin-bottom:16px">
         <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(10,10,10,0.5);margin:0">Monthly Fee</p>
-        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-fee">$69/month</p>
+        <p style="font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-fee">$89/month</p>
       </div>
 
       <!-- Annual Compliance -->
@@ -934,7 +913,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <div id="pr-recurring-standard">
         <div style="display:flex;justify-content:space-between;align-items:baseline;padding:4px 2px;margin-bottom:4px">
           <p style="font-family:'Lato',sans-serif;font-size:12px;font-weight:500;color:rgba(10,10,10,0.5);margin:0">Then, recurring monthly</p>
-          <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-total">$69/month</p>
+          <p style="font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;color:#0a0a0a;margin:0" id="pr-monthly-total">$89/month</p>
         </div>
         <p style="font-family:'Lato',sans-serif;font-size:10px;font-weight:400;color:rgba(10,10,10,0.3);margin:0 0 20px;padding:0 2px;text-align:right" id="pr-monthly-breakdown"></p>
       </div>
@@ -1409,12 +1388,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       window.history.replaceState({}, '', window.location.pathname);
     }
   })();
-
-  function toggleGrowthPlan(btn) {
-    var card = document.getElementById('growth-plan-card');
-    var open = card.classList.toggle('open');
-    btn.textContent = open ? '− Hide Growth plan' : '+ New to real estate? See the Growth plan (70/30)';
-  }
 
   function selectPlan(card) {
     document.querySelectorAll('.plan-card').forEach(function(c) {
