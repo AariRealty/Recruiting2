@@ -742,76 +742,78 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         </div>
       </div>
     </div>
-    <div class="plan-selector">
+    <div>
+      <div class="plan-selector">
 
-      <!-- MENTORSHIP 75/25 -->
-      <div class="plan-card plan-card-v2 plan-card-v2-featured" data-plan="Aari Mentorship 75/25" onclick="selectPlan(this)">
-        <p class="pc-badge">STARTING POINT</p>
-        <h3 class="pc-name">Mentorship Path</h3>
-        <p class="pc-subtitle">We've got you</p>
-        <p class="pc-split">75/25</p>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0 0 4px">agent / brokerage</p>
-        <p class="pc-monthly" style="display:none"><strong>$89</strong>/month</p>
-        <div class="pc-divider"></div>
-        <p class="pc-includes-label">INCLUDES</p>
-        <ul class="pc-includes">
-          <li><strong>Transaction Coordination (done for you)</strong></li>
-          <li>Marketing Essentials</li>
-          <li>Accountability club</li>
-          <li>1:1 with broker</li>
-          <li><strong>Brand Builder complimentary 6 months</strong></li>
-        </ul>
-        <div class="pc-position-box">
-          <p class="pc-position-text">Full support environment to build and grow with broker engagement.</p>
+        <!-- MENTORSHIP 75/25 -->
+        <div class="plan-card plan-card-v2 plan-card-v2-featured" data-plan="Aari Mentorship 75/25" onclick="selectPlan(this)">
+          <p class="pc-badge">STARTING POINT</p>
+          <h3 class="pc-name">Mentorship Path</h3>
+          <p class="pc-subtitle">We've got you</p>
+          <p class="pc-split">75/25</p>
+          <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0 0 4px">agent / brokerage</p>
+          <p class="pc-monthly"><strong>$89</strong>/month</p>
+          <div class="pc-divider"></div>
+          <p class="pc-includes-label">INCLUDES</p>
+          <ul class="pc-includes">
+            <li><strong>Transaction Coordination (done for you)</strong></li>
+            <li>Marketing Essentials</li>
+            <li>Accountability club</li>
+            <li>1:1 with broker</li>
+            <li><strong>Brand Builder complimentary 6 months</strong></li>
+          </ul>
+          <div class="pc-position-box">
+            <p class="pc-position-text">Full support environment to build and grow with broker engagement.</p>
+          </div>
+          <span class="select-bubble">My Pick</span>
         </div>
-        <span class="select-bubble">My Pick</span>
+
+        <!-- GROWTH 85/15 -->
+        <div class="plan-card plan-card-v2" data-plan="Aari Growth 85/15" onclick="selectPlan(this)">
+          <h3 class="pc-name">Aari Growth</h3>
+          <p class="pc-subtitle">More control. Still supported.</p>
+          <p class="pc-split">85/15</p>
+          <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0 0 4px">agent / brokerage</p>
+          <p class="pc-monthly"><strong>$89</strong>/month</p>
+          <div class="pc-divider"></div>
+          <p class="pc-includes-label">INCLUDES</p>
+          <ul class="pc-includes">
+            <li><strong>Deal support when you need it</strong></li>
+            <li>More control over your business</li>
+          </ul>
+          <div class="pc-position-box">
+            <p class="pc-position-text">Operate independently.<br/>Stay in control of your deals.</p>
+          </div>
+          <span class="select-bubble">My Pick</span>
+        </div>
+
+        <!-- MAX 100% -->
+        <div class="plan-card plan-card-v2" data-plan="Aari Max 100%" onclick="selectPlan(this)">
+          <h3 class="pc-name">Aari Max</h3>
+          <p class="pc-subtitle">All you</p>
+          <p class="pc-split">100%</p>
+          <p class="pc-monthly"><strong>$99</strong>/month</p>
+          <div class="pc-divider"></div>
+          <p class="pc-includes-label">INCLUDES</p>
+          <ul class="pc-includes">
+            <li><strong>Just brokerage access</strong></li>
+          </ul>
+          <div class="pc-position-box">
+            <p class="pc-position-text">Fully independent<br/>Self-managed transactions</p>
+          </div>
+          <span class="select-bubble">My Pick</span>
+        </div>
+
       </div>
 
-      <!-- GROWTH 85/15 -->
-      <div class="plan-card plan-card-v2" data-plan="Aari Growth 85/15" onclick="selectPlan(this)">
-        <h3 class="pc-name">Aari Growth</h3>
-        <p class="pc-subtitle">More control. Still supported.</p>
-        <p class="pc-split">85/15</p>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0 0 4px">agent / brokerage</p>
-        <p class="pc-monthly" style="display:none"><strong>$89</strong>/month</p>
-        <div class="pc-divider"></div>
-        <p class="pc-includes-label">INCLUDES</p>
-        <ul class="pc-includes">
-          <li><strong>Deal support when you need it</strong></li>
-          <li>More control over your business</li>
-        </ul>
-        <div class="pc-position-box">
-          <p class="pc-position-text">Operate independently.<br/>Stay in control of your deals.</p>
-        </div>
-        <span class="select-bubble">My Pick</span>
+      <!-- Shared transaction fees -->
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px 24px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.03)">
+        <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0">All Plans</p>
+        <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
+        <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$499 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Residential Transaction Fee</span></p>
+        <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
+        <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$299 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Vacant Land Transaction Fee</span></p>
       </div>
-
-      <!-- MAX 100% -->
-      <div class="plan-card plan-card-v2" data-plan="Aari Max 100%" onclick="selectPlan(this)">
-        <h3 class="pc-name">Aari Max</h3>
-        <p class="pc-subtitle">All you</p>
-        <p class="pc-split">100%</p>
-        <p class="pc-monthly" style="display:none"><strong>$99</strong>/month</p>
-        <div class="pc-divider"></div>
-        <p class="pc-includes-label">INCLUDES</p>
-        <ul class="pc-includes">
-          <li><strong>Just brokerage access</strong></li>
-        </ul>
-        <div class="pc-position-box">
-          <p class="pc-position-text">Fully independent<br/>Self-managed transactions</p>
-        </div>
-        <span class="select-bubble">My Pick</span>
-      </div>
-
-    </div>
-
-    <!-- Shared transaction fees -->
-    <div style="display:flex;align-items:center;justify-content:center;gap:16px 24px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.03)">
-      <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0">All Plans</p>
-      <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
-      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$499 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Residential Transaction Fee</span></p>
-      <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
-      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$299 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Vacant Land Transaction Fee</span></p>
     </div>
 
   </div>
