@@ -35,37 +35,46 @@ module.exports = async function handler(req, res) {
       invoice_settings: { default_payment_method: payment_method_id }
     });
 
+    // Idempotency: keyed on the customer so a double-submit / retry reuses the
+    // same price + subscription instead of creating duplicates (double billing).
+    var idem = String(customer_id);
     var monthlySubId = null;
     var annualSubId = null;
+    var errors = {};
 
     // 1. Monthly subscription (brokerage access + add-ons)
     if (serverMonthly > 0) {
-      var monthlyDesc = 'Aari Realty Monthly — ' + (plan_name || 'Commission Plan');
-      if (addons && addons.length > 0) {
-        monthlyDesc += ' + ' + addons.join(', ');
+      try {
+        var monthlyDesc = 'Aari Realty Monthly — ' + (plan_name || 'Commission Plan');
+        if (addons && addons.length > 0) {
+          monthlyDesc += ' + ' + addons.join(', ');
+        }
+
+        // Create a Price for the monthly amount
+        var monthlyPrice = await stripe.prices.create({
+          unit_amount: Math.round(serverMonthly * 100),
+          currency: 'usd',
+          recurring: { interval: 'month' },
+          product_data: { name: monthlyDesc }
+        }, { idempotencyKey: 'price_monthly_' + idem });
+
+        // Start billing on the 1st of next month
+        var now = new Date();
+        var nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        var billingAnchor = Math.floor(nextMonth.getTime() / 1000);
+
+        var monthlySub = await stripe.subscriptions.create({
+          customer: customer_id,
+          items: [{ price: monthlyPrice.id }],
+          billing_cycle_anchor: billingAnchor,
+          proration_behavior: 'none',
+          default_payment_method: payment_method_id
+        }, { idempotencyKey: 'sub_monthly_' + idem });
+        monthlySubId = monthlySub.id;
+      } catch (monthlyErr) {
+        console.error('[setup-recurring] Monthly subscription FAILED for', customer_id, '-', monthlyErr.message);
+        errors.monthly = monthlyErr.message;
       }
-
-      // Create a Price for the monthly amount
-      var monthlyPrice = await stripe.prices.create({
-        unit_amount: Math.round(serverMonthly * 100),
-        currency: 'usd',
-        recurring: { interval: 'month' },
-        product_data: { name: monthlyDesc }
-      });
-
-      // Start billing on the 1st of next month
-      var now = new Date();
-      var nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-      var billingAnchor = Math.floor(nextMonth.getTime() / 1000);
-
-      var monthlySub = await stripe.subscriptions.create({
-        customer: customer_id,
-        items: [{ price: monthlyPrice.id }],
-        billing_cycle_anchor: billingAnchor,
-        proration_behavior: 'none',
-        default_payment_method: payment_method_id
-      });
-      monthlySubId = monthlySub.id;
     }
 
     // 2. Annual compliance subscription ($199/year starting 1 year from now)
@@ -75,7 +84,7 @@ module.exports = async function handler(req, res) {
         currency: 'usd',
         recurring: { interval: 'year' },
         product_data: { name: 'Aari Realty Annual E&O + Compliance Fee' }
-      });
+      }, { idempotencyKey: 'price_annual_' + idem });
 
       var oneYearFromNow = new Date();
       oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
@@ -87,16 +96,20 @@ module.exports = async function handler(req, res) {
         billing_cycle_anchor: annualAnchor,
         proration_behavior: 'none',
         default_payment_method: payment_method_id
-      });
+      }, { idempotencyKey: 'sub_annual_' + idem });
       annualSubId = annualSub.id;
     } catch (annualErr) {
-      console.warn('[setup-recurring] Annual subscription failed:', annualErr.message);
+      // No longer silent: log at error level and report it in the response.
+      console.error('[setup-recurring] Annual subscription FAILED for', customer_id, '-', annualErr.message);
+      errors.annual = annualErr.message;
     }
 
+    var hasErrors = Object.keys(errors).length > 0;
     return res.status(200).json({
-      success: true,
+      success: !hasErrors,
       monthly_subscription_id: monthlySubId,
-      annual_subscription_id: annualSubId
+      annual_subscription_id: annualSubId,
+      errors: hasErrors ? errors : undefined
     });
   } catch (err) {
     console.error('[setup-recurring] Error:', err);
