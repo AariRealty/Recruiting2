@@ -60,12 +60,15 @@ function computePrice(opts) {
 
   let addonMonthly = 0;
   const addonInput = Array.isArray(opts.addons) ? opts.addons : [];
+  const isMentorship = planName.indexOf('Mentorship') !== -1;
   for (let i = 0; i < addonInput.length; i++) {
     const a = addonInput[i];
     const name = a && a.name ? a.name : a;
     if (!(name in ADDON_PRICES)) {
       return { ok: false, error: 'unknown_addon', addon: name || null };
     }
+    // Brand Builder is complimentary for the first 6 months on Mentorship.
+    if (isMentorship && name === 'Brand Builder') continue;
     addonMonthly += ADDON_PRICES[name];
   }
 

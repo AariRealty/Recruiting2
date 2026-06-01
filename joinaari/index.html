@@ -1910,7 +1910,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
     var addons = getSelectedAddons();
     var totalAddonMonthly = 0;
-    addons.forEach(function(a) { totalAddonMonthly += a.monthly; });
+    var isMentorshipPlan = (planCard && (planCard.getAttribute('data-plan') || '').indexOf('Mentorship') !== -1);
+    addons.forEach(function(a) {
+      if (isMentorshipPlan && a.name === 'Brand Builder') return; // complimentary first 6 months
+      totalAddonMonthly += a.monthly;
+    });
 
     var fullMonthly = planMonthlyNum + totalAddonMonthly;
     var today = new Date();
