@@ -1134,6 +1134,13 @@
         </thead>
         <tbody>
           <tr>
+            <td>Mentorship Path</td>
+            <td>75% / 25%</td>
+            <td>$499</td>
+            <td>$299</td>
+            <td>Full support: TC, marketing, accountability, 1:1 with broker.</td>
+          </tr>
+          <tr>
             <td>Growth</td>
             <td>85% / 15%</td>
             <td>$499</td>
@@ -1156,6 +1163,10 @@
       <p class="ica-subheading">Plan Selection</p>
       <p class="ica-text">The Associate's selected plan based on their application:</p>
       <div style="display:flex;flex-direction:column;gap:12px;margin:16px 0;padding:16px;background:rgba(10,10,10,0.03);border-radius:6px;">
+        <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
+          <input type="radio" name="selected_plan" id="plan-mentorship" value="Mentorship (75/25)" style="width:18px;height:18px;accent-color:#0a0a0a;">
+          <strong>Mentorship Path</strong> 75/25 Split
+        </label>
         <label style="display:flex;align-items:center;gap:10px;font-size:13px;font-family:'Lato',sans-serif;cursor:pointer;">
           <input type="radio" name="selected_plan" id="plan-growth" value="Growth (85/15)" style="width:18px;height:18px;accent-color:#0a0a0a;">
           <strong>Growth</strong> 85/15 Split
@@ -2679,7 +2690,10 @@ function initialAllPages() {
   // Pre-select plan radio button based on URL param
   if (planName) {
     const planLower = planName.toLowerCase();
-    if (planLower.includes('growth')) {
+    if (planLower.includes('mentorship')) {
+      const el = document.getElementById('plan-mentorship');
+      if (el) el.checked = true;
+    } else if (planLower.includes('growth')) {
       const el = document.getElementById('plan-growth');
       if (el) el.checked = true;
     } else if (planLower.includes('max')) {

@@ -733,7 +733,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <p class="plan-step-sub">Start with how you want to get paid.</p>
       <div style="display:flex;gap:12px;margin-top:24px">
         <div style="border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:16px 20px;flex:1">
-          <p style="font-family:'Lato',sans-serif;font-size:20px;font-weight:700;color:#ffffff;margin:0 0 4px">$89/mo</p>
+          <p style="font-family:'Lato',sans-serif;font-size:20px;font-weight:700;color:#ffffff;margin:0 0 4px">from $89/mo</p>
           <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0">Brokerage Access</p>
         </div>
         <div style="border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:16px 20px;flex:1">
@@ -744,17 +744,36 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     </div>
     <div class="plan-selector">
 
-      <!-- GROWTH -->
+      <!-- MENTORSHIP 75/25 -->
+      <div class="plan-card plan-card-v2 plan-card-v2-featured" data-plan="Aari Mentorship 75/25" onclick="selectPlan(this)">
+        <p class="pc-badge">STARTING POINT</p>
+        <h3 class="pc-name">Mentorship Path</h3>
+        <p class="pc-subtitle">We've got you</p>
+        <p class="pc-split">75/25</p>
+        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0 0 4px">agent / brokerage</p>
+        <p class="pc-monthly" style="display:none"><strong>$89</strong>/month</p>
+        <div class="pc-divider"></div>
+        <p class="pc-includes-label">INCLUDES</p>
+        <ul class="pc-includes">
+          <li><strong>Transaction Coordination (done for you)</strong></li>
+          <li>Marketing Essentials</li>
+          <li>Accountability club</li>
+          <li>1:1 with broker</li>
+          <li><strong>Brand Builder complimentary 6 months</strong></li>
+        </ul>
+        <div class="pc-position-box">
+          <p class="pc-position-text">Full support environment to build and grow with broker engagement.</p>
+        </div>
+        <span class="select-bubble">My Pick</span>
+      </div>
+
+      <!-- GROWTH 85/15 -->
       <div class="plan-card plan-card-v2" data-plan="Aari Growth 85/15" onclick="selectPlan(this)">
         <h3 class="pc-name">Aari Growth</h3>
         <p class="pc-subtitle">More control. Still supported.</p>
         <p class="pc-split">85/15</p>
         <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0 0 4px">agent / brokerage</p>
         <p class="pc-monthly" style="display:none"><strong>$89</strong>/month</p>
-        <div class="pc-fees">
-          <div class="pc-fee-row"><strong>$499</strong><span>Residential Transaction Fee</span></div>
-          <div class="pc-fee-row"><strong>$299</strong><span>Vacant Land Transaction Fee</span></div>
-        </div>
         <div class="pc-divider"></div>
         <p class="pc-includes-label">INCLUDES</p>
         <ul class="pc-includes">
@@ -767,16 +786,12 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <span class="select-bubble">My Pick</span>
       </div>
 
-      <!-- MAX -->
+      <!-- MAX 100% -->
       <div class="plan-card plan-card-v2" data-plan="Aari Max 100%" onclick="selectPlan(this)">
         <h3 class="pc-name">Aari Max</h3>
         <p class="pc-subtitle">All you</p>
         <p class="pc-split">100%</p>
         <p class="pc-monthly" style="display:none"><strong>$99</strong>/month</p>
-        <div class="pc-fees">
-          <div class="pc-fee-row"><strong>$499</strong><span>Residential Transaction Fee</span></div>
-          <div class="pc-fee-row"><strong>$299</strong><span>Vacant Land Transaction Fee</span></div>
-        </div>
         <div class="pc-divider"></div>
         <p class="pc-includes-label">INCLUDES</p>
         <ul class="pc-includes">
@@ -788,6 +803,15 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         <span class="select-bubble">My Pick</span>
       </div>
 
+    </div>
+
+    <!-- Shared transaction fees -->
+    <div style="display:flex;align-items:center;justify-content:center;gap:16px 24px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.03)">
+      <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0">All Plans</p>
+      <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$499 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Residential Transaction Fee</span></p>
+      <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
+      <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$299 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Vacant Land Transaction Fee</span></p>
     </div>
 
   </div>
@@ -857,7 +881,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <button class="pr-back" onclick="closePricingReview()">Back</button>
     </div>
 
-    <p class="pr-joining-line" id="pr-joining-line" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#ffffff;line-height:1.1;margin:0 0 6px">You're joining Aari Growth 85/15</p>
+    <p class="pr-joining-line" id="pr-joining-line" style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:400;color:#ffffff;line-height:1.1;margin:0 0 6px">You're joining Aari Mentorship 75/25</p>
     <p class="pr-joining-tools" id="pr-joining-tools" style="font-family:'Lato',sans-serif;font-size:12px;font-weight:400;color:rgba(255,255,255,0.38);margin:0 0 32px;display:none">With Marketing Package</p>
 
     <!-- Receipt container -->
@@ -1166,42 +1190,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   </script>
 </section>
 
-<!-- 75/25 MENTORSHIP PATH -->
-<section class="reveal" style="background:#0a0a0a;padding:80px 24px 72px;text-align:center">
-  <div style="max-width:640px;margin:0 auto">
-
-    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,6vw,56px);font-weight:300;color:#ffffff;margin:0 0 12px;line-height:1.1">Every agent starts here.</h2>
-    <p style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 28px">75/25 Mentorship Path &mdash; Required Entry</p>
-
-    <div style="display:flex;gap:12px;justify-content:center;margin:0 auto 36px;max-width:320px">
-      <div style="border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:16px 20px;flex:1">
-        <p style="font-family:'Lato',sans-serif;font-size:20px;font-weight:700;color:#ffffff;margin:0 0 4px">$89/mo</p>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0">Brokerage Access</p>
-      </div>
-      <div style="border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:16px 20px;flex:1">
-        <p style="font-family:'Lato',sans-serif;font-size:20px;font-weight:700;color:#ffffff;margin:0 0 4px">$199/year</p>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0">E&amp;O + Compliance</p>
-      </div>
-    </div>
-
-    <div style="background:#ffffff;border-radius:16px;padding:36px 32px;text-align:left;max-width:480px;margin:0 auto">
-      <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(10,10,10,0.35);margin:0 0 20px">INCLUDES</p>
-      <ul style="list-style:none;padding:0;margin:0;font-family:'Lato',sans-serif;font-size:14px;color:#0a0a0a;line-height:2.2">
-        <li style="display:flex;align-items:baseline;gap:10px"><span style="color:rgba(10,10,10,0.25);font-size:13px">&#10003;</span> <strong>Transaction Coordination (done for you)</strong></li>
-        <li style="display:flex;align-items:baseline;gap:10px"><span style="color:rgba(10,10,10,0.25);font-size:13px">&#10003;</span> Marketing Essentials</li>
-        <li style="display:flex;align-items:baseline;gap:10px"><span style="color:rgba(10,10,10,0.25);font-size:13px">&#10003;</span> Accountability club</li>
-        <li style="display:flex;align-items:baseline;gap:10px"><span style="color:rgba(10,10,10,0.25);font-size:13px">&#10003;</span> 1:1 with broker</li>
-        <li style="display:flex;align-items:baseline;gap:10px"><span style="color:rgba(10,10,10,0.25);font-size:13px">&#10003;</span> <strong>Brand Builder complimentary 6 months</strong></li>
-      </ul>
-      <div style="background:rgba(10,10,10,0.04);border-radius:8px;padding:16px 20px;margin-top:20px">
-        <p style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.55);margin:0;line-height:1.6">Full support environment to build and grow with broker engagement.</p>
-      </div>
-    </div>
-
-    <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(255,255,255,0.3);max-width:520px;margin:28px auto 0;line-height:1.7">All new agents must complete the 75/25 Mentorship Path before advancing to Aari Growth or Aari Max. Advancement is based on transaction requirements defined in the ICA.</p>
-
-  </div>
-</section>
 
 <footer>
   <div class="footer-top">
@@ -1436,7 +1424,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     if (bbAddon) {
       var planName = card.getAttribute('data-plan') || '';
       var bbSpacer = document.getElementById('bb-top-spacer');
-      if (planName.indexOf('Growth') !== -1) {
+      if (planName.indexOf('Mentorship') !== -1) {
         bbAddon.classList.remove('selected');
         bbAddon.classList.add('bb-included');
         bbAddon.style.pointerEvents = 'none';
@@ -1521,7 +1509,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     document.getElementById('pr-monthly-fee').textContent = planMonthlyText;
 
     // Add-ons
-    var isGrowthPlan = planName.indexOf('Growth') !== -1;
+    var isGrowthPlan = planName.indexOf('Mentorship') !== -1;
     var totalAddonMonthly = 0;
     addons.forEach(function(a){ totalAddonMonthly += a.monthly; });
     var addonsReceipt = document.getElementById('pr-addons-receipt');
@@ -1564,7 +1552,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
     }
 
     // Recurring monthly — Growth plan vs standard
-    var isGrowth = planName.indexOf('Growth') !== -1;
+    var isGrowth = planName.indexOf('Mentorship') !== -1;
     var growthSection = document.getElementById('pr-recurring-growth');
     var standardSection = document.getElementById('pr-recurring-standard');
 
