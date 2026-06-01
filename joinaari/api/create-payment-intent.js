@@ -1,4 +1,5 @@
 const Stripe = require('stripe');
+const { computePrice } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -8,10 +9,10 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { first_name, last_name, email, phone, amount, plan_name } = req.body || {};
+    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code } = req.body || {};
 
-    if (!first_name || !last_name || !email || !amount) {
-      return res.status(400).json({ error: 'first_name, last_name, email, and amount are required' });
+    if (!first_name || !last_name || !email) {
+      return res.status(400).json({ error: 'first_name, last_name, and email are required' });
     }
 
     if (!process.env.STRIPE_SECRET_KEY) {
@@ -23,10 +24,24 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ error: 'STRIPE_SECRET_KEY is invalid. It must start with sk_test_ or sk_live_.' });
     }
 
+    // C1: price is computed server-side from the plan/add-on/coupon SELECTION.
+    // The client-sent `amount` is advisory only and is never charged.
+    const pricing = computePrice({ plan_name: plan_name, addons: addons, coupon_code: coupon_code });
+    if (!pricing.ok) {
+      return res.status(400).json({ error: 'Invalid plan selection', detail: pricing.error });
+    }
+
+    // Loud (non-fatal) signal if the browser's number disagrees with ours.
+    if (amount !== undefined && Math.abs(parseFloat(amount) - pricing.totalDueToday) > pricing.tolerance) {
+      console.warn('[create-payment-intent] client/server amount mismatch — client:', amount, 'server:', pricing.totalDueToday, 'plan:', plan_name);
+    }
+
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-    // Ensure amount is valid (Stripe minimum is $0.50)
-    const amountCents = Math.max(50, Math.round(parseFloat(amount) * 100));
+    // Stripe minimum is $0.50. A true $0 total (full-waive coupon) is handled
+    // by the client skipping confirmation; we still create a min PI so the
+    // Elements form can mount, but it is never confirmed when total is 0.
+    const amountCents = Math.max(50, Math.round(pricing.totalDueToday * 100));
 
     // Create or find Stripe customer
     const customer = await stripe.customers.create({
@@ -46,13 +61,17 @@ module.exports = async function handler(req, res) {
       metadata: {
         plan: plan_name || '',
         agent_name: first_name + ' ' + last_name,
-        agent_email: email
+        agent_email: email,
+        coupon: pricing.couponApplied || '',
+        server_total: String(pricing.totalDueToday)
       }
     });
 
     return res.status(200).json({
       client_secret: paymentIntent.client_secret,
-      customer_id: customer.id
+      customer_id: customer.id,
+      amount: pricing.totalDueToday,
+      monthly: pricing.monthlyAmount
     });
   } catch (err) {
     console.error('[create-payment-intent] Error:', err.type, err.message);

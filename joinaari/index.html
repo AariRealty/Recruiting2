@@ -1240,11 +1240,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   if (plansEl) plansObs.observe(plansEl);
 
   // Stripe initialization
-  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
+  var stripe = Stripe('pk_live_51Qo5qRHTQU4zpF23CsDFS2qsFgJ7pP32si1zp53ABcwGGHWtWooZZZ4yMAfp5X8rLA91QdIRno1EjravY4YzNubU00LLRdoYNp');
   var stripeElements = null;
   var paymentElement = null;
   var paymentMounted = false;
-  var currentClientSecret = null;
+  var currentServerDueToday = null; var currentClientSecret = null;
   var currentCustomerId = null;
 
   async function initPaymentElement(amount, firstName, lastName, email, phone, planName) {
@@ -1258,7 +1258,9 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         email: email,
         phone: phone || '',
         amount: amount,
-        plan_name: planName || ''
+        plan_name: planName || '',
+        addons: getSelectedAddons().map(function(a){ return a.name; }),
+        coupon_code: (typeof activeCoupon !== 'undefined' && activeCoupon) ? activeCoupon.code : null
       })
     });
     var data = await resp.json();
@@ -1266,6 +1268,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
     currentClientSecret = data.client_secret;
     currentCustomerId = data.customer_id;
+    currentServerDueToday = (typeof data.amount === 'number') ? data.amount : amount;
 
     // Create Elements instance with the client secret
     stripeElements = stripe.elements({
@@ -1986,7 +1989,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         );
       } else {
         // Update the PaymentIntent amount (coupon may have changed it)
-        await fetch("/api/update-payment-intent", {
+        var updResp = await fetch("/api/update-payment-intent", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -1995,16 +1998,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
             customer_id: currentCustomerId,
             first_name: firstName,
             last_name: lastName,
-            email: email
+            email: email,
+            plan_name: planName,
+            addons: getSelectedAddons().map(function(a){ return a.name; }),
+            coupon_code: (typeof activeCoupon !== 'undefined' && activeCoupon) ? activeCoupon.code : null
           })
         });
-        // Update elements to reflect new amount
-        stripeElements.update({ amount: Math.round(amounts.totalDueToday * 100) });
+        var updData = await updResp.json().catch(function(){ return {}; });
+        if (typeof updData.amount === 'number') currentServerDueToday = updData.amount;
+        // Update elements to reflect the server-confirmed amount
+        stripeElements.update({ amount: Math.round((currentServerDueToday != null ? currentServerDueToday : amounts.totalDueToday) * 100) });
       }
 
-      // Step 2: Confirm payment (or skip if $0 coupon)
+      // Step 2: Confirm payment (or skip if server-confirmed $0)
       var result;
-      if (amounts.totalDueToday <= 0) {
+      if ((currentServerDueToday != null ? currentServerDueToday : amounts.totalDueToday) <= 0) {
         // $0 due — skip Stripe payment, just record the signup
         result = { paymentIntent: { id: 'coupon_waived_' + Date.now(), payment_method: null } };
       } else {

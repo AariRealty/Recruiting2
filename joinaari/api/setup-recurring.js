@@ -1,4 +1,5 @@
 const Stripe = require('stripe');
+const { computePrice } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -8,7 +9,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { customer_id, payment_method_id, monthly_amount, plan_name, addons } = req.body;
+    const { customer_id, payment_method_id, plan_name, addons } = req.body;
 
     if (!customer_id || !payment_method_id) {
       return res.status(400).json({ error: 'customer_id and payment_method_id are required' });
@@ -17,6 +18,14 @@ module.exports = async function handler(req, res) {
     if (!process.env.STRIPE_SECRET_KEY) {
       return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
     }
+
+    // C1: recurring monthly is computed server-side from the plan + add-ons,
+    // never from a client-supplied amount.
+    const pricing = computePrice({ plan_name: plan_name, addons: addons });
+    if (!pricing.ok) {
+      return res.status(400).json({ error: 'Invalid plan selection', detail: pricing.error });
+    }
+    const serverMonthly = pricing.monthlyAmount;
 
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -30,7 +39,7 @@ module.exports = async function handler(req, res) {
     var annualSubId = null;
 
     // 1. Monthly subscription (brokerage access + add-ons)
-    if (monthly_amount && parseFloat(monthly_amount) > 0) {
+    if (serverMonthly > 0) {
       var monthlyDesc = 'Aari Realty Monthly — ' + (plan_name || 'Commission Plan');
       if (addons && addons.length > 0) {
         monthlyDesc += ' + ' + addons.join(', ');
@@ -38,7 +47,7 @@ module.exports = async function handler(req, res) {
 
       // Create a Price for the monthly amount
       var monthlyPrice = await stripe.prices.create({
-        unit_amount: Math.round(parseFloat(monthly_amount) * 100),
+        unit_amount: Math.round(serverMonthly * 100),
         currency: 'usd',
         recurring: { interval: 'month' },
         product_data: { name: monthlyDesc }

@@ -10,10 +10,10 @@ module.exports = async function handler(req, res) {
     if (!code) return res.status(400).json({ error: 'Coupon code is required' });
 
     // Built-in coupon codes
+    // NOTE: test backdoors TEST1 ($1) and AARIVIP100 ($0) removed before go-live.
+    // Add real promo codes via the COUPON_CODES env var (format CODE:type:value).
     const coupons = {
-      'VIP': { type: 'percent_off', value: 50 },
-      'TEST1': { type: 'set_total', value: 1 },
-      'AARIVIP100': { type: 'set_total', value: 0 }
+      'VIP': { type: 'percent_off', value: 50 }
     };
 
     // Additional coupon codes from environment variable
