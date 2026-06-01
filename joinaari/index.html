@@ -2126,6 +2126,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           region: icaInfo.region || '',
           realtor_association: icaInfo.realtor_association || '',
           how_did_you_hear: icaInfo.how_did_you_hear || '',
+          consent_esign: icaInfo.consent_esign || false,
+          consent_text: icaInfo.consent_text || '',
+          initials: icaInfo.initials || '',
+          initials_count: icaInfo.initials_count || 0,
+          signed_at_client: icaInfo.signed_at_client || '',
           monthly_subscription_id: (typeof recurData !== 'undefined' && recurData && recurData.monthly_subscription_id) || '',
           annual_subscription_id: (typeof recurData !== 'undefined' && recurData && recurData.annual_subscription_id) || '',
           subscription_errors: (typeof recurData !== 'undefined' && recurData && recurData.errors) ? JSON.stringify(recurData.errors) : ''

@@ -14,7 +14,8 @@ module.exports = async function handler(req, res) {
       amount, monthly_amount, payment_id, coupon_code,
       signature, ica_date, mls, years_licensed, closings,
       region, realtor_association, how_did_you_hear,
-      monthly_subscription_id, annual_subscription_id, subscription_errors
+      monthly_subscription_id, annual_subscription_id, subscription_errors,
+      consent_esign, consent_text, initials, initials_count, signed_at_client
     } = req.body;
 
     if (!name || !email) {
@@ -41,6 +42,22 @@ module.exports = async function handler(req, res) {
         </div>` : ''}
         <div class="row"><span class="label">Monthly Subscription</span><span class="value" style="font-size:11px;font-family:monospace;${monthly_subscription_id ? '' : 'color:#c0392b;'}">${monthly_subscription_id || 'NOT CREATED'}</span></div>
         <div class="row"><span class="label">Annual ($199) Subscription</span><span class="value" style="font-size:11px;font-family:monospace;${annual_subscription_id ? '' : 'color:#c0392b;'}">${annual_subscription_id || 'NOT CREATED'}</span></div>
+      </div>`;
+
+    // Electronic signature record — server-captured for audit defensibility.
+    const signedAtServer = new Date().toISOString();
+    const signerIp = ((req.headers['x-forwarded-for'] || '').split(',')[0].trim()) || 'unknown';
+    const signerUa = req.headers['user-agent'] || 'unknown';
+    const esignBlock = `
+      <div class="section-block">
+        <h2 class="section-title">Electronic Signature Record</h2>
+        <div class="row"><span class="label">E-Sign Consent</span><span class="value" style="${consent_esign ? 'color:#1a7a3a;' : 'color:#c0392b;'}">${consent_esign ? 'AGREED' : 'NOT RECORDED'}</span></div>
+        <div class="row"><span class="label">Initials Completed</span><span class="value">${(initials_count || 0)} of 9${initials ? ' (' + initials + ')' : ''}</span></div>
+        <div class="row"><span class="label">Signed (server time, UTC)</span><span class="value" style="font-size:12px;">${signedAtServer}</span></div>
+        ${signed_at_client ? `<div class="row"><span class="label">Signed (device time)</span><span class="value" style="font-size:12px;">${signed_at_client}</span></div>` : ''}
+        <div class="row"><span class="label">Signer IP</span><span class="value" style="font-size:12px;font-family:monospace;">${signerIp}</span></div>
+        <div class="row"><span class="label">Device / Browser</span><span class="value" style="font-size:10px;color:#888;text-align:right;max-width:340px;word-break:break-word;">${signerUa}</span></div>
+        ${consent_text ? `<div class="row" style="display:block;"><span class="label">Consent Statement</span><div style="font-size:11px;color:#666;margin-top:6px;line-height:1.5;">${consent_text}</div></div>` : ''}
       </div>`;
 
     const html = `
@@ -110,6 +127,8 @@ module.exports = async function handler(req, res) {
           <span class="value">${amountFormatted}</span>
         </div>
       </div>
+
+      ${esignBlock}
 
       <div class="section-block">
         <h2 class="section-title">Signed ICA</h2>

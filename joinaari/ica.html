@@ -1711,6 +1711,11 @@
           </div>
         </div>
 
+        <div style="margin-bottom:24px;display:flex;align-items:flex-start;gap:12px;background:rgba(10,10,10,0.03);border-radius:8px;padding:16px 18px;">
+          <input type="checkbox" id="esign-consent" onchange="validateForm()" style="margin-top:3px;width:18px;height:18px;flex-shrink:0;cursor:pointer;">
+          <label for="esign-consent" style="font-family:'Lato',sans-serif;font-size:12px;color:rgba(10,10,10,0.7);line-height:1.6;cursor:pointer;">I agree to sign this Independent Contractor Agreement electronically, and I understand my electronic signature and initials are legally binding under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</label>
+        </div>
+
         <!-- Broker countersignature (compact) -->
         <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:20px 24px;">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
@@ -2714,8 +2719,10 @@ function initialAllPages() {
       if (!span || !span.textContent.trim()) { allInitialed = false; break; }
     }
     var hasSig = signatureInput && signatureInput.value.trim().length > 0;
+    var consentEl = document.getElementById('esign-consent');
+    var consented = consentEl && consentEl.checked;
     if (submitBtn) {
-      submitBtn.disabled = !(allInitialed && hasSig);
+      submitBtn.disabled = !(allInitialed && hasSig && consented);
     }
   };
 
@@ -2742,6 +2749,13 @@ function initialAllPages() {
       var formAssociation = document.getElementById('associate-association-val').value || 'N/A';
       var formHearAbout = document.getElementById('associate-hear-about').value || 'N/A';
 
+      var _initialsArr = [];
+      for (var _ii = 1; _ii <= 9; _ii++) {
+        var _sp = document.getElementById('ack-initial-' + _ii);
+        _initialsArr.push(_sp ? _sp.textContent.trim() : '');
+      }
+      var _consentEl = document.getElementById('esign-consent');
+
       var data = {
         name: formName,
         has_license: formHasLicense,
@@ -2757,6 +2771,11 @@ function initialAllPages() {
         plan: selectedPlan,
         signature: signatureInput ? signatureInput.value.trim() : '',
         date: document.getElementById('associate-date').value,
+        consent_esign: !!(_consentEl && _consentEl.checked),
+        consent_text: "I agree to sign this Independent Contractor Agreement electronically, and I understand my electronic signature and initials are legally binding under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).",
+        initials: _initialsArr.join(', '),
+        initials_count: _initialsArr.filter(function(x){ return x; }).length,
+        signed_at_client: new Date().toISOString(),
         _subject: 'ICA Signed - ' + formName
       };
 
