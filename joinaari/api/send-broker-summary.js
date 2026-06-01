@@ -12,7 +12,8 @@ module.exports = async function handler(req, res) {
       name, email, phone, license, plan, addons,
       amount, monthly_amount, payment_id, coupon_code,
       signature, ica_date, mls, years_licensed, closings,
-      region, realtor_association, how_did_you_hear
+      region, realtor_association, how_did_you_hear,
+      monthly_subscription_id, annual_subscription_id, subscription_errors
     } = req.body;
 
     if (!name || !email) {
@@ -27,6 +28,19 @@ module.exports = async function handler(req, res) {
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const amountFormatted = amount ? '$' + Number(amount).toFixed(2) : 'N/A';
     const monthlyFormatted = monthly_amount ? '$' + Number(monthly_amount).toFixed(2) + '/mo' : 'N/A';
+
+    // Recurring billing setup status (surfaces silent subscription failures to the broker)
+    const hasSubErrors = subscription_errors && subscription_errors !== '' && subscription_errors !== '{}';
+    const subStatusBlock = `
+      <div class="section-block">
+        <h2 class="section-title">Recurring Billing Setup</h2>
+        ${hasSubErrors ? `<div style="background:#fdecea;border-left:4px solid #c0392b;padding:14px 16px;border-radius:0 6px 6px 0;margin-bottom:12px;">
+          <strong style="color:#c0392b;">&#9888; Subscription setup error — needs manual follow-up in Stripe.</strong>
+          <div style="font-size:12px;color:#a33;margin-top:6px;font-family:monospace;word-break:break-word;">${subscription_errors}</div>
+        </div>` : ''}
+        <div class="row"><span class="label">Monthly Subscription</span><span class="value" style="font-size:11px;font-family:monospace;${monthly_subscription_id ? '' : 'color:#c0392b;'}">${monthly_subscription_id || 'NOT CREATED'}</span></div>
+        <div class="row"><span class="label">Annual ($199) Subscription</span><span class="value" style="font-size:11px;font-family:monospace;${annual_subscription_id ? '' : 'color:#c0392b;'}">${annual_subscription_id || 'NOT CREATED'}</span></div>
+      </div>`;
 
     const html = `
 <!DOCTYPE html>
@@ -82,6 +96,8 @@ module.exports = async function handler(req, res) {
         <div class="row"><span class="label">Add-Ons</span><span class="value">${addons || 'None'}</span></div>
         <div class="row"><span class="label">Recurring Monthly</span><span class="value">${monthlyFormatted}</span></div>
       </div>
+
+      ${subStatusBlock}
 
       <div class="section-block">
         <h2 class="section-title">Payment Receipt</h2>

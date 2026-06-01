@@ -2113,7 +2113,10 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           closings: icaInfo.closings_last_12_months || '',
           region: icaInfo.region || '',
           realtor_association: icaInfo.realtor_association || '',
-          how_did_you_hear: icaInfo.how_did_you_hear || ''
+          how_did_you_hear: icaInfo.how_did_you_hear || '',
+          monthly_subscription_id: (typeof recurData !== 'undefined' && recurData && recurData.monthly_subscription_id) || '',
+          annual_subscription_id: (typeof recurData !== 'undefined' && recurData && recurData.annual_subscription_id) || '',
+          subscription_errors: (typeof recurData !== 'undefined' && recurData && recurData.errors) ? JSON.stringify(recurData.errors) : ''
         })
       }).catch(function() { /* silent */ });
 
