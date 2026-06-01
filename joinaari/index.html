@@ -159,7 +159,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .plan-card-v2.selected{border-color:#0a0a0a;box-shadow:0 4px 24px rgba(0,0,0,0.12)}
 .plan-card-v2-featured{background:#0a0a0a;border-color:rgba(255,255,255,0.1);position:relative;margin-top:14px}
 .plan-card-v2-featured:hover{border-color:rgba(255,255,255,0.25);box-shadow:0 4px 20px rgba(0,0,0,0.3);background:#0a0a0a}
-.plan-card-v2-featured.selected{border-color:rgba(255,255,255,0.5)}
+.plan-card-v2-featured.selected{border-color:rgba(255,255,255,0.5);background:#0a0a0a}
 .pc-badge{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;display:inline-block;padding:6px 16px;border-radius:20px;text-align:center;position:absolute;top:-14px;left:50%;transform:translateX(-50%);z-index:2;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.15)}
 .pc-name{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:800;color:#0a0a0a;margin:0 0 4px}
 .plan-card-v2-featured .pc-name{color:#ffffff}
@@ -169,10 +169,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:fl
 .plan-card-v2-featured .pc-split{color:#ffffff}
 .pc-split-label{font-family:'Lato',sans-serif;font-size:14px;font-weight:400;color:rgba(10,10,10,0.4)}
 .plan-card-v2-featured .pc-split-label{color:rgba(255,255,255,0.4)}
-.pc-monthly{font-family:'Lato',sans-serif;font-size:14px;font-weight:400;color:rgba(10,10,10,0.5);margin:0 0 16px}
-.pc-monthly strong{font-weight:700;color:rgba(10,10,10,0.7)}
-.plan-card-v2-featured .pc-monthly{color:rgba(255,255,255,0.5)}
-.plan-card-v2-featured .pc-monthly strong{color:rgba(255,255,255,0.8)}
+.pc-monthly{font-family:'Montserrat',sans-serif;font-size:20px;font-weight:700;color:#0a0a0a;margin:0 0 16px}
+.pc-monthly span{font-size:14px;font-weight:400;color:rgba(10,10,10,0.4)}
+.plan-card-v2-featured .pc-monthly{color:#ffffff}
+.plan-card-v2-featured .pc-monthly span{color:rgba(255,255,255,0.45)}
 .pc-fees{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
 .pc-fee-row{display:flex;flex-direction:column;gap:1px}
 .pc-fee-row strong{font-family:'Montserrat',sans-serif;font-size:15px;font-weight:800;color:#0a0a0a}
@@ -731,7 +731,6 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.65);margin:0 0 14px;padding:6px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:3px;display:inline-block">Step 01</p>
       <h2 class="plan-step-headline">Choose your structure.</h2>
       <p class="plan-step-sub">Start with how you want to get paid.</p>
-      <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.3);margin-top:14px;line-height:1.6">All plans include a <strong style="color:rgba(255,255,255,0.55)">$199/year</strong> E&amp;O + Compliance fee.</p>
     </div>
     <div>
       <div class="plan-selector">
@@ -743,7 +742,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           <p class="pc-subtitle">We've got you</p>
           <p class="pc-split">75/25</p>
           <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4);margin:0 0 4px">agent / brokerage</p>
-          <p class="pc-monthly"><strong>$89</strong>/month</p>
+          <p class="pc-monthly">$89<span>/mo</span></p>
           <div class="pc-divider"></div>
           <p class="pc-includes-label">INCLUDES</p>
           <ul class="pc-includes">
@@ -765,7 +764,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           <p class="pc-subtitle">More control. Still supported.</p>
           <p class="pc-split">85/15</p>
           <p style="font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(10,10,10,0.4);margin:0 0 4px">agent / brokerage</p>
-          <p class="pc-monthly"><strong>$89</strong>/month</p>
+          <p class="pc-monthly">$89<span>/mo</span></p>
           <div class="pc-divider"></div>
           <p class="pc-includes-label">INCLUDES</p>
           <ul class="pc-includes">
@@ -783,7 +782,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
           <h3 class="pc-name">Aari Max</h3>
           <p class="pc-subtitle">All you</p>
           <p class="pc-split">100%</p>
-          <p class="pc-monthly"><strong>$99</strong>/month</p>
+          <p class="pc-monthly">$99<span>/mo</span></p>
           <div class="pc-divider"></div>
           <p class="pc-includes-label">INCLUDES</p>
           <ul class="pc-includes">
@@ -797,9 +796,11 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
       </div>
 
-      <!-- Shared transaction fees -->
+      <!-- Shared fees for all plans -->
       <div style="display:flex;align-items:center;justify-content:center;gap:16px 24px;flex-wrap:wrap;margin-top:20px;padding:18px 24px;border:1px solid rgba(255,255,255,0.1);border-radius:10px;background:rgba(255,255,255,0.03)">
         <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin:0">All Plans</p>
+        <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
+        <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$199<span style="font-weight:400;color:rgba(255,255,255,0.4)">/year E&amp;O + Compliance</span></p>
         <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
         <p style="font-family:'Lato',sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin:0">$499 <span style="font-weight:400;color:rgba(255,255,255,0.4)">Residential Transaction Fee</span></p>
         <span style="width:1px;height:28px;background:rgba(255,255,255,0.1)"></span>
