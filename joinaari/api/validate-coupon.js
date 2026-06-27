@@ -1,5 +1,6 @@
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
+  res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -10,10 +11,10 @@ module.exports = async function handler(req, res) {
     if (!code) return res.status(400).json({ error: 'Coupon code is required' });
 
     // Built-in coupon codes
+    // NOTE: test backdoors TEST1 ($1) and AARIVIP100 ($0) removed before go-live.
+    // Add real promo codes via the COUPON_CODES env var (format CODE:type:value).
     const coupons = {
-      'VIP': { type: 'percent_off', value: 50 },
-      'TEST1': { type: 'set_total', value: 1 },
-      'AARIVIP100': { type: 'set_total', value: 0 }
+      'VIP': { type: 'percent_off', value: 50 }
     };
 
     // Additional coupon codes from environment variable

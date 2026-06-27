@@ -1,7 +1,8 @@
 const { Resend } = require('resend');
 
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
+  res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -12,7 +13,9 @@ module.exports = async function handler(req, res) {
       name, email, phone, license, plan, addons,
       amount, monthly_amount, payment_id, coupon_code,
       signature, ica_date, mls, years_licensed, closings,
-      region, realtor_association, how_did_you_hear
+      region, realtor_association, how_did_you_hear,
+      monthly_subscription_id, annual_subscription_id, subscription_errors,
+      consent_esign, consent_text, initials, initials_count, signed_at_client
     } = req.body;
 
     if (!name || !email) {
@@ -27,6 +30,35 @@ module.exports = async function handler(req, res) {
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const amountFormatted = amount ? '$' + Number(amount).toFixed(2) : 'N/A';
     const monthlyFormatted = monthly_amount ? '$' + Number(monthly_amount).toFixed(2) + '/mo' : 'N/A';
+
+    // Recurring billing setup status (surfaces silent subscription failures to the broker)
+    const hasSubErrors = subscription_errors && subscription_errors !== '' && subscription_errors !== '{}';
+    const subStatusBlock = `
+      <div class="section-block">
+        <h2 class="section-title">Recurring Billing Setup</h2>
+        ${hasSubErrors ? `<div style="background:#fdecea;border-left:4px solid #c0392b;padding:14px 16px;border-radius:0 6px 6px 0;margin-bottom:12px;">
+          <strong style="color:#c0392b;">&#9888; Subscription setup error — needs manual follow-up in Stripe.</strong>
+          <div style="font-size:12px;color:#a33;margin-top:6px;font-family:monospace;word-break:break-word;">${subscription_errors}</div>
+        </div>` : ''}
+        <div class="row"><span class="label">Monthly Subscription</span><span class="value" style="font-size:11px;font-family:monospace;${monthly_subscription_id ? '' : 'color:#c0392b;'}">${monthly_subscription_id || 'NOT CREATED'}</span></div>
+        <div class="row"><span class="label">Annual ($199) Subscription</span><span class="value" style="font-size:11px;font-family:monospace;${annual_subscription_id ? '' : 'color:#c0392b;'}">${annual_subscription_id || 'NOT CREATED'}</span></div>
+      </div>`;
+
+    // Electronic signature record — server-captured for audit defensibility.
+    const signedAtServer = new Date().toISOString();
+    const signerIp = ((req.headers['x-forwarded-for'] || '').split(',')[0].trim()) || 'unknown';
+    const signerUa = req.headers['user-agent'] || 'unknown';
+    const esignBlock = `
+      <div class="section-block">
+        <h2 class="section-title">Electronic Signature Record</h2>
+        <div class="row"><span class="label">E-Sign Consent</span><span class="value" style="${consent_esign ? 'color:#1a7a3a;' : 'color:#c0392b;'}">${consent_esign ? 'AGREED' : 'NOT RECORDED'}</span></div>
+        <div class="row"><span class="label">Initials Completed</span><span class="value">${(initials_count || 0)} of 9${initials ? ' (' + initials + ')' : ''}</span></div>
+        <div class="row"><span class="label">Signed (server time, UTC)</span><span class="value" style="font-size:12px;">${signedAtServer}</span></div>
+        ${signed_at_client ? `<div class="row"><span class="label">Signed (device time)</span><span class="value" style="font-size:12px;">${signed_at_client}</span></div>` : ''}
+        <div class="row"><span class="label">Signer IP</span><span class="value" style="font-size:12px;font-family:monospace;">${signerIp}</span></div>
+        <div class="row"><span class="label">Device / Browser</span><span class="value" style="font-size:10px;color:#888;text-align:right;max-width:340px;word-break:break-word;">${signerUa}</span></div>
+        ${consent_text ? `<div class="row" style="display:block;"><span class="label">Consent Statement</span><div style="font-size:11px;color:#666;margin-top:6px;line-height:1.5;">${consent_text}</div></div>` : ''}
+      </div>`;
 
     const html = `
 <!DOCTYPE html>
@@ -83,6 +115,8 @@ module.exports = async function handler(req, res) {
         <div class="row"><span class="label">Recurring Monthly</span><span class="value">${monthlyFormatted}</span></div>
       </div>
 
+      ${subStatusBlock}
+
       <div class="section-block">
         <h2 class="section-title">Payment Receipt</h2>
         <div class="row"><span class="label">Date</span><span class="value">${date}</span></div>
@@ -93,6 +127,8 @@ module.exports = async function handler(req, res) {
           <span class="value">${amountFormatted}</span>
         </div>
       </div>
+
+      ${esignBlock}
 
       <div class="section-block">
         <h2 class="section-title">Signed ICA</h2>
@@ -117,7 +153,7 @@ module.exports = async function handler(req, res) {
 
     </div>
     <div class="footer">
-      Aari Realty LLC &middot; 4144 Palm Beach Blvd, Fort Myers, FL 33905<br>
+      Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>
       (239) 688-1770 &middot; join@aarirealty.com
     </div>
   </div>

@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Agent Portal | Aari Realty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  /* ============================================================
+     AARI REALTY — AGENT PORTAL (V1 / STATIC SHELL)
+     Brand tokens mirror joinaari/index.html.
+     All agent-specific data is PLACEHOLDER. Hooks for live data
+     are marked with: data-hook="..."  and  /* DATA HOOK */ notes.
+     ============================================================ */
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --black:#0a0a0a;
+    --white:#ffffff;
+    --gray:#a0a0a0;
+    --line:rgba(255,255,255,0.12);
+    --line-strong:rgba(255,255,255,0.22);
+    --panel:#121212;
+    --panel-2:#181818;
+    --ok:#5bd6a0;
+    --warn:#e3c06a;
+    --pending:#7f7f7f;
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--black);color:var(--white);font-family:'Montserrat',sans-serif;-webkit-font-smoothing:antialiased;line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  h1,h2,h3,.serif{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400}
+
+  /* ---------- BUTTONS ---------- */
+  .btn{display:inline-block;border:1px solid var(--white);background:transparent;color:var(--white);
+    padding:13px 30px;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:2px;
+    text-transform:uppercase;border-radius:4px;cursor:pointer;transition:all .3s ease}
+  .btn:hover{background:var(--white);color:var(--black)}
+  .btn-sm{padding:9px 18px;font-size:10px;letter-spacing:1.5px}
+  .btn-ghost{border-color:var(--line-strong);color:var(--gray)}
+  .btn-ghost:hover{background:transparent;border-color:var(--white);color:var(--white)}
+
+  /* ---------- LOGIN GATE (cosmetic V1) ---------- */
+  #gate{position:fixed;inset:0;z-index:100;background:var(--black);display:flex;align-items:center;justify-content:center;padding:24px}
+  #gate .gate-watermark{position:absolute;font-family:'Cormorant Garamond',serif;font-size:clamp(300px,40vw,600px);color:#fff;opacity:.04;pointer-events:none;user-select:none;letter-spacing:-20px;z-index:0}
+  .gate-card{position:relative;z-index:1;width:100%;max-width:380px;text-align:center}
+  .gate-card .mark{font-family:'Cormorant Garamond',serif;font-size:46px;letter-spacing:6px;text-transform:uppercase}
+  .gate-card .sub{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin:4px 0 36px}
+  .gate-card input{width:100%;background:transparent;border:1px solid var(--line-strong);color:#fff;
+    padding:13px 16px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:13px;margin-bottom:12px;outline:none}
+  .gate-card input:focus{border-color:#fff}
+  .gate-card .btn{width:100%;margin-top:8px}
+  .gate-note{font-size:9px;letter-spacing:1px;color:#555;margin-top:24px;line-height:1.7;text-transform:uppercase}
+
+  /* ---------- TOP BAR ---------- */
+  header.topbar{position:sticky;top:0;z-index:40;background:rgba(10,10,10,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:18px 40px}
+  .topbar .brand{font-family:'Cormorant Garamond',serif;font-size:24px;letter-spacing:4px;text-transform:uppercase}
+  .topbar .brand small{font-family:'Montserrat',sans-serif;font-size:9px;letter-spacing:3px;color:var(--gray);display:block;margin-top:-2px}
+  .topbar nav{display:flex;gap:28px;align-items:center}
+  .topbar nav a{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);transition:color .2s}
+  .topbar nav a:hover,.topbar nav a.active{color:#fff}
+  .topbar .agent-chip{display:flex;align-items:center;gap:10px}
+  .topbar .avatar{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:15px}
+  .topbar .agent-name{font-size:11px;letter-spacing:1px;color:#fff}
+  .topbar .agent-plan{font-size:9px;letter-spacing:1px;color:var(--gray);text-transform:uppercase}
+
+  /* ---------- LAYOUT ---------- */
+  .wrap{max-width:1100px;margin:0 auto;padding:48px 40px 100px}
+  .welcome{margin-bottom:44px}
+  .welcome h1{font-size:clamp(34px,4vw,52px);line-height:1.05}
+  .welcome p{color:var(--gray);font-size:13px;letter-spacing:.5px;margin-top:10px}
+
+  .section{margin-bottom:56px;scroll-margin-top:90px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:24px}
+  .section-head h2{font-size:26px;letter-spacing:1px}
+  .section-head .eyebrow{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray)}
+
+  .grid{display:grid;gap:18px}
+  .grid-2{grid-template-columns:repeat(2,1fr)}
+  .grid-3{grid-template-columns:repeat(3,1fr)}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:24px;transition:border-color .25s,transform .25s}
+  .card:hover{border-color:var(--line-strong)}
+  .card h3{font-size:19px;margin-bottom:6px}
+  .card .meta{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gray);margin-bottom:14px}
+  .card p{font-size:12.5px;color:#c8c8c8;margin-bottom:16px}
+
+  /* ---------- STAT TILES ---------- */
+  .stat{background:var(--panel-2);border:1px solid var(--line);border-radius:6px;padding:22px}
+  .stat .num{font-family:'Cormorant Garamond',serif;font-size:42px;line-height:1}
+  .stat .lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:8px}
+
+  /* ---------- DOC / TRANSACTION ROWS ---------- */
+  .rows{border:1px solid var(--line);border-radius:6px;overflow:hidden}
+  .row{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line);background:var(--panel)}
+  .row:last-child{border-bottom:none}
+  .row .row-main{flex:1;min-width:0}
+  .row .row-title{font-size:13px;color:#fff}
+  .row .row-sub{font-size:10.5px;letter-spacing:.5px;color:var(--gray);margin-top:3px;text-transform:uppercase}
+  .badge{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 11px;border-radius:20px;white-space:nowrap;border:1px solid}
+  .badge.ok{color:var(--ok);border-color:rgba(91,214,160,.4)}
+  .badge.warn{color:var(--warn);border-color:rgba(227,192,106,.4)}
+  .badge.pending{color:var(--pending);border-color:rgba(160,160,160,.3)}
+
+  /* ---------- RESOURCE LINKS ---------- */
+  .res{display:flex;flex-direction:column;gap:6px}
+  .res a{display:flex;align-items:center;gap:12px;padding:14px 18px;border:1px solid var(--line);border-radius:5px;
+    font-size:12.5px;letter-spacing:.5px;color:#ddd;transition:all .2s;background:var(--panel)}
+  .res a:hover{border-color:#fff;color:#fff;transform:translateX(3px)}
+  .res a .arrow{margin-left:auto;color:var(--gray);font-size:11px}
+
+  .placeholder-note{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#666;
+    border:1px dashed var(--line-strong);border-radius:4px;padding:8px 12px;display:inline-block;margin-top:14px}
+
+  footer{border-top:1px solid var(--line);padding:34px 40px;text-align:center}
+  footer .fbrand{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:4px;text-transform:uppercase}
+  footer p{font-size:10px;letter-spacing:1px;color:var(--gray);margin-top:10px;line-height:1.8}
+  footer a{color:#cfcfcf}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media(max-width:900px){
+    .topbar{padding:14px 20px}
+    .topbar nav{display:none}
+    .wrap{padding:32px 20px 80px}
+    .grid-2,.grid-3{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     LOGIN GATE — V1 is cosmetic ONLY (no real authentication).
+     It reveals the dashboard client-side. Do NOT treat as secure.
+     DATA HOOK (auth): replace handleGate() with a real auth call
+     (e.g. Supabase / Clerk / Vercel + brokerage roster) and gate
+     the dashboard server-side before launch.
+     ============================================================ -->
+<div id="gate">
+  <div class="gate-watermark">A</div>
+  <div class="gate-card">
+    <div class="mark">Aari</div>
+    <div class="sub">Agent Portal</div>
+    <input type="email" id="gate-email" placeholder="Work email" autocomplete="email" />
+    <input type="password" id="gate-pass" placeholder="Access code" autocomplete="current-password" />
+    <button class="btn" onclick="handleGate()">Enter Portal</button>
+    <div class="gate-note">Authorized Aari Realty agents only.<br>Access is monitored. V1 preview — auth not yet live.</div>
+  </div>
+</div>
+
+<!-- ============================================================ TOP BAR ============================================================ -->
+<header class="topbar" id="dash" style="display:none">
+  <div class="brand">Aari<small>Agent Portal</small></div>
+  <nav>
+    <a href="#documents" class="active">Documents</a>
+    <a href="#transactions">Transactions</a>
+    <a href="#training">Training</a>
+    <a href="#commission">Commission</a>
+  </nav>
+  <div class="agent-chip">
+    <!-- DATA HOOK (agent identity): populate from auth session -->
+    <div class="avatar" data-hook="agent.initials">A</div>
+    <div>
+      <div class="agent-name" data-hook="agent.name">Agent Name</div>
+      <div class="agent-plan" data-hook="agent.plan">Full Suite Plan</div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap" id="dash-body" style="display:none">
+
+  <div class="welcome">
+    <!-- DATA HOOK (agent.firstName) -->
+    <h1>Welcome back, <span data-hook="agent.firstName">Agent</span>.</h1>
+    <p>Everything you need to run your business under Aari — in one place.</p>
+  </div>
+
+  <!-- ---------- SNAPSHOT STATS ---------- -->
+  <div class="grid grid-3" style="margin-bottom:56px">
+    <div class="stat"><div class="num" data-hook="stats.activeDeals">3</div><div class="lbl">Active Transactions</div></div>
+    <div class="stat"><div class="num" data-hook="stats.closingsYTD">11</div><div class="lbl">Closings This Year</div></div>
+    <div class="stat"><div class="num" data-hook="stats.docsPending">2</div><div class="lbl">Documents Need Action</div></div>
+  </div>
+
+  <!-- ============================================================ 1. DOCUMENTS / ICA ============================================================ -->
+  <section class="section" id="documents">
+    <div class="section-head">
+      <h2>Documents &amp; ICA</h2>
+      <span class="eyebrow">Signed agreements · Brokerage files</span>
+    </div>
+    <!-- DATA HOOK (documents[]): pull from SkySlope / DocuSign / storage -->
+    <div class="rows">
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">Independent Contractor Agreement (ICA)</div>
+          <div class="row-sub">Signed · 2025 · Full Suite Plan</div>
+        </div>
+        <span class="badge ok">Executed</span>
+        <button class="btn btn-sm btn-ghost">View</button>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">W-9 — Tax Form</div>
+          <div class="row-sub">On file</div>
+        </div>
+        <span class="badge ok">Complete</span>
+        <button class="btn btn-sm btn-ghost">View</button>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">E&amp;O Insurance Acknowledgment</div>
+          <div class="row-sub">Renewal required · Action needed</div>
+        </div>
+        <span class="badge warn">Action Needed</span>
+        <button class="btn btn-sm btn-ghost">Sign</button>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">Brokerage Policy Manual</div>
+          <div class="row-sub">Current version</div>
+        </div>
+        <span class="badge ok">Available</span>
+        <button class="btn btn-sm btn-ghost">View</button>
+      </div>
+    </div>
+    <span class="placeholder-note">Placeholder rows — wire to document source</span>
+  </section>
+
+  <!-- ============================================================ 2. TRANSACTION STATUS ============================================================ -->
+  <section class="section" id="transactions">
+    <div class="section-head">
+      <h2>Transaction Status</h2>
+      <span class="eyebrow">Active deals · Coordinated by Aari Transactions</span>
+    </div>
+    <!-- DATA HOOK (transactions[]): pull from SkySlope / TC pipeline -->
+    <div class="rows">
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">1234 Sunset Blvd, Cape Coral</div>
+          <div class="row-sub">Buyer · Under Contract · Closing Jun 24</div>
+        </div>
+        <span class="badge warn">Inspection Period</span>
+        <button class="btn btn-sm btn-ghost">Open</button>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">88 Palm Ave, Lehigh Acres</div>
+          <div class="row-sub">Seller · Under Contract · Closing Jul 09</div>
+        </div>
+        <span class="badge ok">Clear to Close</span>
+        <button class="btn btn-sm btn-ghost">Open</button>
+      </div>
+      <div class="row">
+        <div class="row-main">
+          <div class="row-title">501 River Rd, Fort Myers</div>
+          <div class="row-sub">Buyer · Pending file review</div>
+        </div>
+        <span class="badge pending">Docs Pending</span>
+        <button class="btn btn-sm btn-ghost">Open</button>
+      </div>
+    </div>
+    <span class="placeholder-note">Placeholder rows — wire to transaction pipeline</span>
+  </section>
+
+  <!-- ============================================================ 3. TRAINING & RESOURCES ============================================================ -->
+  <section class="section" id="training">
+    <div class="section-head">
+      <h2>Training &amp; Resources</h2>
+      <span class="eyebrow">Onboarding · Tools · SOPs</span>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Onboarding Path</h3>
+        <div class="meta">Start here</div>
+        <p>Your step-by-step ramp: licensing transfer, SkySlope setup, MLS access, and first-deal checklist.</p>
+        <div class="res">
+          <a href="#" data-hook="link.onboarding">Onboarding Checklist <span class="arrow">→</span></a>
+          <a href="#" data-hook="link.skyslope">SkySlope Suite Login <span class="arrow">→</span></a>
+          <a href="#" data-hook="link.mls">MLS / BeachesMLS Access <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Standard Operating Procedures</h3>
+        <div class="meta">How Aari runs</div>
+        <p>The repeatable systems: transaction submission, compliance file standards, and commission disbursement flow.</p>
+        <div class="res">
+          <a href="#" data-hook="link.tcSop">Transaction Submission SOP <span class="arrow">→</span></a>
+          <a href="#" data-hook="link.complianceSop">Compliance File Standards <span class="arrow">→</span></a>
+          <a href="#" data-hook="link.marketingKit">Brand &amp; Marketing Kit <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px">
+      <div>
+        <h3 style="margin-bottom:2px">Need a hand?</h3>
+        <p style="margin:0">Book time with the brokerage or message the TC team directly.</p>
+      </div>
+      <div style="display:flex;gap:12px">
+        <a class="btn btn-sm" href="https://calendly.com/join-aarirealty/30min" target="_blank" rel="noopener">Book a Call</a>
+        <a class="btn btn-sm btn-ghost" href="https://wa.me/12396881770" target="_blank" rel="noopener">Message TC Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ 4. COMMISSION / PAYMENT ============================================================ -->
+  <section class="section" id="commission">
+    <div class="section-head">
+      <h2>Commission &amp; Payments</h2>
+      <span class="eyebrow">Plan · Splits · History</span>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Your Plan</h3>
+        <div class="meta" data-hook="plan.name">Full Suite Plan</div>
+        <!-- DATA HOOK (plan.*): pull from Stripe subscription + roster -->
+        <div class="rows" style="margin-top:4px">
+          <div class="row"><div class="row-main"><div class="row-title">Monthly fee</div></div><span class="row-sub" data-hook="plan.monthly">$199 / mo</span></div>
+          <div class="row"><div class="row-main"><div class="row-title">Commission split</div></div><span class="row-sub" data-hook="plan.split">100% / $0 cap</span></div>
+          <div class="row"><div class="row-main"><div class="row-title">Per-closing transaction fee</div></div><span class="row-sub" data-hook="plan.txnFee">Per schedule</span></div>
+          <div class="row"><div class="row-main"><div class="row-title">Billing status</div></div><span class="badge ok">Active</span></div>
+        </div>
+        <span class="placeholder-note">Verify figures against STPI pricing before launch</span>
+      </div>
+      <div class="card">
+        <h3>Recent Disbursements</h3>
+        <div class="meta">Last 90 days</div>
+        <!-- DATA HOOK (disbursements[]): pull from accounting / Stripe -->
+        <div class="rows" style="margin-top:4px">
+          <div class="row"><div class="row-main"><div class="row-title">88 Palm Ave</div><div class="row-sub">May 12</div></div><span class="badge ok">Paid</span></div>
+          <div class="row"><div class="row-main"><div class="row-title">22 Gulf Dr</div><div class="row-sub">Apr 30</div></div><span class="badge ok">Paid</span></div>
+          <div class="row"><div class="row-main"><div class="row-title">1234 Sunset Blvd</div><div class="row-sub">Pending closing</div></div><span class="badge pending">Scheduled</span></div>
+        </div>
+        <span class="placeholder-note">Placeholder rows — wire to disbursement source</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer id="dash-footer" style="display:none">
+  <div class="fbrand">Aari Realty</div>
+  <p>
+    9160 Forum Corporate Pkwy Suite 350 &middot; Fort Myers, FL 33905 &middot; 239.688.1770<br>
+    Agent Portal · Internal use only · <a href="index.html">Back to site</a>
+  </p>
+</footer>
+
+<script>
+  /* ============================================================
+     V1 GATE — cosmetic reveal only. NOT secure auth.
+     Any input proceeds. Replace with real auth before launch.
+     ============================================================ */
+  function showDash(){
+    document.getElementById('gate').style.display='none';
+    ['dash','dash-body','dash-footer'].forEach(function(id){
+      document.getElementById(id).style.display = (id==='dash') ? 'flex' : 'block';
+    });
+  }
+  function handleGate(){
+    var email=document.getElementById('gate-email').value.trim();
+    // DATA HOOK (auth): validate against brokerage roster server-side here.
+    if(!email){ document.getElementById('gate-email').focus(); return; }
+    showDash();
+  }
+  // Enter key submits the gate
+  document.getElementById('gate').addEventListener('keydown',function(e){
+    if(e.key==='Enter') handleGate();
+  });
+  // Active nav highlight on scroll
+  var navLinks=[].slice.call(document.querySelectorAll('.topbar nav a'));
+  window.addEventListener('scroll',function(){
+    var y=window.scrollY+120, cur=navLinks[0];
+    navLinks.forEach(function(a){
+      var s=document.querySelector(a.getAttribute('href'));
+      if(s && s.offsetTop<=y) cur=a;
+    });
+    navLinks.forEach(function(a){a.classList.remove('active')});
+    if(cur) cur.classList.add('active');
+  });
+</script>
+</body>
+</html>

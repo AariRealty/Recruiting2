@@ -1,7 +1,8 @@
 const { Resend } = require('resend');
 
 module.exports = async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
+  res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   if (req.method === 'OPTIONS') return res.status(200).end();
@@ -90,7 +91,7 @@ module.exports = async function handler(req, res) {
       </div>
     </div>
     <div class="footer">
-      Aari Realty LLC &middot; 4144 Palm Beach Blvd, Fort Myers, FL 33905<br>
+      Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>
       (239) 688-1770 &middot; join@aarirealty.com
     </div>
   </div>

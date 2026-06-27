@@ -1,6 +1,7 @@
 module.exports = async function handler(req, res) {
   // Allow CORS
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
+  res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
