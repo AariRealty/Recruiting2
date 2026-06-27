@@ -3,94 +3,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Independent Contractor Agreement - Aari Realty LLC</title>
+  <title>Independent Contractor Agreement — Aari Realty LLC (Print Version)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ===== BASE STYLES ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      background: #ffffff;
       font-family: Georgia, 'Times New Roman', serif;
       font-size: 13px;
-      line-height: 1.7;
-      color: #1a1a1a;
+      line-height: 1.8;
+      color: #0a0a0a;
+      background: #ffffff;
       max-width: 8.5in;
       margin: 0 auto;
       padding: 0.75in 1in;
     }
 
     h1, h2, h3, h4 {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #000000;
+      font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+      color: #0a0a0a;
     }
 
-    /* ===== COVER PAGE ===== */
-    .cover-page {
-      text-align: center;
-      padding: 3in 0 2in;
-      page-break-after: always;
-    }
-
-    .cover-page h1 {
-      font-size: 32px;
+    h1 {
+      font-size: 28px;
       font-weight: 300;
-      letter-spacing: 1px;
-      line-height: 1.25;
-      margin-bottom: 24px;
+      text-align: center;
+      margin-bottom: 4px;
+      line-height: 1.2;
     }
 
-    .cover-divider {
-      width: 60px;
-      height: 1px;
-      background: #999;
-      margin: 28px auto;
-    }
-
-    .cover-company {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #555;
-      margin-bottom: 8px;
-    }
-
-    .cover-location {
-      font-size: 13px;
-      color: #777;
-    }
-
-    /* ===== SECTION STYLES ===== */
-    .section {
-      margin-bottom: 28px;
-    }
-
-    .section-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 10px;
+    h2 {
+      font-size: 14px;
       font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
-      color: #888;
-      margin-bottom: 18px;
-      border-bottom: 1px solid #ddd;
+      color: rgba(10, 10, 10, 0.4);
+      margin: 32px 0 16px;
+      border-bottom: 1px solid rgba(10, 10, 10, 0.1);
       padding-bottom: 6px;
     }
 
-    .heading {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 16px;
+    h3 {
+      font-size: 15px;
       font-weight: 700;
-      color: #000;
-      margin: 28px 0 10px;
+      margin: 24px 0 8px;
     }
 
-    .subheading {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    h4 {
       font-size: 13px;
       font-weight: 600;
-      color: #000;
       margin: 18px 0 6px;
     }
 
@@ -102,26 +63,83 @@
       font-weight: 700;
     }
 
-    /* ===== DOCUMENT LIST ===== */
+    /* Cover page */
+    .cover-page {
+      text-align: center;
+      padding: 3in 0 2in;
+    }
+
+    .cover-page h1 {
+      font-size: 36px;
+      font-weight: 300;
+      margin-bottom: 8px;
+    }
+
+    .cover-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(10, 10, 10, 0.2);
+      margin: 24px auto;
+    }
+
+    .cover-detail {
+      font-size: 13px;
+      color: rgba(10, 10, 10, 0.5);
+      line-height: 2.2;
+    }
+
+    .cover-detail strong {
+      color: #0a0a0a;
+    }
+
+    .cover-brokerage {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(10, 10, 10, 0.3);
+    }
+
+    /* Document list */
     .doc-list {
       list-style: none;
       padding: 0;
-      margin: 14px 0;
+      margin: 12px 0;
     }
 
     .doc-list li {
       padding: 5px 0;
       font-size: 13px;
-      color: #333;
-      border-bottom: 1px solid #f0f0f0;
+      color: rgba(10, 10, 10, 0.7);
+      border-bottom: 1px solid rgba(10, 10, 10, 0.06);
     }
 
     .doc-list li::before {
-      content: "\2022\00A0\00A0";
+      content: "\00B7\00A0\00A0";
       font-weight: bold;
     }
 
-    /* ===== TABLES ===== */
+    /* Bullet lists */
+    ul.bullet-list {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0;
+    }
+
+    ul.bullet-list li {
+      padding: 4px 0;
+      font-size: 13px;
+      color: rgba(10, 10, 10, 0.75);
+      border-bottom: 1px solid rgba(10, 10, 10, 0.06);
+    }
+
+    ul.bullet-list li::before {
+      content: "\00B7\00A0\00A0";
+      font-weight: bold;
+    }
+
+    /* Tables */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -129,955 +147,1036 @@
       font-size: 12px;
     }
 
-    th {
-      background: #f5f5f5;
-      color: #000;
+    table th {
+      background: #0a0a0a;
+      color: #ffffff;
       padding: 8px 10px;
       text-align: left;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
-      font-weight: 700;
       letter-spacing: 1px;
       text-transform: uppercase;
-      border: 1px solid #ccc;
     }
 
-    td {
+    table td {
       padding: 8px 10px;
-      border: 1px solid #ccc;
-      color: #1a1a1a;
-      vertical-align: top;
+      border-bottom: 1px solid rgba(10, 10, 10, 0.1);
+      color: #0a0a0a;
     }
 
-    /* ===== SIGNATURE BLOCK ===== */
+    table tr:nth-child(even) td {
+      background: rgba(10, 10, 10, 0.02);
+    }
+
+    /* Signature block */
     .signature-block {
-      margin-top: 60px;
-      page-break-inside: avoid;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 2px solid #0a0a0a;
     }
 
     .sig-row {
       display: flex;
-      gap: 40px;
-      margin-bottom: 48px;
+      gap: 48px;
+      margin-top: 36px;
     }
 
-    .sig-field {
+    .sig-col {
       flex: 1;
     }
 
     .sig-line {
-      border-bottom: 1px solid #000;
-      min-height: 36px;
+      border-bottom: 1px solid #0a0a0a;
+      height: 36px;
       margin-bottom: 4px;
     }
 
-    .sig-line.prefilled {
-      font-family: Georgia, serif;
-      font-size: 14px;
-      padding-bottom: 4px;
-    }
-
     .sig-label {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-family: 'Montserrat', sans-serif;
       font-size: 10px;
       font-weight: 600;
       letter-spacing: 1px;
       text-transform: uppercase;
-      color: #666;
+      color: rgba(10, 10, 10, 0.5);
     }
 
-    .company-line {
-      margin-top: 24px;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 12px;
-      color: #333;
-    }
-
-    /* ===== PAGE BREAKS ===== */
-    .page-break {
-      page-break-before: always;
-    }
-
-    /* ===== FOOTER ===== */
-    .doc-footer {
+    /* Footer */
+    .page-footer {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(10, 10, 10, 0.3);
       text-align: center;
-      padding: 40px 0 20px;
-      font-size: 11px;
-      color: #999;
-      border-top: 1px solid #ddd;
-      margin-top: 40px;
+      margin-top: 48px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(10, 10, 10, 0.1);
     }
 
-    /* ===== PRINT STYLES ===== */
+    /* Print styles */
     @media print {
       body {
         padding: 0;
-        margin: 0;
-        font-size: 12px;
+        font-size: 11pt;
+        max-width: none;
       }
 
       @page {
         size: letter;
         margin: 0.75in 1in;
+
+        @bottom-center {
+          content: "Aari Realty LLC — Licensed Real Estate Brokerage — State of Florida";
+          font-family: 'Montserrat', sans-serif;
+          font-size: 8pt;
+          color: #999;
+          letter-spacing: 0.5px;
+        }
       }
 
       .cover-page {
-        padding: 3.5in 0 2in;
+        padding: 3in 0 2in;
       }
 
-      table { font-size: 11px; }
-      th { background: #f0f0f0 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .page-break {
+        page-break-before: always;
+      }
 
-      .no-print { display: none; }
+      .no-break {
+        page-break-inside: avoid;
+      }
+
+      .page-footer {
+        display: none;
+      }
+    }
+
+    /* Screen footer repetition */
+    @media screen {
+      .page-break {
+        border-top: 1px dashed rgba(10, 10, 10, 0.15);
+        padding-top: 32px;
+        margin-top: 32px;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- ==================== COVER PAGE ==================== -->
+<!-- ============================== COVER PAGE ============================== -->
 <div class="cover-page">
   <h1>Independent Contractor<br>Agreement</h1>
   <div class="cover-divider"></div>
-  <p class="cover-company">Aari Realty LLC</p>
-  <p class="cover-location">Fort Myers, Florida</p>
+  <p class="cover-detail"><strong>Aari Realty LLC</strong></p>
+  <p class="cover-detail">Licensed Real Estate Brokerage</p>
+  <p class="cover-detail">Fort Myers, Florida</p>
   <div class="cover-divider"></div>
-  <p style="font-size:12px;color:#999;margin-top:40px;">Licensed Real Estate Brokerage &middot; State of Florida</p>
+  <p class="cover-brokerage">Aari Realty LLC</p>
 </div>
 
-<!-- ==================== INCORPORATED DOCUMENTS ==================== -->
-<div class="section">
-  <div class="section-label">Incorporated Documents</div>
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
 
-  <ul class="doc-list">
-    <li>Independent Contractor Agreement (ICA)</li>
-    <li>Commission Structure Addendum (CSA)</li>
-    <li>Exhibit A &ndash; Commission Fee Schedule</li>
-    <li>Operations &amp; Compliance Manual</li>
-    <li>Transaction File Requirements Addendum</li>
-    <li>Fair Housing Policy</li>
-    <li>Advertising Policy</li>
-    <li>Social Media Policy</li>
-    <li>Errors &amp; Omissions Insurance Addendum</li>
-    <li>Record Retention &amp; Confidentiality Policy</li>
-    <li>Referral Bonus Policy</li>
-    <li>Indemnification, Defense &amp; Offsets Addendum</li>
-    <li>Statement of Understanding &amp; Policy Acknowledgment</li>
-  </ul>
+<!-- ============================== INCORPORATED DOCUMENTS ============================== -->
+<div class="page-break"></div>
 
-  <p><strong>NOTICE &amp; AMENDMENT:</strong> Written notice may be provided by email or electronic posting in the Company's document portal. Unless a different effective date is stated, amendments take effect immediately upon notice. Continued affiliation after the effective date constitutes acceptance of all updated or newly incorporated documents.</p>
+<h2>Incorporated Documents</h2>
+
+<ul class="doc-list">
+  <li>Independent Contractor Agreement (ICA)</li>
+  <li>Commission Structure Addendum (CSA)</li>
+  <li>Exhibit A &ndash; Commission Fee Schedule</li>
+  <li>Operations &amp; Compliance Manual</li>
+  <li>Transaction File Requirements Addendum</li>
+  <li>Fair Housing Policy</li>
+  <li>Advertising Policy</li>
+  <li>Social Media Policy</li>
+  <li>Errors &amp; Omissions Insurance Addendum</li>
+  <li>Record Retention &amp; Confidentiality Policy</li>
+  <li>Referral Bonus Policy</li>
+  <li>Indemnification, Defense &amp; Offsets Addendum</li>
+  <li>Statement of Understanding &amp; Policy Acknowledgment</li>
+</ul>
+
+<p><strong>NOTICE &amp; AMENDMENT:</strong> Written notice may be provided by email or electronic posting in the Company&rsquo;s document portal. Unless a different effective date is stated, amendments take effect immediately upon notice. Continued affiliation after the effective date constitutes acceptance of all updated or newly incorporated documents.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== ICA SECTIONS DEF THROUGH 10 ============================== -->
+<div class="page-break"></div>
+
+<h2>Independent Contractor Agreement</h2>
+
+<h3>DEF. DEFINITIONS</h3>
+
+<p><strong>&ldquo;Agreement&rdquo; or &ldquo;ICA&rdquo;</strong> &mdash; This Independent Contractor Agreement, including all Incorporated Documents.</p>
+<p><strong>&ldquo;Associate&rdquo;</strong> &mdash; The real estate licensee who executes this Agreement.</p>
+<p><strong>&ldquo;Broker&rdquo; or &ldquo;Company&rdquo;</strong> &mdash; Aari Realty LLC, a Florida limited liability company.</p>
+<p><strong>&ldquo;Business Day&rdquo;</strong> &mdash; Any day other than Saturday, Sunday, or a federal holiday observed by the Company.</p>
+<p><strong>&ldquo;Incorporated Documents&rdquo;</strong> &mdash; All documents referenced in Section 18 and incorporated by reference into this Agreement, including the Commission Structure Addendum, Exhibit A, Operations &amp; Compliance Manual, and all policies and addenda.</p>
+<p><strong>&ldquo;Notice&rdquo;</strong> &mdash; Written communication delivered by: (a) email to the Associate&rsquo;s email address on file; (b) posting in the Company&rsquo;s compliance platform; (c) electronic acknowledgment through Company systems; or (d) text message to the Associate&rsquo;s mobile number on file. Notice is deemed delivered and effective immediately upon sending or posting, regardless of whether the Associate has read or accessed the communication. It is the Associate&rsquo;s sole responsibility to monitor all designated communication channels.</p>
+<p><strong>&ldquo;Immediately&rdquo;</strong> &mdash; Within twenty-four (24) hours of discovery unless a shorter timeframe is specified elsewhere in this Agreement.</p>
+
+<h3>1. Independent Contractor Relationship</h3>
+<p>The Associate is engaged as an independent contractor, not an employee. The Broker will not withhold taxes, provide employee benefits, or control the Associate&rsquo;s daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, and maintaining required insurance. The Associate must complete a W-9 form and will receive a 1099-NEC for tax purposes.</p>
+
+<h4>No Authority to Bind</h4>
+<p>The Associate has no authority to bind the Company, enter contracts, or incur obligations on the Company&rsquo;s behalf without a specific written Power of Attorney executed by the Broker for each transaction.</p>
+
+<h3>2. Exclusive Brokerage Affiliation</h3>
+<p>The Associate affirms they are not licensed with or actively affiliated with any other real estate brokerage or conducting brokerage activity outside of Aari Realty LLC. Limited outside affiliations (such as referral-only licenses in other states) require prior written approval from the Broker and must comply with Florida law. Engaging in unapproved brokerage activity constitutes immediate termination for cause and may result in forfeiture of pending commissions until compliance is verified.</p>
+
+<h3>3. Associate Responsibilities</h3>
+
+<h4>Licensure</h4>
+<p>The Associate must maintain an active, current Florida real estate license at all times during the term of this Agreement.</p>
+
+<h4>Compliance with Laws and Rules</h4>
+<p>The Associate shall comply with all applicable federal, state, and local laws, rules, and regulations governing real estate practice in Florida.</p>
+
+<h4>Incorporated Documents</h4>
+<p>The Associate shall comply with all policies, procedures, and standards set forth in the Incorporated Documents listed in this Agreement.</p>
+
+<h4>Cybersecurity &amp; Data Breach Reporting</h4>
+<p>The Associate must report any known or suspected data breach, unauthorized access, or cybersecurity incident to the Broker within four (4) hours of discovery.</p>
+
+<h4>Wire Safety</h4>
+<p>The Associate shall never transmit wire instructions via email or text message. Violation of this policy constitutes grounds for immediate termination.</p>
+
+<h4>Escrow Handling</h4>
+<p>The Associate shall not maintain or operate any escrow accounts. All escrow deposits must be handled in accordance with Company policy and Florida law.</p>
+
+<h4>MLS Compliance / Clear Cooperation</h4>
+<p>The Associate must enter all listings into the MLS within twenty-four (24) hours as required by MLS rules and the Clear Cooperation Policy.</p>
+
+<h4>Social Media &amp; Advertising</h4>
+<p>All advertising and social media content related to real estate must receive prior Broker approval before publication or distribution.</p>
+
+<h4>TCPA Compliance</h4>
+<p>The Associate must comply with the Telephone Consumer Protection Act (TCPA) and all related federal and state telemarketing regulations.</p>
+
+<h4>Transaction Coordination</h4>
+<p>File organization is provided through Aari Transactions LLC, an affiliated entity. Associates may elect full TC services for an additional fee. Associate remains fully responsible for their transactions.</p>
+
+<h3>4. Fair Housing Compliance</h3>
+<p>The Associate must comply with the Fair Housing Policy incorporated into this Agreement. Discriminatory practices of any kind are strictly prohibited. Violations may result in immediate termination and reporting to the Florida Real Estate Commission (FREC).</p>
+
+<h3>5. Confidentiality</h3>
+
+<h4>Definition</h4>
+<p>Confidential Information includes all non-public information obtained during the Associate&rsquo;s affiliation with the Company, including but not limited to client data, business strategies, proprietary systems, and financial information.</p>
+
+<h4>Use Restriction</h4>
+<p>The Associate shall not copy, disclose, or distribute any Confidential Information to any third party without the prior written consent of the Broker.</p>
+
+<h4>Post-Termination Restrictions</h4>
+<p>Upon termination of this Agreement, the Associate shall immediately cease all use of Confidential Information, return all Company property within five (5) days, and certify the deletion of all electronic copies of Confidential Information.</p>
+
+<h4>Survival</h4>
+<p>Confidentiality obligations survive termination of this Agreement indefinitely with respect to trade secrets, and for a reasonable period for all other Confidential Information.</p>
+
+<h3>6. Errors &amp; Omissions (E&amp;O) Insurance</h3>
+<p>The Broker maintains an Errors &amp; Omissions insurance policy covering the brokerage. The Associate is included under this policy at no upfront cost. The Associate agrees to pay the applicable deductible for any claim arising from the Associate&rsquo;s own conduct. The Associate must report any potential claim to the Broker within twenty-four (24) hours of becoming aware of the circumstances giving rise to such claim.</p>
+
+<h3>7. Compensation</h3>
+
+<h4>Commission Basis</h4>
+<p>The Associate&rsquo;s compensation shall be on a commission basis as set forth in the Commission Structure Addendum (CSA). The Associate shall receive no salary, draw, or guaranteed minimum compensation.</p>
+
+<h4>Conditions Precedent</h4>
+<p>Payment of commission is subject to the following conditions precedent: the transaction file is complete, the Broker has granted approval, funds have cleared, and the Associate is in Good Standing.</p>
+
+<h4>Cleared Funds</h4>
+<p>Wire transfers are considered cleared the same or next business day. Checks require three (3) to ten (10) business days to clear. Commission disbursement will occur within three (3) business days after all conditions precedent are satisfied.</p>
+
+<h4>Broker Authorization</h4>
+<p>The Broker has five (5) business days to grant or deny file approval. If approval is denied, the Associate has a three (3) day cure period to correct deficiencies.</p>
+
+<h4>Good Standing</h4>
+<p>Good Standing requires an active license, all fees paid, no suspension or disciplinary action, and all transaction files submitted in accordance with Company policy.</p>
+
+<h4>Post-Termination Compensation Floor</h4>
+<p>After termination, the Associate shall receive a minimum of fifty percent (50%) of the net commission on any pending transaction that closes, provided the Associate&rsquo;s file is complete and compliant.</p>
+
+<h4>Personal Transactions</h4>
+<p>The Associate must obtain prior Broker approval before engaging in any personal real estate transaction.</p>
+
+<h4>Overpayments &amp; Deductions</h4>
+<p>Any overpayment must be repaid within five (5) days of notification. The Company may offset future commissions, up to a maximum of fifty percent (50%) per disbursement, without the Associate&rsquo;s prior consent.</p>
+
+<h3>8. Transaction Compliance</h3>
+<p>The Associate must comply with the Operations &amp; Compliance Manual for all transactions. No commission shall be paid until the transaction file has been reviewed and approved by the Broker. Compliance with the Manual is a condition precedent to the payment of any compensation.</p>
+
+<h3>9. Client Ownership</h3>
+
+<h4>Personally Generated Clients</h4>
+<p>Clients personally generated by the Associate through the Associate&rsquo;s own efforts, relationships, and marketing are considered the Associate&rsquo;s property, subject to exclusions defined in this Agreement.</p>
+
+<h4>Company-Generated Leads</h4>
+<p>Determined by the Broker based on source documentation, timestamp of first contact, and inquiry method used.</p>
+
+<h4>Lead Classification Appeal</h4>
+<p>The Associate may appeal a lead classification determination in writing within seven (7) calendar days. The Broker shall respond to the appeal within ten (10) business days.</p>
+
+<h3>10. Referral &amp; Co-Agent Commission Disputes</h3>
+<p>The Company shall not be responsible for referral or co-agent commission disputes unless the referral or co-agent agreement is in writing, signed by all parties, and approved by the Broker. All disputes shall be resolved through MLS arbitration and NAR dispute resolution procedures. The Company may withhold disputed commission amounts pending resolution.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== ICA SECTIONS 11-20 ============================== -->
+<div class="page-break"></div>
+
+<h2>Independent Contractor Agreement: Sections 11 to 20</h2>
+
+<h3>11. Indemnification</h3>
+<p>For indemnification, defense, and offsets, see the Indemnification, Defense, and Offsets Addendum, which is incorporated by reference and controls this topic. Broker may exercise withholding and offsets consistent with that Addendum and the Operations &amp; Compliance Manual.</p>
+
+<h3>12. Term &amp; Termination</h3>
+
+<h4>Term</h4>
+<p>This Agreement is effective for one (1) year and shall automatically renew annually unless terminated in accordance with this Section.</p>
+
+<h4>Termination At-Will</h4>
+<p>Either party may terminate this Agreement at any time, with or without cause, upon written notice. Termination is effective immediately upon delivery of notice. Termination shall not affect the Broker&rsquo;s right to collect any earned but unpaid fees, commissions, or other amounts due.</p>
+
+<h3>13. Post-Termination Obligations</h3>
+<p>Upon termination, the Associate must: return all Company property, signage, and records within five (5) calendar days; cease all use of Company logos, branding, templates, and platforms; complete all outstanding compliance file requirements; reconcile commissions in accordance with the CSA; and update all online profiles within five (5) calendar days to remove Company affiliation.</p>
+<p>The Associate may continue working only with personally generated clients. The Associate has no rights to Company-generated leads, referrals, relocation clients, or advertising-sourced prospects after termination.</p>
+
+<h3>14. Non-Solicitation</h3>
+<p>During affiliation and for twelve (12) months after termination, the Associate shall not directly or indirectly solicit or recruit Aari Realty Associates, staff, or contractors to leave the Company. For purposes of this section, solicitation means direct, targeted outreach to specific identified individuals and does not include general public advertising or marketing.</p>
+
+<h3>15. Dispute Resolution</h3>
+
+<h4>Internal Commission Disputes</h4>
+<p>Any dispute between Associates regarding the division of commissions shall be governed exclusively by the CSA. Disputes must be submitted in writing to the Broker, whose written determination shall be rendered within ten (10) calendar days.</p>
+
+<h4>Company vs. Associate Disputes</h4>
+<p>All other disputes shall proceed as follows: (1) Mediation First &mdash; good-faith mediation in Lee County, Florida; (2) Arbitration &mdash; if mediation fails, binding arbitration before a single arbitrator in Lee County, Florida, under the Florida Arbitration Code; (3) Attorneys&rsquo; Fees &mdash; the prevailing party shall recover reasonable attorneys&rsquo; fees and costs; (4) Jury Trial Waiver &mdash; both parties knowingly waive any right to a jury trial.</p>
+
+<h3>16. Governing Law</h3>
+<p>This Agreement shall be governed by and construed under the laws of the State of Florida, without regard to conflicts of law principles.</p>
+
+<h3>17. Force Majeure</h3>
+<p>Neither party shall be liable for failure to perform obligations when such failure is caused by events beyond their reasonable control, including: acts of God, natural disasters, hurricanes, war, terrorism, pandemic, government orders, utility failures, or cyberattacks. During a force majeure event, affected deadlines shall be extended by the duration of the event plus a reasonable cure period not to exceed ten (10) business days. Written notice must be provided within forty-eight (48) hours of the event.</p>
+
+<h3>18. Entire Agreement; Notice; Order of Precedence; No Assignment</h3>
+
+<h4>Entire Agreement</h4>
+<p>This ICA, together with all Incorporated Documents, constitutes the entire agreement between the parties and supersedes all prior negotiations, understandings, and agreements.</p>
+
+<h4>Modification</h4>
+<p>This Agreement may not be modified except by a writing signed by both parties.</p>
+
+<h4>Notice</h4>
+<p>All amendments and policy updates are effective immediately upon delivery by any method set forth in the Definitions section. Continued affiliation after notice constitutes acceptance of all updated terms. No amendment to commission rates, splits, transaction fees, or fee schedules shall alter the economic terms of any transaction supported by a fully executed purchase-and-sale agreement or listing agreement dated prior to delivery of such notice. The Associate is solely responsible for monitoring all designated communication channels. Failure to read or access a notice does not affect its validity or the Associate&rsquo;s obligation to comply.</p>
+
+<h4>Order of Precedence</h4>
+<p>In the event of a conflict regarding compensation: (i) this ICA governs the legal relationship of the parties; (ii) the CSA governs commission calculation, application order, offsets, and disbursement mechanics; and (iii) Exhibit A governs commission plans, splits, fees, pricing, thresholds, and schedules.</p>
+
+<h4>No Assignment</h4>
+<p>Neither party may assign this Agreement without the prior written consent of the other party, except that the Company may assign in connection with a merger, sale of assets, or change of control.</p>
+
+<h3>19. Severability; No Waiver</h3>
+
+<h4>Severability</h4>
+<p>If any provision is held invalid or unenforceable, it shall be modified to the minimum extent necessary to make it enforceable while preserving the parties&rsquo; original intent. All other provisions remain in full force.</p>
+
+<h4>No Waiver</h4>
+<p>The failure of either party to enforce any provision shall not constitute a waiver. No waiver shall be effective unless made in writing.</p>
+
+<h3>20. Consolidated Acknowledgment; Electronic Signatures</h3>
+<p>By executing this ICA, the Associate acknowledges and agrees to all Incorporated Documents as they exist on the Effective Date. No separate signatures are required on any Incorporated Document. Future updates become binding upon notice under Section 18.</p>
+<p>Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== COMMISSION STRUCTURE ADDENDUM ============================== -->
+<div class="page-break"></div>
+
+<h2>Commission Structure Addendum</h2>
+
+<h3>1&ndash;2. Purpose and Hierarchy</h3>
+<p>Establishes commission processing mechanics. ICA governs relationship, CSA governs calculation/disbursement, Exhibit A governs fees/pricing.</p>
+
+<h3>3. Commission Earned vs. Payable</h3>
+<p>Not earned until: transaction closed, funds cleared, docs approved, compliance met, Broker authorized. Earned &ne; automatically payable.</p>
+
+<h3>4. Application Order</h3>
+<p>Compliance holds &rarr; Company fees &rarr; Referral obligations &rarr; Offsets &rarr; Net to Associate.</p>
+
+<h3>5. Offsets &amp; Deductions</h3>
+<p>Company authorized to offset unpaid balances, fees, chargebacks, fines from commissions. Survives termination.</p>
+
+<h3>6. Plan Application</h3>
+<p>Plan at time of contract execution, not closing. Changes apply prospectively only.</p>
+
+<h3>7. Referrals</h3>
+<p>Subject to written agreements, cleared funds, and compliance with laws.</p>
+
+<h3>8. Personal Transactions</h3>
+<p>Qualifying: Associate or spouse on title. Standard transaction fee applies, no commission split. Growth plan exception: standard Growth split applies due to additional broker support.</p>
+
+<h3>9. License Status</h3>
+<p>Must hold active license during negotiation, execution, closing, and disbursement.</p>
+
+<h3>10&ndash;11. General</h3>
+<p>No employment relationship. Provisions survive termination. Constitutes entire agreement re: commission structure.</p>
+
+<h3>12. Amendments</h3>
+<p>This Addendum may be amended by the Company effective immediately upon notice to the Associate by any method set forth in the ICA Definitions section. Amendments apply to all transactions not yet under a fully executed purchase-and-sale agreement or listing agreement as of the date of notice.</p>
+
+<h3>13. Entire Agreement</h3>
+<p>This Addendum constitutes the entire agreement regarding commission structure between the parties.</p>
+
+<h3>14. Internal Deal Handling</h3>
+<p>A Company Assisted Transaction is any transaction where the Company reassigns, intervenes in, or provides substantial operational support beyond standard brokerage services. Company Assisted Transactions are subject to a 50/50 split between the Company and the assigned Associate. The original Associate is not entitled to any compensation upon reassignment of a transaction to another Associate or to the Company.</p>
+<p>A Referral is distinguished from a Reassignment: a Referral occurs when an Associate voluntarily introduces a client to another Associate and a written referral agreement is in place. A Reassignment occurs when the Broker determines that a transaction must be transferred due to compliance concerns, inactivity, client request, or other operational necessity. Upon Reassignment, the original Associate forfeits all rights to compensation from that transaction.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== EXHIBIT A — COMMISSION FEE SCHEDULE ============================== -->
+<div class="page-break"></div>
+
+<h2>Commission Fee Schedule: Exhibit A</h2>
+
+<h4>Commission Plans</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Plan</th>
+      <th>Split</th>
+      <th>Txn Fee (Residential)</th>
+      <th>Txn Fee (Vacant Land)</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Mentorship Path</td>
+      <td>75% / 25%</td>
+      <td>$499</td>
+      <td>$299</td>
+      <td>Full support: TC, marketing, accountability, 1:1 with broker.</td>
+    </tr>
+    <tr>
+      <td>Growth</td>
+      <td>85% / 15%</td>
+      <td>$499</td>
+      <td>$299</td>
+      <td>Deal support when needed. Independent.</td>
+    </tr>
+    <tr>
+      <td>Max</td>
+      <td>100%</td>
+      <td>$499</td>
+      <td>$299</td>
+      <td>Fully independent. Just brokerage access.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Mentorship Path &mdash; Required Entry</h4>
+<p>All new Associates begin on the <strong>75/25 Mentorship Path</strong> (75% Associate / 25% Brokerage) at <strong>$89/month</strong> plus the $199/year E&amp;O + Compliance fee. Transaction fees under the Mentorship Path match the standard schedule ($499 residential, $299 vacant land). Advancement to Aari Growth or Aari Max is based on transaction requirements as defined below in Section 1.3 &mdash; Commission Plan Changes.</p>
+
+<h4>1.3 Commission Plan Changes</h4>
+
+<p><strong>Eligibility.</strong> An Associate may request a commission plan change only after completing a minimum of five (5) closed residential sales transactions &mdash; excluding rentals and vacant land &mdash; with fully compliant files under Broker supervision at Aari Realty LLC. Until this minimum is met, the Associate remains on their onboarding plan regardless of time elapsed or prior experience at another brokerage.</p>
+
+<p><strong>Request Process.</strong> The Associate submits a written request to the Broker. The Broker will approve or deny in writing within five (5) business days. Approval is at the Broker&rsquo;s sole discretion based on compliance history, transaction quality, and performance. The Broker may deny a request without cause.</p>
+
+<p><strong>Effective Date.</strong> An approved plan change takes effect on the first day of the calendar month following the Broker&rsquo;s written approval.</p>
+
+<p><strong>Transaction Protection.</strong> The Associate&rsquo;s current plan applies to all transactions under a fully executed purchase-and-sale agreement or listing agreement dated on or before the Broker&rsquo;s written approval date. Those transactions close under the original plan &mdash; no exceptions.</p>
+
+<p><strong>Frequency Limit.</strong> An Associate may not submit a new plan change request within sixty (60) days of their most recent plan change effective date.</p>
+
+<p><strong>Downgrade Rule.</strong> The same eligibility, process, effective date, and frequency limit apply in both directions. Moving from Max back to Growth requires the same process.</p>
+
+<h4>Recurring Fees</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Fee</th>
+      <th>Amount</th>
+      <th>Schedule</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Brokerage Access &mdash; Mentorship Path</td>
+      <td>$89/month</td>
+      <td>Monthly, prorated at onboarding</td>
+    </tr>
+    <tr>
+      <td>Brokerage Access &mdash; Growth</td>
+      <td>$89/month</td>
+      <td>Monthly, prorated at onboarding</td>
+    </tr>
+    <tr>
+      <td>Brokerage Access &mdash; Max</td>
+      <td>$99/month</td>
+      <td>Monthly, prorated at onboarding</td>
+    </tr>
+    <tr>
+      <td>E&amp;O + Compliance</td>
+      <td>$199/year</td>
+      <td>Annual, due on anniversary</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Administrative &amp; Conditional Fees</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Fee</th>
+      <th>Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Personal Transaction (Residential)</td><td>Standard plan transaction fee applies</td></tr>
+    <tr><td>Personal Transaction (Land)</td><td>Standard plan transaction fee applies</td></tr>
+    <tr><td>Admin Cost Rate</td><td>$150/hour</td></tr>
+    <tr><td>Late Payment</td><td>$25</td></tr>
+    <tr><td>Returned Payment</td><td>$25</td></tr>
+    <tr><td>Reactivation</td><td>$50</td></tr>
+    <tr><td>Sign Replacement (Open House)</td><td>$25</td></tr>
+    <tr><td>Sign Replacement (For Sale)</td><td>$35</td></tr>
+  </tbody>
+</table>
+
+<h4>Optional Add-Ons</h4>
+<table>
+  <thead>
+    <tr>
+      <th>Add-On</th>
+      <th>Amount</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>CRM System (Lofty)</td>
+      <td>$49/mo</td>
+      <td>AI-powered CRM, lead tracking, IDX, dialer, texting</td>
+    </tr>
+    <tr>
+      <td>Brand Builder</td>
+      <td>$79/mo</td>
+      <td>Content planning, video, social media strategy</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4>Referral Compensation</h4>
+<p>Admin fee: 10% of referral payment, minimum $100. Recruiting Incentive: $100.</p>
+
+<h4>8. Enforcement</h4>
+<p>This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in the ICA Definitions section. No amendment alters transactions already under a fully executed contract as of the date of notice.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== OPERATIONS & COMPLIANCE MANUAL ============================== -->
+<div class="page-break"></div>
+
+<h2>Operations &amp; Compliance Manual</h2>
+
+<p>ORDER OF PRECEDENCE: (1) Independent Contractor Agreement &rarr; (2) Commission Structure Addendum &rarr; (3) Exhibit A &mdash; Commission Fee Schedule &rarr; (4) This Operations &amp; Compliance Manual &rarr; (5) All other addenda by date, later-dated documents controlling.</p>
+
+<h3>SECTION 1. DEFINITIONS</h3>
+<p>&ldquo;Active&rdquo; &mdash; An Associate who has completed all onboarding requirements, maintains current license status, has paid all required fees, and is eligible to engage in real estate transactions.</p>
+<p>&ldquo;Inactive&rdquo; &mdash; An Associate who has requested or been placed in inactive status, is not eligible to engage in new real estate transactions, but maintains affiliation with the Company.</p>
+<p>&ldquo;Good Standing&rdquo; &mdash; An Associate who: (a) maintains a current, active Florida real estate license; (b) has no outstanding fees or debts owed to the Company; (c) has no material policy violations or unresolved compliance issues; (d) maintains current proof of E&amp;O and auto insurance; (e) complies with all document submission deadlines; and (f) is not subject to any active suspension, investigation, or disciplinary action.</p>
+<p>&ldquo;Material Breach&rdquo; &mdash; Includes: (a) violations resulting in client harm, complaint, or financial loss; (b) regulatory investigation, fine, or disciplinary action by DBPR, FREC, MLS, or NAR; (c) repeated violations of the same policy after written warning; (d) any violation involving fraud, misrepresentation, discrimination, or fair housing law violations; and (e) failure to cure a non-material breach within ten (10) business days of written notice.</p>
+<p>&ldquo;Abandoned Commission&rdquo; &mdash; Any transaction for which: (a) closing documents are not submitted within forty-eight (48) hours of closing; or (b) the Associate fails to respond to Broker requests for file completion within ten (10) business days of written request.</p>
+<p>&ldquo;Complete File&rdquo; &mdash; A transaction file in which: (a) all required documents are submitted; (b) all items on the applicable compliance platform checklist are marked complete; and (c) the file has been reviewed and approved by the Broker.</p>
+<p>&ldquo;Company-Generated Lead&rdquo; &mdash; Any prospective client inquiry, contact, or relationship that originated through Company marketing, advertising, lead purchase programs, referral partnerships, or other Company-funded or Company-operated lead generation activities.</p>
+<p>&ldquo;Business Day&rdquo; &mdash; Monday through Friday, 9:00 AM to 5:00 PM EST, excluding federal holidays and days when the Company office is closed due to emergency.</p>
+
+<h3>SECTION 2. COMMISSIONS &amp; COLLECTIONS</h3>
+<p>The Company may withhold disputed commission amounts and related funds until resolution. Where the Company incurs internal administrative time or outside legal costs to secure or defend a commission, those costs may be allocated proportionally to the Associate. Internal administrative costs shall be calculated at the rate set forth in Exhibit A. In transactions where the Associate receives ninety percent (90%) or more of the gross commission, cost allocation shall be capped at eighty percent (80%) of total costs incurred. The Broker will provide written accounting of all allocated costs within ten (10) business days of deduction. The Company is not obligated to prosecute or sue to collect any commission, and Associates have no right to compel the Company to initiate collection or legal action.</p>
+
+<h3>SECTION 3. COMPANY PROPERTY &amp; RECORDS</h3>
+<p>All listings, pending sales, transaction documents, checklists, communications, and materials created or obtained in the course of affiliation are Company property. Associates must maintain transaction materials in Company systems. Upon termination, all Company materials must be returned within three (3) business days.</p>
+
+<h3>SECTION 4. WIRE &amp; FUNDS HANDLING</h3>
+<p>Associates are prohibited from providing, relaying, drafting, or transmitting wire or funds transfer instructions to any party. Violation constitutes a Material Breach and may result in immediate termination and personal liability for any resulting losses. Clients must obtain and verify wire instructions directly with the escrow or title agent using a known, verified phone number. Associates must never forward screenshots, PDFs, or images of wiring details. Any suspected wire fraud must be reported to the Broker immediately (within 24 hours). Associates must proactively warn every client in writing about wire fraud risks at or before contract execution.</p>
+
+<h3>SECTION 5. REGULATORY COMPLIANCE</h3>
+<p>All Associates must maintain compliance with: Florida Statute Chapter 475; Florida Administrative Code (FAC) Rules of FREC; DBPR requirements; MLS Rules and Regulations; NAR Code of Ethics (if applicable); Fair Housing Act and Florida Fair Housing Act; and all federal, state, and local laws governing real estate transactions. Associates are required to complete all mandatory continuing education and report completion to the Broker at least ten (10) business days before the DBPR renewal deadline.</p>
+
+<h3>SECTION 6. TRANSACTION DOCUMENTATION &amp; FILE SUBMISSION</h3>
+<p>All transactions must be submitted to the Broker for review and approval in accordance with Florida Statute &sect;475.25 and FREC Rule 61J2-14.010. Associates must upload all transaction documents to the Company&rsquo;s designated compliance platform within forty-eight (48) hours of execution or receipt by Associate, whichever occurs later. Required Transaction Documents include but are not limited to: executed listing agreements, buyer-broker agreements, or tenant representation agreements; executed purchase and sale contracts or lease agreements; all amendments, addenda, and modifications; disclosure forms; inspection reports, repair requests, and responses; title commitments and HOA documents; closing statements; Commission Disbursement Authorization (CDA) or equivalent; proof of earnest money deposit and disbursement records; and all written correspondence related to the transaction. Associates must ensure that transaction files are complete and submitted at least seven (7) days prior to closing for final Broker review.</p>
+
+<h3>SECTION 7. BROKER REVIEW &amp; CONTRACT EXECUTION</h3>
+<p>All contracts, listing agreements, buyer-broker agreements, leases, and amendments must be submitted to the Broker for review and approval before presentation or execution unless the Associate holds an active Florida Broker license. Associates may not bind the Company to any agreement, fee arrangement, commission split, or obligation without prior written Broker approval.</p>
+
+<h3>SECTION 8. PROHIBITED CONDUCT</h3>
+<p>The following conduct is strictly prohibited and constitutes a material breach of the ICA:</p>
+<ul class="bullet-list">
+  <li>Misrepresentation, fraud, or dishonest dealing</li>
+  <li>Discrimination or violation of fair housing laws</li>
+  <li>Failure to disclose material facts or conflicts of interest</li>
+  <li>Unauthorized practice of law</li>
+  <li>Commingling of client funds or unauthorized use of trust accounts</li>
+  <li>Advertising or marketing without required Broker identification and approval</li>
+  <li>Solicitation of Company clients or Associates upon termination</li>
+  <li>Failure to submit transaction documents or respond to Broker requests within required timeframes</li>
+  <li>Engaging in real estate activity under another broker&rsquo;s license while affiliated with the Company</li>
+</ul>
+
+<h3>SECTION 9. TRANSACTION FILE REQUIREMENTS</h3>
+<p>All Associates must submit complete transaction files in accordance with Florida Statute &sect;475.5015 and FREC Rule 61J2-10.030. The Broker is required to maintain transaction records for a minimum of five (5) years from the date of closing or termination.</p>
+<p>Submission Deadline: All documents must be uploaded within 48 hours (calculated as calendar hours) of execution or receipt, whichever occurs later. Complete files must be submitted at least seven (7) days before closing for final Broker review.</p>
+
+<h3>SECTION 10. COMPLIANCE &amp; DOCUMENT SUBMISSION ADDENDUM</h3>
+<p>All fully executed contracts, addenda, disclosures, and other transaction-related documents must be submitted to the Company for compliance review within forty-eight (48) hours of execution.</p>
+<p>Any modification to a transaction, including contract extensions, addenda, or notices affecting closing dates or escrow disbursement, must be executed by all parties prior to the original expiration date and submitted for review within forty-eight (48) hours of execution.</p>
+<p>Consequences of Non-Compliance: Failure to submit required documents may result in: commission withholding until file is complete; suspension of system access; mandatory compliance review meeting; and termination of the ICA for repeated or material violations.</p>
+
+<h3>SECTION 11. BROKER EXECUTION &amp; REVIEW ADDENDUM</h3>
+
+<h4>11.1 Broker Signature Required for:</h4>
+<p>Seller to Buyer&rsquo;s Broker Compensation Agreement; Buyer Broker Compensation Agreement; Arbitration or Commission-Disbursement Agreements; Outside-Broker Referral Agreements; Company-Generated Lead Transactions; Associate Personal Transactions; and any form, addendum, or agreement that includes a designated Broker Signature or Broker Authorization field.</p>
+
+<h4>11.2 Associate Signature Permitted</h4>
+<p>For standard FAR/BAR real estate contracts and addenda that do not require Broker authorization or signature. Signature block format: Aari Realty LLC | [Associate&rsquo;s Full Name]</p>
+
+<h4>11.3 Recordkeeping</h4>
+<p>All executed documents must be uploaded into the Company&rsquo;s compliance system within forty-eight (48) hours of signature. No Commission Disbursement Authorization (CDA) will be issued until all required documents are uploaded, checklists are complete, and the file has been reviewed and approved by the Broker.</p>
+
+<h4>11.4 Review Turnaround</h4>
+<p>The Broker will review submitted contracts within forty-eight (48) hours during normal business hours (Monday&ndash;Friday, 9:00 AM &ndash; 5:00 PM EST, excluding holidays) for complete submissions. Incomplete submissions restart the review period upon resubmission.</p>
+
+<h3>SECTION 12. FAIR HOUSING POLICY</h3>
+<p>Aari Realty LLC is committed to full compliance with federal, state, and local fair housing laws, including: Federal Fair Housing Act (Title VIII of the Civil Rights Act of 1968, as amended); Florida Fair Housing Act (Chapter 760, Florida Statutes); Americans with Disabilities Act (ADA); and all applicable local ordinances.</p>
+<p>Prohibited Conduct: Associates may not: refuse to show, rent, sell, or negotiate with any person based on a protected class; provide different terms based on a protected class; steer clients toward or away from neighborhoods based on protected characteristics; make statements or advertisements that indicate a preference, limitation, or discrimination; or retaliate against any person for exercising fair housing rights.</p>
+<p>All Associates must complete Company-approved fair housing training within fourteen (14) days of affiliation. Associates may not accept any client representation until training is completed and proof is submitted to the Broker.</p>
+
+<h3>SECTION 13. ADVERTISING POLICY</h3>
+<p>All advertising and marketing by Associates must comply with Florida Statute &sect;475.42, FREC Rule 61J2-10.025, and applicable MLS rules. All advertisements, marketing materials, and public communications must prominently display the Company name: Aari Realty LLC.</p>
+<p>Associates may not advertise in their own name without including the Company name, advertise under a team name or DBA without prior written Broker approval, or use misleading or deceptive language or images.</p>
+<p>All digital marketing must include the Company name, including: websites and landing pages; social media profiles and posts; email signatures; online advertisements; and video content.</p>
+
+<h3>SECTION 14. SOCIAL MEDIA POLICY</h3>
+<p>All social media activity by Associates must comply with applicable federal, state, and local laws, including advertising and marketing regulations, fair housing laws, antitrust laws, and the NAR Code of Ethics.</p>
+<p>Associates are strictly prohibited from using unauthorized third-party content in social media posts, including images, music, audio, videos, or copyrighted text. Associates assume primary liability for copyright violations.</p>
+<p>Associates must protect client confidentiality on social media. Before posting any content that includes or references a client, Associates must obtain written permission.</p>
+
+<h3>SECTION 15. SIGN BORROWING POLICY</h3>
+<p>Aari Realty provides open house signs and for sale signs to agents for professional use. To maintain inventory and ensure availability, Aari Realty requires payment for signs that are lost, stolen, or damaged beyond use. Replacement fees are set forth in Exhibit A &mdash; Commission Fee Schedule.</p>
+<p>Signs must be returned promptly after use (within 48 hours of event completion), stored properly during use to prevent damage, and lost or damaged signs must be reported immediately.</p>
+
+<h3>SECTION 16. ERRORS &amp; OMISSIONS ADDENDUM</h3>
+<p>The Company maintains Errors &amp; Omissions (E&amp;O) insurance covering the real estate brokerage activities of the Broker and affiliated Associates. Coverage is subject to policy limits, exclusions, and conditions. Current carrier, policy number, effective dates, coverage limits, and deductible amounts are maintained in the internal E&amp;O Certificate on file with the Qualifying Broker and updated at each policy renewal. Associates may request a current certificate of insurance by contacting the Broker directly.</p>
+<p>Exclusions: The Company&rsquo;s E&amp;O policy does not cover: intentional misconduct, fraud, or criminal acts; activities outside the scope of the ICA or Florida real estate license; personal business activities unrelated to transactions under the Company&rsquo;s brokerage; or claims arising after termination of the ICA for transactions that did not close during affiliation.</p>
+<p>Auto Insurance: Associates who transport clients must maintain personal auto insurance with liability limits of at least $100,000 per person / $300,000 per accident. Proof of insurance must be provided to the Broker at onboarding, annually on renewal, and within five (5) business days of any policy change.</p>
+<p>Claims Reporting: Any potential claim, demand, lawsuit, or regulatory complaint must be reported to the Broker immediately (within 24 hours of the Associate becoming aware of the claim). Associates must fully cooperate with the Company&rsquo;s insurance carrier and legal counsel.</p>
+
+<h3>SECTION 17. RECORD RETENTION &amp; CONFIDENTIALITY</h3>
+<p>Aari Realty LLC is required by Florida law to maintain transaction records for a minimum of five (5) years from the date of closing or termination. Associates must submit all transaction documents to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution or receipt.</p>
+<p>Associates must protect the confidentiality of client information, including financial information, personal identifying information, medical or health information, and transaction details.</p>
+
+<h3>SECTION 18. REFERRAL BONUS POLICY</h3>
+<p>Eligibility: To receive the Recruiting Reward: (1) the referring Associate must remain Active and not subject to termination or Material Breach proceedings from the date of referral through payment; (2) the recruited Associate must be a newly affiliated licensed Florida sales associate; (3) the recruited Associate must complete onboarding and pay all required fees; and (4) the recruited Associate must remain Active and in Good Standing for at least thirty (30) consecutive days after affiliation.</p>
+<p>Payment: The Recruiting Reward will be paid within the timeframe specified in Exhibit A following the date all eligibility requirements are satisfied. Payment will be issued via ACH, check, or other method designated by the Company. The reward is considered taxable income and will be reported to the IRS on Form 1099-NEC.</p>
+<p>Fee Amounts: The specific amount of the Recruiting Reward and all related fees are set forth in Exhibit A &mdash; Commission Fee Schedule.</p>
+
+<h3>SECTION 19. COMPANY LEADS ADDENDUM</h3>
+
+<h4>19.1 Lead Ownership and Assignment</h4>
+<p>Company-generated leads are Company property. The Broker assigns leads and may reassign for missed service levels. Compensation on Company leads is split 50/50 between Associate and Company after referral fees and approved marketing deductions are taken off the top. Marketing deductions must be pre-approved in writing by Broker prior to lead assignment and may not reduce the net commission below the minimum floor set forth in Exhibit A.</p>
+
+<h4>19.2 Service Level Minimums</h4>
+<p>First contact attempt within 2 business hours. Daily contact attempts for the first 7 days, then 3&times; weekly until qualified or closed. Notes logged in the CRM after every touch. Broker may reassign after 48 hours of no logged activity.</p>
+
+<h3>SECTION 20. PERSONAL TRANSACTIONS ADDENDUM</h3>
+
+<h4>20.1 Scope</h4>
+<p>This Addendum applies to any transaction in which the Associate has a direct or indirect ownership interest in real property, including purchases, sales, assignments, and acquisitions through an entity.</p>
+
+<h4>20.2 Policy</h4>
+<p>Personal transactions are subject to the standard transaction fee and compliance review requirements as set forth in Exhibit A. No commission split applies to qualifying personal transactions, as further defined in the CSA. Full files and approvals are required. No discounts on compliance steps or documentation.</p>
+
+<h4>20.3 Disclosure Requirement</h4>
+<p>The Associate must disclose to the Qualifying Broker any transaction covered by this Addendum prior to contract execution. The Associate&rsquo;s status as a real estate licensee must be disclosed in the purchase contract or other applicable transaction documents.</p>
+
+<h3>SECTION 21. MLS &amp; BRAND STANDARDS ADDENDUM</h3>
+<p>Associates must comply with NAR Clear Cooperation and applicable MLS rules. At minimum, all listings must be entered into MLS within twenty-four (24) hours of obtaining seller signature on listing agreement.</p>
+<p>All advertising must include Aari Realty LLC as broker of record. Team/DBA usage requires prior written Broker approval. Social media posts are advertising and must meet broker ID and fair housing standards.</p>
+
+<h3>SECTION 22. TEAM ADDENDUM</h3>
+
+<h4>22.1 Team Lead Responsibilities</h4>
+<p>Team lead is responsible for coordinating team activities, monitoring branding compliance, and assisting the Broker in ensuring team members follow Company policies. The Broker retains all supervisory responsibility under Florida law.</p>
+
+<h4>22.2 Team Splits</h4>
+<p>Intra-team splits must be on file (signed and stored in the team folder) before first shared deal.</p>
+
+<h4>22.3 Roster Management</h4>
+<p>Submit roster changes within 48 hours. Update signage, websites, and marketing materials to reflect roster changes within seven (7) business days of the roster change effective date.</p>
+
+<h3>SECTION 23. CDA WORKFLOW ADDENDUM</h3>
+
+<h4>23.1 CDA Preparation</h4>
+<p>The CDA is prepared and added to the transaction by the Broker or Compliance Team. Agents do not create, edit, or attach the CDA. A CDA is required when: (a) Associate or related party has any ownership interest in the property; (b) team member representation exists; (c) any family relationship or financial interest exists between transaction parties; or (d) any other conflict of interest as required by FREC rules or Company policy.</p>
+
+<h4>23.2 File Completion and Commission Payment</h4>
+<p>Commission is earned and payable only after complete, compliant file and Broker approval. All required documents uploaded within 48 hours of execution/receipt. Complete file submitted at least 7 days before close for final review. Payout timing: within 3 business days after funds clear and CDA conditions are satisfied.</p>
+
+<h3>SECTION 24. BILLING &amp; PRORATION ADDENDUM</h3>
+
+<h4>24.1 Recurring Fees</h4>
+<p>All recurring fees applicable to Associates &mdash; including the monthly Brokerage Access Fee and the annual E&amp;O + Compliance Fee &mdash; are non-refundable. The monthly Brokerage Access Fee is due on the first (1st) day of each month. At onboarding, the first month&rsquo;s fee is prorated based on the Associate&rsquo;s start date and due at the time of joining. The annual E&amp;O + Compliance Fee is due on the Associate&rsquo;s onboarding anniversary date each year. At onboarding, the full annual fee is due at the time of joining. All fee amounts and billing schedules are governed exclusively by Exhibit A &mdash; Commission Fee Schedule, as amended from time to time.</p>
+
+<h4>24.2 Payment Enforcement</h4>
+<p>Failed payments may result in: late payment fees; returned payment fees; reactivation fees when returning from Inactive status; suspension of system access; commission withholding; change to Inactive status; or termination of the ICA.</p>
+
+<h3>SECTION 25. TERMINATION ADDENDUM</h3>
+
+<h4>25.1 Immediate Actions.</h4>
+<p>Access removal within 24 hours. Listing transfers processed upon written seller consent and Company release. Keys/lockboxes and Company property returned within 3 business days.</p>
+
+<h4>25.2 File Completion.</h4>
+<p>Departed Associates must deliver all final documents and complete all outstanding files within ten (10) business days of termination. Files not completed within this timeframe shall be deemed Abandoned Commissions and subject to fees per Exhibit A.</p>
+
+<h4>25.3 Financial Settlement.</h4>
+<p>Pending payouts processed per ICA and CSA order of precedence.</p>
+
+<h3>SECTION 26. REFERRALS LLC POLICY</h3>
+<p>All referral compensation rules, including associate/broker splits and any administrative retention on incoming referrals, are governed solely by the Aari Referrals LLC &mdash; Referral Compensation Policy. This Manual intentionally does not restate referral percentages or admin amounts.</p>
+
+<h3>SECTION 27. RESERVED</h3>
+<p>This section is reserved for future use.</p>
+
+<h3>SECTION 28. INDEMNIFICATION &amp; DEFENSE ADDENDUM</h3>
+
+<h4>28.1 Indemnification.</h4>
+<p>To the fullest extent permitted by law, Associate agrees to indemnify, defend, and hold Broker harmless from and against any and all claims, demands, actions, damages, losses, liabilities, fines, penalties, and costs arising out of or related to: any act, omission, negligence, misrepresentation, or misconduct by Associate in the performance of real estate services; any failure by Associate to comply with federal, state, or local laws, FREC rules, MLS regulations, or Brokerage policies; any unauthorized promises, guarantees, or agreements made by Associate to clients, cooperating brokers, or third parties; or any disputes, penalties, or claims related to incomplete, inaccurate, or untimely documentation. This indemnification does not apply to claims arising solely from the Broker&rsquo;s independent negligence or willful misconduct.</p>
+
+<h4>28.2 Defense, Insurance, and Offsets.</h4>
+<p>Broker, or its E&amp;O carrier, may assume control of the defense and selection of counsel for any covered matter. Associate must notify Broker in writing within twenty-four (24) hours of any demand, complaint, investigation, or threatened claim and must fully cooperate in the investigation and defense. Broker may deduct or withhold commissions in an amount reasonably calculated to cover potential or actual losses. Upon final resolution, Broker will reconcile and remit any excess amounts within thirty (30) days of final resolution, or within sixty (60) days if litigation is pending at the time of resolution.</p>
+
+<h4>28.3 Survival.</h4>
+<p>The indemnity, defense, and hold-harmless obligations survive termination of Associate&rsquo;s affiliation with Broker.</p>
+
+<h3>SECTION 29. POST-DEPARTURE COMPENSATION ADDENDUM</h3>
+
+<h4>29.1 Procuring Cause.</h4>
+<p>Under Florida law, all procuring cause rights belong to the brokerage, not the sales associate. Aari retains all procuring cause rights for any buyer or seller introduced to real property through Aari, regardless of whether the Associate remains affiliated with the Company.</p>
+
+<h4>29.2 Protection Period.</h4>
+<p>Any protection period contained in a Buyer Brokerage Agreement, Listing Agreement, or compensation agreement survives the Associate&rsquo;s departure from the brokerage. Aari retains full compensation rights for any contract, offer, or closing involving a buyer or seller introduced through Aari during the protection period.</p>
+
+<h4>29.3 Broker Discretion on Post-Departure Compensation.</h4>
+<p>The Broker retains sole discretion to determine the compensation split for any transaction in which the Associate has departed Aari prior to closing. The Associate&rsquo;s prior commission plan does not survive departure. No departing Associate is guaranteed their previous split. The minimum floor for post-departure compensation, if any, is governed by the Commission Structure Addendum.</p>
+
+<h4>29.4 Aari Paid First.</h4>
+<p>All compensation due to Aari must be paid directly to Aari Realty LLC. Departing Associates receive their portion only after Aari receives funds in full, confirms accurate disbursement, completes audit compliance, and processes internal accounting.</p>
+
+<h4>29.5 Prohibition Against Interference.</h4>
+<p>Departing Associates may not interfere with Aari&rsquo;s compensation status, instruct title companies, or attempt to influence representation. Any attempt to manipulate, alter, backdate, or rewrite documents to bypass Aari&rsquo;s rights is strictly prohibited.</p>
+
+<h4>29.6 Survival.</h4>
+<p>This Addendum remains binding after the Associate&rsquo;s departure. Aari&rsquo;s rights to compensation survive termination of the ICA.</p>
+
+<h3>SECTION 30. FORCE MAJEURE</h3>
+<p>In the event of natural disaster, hurricane, widespread system outage, or other force majeure event affecting Associates&rsquo; ability to meet deadlines, the Broker may extend deadlines on a case-by-case basis. Associates must: (a) provide initial notice of force majeure circumstances within forty-eight (48) hours of the event or as soon as communication is restored; and (b) submit supporting documentation within five (5) business days of initial notice.</p>
+
+<h3>SECTION 31. DISPUTE RESOLUTION &amp; APPEALS</h3>
+<p>Associates who wish to contest any enforcement decision, fee assessment, or suspension must submit a written appeal to the Broker within ten (10) business days of receiving notice of the decision. The appeal must include: a clear statement of the decision being appealed; the Associate&rsquo;s position and supporting facts; and any documentation supporting the appeal.</p>
+<p>The Broker will review and respond in writing within fifteen (15) business days. The Broker&rsquo;s decision on appeal is final and binding. Filing an appeal does not toll, extend, or suspend any other deadlines or obligations under this Manual, the ICA, or applicable law unless the Broker grants a specific written extension.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== W-9 COLLECTION & TAX ACKNOWLEDGMENT ============================== -->
+<div class="page-break"></div>
+
+<h2>W-9 Collection &amp; Tax Acknowledgment</h2>
+
+<p>This acknowledgment must be completed at onboarding. No commission disbursement will be made to the Associate until a valid IRS Form W-9 is received by Aari Realty LLC.</p>
+
+<h3>1. W-9 Submission</h3>
+
+<h4>1.1</h4>
+<p>The Associate confirms they have completed and submitted to Aari Realty LLC a valid IRS Form W-9 containing their legal name, business name or DBA (if applicable), federal tax classification, Taxpayer Identification Number (TIN) or Social Security Number (SSN), and certification signature.</p>
+
+<h4>1.2</h4>
+<p>The Associate acknowledges that Aari Realty LLC is required by federal law to obtain a completed W-9 prior to issuing any commission payments. Failure to provide a valid W-9 will result in commission withholding until the form is received.</p>
+
+<h3>2. Tax Reporting Acknowledgment</h3>
+<p>The Associate acknowledges and understands that:</p>
+<ul class="bullet-list">
+  <li>They are engaged as an independent contractor, not an employee of Aari Realty LLC</li>
+  <li>Aari Realty LLC will not withhold federal income tax, Social Security tax, or Medicare tax from commission payments</li>
+  <li>Aari Realty LLC will issue a Form 1099-NEC for each calendar year in which the Associate receives commission payments totaling $600.00 or more</li>
+  <li>The Associate is solely responsible for all federal, state, and local tax obligations, including estimated quarterly tax payments</li>
+  <li>The Associate must notify Aari Realty LLC in writing within thirty (30) days of any change to their legal name, TIN, SSN, or tax classification requiring an updated W-9</li>
+</ul>
+
+<h3>3. Backup Withholding</h3>
+<p>The Associate acknowledges that Aari Realty LLC may be required by the IRS to apply backup withholding if: the Associate fails to provide a TIN; the IRS notifies Aari Realty LLC that the TIN provided is incorrect; or the Associate fails to certify that they are not subject to backup withholding. The Associate certifies that the information provided on their W-9 is accurate and complete.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== LICENSE VERIFICATION ============================== -->
+<div class="page-break"></div>
+
+<h2>License Verification &amp; Active Status Acknowledgment</h2>
+
+<p>This acknowledgment is required before the Associate may conduct any real estate activity under Aari Realty LLC&rsquo;s brokerage license.</p>
+
+<h3>1. License Information</h3>
+<p>Full Legal Name, Florida License Number, License Type (Sales Associate or Broker Associate), License Status at Onboarding, License Expiration Date, and DBPR Profile Email are collected and verified at onboarding.</p>
+
+<h3>2. Associate Acknowledgments</h3>
+
+<h4>2.1 Active License Required.</h4>
+<p>The Associate must maintain an active, current, and unrestricted Florida real estate license in good standing with DBPR at all times during their affiliation with Aari Realty LLC.</p>
+
+<h4>2.2 Sole Responsibility.</h4>
+<p>The Associate is solely responsible for monitoring their license expiration date, completing all required continuing education, and renewing their license on time. Monthly DBPR verification by Aari Realty LLC is a supervisory measure only and does not relieve the Associate of this responsibility.</p>
+
+<h4>2.3 Immediate Notification Required.</h4>
+<p>The Associate must notify the Qualifying Broker in writing within twenty-four (24) hours of any change to their license status, including: license expiration or failure to renew; suspension or revocation; voluntary surrender or inactivation; disciplinary action by DBPR or FREC; or any investigation, complaint, or proceeding initiated by DBPR, FREC, MLS, or NAR.</p>
+
+<h4>2.4 Consequence of Inactive License.</h4>
+<p>Any real estate activity conducted under an inactive, suspended, expired, or revoked license constitutes a violation of Florida Statute &sect;475.42 and grounds for immediate termination of the Independent Contractor Agreement, forfeiture of pending commissions, and reporting to DBPR.</p>
+
+<h4>2.5 Continuing Education.</h4>
+<p>The Associate is solely responsible for completing all continuing education requirements mandated by DBPR and must provide the Broker with proof of completion at least ten (10) business days before the DBPR renewal deadline.</p>
+
+<h3>3. Broker Verification</h3>
+<p>Aari Realty LLC confirms that the Associate&rsquo;s license was verified as active and in good standing through the DBPR online verification system as of the date of this acknowledgment. Aari Realty LLC will conduct ongoing monthly license verification for all affiliated Associates.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== RESPA AFFILIATED BUSINESS DISCLOSURE ============================== -->
+<div class="page-break"></div>
+
+<h2>Affiliated Business Disclosure: RESPA Compliance</h2>
+
+<p>This disclosure is required under the Real Estate Settlement Procedures Act (RESPA), 12 U.S.C. &sect;2607(c)(4), and must be signed at onboarding by all Associates affiliated with Aari Realty LLC.</p>
+
+<h3>1. Affiliated Business Relationships</h3>
+<p>Aari Realty LLC discloses that it has affiliated business relationships with the following entities under common ownership by Marlenyi Paredes:</p>
+
+<table>
+  <thead>
+    <tr><th>Entity</th><th>Services Provided</th><th>Relationship</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Aari Transactions LLC</td><td>Transaction coordination, file organization, compliance support</td><td>Under common ownership with Aari Realty LLC</td></tr>
+    <tr><td>Aari Referrals LLC</td><td>Referral-only real estate affiliation and referral fee processing</td><td>Under common ownership with Aari Realty LLC</td></tr>
+  </tbody>
+</table>
+
+<h3>2. Associate Obligations</h3>
+
+<h4>2.1 Client Disclosure Required.</h4>
+<p>When referring a client to Aari Transactions LLC for transaction coordination services, the Associate must provide the client with a written Affiliated Business Disclosure prior to or at the time of referral, disclosing the common ownership relationship.</p>
+
+<h4>2.2 No Required Use.</h4>
+<p>Clients are under no obligation to use the services of any affiliated entity. Clients may use any qualified service provider of their choice. The Associate shall not represent or imply to any client that use of an affiliated entity is required.</p>
+
+<h4>2.3 No Additional Compensation.</h4>
+<p>The Associate will not receive any referral fee, bonus, or additional compensation from any affiliated entity beyond the compensation structure set forth in Exhibit A &mdash; Commission Fee Schedule.</p>
+
+<p><strong>Legal Reference:</strong> This disclosure is made pursuant to RESPA Section 8(c)(4), 12 U.S.C. &sect;2607(c)(4), and 24 C.F.R. &sect;3500.15. This disclosure does not constitute legal advice. Associates should consult with a licensed attorney regarding their individual compliance obligations.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== MLS RULES ACKNOWLEDGMENT ============================== -->
+<div class="page-break"></div>
+
+<h2>MLS Rules Acknowledgment</h2>
+
+<p>This acknowledgment must be signed at onboarding before the Associate may access or use any MLS system under Aari Realty LLC&rsquo;s membership. Aari Realty LLC maintains membership in multiple MLS boards. The Associate&rsquo;s obligations under this Acknowledgment apply equally to all boards through which they conduct business.</p>
+
+<h3>1. MLS Membership Information</h3>
+<p>Associate Full Legal Name, Primary MLS Board, MLS Member ID (Primary Board), Additional MLS Boards (if any), and Florida License Number are collected and verified at onboarding.</p>
+
+<h3>2. Associate Acknowledgments</h3>
+
+<h4>2.1 Receipt of MLS Rules.</h4>
+<p>The Associate has received, reviewed, and agrees to comply with the current rules and regulations of all MLS boards through which they conduct business under Aari Realty LLC&rsquo;s membership, as amended from time to time. Current rules are available through each respective MLS board&rsquo;s member portal.</p>
+
+<h4>2.2 Multiple Board Compliance.</h4>
+<p>Where the Associate participates in more than one MLS board, they are responsible for knowing and complying with the specific rules of each board. Rules vary by board. The more restrictive rule applies in all cases of conflict unless the Broker directs otherwise in writing.</p>
+
+<h4>2.3 Clear Cooperation Compliance.</h4>
+<p>The Associate must enter all listings into the applicable MLS within twenty-four (24) hours of obtaining seller signature on the listing agreement and prior to any public marketing, in compliance with NAR&rsquo;s Clear Cooperation Policy and applicable MLS rules for each board.</p>
+
+<h4>2.4 NAR Settlement Compliance.</h4>
+<p>The Associate must comply with all MLS rule changes implemented in connection with the NAR settlement effective August 17, 2024, including the prohibition on offering buyer broker compensation in any MLS field, across all boards in which they participate.</p>
+
+<h4>2.5 MLS Fines.</h4>
+<p>Any fine, penalty, or sanction imposed by any MLS board as a result of the Associate&rsquo;s violation of MLS rules is the Associate&rsquo;s sole financial responsibility. Aari Realty LLC reserves the right to offset any MLS fines paid by the brokerage on the Associate&rsquo;s behalf against future commission disbursements.</p>
+
+<h4>2.6 Broker Notification.</h4>
+<p>The Associate must notify the Qualifying Broker within twenty-four (24) hours of receiving any MLS inquiry, fine notice, complaint, or disciplinary communication from any MLS board.</p>
+
+<h4>2.7 Rule Updates.</h4>
+<p>The Associate is responsible for monitoring communications from all MLS boards in which they participate and remaining current on all rule changes. Lack of awareness of a rule change is not a defense to a violation.</p>
+
+<h3>3. Broker Rights</h3>
+<p>Aari Realty LLC reserves the right to review all MLS activity by affiliated Associates across all boards and to conduct periodic compliance audits. MLS rule violations constitute a Compliance Issue or Material Breach under the Independent Contractor Agreement, depending on severity and frequency, and may result in suspension or termination of affiliation.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== BUYER BROKERAGE AGREEMENT POLICY ============================== -->
+<div class="page-break"></div>
+
+<h2>Buyer Brokerage Agreement Policy Acknowledgment</h2>
+
+<p>This acknowledgment is required in connection with the NAR settlement effective August 17, 2024, and must be signed at onboarding before the Associate may represent any buyer client.</p>
+
+<h3>1. Background</h3>
+<p>Effective August 17, 2024, the National Association of Realtors (NAR) implemented practice changes requiring that all buyer&rsquo;s agents enter into a written Buyer Brokerage Agreement with buyer clients before touring any property. These requirements are incorporated into FGCMLS rules and are subject to oversight by FREC as part of the Qualifying Broker&rsquo;s supervisory obligations under Florida Statute &sect;475.278.</p>
+
+<h3>2. Mandatory Requirements</h3>
+
+<h4>2.1 Written Agreement Before Touring.</h4>
+<p>The Associate must obtain a signed, written Buyer Brokerage Agreement with every buyer client before conducting any property showing, tour, or property preview on the buyer&rsquo;s behalf, whether in person, virtually, or by any other means.</p>
+
+<h4>2.2 Approved Forms Only.</h4>
+<p>The Associate must use only Company-approved Buyer Brokerage Agreement forms or Florida Realtors/Florida Bar approved forms. The Associate may not draft, create, or modify buyer representation agreements without prior written Broker approval.</p>
+
+<h4>2.3 Compensation Terms.</h4>
+<p>All buyer broker compensation terms must be clearly disclosed in the Buyer Brokerage Agreement. The Associate may not make any verbal representations about compensation that differ from the written agreement.</p>
+
+<h4>2.4 No MLS Compensation Offers.</h4>
+<p>The Associate must not communicate or offer buyer broker compensation through any MLS field, in compliance with NAR settlement requirements and current FGCMLS rules.</p>
+
+<h4>2.5 Broker Submission.</h4>
+<p>A copy of every executed Buyer Brokerage Agreement must be submitted to the compliance platform within forty-eight (48) hours of execution.</p>
+
+<h4>2.6 Client Disclosure.</h4>
+<p>When presenting the Buyer Brokerage Agreement to clients, the Associate must clearly explain: (a) what services are being provided; (b) the compensation structure; (c) the duration of the agreement; and (d) that compensation amounts are negotiable and not set by law.</p>
+
+<h4>2.7 No Waiver or Circumvention.</h4>
+<p>The Associate may not show property to any buyer without a signed agreement, regardless of the buyer&rsquo;s objection, reluctance, or claim that another agent has already shown the property.</p>
+
+<h3>3. Consequences of Non-Compliance</h3>
+<p>Failure to obtain a signed Buyer Brokerage Agreement before showing property constitutes a Compliance Issue under the Independent Contractor Agreement and may result in: written warning and mandatory compliance review; commission withholding on the affected transaction; suspension of transaction privileges; termination of affiliation for repeated violations; and reporting to FREC if the violation constitutes a breach of supervisory obligations.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== WIRE FRAUD & CYBERSECURITY ============================== -->
+<div class="page-break"></div>
+
+<h2>Wire Fraud &amp; Cybersecurity Acknowledgment</h2>
+
+<p>This standalone acknowledgment supplements the wire safety provisions in the Independent Contractor Agreement and creates an independent record of the Associate&rsquo;s awareness of wire fraud risks and protocols. It must be signed at onboarding.</p>
+
+<h3>1. Wire Fraud: Absolute Prohibition</h3>
+
+<h4>1.1 No Transmission of Wire Instructions.</h4>
+<p>The Associate is strictly prohibited from transmitting, forwarding, drafting, creating, or relaying wire transfer instructions, banking information, or funds transfer details to any party &mdash; including clients, buyers, sellers, lenders, or title companies &mdash; by any means, including email, text message, social media, or any electronic communication platform.</p>
+
+<h4>1.2 Verbal Verification Required.</h4>
+<p>All wire instructions must be verified directly by the client with the receiving title company or escrow agent by telephone, using a phone number independently obtained from a trusted source &mdash; not a phone number provided in any email or electronic communication.</p>
+
+<h4>1.3 No Screenshots or Attachments.</h4>
+<p>The Associate must never forward, photograph, screenshot, or otherwise transmit images, PDFs, or documents containing wire instructions or banking information.</p>
+
+<h4>1.4 Client Warning Obligation.</h4>
+<p>The Associate must proactively warn every buyer and seller client in writing about the risk of wire fraud at or before contract execution. This warning must be documented in the transaction file.</p>
+
+<h3>2. Cybersecurity Obligations</h3>
+
+<h4>2.1 Email Security.</h4>
+<p>The Associate must use secure, password-protected email accounts for all real estate communications. Shared or unsecured email accounts may not be used for client communications involving financial information.</p>
+
+<h4>2.2 Suspicious Activity Reporting.</h4>
+<p>The Associate must report any suspected phishing attempt, email compromise, unauthorized account access, or attempted wire fraud to the Qualifying Broker immediately and no later than four (4) hours of discovery.</p>
+
+<h4>2.3 Device Security.</h4>
+<p>The Associate must not access client files, MLS systems, or transaction platforms on unsecured public Wi-Fi networks without a VPN or equivalent security measure.</p>
+
+<h3>3. Incident Response Protocol</h3>
+<p>If the Associate suspects that a wire fraud attempt has occurred, is in progress, or has been completed, the Associate must immediately:</p>
+<ul class="bullet-list">
+  <li>Notify the Qualifying Broker within four (4) hours</li>
+  <li>Contact the title company or escrow agent immediately</li>
+  <li>Preserve all communications &mdash; do not delete any emails or messages</li>
+  <li>Do not communicate with the suspected fraudulent party</li>
+  <li>File a report with the FBI&rsquo;s Internet Crime Complaint Center (IC3) at ic3.gov</li>
+  <li>Contact local law enforcement if funds have been transferred</li>
+  <li>Make no admission of fault, apology, or statement of liability without prior written authorization from the Qualifying Broker</li>
+</ul>
+
+<h3>4. Consequences of Violation</h3>
+<p>Violation of any provision of this Acknowledgment constitutes an immediate termination event under Section 12 of the Independent Contractor Agreement. The Associate may be held personally liable for all losses, damages, investigation costs, remediation expenses, legal fees, and regulatory fines arising from their violation of these protocols, as set forth in the Indemnification &amp; Defense Addendum.</p>
+
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
+
+<!-- ============================== CONFIRMATION OF COMMUNICATION ============================== -->
+<div class="page-break"></div>
+
+<h2>Confirmation of Communication</h2>
+
+<p>By signing this Agreement, the Associate confirms that all notices, disclosures, and communications from Aari Realty LLC may be delivered electronically to the email address and phone number provided below. The Associate is responsible for ensuring this contact information remains current and agrees to notify the Brokerage in writing of any changes.</p>
+
+<div style="background:rgba(10,10,10,0.03);border:1px solid rgba(10,10,10,0.1);border-radius:4px;padding:20px 24px;margin-top:16px">
+  <p style="margin:0 0 6px;line-height:1.6">Email: ________________________________________</p>
+  <p style="margin:0;line-height:1.6">Phone: ________________________________________</p>
 </div>
 
-<!-- ==================== ICA SECTIONS 1-10 ==================== -->
-<div class="section page-break">
-  <div class="section-label">Independent Contractor Agreement</div>
+<div class="page-footer">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
 
-  <!-- Definitions -->
-  <div class="heading">DEF. DEFINITIONS</div>
+<!-- ============================== SIGNATURE BLOCK ============================== -->
+<div class="page-break"></div>
 
-  <p><strong>&ldquo;Agreement&rdquo; or &ldquo;ICA&rdquo;</strong> &mdash; This Independent Contractor Agreement, including all Incorporated Documents.</p>
-  <p><strong>&ldquo;Associate&rdquo;</strong> &mdash; The real estate licensee who executes this Agreement.</p>
-  <p><strong>&ldquo;Broker&rdquo; or &ldquo;Company&rdquo;</strong> &mdash; Aari Realty LLC, a Florida limited liability company.</p>
-  <p><strong>&ldquo;Business Day&rdquo;</strong> &mdash; Any day other than Saturday, Sunday, or a federal holiday observed by the Company.</p>
-  <p><strong>&ldquo;Incorporated Documents&rdquo;</strong> &mdash; All documents referenced in Section 18 and incorporated by reference into this Agreement, including the Commission Structure Addendum, Exhibit A, Operations &amp; Compliance Manual, and all policies and addenda.</p>
-  <p><strong>&ldquo;Notice&rdquo;</strong> &mdash; Written communication delivered by: (a) email to the Associate&rsquo;s email address on file; (b) posting in the Company&rsquo;s compliance platform; (c) electronic acknowledgment through Company systems; or (d) text message to the Associate&rsquo;s mobile number on file. Notice is deemed delivered and effective immediately upon sending or posting, regardless of whether the Associate has read or accessed the communication. It is the Associate&rsquo;s sole responsibility to monitor all designated communication channels.</p>
-  <p><strong>&ldquo;Immediately&rdquo;</strong> &mdash; Within twenty-four (24) hours of discovery unless a shorter timeframe is specified elsewhere in this Agreement.</p>
+<h2>Execution</h2>
 
-  <!-- Section 1 -->
-  <div class="heading">1. Independent Contractor Relationship</div>
-  <p>The Associate is engaged as an independent contractor, not an employee. The Broker will not withhold taxes, provide employee benefits, or control the Associate's daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, and maintaining required insurance. The Associate must complete a W-9 form and will receive a 1099-NEC for tax purposes.</p>
+<p>By executing this Agreement, the Associate acknowledges that they have read, understand, and agree to all terms and conditions set forth in this Independent Contractor Agreement and all Incorporated Documents. Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
 
-  <div class="subheading">No Authority to Bind</div>
-  <p>The Associate has no authority to bind the Company, enter contracts, or incur obligations on the Company's behalf without a specific written Power of Attorney executed by the Broker for each transaction.</p>
+<div class="signature-block">
 
-  <!-- Section 2 -->
-  <div class="heading">2. Exclusive Brokerage Affiliation</div>
-  <p>The Associate affirms they are not licensed with or actively affiliated with any other real estate brokerage or conducting brokerage activity outside of Aari Realty LLC. Limited outside affiliations (such as referral-only licenses in other states) require prior written approval from the Broker and must comply with Florida law. Engaging in unapproved brokerage activity constitutes immediate termination for cause and may result in forfeiture of pending commissions until compliance is verified.</p>
+  <div class="sig-row">
+    <div class="sig-col">
+      <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:24px;">Associate</p>
 
-  <!-- Section 3 -->
-  <div class="heading">3. Associate Responsibilities</div>
+      <div class="sig-line"></div>
+      <p class="sig-label">Printed Name</p>
 
-  <div class="subheading">Licensure</div>
-  <p>The Associate must maintain an active, current Florida real estate license at all times during the term of this Agreement.</p>
-
-  <div class="subheading">Compliance with Laws and Rules</div>
-  <p>The Associate shall comply with all applicable federal, state, and local laws, rules, and regulations governing real estate practice in Florida.</p>
-
-  <div class="subheading">Incorporated Documents</div>
-  <p>The Associate shall comply with all policies, procedures, and standards set forth in the Incorporated Documents listed in this Agreement.</p>
-
-  <div class="subheading">Cybersecurity &amp; Data Breach Reporting</div>
-  <p>The Associate must report any known or suspected data breach, unauthorized access, or cybersecurity incident to the Broker within four (4) hours of discovery.</p>
-
-  <div class="subheading">Wire Safety</div>
-  <p>The Associate shall never transmit wire instructions via email or text message. Violation of this policy constitutes grounds for immediate termination.</p>
-
-  <div class="subheading">Escrow Handling</div>
-  <p>The Associate shall not maintain or operate any escrow accounts. All escrow deposits must be handled in accordance with Company policy and Florida law.</p>
-
-  <div class="subheading">MLS Compliance / Clear Cooperation</div>
-  <p>The Associate must enter all listings into the MLS within twenty-four (24) hours as required by MLS rules and the Clear Cooperation Policy.</p>
-
-  <div class="subheading">Social Media &amp; Advertising</div>
-  <p>All advertising and social media content related to real estate must receive prior Broker approval before publication or distribution.</p>
-
-  <div class="subheading">TCPA Compliance</div>
-  <p>The Associate must comply with the Telephone Consumer Protection Act (TCPA) and all related federal and state telemarketing regulations.</p>
-
-  <div class="subheading">Transaction Coordination</div>
-  <p>File organization is provided through Aari Transactions LLC, an affiliated entity. Associates may elect full TC services for an additional fee. Associate remains fully responsible for their transactions.</p>
-
-  <!-- Section 4 -->
-  <div class="heading">4. Fair Housing Compliance</div>
-  <p>The Associate must comply with the Fair Housing Policy incorporated into this Agreement. Discriminatory practices of any kind are strictly prohibited. Violations may result in immediate termination and reporting to the Florida Real Estate Commission (FREC).</p>
-
-  <!-- Section 5 -->
-  <div class="heading">5. Confidentiality</div>
-
-  <div class="subheading">Definition</div>
-  <p>Confidential Information includes all non-public information obtained during the Associate's affiliation with the Company, including but not limited to client data, business strategies, proprietary systems, and financial information.</p>
-
-  <div class="subheading">Use Restriction</div>
-  <p>The Associate shall not copy, disclose, or distribute any Confidential Information to any third party without the prior written consent of the Broker.</p>
-
-  <div class="subheading">Post-Termination Restrictions</div>
-  <p>Upon termination of this Agreement, the Associate shall immediately cease all use of Confidential Information, return all Company property within five (5) days, and certify the deletion of all electronic copies of Confidential Information.</p>
-
-  <div class="subheading">Survival</div>
-  <p>Confidentiality obligations survive termination of this Agreement indefinitely with respect to trade secrets, and for a reasonable period for all other Confidential Information.</p>
-
-  <!-- Section 6 -->
-  <div class="heading">6. Errors &amp; Omissions (E&amp;O) Insurance</div>
-  <p>The Broker maintains an Errors &amp; Omissions insurance policy covering the brokerage. The Associate is included under this policy at no upfront cost. The Associate agrees to pay the applicable deductible for any claim arising from the Associate's own conduct. The Associate must report any potential claim to the Broker within twenty-four (24) hours of becoming aware of the circumstances giving rise to such claim.</p>
-
-  <!-- Section 7 -->
-  <div class="heading">7. Compensation</div>
-
-  <div class="subheading">Commission Basis</div>
-  <p>The Associate's compensation shall be on a commission basis as set forth in the Commission Structure Addendum (CSA). The Associate shall receive no salary, draw, or guaranteed minimum compensation.</p>
-
-  <div class="subheading">Conditions Precedent</div>
-  <p>Payment of commission is subject to the following conditions precedent: the transaction file is complete, the Broker has granted approval, funds have cleared, and the Associate is in Good Standing.</p>
-
-  <div class="subheading">Cleared Funds</div>
-  <p>Wire transfers are considered cleared the same or next business day. Checks require three (3) to ten (10) business days to clear. Commission disbursement will occur within three (3) business days after all conditions precedent are satisfied.</p>
-
-  <div class="subheading">Broker Authorization</div>
-  <p>The Broker has five (5) business days to grant or deny file approval. If approval is denied, the Associate has a three (3) day cure period to correct deficiencies.</p>
-
-  <div class="subheading">Good Standing</div>
-  <p>Good Standing requires an active license, all fees paid, no suspension or disciplinary action, and all transaction files submitted in accordance with Company policy.</p>
-
-  <div class="subheading">Post-Termination Compensation Floor</div>
-  <p>After termination, the Associate shall receive a minimum of fifty percent (50%) of the net commission on any pending transaction that closes, provided the Associate's file is complete and compliant.</p>
-
-  <div class="subheading">Personal Transactions</div>
-  <p>The Associate must obtain prior Broker approval before engaging in any personal real estate transaction.</p>
-
-  <div class="subheading">Overpayments &amp; Deductions</div>
-  <p>Any overpayment must be repaid within five (5) days of notification. The Company may offset future commissions, up to a maximum of fifty percent (50%) per disbursement, without the Associate's prior consent.</p>
-
-  <!-- Section 8 -->
-  <div class="heading">8. Transaction Compliance</div>
-  <p>The Associate must comply with the Operations &amp; Compliance Manual for all transactions. No commission shall be paid until the transaction file has been reviewed and approved by the Broker. Compliance with the Manual is a condition precedent to the payment of any compensation.</p>
-
-  <!-- Section 9 -->
-  <div class="heading">9. Client Ownership</div>
-
-  <div class="subheading">Personally Generated Clients</div>
-  <p>Clients personally generated by the Associate through the Associate's own efforts, relationships, and marketing are considered the Associate's property, subject to exclusions defined in this Agreement.</p>
-
-  <div class="subheading">Company-Generated Leads</div>
-  <p>Determined by the Broker based on source documentation, timestamp of first contact, and inquiry method used.</p>
-
-  <div class="subheading">Lead Classification Appeal</div>
-  <p>The Associate may appeal a lead classification determination in writing within seven (7) calendar days. The Broker shall respond to the appeal within ten (10) business days.</p>
-
-  <!-- Section 10 -->
-  <div class="heading">10. Referral &amp; Co-Agent Commission Disputes</div>
-  <p>The Company shall not be responsible for referral or co-agent commission disputes unless the referral or co-agent agreement is in writing, signed by all parties, and approved by the Broker. All disputes shall be resolved through MLS arbitration and NAR dispute resolution procedures. The Company may withhold disputed commission amounts pending resolution.</p>
-</div>
-
-<!-- ==================== SECTIONS 11-20 ==================== -->
-<div class="section page-break">
-  <div class="section-label">Independent Contractor Agreement: Sections 11 to 20</div>
-
-  <div class="heading">11. Indemnification</div>
-  <p>For indemnification, defense, and offsets, see the Indemnification, Defense, and Offsets Addendum, which is incorporated by reference and controls this topic. Broker may exercise withholding and offsets consistent with that Addendum and the Operations &amp; Compliance Manual.</p>
-
-  <div class="heading">12. Term &amp; Termination</div>
-  <div class="subheading">Term</div>
-  <p>This Agreement is effective for one (1) year and shall automatically renew annually unless terminated in accordance with this Section.</p>
-  <div class="subheading">Termination At-Will</div>
-  <p>Either party may terminate this Agreement at any time, with or without cause, upon written notice. Termination is effective immediately upon delivery of notice. Termination shall not affect the Broker's right to collect any earned but unpaid fees, commissions, or other amounts due.</p>
-
-  <div class="heading">13. Post-Termination Obligations</div>
-  <p>Upon termination, the Associate must: return all Company property, signage, and records within five (5) calendar days; cease all use of Company logos, branding, templates, and platforms; complete all outstanding compliance file requirements; reconcile commissions in accordance with the CSA; and update all online profiles within five (5) calendar days to remove Company affiliation.</p>
-  <p>The Associate may continue working only with personally generated clients. The Associate has no rights to Company-generated leads, referrals, relocation clients, or advertising-sourced prospects after termination.</p>
-
-  <div class="heading">14. Non-Solicitation</div>
-  <p>During affiliation and for twelve (12) months after termination, the Associate shall not directly or indirectly solicit or recruit Aari Realty Associates, staff, or contractors to leave the Company. For purposes of this section, solicitation means direct, targeted outreach to specific identified individuals and does not include general public advertising or marketing.</p>
-
-  <div class="heading">15. Dispute Resolution</div>
-  <div class="subheading">Internal Commission Disputes</div>
-  <p>Any dispute between Associates regarding the division of commissions shall be governed exclusively by the CSA. Disputes must be submitted in writing to the Broker, whose written determination shall be rendered within ten (10) calendar days.</p>
-  <div class="subheading">Company vs. Associate Disputes</div>
-  <p>All other disputes shall proceed as follows: (1) Mediation First &mdash; good-faith mediation in Lee County, Florida; (2) Arbitration &mdash; if mediation fails, binding arbitration before a single arbitrator in Lee County, Florida, under the Florida Arbitration Code; (3) Attorneys' Fees &mdash; the prevailing party shall recover reasonable attorneys' fees and costs; (4) Jury Trial Waiver &mdash; both parties knowingly waive any right to a jury trial.</p>
-
-  <div class="heading">16. Governing Law</div>
-  <p>This Agreement shall be governed by and construed under the laws of the State of Florida, without regard to conflicts of law principles.</p>
-
-  <div class="heading">17. Force Majeure</div>
-  <p>Neither party shall be liable for failure to perform obligations when such failure is caused by events beyond their reasonable control, including: acts of God, natural disasters, hurricanes, war, terrorism, pandemic, government orders, utility failures, or cyberattacks. During a force majeure event, affected deadlines shall be extended by the duration of the event plus a reasonable cure period not to exceed ten (10) business days. Written notice must be provided within forty-eight (48) hours of the event.</p>
-
-  <div class="heading">18. Entire Agreement; Notice; Order of Precedence; No Assignment</div>
-  <div class="subheading">Entire Agreement</div>
-  <p>This ICA, together with all Incorporated Documents, constitutes the entire agreement between the parties and supersedes all prior negotiations, understandings, and agreements.</p>
-  <div class="subheading">Modification</div>
-  <p>This Agreement may not be modified except by a writing signed by both parties.</p>
-  <div class="subheading">Notice</div>
-  <p>All amendments and policy updates are effective immediately upon delivery by any method set forth in the Definitions section. Continued affiliation after notice constitutes acceptance of all updated terms. No amendment to commission rates, splits, transaction fees, or fee schedules shall alter the economic terms of any transaction supported by a fully executed purchase-and-sale agreement or listing agreement dated prior to delivery of such notice. The Associate is solely responsible for monitoring all designated communication channels. Failure to read or access a notice does not affect its validity or the Associate&rsquo;s obligation to comply.</p>
-  <div class="subheading">Order of Precedence</div>
-  <p>In the event of a conflict regarding compensation: (i) this ICA governs the legal relationship of the parties; (ii) the CSA governs commission calculation, application order, offsets, and disbursement mechanics; and (iii) Exhibit A governs commission plans, splits, fees, pricing, thresholds, and schedules.</p>
-  <div class="subheading">No Assignment</div>
-  <p>Neither party may assign this Agreement without the prior written consent of the other party, except that the Company may assign in connection with a merger, sale of assets, or change of control.</p>
-
-  <div class="heading">19. Severability; No Waiver</div>
-  <div class="subheading">Severability</div>
-  <p>If any provision is held invalid or unenforceable, it shall be modified to the minimum extent necessary to make it enforceable while preserving the parties' original intent. All other provisions remain in full force.</p>
-  <div class="subheading">No Waiver</div>
-  <p>The failure of either party to enforce any provision shall not constitute a waiver. No waiver shall be effective unless made in writing.</p>
-
-  <div class="heading">20. Consolidated Acknowledgment; Electronic Signatures</div>
-  <p>By executing this ICA, the Associate acknowledges and agrees to all Incorporated Documents as they exist on the Effective Date. No separate signatures are required on any Incorporated Document. Future updates become binding upon notice under Section 18.</p>
-  <p>Electronic signatures shall have the same force and effect as original signatures under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
-</div>
-
-<!-- ==================== COMMISSION STRUCTURE ADDENDUM ==================== -->
-<div class="section page-break">
-  <div class="section-label">Commission Structure Addendum</div>
-
-  <div class="heading">1&ndash;2. Purpose and Hierarchy</div>
-  <p>Establishes commission processing mechanics. ICA governs relationship, CSA governs calculation/disbursement, Exhibit A governs fees/pricing.</p>
-
-  <div class="heading">3. Commission Earned vs. Payable</div>
-  <p>Not earned until: transaction closed, funds cleared, docs approved, compliance met, Broker authorized. Earned &ne; automatically payable.</p>
-
-  <div class="heading">4. Application Order</div>
-  <p>Compliance holds &rarr; Company fees &rarr; Referral obligations &rarr; Offsets &rarr; Net to Associate.</p>
-
-  <div class="heading">5. Offsets &amp; Deductions</div>
-  <p>Company authorized to offset unpaid balances, fees, chargebacks, fines from commissions. Survives termination.</p>
-
-  <div class="heading">6. Plan Application</div>
-  <p>Plan at time of contract execution, not closing. Changes apply prospectively only.</p>
-
-  <div class="heading">7. Referrals</div>
-  <p>Subject to written agreements, cleared funds, and compliance with laws.</p>
-
-  <div class="heading">8. Personal Transactions</div>
-  <p>Qualifying: Associate or spouse on title. Standard transaction fee applies, no commission split. Growth plan exception: standard Growth split applies due to additional broker support.</p>
-
-  <div class="heading">9. License Status</div>
-  <p>Must hold active license during negotiation, execution, closing, and disbursement.</p>
-
-  <div class="heading">10&ndash;11. General</div>
-  <p>No employment relationship. Provisions survive termination. Constitutes entire agreement re: commission structure.</p>
-
-  <div class="heading">12. Amendments</div>
-  <p>This Addendum may be amended by the Company effective immediately upon notice to the Associate by any method set forth in the ICA Definitions section. Amendments apply to all transactions not yet under a fully executed purchase-and-sale agreement or listing agreement as of the date of notice.</p>
-
-  <div class="heading">13. Entire Agreement</div>
-  <p>This Addendum constitutes the entire agreement regarding commission structure between the parties.</p>
-
-  <div class="heading">14. Internal Deal Handling</div>
-  <p>A Company Assisted Transaction is any transaction where the Company reassigns, intervenes in, or provides substantial operational support beyond standard brokerage services. Company Assisted Transactions are subject to a 50/50 split between the Company and the assigned Associate. The original Associate is not entitled to any compensation upon reassignment of a transaction to another Associate or to the Company.</p>
-  <p>A Referral is distinguished from a Reassignment: a Referral occurs when an Associate voluntarily introduces a client to another Associate and a written referral agreement is in place. A Reassignment occurs when the Broker determines that a transaction must be transferred due to compliance concerns, inactivity, client request, or other operational necessity. Upon Reassignment, the original Associate forfeits all rights to compensation from that transaction.</p>
-</div>
-
-<!-- ==================== COMMISSION FEE SCHEDULE: EXHIBIT A ==================== -->
-<div class="section page-break">
-  <div class="section-label">Commission Fee Schedule: Exhibit A</div>
-
-  <div class="subheading">Commission Plans</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Plan</th>
-        <th>Split</th>
-        <th>Txn Fee (Residential)</th>
-        <th>Txn Fee (Vacant Land)</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Mentorship Path</td>
-        <td>75% / 25%</td>
-        <td>$499</td>
-        <td>$299</td>
-        <td>Full support: TC, marketing, accountability, 1:1 with broker.</td>
-      </tr>
-      <tr>
-        <td>Growth</td>
-        <td>85% / 15%</td>
-        <td>$499</td>
-        <td>$299</td>
-        <td>Deal support when needed. Independent.</td>
-      </tr>
-      <tr>
-        <td>Max</td>
-        <td>100%</td>
-        <td>$499</td>
-        <td>$299</td>
-        <td>Fully independent. Just brokerage access.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="subheading">Mentorship Path &mdash; Required Entry</div>
-  <p>All new Associates begin on the <strong>75/25 Mentorship Path</strong> (75% Associate / 25% Brokerage) at <strong>$89/month</strong> plus the $199/year E&amp;O + Compliance fee. Transaction fees under the Mentorship Path match the standard schedule ($499 residential, $299 vacant land). Advancement to Aari Growth or Aari Max is based on transaction requirements as defined below in Section 1.3 &mdash; Commission Plan Changes.</p>
-
-  <div class="subheading">Plan Selection</div>
-  <p>The Associate's selected plan based on their application:</p>
-  <p style="margin:10px 0 10px 20px;">&#9634; <strong>Mentorship Path</strong> 75/25 Split &nbsp;&nbsp;&nbsp; &#9634; <strong>Growth</strong> 85/15 Split &nbsp;&nbsp;&nbsp; &#9634; <strong>Max</strong> 100% Split</p>
-
-  <div class="subheading">1.3 Commission Plan Changes</div>
-
-  <p><strong>Eligibility.</strong> An Associate may request a commission plan change only after completing a minimum of five (5) closed residential sales transactions &mdash; excluding rentals and vacant land &mdash; with fully compliant files under Broker supervision at Aari Realty LLC. Until this minimum is met, the Associate remains on their onboarding plan regardless of time elapsed or prior experience at another brokerage.</p>
-
-  <p><strong>Request Process.</strong> The Associate submits a written request to the Broker. The Broker will approve or deny in writing within five (5) business days. Approval is at the Broker&rsquo;s sole discretion based on compliance history, transaction quality, and performance. The Broker may deny a request without cause.</p>
-
-  <p><strong>Effective Date.</strong> An approved plan change takes effect on the first day of the calendar month following the Broker&rsquo;s written approval.</p>
-
-  <p><strong>Transaction Protection.</strong> The Associate&rsquo;s current plan applies to all transactions under a fully executed purchase-and-sale agreement or listing agreement dated on or before the Broker&rsquo;s written approval date. Those transactions close under the original plan &mdash; no exceptions.</p>
-
-  <p><strong>Frequency Limit.</strong> An Associate may not submit a new plan change request within sixty (60) days of their most recent plan change effective date.</p>
-
-  <p><strong>Downgrade Rule.</strong> The same eligibility, process, effective date, and frequency limit apply in both directions. Moving from Max back to Growth requires the same process.</p>
-
-  <div class="subheading">Recurring Fees</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Fee</th>
-        <th>Amount</th>
-        <th>Schedule</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Brokerage Access &mdash; Mentorship Path</td>
-        <td>$89/month</td>
-        <td>Monthly, prorated at onboarding</td>
-      </tr>
-      <tr>
-        <td>Brokerage Access &mdash; Growth</td>
-        <td>$89/month</td>
-        <td>Monthly, prorated at onboarding</td>
-      </tr>
-      <tr>
-        <td>Brokerage Access &mdash; Max</td>
-        <td>$99/month</td>
-        <td>Monthly, prorated at onboarding</td>
-      </tr>
-      <tr>
-        <td>E&amp;O + Compliance</td>
-        <td>$199/year</td>
-        <td>Annual, due on anniversary</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="subheading">Administrative &amp; Conditional Fees</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Fee</th>
-        <th>Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr><td>Personal Transaction (Residential)</td><td>Standard plan transaction fee applies</td></tr>
-      <tr><td>Personal Transaction (Land)</td><td>Standard plan transaction fee applies</td></tr>
-      <tr><td>Admin Cost Rate</td><td>$150/hour</td></tr>
-      <tr><td>Late Payment</td><td>$25</td></tr>
-      <tr><td>Returned Payment</td><td>$25</td></tr>
-      <tr><td>Reactivation</td><td>$50</td></tr>
-      <tr><td>Sign Replacement (Open House)</td><td>$25</td></tr>
-      <tr><td>Sign Replacement (For Sale)</td><td>$35</td></tr>
-    </tbody>
-  </table>
-
-  <div class="subheading">Optional Add-Ons</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Add-On</th>
-        <th>Amount</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>CRM System (Lofty)</td>
-        <td>$49/mo</td>
-        <td>AI-powered CRM, lead tracking, IDX, dialer, texting</td>
-      </tr>
-      <tr>
-        <td>Brand Builder</td>
-        <td>$79/mo</td>
-        <td>Content planning, video, social media strategy</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <div class="subheading">Referral Compensation</div>
-  <p>Admin fee: 10% of referral payment, minimum $100. Recruiting Incentive: $100.</p>
-
-  <div class="subheading">8. Enforcement</div>
-  <p>This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in the ICA Definitions section. No amendment alters transactions already under a fully executed contract as of the date of notice.</p>
-</div>
-
-<!-- ==================== OPERATIONS & COMPLIANCE MANUAL ==================== -->
-<div class="section page-break">
-  <div class="section-label">Operations &amp; Compliance Manual</div>
-
-  <p>ORDER OF PRECEDENCE: (1) Independent Contractor Agreement &rarr; (2) Commission Structure Addendum &rarr; (3) Exhibit A &mdash; Commission Fee Schedule &rarr; (4) This Operations &amp; Compliance Manual &rarr; (5) All other addenda by date, later-dated documents controlling.</p>
-
-  <div class="heading">SECTION 1. DEFINITIONS</div>
-  <p>&ldquo;Active&rdquo; &mdash; An Associate who has completed all onboarding requirements, maintains current license status, has paid all required fees, and is eligible to engage in real estate transactions.</p>
-  <p>&ldquo;Inactive&rdquo; &mdash; An Associate who has requested or been placed in inactive status, is not eligible to engage in new real estate transactions, but maintains affiliation with the Company.</p>
-  <p>&ldquo;Good Standing&rdquo; &mdash; An Associate who: (a) maintains a current, active Florida real estate license; (b) has no outstanding fees or debts owed to the Company; (c) has no material policy violations or unresolved compliance issues; (d) maintains current proof of E&amp;O and auto insurance; (e) complies with all document submission deadlines; and (f) is not subject to any active suspension, investigation, or disciplinary action.</p>
-  <p>&ldquo;Material Breach&rdquo; &mdash; Includes: (a) violations resulting in client harm, complaint, or financial loss; (b) regulatory investigation, fine, or disciplinary action by DBPR, FREC, MLS, or NAR; (c) repeated violations of the same policy after written warning; (d) any violation involving fraud, misrepresentation, discrimination, or fair housing law violations; and (e) failure to cure a non-material breach within ten (10) business days of written notice.</p>
-  <p>&ldquo;Abandoned Commission&rdquo; &mdash; Any transaction for which: (a) closing documents are not submitted within forty-eight (48) hours of closing; or (b) the Associate fails to respond to Broker requests for file completion within ten (10) business days of written request.</p>
-  <p>&ldquo;Complete File&rdquo; &mdash; A transaction file in which: (a) all required documents are submitted; (b) all items on the applicable compliance platform checklist are marked complete; and (c) the file has been reviewed and approved by the Broker.</p>
-  <p>&ldquo;Company-Generated Lead&rdquo; &mdash; Any prospective client inquiry, contact, or relationship that originated through Company marketing, advertising, lead purchase programs, referral partnerships, or other Company-funded or Company-operated lead generation activities.</p>
-  <p>&ldquo;Business Day&rdquo; &mdash; Monday through Friday, 9:00 AM to 5:00 PM EST, excluding federal holidays and days when the Company office is closed due to emergency.</p>
-
-  <div class="heading">SECTION 2. COMMISSIONS &amp; COLLECTIONS</div>
-  <p>The Company may withhold disputed commission amounts and related funds until resolution. Where the Company incurs internal administrative time or outside legal costs to secure or defend a commission, those costs may be allocated proportionally to the Associate. Internal administrative costs shall be calculated at the rate set forth in Exhibit A. In transactions where the Associate receives ninety percent (90%) or more of the gross commission, cost allocation shall be capped at eighty percent (80%) of total costs incurred. The Broker will provide written accounting of all allocated costs within ten (10) business days of deduction. The Company is not obligated to prosecute or sue to collect any commission, and Associates have no right to compel the Company to initiate collection or legal action.</p>
-
-  <div class="heading">SECTION 3. COMPANY PROPERTY &amp; RECORDS</div>
-  <p>All listings, pending sales, transaction documents, checklists, communications, and materials created or obtained in the course of affiliation are Company property. Associates must maintain transaction materials in Company systems. Upon termination, all Company materials must be returned within three (3) business days.</p>
-
-  <div class="heading">SECTION 4. WIRE &amp; FUNDS HANDLING</div>
-  <p>Associates are prohibited from providing, relaying, drafting, or transmitting wire or funds transfer instructions to any party. Violation constitutes a Material Breach and may result in immediate termination and personal liability for any resulting losses. Clients must obtain and verify wire instructions directly with the escrow or title agent using a known, verified phone number. Associates must never forward screenshots, PDFs, or images of wiring details. Any suspected wire fraud must be reported to the Broker immediately (within 24 hours). Associates must proactively warn every client in writing about wire fraud risks at or before contract execution.</p>
-
-  <div class="heading">SECTION 5. REGULATORY COMPLIANCE</div>
-  <p>All Associates must maintain compliance with: Florida Statute Chapter 475; Florida Administrative Code (FAC) Rules of FREC; DBPR requirements; MLS Rules and Regulations; NAR Code of Ethics (if applicable); Fair Housing Act and Florida Fair Housing Act; and all federal, state, and local laws governing real estate transactions. Associates are required to complete all mandatory continuing education and report completion to the Broker at least ten (10) business days before the DBPR renewal deadline.</p>
-
-  <div class="heading">SECTION 6. TRANSACTION DOCUMENTATION &amp; FILE SUBMISSION</div>
-  <p>All transactions must be submitted to the Broker for review and approval in accordance with Florida Statute &sect;475.25 and FREC Rule 61J2-14.010. Associates must upload all transaction documents to the Company&rsquo;s designated compliance platform within forty-eight (48) hours of execution or receipt by Associate, whichever occurs later. Required Transaction Documents include but are not limited to: executed listing agreements, buyer-broker agreements, or tenant representation agreements; executed purchase and sale contracts or lease agreements; all amendments, addenda, and modifications; disclosure forms; inspection reports, repair requests, and responses; title commitments and HOA documents; closing statements; Commission Disbursement Authorization (CDA) or equivalent; proof of earnest money deposit and disbursement records; and all written correspondence related to the transaction. Associates must ensure that transaction files are complete and submitted at least seven (7) days prior to closing for final Broker review.</p>
-
-  <div class="heading">SECTION 7. BROKER REVIEW &amp; CONTRACT EXECUTION</div>
-  <p>All contracts, listing agreements, buyer-broker agreements, leases, and amendments must be submitted to the Broker for review and approval before presentation or execution unless the Associate holds an active Florida Broker license. Associates may not bind the Company to any agreement, fee arrangement, commission split, or obligation without prior written Broker approval.</p>
-
-  <div class="heading">SECTION 8. PROHIBITED CONDUCT</div>
-  <p>The following conduct is strictly prohibited and constitutes a material breach of the ICA:</p>
-  <ul class="doc-list">
-    <li>Misrepresentation, fraud, or dishonest dealing</li>
-    <li>Discrimination or violation of fair housing laws</li>
-    <li>Failure to disclose material facts or conflicts of interest</li>
-    <li>Unauthorized practice of law</li>
-    <li>Commingling of client funds or unauthorized use of trust accounts</li>
-    <li>Advertising or marketing without required Broker identification and approval</li>
-    <li>Solicitation of Company clients or Associates upon termination</li>
-    <li>Failure to submit transaction documents or respond to Broker requests within required timeframes</li>
-    <li>Engaging in real estate activity under another broker&rsquo;s license while affiliated with the Company</li>
-  </ul>
-
-  <div class="heading">SECTION 9. TRANSACTION FILE REQUIREMENTS</div>
-  <p>All Associates must submit complete transaction files in accordance with Florida Statute &sect;475.5015 and FREC Rule 61J2-10.030. The Broker is required to maintain transaction records for a minimum of five (5) years from the date of closing or termination.</p>
-  <p>Submission Deadline: All documents must be uploaded within 48 hours (calculated as calendar hours) of execution or receipt, whichever occurs later. Complete files must be submitted at least seven (7) days before closing for final Broker review.</p>
-
-  <div class="heading">SECTION 10. COMPLIANCE &amp; DOCUMENT SUBMISSION ADDENDUM</div>
-  <p>All fully executed contracts, addenda, disclosures, and other transaction-related documents must be submitted to the Company for compliance review within forty-eight (48) hours of execution.</p>
-  <p>Any modification to a transaction, including contract extensions, addenda, or notices affecting closing dates or escrow disbursement, must be executed by all parties prior to the original expiration date and submitted for review within forty-eight (48) hours of execution.</p>
-  <p>Consequences of Non-Compliance: Failure to submit required documents may result in: commission withholding until file is complete; suspension of system access; mandatory compliance review meeting; and termination of the ICA for repeated or material violations.</p>
-
-  <div class="heading">SECTION 11. BROKER EXECUTION &amp; REVIEW ADDENDUM</div>
-  <div class="subheading">11.1 Broker Signature Required for:</div>
-  <p>Seller to Buyer&rsquo;s Broker Compensation Agreement; Buyer Broker Compensation Agreement; Arbitration or Commission-Disbursement Agreements; Outside-Broker Referral Agreements; Company-Generated Lead Transactions; Associate Personal Transactions; and any form, addendum, or agreement that includes a designated Broker Signature or Broker Authorization field.</p>
-  <div class="subheading">11.2 Associate Signature Permitted</div>
-  <p>For standard FAR/BAR real estate contracts and addenda that do not require Broker authorization or signature. Signature block format: Aari Realty LLC | [Associate&rsquo;s Full Name]</p>
-  <div class="subheading">11.3 Recordkeeping</div>
-  <p>All executed documents must be uploaded into the Company&rsquo;s compliance system within forty-eight (48) hours of signature. No Commission Disbursement Authorization (CDA) will be issued until all required documents are uploaded, checklists are complete, and the file has been reviewed and approved by the Broker.</p>
-  <div class="subheading">11.4 Review Turnaround</div>
-  <p>The Broker will review submitted contracts within forty-eight (48) hours during normal business hours (Monday&ndash;Friday, 9:00 AM &ndash; 5:00 PM EST, excluding holidays) for complete submissions. Incomplete submissions restart the review period upon resubmission.</p>
-
-  <div class="heading">SECTION 12. FAIR HOUSING POLICY</div>
-  <p>Aari Realty LLC is committed to full compliance with federal, state, and local fair housing laws, including: Federal Fair Housing Act (Title VIII of the Civil Rights Act of 1968, as amended); Florida Fair Housing Act (Chapter 760, Florida Statutes); Americans with Disabilities Act (ADA); and all applicable local ordinances.</p>
-  <p>Prohibited Conduct: Associates may not: refuse to show, rent, sell, or negotiate with any person based on a protected class; provide different terms based on a protected class; steer clients toward or away from neighborhoods based on protected characteristics; make statements or advertisements that indicate a preference, limitation, or discrimination; or retaliate against any person for exercising fair housing rights.</p>
-  <p>All Associates must complete Company-approved fair housing training within fourteen (14) days of affiliation. Associates may not accept any client representation until training is completed and proof is submitted to the Broker.</p>
-
-  <div class="heading">SECTION 13. ADVERTISING POLICY</div>
-  <p>All advertising and marketing by Associates must comply with Florida Statute &sect;475.42, FREC Rule 61J2-10.025, and applicable MLS rules. All advertisements, marketing materials, and public communications must prominently display the Company name: Aari Realty LLC.</p>
-  <p>Associates may not advertise in their own name without including the Company name, advertise under a team name or DBA without prior written Broker approval, or use misleading or deceptive language or images.</p>
-  <p>All digital marketing must include the Company name, including: websites and landing pages; social media profiles and posts; email signatures; online advertisements; and video content.</p>
-
-  <div class="heading">SECTION 14. SOCIAL MEDIA POLICY</div>
-  <p>All social media activity by Associates must comply with applicable federal, state, and local laws, including advertising and marketing regulations, fair housing laws, antitrust laws, and the NAR Code of Ethics.</p>
-  <p>Associates are strictly prohibited from using unauthorized third-party content in social media posts, including images, music, audio, videos, or copyrighted text. Associates assume primary liability for copyright violations.</p>
-  <p>Associates must protect client confidentiality on social media. Before posting any content that includes or references a client, Associates must obtain written permission.</p>
-
-  <div class="heading">SECTION 15. SIGN BORROWING POLICY</div>
-  <p>Aari Realty provides open house signs and for sale signs to agents for professional use. To maintain inventory and ensure availability, Aari Realty requires payment for signs that are lost, stolen, or damaged beyond use. Replacement fees are set forth in Exhibit A &mdash; Commission Fee Schedule.</p>
-  <p>Signs must be returned promptly after use (within 48 hours of event completion), stored properly during use to prevent damage, and lost or damaged signs must be reported immediately.</p>
-
-  <div class="heading">SECTION 16. ERRORS &amp; OMISSIONS ADDENDUM</div>
-  <p>The Company maintains Errors &amp; Omissions (E&amp;O) insurance covering the real estate brokerage activities of the Broker and affiliated Associates. Coverage is subject to policy limits, exclusions, and conditions. Current carrier, policy number, effective dates, coverage limits, and deductible amounts are maintained in the internal E&amp;O Certificate on file with the Qualifying Broker and updated at each policy renewal. Associates may request a current certificate of insurance by contacting the Broker directly.</p>
-  <p>Exclusions: The Company&rsquo;s E&amp;O policy does not cover: intentional misconduct, fraud, or criminal acts; activities outside the scope of the ICA or Florida real estate license; personal business activities unrelated to transactions under the Company&rsquo;s brokerage; or claims arising after termination of the ICA for transactions that did not close during affiliation.</p>
-  <p>Auto Insurance: Associates who transport clients must maintain personal auto insurance with liability limits of at least $100,000 per person / $300,000 per accident. Proof of insurance must be provided to the Broker at onboarding, annually on renewal, and within five (5) business days of any policy change.</p>
-  <p>Claims Reporting: Any potential claim, demand, lawsuit, or regulatory complaint must be reported to the Broker immediately (within 24 hours of the Associate becoming aware of the claim). Associates must fully cooperate with the Company&rsquo;s insurance carrier and legal counsel.</p>
-
-  <div class="heading">SECTION 17. RECORD RETENTION &amp; CONFIDENTIALITY</div>
-  <p>Aari Realty LLC is required by Florida law to maintain transaction records for a minimum of five (5) years from the date of closing or termination. Associates must submit all transaction documents to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution or receipt.</p>
-  <p>Associates must protect the confidentiality of client information, including financial information, personal identifying information, medical or health information, and transaction details.</p>
-
-  <div class="heading">SECTION 18. REFERRAL BONUS POLICY</div>
-  <p>Eligibility: To receive the Recruiting Reward: (1) the referring Associate must remain Active and not subject to termination or Material Breach proceedings from the date of referral through payment; (2) the recruited Associate must be a newly affiliated licensed Florida sales associate; (3) the recruited Associate must complete onboarding and pay all required fees; and (4) the recruited Associate must remain Active and in Good Standing for at least thirty (30) consecutive days after affiliation.</p>
-  <p>Payment: The Recruiting Reward will be paid within the timeframe specified in Exhibit A following the date all eligibility requirements are satisfied. Payment will be issued via ACH, check, or other method designated by the Company. The reward is considered taxable income and will be reported to the IRS on Form 1099-NEC.</p>
-  <p>Fee Amounts: The specific amount of the Recruiting Reward and all related fees are set forth in Exhibit A &mdash; Commission Fee Schedule.</p>
-
-  <div class="heading">SECTION 19. COMPANY LEADS ADDENDUM</div>
-  <div class="subheading">19.1 Lead Ownership and Assignment</div>
-  <p>Company-generated leads are Company property. The Broker assigns leads and may reassign for missed service levels. Compensation on Company leads is split 50/50 between Associate and Company after referral fees and approved marketing deductions are taken off the top. Marketing deductions must be pre-approved in writing by Broker prior to lead assignment and may not reduce the net commission below the minimum floor set forth in Exhibit A.</p>
-  <div class="subheading">19.2 Service Level Minimums</div>
-  <p>First contact attempt within 2 business hours. Daily contact attempts for the first 7 days, then 3&times; weekly until qualified or closed. Notes logged in the CRM after every touch. Broker may reassign after 48 hours of no logged activity.</p>
-
-  <div class="heading">SECTION 20. PERSONAL TRANSACTIONS ADDENDUM</div>
-  <div class="subheading">20.1 Scope</div>
-  <p>This Addendum applies to any transaction in which the Associate has a direct or indirect ownership interest in real property, including purchases, sales, assignments, and acquisitions through an entity.</p>
-  <div class="subheading">20.2 Policy</div>
-  <p>Personal transactions are subject to the standard transaction fee and compliance review requirements as set forth in Exhibit A. No commission split applies to qualifying personal transactions, as further defined in the CSA. Full files and approvals are required. No discounts on compliance steps or documentation.</p>
-  <div class="subheading">20.3 Disclosure Requirement</div>
-  <p>The Associate must disclose to the Qualifying Broker any transaction covered by this Addendum prior to contract execution. The Associate&rsquo;s status as a real estate licensee must be disclosed in the purchase contract or other applicable transaction documents.</p>
-
-  <div class="heading">SECTION 21. MLS &amp; BRAND STANDARDS ADDENDUM</div>
-  <p>Associates must comply with NAR Clear Cooperation and applicable MLS rules. At minimum, all listings must be entered into MLS within twenty-four (24) hours of obtaining seller signature on listing agreement.</p>
-  <p>All advertising must include Aari Realty LLC as broker of record. Team/DBA usage requires prior written Broker approval. Social media posts are advertising and must meet broker ID and fair housing standards.</p>
-
-  <div class="heading">SECTION 22. TEAM ADDENDUM</div>
-  <div class="subheading">22.1 Team Lead Responsibilities</div>
-  <p>Team lead is responsible for coordinating team activities, monitoring branding compliance, and assisting the Broker in ensuring team members follow Company policies. The Broker retains all supervisory responsibility under Florida law.</p>
-  <div class="subheading">22.2 Team Splits</div>
-  <p>Intra-team splits must be on file (signed and stored in the team folder) before first shared deal.</p>
-  <div class="subheading">22.3 Roster Management</div>
-  <p>Submit roster changes within 48 hours. Update signage, websites, and marketing materials to reflect roster changes within seven (7) business days of the roster change effective date.</p>
-
-  <div class="heading">SECTION 23. CDA WORKFLOW ADDENDUM</div>
-  <div class="subheading">23.1 CDA Preparation</div>
-  <p>The CDA is prepared and added to the transaction by the Broker or Compliance Team. Agents do not create, edit, or attach the CDA. A CDA is required when: (a) Associate or related party has any ownership interest in the property; (b) team member representation exists; (c) any family relationship or financial interest exists between transaction parties; or (d) any other conflict of interest as required by FREC rules or Company policy.</p>
-  <div class="subheading">23.2 File Completion and Commission Payment</div>
-  <p>Commission is earned and payable only after complete, compliant file and Broker approval. All required documents uploaded within 48 hours of execution/receipt. Complete file submitted at least 7 days before close for final review. Payout timing: within 3 business days after funds clear and CDA conditions are satisfied.</p>
-
-  <div class="heading">SECTION 24. BILLING &amp; PRORATION ADDENDUM</div>
-  <div class="subheading">24.1 Recurring Fees</div>
-  <p>All recurring fees applicable to Associates &mdash; including the monthly Brokerage Access Fee and the annual E&amp;O + Compliance Fee &mdash; are non-refundable. The monthly Brokerage Access Fee is due on the first (1st) day of each month. At onboarding, the first month&rsquo;s fee is prorated based on the Associate&rsquo;s start date and due at the time of joining. The annual E&amp;O + Compliance Fee is due on the Associate&rsquo;s onboarding anniversary date each year. At onboarding, the full annual fee is due at the time of joining. All fee amounts and billing schedules are governed exclusively by Exhibit A &mdash; Commission Fee Schedule, as amended from time to time.</p>
-  <div class="subheading">24.2 Payment Enforcement</div>
-  <p>Failed payments may result in: late payment fees; returned payment fees; reactivation fees when returning from Inactive status; suspension of system access; commission withholding; change to Inactive status; or termination of the ICA.</p>
-
-  <div class="heading">SECTION 25. TERMINATION ADDENDUM</div>
-  <div class="subheading">25.1 Immediate Actions.</div>
-  <p>Access removal within 24 hours. Listing transfers processed upon written seller consent and Company release. Keys/lockboxes and Company property returned within 3 business days.</p>
-  <div class="subheading">25.2 File Completion.</div>
-  <p>Departed Associates must deliver all final documents and complete all outstanding files within ten (10) business days of termination. Files not completed within this timeframe shall be deemed Abandoned Commissions and subject to fees per Exhibit A.</p>
-  <div class="subheading">25.3 Financial Settlement.</div>
-  <p>Pending payouts processed per ICA and CSA order of precedence.</p>
-
-  <div class="heading">SECTION 26. REFERRALS LLC POLICY</div>
-  <p>All referral compensation rules, including associate/broker splits and any administrative retention on incoming referrals, are governed solely by the Aari Referrals LLC &mdash; Referral Compensation Policy. This Manual intentionally does not restate referral percentages or admin amounts.</p>
-
-  <div class="heading">SECTION 27. RESERVED</div>
-  <p>This section is reserved for future use.</p>
-
-  <div class="heading">SECTION 28. INDEMNIFICATION &amp; DEFENSE ADDENDUM</div>
-  <div class="subheading">28.1 Indemnification.</div>
-  <p>To the fullest extent permitted by law, Associate agrees to indemnify, defend, and hold Broker harmless from and against any and all claims, demands, actions, damages, losses, liabilities, fines, penalties, and costs arising out of or related to: any act, omission, negligence, misrepresentation, or misconduct by Associate in the performance of real estate services; any failure by Associate to comply with federal, state, or local laws, FREC rules, MLS regulations, or Brokerage policies; any unauthorized promises, guarantees, or agreements made by Associate to clients, cooperating brokers, or third parties; or any disputes, penalties, or claims related to incomplete, inaccurate, or untimely documentation. This indemnification does not apply to claims arising solely from the Broker&rsquo;s independent negligence or willful misconduct.</p>
-  <div class="subheading">28.2 Defense, Insurance, and Offsets.</div>
-  <p>Broker, or its E&amp;O carrier, may assume control of the defense and selection of counsel for any covered matter. Associate must notify Broker in writing within twenty-four (24) hours of any demand, complaint, investigation, or threatened claim and must fully cooperate in the investigation and defense. Broker may deduct or withhold commissions in an amount reasonably calculated to cover potential or actual losses. Upon final resolution, Broker will reconcile and remit any excess amounts within thirty (30) days of final resolution, or within sixty (60) days if litigation is pending at the time of resolution.</p>
-  <div class="subheading">28.3 Survival.</div>
-  <p>The indemnity, defense, and hold-harmless obligations survive termination of Associate&rsquo;s affiliation with Broker.</p>
-
-  <div class="heading">SECTION 29. POST-DEPARTURE COMPENSATION ADDENDUM</div>
-  <div class="subheading">29.1 Procuring Cause.</div>
-  <p>Under Florida law, all procuring cause rights belong to the brokerage, not the sales associate. Aari retains all procuring cause rights for any buyer or seller introduced to real property through Aari, regardless of whether the Associate remains affiliated with the Company.</p>
-  <div class="subheading">29.2 Protection Period.</div>
-  <p>Any protection period contained in a Buyer Brokerage Agreement, Listing Agreement, or compensation agreement survives the Associate&rsquo;s departure from the brokerage. Aari retains full compensation rights for any contract, offer, or closing involving a buyer or seller introduced through Aari during the protection period.</p>
-  <div class="subheading">29.3 Broker Discretion on Post-Departure Compensation.</div>
-  <p>The Broker retains sole discretion to determine the compensation split for any transaction in which the Associate has departed Aari prior to closing. The Associate&rsquo;s prior commission plan does not survive departure. No departing Associate is guaranteed their previous split. The minimum floor for post-departure compensation, if any, is governed by the Commission Structure Addendum.</p>
-  <div class="subheading">29.4 Aari Paid First.</div>
-  <p>All compensation due to Aari must be paid directly to Aari Realty LLC. Departing Associates receive their portion only after Aari receives funds in full, confirms accurate disbursement, completes audit compliance, and processes internal accounting.</p>
-  <div class="subheading">29.5 Prohibition Against Interference.</div>
-  <p>Departing Associates may not interfere with Aari&rsquo;s compensation status, instruct title companies, or attempt to influence representation. Any attempt to manipulate, alter, backdate, or rewrite documents to bypass Aari&rsquo;s rights is strictly prohibited.</p>
-  <div class="subheading">29.6 Survival.</div>
-  <p>This Addendum remains binding after the Associate&rsquo;s departure. Aari&rsquo;s rights to compensation survive termination of the ICA.</p>
-
-  <div class="heading">SECTION 30. FORCE MAJEURE</div>
-  <p>In the event of natural disaster, hurricane, widespread system outage, or other force majeure event affecting Associates&rsquo; ability to meet deadlines, the Broker may extend deadlines on a case-by-case basis. Associates must: (a) provide initial notice of force majeure circumstances within forty-eight (48) hours of the event or as soon as communication is restored; and (b) submit supporting documentation within five (5) business days of initial notice.</p>
-
-  <div class="heading">SECTION 31. DISPUTE RESOLUTION &amp; APPEALS</div>
-  <p>Associates who wish to contest any enforcement decision, fee assessment, or suspension must submit a written appeal to the Broker within ten (10) business days of receiving notice of the decision. The appeal must include: a clear statement of the decision being appealed; the Associate&rsquo;s position and supporting facts; and any documentation supporting the appeal.</p>
-  <p>The Broker will review and respond in writing within fifteen (15) business days. The Broker&rsquo;s decision on appeal is final and binding. Filing an appeal does not toll, extend, or suspend any other deadlines or obligations under this Manual, the ICA, or applicable law unless the Broker grants a specific written extension.</p>
-</div>
-
-<!-- ==================== W-9 COLLECTION & TAX ACKNOWLEDGMENT ==================== -->
-<div class="section page-break">
-  <div class="section-label">W-9 Collection &amp; Tax Acknowledgment</div>
-
-  <p>This acknowledgment must be completed at onboarding. No commission disbursement will be made to the Associate until a valid IRS Form W-9 is received by Aari Realty LLC.</p>
-
-  <div class="heading">1. W-9 Submission</div>
-  <div class="subheading">1.1</div>
-  <p>The Associate confirms they have completed and submitted to Aari Realty LLC a valid IRS Form W-9 containing their legal name, business name or DBA (if applicable), federal tax classification, Taxpayer Identification Number (TIN) or Social Security Number (SSN), and certification signature.</p>
-  <div class="subheading">1.2</div>
-  <p>The Associate acknowledges that Aari Realty LLC is required by federal law to obtain a completed W-9 prior to issuing any commission payments. Failure to provide a valid W-9 will result in commission withholding until the form is received.</p>
-
-  <div class="heading">2. Tax Reporting Acknowledgment</div>
-  <p>The Associate acknowledges and understands that:</p>
-  <ul class="doc-list">
-    <li>They are engaged as an independent contractor, not an employee of Aari Realty LLC</li>
-    <li>Aari Realty LLC will not withhold federal income tax, Social Security tax, or Medicare tax from commission payments</li>
-    <li>Aari Realty LLC will issue a Form 1099-NEC for each calendar year in which the Associate receives commission payments totaling $600.00 or more</li>
-    <li>The Associate is solely responsible for all federal, state, and local tax obligations, including estimated quarterly tax payments</li>
-    <li>The Associate must notify Aari Realty LLC in writing within thirty (30) days of any change to their legal name, TIN, SSN, or tax classification requiring an updated W-9</li>
-  </ul>
-
-  <div class="heading">3. Backup Withholding</div>
-  <p>The Associate acknowledges that Aari Realty LLC may be required by the IRS to apply backup withholding if: the Associate fails to provide a TIN; the IRS notifies Aari Realty LLC that the TIN provided is incorrect; or the Associate fails to certify that they are not subject to backup withholding. The Associate certifies that the information provided on their W-9 is accurate and complete.</p>
-</div>
-
-<!-- ==================== LICENSE VERIFICATION ==================== -->
-<div class="section page-break">
-  <div class="section-label">License Verification &amp; Active Status Acknowledgment</div>
-
-  <p>This acknowledgment is required before the Associate may conduct any real estate activity under Aari Realty LLC&rsquo;s brokerage license.</p>
-
-  <div class="heading">1. License Information</div>
-  <p>Full Legal Name, Florida License Number, License Type (Sales Associate or Broker Associate), License Status at Onboarding, License Expiration Date, and DBPR Profile Email are collected and verified at onboarding.</p>
-
-  <div class="heading">2. Associate Acknowledgments</div>
-  <div class="subheading">2.1 Active License Required.</div>
-  <p>The Associate must maintain an active, current, and unrestricted Florida real estate license in good standing with DBPR at all times during their affiliation with Aari Realty LLC.</p>
-  <div class="subheading">2.2 Sole Responsibility.</div>
-  <p>The Associate is solely responsible for monitoring their license expiration date, completing all required continuing education, and renewing their license on time. Monthly DBPR verification by Aari Realty LLC is a supervisory measure only and does not relieve the Associate of this responsibility.</p>
-  <div class="subheading">2.3 Immediate Notification Required.</div>
-  <p>The Associate must notify the Qualifying Broker in writing within twenty-four (24) hours of any change to their license status, including: license expiration or failure to renew; suspension or revocation; voluntary surrender or inactivation; disciplinary action by DBPR or FREC; or any investigation, complaint, or proceeding initiated by DBPR, FREC, MLS, or NAR.</p>
-  <div class="subheading">2.4 Consequence of Inactive License.</div>
-  <p>Any real estate activity conducted under an inactive, suspended, expired, or revoked license constitutes a violation of Florida Statute &sect;475.42 and grounds for immediate termination of the Independent Contractor Agreement, forfeiture of pending commissions, and reporting to DBPR.</p>
-  <div class="subheading">2.5 Continuing Education.</div>
-  <p>The Associate is solely responsible for completing all continuing education requirements mandated by DBPR and must provide the Broker with proof of completion at least ten (10) business days before the DBPR renewal deadline.</p>
-
-  <div class="heading">3. Broker Verification</div>
-  <p>Aari Realty LLC confirms that the Associate&rsquo;s license was verified as active and in good standing through the DBPR online verification system as of the date of this acknowledgment. Aari Realty LLC will conduct ongoing monthly license verification for all affiliated Associates.</p>
-</div>
-
-<!-- ==================== AFFILIATED BUSINESS DISCLOSURE ==================== -->
-<div class="section page-break">
-  <div class="section-label">Affiliated Business Disclosure: RESPA Compliance</div>
-
-  <p>This disclosure is required under the Real Estate Settlement Procedures Act (RESPA), 12 U.S.C. &sect;2607(c)(4), and must be signed at onboarding by all Associates affiliated with Aari Realty LLC.</p>
-
-  <div class="heading">1. Affiliated Business Relationships</div>
-  <p>Aari Realty LLC discloses that it has affiliated business relationships with the following entities under common ownership by Marlenyi Paredes:</p>
-
-  <table>
-    <thead>
-      <tr><th>Entity</th><th>Services Provided</th><th>Relationship</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Aari Transactions LLC</td><td>Transaction coordination, file organization, compliance support</td><td>Under common ownership with Aari Realty LLC</td></tr>
-      <tr><td>Aari Referrals LLC</td><td>Referral-only real estate affiliation and referral fee processing</td><td>Under common ownership with Aari Realty LLC</td></tr>
-    </tbody>
-  </table>
-
-  <div class="heading">2. Associate Obligations</div>
-  <div class="subheading">2.1 Client Disclosure Required.</div>
-  <p>When referring a client to Aari Transactions LLC for transaction coordination services, the Associate must provide the client with a written Affiliated Business Disclosure prior to or at the time of referral, disclosing the common ownership relationship.</p>
-  <div class="subheading">2.2 No Required Use.</div>
-  <p>Clients are under no obligation to use the services of any affiliated entity. Clients may use any qualified service provider of their choice. The Associate shall not represent or imply to any client that use of an affiliated entity is required.</p>
-  <div class="subheading">2.3 No Additional Compensation.</div>
-  <p>The Associate will not receive any referral fee, bonus, or additional compensation from any affiliated entity beyond the compensation structure set forth in Exhibit A &mdash; Commission Fee Schedule.</p>
-
-  <p><strong>Legal Reference:</strong> This disclosure is made pursuant to RESPA Section 8(c)(4), 12 U.S.C. &sect;2607(c)(4), and 24 C.F.R. &sect;3500.15. This disclosure does not constitute legal advice. Associates should consult with a licensed attorney regarding their individual compliance obligations.</p>
-</div>
-
-<!-- ==================== MLS RULES ACKNOWLEDGMENT ==================== -->
-<div class="section page-break">
-  <div class="section-label">MLS Rules Acknowledgment</div>
-
-  <p>This acknowledgment must be signed at onboarding before the Associate may access or use any MLS system under Aari Realty LLC&rsquo;s membership. Aari Realty LLC maintains membership in multiple MLS boards. The Associate&rsquo;s obligations under this Acknowledgment apply equally to all boards through which they conduct business.</p>
-
-  <div class="heading">1. MLS Membership Information</div>
-  <p>Associate Full Legal Name, Primary MLS Board, MLS Member ID (Primary Board), Additional MLS Boards (if any), and Florida License Number are collected and verified at onboarding.</p>
-
-  <div class="heading">2. Associate Acknowledgments</div>
-  <div class="subheading">2.1 Receipt of MLS Rules.</div>
-  <p>The Associate has received, reviewed, and agrees to comply with the current rules and regulations of all MLS boards through which they conduct business under Aari Realty LLC&rsquo;s membership, as amended from time to time. Current rules are available through each respective MLS board&rsquo;s member portal.</p>
-  <div class="subheading">2.2 Multiple Board Compliance.</div>
-  <p>Where the Associate participates in more than one MLS board, they are responsible for knowing and complying with the specific rules of each board. Rules vary by board. The more restrictive rule applies in all cases of conflict unless the Broker directs otherwise in writing.</p>
-  <div class="subheading">2.3 Clear Cooperation Compliance.</div>
-  <p>The Associate must enter all listings into the applicable MLS within twenty-four (24) hours of obtaining seller signature on the listing agreement and prior to any public marketing, in compliance with NAR&rsquo;s Clear Cooperation Policy and applicable MLS rules for each board.</p>
-  <div class="subheading">2.4 NAR Settlement Compliance.</div>
-  <p>The Associate must comply with all MLS rule changes implemented in connection with the NAR settlement effective August 17, 2024, including the prohibition on offering buyer broker compensation in any MLS field, across all boards in which they participate.</p>
-  <div class="subheading">2.5 MLS Fines.</div>
-  <p>Any fine, penalty, or sanction imposed by any MLS board as a result of the Associate&rsquo;s violation of MLS rules is the Associate&rsquo;s sole financial responsibility. Aari Realty LLC reserves the right to offset any MLS fines paid by the brokerage on the Associate&rsquo;s behalf against future commission disbursements.</p>
-  <div class="subheading">2.6 Broker Notification.</div>
-  <p>The Associate must notify the Qualifying Broker within twenty-four (24) hours of receiving any MLS inquiry, fine notice, complaint, or disciplinary communication from any MLS board.</p>
-  <div class="subheading">2.7 Rule Updates.</div>
-  <p>The Associate is responsible for monitoring communications from all MLS boards in which they participate and remaining current on all rule changes. Lack of awareness of a rule change is not a defense to a violation.</p>
-
-  <div class="heading">3. Broker Rights</div>
-  <p>Aari Realty LLC reserves the right to review all MLS activity by affiliated Associates across all boards and to conduct periodic compliance audits. MLS rule violations constitute a Compliance Issue or Material Breach under the Independent Contractor Agreement, depending on severity and frequency, and may result in suspension or termination of affiliation.</p>
-</div>
-
-<!-- ==================== BUYER BROKERAGE AGREEMENT POLICY ==================== -->
-<div class="section page-break">
-  <div class="section-label">Buyer Brokerage Agreement Policy Acknowledgment</div>
-
-  <p>This acknowledgment is required in connection with the NAR settlement effective August 17, 2024, and must be signed at onboarding before the Associate may represent any buyer client.</p>
-
-  <div class="heading">1. Background</div>
-  <p>Effective August 17, 2024, the National Association of Realtors (NAR) implemented practice changes requiring that all buyer&rsquo;s agents enter into a written Buyer Brokerage Agreement with buyer clients before touring any property. These requirements are incorporated into FGCMLS rules and are subject to oversight by FREC as part of the Qualifying Broker&rsquo;s supervisory obligations under Florida Statute &sect;475.278.</p>
-
-  <div class="heading">2. Mandatory Requirements</div>
-  <div class="subheading">2.1 Written Agreement Before Touring.</div>
-  <p>The Associate must obtain a signed, written Buyer Brokerage Agreement with every buyer client before conducting any property showing, tour, or property preview on the buyer&rsquo;s behalf, whether in person, virtually, or by any other means.</p>
-  <div class="subheading">2.2 Approved Forms Only.</div>
-  <p>The Associate must use only Company-approved Buyer Brokerage Agreement forms or Florida Realtors/Florida Bar approved forms. The Associate may not draft, create, or modify buyer representation agreements without prior written Broker approval.</p>
-  <div class="subheading">2.3 Compensation Terms.</div>
-  <p>All buyer broker compensation terms must be clearly disclosed in the Buyer Brokerage Agreement. The Associate may not make any verbal representations about compensation that differ from the written agreement.</p>
-  <div class="subheading">2.4 No MLS Compensation Offers.</div>
-  <p>The Associate must not communicate or offer buyer broker compensation through any MLS field, in compliance with NAR settlement requirements and current FGCMLS rules.</p>
-  <div class="subheading">2.5 Broker Submission.</div>
-  <p>A copy of every executed Buyer Brokerage Agreement must be submitted to the compliance platform within forty-eight (48) hours of execution.</p>
-  <div class="subheading">2.6 Client Disclosure.</div>
-  <p>When presenting the Buyer Brokerage Agreement to clients, the Associate must clearly explain: (a) what services are being provided; (b) the compensation structure; (c) the duration of the agreement; and (d) that compensation amounts are negotiable and not set by law.</p>
-  <div class="subheading">2.7 No Waiver or Circumvention.</div>
-  <p>The Associate may not show property to any buyer without a signed agreement, regardless of the buyer&rsquo;s objection, reluctance, or claim that another agent has already shown the property.</p>
-
-  <div class="heading">3. Consequences of Non-Compliance</div>
-  <p>Failure to obtain a signed Buyer Brokerage Agreement before showing property constitutes a Compliance Issue under the Independent Contractor Agreement and may result in: written warning and mandatory compliance review; commission withholding on the affected transaction; suspension of transaction privileges; termination of affiliation for repeated violations; and reporting to FREC if the violation constitutes a breach of supervisory obligations.</p>
-</div>
-
-<!-- ==================== WIRE FRAUD & CYBERSECURITY ==================== -->
-<div class="section page-break">
-  <div class="section-label">Wire Fraud &amp; Cybersecurity Acknowledgment</div>
-
-  <p>This standalone acknowledgment supplements the wire safety provisions in the Independent Contractor Agreement and creates an independent record of the Associate&rsquo;s awareness of wire fraud risks and protocols. It must be signed at onboarding.</p>
-
-  <div class="heading">1. Wire Fraud: Absolute Prohibition</div>
-  <div class="subheading">1.1 No Transmission of Wire Instructions.</div>
-  <p>The Associate is strictly prohibited from transmitting, forwarding, drafting, creating, or relaying wire transfer instructions, banking information, or funds transfer details to any party &mdash; including clients, buyers, sellers, lenders, or title companies &mdash; by any means, including email, text message, social media, or any electronic communication platform.</p>
-  <div class="subheading">1.2 Verbal Verification Required.</div>
-  <p>All wire instructions must be verified directly by the client with the receiving title company or escrow agent by telephone, using a phone number independently obtained from a trusted source &mdash; not a phone number provided in any email or electronic communication.</p>
-  <div class="subheading">1.3 No Screenshots or Attachments.</div>
-  <p>The Associate must never forward, photograph, screenshot, or otherwise transmit images, PDFs, or documents containing wire instructions or banking information.</p>
-  <div class="subheading">1.4 Client Warning Obligation.</div>
-  <p>The Associate must proactively warn every buyer and seller client in writing about the risk of wire fraud at or before contract execution. This warning must be documented in the transaction file.</p>
-
-  <div class="heading">2. Cybersecurity Obligations</div>
-  <div class="subheading">2.1 Email Security.</div>
-  <p>The Associate must use secure, password-protected email accounts for all real estate communications. Shared or unsecured email accounts may not be used for client communications involving financial information.</p>
-  <div class="subheading">2.2 Suspicious Activity Reporting.</div>
-  <p>The Associate must report any suspected phishing attempt, email compromise, unauthorized account access, or attempted wire fraud to the Qualifying Broker immediately and no later than four (4) hours of discovery.</p>
-  <div class="subheading">2.3 Device Security.</div>
-  <p>The Associate must not access client files, MLS systems, or transaction platforms on unsecured public Wi-Fi networks without a VPN or equivalent security measure.</p>
-
-  <div class="heading">3. Incident Response Protocol</div>
-  <p>If the Associate suspects that a wire fraud attempt has occurred, is in progress, or has been completed, the Associate must immediately:</p>
-  <ul class="doc-list">
-    <li>Notify the Qualifying Broker within four (4) hours</li>
-    <li>Contact the title company or escrow agent immediately</li>
-    <li>Preserve all communications &mdash; do not delete any emails or messages</li>
-    <li>Do not communicate with the suspected fraudulent party</li>
-    <li>File a report with the FBI&rsquo;s Internet Crime Complaint Center (IC3) at ic3.gov</li>
-    <li>Contact local law enforcement if funds have been transferred</li>
-    <li>Make no admission of fault, apology, or statement of liability without prior written authorization from the Qualifying Broker</li>
-  </ul>
-
-  <div class="heading">4. Consequences of Violation</div>
-  <p>Violation of any provision of this Acknowledgment constitutes an immediate termination event under Section 12 of the Independent Contractor Agreement. The Associate may be held personally liable for all losses, damages, investigation costs, remediation expenses, legal fees, and regulatory fines arising from their violation of these protocols, as set forth in the Indemnification &amp; Defense Addendum.</p>
-</div>
-
-<!-- ==================== CONFIRMATION OF COMMUNICATION ==================== -->
-<div class="section page-break">
-  <div class="section-label">Confirmation of Communication</div>
-  <p>By signing this Agreement, the Associate confirms that all notices, disclosures, and communications from Aari Realty LLC may be delivered electronically to the email address and phone number provided below. The Associate is responsible for ensuring this contact information remains current and agrees to notify the Brokerage in writing of any changes.</p>
-  <p style="margin-top:20px;">Email: _______________________________________________</p>
-  <p>Phone: _______________________________________________</p>
-</div>
-
-<!-- ==================== SIGNATURE BLOCK ==================== -->
-<div class="section page-break">
-  <div class="section-label">Execution</div>
-
-  <p style="margin-bottom:30px;">By signing below, the Associate acknowledges that they have read, understand, and agree to be bound by all terms and conditions of this Independent Contractor Agreement, including all Incorporated Documents as listed herein. Electronic signatures carry the same legal weight as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
-
-  <div class="signature-block">
-    <p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#555;margin-bottom:24px;">Associate</p>
-
-    <div class="sig-row">
-      <div class="sig-field">
+      <div style="margin-top:20px;">
         <div class="sig-line"></div>
-        <div class="sig-label">Associate Name (Print)</div>
+        <p class="sig-label">Signature</p>
       </div>
-      <div class="sig-field">
+
+      <div style="margin-top:20px;">
         <div class="sig-line"></div>
-        <div class="sig-label">Florida License Number</div>
+        <p class="sig-label">Date</p>
       </div>
     </div>
 
-    <div class="sig-row">
-      <div class="sig-field">
+    <div class="sig-col">
+      <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:24px;">Qualifying Broker</p>
+
+      <div class="sig-line" style="position:relative;">
+        <span style="position:absolute;bottom:4px;left:0;font-size:13px;">Marlenyi Paredes</span>
+      </div>
+      <p class="sig-label">Printed Name</p>
+
+      <div style="margin-top:20px;">
+        <div class="sig-line" style="position:relative;">
+          <span style="position:absolute;bottom:4px;left:0;font-size:11px;color:rgba(10,10,10,0.5);">BK3527289</span>
+        </div>
+        <p class="sig-label">Signature</p>
+      </div>
+
+      <div style="margin-top:20px;">
         <div class="sig-line"></div>
-        <div class="sig-label">Signature</div>
+        <p class="sig-label">Date</p>
       </div>
-      <div class="sig-field">
-        <div class="sig-line"></div>
-        <div class="sig-label">Date</div>
-      </div>
-    </div>
-
-    <div style="border-top:1px solid #ccc;margin:40px 0 24px;padding-top:24px;">
-      <p style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#555;margin-bottom:24px;">Qualifying Broker</p>
-
-      <div class="sig-row">
-        <div class="sig-field">
-          <div class="sig-line prefilled">Marlenyi Paredes</div>
-          <div class="sig-label">Broker Name (Print)</div>
-        </div>
-        <div class="sig-field">
-          <div class="sig-line prefilled">BK3527289</div>
-          <div class="sig-label">Florida License Number</div>
-        </div>
-      </div>
-
-      <div class="sig-row">
-        <div class="sig-field">
-          <div class="sig-line"></div>
-          <div class="sig-label">Signature</div>
-        </div>
-        <div class="sig-field">
-          <div class="sig-line"></div>
-          <div class="sig-label">Date</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="company-line">
-      <strong>Company:</strong> Aari Realty LLC<br>
-      3620 Colonial Blvd, Suite 130 &middot; Fort Myers, FL 33966<br>
-      239.688.1770
     </div>
   </div>
+
 </div>
 
-<!-- ==================== FOOTER ==================== -->
-<div class="doc-footer">
-  <p>Aari Realty LLC &middot; Licensed Real Estate Brokerage &middot; State of Florida</p>
-  <p>3620 Colonial Blvd, Suite 130 &middot; Fort Myers, FL 33966 &middot; 239.688.1770</p>
-</div>
+<div class="page-footer" style="margin-top:64px;">Aari Realty LLC &mdash; Licensed Real Estate Brokerage &mdash; State of Florida</div>
 
 </body>
 </html>
