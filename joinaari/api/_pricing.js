@@ -9,8 +9,8 @@
 // ============================================================================
 
 const PLAN_PRICES = {
-  'Aari Mentorship 75/25': 89,
-  'Aari Growth 85/15': 89,
+  'Aari Mentorship 75/25': 59,
+  'Aari Growth 85/15': 79,
   'Aari Max 100%': 99,
 };
 
