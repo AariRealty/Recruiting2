@@ -820,68 +820,21 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   </div>
 
-  <!-- STEP 2: Optional Add-Ons -->
-  <div class="tools-step" id="tools-step">
-    <div class="tools-header">
-      <p style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.65);margin:0 0 14px;padding:6px 12px;border:1px solid rgba(255,255,255,0.2);border-radius:3px;display:inline-block">Step 02</p>
-      <h3 class="tools-headline">Optional Add-Ons</h3>
-      <p class="tools-subline">Select any add-ons you'd like, or skip this step.</p>
-    </div>
-    <div class="tools-selector" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;border-top:none;align-items:stretch">
-
-      <div class="tools-option" data-tools="CRM System" data-price="$49/mo" data-monthly="49" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:0;display:flex;flex-direction:column;border-bottom:none;cursor:pointer;transition:all 0.3s">
-        <div style="padding:5px 12px;margin:0"><span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;display:inline-block">Most Popular</span></div>
-        <div style="padding:0 32px 36px;display:flex;flex-direction:column;gap:16px;flex:1">
-          <p class="tools-name" style="margin:0">CRM System</p>
-          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">Powered by Lofty</p>
-          <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">AI-powered CRM built for real estate</p>
-          <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Track and manage all your leads in one place</li>
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Automated follow-up and smart campaigns</li>
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> IDX website + property alerts</li>
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Built-in dialer, texting, and mobile app</li>
-          </ul>
-          <p class="tools-price" style="margin:8px 0 0;font-size:32px">$49<span style="font-size:14px;font-weight:300">/mo</span></p>
-          <button class="tools-select-btn" id="crm-add-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
-        </div>
-      </div>
-
-      <div class="tools-option" id="brand-builder-addon" data-tools="Brand Builder" data-price="$79/mo" data-monthly="79" onclick="toggleAddon(this)" style="border:1px solid rgba(255,255,255,0.18);border-radius:16px;padding:0;display:flex;flex-direction:column;border-bottom:none;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden">
-        <div id="bb-included-banner" style="display:none;padding:5px 12px;margin:0"><span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;display:inline-block">Complementary for 6 months</span></div>
-        <div id="bb-top-spacer" style="display:block;padding:5px 12px;margin:0"><span style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;padding:5px 12px;border-radius:3px;visibility:hidden">&nbsp;</span></div>
-        <div style="padding:0 32px 36px;display:flex;flex-direction:column;gap:16px;flex:1">
-          <p class="tools-name" style="margin:0" id="bb-title">Brand Builder</p>
-          <p style="margin:0;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.4)">&nbsp;</p>
-          <p style="margin:0;font-size:14px;font-weight:400;color:rgba(255,255,255,0.55);line-height:1.5">Work directly with us to build your content</p>
-          <ul style="margin:0;padding:0;list-style:none;font-size:13px;font-weight:400;color:rgba(255,255,255,0.5);line-height:2.2">
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> In-person content planning sessions</li>
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Video recording + execution support</li>
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Social media strategy tailored to your business</li>
-            <li style="padding-left:18px;position:relative"><span style="position:absolute;left:0">&#8226;</span> Templates + structure so you stay consistent</li>
-          </ul>
-          <p class="tools-price" style="margin:8px 0 0;font-size:32px">$79<span style="font-size:14px;font-weight:300">/mo</span></p>
-          <p id="bb-enrollment-note" style="display:none;margin:4px 0 0;font-family:'Lato',sans-serif;font-size:11px;font-weight:400;color:rgba(255,255,255,0.45);line-height:1.4">Enrollment required after 6 months to continue using this add-on.</p>
-          <button class="tools-select-btn" id="bb-add-btn" onclick="event.stopPropagation();toggleAddon(this.closest('.tools-option'))" style="margin-top:auto;width:100%">Add to plan &rarr;</button>
-        </div>
-      </div>
-
-    </div>
-    <div style="text-align:center;margin-top:32px">
-      <button id="addons-summary-btn" style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#ffffff;border:none;padding:18px 48px;border-radius:4px;cursor:pointer;transition:all 0.2s" onclick="openPricingReview()">Skip to Summary &rarr;</button>
-    </div>
+  <!-- STEP 2: Optional Add-Ons (hidden for now) -->
+  <div class="tools-step" id="tools-step" style="display:none">
   </div>
 
 
 </section>
 
-<!-- PRICING REVIEW — Step 3 -->
+<!-- PRICING REVIEW — Step 2 -->
 <div class="pricing-review" id="pricing-review">
 
   <div style="max-width:480px;margin:0 auto">
 
     <!-- Header -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:32px">
-      <p class="pr-step-label">Step 03</p>
+      <p class="pr-step-label">Step 02</p>
       <button class="pr-back" onclick="closePricingReview()">Back</button>
     </div>
 
@@ -965,7 +918,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
   <div style="max-width:680px;margin:0 auto;padding:60px 24px 48px;">
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;">
-      <p class="pr-step-label">Step 04</p>
+      <p class="pr-step-label">Step 03</p>
       <button class="pr-back" onclick="backFromICA()">Back</button>
     </div>
 
@@ -1086,7 +1039,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
       </div>
     </div>
 
-    <!-- Receipt-style summary matching Step 03 -->
+    <!-- Receipt-style summary matching Step 02 -->
     <div class="conf-receipt">
       <p class="conf-receipt-title">Summary</p>
 
@@ -1454,15 +1407,8 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
         if (bbNote) bbNote.style.display = 'none';
       }
     }
-    var toolsStep = document.getElementById('tools-step');
-    toolsStep.classList.add('open');
     if (!window._suppressPlanScroll) {
-      setTimeout(function() { toolsStep.scrollIntoView({behavior:'smooth', block:'start'}); }, 60);
-      setTimeout(function() {
-        pulseBtn(document.getElementById('crm-add-btn'));
-        pulseBtn(document.getElementById('bb-add-btn'));
-        pulseBtn(document.getElementById('addons-summary-btn'));
-      }, 600);
+      openPricingReview();
     }
   }
 
@@ -1610,7 +1556,7 @@ footer{background:var(--black);border-top:1px solid rgba(255,255,255,0.06);paddi
 
   function closePricingReview() {
     document.getElementById('pricing-review').classList.remove('open');
-    document.getElementById('tools-step').scrollIntoView({behavior:'smooth', block:'start'});
+    document.getElementById('plans').scrollIntoView({behavior:'smooth', block:'start'});
   }
 
   function proceedToApply() {
