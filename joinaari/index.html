@@ -126,6 +126,18 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .accent-marq .marquee-track{animation:marquee 50s linear infinite}
 .accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:#967a4a;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
+.leadmag{background:#f5f3ed;padding:74px 44px 84px;overflow:hidden}
+.leadmag-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:370px 1fr;gap:58px;align-items:center}
+.leadmag-photo{position:relative;margin-top:-168px;margin-bottom:-26px;border:9px solid #fff;border-radius:16px;box-shadow:0 30px 72px rgba(20,18,15,.32);overflow:hidden;aspect-ratio:4/5;background:linear-gradient(155deg,#3a352e,#141210)}
+.leadmag-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.leadmag-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px}
+.leadmag-ph .mono{font-family:'Cormorant Garamond',serif;font-size:46px;color:#c9b79a;line-height:1}
+.leadmag-ph small{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.55)}
+.leadmag-copy .eyebrow{color:#967a4a;letter-spacing:.26em}
+.leadmag-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.4vw,44px);font-weight:500;line-height:1.06;letter-spacing:-.01em;margin:14px 0 0}
+.leadmag-copy h2 em{font-style:italic;color:#967a4a}
+.leadmag-copy p{font-size:15px;color:var(--mid);line-height:1.75;max-width:470px;margin:16px 0 24px}
+.leadmag-note{font-size:12px;color:var(--lite);margin-top:12px}
 @media(max-width:900px){
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
@@ -136,6 +148,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-grid{grid-template-columns:1fr;gap:26px}
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid rgba(255,255,255,.12);padding-left:0;padding-top:26px;min-height:0}
+  .leadmag{padding:56px 20px 60px}.leadmag-wrap{grid-template-columns:1fr;gap:26px}
+  .leadmag-photo{margin-top:-108px;max-width:300px;margin-left:auto;margin-right:auto}
 }
 </style>
 </head>
@@ -248,6 +262,21 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </div>
   <div class="how-cta">
     <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
+  </div>
+</section>
+<section class="leadmag" id="calculator">
+  <div class="leadmag-wrap">
+    <div class="leadmag-photo">
+      <!-- Real photo drops in here on final pass: <img src="marlenyi.jpg" alt="Marlenyi Paredes, Broker Owner"> -->
+      <div class="leadmag-ph"><span class="mono">MP</span><small>Marlenyi Paredes</small><small>Photo placeholder</small></div>
+    </div>
+    <div class="leadmag-copy">
+      <span class="eyebrow">Free agent tool</span>
+      <h2>See your real take-home <em>before</em> you switch.</h2>
+      <p>Run any deal through the Aari split calculator. Drop in a sale price, pick a plan, and see exactly what lands in your pocket at 75/25, 85/15, or 100%. No pitch. Just your numbers.</p>
+      <a class="btn btn-dark btn-lg" href="#calculator-app">Open the calculator &rarr;</a>
+      <p class="leadmag-note">Free. No signup. Built by a licensed Florida broker.</p>
+    </div>
   </div>
 </section>
 <section class="accent-marq">
