@@ -106,7 +106,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .b5-row.active{background:#fff;color:#0f0f0f}
 .b5-content{border-left:1px solid rgba(255,255,255,.12);padding-left:44px;min-height:230px}
 .b5-pane{display:none}
-.b5-pane.active{display:block}
+.b5-pane.active{display:block;animation:paneIn .5s ease}
+@keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .b5-num-big{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:600;line-height:1;color:rgba(150,122,74,.42);margin-bottom:14px}
 .b5-step-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,32px);font-weight:500;color:#fff;line-height:1.08;margin-bottom:12px}
 .b5-desc{font-size:15px;color:rgba(255,255,255,.72);line-height:1.75;max-width:460px}
@@ -251,12 +252,17 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var items=['SkySlope Suite','SkySlope Books','FGCMLS','DigiSign','Coffee & Contracts','Canva','Cloze CRM'];
   var one=items.map(function(t){return '<span>'+t+'</span>';}).join('');
   document.getElementById('mtrack').innerHTML=one+one;
-  var rows=document.querySelectorAll('.b5-row'),panes=document.querySelectorAll('.b5-pane');
-  rows.forEach(function(r,i){r.addEventListener('click',function(){
+  var rows=document.querySelectorAll('.b5-row'),panes=document.querySelectorAll('.b5-pane'),cur=0,timer=null;
+  function setActive(i){cur=i;
     rows.forEach(function(x){x.classList.remove('active');});
     panes.forEach(function(x){x.classList.remove('active');});
-    r.classList.add('active');if(panes[i])panes[i].classList.add('active');
-  });});
+    if(rows[i])rows[i].classList.add('active');if(panes[i])panes[i].classList.add('active');}
+  function start(){stop();timer=setInterval(function(){setActive((cur+1)%rows.length);},2000);}
+  function stop(){if(timer){clearInterval(timer);timer=null;}}
+  rows.forEach(function(r,i){r.addEventListener('click',function(){setActive(i);start();});});
+  var howSec=document.querySelector('.how');
+  if(howSec){howSec.addEventListener('mouseenter',stop);howSec.addEventListener('mouseleave',start);}
+  if(rows.length){setActive(0);start();}
 })();
 </script>
 </body>
