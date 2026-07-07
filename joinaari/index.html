@@ -272,10 +272,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     rows.forEach(function(x){x.classList.remove('active');});
     panes.forEach(function(x){x.classList.remove('active');});
     if(rows[i])rows[i].classList.add('active');if(panes[i])panes[i].classList.add('active');}
-  function start(){stop();timer=setInterval(function(){setActive((cur+1)%rows.length);},1000);}
+  function start(){stop();timer=setInterval(function(){setActive((cur+1)%rows.length);},3000);}
   function stop(){if(timer){clearInterval(timer);timer=null;}}
   rows.forEach(function(r,i){r.addEventListener('click',function(){setActive(i);start();});});
-  var howSec=document.querySelector('.how');
+  var howSec=document.querySelector('.b5-nav');
   if(howSec){howSec.addEventListener('mouseenter',stop);howSec.addEventListener('mouseleave',start);}
   if(rows.length){setActive(0);start();}
   var rot=document.getElementById('rot');
