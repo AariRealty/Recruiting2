@@ -66,45 +66,63 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 /* WHY AGENTS SWITCH */
 .compare{padding:86px 44px;background:var(--bg)}
 .compare-head{max-width:760px;margin:0 auto 46px;text-align:center}
-.compare-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,48px);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:16px 0 0}
-.compare-head h2 em{font-style:italic;color:rgba(20,18,15,.42)}
+.compare .eyebrow,.how .eyebrow{color:#967a4a;letter-spacing:.26em}
+.compare-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:16px 0 0}
+.compare-head h2 em{font-style:italic;color:#967a4a}
 .compare-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:540px;margin:16px auto 0}
 .compare-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:22px}
-.col{border:1px solid var(--border);border-radius:var(--r);padding:32px 30px}
-.col-aari{background:var(--card);border-color:#d8d3c5;box-shadow:0 18px 50px rgba(20,18,15,.06);position:relative}
-.col-tag{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);margin-bottom:6px}
-.col h3{font-family:'Cormorant Garamond',serif;font-size:23px;font-weight:500;margin-bottom:20px}
-.col-aari .col-badge{position:absolute;top:-12px;right:24px;background:var(--ink);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:var(--r-pill)}
+.col{border:1px solid var(--border);border-radius:10px;padding:30px 28px 28px}
+.col-old{background:#f5f3ed;border-color:#e8e4da}
+.col-aari{background:#0a0a0a;border-color:#0a0a0a;box-shadow:0 22px 60px rgba(20,18,15,.18);position:relative}
+.col-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a09885;margin-bottom:6px}
+.col-aari .col-tag{color:rgba(255,255,255,.5)}
+.col h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:20px}
+.col-aari h3{color:#fff}
+.col-aari h3 em{font-style:italic;color:#f5f0e8}
+.col-aari .col-badge{position:absolute;top:-12px;left:26px;background:#f5f0e8;color:#0a0a0a;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:var(--r-pill)}
 .crow{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-top:1px solid var(--border);font-size:14px;line-height:1.5}
 .crow:first-of-type{border-top:none;padding-top:0}
-.ic{flex-shrink:0;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:2px}
-.ic-x{background:#eceae3;color:var(--lite)}
-.ic-v{background:rgba(47,107,70,.12);color:var(--green)}
-.col-old .crow{color:var(--mid)}
-.col-aari .crow{color:var(--ink)}
+.col-aari .crow{border-top-color:rgba(255,255,255,.1)}
+.ic{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;margin-top:1px}
+.ic-x{background:#d8d2c1;color:#5a5249}
+.ic-v{background:#f5f0e8;color:#0a0a0a}
+.col-old .crow{color:#7a7264}
+.col-aari .crow{color:rgba(255,255,255,.92)}
 .compare-close{max-width:960px;margin:34px auto 0;text-align:center;font-size:15px;color:var(--mid);line-height:1.6}
 .compare-close em{font-style:italic;color:var(--ink)}
 .compare-close a{color:var(--ink);font-weight:600;white-space:nowrap}
-/* HOW IT WORKS */
-.how{background:var(--off);padding:86px 44px;border-top:1px solid var(--border)}
-.how-head{max-width:720px;margin:0 auto 48px;text-align:center}
-.how-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,48px);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:16px 0 0}
-.how-head h2 em{font-style:italic;color:rgba(20,18,15,.42)}
-.how-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:520px;margin:16px auto 0}
-.how-head p strong{color:var(--ink);font-weight:600}
-.how-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.step{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;position:relative}
-.step-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;line-height:1;color:#c9b79a;margin-bottom:16px}
-.step h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:8px}
-.step p{font-size:14px;color:var(--mid);line-height:1.65}
-.how-cta{text-align:center;margin-top:44px}
+/* HOW IT WORKS — interactive stepper */
+.how{background:var(--black);color:#fff;padding:74px 44px 92px}
+.how-head{max-width:820px;margin:0 auto 46px;text-align:center}
+.how-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,52px);font-weight:600;line-height:1.06;letter-spacing:-.01em;color:#fff;margin:14px 0 0}
+.how-head h2 em{font-style:italic;color:#967a4a}
+.how-head p{font-size:15px;color:rgba(255,255,255,.72);line-height:1.7;max-width:520px;margin:16px auto 0}
+.b5-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:44px;align-items:start}
+.b5-nav{display:flex;flex-direction:column;gap:4px}
+.b5-row{display:flex;align-items:center;gap:14px;padding:13px 16px;border-radius:8px;cursor:pointer;color:rgba(255,255,255,.55);transition:background .2s,color .2s}
+.b5-row .b5-num{font-family:'Cormorant Garamond',serif;font-size:18px;line-height:1}
+.b5-row-label{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.b5-row:hover{color:#fff}
+.b5-row.active{background:#fff;color:#0f0f0f}
+.b5-content{border-left:1px solid rgba(255,255,255,.12);padding-left:44px;min-height:230px}
+.b5-pane{display:none}
+.b5-pane.active{display:block}
+.b5-num-big{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:600;line-height:1;color:rgba(150,122,74,.42);margin-bottom:14px}
+.b5-step-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,32px);font-weight:500;color:#fff;line-height:1.08;margin-bottom:12px}
+.b5-desc{font-size:15px;color:rgba(255,255,255,.72);line-height:1.75;max-width:460px}
+.btn-light{background:#fff;color:#0f0f0f;border-color:#fff}
+.btn-light:hover{opacity:.9;transform:translateY(-1px)}
+.how-cta{text-align:center;margin-top:48px}
 @media(max-width:900px){
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
   .grid{grid-template-columns:1fr;gap:34px}
   .belief{padding:56px 20px}
   .compare{padding:60px 20px}.compare-grid{grid-template-columns:1fr;gap:16px}
-  .how{padding:60px 20px}.how-grid{grid-template-columns:1fr;gap:16px}
+  .how{padding:56px 20px 72px}
+  .b5-grid{grid-template-columns:1fr;gap:26px}
+  .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
+  .b5-content{border-left:none;border-top:1px solid rgba(255,255,255,.12);padding-left:0;padding-top:26px;min-height:0}
 }
 </style>
 </head>
@@ -174,7 +192,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <div class="col col-aari">
       <span class="col-badge">Aari Realty</span>
       <div class="col-tag">What you actually get</div>
-      <h3>The Aari way</h3>
+      <h3>The <em>Aari</em> way</h3>
       <div class="crow"><span class="ic ic-v">&#10003;</span>Splits from 75/25 up to 100%</div>
       <div class="crow"><span class="ic ic-v">&#10003;</span>Clear pricing. No franchise fees.</div>
       <div class="crow"><span class="ic ic-v">&#10003;</span>A licensed broker who picks up</div>
@@ -191,25 +209,32 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <h2>Joining should take minutes.<br><em>Not a month of phone tag.</em></h2>
     <p>Pick a plan. Sign on the spot. Land in your portal the same day.</p>
   </div>
-  <div class="how-grid">
-    <div class="step">
-      <div class="step-num">01</div>
-      <h3>Pick your plan</h3>
-      <p>75/25, 85/15, or 100%. Choose the split and the support that fit where you are right now. Change it as you grow.</p>
+  <div class="b5-grid">
+    <div class="b5-nav">
+      <div class="b5-row active" data-i="0"><span class="b5-num">01</span><span class="b5-row-label">Plan</span></div>
+      <div class="b5-row" data-i="1"><span class="b5-num">02</span><span class="b5-row-label">Sign</span></div>
+      <div class="b5-row" data-i="2"><span class="b5-num">03</span><span class="b5-row-label">Portal</span></div>
     </div>
-    <div class="step">
-      <div class="step-num">02</div>
-      <h3>Sign in minutes</h3>
-      <p>A quick questionnaire fills out your agreement. Review it, sign with DigiSign, done. No printing. No scanning.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">03</div>
-      <h3>You're in</h3>
-      <p>Check out and land straight in your agent portal. Your tools and onboarding, ready the same day.</p>
+    <div class="b5-content">
+      <div class="b5-pane active">
+        <div class="b5-num-big">01</div>
+        <h3 class="b5-step-title">Pick the split that fits you.</h3>
+        <p class="b5-desc">75/25, 85/15, or 100%. Choose the structure and the support for where you are right now. Change it as you grow.</p>
+      </div>
+      <div class="b5-pane">
+        <div class="b5-num-big">02</div>
+        <h3 class="b5-step-title">Sign in minutes, not weeks.</h3>
+        <p class="b5-desc">A quick questionnaire fills out your agreement. Review it, sign with DigiSign, done. No printing. No scanning.</p>
+      </div>
+      <div class="b5-pane">
+        <div class="b5-num-big">03</div>
+        <h3 class="b5-step-title">Land in your portal the same day.</h3>
+        <p class="b5-desc">Check out and walk straight into your agent portal. Your tools and onboarding, ready to go.</p>
+      </div>
     </div>
   </div>
   <div class="how-cta">
-    <a class="btn btn-dark btn-lg" href="#plans">Start Your Application &rarr;</a>
+    <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
   </div>
 </section>
 <script>
@@ -226,6 +251,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var items=['SkySlope Suite','SkySlope Books','FGCMLS','DigiSign','Coffee & Contracts','Canva','Cloze CRM'];
   var one=items.map(function(t){return '<span>'+t+'</span>';}).join('');
   document.getElementById('mtrack').innerHTML=one+one;
+  var rows=document.querySelectorAll('.b5-row'),panes=document.querySelectorAll('.b5-pane');
+  rows.forEach(function(r,i){r.addEventListener('click',function(){
+    rows.forEach(function(x){x.classList.remove('active');});
+    panes.forEach(function(x){x.classList.remove('active');});
+    r.classList.add('active');if(panes[i])panes[i].classList.add('active');
+  });});
 })();
 </script>
 </body>
