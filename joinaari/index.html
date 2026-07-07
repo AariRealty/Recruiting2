@@ -85,12 +85,26 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .compare-close{max-width:960px;margin:34px auto 0;text-align:center;font-size:15px;color:var(--mid);line-height:1.6}
 .compare-close em{font-style:italic;color:var(--ink)}
 .compare-close a{color:var(--ink);font-weight:600;white-space:nowrap}
+/* HOW IT WORKS */
+.how{background:var(--off);padding:86px 44px;border-top:1px solid var(--border)}
+.how-head{max-width:720px;margin:0 auto 48px;text-align:center}
+.how-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,48px);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:16px 0 0}
+.how-head h2 em{font-style:italic;color:rgba(20,18,15,.42)}
+.how-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:520px;margin:16px auto 0}
+.how-head p strong{color:var(--ink);font-weight:600}
+.how-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.step{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;position:relative}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:500;line-height:1;color:#c9b79a;margin-bottom:16px}
+.step h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:8px}
+.step p{font-size:14px;color:var(--mid);line-height:1.65}
+.how-cta{text-align:center;margin-top:44px}
 @media(max-width:900px){
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
   .grid{grid-template-columns:1fr;gap:34px}
   .belief{padding:56px 20px}
   .compare{padding:60px 20px}.compare-grid{grid-template-columns:1fr;gap:16px}
+  .how{padding:60px 20px}.how-grid{grid-template-columns:1fr;gap:16px}
 }
 </style>
 </head>
@@ -170,6 +184,33 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     </div>
   </div>
   <p class="compare-close">Same license. Same market. <em>A very different paycheck.</em> <a href="#plans">See the plans &rarr;</a></p>
+</section>
+<section class="how" id="how">
+  <div class="how-head">
+    <span class="eyebrow">How it works</span>
+    <h2>Joining should take minutes.<br><em>Not a month of phone tag.</em></h2>
+    <p>Pick a plan. Sign on the spot. Land in your portal the same day.</p>
+  </div>
+  <div class="how-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Pick your plan</h3>
+      <p>75/25, 85/15, or 100%. Choose the split and the support that fit where you are right now. Change it as you grow.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Sign in minutes</h3>
+      <p>A quick questionnaire fills out your agreement. Review it, sign with DigiSign, done. No printing. No scanning.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>You're in</h3>
+      <p>Check out and land straight in your agent portal. Your tools and onboarding, ready the same day.</p>
+    </div>
+  </div>
+  <div class="how-cta">
+    <a class="btn btn-dark btn-lg" href="#plans">Start Your Application &rarr;</a>
+  </div>
 </section>
 <script>
 (function(){
