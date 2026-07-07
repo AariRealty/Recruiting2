@@ -50,7 +50,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .aside-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e6e0d3,#cfc7b6);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:17px;color:#8a8272;flex-shrink:0}
 .aside-name{font-size:12.5px;font-weight:700}
 .aside-role{font-size:10.5px;color:var(--lite);margin-top:2px}
-/* BLACK BAND + MARQUEE */
 .band{background:var(--black);color:#fff;padding:64px 0 60px;overflow:hidden}
 .band-inner{padding:0 44px;text-align:center}
 .band-line{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,40px);font-weight:500;line-height:1.16;max-width:780px;margin:0 auto}
@@ -108,7 +107,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     </div>
   </div>
 </section>
-
 <section class="band">
   <div class="band-inner">
     <p class="band-line">Real estate doesn't clock out at five.<br><em>Neither does your broker.</em></p>
@@ -117,7 +115,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </div>
   <div class="marquee"><div class="marquee-track" id="mtrack"></div></div>
 </section>
-
 <script>
 (function(){
   var c=document.getElementById('dots'),n=150,cols=['#2a2a2a','#6b6b6b','#a8a8a8'],h='';
@@ -129,7 +126,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     h+='<span style="left:'+x+'%;top:'+y+'%;background:'+col+';opacity:'+op+';animation-duration:'+d+'s;animation-delay:'+dl+'s"></span>';
   }
   c.innerHTML=h;
-  var items=['SkySlope Suite','SkySlope Books','FGCMLS','Stellar MLS','DocuSign','Coffee & Contracts','Canva','Cloze CRM','Follow Up Boss'];
+  var items=['SkySlope Suite','SkySlope Books','FGCMLS','DigiSign','Coffee & Contracts','Canva','Cloze CRM'];
   var one=items.map(function(t){return '<span>'+t+'</span>';}).join('');
   document.getElementById('mtrack').innerHTML=one+one;
 })();
