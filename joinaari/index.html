@@ -4,124 +4,139 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Join Aari Realty | Fort Myers, FL</title>
-<meta name="description" content="Join Aari Realty — a Southwest Florida brokerage built for agents who want real support, fair commission splits from 75/25 to 100%, full transaction coordination, and the systems to actually grow." />
+<meta name="description" content="Join Aari Realty — a Southwest Florida brokerage built for agents who want real support, fair splits from 75/25 to 100%, transaction coordination done for you, and the systems to grow." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--black:#0f0f0f;--white:#ffffff;--off:#f5f4f1;--mid:#6b6b6b;--lite:#9b9b9b;--border:#e2e0d8;--r:20px;--r-sm:10px;--r-pill:50px}
+:root{--black:#0f0f0f;--white:#ffffff;--off:#f5f4f1;--mid:#6b6b6b;--lite:#9b9b9b;--border:#e2e0d8;--r:20px;--r-pill:50px}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:var(--white);color:var(--black);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
 .wrap{max-width:1100px;margin:0 auto}
 .eyebrow{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--mid);background:var(--off);padding:7px 16px;border-radius:var(--r-pill)}
-.label{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--lite)}
-h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif;letter-spacing:-.02em}
+.label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lite);text-align:center;display:block}
+h1,h2,h3,h4,.serif{font-family:'Cormorant Garamond',serif;letter-spacing:-.02em}
+.center{text-align:center}
+.sec-title{font-size:clamp(32px,4.2vw,50px);font-weight:500;line-height:1.02;margin:14px 0 0}
+.sec-title em{font-style:italic;color:var(--mid)}
+.sec-sub{font-size:14px;color:var(--mid);margin-top:16px;max-width:520px}
+.center .sec-sub{margin-left:auto;margin-right:auto}
 .promo{background:var(--black);color:#fff;text-align:center;font-size:11px;font-weight:500;letter-spacing:.04em;padding:9px 20px}
 .promo a{text-decoration:underline;text-underline-offset:2px}
 nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:16px 48px;display:flex;justify-content:space-between;align-items:center}
-.logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--black)}
+.logo{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
 .logo span{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--mid);margin-left:8px}
 .nav-right{display:flex;align-items:center;gap:30px}
 .nav-link{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s}
 .nav-link:hover{color:var(--black)}
-.btn{display:inline-flex;align-items:center;gap:9px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:var(--r-pill);padding:12px 26px;cursor:pointer;transition:all .2s;border:1px solid var(--black)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:var(--r-pill);padding:12px 26px;cursor:pointer;transition:all .2s;border:1px solid var(--black)}
 .btn-dark{background:var(--black);color:#fff}
 .btn-dark:hover{opacity:.85;transform:translateY(-1px)}
 .btn-ghost{background:transparent;color:var(--black)}
 .btn-ghost:hover{background:var(--black);color:#fff}
 .btn-lg{padding:15px 38px;font-size:12px}
+.btn-light{background:#fff;color:var(--black);border-color:#fff}
+.btn-light:hover{opacity:.85}
 section{padding:80px 48px;border-bottom:1px solid var(--border)}
 section.alt{background:var(--off)}
-.sec-head{max-width:680px;margin-bottom:48px}
-.sec-head h2{font-size:clamp(34px,4.4vw,52px);font-weight:500;line-height:1.02;margin:16px 0 0}
-.sec-head h2 em{font-style:italic;color:var(--mid)}
-.sec-head p{font-size:14px;color:var(--mid);margin-top:16px;max-width:520px}
-.hero{padding:76px 48px 68px}
+section.dark{background:var(--black);color:#fff;border-color:#1e1e1e}
+.sec-head{max-width:700px;margin-bottom:46px}
+.sec-head .sec-title em{color:var(--mid)}
+/* HERO */
+.hero{padding:72px 48px 66px}
 .hero-inner{display:grid;grid-template-columns:1fr 340px;gap:60px;align-items:end}
-.hero h1{font-size:clamp(50px,6.6vw,84px);font-weight:500;line-height:.95;margin:26px 0 0}
+.hero h1{font-size:clamp(48px,6.4vw,82px);font-weight:500;line-height:.95;margin:24px 0 0}
 .hero h1 em{font-style:italic;color:var(--mid)}
-.hero-desc{font-size:15px;color:var(--mid);line-height:1.7;max-width:460px;margin:24px 0 30px}
+.hero-desc{font-size:15px;color:var(--mid);line-height:1.7;max-width:460px;margin:22px 0 28px}
 .hero-desc strong{color:var(--black);font-weight:600}
-.hero-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.hero-checks{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px}
+.hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+.hero-checks{display:flex;gap:22px;flex-wrap:wrap;margin-top:28px}
 .hero-checks span{font-size:11.5px;color:var(--mid);font-weight:500}
 .hero-checks span::before{content:"\2713";color:var(--black);font-weight:700;margin-right:7px}
-.aside{background:var(--off);border:1px solid var(--border);border-radius:var(--r);padding:26px 26px 24px}
+.aside{background:var(--off);border:1px solid var(--border);border-radius:var(--r);padding:26px}
 .aside-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);background:#fff;border:1px solid var(--border);padding:4px 11px;border-radius:var(--r-pill);margin-bottom:16px}
-.aside h4{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--lite);margin-bottom:14px}
+.aside h4{font-size:10px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--lite);margin-bottom:6px}
 .aside-row{display:flex;justify-content:space-between;align-items:baseline;padding:13px 0;border-top:1px solid var(--border)}
-.aside-row:first-of-type{border-top:none}
-.aside-row .name{font-size:13px;color:var(--black)}
-.aside-row .name small{display:block;font-size:11px;color:var(--lite);margin-top:2px}
+.aside-row .name{font-size:13px}.aside-row .name small{display:block;font-size:11px;color:var(--lite);margin-top:2px}
 .aside-row .price{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500}
-.aside-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--mid);margin-top:16px;line-height:1.5}
-.tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.tile{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:26px 24px;transition:border-color .2s,transform .1s}
-.tile:hover{border-color:var(--black);transform:translateY(-2px)}
-.tile .num{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--lite);display:block;margin-bottom:12px}
-.tile p{font-size:14px;color:var(--mid);line-height:1.6}
-.broker{display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start}
-.broker-photo{width:200px;height:200px;border-radius:50%;background:linear-gradient(135deg,#e9e5db,#d8d3c6);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:56px;color:#8a8272;border:1px solid var(--border)}
-.broker h3{font-size:clamp(26px,2.6vw,38px);font-weight:500;line-height:1.1;margin-bottom:22px}
-.broker .name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;margin-bottom:2px}
-.broker .role{font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lite);margin-bottom:26px}
-.broker p{font-size:13.5px;color:var(--mid);line-height:1.85;margin-bottom:6px}
-.broker p.accent{color:var(--black);font-weight:600}
-.creds{display:flex;flex-wrap:wrap;gap:6px;margin-top:26px}
-.cred{font-size:8px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);border:1px solid var(--border);padding:5px 10px;border-radius:var(--r-pill)}
-.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
-.plan{position:relative;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;transition:border-color .2s,transform .1s}
-.plan:hover{border-color:var(--black);transform:translateY(-3px)}
-.plan.featured{background:var(--black);color:#fff;border-color:var(--black)}
-.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--black);color:#fff;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill)}
-.plan .pname{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500}
-.plan .psplit{font-size:11px;font-weight:600;letter-spacing:.06em;color:var(--mid);margin-top:2px}
-.plan.featured .psplit{color:rgba(255,255,255,.5)}
-.plan .pprice{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:500;line-height:1;margin:18px 0 2px}
-.plan .pprice span{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:400;color:var(--lite)}
-.plan.featured .pprice span{color:rgba(255,255,255,.5)}
-.plan .pfee{font-size:11px;color:var(--lite);padding-bottom:20px;margin-bottom:20px;border-bottom:1px solid var(--border)}
-.plan.featured .pfee{color:rgba(255,255,255,.45);border-color:rgba(255,255,255,.15)}
-.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1;margin-bottom:24px}
-.plan li{font-size:12.5px;color:var(--mid);line-height:1.45;display:flex;gap:9px}
-.plan li::before{content:"\2713";color:var(--black);font-weight:700;flex-shrink:0}
-.plan.featured li{color:rgba(255,255,255,.82)}
-.plan.featured li::before{color:#fff}
-.plan .btn{width:100%;justify-content:center}
-.plan.featured .btn{background:#fff;color:var(--black);border-color:#fff}
-.plan.featured .btn:hover{opacity:.85}
-.incl-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.incl{padding:30px 28px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
-.incl:nth-child(3n){border-right:none}
-.incl:nth-child(n+4){border-bottom:none}
-.incl h4{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:500;margin:0 0 8px}
-.incl p{font-size:12.5px;color:var(--mid);line-height:1.55}
+.aside-note{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:var(--mid);margin-top:14px;line-height:1.5}
+/* BAND */
+.band-line{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3vw,38px);font-weight:500;line-height:1.15;text-align:center;max-width:760px;margin:0 auto}
+.band-line em{font-style:italic;color:#c9c2b4}
+.band-sub{text-align:center;font-size:13px;color:rgba(255,255,255,.55);max-width:520px;margin:16px auto 0}
+.band-label{text-align:center;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin:44px 0 18px}
+.band-tools{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 30px;font-size:12px;color:rgba(255,255,255,.72);letter-spacing:.03em}
+.band-tools span{position:relative}
+/* COMPARE */
 .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .cmp-col{border:1.5px solid var(--border);border-radius:var(--r);padding:30px 28px;background:var(--white)}
 .cmp-col.aari{background:var(--black);color:#fff;border-color:var(--black)}
 .cmp-col .tag{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);margin-bottom:6px}
 .cmp-col.aari .tag{color:rgba(255,255,255,.5)}
-.cmp-col h4{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;margin-bottom:22px}
-.cmp-col h4 em{font-style:italic}
+.cmp-col h4{font-size:26px;font-weight:500;margin-bottom:22px}.cmp-col h4 em{font-style:italic}
 .cmp-col ul{list-style:none;display:flex;flex-direction:column;gap:14px}
 .cmp-col li{font-size:13px;color:var(--mid);display:flex;gap:11px;line-height:1.4}
 .cmp-col.aari li{color:rgba(255,255,255,.85)}
-.cmp-col li .mk{flex-shrink:0;font-weight:700}
-.cmp-col li .x{color:#b7b2a6}
-.cmp-col.aari li .c{color:#fff}
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.tcard{background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:28px 26px;display:flex;gap:18px;align-items:flex-start}
-.tavatar{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#e9e5db,#d8d3c6);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:19px;color:#8a8272}
-.tcard .q{font-size:13px;color:var(--black);line-height:1.65;margin-bottom:12px}
-.tcard .who{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--black)}
-.tcard .who small{display:block;font-weight:400;letter-spacing:.04em;text-transform:none;color:var(--lite);margin-top:2px;font-size:11px}
-.cta{text-align:center;background:var(--off)}
-.cta h2{font-size:clamp(34px,4.4vw,56px);font-weight:500;line-height:1.05;margin-bottom:14px}
-.cta h2 em{font-style:italic;color:var(--mid)}
-.cta p{font-size:14px;color:var(--mid);max-width:460px;margin:0 auto 34px}
-.cta-actions{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.cmp-col li .x{color:#b7b2a6;font-weight:700;flex-shrink:0}
+.cmp-col.aari li .c{color:#fff;font-weight:700;flex-shrink:0}
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{border:1px solid rgba(255,255,255,.14);border-radius:var(--r);padding:26px 22px}
+.step .n{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:400;color:rgba(255,255,255,.28)}
+.step h4{font-size:22px;font-weight:500;margin:6px 0 10px}
+.step p{font-size:12.5px;color:rgba(255,255,255,.6);line-height:1.6}
+/* TEAM */
+.team-big{font-family:'Cormorant Garamond',serif;font-size:clamp(70px,12vw,150px);font-weight:500;font-style:italic;text-align:center;line-height:.9;margin:8px 0 26px}
+.faces{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+.face{text-align:center}
+.face .av{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#e9e5db,#d3cdbf);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:30px;color:#8a8272;border:1px solid var(--border);margin:0 auto 10px}
+.face .fn{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:500}
+.face .fr{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lite);margin-top:2px}
+/* QUOTE */
+.quote-eye{text-align:center;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#b79b63;margin-bottom:26px}
+.quote-big{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,36px);font-weight:500;line-height:1.3;text-align:center;max-width:820px;margin:0 auto}
+.quote-big em{font-style:italic}
+.quote-by{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:34px}
+.quote-by .av{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3a3a3a,#1a1a1a);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;color:#d8cfae}
+.quote-by .qn{font-family:'Cormorant Garamond',serif;font-size:18px}
+.quote-by .qr{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-top:2px}
+/* PLANS */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:stretch}
+.plan{position:relative;background:var(--white);border:1.5px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;transition:border-color .2s,transform .1s}
+.plan:hover{border-color:var(--black);transform:translateY(-3px)}
+.plan.featured{background:var(--black);color:#fff;border-color:var(--black)}
+.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--black);color:#fff;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:5px 14px;border-radius:var(--r-pill)}
+.plan .pname{font-size:24px;font-weight:500}
+.plan .psplit{font-size:11px;font-weight:600;color:var(--mid);margin-top:2px}
+.plan.featured .psplit{color:rgba(255,255,255,.5)}
+.plan .pprice{font-family:'Cormorant Garamond',serif;font-size:52px;font-weight:500;line-height:1;margin:18px 0 2px}
+.plan .pprice span{font-family:'Montserrat',sans-serif;font-size:13px;color:var(--lite)}
+.plan.featured .pprice span{color:rgba(255,255,255,.5)}
+.plan .pfee{font-size:11px;color:var(--lite);padding-bottom:18px;margin-bottom:18px;border-bottom:1px solid var(--border)}
+.plan.featured .pfee{color:rgba(255,255,255,.45);border-color:rgba(255,255,255,.15)}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1;margin-bottom:22px}
+.plan li{font-size:12.5px;color:var(--mid);line-height:1.45;display:flex;gap:9px}
+.plan li::before{content:"\2713";color:var(--black);font-weight:700;flex-shrink:0}
+.plan.featured li{color:rgba(255,255,255,.82)}.plan.featured li::before{color:#fff}
+.plan .btn{width:100%;justify-content:center}
+.plan.featured .btn{background:#fff;color:var(--black);border-color:#fff}
+/* CTA CARD */
+.cta-card{background:var(--black);color:#fff;border-radius:var(--r);padding:64px 40px;text-align:center;max-width:940px;margin:0 auto}
+.cta-card .lbl{font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:16px}
+.cta-card h2{font-size:clamp(30px,4vw,46px);font-weight:500;line-height:1.05}
+.cta-card h2 em{font-style:italic;color:#c9c2b4}
+.cta-card p{font-size:13px;color:rgba(255,255,255,.6);max-width:440px;margin:14px auto 28px}
+/* FAQ */
+.faq{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+details{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:0 22px}
+details summary{list-style:none;cursor:pointer;padding:18px 0;font-size:14px;font-weight:500;display:flex;justify-content:space-between;align-items:center}
+details summary::-webkit-details-marker{display:none}
+details summary::after{content:"+";font-size:20px;color:var(--lite);font-weight:300}
+details[open] summary::after{content:"\2013"}
+details .a{font-size:13px;color:var(--mid);line-height:1.7;padding:0 0 20px}
+/* FOOTER */
 footer{background:var(--black);color:rgba(255,255,255,.55);padding:44px 48px;border-bottom:none}
 .foot-inner{display:flex;justify-content:space-between;gap:30px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
 .foot-inner .logo{color:#fff}
@@ -130,12 +145,10 @@ footer{background:var(--black);color:rgba(255,255,255,.55);padding:44px 48px;bor
 .foot-disc{font-size:10px;color:rgba(255,255,255,.35);line-height:1.7;max-width:1100px;margin:28px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.1)}
 @media(max-width:900px){
   nav{padding:14px 20px}.nav-right .nav-link{display:none}
-  section{padding:56px 20px}.hero{padding:48px 20px 44px}
-  .hero-inner{grid-template-columns:1fr;gap:34px}
-  .tiles,.plan-grid,.incl-grid,.cmp,.tgrid{grid-template-columns:1fr}
-  .incl{border-right:none}
-  .broker{grid-template-columns:1fr;gap:28px;text-align:center}.broker-photo{margin:0 auto}.creds{justify-content:center}
-  .promo{font-size:10px}
+  section{padding:56px 20px}.hero{padding:44px 20px}
+  .hero-inner,.cmp,.plan-grid{grid-template-columns:1fr;gap:26px}
+  .steps{grid-template-columns:1fr 1fr}
+  .cta-card{padding:44px 24px}
 }
 </style>
 </head>
@@ -145,74 +158,133 @@ footer{background:var(--black);color:rgba(255,255,255,.55);padding:44px 48px;bor
   <a class="logo" href="#">Aari<span>Realty &middot; SW Florida</span></a>
   <div class="nav-right">
     <a class="nav-link" href="#plans">Plans</a>
-    <a class="nav-link" href="#why">Why Aari</a>
-    <a class="nav-link" href="#culture">Culture</a>
+    <a class="nav-link" href="#how">How it works</a>
+    <a class="nav-link" href="#faq">FAQ</a>
     <a class="btn btn-dark" href="#plans">Start Your Application &rarr;</a>
   </div>
 </nav>
+
+<!-- HERO -->
 <section class="hero">
   <div class="wrap hero-inner">
     <div>
-      <span class="eyebrow">Broker-owned &middot; Still splitting your commission?</span>
+      <span class="eyebrow">Broker-owned &middot; SW Florida brokerage</span>
       <h1>Your business.<br>Your rules.<br><em>Real support.</em></h1>
-      <p class="hero-desc">Built for agents who want more control, more clarity, and a structure that actually supports how they grow. <strong>Splits from 75/25 to 100%. Transaction coordination done for you.</strong> Your nights back. Your name known.</p>
+      <p class="hero-desc">A Southwest Florida brokerage built for agents who want more control and a structure that supports how they grow. <strong>Splits from 75/25 to 100%. Transaction coordination done for you.</strong> Your nights back. Your name known.</p>
       <div class="hero-actions">
-        <a class="btn btn-dark btn-lg" href="#plans">Choose your plan &rarr;</a>
-        <a class="btn btn-ghost" href="https://wa.me/12392018950" target="_blank" rel="noopener">Let's chat</a>
+        <a class="btn btn-dark btn-lg" href="#plans">Start your application &rarr;</a>
+        <a class="btn btn-ghost" href="https://wa.me/12392018950" target="_blank" rel="noopener">See the plans &rarr;</a>
       </div>
-      <div class="hero-checks">
-        <span>Transaction coordination included</span>
-        <span>Direct broker access</span>
-        <span>No hidden fees</span>
-      </div>
+      <div class="hero-checks"><span>Direct broker access</span><span>Transaction coordination included</span><span>No hidden fees</span></div>
     </div>
     <div class="aside">
       <span class="aside-badge">Built by a broker</span>
-      <h4>Plans at a glance</h4>
-      <div class="aside-row"><div class="name">Mentorship 75/25 <small>We've got you</small></div><div class="price">$59</div></div>
+      <h4>What you'll pay per month</h4>
+      <div class="aside-row" style="border-top:none"><div class="name">Mentorship 75/25 <small>We've got you</small></div><div class="price">$59</div></div>
       <div class="aside-row"><div class="name">Growth 85/15 <small>More control</small></div><div class="price">$79</div></div>
       <div class="aside-row"><div class="name">Max 100% <small>All you</small></div><div class="price">$99</div></div>
       <p class="aside-note">Every file runs through broker-level compliance review. That's not a feature. That's how this brokerage is built.</p>
     </div>
   </div>
 </section>
+
+<!-- BLACK BAND -->
+<section class="dark">
+  <div class="wrap">
+    <p class="band-line">Real estate doesn't clock out at five.<br><em>Neither does your broker.</em></p>
+    <p class="band-sub">Nights, weekends, deals that go sideways at the worst time. You get a licensed Florida broker who actually answers. We've been in your shoes.</p>
+    <p class="band-label">Built on the systems serious agents run</p>
+    <div class="band-tools"><span>SkySlope Suite</span><span>SkySlope Books</span><span>FGCMLS</span><span>Stellar MLS</span><span>DocuSign</span><span>Coffee &amp; Contracts</span><span>Canva</span><span>Cloze CRM</span></div>
+  </div>
+</section>
+
+<!-- COMPARISON -->
 <section class="alt">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="label">Sound familiar?</span>
-      <h2>You didn't get licensed<br>to <em>feel stuck.</em></h2>
-      <p>There's a better way to run your business. And it starts with who you're building next to.</p>
+    <div class="sec-head center" style="margin-left:auto;margin-right:auto">
+      <span class="label">The difference</span>
+      <h2 class="sec-title">Why agents <em>switch</em> to Aari.</h2>
+      <p class="sec-sub">Most brokerages run on a logo and a group chat. Aari runs on a Florida broker, real systems, and review on every file.</p>
     </div>
-    <div class="tiles">
-      <div class="tile"><span class="num">01</span><p>You close deals, but someone else decides what you keep.</p></div>
-      <div class="tile"><span class="num">02</span><p>You have questions, but your broker is unreachable.</p></div>
-      <div class="tile"><span class="num">03</span><p>You pay monthly fees, but you're not sure what they cover.</p></div>
-      <div class="tile"><span class="num">04</span><p>You're told you have "support," but it's just a group chat.</p></div>
+    <div class="cmp">
+      <div class="cmp-col">
+        <div class="tag">Most brokerages</div>
+        <h4>A logo on your <em>card.</em></h4>
+        <ul>
+          <li><span class="x">&times;</span> Support that's really a group chat</li>
+          <li><span class="x">&times;</span> Broker unreachable when it counts</li>
+          <li><span class="x">&times;</span> Fees that change without notice</li>
+          <li><span class="x">&times;</span> You handle compliance alone</li>
+          <li><span class="x">&times;</span> One-size-fits-all splits</li>
+        </ul>
+      </div>
+      <div class="cmp-col aari">
+        <div class="tag">Aari Realty</div>
+        <h4>A broker in your <em>corner.</em></h4>
+        <ul>
+          <li><span class="c">&#10003;</span> Direct access to the qualifying broker</li>
+          <li><span class="c">&#10003;</span> Transaction coordination done for you</li>
+          <li><span class="c">&#10003;</span> Every fee spelled out from day one</li>
+          <li><span class="c">&#10003;</span> Compliance review on every file</li>
+          <li><span class="c">&#10003;</span> Splits from 75/25 to 100%</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- HOW IT WORKS -->
+<section class="dark" id="how">
+  <div class="wrap">
+    <div class="sec-head center" style="margin:0 auto 46px">
+      <span class="label" style="color:rgba(255,255,255,.4)">How it works</span>
+      <h2 class="sec-title" style="color:#fff">Four steps. <em style="color:#c9c2b4">Then you're selling.</em></h2>
+      <p class="sec-sub" style="color:rgba(255,255,255,.55)">From first hello to first closing, here's exactly what joining Aari looks like.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="n">01</div><h4>Apply</h4><p>Two minutes. Tell us where you are and where you want to go. No pressure, no script.</p></div>
+      <div class="step"><div class="n">02</div><h4>Onboard</h4><p>License transferred, systems set up, card on file. You're live and ready to write fast.</p></div>
+      <div class="step"><div class="n">03</div><h4>Sell with support</h4><p>Transaction coordination, compliance review, and a broker who actually picks up.</p></div>
+      <div class="step"><div class="n">04</div><h4>Get paid</h4><p>Clean splits tracked in SkySlope Books. You always know your number, no surprises.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
 <section>
-  <div class="wrap broker">
-    <div class="broker-photo">MP</div>
-    <div>
-      <span class="label">Qualifying Broker</span>
-      <h3 style="margin-top:14px">Built by a broker who <em style="font-style:italic;color:var(--mid)">actually works with agents.</em></h3>
-      <div class="name">Marlenyi Paredes</div>
-      <div class="role">Qualifying Broker &amp; Owner &middot; Aari Realty LLC</div>
-      <p>You're not getting passed around here. You're working directly with the broker who built the systems, set the standards, and is still in the day to day.</p>
-      <p>When something comes up, a contract, a negotiation, a situation you haven't seen before, you're not guessing.</p>
-      <p class="accent">You have access.</p>
-      <p>That's not a feature. That's how this brokerage is built.</p>
-      <div class="creds"><span class="cred">SRS</span><span class="cred">PSA</span><span class="cred">ABR</span><span class="cred">C2EX</span><span class="cred">Qualifying Broker</span></div>
+  <div class="wrap center">
+    <span class="label">Aari Realty</span>
+    <h2 class="sec-title" style="margin-top:12px">The agents. <em>The standard.</em></h2>
+    <div class="team-big">Florida.</div>
+    <div class="faces">
+      <div class="face"><div class="av">MV</div><div class="fn">Milennys</div><div class="fr">100% Max</div></div>
+      <div class="face"><div class="av">AM</div><div class="fn">Alied</div><div class="fr">80 / 20</div></div>
+      <div class="face"><div class="av">RS</div><div class="fn">Roosevelt</div><div class="fr">80 / 20</div></div>
+      <div class="face"><div class="av">MP</div><div class="fn">Marlenyi</div><div class="fr">Broker</div></div>
     </div>
   </div>
 </section>
+
+<!-- FOUNDER QUOTE -->
+<section class="dark">
+  <div class="wrap">
+    <p class="quote-eye">Built by a broker &middot; Run like one.</p>
+    <p class="quote-big">"Your commission shouldn't decide your worth, and your broker shouldn't disappear when it gets hard. <em>I built Aari so agents get the support I always wished I'd had.</em>"</p>
+    <div class="quote-by">
+      <div class="av">MP</div>
+      <div style="text-align:left"><div class="qn">Marlenyi Paredes</div><div class="qr">Qualifying Broker &amp; Owner &middot; Aari Realty LLC</div></div>
+    </div>
+    <div class="center" style="margin-top:32px"><a class="btn btn-light" href="#plans">See the plans &rarr;</a></div>
+  </div>
+</section>
+
+<!-- PLANS -->
 <section class="alt" id="plans">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="label">Choose your structure</span>
-      <h2>Start with how <em>you want to get paid.</em></h2>
-      <p>New or experienced, there's a structure here that fits how you want to grow. Every plan includes a $199/year E&amp;O and compliance fee.</p>
+    <div class="sec-head center" style="margin:0 auto 46px">
+      <span class="label">Plans</span>
+      <h2 class="sec-title">Fair splits. <em>Pick how you get paid.</em></h2>
+      <p class="sec-sub">New or experienced, there's a structure here that fits. Every plan includes a $199/year E&amp;O and compliance fee.</p>
     </div>
     <div class="plan-grid">
       <div class="plan">
@@ -243,79 +315,38 @@ footer{background:var(--black);color:rgba(255,255,255,.55);padding:44px 48px;bor
     </div>
   </div>
 </section>
-<section id="why">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="label">Included with every plan</span>
-      <h2>The infrastructure to <em>actually grow.</em></h2>
-    </div>
-    <div class="incl-grid">
-      <div class="incl"><h4>Content Studio</h4><p>Branded templates and tools to create clean, consistent marketing.</p></div>
-      <div class="incl"><h4>Accountability Club</h4><p>Stay consistent with content, follow through, and execution.</p></div>
-      <div class="incl"><h4>Lead Distribution</h4><p>Inbound leads routed through brokerage systems when available.</p></div>
-      <div class="incl"><h4>SkySlope Suite</h4><p>Manage transactions, documents, and compliance in one place.</p></div>
-      <div class="incl"><h4>SkySlope Books</h4><p>Track commissions, payouts, and production in real time.</p></div>
-      <div class="incl"><h4>File Compliance Review</h4><p>Every file reviewed for accuracy, completeness, and compliance.</p></div>
-    </div>
-  </div>
-</section>
+
+<!-- BLACK CTA CARD -->
 <section class="alt">
   <div class="wrap">
-    <div class="sec-head">
-      <span class="label">The difference</span>
-      <h2>Why agents <em>switch</em> to Aari.</h2>
-      <p>Most brokerages run on a logo and a group chat. Aari runs on a Florida broker, real systems, and review on every file.</p>
-    </div>
-    <div class="cmp">
-      <div class="cmp-col">
-        <div class="tag">Most brokerages</div>
-        <h4>A logo on your <em>card.</em></h4>
-        <ul>
-          <li><span class="mk x">&times;</span> Support that's really a group chat</li>
-          <li><span class="mk x">&times;</span> Broker unreachable when it counts</li>
-          <li><span class="mk x">&times;</span> Fees that change without notice</li>
-          <li><span class="mk x">&times;</span> You handle compliance alone</li>
-          <li><span class="mk x">&times;</span> One-size-fits-all splits</li>
-        </ul>
-      </div>
-      <div class="cmp-col aari">
-        <div class="tag">Aari Realty</div>
-        <h4>A broker in your <em>corner.</em></h4>
-        <ul>
-          <li><span class="mk c">&#10003;</span> Direct access to the qualifying broker</li>
-          <li><span class="mk c">&#10003;</span> Transaction coordination done for you</li>
-          <li><span class="mk c">&#10003;</span> Every fee spelled out from day one</li>
-          <li><span class="mk c">&#10003;</span> Compliance review on every file</li>
-          <li><span class="mk c">&#10003;</span> Splits from 75/25 to 100%</li>
-        </ul>
-      </div>
+    <div class="cta-card">
+      <div class="lbl">Ready when you are</div>
+      <h2>Bring your license.<br><em>Keep your weekends.</em></h2>
+      <p>Direct broker access, transaction coordination done for you, and fees spelled out from day one.</p>
+      <a class="btn btn-light btn-lg" href="#plans">Start your application &rarr;</a>
     </div>
   </div>
 </section>
-<section id="culture">
+
+<!-- FAQ -->
+<section id="faq">
   <div class="wrap">
-    <div class="sec-head" style="text-align:center;margin:0 auto 48px">
-      <h2 style="margin:0">What agents are <em>saying.</em></h2>
+    <div class="sec-head center" style="margin:0 auto 40px">
+      <span class="label">Common questions</span>
+      <h2 class="sec-title">Questions agents ask <em>before they join.</em></h2>
     </div>
-    <div class="tgrid">
-      <div class="tcard"><div class="tavatar">AM</div><div><p class="q">"My first week at Aari, I had systems, contacts, and a real plan. I'd been working remotely with no check-ins, just me and a logo on my business card. Night and day."</p><div class="who">Alied Machuca<small>Aari Realty Agent</small></div></div></div>
-      <div class="tcard"><div class="tavatar">RS</div><div><p class="q">"I came from a '100% virtual' brokerage. Sounds amazing in the interview, then it's 9pm on a contract and no one to call. Here, when I need backup, someone actually picks up."</p><div class="who">Roosevelt Sanchez Santos<small>Aari Realty Agent</small></div></div></div>
-      <div class="tcard"><div class="tavatar">MV</div><div><p class="q">"I got my feet wet as Aari's transaction coordinator first. Saw how files close, how compliance works. By the time I started selling, I already knew what I was doing."</p><div class="who">Milennys Vargas<small>Aari Realty Agent</small></div></div></div>
-      <div class="tcard"><div class="tavatar">JP</div><div><p class="q">"Every brokerage says 'no hidden fees' until the invoice. Here, everything was spelled out from day one. Months in, still no surprises. That's the whole reason I stayed."</p><div class="who">Jose Alejandro Paredes<small>Aari Realty Agent</small></div></div></div>
-    </div>
-  </div>
-</section>
-<section class="cta">
-  <div class="wrap">
-    <span class="eyebrow">Ready to talk?</span>
-    <h2 style="margin-top:18px">Build your business <em>your way.</em></h2>
-    <p>No pressure. Ask questions, learn the structure, and see if Aari is the right fit.</p>
-    <div class="cta-actions">
-      <a class="btn btn-dark btn-lg" href="#plans">Start your application &rarr;</a>
-      <a class="btn btn-ghost btn-lg" href="https://wa.me/12392018950" target="_blank" rel="noopener">Text Marlenyi</a>
+    <div class="faq">
+      <details><summary>What does it cost to join?</summary><div class="a">Your monthly fee depends on your plan: $59 Mentorship (75/25), $79 Growth (85/15), or $99 Max (100%). Every plan carries a $199/year E&amp;O and compliance fee. No franchise fees, no surprise charges.</div></details>
+      <details><summary>When do I start paying?</summary><div class="a">Your first month and annual compliance fee are set up at onboarding, and your monthly runs on the same day each month after. Everything is on card so you never chase an invoice.</div></details>
+      <details><summary>What splits do you offer?</summary><div class="a">75/25 Mentorship for agents who want a full support environment, 85/15 Growth for more independence, and 100% Max for fully self-managed agents. You pick the structure that fits how you work.</div></details>
+      <details><summary>Is transaction coordination really included?</summary><div class="a">Yes. Mentorship agents get transaction coordination done for you. Every file across the brokerage gets broker-level compliance review before close, no matter your plan.</div></details>
+      <details><summary>How fast can I get started?</summary><div class="a">Most agents are onboarded and live within a few days of applying, license transfer permitting. You apply, we set up your systems, and you're ready to write.</div></details>
+      <details><summary>Why does broker-owned matter?</summary><div class="a">You work directly with the qualifying broker who built the systems and is still in the day to day. When a contract, negotiation, or a situation you haven't seen before comes up, you have access, not a group chat.</div></details>
     </div>
   </div>
 </section>
+
+<!-- FOOTER -->
 <footer>
   <div class="foot-inner">
     <div class="foot-col">
