@@ -114,6 +114,18 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .btn-light{background:#fff;color:#0f0f0f;border-color:#fff}
 .btn-light:hover{opacity:.9;transform:translateY(-1px)}
 .how-cta{text-align:center;margin-top:34px}
+/* COPY POSSE MOTION */
+.rot{display:inline-block;transition:opacity .35s ease}
+.rot.out{opacity:0}
+.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv-in{opacity:1!important;transform:none!important}
+.compare-grid .col:nth-child(2){transition-delay:.1s}
+.trustbar{position:relative;z-index:2;margin-top:-26px;clip-path:polygon(0 26px,100% 0,100% 100%,0 100%);padding-top:46px}
+.how{position:relative;z-index:2;margin-top:-30px;clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding-top:86px}
+.accent-marq{background:var(--black);padding:15px 0;overflow:hidden}
+.accent-marq .marquee-track{animation:marquee 50s linear infinite}
+.accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:#967a4a;padding:0 26px;display:inline-flex;align-items:center}
+.accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
 @media(max-width:900px){
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
@@ -143,7 +155,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   <div class="grid">
     <div>
       <span class="eyebrow">Broker-owned &middot; Southwest Florida</span>
-      <h1 class="h1">Your business.<br>Your rules.<br><em>Real support.</em></h1>
+      <h1 class="h1">Your business.<br>Your rules.<br><em id="rot" class="rot">Real support.</em></h1>
       <p class="sub">You built your book. Don't hand your upside to a brokerage that vanishes when it gets hard. <strong>Splits from 75/25 to 100%</strong>, transaction coordination done for you, and a broker who actually answers.</p>
       <div class="cta-row">
         <a class="btn btn-dark btn-lg" href="#plans">Start Your Application &rarr;</a>
@@ -238,6 +250,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
   </div>
 </section>
+<section class="accent-marq">
+  <div class="marquee"><div class="marquee-track" id="atrack"></div></div>
+</section>
 <script>
 (function(){
   var c=document.getElementById('dots'),n=150,cols=['#2a2a2a','#6b6b6b','#a8a8a8'],h='';
@@ -263,6 +278,19 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var howSec=document.querySelector('.how');
   if(howSec){howSec.addEventListener('mouseenter',stop);howSec.addEventListener('mouseleave',start);}
   if(rows.length){setActive(0);start();}
+  var rot=document.getElementById('rot');
+  if(rot){var words=['Real support.','Fair splits.','Real answers.','Your name.'],ri=0;
+    setInterval(function(){rot.classList.add('out');
+      setTimeout(function(){ri=(ri+1)%words.length;rot.textContent=words[ri];rot.classList.remove('out');},350);
+    },2000);}
+  var at=document.getElementById('atrack');
+  if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
+    var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao;}
+  var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
+    rv.forEach(function(el){io.observe(el);});
+  }else{rv.forEach(function(el){el.classList.add('rv-in');});}
 })();
 </script>
 </body>
