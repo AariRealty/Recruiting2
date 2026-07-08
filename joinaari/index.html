@@ -117,7 +117,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 /* COPY POSSE MOTION */
 .rot{display:inline-block;transition:opacity .35s ease}
 .rot.out{opacity:0}
-.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv-in{opacity:1!important;transform:none!important}
 .compare-grid .col:nth-child(2){transition-delay:.1s}
 
@@ -215,6 +215,28 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .apply p{font-size:15px;color:rgba(255,255,255,.72);max-width:520px;margin:16px auto 24px;line-height:1.7}
 .apply .sel-note{font-size:12px;color:rgba(255,255,255,.5);margin-top:16px;letter-spacing:.02em}
 .apply .sel-note b{color:#f5f0e8;font-weight:600}
+.eco{background:var(--bg);padding:64px 44px}
+.eco-head{max-width:760px;margin:0 auto 44px;text-align:center}
+.eco-head .eyebrow{color:#967a4a;letter-spacing:.26em}
+.eco-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.06;letter-spacing:-.01em;margin:16px 0 0}
+.eco-head h2 em{font-style:italic;color:#967a4a}
+.eco-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:560px;margin:16px auto 0}
+.eco-grid{max-width:1020px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.eco-card{border:1px solid var(--border);border-radius:14px;padding:30px 28px;background:var(--card);display:flex;flex-direction:column}
+.eco-card .tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a09885}
+.eco-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;margin:8px 0 12px}
+.eco-card p{font-size:13.5px;color:var(--mid);line-height:1.6}
+.eco-note{max-width:1020px;margin:26px auto 0;text-align:center;font-size:12.5px;color:var(--lite);line-height:1.6}
+.founder{background:#0a0a0a;color:#fff;padding:66px 44px}
+.founder-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:50px;align-items:center}
+.founder-photo{position:relative}
+.founder-photo img{width:100%;display:block;border-radius:16px;border:1px solid rgba(255,255,255,.12)}
+.founder-copy .eyebrow{color:#967a4a;letter-spacing:.26em}
+.founder-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:500;line-height:1.02;color:#fff;margin:14px 0 4px}
+.founder-copy .role{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.founder-copy p{font-size:15px;color:rgba(255,255,255,.78);line-height:1.75;margin:18px 0 0;max-width:520px}
+.founder-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.founder-tags span{font-size:11px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:7px 14px}
 @media(max-width:900px){
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
@@ -228,6 +250,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .leadmag{padding:0 20px}.leadmag-wrap{grid-template-columns:1fr;gap:0}.leadmag-photo{max-width:270px;margin:0 auto}.leadmag-photo img{margin-top:-64px}.leadmag-copy{padding:8px 0 54px;text-align:center}
   .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{flex-direction:column;gap:12px}.pl-fee-sep{display:none}
   .apply{padding:52px 20px}
+  .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
+  .founder{padding:52px 20px}.founder-wrap{grid-template-columns:1fr;gap:26px}.founder-photo{max-width:320px;margin:0 auto}
 }
 </style>
 </head>
@@ -290,6 +314,52 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 <section class="belief">
   <h2>Real estate doesn't clock out at five.<br><em>Neither does your broker.</em></h2>
   <p>Nights, weekends, and the deal that goes sideways at the worst possible time. You get a licensed Florida broker who actually picks up. We have been in your shoes.</p>
+</section>
+<section class="eco" id="ecosystem">
+  <div class="eco-head">
+    <span class="eyebrow">Who we are</span>
+    <h2>Not just a brokerage. <em>A whole ecosystem.</em></h2>
+    <p>Most brokerages hand you a login and wish you luck. Aari is three companies built to move your business forward, and as an agent here you plug into all of them.</p>
+  </div>
+  <div class="eco-grid">
+    <div class="eco-card">
+      <span class="tag">The brokerage</span>
+      <h3>Aari Realty</h3>
+      <p>Where your license lives. Splits from 75/25 to 100 percent, a broker who actually answers, and the full tool stack loaded on day one.</p>
+    </div>
+    <div class="eco-card">
+      <span class="tag">Done for you</span>
+      <h3>Aari Transactions</h3>
+      <p>Our own coordination team runs your files start to finish, so you spend your time selling instead of chasing paperwork and deadlines.</p>
+    </div>
+    <div class="eco-card">
+      <span class="tag">Keep earning</span>
+      <h3>Aari Referrals</h3>
+      <p>Send the business you cannot take and still earn on it through our referral brokerage. Your license keeps working even when you are not the agent.</p>
+    </div>
+  </div>
+  <p class="eco-note">Aari agents plug into all three. How transaction coordination is bundled into each plan is being finalized, so ask your broker for the current benefit.</p>
+</section>
+<section class="founder" id="founder">
+  <div class="founder-wrap">
+    <div class="founder-photo">
+      <img src="marlenyi.jpg" alt="Marlenyi Paredes, Broker Owner of Aari Realty LLC" />
+    </div>
+    <div class="founder-copy">
+      <span class="eyebrow">Meet the founder</span>
+      <h2>Marlenyi Paredes</h2>
+      <div class="role">Broker Owner &middot; Aari Realty LLC &middot; BK3530153</div>
+      <p>I built Aari, the brokerage I wish I had. I have been the agent chasing a deal at midnight with no one to call, and I watched big box brokerages take the cut and disappear the moment it got hard. So I built something different.</p>
+      <p>A broker who answers. Splits that respect what you built. And a full ecosystem, coordination and referrals, so you are never doing this alone. Not every agent wants the same thing, and that is exactly why Aari lets you pick the structure that fits you.</p>
+      <div class="founder-tags">
+        <span>Broker owner</span>
+        <span>Systems builder</span>
+        <span>Southwest Florida</span>
+        <span>Licensed Florida broker</span>
+        <span>Founder of Realty, Transactions and Referrals</span>
+      </div>
+    </div>
+  </div>
 </section>
 <section class="compare" id="why">
   <div class="compare-head">
@@ -492,7 +562,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var at=document.getElementById('atrack');
   if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
     var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao;}
-  var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.apply .eyebrow,.apply h2,.apply p');
+  var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(el){io.observe(el);});
