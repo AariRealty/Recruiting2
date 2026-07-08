@@ -237,6 +237,25 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .founder-copy p{font-size:15px;color:rgba(255,255,255,.78);line-height:1.75;margin:18px 0 0;max-width:520px}
 .founder-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
 .founder-tags span{font-size:11px;font-weight:600;letter-spacing:.04em;color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:7px 14px}
+.tools{background:#f5f0e8;padding:64px 44px}
+.tools-head{max-width:760px;margin:0 auto 28px;text-align:center}
+.tools-head .teb{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#141210}
+.tools-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.05;margin:12px 0 0;color:#141210}
+.tools-head h2 em{font-style:italic;color:#967a4a}
+.tools-head p{font-size:14px;color:var(--mid);line-height:1.7;max-width:520px;margin:14px auto 0}
+.tools-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.tool-row{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid #e7e2d7;border-radius:14px;padding:18px 22px}
+.tool-num{width:44px;height:44px;flex-shrink:0;border-radius:11px;background:#141210;color:#f5f0e8;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:16px}
+.tool-txt{flex:1}
+.tool-txt h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;line-height:1;color:#141210}
+.tool-txt p{font-size:12.5px;color:var(--mid);margin-top:3px}
+.tool-cta{margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:50px;padding:14px 24px;background:#141210;color:#f5f0e8;white-space:nowrap;transition:opacity .2s}
+.tool-cta:hover{opacity:.85}
+.tool-row.soon{background:transparent;border:1px dashed #d8d2c4}
+.tool-row.soon .tool-num{background:#e7e2d7;color:#a09885}
+.tool-row.soon .tool-txt h3{color:#a89f8e}
+.tool-row.soon .tool-txt p{color:#b3ab9b}
+.tool-soon-tag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a89f8e;border:1px solid #d8d2c4;border-radius:50px;padding:8px 16px;white-space:nowrap}
 @media(max-width:900px){
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
@@ -251,7 +270,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{flex-direction:column;gap:12px}.pl-fee-sep{display:none}
   .apply{padding:52px 20px}
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
-  .founder{padding:52px 20px}.founder-wrap{grid-template-columns:1fr;gap:26px}.founder-photo{max-width:320px;margin:0 auto}
+  .founder{padding:52px 20px}
+  .tools{padding:56px 20px}.tool-row{padding:16px 16px;gap:14px}.tool-cta{padding:12px 18px}.founder-wrap{grid-template-columns:1fr;gap:26px}.founder-photo{max-width:320px;margin:0 auto}
 }
 </style>
 </head>
@@ -358,6 +378,30 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <span>Licensed Florida broker</span>
         <span>Founder of Realty, Transactions and Referrals</span>
       </div>
+    </div>
+  </div>
+</section>
+<section class="tools" id="tools">
+  <div class="tools-head">
+    <span class="teb">Free tools for agents</span>
+    <h2>Grab a tool. <em>It's free.</em></h2>
+    <p>The systems I actually run at Aari, built by Marlenyi Paredes, Broker Owner. No sign-up games, just tools you can use on your next deal.</p>
+  </div>
+  <div class="tools-list">
+    <div class="tool-row">
+      <div class="tool-num">01</div>
+      <div class="tool-txt"><h3>Florida deadline calculator</h3><p>Every FR/BAR, CRSP and NABOR deadline, calculated in seconds.</p></div>
+      <a class="tool-cta" href="https://aaritransactions.com/contract-guide" target="_blank" rel="noopener">Get it &rarr;</a>
+    </div>
+    <div class="tool-row soon">
+      <div class="tool-num">02</div>
+      <div class="tool-txt"><h3>More coming soon</h3><p>New agent tools are on the way.</p></div>
+      <span class="tool-soon-tag">Coming soon</span>
+    </div>
+    <div class="tool-row soon">
+      <div class="tool-num">03</div>
+      <div class="tool-txt"><h3>More coming soon</h3><p>New agent tools are on the way.</p></div>
+      <span class="tool-soon-tag">Coming soon</span>
     </div>
   </div>
 </section>
