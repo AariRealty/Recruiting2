@@ -586,7 +586,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   c.innerHTML=h;
   var items=['SkySlope Suite','SkySlope Books','FGCMLS','DigiSign','Coffee & Contracts','Canva','Cloze CRM'];
   var one=items.map(function(t){return '<span>'+t+'</span>';}).join('');
-  document.getElementById('mtrack').innerHTML=one+one;
+  document.getElementById('mtrack').innerHTML=one+one+one+one;
   var rows=document.querySelectorAll('.b5-row'),panes=document.querySelectorAll('.b5-pane'),cur=0,timer=null;
   function setActive(i){cur=i;
     rows.forEach(function(x){x.classList.remove('active');});
@@ -605,7 +605,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     },2000);}
   var at=document.getElementById('atrack');
   if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
-    var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao;}
+    var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao+ao+ao;}
   var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
