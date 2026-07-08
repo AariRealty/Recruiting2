@@ -117,7 +117,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 /* COPY POSSE MOTION */
 .rot{display:inline-block;transition:opacity .35s ease}
 .rot.out{opacity:0}
-.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.plans-head,.plans-grid .plan,.plans-note,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv-in{opacity:1!important;transform:none!important}
 .compare-grid .col:nth-child(2){transition-delay:.1s}
 
@@ -138,36 +138,44 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .leadmag-copy h2 em{font-style:italic;color:#967a4a}
 .leadmag-copy p{font-size:15px;color:var(--mid);line-height:1.75;max-width:470px;margin:16px 0 24px}
 .leadmag-note{font-size:12px;color:var(--lite);margin-top:12px}
-.plans{background:var(--bg);padding:64px 44px 72px}
-.plans-head{max-width:760px;margin:0 auto 40px;text-align:center}
-.plans-head .eyebrow{color:#967a4a;letter-spacing:.26em}
-.plans-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.06;letter-spacing:-.01em;margin:16px 0 0}
-.plans-head h2 em{font-style:italic;color:#967a4a}
-.plans-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:520px;margin:16px auto 0}
-.plans-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;align-items:stretch}
-.plan{position:relative;border:1px solid var(--border);border-radius:14px;background:var(--card);padding:32px 26px 28px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s;cursor:pointer}
-.plan:hover{transform:translateY(-4px);box-shadow:0 22px 50px rgba(20,18,15,.1)}
-.plan.selected{border-color:#967a4a;box-shadow:0 22px 54px rgba(150,122,74,.2)}
-.plan-feat{background:#0a0a0a;border-color:#0a0a0a}
-.plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#967a4a;color:#fff;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border-radius:50px;white-space:nowrap}
-.plan-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a09885;margin-bottom:10px}
-.plan-feat .plan-tag{color:rgba(255,255,255,.5)}
-.plan-name{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;line-height:1.05;color:var(--ink)}
-.plan-feat .plan-name{color:#fff}
-.plan-price{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:var(--ink);line-height:1;margin:12px 0 2px}
-.plan-feat .plan-price{color:#fff}
-.plan-price span{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:var(--mid);letter-spacing:.02em}
-.plan-feat .plan-price span{color:rgba(255,255,255,.6)}
-.plan-list{list-style:none;margin:18px 0 24px;padding-top:18px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:11px;flex:1}
-.plan-feat .plan-list{border-top-color:rgba(255,255,255,.14)}
-.plan-list li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.5;color:var(--ink)}
-.plan-feat .plan-list li{color:rgba(255,255,255,.92)}
-.plan-list .ic{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:#f5f0e8;color:#0a0a0a;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;margin-top:1px}
-.plan-cta{display:block;text-align:center;border-radius:50px;padding:14px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border:1px solid var(--ink);background:transparent;color:var(--ink);transition:all .2s;cursor:pointer}
-.plan-cta:hover{background:var(--ink);color:#fff}
-.plan-feat .plan-cta{background:#fff;color:#0a0a0a;border-color:#fff}
-.plan-feat .plan-cta:hover{opacity:.9;transform:translateY(-1px)}
-.plans-note{max-width:780px;margin:28px auto 0;text-align:center;font-size:12.5px;color:var(--lite);line-height:1.7}
+.plans{background:#0a0a0a;color:#fff;padding:64px 44px 68px}
+.pl-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:248px 1fr 1fr 1fr;gap:22px;align-items:start}
+.pl-rail{padding-top:6px}
+.pl-step{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:9px 16px;margin-bottom:26px}
+.pl-rail h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.4vw,46px);font-weight:500;line-height:1.02;color:#fff}
+.pl-rail h2 em{font-style:italic}
+.pl-rail p{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px;max-width:210px;line-height:1.6}
+.pl-card{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:30px 26px 26px;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s}
+.pl-card:hover{transform:translateY(-4px)}
+.pl-dark{background:#151310;color:#fff;border:1px solid rgba(255,255,255,.1)}
+.pl-flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#f5f0e8;color:#0a0a0a;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:7px 16px;border-radius:50px;white-space:nowrap}
+.pl-name{font-size:24px;font-weight:700;letter-spacing:-.01em;line-height:1.05}
+.pl-tagline{font-size:13px;color:var(--mid);margin-top:5px}
+.pl-dark .pl-tagline{color:rgba(255,255,255,.55)}
+.pl-split{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:22px}
+.pl-splitlabel{font-size:12px;color:var(--lite);margin-top:8px;min-height:15px}
+.pl-dark .pl-splitlabel{color:rgba(255,255,255,.4)}
+.pl-price{font-size:24px;font-weight:800;margin-top:8px}
+.pl-price span{font-size:14px;font-weight:600;color:var(--mid)}
+.pl-dark .pl-price span{color:rgba(255,255,255,.5)}
+.pl-inc{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lite);margin-top:22px;padding-top:22px;border-top:1px solid var(--border)}
+.pl-dark .pl-inc{color:rgba(255,255,255,.4);border-top-color:rgba(255,255,255,.12)}
+.pl-feat{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:14px;flex:1}
+.pl-feat li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4}
+.pl-feat li b{font-weight:700}
+.pl-feat .k{color:#8a8272;font-weight:700;flex-shrink:0}
+.pl-dark .pl-feat .k{color:#b3a688}
+.pl-blurb{background:var(--tint,#faf8f4);border-radius:10px;padding:14px 16px;font-size:12.5px;color:var(--mid);line-height:1.5;margin:18px 0}
+.pl-dark .pl-blurb{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
+.pl-cta{display:block;text-align:center;border-radius:50px;padding:15px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;background:#0a0a0a;color:#fff;transition:opacity .2s}
+.pl-cta:hover{opacity:.85}
+.pl-dark .pl-cta{background:#f5f0e8;color:#0a0a0a}
+.pl-card.selected{outline:2px solid #b3a688;outline-offset:3px}
+.pl-bar{max-width:1140px;margin:24px auto 0;background:#141210;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 30px;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+.pl-bar-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
+.pl-fee b{color:#fff;font-weight:700}
+.pl-fee-sep{width:1px;height:16px;background:rgba(255,255,255,.14)}
 .apply{background:var(--black);color:#fff;padding:60px 44px;text-align:center}
 .apply .eyebrow{color:#967a4a;letter-spacing:.26em}
 .apply h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);font-weight:500;line-height:1.08;margin:14px 0 0}
@@ -187,7 +195,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-content{border-left:none;border-top:1px solid rgba(255,255,255,.12);padding-left:0;padding-top:26px;min-height:0}
   .leadmag{padding:56px 20px 60px}.leadmag-wrap{grid-template-columns:1fr;gap:26px}
   .leadmag-photo{margin-top:-108px;max-width:300px;margin-left:auto;margin-right:auto}
-  .plans{padding:56px 20px 60px}.plans-grid{grid-template-columns:1fr;gap:16px}
+  .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{flex-direction:column;gap:12px}.pl-fee-sep{display:none}
   .apply{padding:52px 20px}
 }
 </style>
@@ -241,8 +249,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 <section class="leadmag" id="calculator">
   <div class="leadmag-wrap">
     <div class="leadmag-photo">
-      <!-- Real photo drops in here on final pass: <img src="marlenyi.jpg" alt="Marlenyi Paredes, Broker Owner"> -->
-      <div class="leadmag-ph"><span class="mono">MP</span><small>Marlenyi Paredes</small><small>Photo placeholder</small></div>
+      <img src="marlenyi.jpg" alt="Marlenyi Paredes, Broker Owner and Qualifying Broker of Aari Realty" />
     </div>
     <div class="leadmag-copy">
       <span class="eyebrow">Free agent tool</span>
@@ -319,51 +326,66 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </div>
 </section>
 <section class="plans" id="plans">
-  <div class="plans-head">
-    <span class="eyebrow">Pick your plan</span>
-    <h2>Three ways in. <em>One standard.</em></h2>
-    <p>Start where you are. Move up when you are ready. Every plan is month to month, and your license is never held hostage.</p>
+  <div class="pl-inner">
+    <div class="pl-rail">
+      <span class="pl-step">Step 01</span>
+      <h2>Choose your <em>structure.</em></h2>
+      <p>Start with how you want to get paid.</p>
+    </div>
+    <div class="pl-card pl-dark" data-plan="Aari Mentorship 75/25">
+      <span class="pl-flag">Starting point</span>
+      <div class="pl-name">Mentorship Path</div>
+      <div class="pl-tagline">We've got you.</div>
+      <div class="pl-split">75/25</div>
+      <div class="pl-splitlabel">agent / brokerage</div>
+      <div class="pl-price">$59<span>/mo</span></div>
+      <div class="pl-inc">Includes</div>
+      <ul class="pl-feat">
+        <li><span class="k">&#10003;</span><b>Transaction coordination, done for you</b></li>
+        <li><span class="k">&#10003;</span>Marketing essentials</li>
+        <li><span class="k">&#10003;</span>Accountability club</li>
+        <li><span class="k">&#10003;</span>One on one with your broker</li>
+        <li><span class="k">&#10003;</span><b>Brand Builder free for six months</b></li>
+      </ul>
+      <div class="pl-blurb">A full support environment to build and grow with real broker engagement.</div>
+      <span class="pl-cta" data-plan="Aari Mentorship 75/25">My pick</span>
+    </div>
+    <div class="pl-card" data-plan="Aari Growth 85/15">
+      <div class="pl-name">Aari Growth</div>
+      <div class="pl-tagline">More control. Still supported.</div>
+      <div class="pl-split">85/15</div>
+      <div class="pl-splitlabel">agent / brokerage</div>
+      <div class="pl-price">$79<span>/mo</span></div>
+      <div class="pl-inc">Includes</div>
+      <ul class="pl-feat">
+        <li><span class="k">&#10003;</span><b>Deal support when you need it</b></li>
+        <li><span class="k">&#10003;</span>More control over your business</li>
+      </ul>
+      <div class="pl-blurb">Operate independently. Stay in control of your deals.</div>
+      <span class="pl-cta" data-plan="Aari Growth 85/15">My pick</span>
+    </div>
+    <div class="pl-card" data-plan="Aari Max 100%">
+      <div class="pl-name">Aari Max</div>
+      <div class="pl-tagline">All you.</div>
+      <div class="pl-split">100%</div>
+      <div class="pl-splitlabel">&nbsp;</div>
+      <div class="pl-price">$99<span>/mo</span></div>
+      <div class="pl-inc">Includes</div>
+      <ul class="pl-feat">
+        <li><span class="k">&#10003;</span><b>Just brokerage access</b></li>
+      </ul>
+      <div class="pl-blurb">Fully independent. Self managed transactions.</div>
+      <span class="pl-cta" data-plan="Aari Max 100%">My pick</span>
+    </div>
   </div>
-  <div class="plans-grid">
-    <div class="plan" data-plan="Aari Mentorship 75/25">
-      <div class="plan-tag">New and building</div>
-      <div class="plan-name">Aari Mentorship</div>
-      <div class="plan-price">$59<span>/mo &middot; 75/25</span></div>
-      <ul class="plan-list">
-        <li><span class="ic">&#10003;</span>75/25 split with real coaching</li>
-        <li><span class="ic">&#10003;</span>A broker who answers, days and nights</li>
-        <li><span class="ic">&#10003;</span>SkySlope, FGCMLS, and DigiSign loaded</li>
-        <li><span class="ic">&#10003;</span>Brand Builder free for six months</li>
-      </ul>
-      <span class="plan-cta" data-plan="Aari Mentorship 75/25">Start with Mentorship</span>
-    </div>
-    <div class="plan plan-feat" data-plan="Aari Growth 85/15">
-      <span class="plan-badge">Most chosen</span>
-      <div class="plan-tag">Producing and scaling</div>
-      <div class="plan-name">Aari Growth</div>
-      <div class="plan-price">$79<span>/mo &middot; 85/15</span></div>
-      <ul class="plan-list">
-        <li><span class="ic">&#10003;</span>85/15 split, keep more of every deal</li>
-        <li><span class="ic">&#10003;</span>Transaction coordination handled for you</li>
-        <li><span class="ic">&#10003;</span>Priority broker support</li>
-        <li><span class="ic">&#10003;</span>Full tool stack, ready day one</li>
-      </ul>
-      <span class="plan-cta" data-plan="Aari Growth 85/15">Start with Growth</span>
-    </div>
-    <div class="plan" data-plan="Aari Max 100%">
-      <div class="plan-tag">Full independence</div>
-      <div class="plan-name">Aari Max</div>
-      <div class="plan-price">$99<span>/mo &middot; 100%</span></div>
-      <ul class="plan-list">
-        <li><span class="ic">&#10003;</span>Keep 100% of your commission</li>
-        <li><span class="ic">&#10003;</span>Flat monthly. No split. No surprises.</li>
-        <li><span class="ic">&#10003;</span>Same systems, same compliance</li>
-        <li><span class="ic">&#10003;</span>Built to grow your name, not ours</li>
-      </ul>
-      <span class="plan-cta" data-plan="Aari Max 100%">Start with Max</span>
-    </div>
+  <div class="pl-bar">
+    <span class="pl-bar-label">All plans</span>
+    <span class="pl-fee"><b>$199</b> annual E&amp;O, due today</span>
+    <span class="pl-fee-sep"></span>
+    <span class="pl-fee"><b>$499</b> residential transaction fee</span>
+    <span class="pl-fee-sep"></span>
+    <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
   </div>
-  <p class="plans-note">All plans include a $199 annual E&amp;O and compliance fee, due today and once a year. Your first month is prorated. Optional add ons: CRM at $49 and Brand Builder at $79, both month to month.</p>
 </section>
 <section class="apply" id="apply">
   <span class="eyebrow">Last step</span>
@@ -408,12 +430,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var at=document.getElementById('atrack');
   if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
     var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao;}
-  var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.plans-head,.plans-grid .plan,.plans-note,.apply .eyebrow,.apply h2,.apply p');
+  var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.apply .eyebrow,.apply h2,.apply p');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(el){io.observe(el);});
   }else{rv.forEach(function(el){el.classList.add('rv-in');});}
-  var plans=document.querySelectorAll('.plan'),selNote=document.getElementById('selNote'),applyBtn=document.getElementById('applyBtn');
+  var plans=document.querySelectorAll('.pl-card'),selNote=document.getElementById('selNote'),applyBtn=document.getElementById('applyBtn');
   function pickPlan(name){
     plans.forEach(function(p){p.classList.toggle('selected',p.getAttribute('data-plan')===name);});
     try{localStorage.setItem('aari_plan',name);}catch(e){}
@@ -421,7 +443,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     if(applyBtn)applyBtn.setAttribute('href','https://joinaari.com/#plan='+encodeURIComponent(name));
   }
   plans.forEach(function(p){p.addEventListener('click',function(){pickPlan(p.getAttribute('data-plan'));});});
-  document.querySelectorAll('.plan-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));var a=document.getElementById('apply');if(a)a.scrollIntoView({behavior:'smooth'});});});
+  document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));var a=document.getElementById('apply');if(a)a.scrollIntoView({behavior:'smooth'});});});
   try{var saved=localStorage.getItem('aari_plan');if(saved)pickPlan(saved);}catch(e){}
 })();
 </script>
