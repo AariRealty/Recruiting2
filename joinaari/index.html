@@ -56,12 +56,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .belief h2 em{font-style:italic}
 .belief p{font-size:14px;color:rgba(255,255,255,.55);max-width:540px;margin:18px auto 0;line-height:1.7}
 /* PLATFORMS TRUST BAR */
-.trustbar{background:var(--off);padding:22px 0;overflow:hidden;border-bottom:1px solid var(--border)}
-.tlabel{text-align:center;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lite);margin-bottom:18px}
+.trustbar{background:#0f0f0f;padding:26px 0;overflow:hidden}
+.tlabel{text-align:center;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px}
 .marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .marquee-track{display:inline-flex;white-space:nowrap;animation:marquee 55s linear infinite;will-change:transform}
-.marquee-track span{font-size:16px;color:#77716a;letter-spacing:-.2px;padding:0 22px;display:inline-flex;align-items:center;font-weight:500}
-.marquee-track span::after{content:"\2605";color:rgba(20,18,15,.16);font-size:9px;margin-left:22px}
+.marquee-track span{font-size:16px;color:rgba(255,255,255,.6);letter-spacing:-.2px;padding:0 22px;display:inline-flex;align-items:center;font-weight:500}
+.marquee-track span::after{content:"\2605";color:rgba(255,255,255,.2);font-size:9px;margin-left:22px}
 @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 /* WHY AGENTS SWITCH */
 .compare{padding:62px 44px;background:var(--bg)}
@@ -126,18 +126,16 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .accent-marq .marquee-track{animation:marquee 50s linear infinite}
 .accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:#967a4a;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
-.leadmag{background:#f5f3ed;padding:74px 44px 84px;overflow:hidden}
-.leadmag-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:370px 1fr;gap:58px;align-items:center}
-.leadmag-photo{position:relative;margin-top:-168px;margin-bottom:-26px;border:9px solid #fff;border-radius:16px;box-shadow:0 30px 72px rgba(20,18,15,.32);overflow:hidden;aspect-ratio:4/5;background:linear-gradient(155deg,#3a352e,#141210)}
-.leadmag-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.leadmag-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;padding:20px}
-.leadmag-ph .mono{font-family:'Cormorant Garamond',serif;font-size:46px;color:#c9b79a;line-height:1}
-.leadmag-ph small{font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;color:rgba(245,240,232,.55)}
+.leadmag{background:#f5f0e8;padding:0 44px;overflow:visible;position:relative}
+.leadmag-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:end}
+.leadmag-photo{position:relative;line-height:0;z-index:3}
+.leadmag-photo img{display:block;width:100%;margin-top:-96px}
+.leadmag-copy{align-self:center;padding:64px 0 72px}
 .leadmag-copy .eyebrow{color:#967a4a;letter-spacing:.26em}
-.leadmag-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.4vw,44px);font-weight:500;line-height:1.06;letter-spacing:-.01em;margin:14px 0 0}
+.leadmag-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.8vw,50px);font-weight:500;line-height:1.03;letter-spacing:-.01em;margin:14px 0 0}
 .leadmag-copy h2 em{font-style:italic;color:#967a4a}
-.leadmag-copy p{font-size:15px;color:var(--mid);line-height:1.75;max-width:470px;margin:16px 0 24px}
-.leadmag-note{font-size:12px;color:var(--lite);margin-top:12px}
+.leadmag-copy p{font-size:15px;color:var(--mid);line-height:1.75;max-width:470px;margin:18px 0 26px}
+.leadmag-note{font-size:12px;color:var(--lite);margin-top:14px}
 .plans{background:#0a0a0a;color:#fff;padding:64px 44px 68px}
 .pl-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:248px 1fr 1fr 1fr;gap:22px;align-items:start}
 .pl-rail{padding-top:6px}
@@ -176,6 +174,40 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
 .pl-fee b{color:#fff;font-weight:700}
 .pl-fee-sep{width:1px;height:16px;background:rgba(255,255,255,.14)}
+.co-overlay{position:fixed;inset:0;z-index:200;background:#0a0a0a;overflow-y:auto;display:none;padding:46px 24px 64px}
+.co-overlay.open{display:block}
+.co-wrap{max-width:640px;margin:0 auto}
+.co-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.co-step{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:9px 16px}
+.co-back{font-size:14px;color:rgba(255,255,255,.55);cursor:pointer;background:none;border:none;font-family:inherit}
+.co-back:hover{color:#fff}
+.co-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,56px);font-weight:500;line-height:1.02;color:#fff;margin-bottom:10px}
+.co-sub{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:30px;max-width:520px;line-height:1.6}
+.co-pane{display:none}
+.co-pane.active{display:block}
+.co-card{background:#fff;color:var(--ink);border-radius:18px;padding:32px 32px 28px}
+.co-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lite);margin-bottom:18px}
+.co-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:16px 0;border-top:1px solid var(--border)}
+.co-row:first-of-type{border-top:none}
+.co-row .l{font-size:16px}
+.co-row .r{font-size:20px;font-weight:700;white-space:nowrap}
+.co-row .sub{font-size:12.5px;color:var(--mid);margin-top:5px;line-height:1.45}
+.co-row .sub em{font-style:italic}
+.co-due{background:#0f0f0f;color:#fff;border-radius:14px;padding:24px 26px;margin:18px 0}
+.co-due .dl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.co-due .dv{font-size:44px;font-weight:800;margin:8px 0 6px;letter-spacing:-.02em}
+.co-due .db{font-size:13px;color:rgba(255,255,255,.55)}
+.co-recur{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:8px}
+.co-recur .l{font-size:15px;color:var(--mid)}
+.co-recur .r{font-size:22px;font-weight:700;white-space:nowrap}
+.co-note{text-align:center;font-size:13px;color:var(--lite);margin-top:16px}
+.co-sel-name{font-size:22px;font-weight:700;margin-bottom:6px}
+.co-sel-price{font-size:15px;color:var(--mid)}
+.co-change{display:inline-block;margin-top:16px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);cursor:pointer}
+.co-change:hover{color:var(--ink)}
+.co-cta{display:block;width:100%;text-align:center;background:#fff;color:#0a0a0a;border:none;border-radius:50px;padding:18px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:22px;transition:opacity .2s;font-family:inherit}
+.co-cta:hover{opacity:.9}
+.co-foot{text-align:center;font-size:13px;color:rgba(255,255,255,.4);margin-top:16px;line-height:1.5}
 .apply{background:var(--black);color:#fff;padding:60px 44px;text-align:center}
 .apply .eyebrow{color:#967a4a;letter-spacing:.26em}
 .apply h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);font-weight:500;line-height:1.08;margin:14px 0 0}
@@ -193,8 +225,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-grid{grid-template-columns:1fr;gap:26px}
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid rgba(255,255,255,.12);padding-left:0;padding-top:26px;min-height:0}
-  .leadmag{padding:56px 20px 60px}.leadmag-wrap{grid-template-columns:1fr;gap:26px}
-  .leadmag-photo{margin-top:-108px;max-width:300px;margin-left:auto;margin-right:auto}
+  .leadmag{padding:0 20px}.leadmag-wrap{grid-template-columns:1fr;gap:0}.leadmag-photo{max-width:270px;margin:0 auto}.leadmag-photo img{margin-top:-64px}.leadmag-copy{padding:8px 0 54px;text-align:center}
   .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{flex-direction:column;gap:12px}.pl-fee-sep{display:none}
   .apply{padding:52px 20px}
 }
@@ -242,23 +273,23 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   <div class="tlabel">The systems serious agents run</div>
   <div class="marquee"><div class="marquee-track" id="mtrack"></div></div>
 </section>
-<section class="belief">
-  <h2>Real estate doesn't clock out at five.<br><em>Neither does your broker.</em></h2>
-  <p>Nights, weekends, and the deal that goes sideways at the worst possible time. You get a licensed Florida broker who actually picks up. We have been in your shoes.</p>
-</section>
 <section class="leadmag" id="calculator">
   <div class="leadmag-wrap">
     <div class="leadmag-photo">
-      <img src="marlenyi.jpg" alt="Marlenyi Paredes, Broker Owner and Qualifying Broker of Aari Realty" />
+      <img src="marlenyi-cutout.png" alt="Marlenyi Paredes, Broker Owner of Aari Realty" />
     </div>
     <div class="leadmag-copy">
       <span class="eyebrow">Free agent tool</span>
       <h2>Never miss a contract deadline <em>again.</em></h2>
-      <p>Pick your contract, drop in your dates, and every critical deadline calculates instantly. FR/BAR As-Is, Standard, CRSP, and NABOR, with the day-count rules built in. Made for agents. Free to use.</p>
+      <p>Pick your contract, drop in your dates, and every critical deadline calculates instantly. FR/BAR As-Is, Standard, CRSP, and NABOR, with the day count rules built in. Made for agents. Free to use.</p>
       <a class="btn btn-dark btn-lg" href="https://aaritransactions.com/contract-guide" target="_blank" rel="noopener">Open the deadline calculator &rarr;</a>
       <p class="leadmag-note">Free. No signup. Built by a licensed Florida broker.</p>
     </div>
   </div>
+</section>
+<section class="belief">
+  <h2>Real estate doesn't clock out at five.<br><em>Neither does your broker.</em></h2>
+  <p>Nights, weekends, and the deal that goes sideways at the worst possible time. You get a licensed Florida broker who actually picks up. We have been in your shoes.</p>
 </section>
 <section class="compare" id="why">
   <div class="compare-head">
@@ -397,6 +428,37 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 <section class="accent-marq">
   <div class="marquee"><div class="marquee-track" id="atrack"></div></div>
 </section>
+<div class="co-overlay" id="checkout">
+  <div class="co-wrap">
+    <div class="co-pane active" id="coStep2">
+      <div class="co-top"><span class="co-step">Step 02</span><button class="co-back" data-co-close>Back</button></div>
+      <h2 class="co-h" id="coJoinTitle">You're joining</h2>
+      <div class="co-card">
+        <div class="co-label">Summary</div>
+        <div class="co-row"><div class="l">Monthly fee</div><div class="r" id="coMonthly">$59/mo</div></div>
+        <div class="co-row"><div class="l">Annual compliance</div><div class="r">$199/year</div></div>
+        <div class="co-row"><div><div class="l">Add ons</div><div class="sub" id="coAddonSub">Brand Builder complimentary for 6 months. <em>Enrollment required after 6 months to continue Brand Builder.</em></div></div><div class="r">$0/mo</div></div>
+        <div class="co-due"><div class="dl">Due today</div><div class="dv" id="coDue">$244.68</div><div class="db" id="coDueBreak">$199 compliance + $45.68 prorated</div></div>
+        <div class="co-recur"><div class="l">Then, recurring monthly</div><div class="r" id="coRecur">$59/month</div></div>
+      </div>
+      <p class="co-note">Prorated amount covers the remaining days in the current month.</p>
+      <button class="co-cta" id="coContinue">Continue &rarr;</button>
+    </div>
+    <div class="co-pane" id="coStep3">
+      <div class="co-top"><span class="co-step">Step 03</span><button class="co-back" data-co-back2>Back</button></div>
+      <h2 class="co-h">Independent Contractor Agreement</h2>
+      <p class="co-sub">Review and sign your ICA with Aari Realty LLC before completing payment.</p>
+      <div class="co-card">
+        <div class="co-label">Your selection</div>
+        <div class="co-sel-name" id="coSelName">Aari Mentorship 75/25</div>
+        <div class="co-sel-price" id="coSelPrice">$59 monthly &middot; $199/year compliance fee</div>
+        <div class="co-change" data-co-back2>Need to make changes?</div>
+      </div>
+      <button class="co-cta" id="coSign">Review &amp; sign agreement &rarr;</button>
+      <p class="co-foot">Fill in your details, review the full agreement, then initial and sign electronically.</p>
+    </div>
+  </div>
+</div>
 <script>
 (function(){
   var c=document.getElementById('dots'),n=150,cols=['#2a2a2a','#6b6b6b','#a8a8a8'],h='';
@@ -443,8 +505,31 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     if(applyBtn)applyBtn.setAttribute('href','https://joinaari.com/#plan='+encodeURIComponent(name));
   }
   plans.forEach(function(p){p.addEventListener('click',function(){pickPlan(p.getAttribute('data-plan'));});});
-  document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));var a=document.getElementById('apply');if(a)a.scrollIntoView({behavior:'smooth'});});});
+  document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));openCheckout(b.getAttribute('data-plan'));});});
   try{var saved=localStorage.getItem('aari_plan');if(saved)pickPlan(saved);}catch(e){}
+  var ANNUAL=199,PLAN={'Aari Mentorship 75/25':59,'Aari Growth 85/15':79,'Aari Max 100%':99};
+  function r2(n){return Math.round((n+Number.EPSILON)*100)/100;}
+  function computeDue(name){var m=PLAN[name]||59;var t=new Date(),dim=new Date(t.getFullYear(),t.getMonth()+1,0).getDate(),drem=dim-t.getDate()+1;var pro=r2(m*drem/dim);return {m:m,pro:pro,total:r2(ANNUAL+pro),drem:drem,dim:dim};}
+  var overlay=document.getElementById('checkout'),curName='Aari Mentorship 75/25';
+  function coShow(id){['coStep2','coStep3'].forEach(function(x){document.getElementById(x).classList.toggle('active',x===id);});overlay.scrollTop=0;}
+  function openCheckout(name){curName=name;var d=computeDue(name);
+    document.getElementById('coJoinTitle').textContent="You're joining "+name;
+    document.getElementById('coMonthly').textContent='$'+d.m+'/mo';
+    document.getElementById('coRecur').textContent='$'+d.m+'/month';
+    document.getElementById('coDue').textContent='$'+d.total.toFixed(2);
+    document.getElementById('coDueBreak').textContent='$'+ANNUAL+' compliance + $'+d.pro.toFixed(2)+' prorated ('+d.drem+' of '+d.dim+' days)';
+    var addon=document.getElementById('coAddonSub');
+    if(name.indexOf('Mentorship')!==-1){addon.innerHTML='Brand Builder complimentary for 6 months. <em>Enrollment required after 6 months to continue Brand Builder.</em>';}else{addon.textContent='No add ons selected.';}
+    document.getElementById('coSelName').textContent=name;
+    document.getElementById('coSelPrice').innerHTML='$'+d.m+' monthly &middot; $199/year compliance fee';
+    coShow('coStep2');overlay.classList.add('open');document.body.style.overflow='hidden';}
+  function closeCheckout(){overlay.classList.remove('open');document.body.style.overflow='';}
+  document.getElementById('coContinue').addEventListener('click',function(){coShow('coStep3');});
+  [].forEach.call(document.querySelectorAll('[data-co-back2]'),function(b){b.addEventListener('click',function(){coShow('coStep2');});});
+  [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
+  document.getElementById('coSign').addEventListener('click',function(){var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
+  var applyBtn2=document.getElementById('applyBtn');
+  if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}openCheckout(s||'Aari Mentorship 75/25');});}
 })();
 </script>
 </body>
