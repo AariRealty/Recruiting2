@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--ink:#141210;--black:#0f0f0f;--bg:#ffffff;--off:#f5f4f1;--card:#f5f4f1;--mid:#6b6b6b;--lite:#9b948a;--border:#e2e0d8;--green:#2f6b46;--r:18px;--r-pill:50px}
+:root{--ink:#141210;--black:#0a0a0a;--bg:#ffffff;--off:#f5f4f1;--card:#f5f4f1;--mid:#6b6b6b;--lite:#9b948a;--border:#e2e0d8;--green:#2f6b46;--r:18px;--r-pill:50px}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
@@ -47,7 +47,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .aside-label{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);margin-bottom:14px}
 .aside-quote{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;line-height:1.5;color:var(--ink)}
 .aside-by{display:flex;align-items:center;gap:12px;margin-top:22px;padding-top:18px;border-top:1px solid var(--border)}
-.aside-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e6e0d3,#cfc7b6);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:17px;color:#8a8272;flex-shrink:0}
+.aside-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e6e0d3,#cfc7b6);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:17px;color:inherit;flex-shrink:0}
 .aside-name{font-size:12.5px;font-weight:700}
 .aside-role{font-size:10.5px;color:var(--lite);margin-top:2px}
 /* BELIEF STATEMENT */
@@ -56,7 +56,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .belief h2 em{font-style:italic}
 .belief p{font-size:14px;color:rgba(255,255,255,.55);max-width:540px;margin:18px auto 0;line-height:1.7}
 /* PLATFORMS TRUST BAR */
-.trustbar{background:#0f0f0f;padding:26px 0;overflow:hidden}
+.trustbar{background:#0a0a0a;padding:26px 0;overflow:hidden}
 .tlabel{text-align:center;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px}
 .marquee{overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
 .marquee-track{display:inline-flex;white-space:nowrap;animation:marquee 55s linear infinite;will-change:transform}
@@ -66,15 +66,15 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 /* WHY AGENTS SWITCH */
 .compare{padding:62px 44px;background:var(--bg)}
 .compare-head{max-width:760px;margin:0 auto 34px;text-align:center}
-.compare .eyebrow,.how .eyebrow{color:#967a4a;letter-spacing:.26em}
+.compare .eyebrow,.how .eyebrow{color:inherit;letter-spacing:.26em}
 .compare-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.01em;margin:16px 0 0}
-.compare-head h2 em{font-style:italic;color:#967a4a}
+.compare-head h2 em{font-style:italic;color:inherit}
 .compare-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:540px;margin:16px auto 0}
 .compare-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:22px}
 .col{border:1px solid var(--border);border-radius:10px;padding:30px 28px 28px}
 .col-old{background:#f5f3ed;border-color:#e8e4da}
 .col-aari{background:#0a0a0a;border-color:#0a0a0a;box-shadow:0 22px 60px rgba(20,18,15,.18);position:relative}
-.col-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a09885;margin-bottom:6px}
+.col-tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:inherit;margin-bottom:6px}
 .col-aari .col-tag{color:rgba(255,255,255,.5)}
 .col h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:20px}
 .col-aari h3{color:#fff}
@@ -95,7 +95,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .how{background:var(--black);color:#fff;padding:56px 44px 70px}
 .how-head{max-width:820px;margin:0 auto 34px;text-align:center}
 .how-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4vw,52px);font-weight:600;line-height:1.06;letter-spacing:-.01em;color:#fff;margin:14px 0 0}
-.how-head h2 em{font-style:italic;color:#967a4a}
+.how-head h2 em{font-style:italic;color:inherit}
 .how-head p{font-size:15px;color:rgba(255,255,255,.72);line-height:1.7;max-width:520px;margin:16px auto 0}
 .b5-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:290px 1fr;gap:44px;align-items:start}
 .b5-nav{display:flex;flex-direction:column;gap:4px}
@@ -108,7 +108,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .b5-pane{display:none}
 .b5-pane.active{display:block;animation:paneIn .5s ease}
 @keyframes paneIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.b5-num-big{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:600;line-height:1;color:rgba(150,122,74,.42);margin-bottom:14px}
+.b5-num-big{font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:600;line-height:1;color:rgba(233,226,213,.32);margin-bottom:14px}
 .b5-step-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,3vw,32px);font-weight:500;color:#fff;line-height:1.08;margin-bottom:12px}
 .b5-desc{font-size:15px;color:rgba(255,255,255,.72);line-height:1.75;max-width:460px}
 .btn-light{background:#fff;color:#0f0f0f;border-color:#fff}
@@ -124,16 +124,16 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .how{position:relative;z-index:2;margin-top:-30px;clip-path:polygon(0 30px,100% 0,100% 100%,0 100%);padding-top:86px}
 .accent-marq{background:var(--black);padding:15px 0;overflow:hidden}
 .accent-marq .marquee-track{animation:marquee 50s linear infinite}
-.accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:#967a4a;padding:0 26px;display:inline-flex;align-items:center}
+.accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:inherit;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
 .leadmag{background:#f5f0e8;padding:0 44px;overflow:visible;position:relative}
 .leadmag-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:400px 1fr;gap:40px;align-items:end}
 .leadmag-photo{position:relative;line-height:0;z-index:3}
 .leadmag-photo img{display:block;width:100%;margin-top:-96px}
 .leadmag-copy{align-self:center;padding:64px 0 72px}
-.leadmag-copy .eyebrow{color:#967a4a;letter-spacing:.26em}
+.leadmag-copy .eyebrow{color:inherit;letter-spacing:.26em}
 .leadmag-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.8vw,50px);font-weight:500;line-height:1.03;letter-spacing:-.01em;margin:14px 0 0}
-.leadmag-copy h2 em{font-style:italic;color:#967a4a}
+.leadmag-copy h2 em{font-style:italic;color:inherit}
 .leadmag-copy p{font-size:15px;color:var(--mid);line-height:1.75;max-width:470px;margin:18px 0 26px}
 .leadmag-note{font-size:12px;color:var(--lite);margin-top:14px}
 .plans{background:#0a0a0a;color:#fff;padding:64px 44px 68px}
@@ -161,8 +161,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-feat{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:14px;flex:1}
 .pl-feat li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;line-height:1.4}
 .pl-feat li b{font-weight:700}
-.pl-feat .k{color:#8a8272;font-weight:700;flex-shrink:0}
-.pl-dark .pl-feat .k{color:#b3a688}
+.pl-feat .k{color:inherit;font-weight:700;flex-shrink:0}
+.pl-dark .pl-feat .k{color:inherit}
 .pl-blurb{background:var(--tint,#faf8f4);border-radius:10px;padding:14px 16px;font-size:12.5px;color:var(--mid);line-height:1.5;margin:18px 0}
 .pl-dark .pl-blurb{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
 .pl-cta{display:block;text-align:center;border-radius:50px;padding:15px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;background:#0a0a0a;color:#fff;transition:opacity .2s}
@@ -209,21 +209,21 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .co-cta:hover{opacity:.9}
 .co-foot{text-align:center;font-size:13px;color:rgba(255,255,255,.4);margin-top:16px;line-height:1.5}
 .apply{background:var(--black);color:#fff;padding:60px 44px;text-align:center}
-.apply .eyebrow{color:#967a4a;letter-spacing:.26em}
+.apply .eyebrow{color:inherit;letter-spacing:.26em}
 .apply h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);font-weight:500;line-height:1.08;margin:14px 0 0}
-.apply h2 em{font-style:italic;color:#967a4a}
+.apply h2 em{font-style:italic;color:inherit}
 .apply p{font-size:15px;color:rgba(255,255,255,.72);max-width:520px;margin:16px auto 24px;line-height:1.7}
 .apply .sel-note{font-size:12px;color:rgba(255,255,255,.5);margin-top:16px;letter-spacing:.02em}
 .apply .sel-note b{color:#f5f0e8;font-weight:600}
 .eco{background:var(--bg);padding:64px 44px}
 .eco-head{max-width:760px;margin:0 auto 44px;text-align:center}
-.eco-head .eyebrow{color:#967a4a;letter-spacing:.26em}
+.eco-head .eyebrow{color:inherit;letter-spacing:.26em}
 .eco-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.06;letter-spacing:-.01em;margin:16px 0 0}
-.eco-head h2 em{font-style:italic;color:#967a4a}
+.eco-head h2 em{font-style:italic;color:inherit}
 .eco-head p{font-size:15px;color:var(--mid);line-height:1.7;max-width:560px;margin:16px auto 0}
 .eco-grid{max-width:1020px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
 .eco-card{border:1px solid var(--border);border-radius:14px;padding:30px 28px;background:var(--card);display:flex;flex-direction:column}
-.eco-card .tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#a09885}
+.eco-card .tag{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:inherit}
 .eco-card h3{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;margin:8px 0 12px}
 .eco-card p{font-size:13.5px;color:var(--mid);line-height:1.6}
 .eco-note{max-width:1020px;margin:26px auto 0;text-align:center;font-size:12.5px;color:var(--lite);line-height:1.6}
@@ -231,7 +231,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .founder-wrap{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:340px 1fr;gap:50px;align-items:center}
 .founder-photo{position:relative}
 .founder-photo img{width:100%;display:block;border-radius:16px;border:1px solid rgba(255,255,255,.12)}
-.founder-copy .eyebrow{color:#967a4a;letter-spacing:.26em}
+.founder-copy .eyebrow{color:inherit;letter-spacing:.26em}
 .founder-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);font-weight:500;line-height:1.02;color:#fff;margin:14px 0 4px}
 .founder-copy .role{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.5)}
 .founder-copy p{font-size:15px;color:rgba(255,255,255,.78);line-height:1.75;margin:18px 0 0;max-width:520px}
@@ -241,7 +241,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .tools-head{max-width:760px;margin:0 auto 28px;text-align:center}
 .tools-head .teb{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#141210}
 .tools-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.05;margin:12px 0 0;color:#141210}
-.tools-head h2 em{font-style:italic;color:#967a4a}
+.tools-head h2 em{font-style:italic;color:inherit}
 .tools-head p{font-size:14px;color:var(--mid);line-height:1.7;max-width:520px;margin:14px auto 0}
 .tools-list{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
 .tool-row{display:flex;align-items:center;gap:18px;background:#fff;border:1px solid #e7e2d7;border-radius:14px;padding:18px 22px}
@@ -252,50 +252,52 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .tool-cta{margin-left:auto;flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:50px;padding:14px 24px;background:#141210;color:#f5f0e8;white-space:nowrap;transition:opacity .2s}
 .tool-cta:hover{opacity:.85}
 .tool-row.soon{background:transparent;border:1px dashed #d8d2c4}
-.tool-row.soon .tool-num{background:#e7e2d7;color:#a09885}
+.tool-row.soon .tool-num{background:#e7e2d7;color:inherit}
 .tool-row.soon .tool-txt h3{color:#a89f8e}
 .tool-row.soon .tool-txt p{color:#b3ab9b}
 .tool-soon-tag{margin-left:auto;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#a89f8e;border:1px solid #d8d2c4;border-radius:50px;padding:8px 16px;white-space:nowrap}
-.testi{background:#0f0f0f;color:#fff;padding:64px 44px}
+.testi{background:#ffffff;color:var(--ink);padding:64px 44px}
 .testi-head{max-width:760px;margin:0 auto 34px;text-align:center}
-.testi-head .eb{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#c9a86a}
-.testi-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.06;color:#fff;margin:12px 0 0}
-.testi-head h2 em{font-style:italic;color:#c9a86a}
+.testi-head .eb{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--ink)}
+.testi-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.06;color:var(--ink);margin:12px 0 0}
+.testi-head h2 em{font-style:italic}
 .testi-grid{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.testi-card{background:#1a1815;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px 28px 24px;display:flex;flex-direction:column}
-.testi-card p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.5;color:#f0ece3;flex:1}
-.testi-card .who{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.testi-card{background:#0a0a0a;border:1px solid #0a0a0a;border-radius:16px;padding:28px 28px 24px;display:flex;flex-direction:column}
+.testi-card p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;line-height:1.5;color:#f0ece3;flex:1}
+.testi-card .who{margin-top:20px;padding-top:16px;border-top:1px solid rgba(255,255,255,.12);display:flex;align-items:center;gap:12px}
+.testi-av{width:46px;height:46px;flex-shrink:0;border-radius:50%;background:#f5f0e8;color:#0a0a0a;display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;overflow:hidden}
+.testi-av img{width:100%;height:100%;object-fit:cover}
 .testi-card .who .nm{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#fff}
-.testi-card .who .rl{font-size:11px;color:#a89f8e;margin-top:2px}
-.faq{background:var(--bg);padding:64px 44px}
+.testi-card .who .rl{font-size:11px;color:#b3ab9b;margin-top:2px}
+.faq{background:#f5f0e8;padding:64px 44px}
 .faq-head{max-width:760px;margin:0 auto 30px;text-align:center}
-.faq-head .eb{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#967a4a}
+.faq-head .eb{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:inherit}
 .faq-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.06;color:var(--ink);margin:12px 0 0}
-.faq-head h2 em{font-style:italic;color:#967a4a}
+.faq-head h2 em{font-style:italic;color:inherit}
 .faq-list{max-width:760px;margin:0 auto}
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:18px;padding:20px 2px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;color:var(--ink)}
 .faq-item summary::-webkit-details-marker{display:none}
-.faq-item summary .pm{font-family:'Cormorant Garamond',serif;font-size:24px;color:#967a4a;transition:transform .2s;flex-shrink:0}
+.faq-item summary .pm{font-family:'Cormorant Garamond',serif;font-size:24px;color:inherit;transition:transform .2s;flex-shrink:0}
 .faq-item[open] summary .pm{transform:rotate(45deg)}
 .faq-item .ans{font-size:13.5px;color:var(--mid);line-height:1.7;padding:0 2px 20px;max-width:640px}
-.news{background:#141210;color:#fff;padding:58px 44px;text-align:center}
-.news .eb{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#c9a86a}
-.news h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);font-weight:500;line-height:1.08;color:#fff;margin:12px 0 6px}
-.news h2 em{font-style:italic;color:#c9a86a}
-.news p{font-size:14px;color:rgba(255,255,255,.62);max-width:480px;margin:0 auto 24px;line-height:1.6}
+.news{background:#f5f0e8;color:var(--ink);padding:58px 44px;text-align:center}
+.news .eb{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:inherit}
+.news h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);font-weight:500;line-height:1.08;color:var(--ink);margin:12px 0 6px}
+.news h2 em{font-style:italic;color:inherit}
+.news p{font-size:14px;color:var(--mid);max-width:480px;margin:0 auto 24px;line-height:1.6}
 .news-form{display:flex;gap:10px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center}
-.news-form input{flex:1;min-width:220px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);border-radius:50px;padding:15px 22px;color:#fff;font-family:'Montserrat',sans-serif;font-size:14px;outline:none}
-.news-form input::placeholder{color:rgba(255,255,255,.45)}
-.news-form button{background:#f5f0e8;color:#141210;border:none;border-radius:50px;padding:15px 28px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.news-form input{flex:1;min-width:220px;background:#fff;border:1px solid var(--border);border-radius:50px;padding:15px 22px;color:var(--ink);font-family:'Montserrat',sans-serif;font-size:14px;outline:none}
+.news-form input::placeholder{color:#9b948a}
+.news-form button{background:#141210;color:#f5f0e8;border:none;border-radius:50px;padding:15px 28px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:opacity .2s}
 .news-form button:hover{opacity:.88}
-.news-note{font-size:11px;color:rgba(255,255,255,.4);margin-top:14px}
+.news-note{font-size:11px;color:var(--lite);margin-top:14px}
 .footer{background:#0a0a0a;color:#fff;padding:56px 44px 26px}
 .footer-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
 .footer .fbrand{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;line-height:1}
 .footer .ftag{font-size:12.5px;color:rgba(255,255,255,.55);line-height:1.6;margin-top:12px;max-width:280px}
 .footer .flic{font-size:11px;color:rgba(255,255,255,.4);margin-top:14px;letter-spacing:.04em}
-.footer h4{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#967a4a;margin-bottom:14px}
+.footer h4{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:inherit;margin-bottom:14px}
 .footer a{display:block;font-size:13px;color:rgba(255,255,255,.72);margin-bottom:10px;transition:color .2s}
 .footer a:hover{color:#fff}
 .footer-bottom{max-width:1080px;margin:36px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
@@ -348,7 +350,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <a class="btn btn-ghost" href="#plans">See the plans &rarr;</a>
       </div>
       <div class="signal">
-        <span class="pills"><b style="background:#2f6b46">FL</b><b style="background:#7a5a2a">75</b><b style="background:#3a3a3a">$</b></span>
+        <span class="pills"><b style="background:#2a2a2a">FL</b><b style="background:#3a3a3a">75</b><b style="background:#3a3a3a">$</b></span>
         <span>Plans from <strong>$59/mo</strong> &middot; Splits to 100% &middot; No franchise fees.</span>
       </div>
     </div>
@@ -417,10 +419,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <h2>Don't take my word for it. <em>Take theirs.</em></h2>
   </div>
   <div class="testi-grid">
-    <div class="testi-card"><p>"You know that feeling when you're technically with a brokerage but nobody actually knows your name? I was working remotely, no check-ins, no guidance. Just me and a logo on my business card. My first week at Aari, I had systems, contacts, and a real plan. Night and day."</p><div class="who"><div class="nm">Alied Machuca</div><div class="rl">Aari Realty Agent</div></div></div>
-    <div class="testi-card"><p>"I came from one of those 100 percent virtual brokerages. It sounds amazing in the interview. Then it's 9pm, you're stuck on a contract, and there's literally no one to call. Here, I still run my own business but when I need backup, someone actually picks up."</p><div class="who"><div class="nm">Roosevelt Sanchez Santos</div><div class="rl">Aari Realty Agent</div></div></div>
-    <div class="testi-card"><p>"Most new agents get thrown in and told to figure it out. I got my feet wet as Aari's transaction coordinator first. Saw how files actually close, how compliance works, all the stuff that makes other agents panic. By the time I started selling, I already knew what I was doing."</p><div class="who"><div class="nm">Milennys Vargas</div><div class="rl">Aari Realty Agent</div></div></div>
-    <div class="testi-card"><p>"Every brokerage says no hidden fees until you get the invoice. I'd been burned before. Fees that change, support that vanishes, nobody who can explain where your money goes. Here, everything was spelled out from day one. Months in, still no surprises. That's the whole reason I stayed."</p><div class="who"><div class="nm">Jose Alejandro Paredes</div><div class="rl">Aari Realty Agent</div></div></div>
+    <div class="testi-card"><p>"My first week at Aari I had systems, contacts, and a real plan. After working remotely with no guidance, it was night and day."</p><div class="who"><div class="testi-av">AM</div><div><div class="nm">Alied Machuca</div><div class="rl">Aari Realty Agent</div></div></div></div>
+    <div class="testi-card"><p>"I still run my own business, but when I'm stuck on a contract at 9pm, someone actually picks up. That's the difference."</p><div class="who"><div class="testi-av">RS</div><div><div class="nm">Roosevelt Sanchez Santos</div><div class="rl">Aari Realty Agent</div></div></div></div>
+    <div class="testi-card"><p>"I learned how files really close as Aari's transaction coordinator first. By the time I started selling, I already knew what I was doing."</p><div class="who"><div class="testi-av">MV</div><div><div class="nm">Milennys Vargas</div><div class="rl">Aari Realty Agent</div></div></div></div>
+    <div class="testi-card"><p>"Everything was spelled out from day one. Months in, still no surprises. That's the whole reason I stayed."</p><div class="who"><div class="testi-av">JP</div><div><div class="nm">Jose Alejandro Paredes</div><div class="rl">Aari Realty Agent</div></div></div></div>
   </div>
 </section>
 <section class="tools" id="tools">
@@ -512,6 +514,20 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
   </div>
 </section>
+<section class="faq" id="faq">
+  <div class="faq-head">
+    <span class="eb">Questions</span>
+    <h2>The stuff you're <em>actually wondering.</em></h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item"><summary>What are the splits and the fees?<span class="pm">+</span></summary><div class="ans">Pick your structure: 75/25, 85/15, or 100 percent on a flat monthly. A $199 annual E and O and compliance fee, due when you join. Transaction fees are $499 residential and $299 vacant land. No franchise fees, and no surprise fees. Everything is spelled out before you sign.</div></details>
+    <details class="faq-item"><summary>Is it really fully virtual?<span class="pm">+</span></summary><div class="ans">Yes. Aari is a fully virtual brokerage. You run your business from anywhere in Southwest Florida, with your tools loaded and a broker who actually answers when you need one.</div></details>
+    <details class="faq-item"><summary>What support do I actually get?<span class="pm">+</span></summary><div class="ans">A licensed Florida broker who picks up, transaction coordination through Aari Transactions, a compliance review on every file, and the full stack loaded on day one, including SkySlope, FGCMLS, and more.</div></details>
+    <details class="faq-item"><summary>How does billing work?<span class="pm">+</span></summary><div class="ans">Fees run through SkySlope Books. A card on file is strongly recommended. You get a 10 day grace period, then a $25 late fee. Late payments can lead to license deactivation, so keep it current.</div></details>
+    <details class="faq-item"><summary>Can I change my plan as I grow?<span class="pm">+</span></summary><div class="ans">Yes. Start where you are today and move up when you are ready. Your structure should fit your business, not the other way around.</div></details>
+    <details class="faq-item"><summary>How fast can I join?<span class="pm">+</span></summary><div class="ans">Minutes, not weeks. Pick a plan, review and e-sign your independent contractor agreement, put a card on file, and you land in your agent portal the same day.</div></details>
+  </div>
+</section>
 <section class="plans" id="plans">
   <div class="pl-inner">
     <div class="pl-rail">
@@ -574,30 +590,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
   </div>
 </section>
-<section class="faq" id="faq">
-  <div class="faq-head">
-    <span class="eb">Questions</span>
-    <h2>The stuff you're <em>actually wondering.</em></h2>
-  </div>
-  <div class="faq-list">
-    <details class="faq-item"><summary>What are the splits and the fees?<span class="pm">+</span></summary><div class="ans">Pick your structure: 75/25, 85/15, or 100 percent on a flat monthly. A $199 annual E and O and compliance fee, due when you join. Transaction fees are $499 residential and $299 vacant land. No franchise fees, and no surprise fees. Everything is spelled out before you sign.</div></details>
-    <details class="faq-item"><summary>Is it really fully virtual?<span class="pm">+</span></summary><div class="ans">Yes. Aari is a fully virtual brokerage. You run your business from anywhere in Southwest Florida, with your tools loaded and a broker who actually answers when you need one.</div></details>
-    <details class="faq-item"><summary>What support do I actually get?<span class="pm">+</span></summary><div class="ans">A licensed Florida broker who picks up, transaction coordination through Aari Transactions, a compliance review on every file, and the full stack loaded on day one, including SkySlope, FGCMLS, and more.</div></details>
-    <details class="faq-item"><summary>How does billing work?<span class="pm">+</span></summary><div class="ans">Fees run through SkySlope Books. A card on file is strongly recommended. You get a 10 day grace period, then a $25 late fee. Late payments can lead to license deactivation, so keep it current.</div></details>
-    <details class="faq-item"><summary>Can I change my plan as I grow?<span class="pm">+</span></summary><div class="ans">Yes. Start where you are today and move up when you are ready. Your structure should fit your business, not the other way around.</div></details>
-    <details class="faq-item"><summary>How fast can I join?<span class="pm">+</span></summary><div class="ans">Minutes, not weeks. Pick a plan, review and e-sign your independent contractor agreement, put a card on file, and you land in your agent portal the same day.</div></details>
-  </div>
-</section>
-<section class="apply" id="apply">
-  <span class="eyebrow">Last step</span>
-  <h2>Ready to make it <em>official?</em></h2>
-  <p>Your application and secure payment take about ten minutes. Parse your license, e sign your ICA, put a card on file, done.</p>
-  <a class="btn btn-light btn-lg" id="applyBtn" href="https://joinaari.com" target="_blank" rel="noopener">Begin secure checkout &rarr;</a>
-  <p class="sel-note" id="selNote">No plan selected yet. Pick one above to get started.</p>
-</section>
-<section class="accent-marq">
-  <div class="marquee"><div class="marquee-track" id="atrack"></div></div>
-</section>
 <section class="news" id="stay">
   <span class="eb">Not ready to switch?</span>
   <h2>Stay close. <em>Grow anyway.</em></h2>
@@ -606,7 +598,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <input type="email" placeholder="you@email.com" aria-label="Email address" />
     <button type="submit">Send me the tips</button>
   </form>
-  <p class="news-note">Or talk to a real person: <a href="tel:2396881770" style="color:#c9a86a">239.688.1770</a></p>
+  <p class="news-note">Or talk to a real person: <a href="tel:2396881770" style="color:inherit">239.688.1770</a></p>
 </section>
 <footer class="footer">
   <div class="footer-grid">
