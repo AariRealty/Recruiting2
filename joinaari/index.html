@@ -560,7 +560,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       <h4>The ecosystem</h4>
       <a href="#plans">Aari Realty</a>
       <a href="https://aaritransactions.com" target="_blank" rel="noopener">Aari Transactions</a>
-      <a href="#ecosystem">Aari Referrals</a>
+      <a href="https://aaritransactions.com/aari-referrals.html" target="_blank" rel="noopener">Aari Referrals</a>
     </div>
     <div>
       <h4>Get in touch</h4>
@@ -583,7 +583,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <div class="co-label">Summary</div>
         <div class="co-row"><div class="l">Monthly fee</div><div class="r" id="coMonthly">$59/mo</div></div>
         <div class="co-row"><div class="l">Annual compliance</div><div class="r">$199/year</div></div>
-        <div class="co-row"><div><div class="l">Add ons</div><div class="sub" id="coAddonSub">Brand Builder complimentary for 6 months. <em>Enrollment required after 6 months to continue Brand Builder.</em></div></div><div class="r">$0/mo</div></div>
+        <div class="co-row"><div><div class="l">Add ons</div><div class="sub" id="coAddonSub">Aari Transactions Starter membership, on us. Two files a month coordinated for you.</div></div><div class="r">$0/mo</div></div>
         <div class="co-due"><div class="dl">Due today</div><div class="dv" id="coDue">$244.68</div><div class="db" id="coDueBreak">$199 compliance + $45.68 prorated</div></div>
         <div class="co-recur"><div class="l">Then, recurring monthly</div><div class="r" id="coRecur">$59/month</div></div>
       </div>
@@ -665,7 +665,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     document.getElementById('coDue').textContent='$'+d.total.toFixed(2);
     document.getElementById('coDueBreak').textContent='$'+ANNUAL+' compliance + $'+d.pro.toFixed(2)+' prorated ('+d.drem+' of '+d.dim+' days)';
     var addon=document.getElementById('coAddonSub');
-    if(name.indexOf('Mentorship')!==-1){addon.innerHTML='Brand Builder complimentary for 6 months. <em>Enrollment required after 6 months to continue Brand Builder.</em>';}else{addon.textContent='No add ons selected.';}
+    if(name.indexOf('Mentorship')!==-1||name.indexOf('Growth')!==-1){addon.innerHTML='Aari Transactions Starter membership, on us. Two files a month coordinated for you, a $79/mo value while you are on this split.';}else{addon.innerHTML='Aari Transactions Starter available at $79/mo. Two files a month coordinated for you.';}
     document.getElementById('coSelName').textContent=name;
     document.getElementById('coSelPrice').innerHTML='$'+d.m+' monthly &middot; $199/year compliance fee';
     coShow('coStep2');overlay.classList.add('open');document.body.style.overflow='hidden';}
