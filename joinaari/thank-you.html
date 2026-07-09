@@ -3,248 +3,119 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>Welcome to Aari Realty</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Lato:wght@300;400;500;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { background: #0a0a0a; color: #ffffff; min-height: 100vh; -webkit-font-smoothing: antialiased; }
-  body {
-    font-family: 'Lato', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 24px;
-  }
-  .wrap {
-    width: 100%;
-    max-width: 640px;
-    text-align: center;
-  }
-
-  /* Brand */
-  .brand {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 48px;
-  }
-
-  /* Checkmark */
-  .check {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 1.5px solid rgba(255,255,255,0.9);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 32px;
-  }
-  .check svg { width: 22px; height: 17px; }
-
-  /* Eyebrow */
-  .eyebrow {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 20px;
-  }
-
-  /* Heading */
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(40px, 7vw, 64px);
-    line-height: 1.05;
-    color: #ffffff;
-    margin-bottom: 28px;
-  }
-  h1 .name {
-    font-style: italic;
-    font-weight: 400;
-  }
-
-  /* Message card */
-  .message {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px;
-    padding: 32px 28px;
-    margin: 36px 0 28px;
-    text-align: left;
-  }
-  .message p {
-    font-family: 'Lato', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 1.75;
-    color: rgba(255,255,255,0.85);
-  }
-  .message p + p { margin-top: 14px; }
-  .message strong {
-    color: #ffffff;
-    font-weight: 700;
-  }
-
-  /* Next steps list */
-  .next-steps {
-    text-align: left;
-    margin: 0 0 40px;
-  }
-  .next-steps-title {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .step {
-    display: flex;
-    gap: 16px;
-    padding: 14px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  .step:last-child { border-bottom: none; }
-  .step-num {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    color: rgba(255,255,255,0.3);
-    flex-shrink: 0;
-    min-width: 22px;
-  }
-  .step-text {
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.75);
-  }
-  .step-text strong { color: #ffffff; font-weight: 600; }
-
-  /* Contact */
-  .contact {
-    font-family: 'Lato', sans-serif;
-    font-size: 13px;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 24px;
-    line-height: 1.7;
-  }
-  .contact a {
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
-    padding-bottom: 1px;
-  }
-  .contact a:hover { color: #ffffff; border-bottom-color: #ffffff; }
-
-  /* Home link */
-  .home {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.5);
-    text-decoration: none;
-    padding: 14px 28px;
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 50px;
-    transition: all 0.25s;
-  }
-  .home:hover {
-    color: #ffffff;
-    border-color: rgba(255,255,255,0.4);
-  }
-
-  @media (max-width: 520px) {
-    .message { padding: 24px 20px; }
-    .message p { font-size: 14px; }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#0a0a0a;--white:#fafafa;--bd:rgba(255,255,255,0.1)}
+html{scroll-behavior:smooth}
+body{font-family:'Montserrat',sans-serif;background:var(--black);color:var(--white);min-height:100vh;-webkit-font-smoothing:antialiased;display:flex;flex-direction:column}
+nav{position:sticky;top:0;z-index:100;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:rgba(10,10,10,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--bd)}
+.brand{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;letter-spacing:1px;color:#fff;text-decoration:none;line-height:1}
+.nav-phone{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.3s}
+.nav-phone:hover{color:#fff}
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:64px 24px}
+.wrap{width:100%;max-width:660px;text-align:center}
+.check{width:56px;height:56px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.9);display:inline-flex;align-items:center;justify-content:center;margin:0 auto 32px}
+.check svg{width:22px;height:17px}
+.eyebrow{font-size:9px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:18px}
+h1{font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(40px,7vw,62px);line-height:1.05;color:#fff;margin-bottom:20px}
+h1 .name{font-style:italic;font-weight:400}
+.sub{font-family:'Lato',sans-serif;font-size:14px;font-weight:400;line-height:1.8;color:rgba(255,255,255,0.5);max-width:440px;margin:0 auto 48px}
+.card{background:#ffffff;border-radius:14px;padding:40px 36px;text-align:left;margin-bottom:28px}
+.card-title{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.4);margin-bottom:8px}
+.step{display:flex;gap:22px;padding:24px 0;border-bottom:1px solid rgba(10,10,10,0.08)}
+.step:last-child{border-bottom:none;padding-bottom:0}
+.step:first-of-type{padding-top:24px;border-top:1px solid rgba(10,10,10,0.08)}
+.step-num{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:300;color:rgba(10,10,10,0.15);flex-shrink:0;line-height:1;min-width:34px}
+.step-name{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;color:#0a0a0a;margin-bottom:6px;letter-spacing:0.3px}
+.step-desc{font-family:'Lato',sans-serif;font-size:13px;font-weight:400;line-height:1.7;color:rgba(10,10,10,0.6)}
+.timing{display:flex;align-items:flex-start;gap:12px;background:rgba(45,106,79,0.06);border:1px solid rgba(45,106,79,0.15);border-radius:10px;padding:18px 22px;margin:0 0 40px;text-align:left}
+.timing-dot{width:8px;height:8px;border-radius:50%;background:#2d6a4f;flex-shrink:0;margin-top:6px}
+.timing p{font-family:'Lato',sans-serif;font-size:13px;font-weight:400;line-height:1.6;color:rgba(255,255,255,0.7)}
+.timing strong{color:#fff;font-weight:700}
+.contact{font-family:'Lato',sans-serif;font-size:13px;color:rgba(255,255,255,0.42);margin-bottom:32px;line-height:1.8}
+.contact a{color:rgba(255,255,255,0.85);text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.2);padding-bottom:1px}
+.contact a:hover{color:#fff;border-bottom-color:#fff}
+.home{display:inline-flex;align-items:center;gap:9px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#0a0a0a;background:#fff;text-decoration:none;padding:16px 34px;border-radius:4px;transition:all 0.3s}
+.home:hover{background:transparent;color:#fff;outline:1px solid rgba(255,255,255,0.4)}
+.home svg{transition:transform 0.3s}
+.home:hover svg{transform:translateX(4px)}
+@media(max-width:600px){nav{padding:16px 24px}.card{padding:28px 22px}.step{gap:16px}}
 </style>
 </head>
 <body>
-  <div class="wrap">
-
-    <p class="brand">AARI.</p>
-
-    <div class="check">
-      <svg viewBox="0 0 22 17" fill="none">
-        <path d="M1.5 8.5l6.5 6.5L20.5 1.5" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </div>
-
-    <p class="eyebrow">Payment Received</p>
-    <h1>Welcome aboard<span id="name-wrap">, <span class="name" id="first-name">friend</span></span>.</h1>
-
-    <div class="message">
-      <p>Our office will be sending you confirmation of your license change. Please allow <strong>24&ndash;48 hours</strong> and your onboarding will begin.</p>
-      <p>We're so excited to have you on the Aari Realty team.</p>
-    </div>
-
-    <div class="next-steps">
-      <p class="next-steps-title">What happens next</p>
-      <div class="step">
-        <span class="step-num">01</span>
-        <p class="step-text">Check your inbox for your <strong>executed Independent Contractor Agreement</strong> and <strong>payment receipt</strong>.</p>
+  <nav>
+    <a href="/index.html" class="brand">Aari.</a>
+    <a href="tel:+12396881770" class="nav-phone">239.688.1770</a>
+  </nav>
+  <main>
+    <div class="wrap">
+      <div class="check">
+        <svg viewBox="0 0 22 17" fill="none">
+          <path d="M1.5 8.5l6.5 6.5L20.5 1.5" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
       </div>
-      <div class="step">
-        <span class="step-num">02</span>
-        <p class="step-text">Our office submits your <strong>license change</strong> with the Florida DBPR.</p>
+      <p class="eyebrow">Payment Received</p>
+      <h1>Welcome aboard<span id="name-wrap">, <span class="name" id="first-name">friend</span></span>.</h1>
+      <p class="sub">Your spot on the Aari Realty team is locked in. Here is exactly what happens next.</p>
+      <div class="card">
+        <p class="card-title">What happens next</p>
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <p class="step-name">Your contract and receipt</p>
+            <p class="step-desc">Check your inbox for your executed Independent Contractor Agreement and your payment receipt. Both are on the way now.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <p class="step-name">Your license change</p>
+            <p class="step-desc">Our office files your license change with the Florida DBPR so you are active and producing under Aari Realty.</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <p class="step-name">Your Agent Hub login</p>
+            <p class="step-desc">Your broker creates your Agent Hub account and sends your login. That is your home base for tools, training, and everything you need to close.</p>
+          </div>
+        </div>
       </div>
-      <div class="step">
-        <span class="step-num">03</span>
-        <p class="step-text">Within <strong>24&ndash;48 hours</strong>, Marlenyi will reach out personally to kick off your onboarding and get you plugged into all your tools and systems.</p>
+      <div class="timing">
+        <span class="timing-dot"></span>
+        <p>Allow <strong>24 to 48 hours</strong> for your license change and Agent Hub access to be set up. Marlenyi will be in touch personally.</p>
       </div>
+      <p class="contact">
+        Questions? Text or call Marlenyi directly at <a href="tel:+12396881770">239.688.1770</a><br>
+        or email <a href="mailto:join@aarirealty.com">join@aarirealty.com</a>
+      </p>
+      <a href="/index.html" class="home">
+        Back to Home
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+          <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
     </div>
-
-    <p class="contact">
-      Questions? Text or call Marlenyi directly at <a href="tel:+12396881770">(239) 688-1770</a><br>
-      or email <a href="mailto:join@aarirealty.com">join@aarirealty.com</a>
-    </p>
-
-    <a href="/index.html" class="home">
-      Back to Home
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-        <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
-    </a>
-
-  </div>
-
+  </main>
 <script>
   (function() {
-    // Populate first name from URL params
     var params = new URLSearchParams(window.location.search);
     var firstName = (params.get('first_name') || '').trim();
     if (firstName) {
-      // Basic sanitization: strip any HTML-ish characters
       firstName = firstName.replace(/[<>"'&]/g, '');
       var el = document.getElementById('first-name');
       if (el) el.textContent = firstName;
     } else {
-      // Hide the ", Name" portion if no name provided
       var wrap = document.getElementById('name-wrap');
       if (wrap) wrap.textContent = '';
     }
-    // Clean URL (remove tracking params) without reloading
     window.history.replaceState({}, '', window.location.pathname);
   })();
 </script>
-
 </body>
 </html>
