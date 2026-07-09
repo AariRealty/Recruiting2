@@ -2731,11 +2731,11 @@ function initialAllPages() {
     // Stripe requires at least $0.50
     if (totalDue < 0.50) totalDue = 0.50;
 
-    var nameParts = (data.name || '').split(' ');
+    var _nmEl = document.getElementById('associate-name'); var _fullNm = ((_nmEl && _nmEl.value) ? _nmEl.value : (data.name || '')).trim(); var nameParts = _fullNm.split(/\s+/).filter(Boolean);
     var firstName = nameParts[0] || params.get('first_name') || 'Agent';
-    var lastName = nameParts.slice(1).join(' ') || params.get('last_name') || '';
-    var email = data.email || params.get('email') || '';
-    var phone = data.phone || params.get('phone') || '';
+    var lastName = nameParts.slice(1).join(' ') || params.get('last_name') || nameParts[0] || 'Agent';
+    var _emEl = document.getElementById('associate-email'); var email = ((_emEl && _emEl.value) ? _emEl.value.trim() : '') || data.email || params.get('email') || '';
+    var _phEl = document.getElementById('associate-phone'); var phone = ((_phEl && _phEl.value) ? _phEl.value.trim() : '') || data.phone || params.get('phone') || '';
     var planName = data.plan || params.get('plan_name') || '';
 
     // Update due display
