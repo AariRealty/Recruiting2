@@ -2478,8 +2478,9 @@ function goToStep(step) {
   if (c34) { if (step > 3) c34.classList.add('done'); else c34.classList.remove('done'); }
 
   // Initialize payment when entering step 4
-  if ((step === 3 || step === 4) && !paymentMounted) {
-    initPaymentElement();
+  if (step === 3 && !window.__aariPayInit) {
+    window.__aariPayInit = true;
+    if (window.retryPaymentInit) { window.retryPaymentInit(); }
   }
 
   currentStep = step;
