@@ -2710,7 +2710,7 @@ function initialAllPages() {
   };
 
   // ========== STRIPE PAYMENT ==========
-  var stripe = Stripe(((location.hostname === 'joinaari.com' || location.hostname === 'www.joinaari.com') ? 'pk_live_51Qo5qRHTQU4zpF23CsDFS2qsFgJ7pP32si1zp53ABcwGGHWtWooZZZ4yMAfp5X8rLA91QdIRno1EjravY4YzNubU00LLRdoYNp' : 'pk_test_51Qo5qRHTQU4zpF23gwd9gnEsOEiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA'));
+  var stripe = Stripe(((location.hostname === 'joinaari.com' || location.hostname === 'www.joinaari.com' || location.hostname === 'joinaari.vercel.app') ? 'pk_live_51Qo5qRHTQU4zpF23CsDFS2qsFgJ7pP32si1zp53ABcwGGHWtWooZZZ4yMAfp5X8rLA91QdIRno1EjravY4YzNubU00LLRdoYNp' : 'pk_test_51Qo5qRHTQU4zpF23gwd9gnEsOEiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA'));
   var stripeElements = null;
   var paymentElement = null;
   var paymentMounted = false;
