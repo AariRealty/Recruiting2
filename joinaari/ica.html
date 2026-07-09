@@ -2864,7 +2864,7 @@ function initialAllPages() {
       var discount = data.type === 'percent_off' ? totalDue * (data.value / 100) : data.value;
       var newTotal = Math.max(0, totalDue - discount);
 
-      document.getElementById('payment-due-amount').textContent = '$' + newTotal.toFixed(2);
+      var _dueC = document.getElementById('payment-due-amount'); if (_dueC) _dueC.textContent = '$' + newTotal.toFixed(2);
       document.getElementById('coupon-discount-amount').textContent = '-$' + discount.toFixed(2);
       document.getElementById('coupon-discount-row').style.display = 'block';
 
@@ -2915,7 +2915,7 @@ function initialAllPages() {
         body: JSON.stringify({
           agent: icaData,
           payment: {
-            amount: document.getElementById('payment-due-amount').textContent,
+            amount: (document.getElementById('payment-due-amount') ? document.getElementById('payment-due-amount').textContent : ('$' + (new URLSearchParams(location.search).get('total_due')||'0'))),
             method: 'card',
             customer_id: currentCustomerId
           }
