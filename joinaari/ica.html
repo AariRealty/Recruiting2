@@ -2922,6 +2922,29 @@ function initialAllPages() {
         })
       }).catch(function() { /* silent */ });
 
+      // Email the agent their signed ICA copy and payment receipt (non-blocking)
+      try {
+        var _v = function(id){ var e = document.getElementById(id); return e ? (e.value || e.textContent || '').trim() : ''; };
+        var _plan = new URLSearchParams(location.search).get('plan_name') || icaData.plan || icaData.plan_name || '';
+        var _amtStr = (document.getElementById('payment-due-amount') ? document.getElementById('payment-due-amount').textContent : ('$' + (new URLSearchParams(location.search).get('total_due') || '0')));
+        var _agent = {
+          name: _v('associate-name') || icaData.name || '',
+          email: _v('associate-email') || icaData.email || '',
+          license: _v('associate-license') || 'N/A',
+          phone: _v('associate-phone') || icaData.phone || '',
+          plan: _plan,
+          signature: _v('associate-signature') || _v('associate-name'),
+          date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          mls: _v('associate-mls') || 'N/A',
+          years_licensed: _v('associate-years') || 'N/A',
+          closings_last_12_months: _v('associate-closings') || 'N/A',
+          region: _v('associate-region-val') || 'N/A',
+          realtor_association: _v('associate-association-val') || 'N/A'
+        };
+        fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) }).catch(function() {});
+        fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _agent.name, email: _agent.email, plan: _plan, amount: _amtStr, payment_id: (typeof result !== 'undefined' && result && result.paymentIntent ? result.paymentIntent.id : ''), addons: [], monthly_amount: '' }) }).catch(function() {});
+      } catch (e) {}
+
       // Redirect to confirmation
       setTimeout(function() {
         var params = new URLSearchParams(window.location.search);
@@ -2929,7 +2952,7 @@ function initialAllPages() {
         returnParams.set('payment_success', 'true');
         returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
         returnParams.set('email', icaData.email || '');
-        window.location.href = '/index.html?' + returnParams.toString();
+        window.location.href = '/thank-you.html?' + returnParams.toString();
       }, 1500);
 
     } catch (err) {
