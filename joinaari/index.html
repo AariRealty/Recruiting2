@@ -127,9 +127,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:inherit;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
 .leadmag{background:#f5f0e8;padding:0 44px;overflow:visible;position:relative}
-.leadmag-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:360px 1fr;gap:40px;align-items:end}
+.leadmag-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:430px 1fr;gap:40px;align-items:end}
 .leadmag-photo{position:relative;line-height:0;z-index:3}
-.leadmag-photo img{display:block;width:100%;margin-top:-60px}
+.leadmag-photo img{display:block;width:100%;margin-top:-100px}
 .leadmag-copy{align-self:center;padding:64px 0 72px}
 .leadmag-copy .eyebrow{color:inherit;letter-spacing:.26em}
 .leadmag-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.8vw,50px);font-weight:500;line-height:1.03;letter-spacing:-.01em;margin:14px 0 0}
@@ -397,20 +397,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <div class="testi-card"><div class="testi-av" data-agent="jose"><img src="alejandro-paredes.jpg" alt="Jose Alejandro Paredes"></div><div class="testi-body"><p>"Every brokerage says no hidden fees until you get the invoice. I had been burned before. Fees that change, support that vanishes, nobody who can explain where your money goes. Here, everything was spelled out from day one. Months in, still no surprises. That is the whole reason I stayed."</p><div class="nm">Jose Alejandro Paredes</div><div class="rl">Aari Realty Agent</div></div></div>
   </div>
 </section>
-<section class="tools" id="tools">
-  <div class="tools-head">
-    <span class="teb">Free tools for agents</span>
-    <h2>Grab a tool. <em>It's free.</em></h2>
-    <p>The systems I actually run at Aari, built by Marlenyi Paredes, Broker Owner. No sign-up games, just tools you can use on your next deal.</p>
-  </div>
-  <div class="tools-list">
-    <div class="tool-row">
-      <div class="tool-num">01</div>
-      <div class="tool-txt"><h3>Florida deadline calculator</h3><p>Every FR/BAR, CRSP and NABOR deadline, calculated in seconds.</p></div>
-      <a class="tool-cta" href="https://aaritransactions.com/contract-guide" target="_blank" rel="noopener">Get it &rarr;</a>
-    </div>
-  </div>
-</section>
+
 <section class="compare" id="why">
   <div class="compare-head">
     <span class="eyebrow">Why agents leave</span>
@@ -691,5 +678,5 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}openCheckout(s||'Aari Mentorship 75/25');});}
 })();
 </script>
-<script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.thumbnailUrl||p.mediaUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script></body>
+<script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script></body>
 </html>
