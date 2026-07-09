@@ -2478,7 +2478,7 @@ function goToStep(step) {
   if (c34) { if (step > 3) c34.classList.add('done'); else c34.classList.remove('done'); }
 
   // Initialize payment when entering step 4
-  if (step === 4 && !paymentMounted) {
+  if ((step === 3 || step === 4) && !paymentMounted) {
     initPaymentElement();
   }
 
@@ -2709,7 +2709,7 @@ function initialAllPages() {
   };
 
   // ========== STRIPE PAYMENT ==========
-  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEs0EiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
+  var stripe = Stripe('pk_test_51Qo5qRHTQU4zpF23gwd9gnEsOEiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA');
   var stripeElements = null;
   var paymentElement = null;
   var paymentMounted = false;
