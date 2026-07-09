@@ -570,6 +570,7 @@
     }
   </style>
   <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script src="https://js.stripe.com/v3/"></script>
 </head>
 <body>
 
@@ -1244,28 +1245,7 @@
         </tbody>
       </table>
 
-      <p class="ica-subheading">Optional Add-Ons</p>
-      <table class="ica-table">
-        <thead>
-          <tr>
-            <th>Add-On</th>
-            <th>Amount</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>CRM System (Lofty)</td>
-            <td>$49/mo</td>
-            <td>AI-powered CRM, lead tracking, IDX, dialer, texting</td>
-          </tr>
-          <tr>
-            <td>Brand Builder</td>
-            <td>$79/mo</td>
-            <td>Content planning, video, social media strategy</td>
-          </tr>
-        </tbody>
-      </table>
+      
 
       <p class="ica-subheading">Referral Compensation</p>
       <p class="ica-text">Admin fee: 10% of referral payment, minimum $100. Recruiting Incentive: $100.</p>
@@ -1711,100 +1691,22 @@
           </div>
         </div>
 
-        <div style="margin-bottom:24px;display:flex;align-items:flex-start;gap:12px;background:rgba(10,10,10,0.03);border-radius:8px;padding:16px 18px;">
-          <input type="checkbox" id="esign-consent" onchange="validateForm()" style="margin-top:3px;width:18px;height:18px;flex-shrink:0;cursor:pointer;">
-          <label for="esign-consent" style="font-family:'Lato',sans-serif;font-size:12px;color:rgba(10,10,10,0.7);line-height:1.6;cursor:pointer;">I agree to sign this Independent Contractor Agreement electronically, and I understand my electronic signature and initials are legally binding under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</label>
+        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
+
+        <!-- Stripe Payment Element -->
+        <div id="stripe-payment-element" style="margin-bottom:8px;min-height:100px">
+          <p id="stripe-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:32px 0">Loading payment options...</p>
+        </div>
+        <p id="card-error" style="display:none;font-size:11px;color:#c0392b;margin-top:8px;font-weight:500"></p>
+        <div id="stripe-retry-box" style="display:none;text-align:center;margin:16px 0">
+          <button type="button" onclick="retryPaymentInit()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;padding:10px 24px;border:1px solid #0a0a0a;border-radius:6px;background:#fff;color:#0a0a0a;cursor:pointer">Retry Loading Payment</button>
         </div>
 
-        <!-- Broker countersignature (compact) -->
-        <div style="background:rgba(10,10,10,0.03);border-radius:8px;padding:20px 24px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-            <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.3);margin:0;">Qualifying Broker</p>
-            <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0;">Countersigned</p>
-          </div>
-          <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap;">
-            <div style="flex:1;min-width:180px;">
-              <p class="ica-broker-sig" style="margin:0;font-size:24px;">Marlenyi Paredes</p>
-              <div style="border-top:1px solid rgba(10,10,10,0.1);margin-top:4px;padding-top:6px;">
-                <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0;">BK3527289 &middot; Qualifying Broker</p>
-              </div>
-            </div>
-            <div style="text-align:right;">
-              <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0;" id="broker-date"></p>
-            </div>
-          </div>
+        <p style="font-family:'Lato',sans-serif;font-size:10px;color:rgba(10,10,10,0.35);line-height:1.6;margin:16px 0 20px;text-align:center">By submitting, your card will be charged the total due today. Recurring billing will be set up separately during onboarding.</p>
+
+        <div class="ica-nav-row" style="margin-top:16px;justify-content:center;">
+          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:240px;">Pay &amp; Join Aari Realty &rarr;</button>
         </div>
-
-        <p class="ica-text" style="margin-top:20px;font-size:10px;color:rgba(10,10,10,0.4);">Electronic signatures carry the same legal weight as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
-
-        <div class="ica-nav-row" style="margin-top:24px;">
-          <button type="button" class="ica-nav-btn" onclick="goToStep(2)">Back</button>
-          <button type="button" class="ica-nav-btn primary" id="ica-submit-btn" disabled onclick="submitICA()">Continue to Payment &rarr;</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- UNLICENSED: CTA instead of signature -->
-    <div id="unlicensed-step3-cta" style="display:none;">
-      <div class="ica-section" style="text-align:center;">
-        <p class="ica-text" style="margin-bottom:16px;">You&rsquo;ve reviewed the full ICA package. Once you have your license, come back to initial and sign.</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;">
-          <a href="https://calendly.com/join-aarirealty/30min" target="_blank" class="ica-nav-btn primary" style="text-decoration:none;">Meet Your Future Broker</a>
-          <a href="https://wa.me/12396881770?text=Hi%20Marlenyi!" target="_blank" class="ica-nav-btn" style="text-decoration:none;background:#25D366;color:#fff;border-color:#25D366;">Text Marlenyi</a>
-        </div>
-        <button type="button" class="ica-nav-btn" onclick="goToStep(2)">Back</button>
-      </div>
-    </div>
-
-    </div><!-- end step-3 -->
-
-    <!-- ===================== STEP 4: PAYMENT ===================== -->
-    <div class="ica-step-panel" id="step-4">
-      <div class="ica-section">
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-          <div class="ica-section-title" style="margin-bottom:0;">Complete Your Payment</div>
-          <button type="button" class="ica-nav-btn" onclick="goToStep(3)" style="flex-shrink:0;">Back</button>
-        </div>
-        <p class="ica-text" style="margin-bottom:24px;">Your ICA has been signed. Enter your payment details to activate your account.</p>
-
-        <!-- Coupon Code -->
-        <div id="coupon-section" style="margin:0 0 20px">
-          <label style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(10,10,10,0.4);display:block;margin-bottom:6px">Coupon Code</label>
-          <div style="display:flex;gap:8px;align-items:center">
-            <input type="text" id="coupon-input" placeholder="Enter code" style="flex:1;font-family:'Montserrat',sans-serif;font-size:13px;padding:10px 14px;border:1px solid rgba(10,10,10,0.15);border-radius:6px;outline:none;text-transform:uppercase;letter-spacing:1px" />
-            <button type="button" id="coupon-apply-btn" onclick="applyCoupon()" style="font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;padding:11px 20px;border:1px solid #0a0a0a;border-radius:6px;background:#0a0a0a;color:#fff;cursor:pointer;white-space:nowrap">Apply</button>
-          </div>
-          <p id="coupon-msg" style="display:none;font-size:11px;margin-top:6px;font-weight:500"></p>
-        </div>
-
-        <!-- Due Today Box -->
-        <div id="payment-due-box" style="background:rgba(10,10,10,0.04);border-radius:8px;padding:18px 20px;margin:0 0 20px">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <span style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;color:#0a0a0a">Due Today</span>
-            <span id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:24px;font-weight:700;color:#0a0a0a">$0.00</span>
-          </div>
-          <p id="payment-due-breakdown" style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:6px 0 0;line-height:1.4"></p>
-          <div id="coupon-discount-row" style="display:none;margin-top:8px;padding-top:8px;border-top:1px dashed rgba(10,10,10,0.1)">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-              <span style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:#27ae60">Coupon Applied</span>
-              <span id="coupon-discount-amount" style="font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:#27ae60">-$0.00</span>
-            </div>
-            <p id="coupon-discount-detail" style="font-family:'Lato',sans-serif;font-size:10px;color:#27ae60;margin:2px 0 0"></p>
-          </div>
-        </div>
-
-        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 20px;line-height:1.6">Pay securely with PayPal or debit/credit card. Recurring billing will be set up separately during onboarding.</p>
-
-        <!-- PayPal Buttons -->
-        <div id="paypal-button-container" style="min-height:150px;"></div>
-        <p id="paypal-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:24px 0">Loading payment options...</p>
-
-        <!-- $0 signup path (shown when coupon waives the total) -->
-        <div id="comp-signup-wrap" style="display:none;text-align:center;padding:12px 0 4px">
-          <button type="button" id="comp-signup-btn" onclick="completeCompSignup()" style="font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:18px 36px;border:none;border-radius:50px;background:#0a0a0a;color:#ffffff;cursor:pointer;transition:all 0.25s" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='none'">Complete Signup &rarr;</button>
-          <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:12px 0 0">No payment required &mdash; your coupon covers today's fees.</p>
-        </div>
-
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
       </div>
     </div><!-- end step-4 -->
@@ -2576,8 +2478,9 @@ function goToStep(step) {
   if (c34) { if (step > 3) c34.classList.add('done'); else c34.classList.remove('done'); }
 
   // Initialize payment when entering step 4
-  if (step === 4 && !window.paypalMounted) {
-    initPaymentElement();
+  if (step === 3 && !window.__aariPayInit) {
+    window.__aariPayInit = true;
+    if (window.retryPaymentInit) { window.retryPaymentInit(); }
   }
 
   currentStep = step;
@@ -2806,227 +2709,127 @@ function initialAllPages() {
       goToStep(4);
   };
 
-  // ========== PAYPAL PAYMENT ==========
-  window.paypalMounted = false;
+  // ========== STRIPE PAYMENT ==========
+  var stripe = Stripe(((location.hostname === 'joinaari.com' || location.hostname === 'www.joinaari.com') ? 'pk_live_51Qo5qRHTQU4zpF23CsDFS2qsFgJ7pP32si1zp53ABcwGGHWtWooZZZ4yMAfp5X8rLA91QdIRno1EjravY4YzNubU00LLRdoYNp' : 'pk_test_51Qo5qRHTQU4zpF23gwd9gnEsOEiYbcX7mcY8Nz1j13R9WVhuWDMsQ4t16QOLnRKyrkbEK038KHb1WAmRk4HrEiiD00I5g4LOJA'));
+  var stripeElements = null;
+  var paymentElement = null;
+  var paymentMounted = false;
+  var currentClientSecret = null;
+  var currentCustomerId = null;
   var appliedCoupon = null;
 
-  function getPaymentTotal() {
+  async function initPaymentElement() {
+    var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
     var params = new URLSearchParams(window.location.search);
     var totalDue = parseFloat(params.get('total_due')) || 0;
+    // Fallback: try to calculate from plan if total_due is missing
     if (totalDue <= 0) {
       var monthly = parseFloat(params.get('monthly')) || 0;
-      if (monthly > 0) totalDue = monthly + 199;
-      else totalDue = 278.20;
+      var compliance = 199;
+      if (monthly > 0) totalDue = monthly + compliance;
+      else totalDue = 278.20; // safe default
     }
-    // Apply coupon if active
-    if (appliedCoupon) {
-      if (appliedCoupon.type === 'set_total') {
-        totalDue = appliedCoupon.value;
-      } else {
-        var discount = appliedCoupon.type === 'percent_off' ? totalDue * (appliedCoupon.value / 100) : appliedCoupon.value;
-        totalDue = Math.max(0, totalDue - discount);
-      }
-    }
-    return totalDue;
-  }
+    // Stripe requires at least $0.50
+    if (totalDue < 0.50) totalDue = 0.50;
 
-  window.initPaymentElement = function() {
-    var params = new URLSearchParams(window.location.search);
-    var totalDue = getPaymentTotal();
+    var _nmEl = document.getElementById('associate-name'); var _fullNm = ((_nmEl && _nmEl.value) ? _nmEl.value : (data.name || '')).trim(); var nameParts = _fullNm.split(/\s+/).filter(Boolean);
+    var firstName = nameParts[0] || params.get('first_name') || 'Agent';
+    var lastName = nameParts.slice(1).join(' ') || params.get('last_name') || nameParts[0] || 'Agent';
+    var _emEl = document.getElementById('associate-email'); var email = ((_emEl && _emEl.value) ? _emEl.value.trim() : '') || data.email || params.get('email') || '';
+    var _phEl = document.getElementById('associate-phone'); var phone = ((_phEl && _phEl.value) ? _phEl.value.trim() : '') || data.phone || params.get('phone') || '';
+    var planName = data.plan || params.get('plan_name') || '';
+
+    // Update due display
     var dueEl = document.getElementById('payment-due-amount');
     if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
 
-    if (window.paypalMounted) return;
+    var loadMsg = document.getElementById('stripe-loading-msg');
+    var retryBox = document.getElementById('stripe-retry-box');
+    if (loadMsg) { loadMsg.textContent = 'Loading payment options...'; loadMsg.style.color = 'rgba(10,10,10,0.4)'; loadMsg.style.display = 'block'; }
+    if (retryBox) retryBox.style.display = 'none';
 
-    // If PayPal SDK already loaded, render buttons
-    if (typeof paypal !== 'undefined') {
-      renderPayPalButtons();
-      return;
-    }
+    try {
+      console.log('[stripe] Creating payment intent for $' + totalDue.toFixed(2));
+      var resp = await fetch('/api/create-payment-intent', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          phone: phone,
+          amount: totalDue,
+          plan_name: planName
+        })
+      });
 
-    // Dynamically load PayPal SDK
-    console.log('[paypal] Loading SDK...');
-    var script = document.createElement('script');
-    script.src = 'https://www.paypal.com/sdk/js?client-id=AeQLr2FHD6cLvIHXH4akQ-ZcCWZpCOywBWrbb3GiOBwEudyxKlhRLX-GNuNElWAKSklyAz-XLcw6tExw&currency=USD&intent=capture&components=buttons';
-    script.onload = function() {
-      console.log('[paypal] SDK loaded successfully');
-      renderPayPalButtons();
-    };
-    script.onerror = function() {
-      console.error('[paypal] SDK failed to load');
-      var loadMsg = document.getElementById('paypal-loading-msg');
+      var result;
+      try { result = await resp.json(); } catch (e) {
+        throw new Error('Server returned invalid response (status ' + resp.status + ')');
+      }
+      console.log('[stripe] API response:', resp.status, result);
+      if (!resp.ok) throw new Error(result.error || result.detail || 'Server error (status ' + resp.status + ')');
+
+      currentClientSecret = result.client_secret;
+      currentCustomerId = result.customer_id;
+
+      // Clear any previous Stripe mount
+      var mountEl = document.getElementById('stripe-payment-element');
+      if (paymentElement) { paymentElement.destroy(); paymentElement = null; }
+      // Remove any leftover iframes
+      var iframes = mountEl.querySelectorAll('iframe');
+      for (var i = 0; i < iframes.length; i++) iframes[i].remove();
+
+      stripeElements = stripe.elements({
+        clientSecret: currentClientSecret,
+        appearance: {
+          theme: 'stripe',
+          variables: {
+            fontFamily: "'Montserrat', sans-serif",
+            colorPrimary: '#0a0a0a',
+            colorText: '#0a0a0a',
+            colorDanger: '#c0392b',
+            borderRadius: '6px'
+          }
+        }
+      });
+
+      paymentElement = stripeElements.create('payment', {
+        layout: { type: 'tabs', defaultCollapsed: false },
+        wallets: { applePay: 'auto', googlePay: 'auto' },
+        paymentMethodOrder: ['card', 'apple_pay', 'google_pay']
+      });
+
+      if (loadMsg) loadMsg.style.display = 'none';
+
+      paymentElement.mount('#stripe-payment-element');
+      paymentMounted = true;
+
+      paymentElement.on('ready', function() {
+        console.log('[stripe] Payment Element ready');
+      });
+
+      paymentElement.on('change', function(event) {
+        var errEl = document.getElementById('card-error');
+        if (event.error) { errEl.textContent = event.error.message; errEl.style.display = 'block'; }
+        else { errEl.style.display = 'none'; }
+      });
+
+    } catch (err) {
+      console.error('[stripe] Payment Element init error:', err.message);
       if (loadMsg) {
-        loadMsg.innerHTML = '<span style="color:#c0392b;font-weight:500">Unable to load PayPal. Please refresh and try again.</span>';
+        loadMsg.innerHTML = '<span style="color:#c0392b;font-weight:500">Unable to load payment form</span><br><span style="font-size:11px;color:rgba(10,10,10,0.45);margin-top:4px;display:inline-block">' + err.message + '</span>';
+        loadMsg.style.display = 'block';
       }
-    };
-    document.head.appendChild(script);
+      if (retryBox) retryBox.style.display = 'block';
+      paymentMounted = false;
+    }
   }
 
-  function renderPayPalButtons() {
-    if (window.paypalMounted) return;
-
-    var loadMsg = document.getElementById('paypal-loading-msg');
-    if (loadMsg) loadMsg.style.display = 'none';
-
-    var params = new URLSearchParams(window.location.search);
-    var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
-    var planName = data.plan || params.get('plan_name') || 'Aari Realty Onboarding';
-
-    paypal.Buttons({
-      style: {
-        layout: 'vertical',
-        color: 'black',
-        shape: 'rect',
-        label: 'pay',
-        height: 48
-      },
-      createOrder: function(data, actions) {
-        var amount = getPaymentTotal();
-        return actions.order.create({
-          purchase_units: [{
-            description: 'Aari Realty Onboarding: ' + planName,
-            amount: {
-              currency_code: 'USD',
-              value: amount.toFixed(2)
-            }
-          }],
-          application_context: {
-            brand_name: 'Aari Realty LLC',
-            shipping_preference: 'NO_SHIPPING'
-          }
-        });
-      },
-      onApprove: function(data, actions) {
-        var formMsg = document.getElementById('form-msg');
-        formMsg.textContent = 'Processing your payment...';
-        formMsg.style.color = '#0a0a0a';
-        formMsg.style.display = 'block';
-
-        return actions.order.capture().then(function(details) {
-          console.log('[paypal] Payment captured:', details);
-          formMsg.textContent = 'Payment successful! Sending confirmations...';
-          formMsg.style.color = '#0a0a0a';
-          formMsg.style.fontWeight = '700';
-
-          // Hide PayPal buttons after success
-          var btnContainer = document.getElementById('paypal-button-container');
-          if (btnContainer) btnContainer.style.display = 'none';
-
-          // Build shared payload context
-          var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
-          var paidAmount = getPaymentTotal();
-          var urlParams = new URLSearchParams(window.location.search);
-          var monthlyParam = parseFloat(urlParams.get('monthly')) || 0;
-          var addonsParam = urlParams.get('addons') || 'None';
-          var couponCode = appliedCoupon && appliedCoupon.code ? appliedCoupon.code : 'None';
-          var paymentId = details.id;
-
-          // Helper: POST with keepalive and response.ok verification.
-          // keepalive lets the request survive the post-payment redirect.
-          function sendEmail(endpoint, payload) {
-            return fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-              keepalive: true
-            }).then(function(resp) {
-              if (!resp.ok) {
-                return resp.json().catch(function() { return {}; }).then(function(err) {
-                  throw new Error(endpoint + ' -> ' + resp.status + ' ' + (err.error || 'unknown'));
-                });
-              }
-              return resp.json().catch(function() { return {}; });
-            });
-          }
-
-          // Email 1: executed ICA copy to agent (CC: broker)
-          var icaPromise = sendEmail('/api/send-ica-copy', icaData)
-            .then(function() { console.log('[email] ICA copy sent'); return null; })
-            .catch(function(err) { console.error('[email] ICA copy FAILED:', err.message); return 'ica'; });
-
-          // Email 2: payment receipt to agent (CC: broker)
-          var receiptPromise = sendEmail('/api/send-payment-receipt', {
-            name: icaData.name || '',
-            email: icaData.email || '',
-            plan: icaData.plan || '',
-            amount: paidAmount,
-            payment_id: paymentId,
-            addons: addonsParam,
-            monthly_amount: monthlyParam
-          })
-            .then(function() { console.log('[email] Receipt sent'); return null; })
-            .catch(function(err) { console.error('[email] Receipt FAILED:', err.message); return 'receipt'; });
-
-          // Email 3: broker summary (flat payload matching send-broker-summary.js)
-          var brokerPromise = sendEmail('/api/send-broker-summary', {
-            name: icaData.name || '',
-            email: icaData.email || '',
-            phone: icaData.phone || '',
-            license: icaData.license || '',
-            plan: icaData.plan || '',
-            addons: addonsParam,
-            amount: paidAmount,
-            monthly_amount: monthlyParam,
-            payment_id: paymentId,
-            coupon_code: couponCode,
-            signature: icaData.signature || '',
-            ica_date: icaData.date || '',
-            mls: icaData.mls || '',
-            years_licensed: icaData.years_licensed || '',
-            closings: icaData.closings_last_12_months || '',
-            region: icaData.region || '',
-            realtor_association: icaData.realtor_association || '',
-            how_did_you_hear: icaData.how_did_you_hear || ''
-          })
-            .then(function() { console.log('[email] Broker summary sent'); return null; })
-            .catch(function(err) { console.error('[email] Broker summary FAILED:', err.message); return 'broker'; });
-
-          // Wait for all three emails, then redirect with a failsafe timeout.
-          var redirected = false;
-          function doRedirect() {
-            if (redirected) return;
-            redirected = true;
-            setTimeout(function() {
-              var returnParams = new URLSearchParams();
-              returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
-              returnParams.set('email', icaData.email || '');
-              window.location.href = '/thank-you.html?' + returnParams.toString();
-            }, 1500);
-          }
-
-          Promise.all([icaPromise, receiptPromise, brokerPromise]).then(function(results) {
-            var failed = results.filter(function(r) { return r !== null; });
-            if (failed.length === 0) {
-              formMsg.textContent = 'Payment successful! Welcome to Aari Realty.';
-            } else {
-              console.warn('[email] Failed deliveries:', failed);
-              formMsg.textContent = 'Payment successful! Our team will follow up within 24 hours.';
-            }
-            doRedirect();
-          });
-
-          // Failsafe: if email APIs hang, redirect after 6 seconds. keepalive
-          // ensures in-flight requests still complete after navigation.
-          setTimeout(doRedirect, 6000);
-        });
-      },
-      onError: function(err) {
-        console.error('[paypal] Error:', err);
-        var formMsg = document.getElementById('form-msg');
-        formMsg.textContent = 'Payment failed. Please try again.';
-        formMsg.style.color = '#c0392b';
-        formMsg.style.display = 'block';
-      },
-      onCancel: function() {
-        var formMsg = document.getElementById('form-msg');
-        formMsg.textContent = 'Payment cancelled. You can try again when ready.';
-        formMsg.style.color = 'rgba(10,10,10,0.5)';
-        formMsg.style.display = 'block';
-      }
-    }).render('#paypal-button-container');
-
-    window.paypalMounted = true;
-  }
+  window.retryPaymentInit = function() {
+    paymentMounted = false;
+    initPaymentElement();
+  };
 
   window.applyCoupon = async function() {
     var code = document.getElementById('coupon-input').value.trim().toUpperCase();
@@ -3055,27 +2858,19 @@ function initialAllPages() {
       msg.style.color = '#27ae60';
       msg.style.display = 'block';
 
-      // Recalculate display
-      var newTotal = getPaymentTotal();
+      // Recalculate
       var params = new URLSearchParams(window.location.search);
-      var originalTotal = parseFloat(params.get('total_due') || '278.20');
-      var discount = originalTotal - newTotal;
+      var totalDue = parseFloat(params.get('total_due') || '278.20');
+      var discount = data.type === 'percent_off' ? totalDue * (data.value / 100) : data.value;
+      var newTotal = Math.max(0, totalDue - discount);
 
-      document.getElementById('payment-due-amount').textContent = '$' + newTotal.toFixed(2);
+      var _dueC = document.getElementById('payment-due-amount'); if (_dueC) _dueC.textContent = '$' + newTotal.toFixed(2);
       document.getElementById('coupon-discount-amount').textContent = '-$' + discount.toFixed(2);
       document.getElementById('coupon-discount-row').style.display = 'block';
 
-      // If the coupon brings the total to $0, swap PayPal for the comp signup button
-      var paypalWrap = document.getElementById('paypal-button-container');
-      var paypalLoadMsg = document.getElementById('paypal-loading-msg');
-      var compWrap = document.getElementById('comp-signup-wrap');
-      if (newTotal <= 0) {
-        if (paypalWrap) paypalWrap.style.display = 'none';
-        if (paypalLoadMsg) paypalLoadMsg.style.display = 'none';
-        if (compWrap) compWrap.style.display = 'block';
-      } else {
-        if (paypalWrap) paypalWrap.style.display = '';
-        if (compWrap) compWrap.style.display = 'none';
+      // Update Stripe amount
+      if (stripeElements && newTotal > 0) {
+        stripeElements.update({ amount: Math.round(newTotal * 100) });
       }
     } catch (err) {
       msg.textContent = 'Error validating coupon.';
@@ -3084,105 +2879,89 @@ function initialAllPages() {
     }
   };
 
-  // ========== COMP SIGNUP ($0 path) ==========
-  // Runs the same post-payment flow as PayPal onApprove but with a synthetic
-  // payment_id since no real transaction exists.
-  window.completeCompSignup = function() {
-    var btn = document.getElementById('comp-signup-btn');
-    if (btn) { btn.disabled = true; btn.textContent = 'Processing...'; }
-
+  window.processPayment = async function() {
+    var payBtn = document.getElementById('pay-btn');
     var formMsg = document.getElementById('form-msg');
-    formMsg.textContent = 'Finalizing your signup...';
-    formMsg.style.color = '#0a0a0a';
-    formMsg.style.fontWeight = '700';
-    formMsg.style.display = 'block';
+    payBtn.disabled = true;
+    payBtn.textContent = 'Processing...';
+    formMsg.style.display = 'none';
 
-    var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
-    var urlParams = new URLSearchParams(window.location.search);
-    var monthlyParam = parseFloat(urlParams.get('monthly')) || 0;
-    var addonsParam = urlParams.get('addons') || 'None';
-    var couponCode = appliedCoupon && appliedCoupon.code ? appliedCoupon.code : 'None';
-    var paymentId = 'comp_waived_' + Date.now();
+    try {
+      var result = await stripe.confirmPayment({
+        elements: stripeElements,
+        confirmParams: { return_url: window.location.origin + '/index.html?payment_success=true' },
+        redirect: 'if_required'
+      });
 
-    function sendEmail(endpoint, payload) {
-      return fetch(endpoint, {
+      if (result.error) {
+        formMsg.textContent = result.error.message;
+        formMsg.style.color = '#c0392b';
+        formMsg.style.display = 'block';
+        payBtn.disabled = false;
+        payBtn.textContent = 'Pay & Join Aari Realty \u2192';
+        return;
+      }
+
+      // Payment succeeded
+      payBtn.textContent = 'Payment Successful!';
+      payBtn.style.background = '#0a0a0a';
+      payBtn.style.borderColor = '#0a0a0a';
+
+      // Send broker summary (non-blocking)
+      var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+      fetch('/api/send-broker-summary', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        keepalive: true
-      }).then(function(resp) {
-        if (!resp.ok) {
-          return resp.json().catch(function() { return {}; }).then(function(err) {
-            throw new Error(endpoint + ' -> ' + resp.status + ' ' + (err.error || 'unknown'));
-          });
-        }
-        return resp.json().catch(function() { return {}; });
-      });
-    }
+        body: JSON.stringify({
+          agent: icaData,
+          payment: {
+            amount: (document.getElementById('payment-due-amount') ? document.getElementById('payment-due-amount').textContent : ('$' + (new URLSearchParams(location.search).get('total_due')||'0'))),
+            method: 'card',
+            customer_id: currentCustomerId
+          }
+        })
+      }).catch(function() { /* silent */ });
 
-    var icaPromise = sendEmail('/api/send-ica-copy', icaData)
-      .then(function() { console.log('[email] ICA copy sent'); return null; })
-      .catch(function(err) { console.error('[email] ICA copy FAILED:', err.message); return 'ica'; });
+      // Email the agent their signed ICA copy and payment receipt (non-blocking)
+      try {
+        var _v = function(id){ var e = document.getElementById(id); return e ? (e.value || e.textContent || '').trim() : ''; };
+        var _plan = new URLSearchParams(location.search).get('plan_name') || icaData.plan || icaData.plan_name || '';
+        var _amtStr = (document.getElementById('payment-due-amount') ? document.getElementById('payment-due-amount').textContent : ('$' + (new URLSearchParams(location.search).get('total_due') || '0')));
+        var _agent = {
+          name: _v('associate-name') || icaData.name || '',
+          email: _v('associate-email') || icaData.email || '',
+          license: _v('associate-license') || 'N/A',
+          phone: _v('associate-phone') || icaData.phone || '',
+          plan: _plan,
+          signature: _v('associate-signature') || _v('associate-name'),
+          date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+          mls: _v('associate-mls') || 'N/A',
+          years_licensed: _v('associate-years') || 'N/A',
+          closings_last_12_months: _v('associate-closings') || 'N/A',
+          region: _v('associate-region-val') || 'N/A',
+          realtor_association: _v('associate-association-val') || 'N/A'
+        };
+        fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) }).catch(function() {});
+        fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _agent.name, email: _agent.email, plan: _plan, amount: _amtStr, payment_id: (typeof result !== 'undefined' && result && result.paymentIntent ? result.paymentIntent.id : ''), addons: [], monthly_amount: '' }) }).catch(function() {});
+      } catch (e) {}
 
-    var receiptPromise = sendEmail('/api/send-payment-receipt', {
-      name: icaData.name || '',
-      email: icaData.email || '',
-      plan: icaData.plan || '',
-      amount: 0,
-      payment_id: paymentId,
-      addons: addonsParam,
-      monthly_amount: monthlyParam
-    })
-      .then(function() { console.log('[email] Receipt sent'); return null; })
-      .catch(function(err) { console.error('[email] Receipt FAILED:', err.message); return 'receipt'; });
-
-    var brokerPromise = sendEmail('/api/send-broker-summary', {
-      name: icaData.name || '',
-      email: icaData.email || '',
-      phone: icaData.phone || '',
-      license: icaData.license || '',
-      plan: icaData.plan || '',
-      addons: addonsParam,
-      amount: 0,
-      monthly_amount: monthlyParam,
-      payment_id: paymentId,
-      coupon_code: couponCode,
-      signature: icaData.signature || '',
-      ica_date: icaData.date || '',
-      mls: icaData.mls || '',
-      years_licensed: icaData.years_licensed || '',
-      closings: icaData.closings_last_12_months || '',
-      region: icaData.region || '',
-      realtor_association: icaData.realtor_association || '',
-      how_did_you_hear: icaData.how_did_you_hear || ''
-    })
-      .then(function() { console.log('[email] Broker summary sent'); return null; })
-      .catch(function(err) { console.error('[email] Broker summary FAILED:', err.message); return 'broker'; });
-
-    var redirected = false;
-    function doRedirect() {
-      if (redirected) return;
-      redirected = true;
+      // Redirect to confirmation
       setTimeout(function() {
+        var params = new URLSearchParams(window.location.search);
         var returnParams = new URLSearchParams();
+        returnParams.set('payment_success', 'true');
         returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
         returnParams.set('email', icaData.email || '');
         window.location.href = '/thank-you.html?' + returnParams.toString();
       }, 1500);
+
+    } catch (err) {
+      formMsg.textContent = 'Payment failed. Please try again.';
+      formMsg.style.color = '#c0392b';
+      formMsg.style.display = 'block';
+      payBtn.disabled = false;
+      payBtn.textContent = 'Pay & Join Aari Realty \u2192';
     }
-
-    Promise.all([icaPromise, receiptPromise, brokerPromise]).then(function(results) {
-      var failed = results.filter(function(r) { return r !== null; });
-      if (failed.length === 0) {
-        formMsg.textContent = 'Welcome to Aari Realty! Redirecting...';
-      } else {
-        console.warn('[email] Failed deliveries:', failed);
-        formMsg.textContent = "You're signed up! Our team will follow up within 24 hours.";
-      }
-      doRedirect();
-    });
-
-    setTimeout(doRedirect, 6000);
   };
 
 })();
@@ -3190,3 +2969,5 @@ function initialAllPages() {
 
 </body>
 </html>
+
+<!-- redeploy trigger -->
