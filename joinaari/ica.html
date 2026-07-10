@@ -2941,7 +2941,7 @@ function initialAllPages() {
           region: _v('associate-region-val') || 'N/A',
           realtor_association: _v('associate-association-val') || 'N/A'
         };
-        fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) }).catch(function() {});
+        false && fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) }).catch(function() {});
         fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _agent.name, email: _agent.email, plan: _plan, amount: _amtStr, payment_id: (typeof result !== 'undefined' && result && result.paymentIntent ? result.paymentIntent.id : ''), addons: [], monthly_amount: '' }) }).catch(function() {});
       } catch (e) {}
 
@@ -2967,6 +2967,23 @@ function initialAllPages() {
 })();
 </script>
 
+
+<script>
+/* __aariHideSigning: portal owns ICA e-signature; hide join-page signing UI, keep payment */
+(function(){
+  function hideSigning(){
+    var ex=document.getElementById('execution-section'); if(!ex) return;
+    var sig=document.getElementById('associate-signature'); if(sig&&sig.parentElement) sig.parentElement.style.display='none';
+    Array.prototype.forEach.call(ex.querySelectorAll('p,.ica-section-title,.ica-subheading,label'),function(el){
+      var tl=(el.textContent||'').toLowerCase();
+      if(tl.indexOf('sign')>-1||tl.indexOf('execut')>-1||tl.indexOf('acknowledg')>-1||tl.indexOf('by typing')>-1||tl.indexOf('initial')>-1) el.style.display='none';
+    });
+    var pay=document.getElementById('pay-btn');
+    if(pay){ var tx=pay.textContent||''; ['Sign & ','Sign and ','Sign, ','Sign '].forEach(function(p){ tx=tx.split(p).join(''); }); pay.textContent=(tx.trim()||'Complete Payment'); }
+  }
+  if(document.readyState!=='loading') hideSigning(); else document.addEventListener('DOMContentLoaded',hideSigning);
+})();
+</script>
 </body>
 </html>
 
