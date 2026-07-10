@@ -76,7 +76,8 @@ breakdownRows +
       to: email,
       cc: 'join@aarirealty.com',
       subject: 'Payment received at Aari Realty (' + amountFormatted + ')',
-      html: html
+      html: html,
+      attachments: [{ filename: 'Aari-Realty-ICA.pdf', path: 'https://joinaari.com/Aari-Realty-ICA.pdf' }]
     });
 
     return res.status(200).json({ success: true });
