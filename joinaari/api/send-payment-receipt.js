@@ -64,11 +64,6 @@ breakdownRows +
 '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'A separate email has your Agent Hub login to get started.</div>' +
 '</td></tr>' +
 '<tr><td style="padding:14px 30px 4px;">' +
-'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #e2e0d8;border-radius:10px;background:#fafafa;"><tr>' +
-'<td style="padding:16px;width:46px;vertical-align:middle;"><div style="width:30px;height:38px;background:#B04040;border-radius:4px;color:#ffffff;font-size:9px;font-weight:700;text-align:center;line-height:38px;">PDF</div></td>' +
-'<td style="padding:16px 16px 16px 0;vertical-align:middle;"><div style="font-size:13px;font-weight:600;color:#111111;">Your signed Independent Contractor Agreement</div><div style="font-size:11px;color:#9a9a92;">Attached to this email</div></td>' +
-'</tr></table></td></tr>' +
-'<tr><td style="padding:14px 30px 4px;">' +
 '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
 '</td></tr>' +
 '<tr><td style="padding:20px 30px 28px;">' +
