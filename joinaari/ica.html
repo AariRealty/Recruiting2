@@ -2759,7 +2759,7 @@ function initialAllPages() {
           email: email,
           phone: phone,
           amount: totalDue,
-          plan_name: planName
+          license_number: ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || ''), plan_name: planName
         })
       });
 
