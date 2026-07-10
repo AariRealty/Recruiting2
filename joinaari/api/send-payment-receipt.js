@@ -43,9 +43,9 @@ module.exports = async function handler(req, res) {
     const html =
 '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
 '<style>@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap);</style>' +
-'</head><body style="margin:0;padding:0;background:#f0ede5;font-family:Montserrat,Arial,sans-serif;">' +
-'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f0ede5;padding:28px 12px;"><tr><td align="center">' +
-'<table role="presentation" width="540" cellpadding="0" cellspacing="0" style="max-width:540px;width:100%;background:#faf9f6;border:1px solid #ecebe4;border-radius:12px;">' +
+'</head><body style="margin:0;padding:0;background:#f3f3f2;font-family:Montserrat,Arial,sans-serif;">' +
+'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f2;padding:28px 12px;"><tr><td align="center">' +
+'<table role="presentation" width="540" cellpadding="0" cellspacing="0" style="max-width:540px;width:100%;background:#ffffff;border:1px solid #ecebe4;border-radius:12px;">' +
 '<tr><td style="padding:32px 30px 22px;border-bottom:1px solid #ecebe4;">' +
 '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:600;font-size:26px;color:#111111;line-height:1;">Aari Realty</div>' +
 '<div style="font-size:8px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;margin-top:5px;">Southwest Florida Brokerage</div>' +
