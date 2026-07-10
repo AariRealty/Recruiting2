@@ -38,7 +38,7 @@ module.exports = async function handler(req, res) {
     }
 
     const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + '/mo, billed monthly. ') : '';
-    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' , ') : '') + date + ' , ' + name;
+    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + name;
 
     const html =
 '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
@@ -67,7 +67,7 @@ breakdownRows +
 '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
 '</td></tr>' +
 '<tr><td style="padding:20px 30px 28px;">' +
-'<div style="border-top:1px solid #eceae4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC , 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.688.1770 , join@aarirealty.com</div>' +
+'<div style="border-top:1px solid #eceae4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.688.1770 &middot; join@aarirealty.com</div>' +
 '</td></tr>' +
 '</table></td></tr></table></body></html>';
 
