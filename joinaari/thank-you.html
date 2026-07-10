@@ -44,6 +44,8 @@ h1 .name{font-style:italic;font-weight:400}
 .home:hover{background:transparent;color:#fff;outline:1px solid rgba(255,255,255,0.4)}
 .home svg{transition:transform 0.3s}
 .home:hover svg{transform:translateX(4px)}
+.secondary{display:inline-block;margin-top:18px;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.4);text-decoration:none}
+.secondary:hover{color:rgba(255,255,255,0.8)}
 @media(max-width:600px){nav{padding:16px 24px}.card{padding:28px 22px}.step{gap:16px}}
 </style>
 </head>
@@ -67,39 +69,41 @@ h1 .name{font-style:italic;font-weight:400}
         <div class="step">
           <span class="step-num">01</span>
           <div>
-            <p class="step-name">Your contract and receipt</p>
-            <p class="step-desc">Check your inbox for your executed Independent Contractor Agreement and your payment receipt. Both are on the way now.</p>
+            <p class="step-name">Your receipt</p>
+            <p class="step-desc">Check your inbox for your payment receipt. It is on the way now.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">02</span>
           <div>
-            <p class="step-name">Your license change</p>
-            <p class="step-desc">Our office files your license change with the Florida DBPR so you are active and producing under Aari Realty.</p>
+            <p class="step-name">Your Agent Hub account</p>
+            <p class="step-desc">Your account is being created automatically right now. Your login lands in your inbox in a few minutes.</p>
           </div>
         </div>
         <div class="step">
           <span class="step-num">03</span>
           <div>
-            <p class="step-name">Your Agent Hub login</p>
-            <p class="step-desc">Your broker creates your Agent Hub account and sends your login. That is your home base for tools, training, and everything you need to close.</p>
+            <p class="step-name">Sign in and finish onboarding</p>
+            <p class="step-desc">Log in to the Agent Hub, sign your Independent Contractor Agreement right there, and get plugged into your tools, training, and everything you need to close.</p>
           </div>
         </div>
       </div>
       <div class="timing">
         <span class="timing-dot"></span>
-        <p>Allow <strong>24 to 48 hours</strong> for your license change and Agent Hub access to be set up. Marlenyi will be in touch personally.</p>
+        <p>Give it a few minutes for your login email to arrive. The button below takes you straight to the <strong>Agent Hub</strong> whenever you are ready.</p>
       </div>
       <p class="contact">
         Questions? Text or call Marlenyi directly at <a href="tel:+12396881770">239.688.1770</a><br>
         or email <a href="mailto:join@aarirealty.com">join@aarirealty.com</a>
       </p>
-      <a href="/index.html" class="home">
-        Back to Home
+      <a href="https://aari-agent-hub.netlify.app" class="home">
+        Enter the Agent Hub
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
           <path d="M1 5h8M5 1l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
       </a>
+      <br>
+      <a href="/index.html" class="secondary">Back to Home</a>
     </div>
   </main>
 <script>
@@ -115,6 +119,8 @@ h1 .name{font-style:italic;font-weight:400}
       if (wrap) wrap.textContent = '';
     }
     window.history.replaceState({}, '', window.location.pathname);
+    // Soft forward to the Agent Hub after a short read window.
+    setTimeout(function(){ window.location.href = 'https://aari-agent-hub.netlify.app'; }, 12000);
   })();
 </script>
 </body>
