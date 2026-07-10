@@ -5,6 +5,10 @@
   "functions": {
     "api/parse-license.js": {
       "maxDuration": 30
+    },
+    "api/ica-pdf.js": {
+      "maxDuration": 60,
+      "memory": 1024
     }
   }
 }
