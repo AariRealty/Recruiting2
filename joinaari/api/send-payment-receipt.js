@@ -98,7 +98,7 @@ module.exports = async function handler(req, res) {
 </html>`;
 
     await resend.emails.send({
-      from: 'Aari Realty <noreply@aarirealty.com>',
+      from: 'Aari Realty <onboarding@aaritransactions.com>',
       to: email,
       cc: 'join@aarirealty.com',
       subject: `Payment Receipt — Aari Realty (${amountFormatted})`,
