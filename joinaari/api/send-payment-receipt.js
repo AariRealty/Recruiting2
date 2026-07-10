@@ -10,98 +10,73 @@ module.exports = async function handler(req, res) {
 
   try {
     const { name, email, plan, amount, payment_id, addons, monthly_amount } = req.body;
-
     if (!email || !name || !amount) {
       return res.status(400).json({ error: 'email, name, and amount are required' });
     }
-
     if (!process.env.RESEND_API_KEY) {
       return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
     }
-
     const resend = new Resend(process.env.RESEND_API_KEY);
 
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    const amountFormatted = '$' + Number(amount).toFixed(2);
-    const monthlyFormatted = monthly_amount ? '$' + Number(monthly_amount).toFixed(2) + '/mo' : 'N/A';
+    const firstName = String(name).split(' ')[0];
+    const total = Number(amount);
+    const EO = 199;
+    const membershipToday = Math.max(0, total - EO);
+    const fmt = function (n) { return '$' + Number(n).toFixed(2); };
+    const amountFormatted = fmt(total);
+    const planName = plan || 'Aari Max 100%';
 
-    const html = `
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #1a1a1a; background: #f5f5f5; margin: 0; padding: 0; }
-    .container { max-width: 640px; margin: 0 auto; background: #ffffff; }
-    .header { background: #0a0a0a; color: #ffffff; padding: 40px 32px; text-align: center; }
-    .header h1 { font-size: 28px; font-weight: 300; letter-spacing: 6px; margin: 0; }
-    .header p { font-size: 12px; letter-spacing: 2px; opacity: 0.6; margin-top: 8px; }
-    .body { padding: 40px 32px; }
-    .greeting { font-size: 18px; font-weight: 300; color: #1a1a1a; margin-bottom: 8px; }
-    .intro { font-size: 14px; color: #666; margin-bottom: 32px; line-height: 1.6; }
-    .receipt-box { border: 1px solid #eee; border-radius: 8px; overflow: hidden; margin-bottom: 32px; }
-    .receipt-header { background: #f9f9f9; padding: 16px 24px; border-bottom: 1px solid #eee; }
-    .receipt-header h2 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #888; margin: 0; }
-    .receipt-body { padding: 0; }
-    .row { display: flex; justify-content: space-between; padding: 14px 24px; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
-    .row:last-child { border-bottom: none; }
-    .row .label { color: #888; }
-    .row .value { color: #1a1a1a; font-weight: 600; text-align: right; }
-    .total-row { background: #0a0a0a; color: #ffffff; display: flex; justify-content: space-between; padding: 18px 24px; font-size: 16px; }
-    .total-row .label { opacity: 0.7; }
-    .total-row .value { font-weight: 700; }
-    .notice { background: #f0faf0; border-left: 3px solid #27ae60; padding: 16px; margin-top: 24px; font-size: 13px; color: #333; line-height: 1.6; border-radius: 0 6px 6px 0; }
-    .footer { background: #0a0a0a; color: rgba(255,255,255,0.5); padding: 24px 32px; text-align: center; font-size: 11px; line-height: 1.8; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>AARI.</h1>
-      <p>PAYMENT RECEIPT</p>
-    </div>
-    <div class="body">
-      <p class="greeting">Welcome to Aari Realty, ${name.split(' ')[0]}.</p>
-      <p class="intro">Your payment has been processed successfully. Below is your receipt for your records.</p>
+    var breakdownRows;
+    if (total > EO) {
+      breakdownRows =
+        '<tr><td style="padding:11px 0;border-bottom:1px solid #ecebe4;font-size:13px;color:#9a9a92;">Membership, ' + planName + '</td><td align="right" style="padding:11px 0;border-bottom:1px solid #ecebe4;font-size:13px;color:#111111;">' + fmt(membershipToday) + '</td></tr>' +
+        '<tr><td style="padding:11px 0;border-bottom:1px solid #ecebe4;font-size:13px;color:#9a9a92;">Annual E&amp;O + Compliance</td><td align="right" style="padding:11px 0;border-bottom:1px solid #ecebe4;font-size:13px;color:#111111;">$199.00</td></tr>';
+    } else {
+      breakdownRows =
+        '<tr><td style="padding:11px 0;border-bottom:1px solid #ecebe4;font-size:13px;color:#9a9a92;">Plan</td><td align="right" style="padding:11px 0;border-bottom:1px solid #ecebe4;font-size:13px;color:#111111;">' + planName + '</td></tr>';
+    }
 
-      <div class="receipt-box">
-        <div class="receipt-header">
-          <h2>Transaction Details</h2>
-        </div>
-        <div class="receipt-body">
-          <div class="row"><span class="label">Date</span><span class="value">${date}</span></div>
-          <div class="row"><span class="label">Agent</span><span class="value">${name}</span></div>
-          <div class="row"><span class="label">Plan</span><span class="value">${plan || 'N/A'}</span></div>
-          ${addons && addons !== 'None' ? `<div class="row"><span class="label">Add-ons</span><span class="value">${addons}</span></div>` : ''}
-          <div class="row"><span class="label">Payment ID</span><span class="value" style="font-size:11px;font-family:monospace;color:#888;">${payment_id || 'N/A'}</span></div>
-        </div>
-        <div class="total-row">
-          <span class="label">Amount Charged</span>
-          <span class="value">${amountFormatted}</span>
-        </div>
-      </div>
+    const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + '/mo, billed monthly. ') : '';
+    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' , ') : '') + date + ' , ' + name;
 
-      <div class="row" style="border:1px solid #eee;border-radius:8px;margin-bottom:24px;">
-        <span class="label">Recurring Monthly</span>
-        <span class="value">${monthlyFormatted}</span>
-      </div>
-
-      <div class="notice">
-        <strong>What happens next?</strong> Our team will reach out within 24 hours to complete your onboarding, set up your recurring billing, and get you plugged into all of your tools and systems.
-      </div>
-    </div>
-    <div class="footer">
-      Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>
-      (239) 688-1770 &middot; join@aarirealty.com
-    </div>
-  </div>
-</body>
-</html>`;
+    const html =
+'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+'<style>@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap);</style>' +
+'</head><body style="margin:0;padding:0;background:#f0ede5;font-family:Montserrat,Arial,sans-serif;">' +
+'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f0ede5;padding:28px 12px;"><tr><td align="center">' +
+'<table role="presentation" width="540" cellpadding="0" cellspacing="0" style="max-width:540px;width:100%;background:#faf9f6;border:1px solid #ecebe4;border-radius:12px;">' +
+'<tr><td style="padding:32px 30px 22px;border-bottom:1px solid #ecebe4;">' +
+'<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:600;font-size:26px;color:#111111;line-height:1;">Aari Realty</div>' +
+'<div style="font-size:8px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;margin-top:5px;">Southwest Florida Brokerage</div>' +
+'</td></tr>' +
+'<tr><td style="padding:26px 30px 4px;">' +
+'<div style="font-size:10px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;font-weight:600;">Payment received</div>' +
+'<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:40px;color:#111111;line-height:1.05;margin:12px 0 12px;">You are in, <em>' + firstName + '</em>.</div>' +
+'<div style="font-size:13px;color:#57564f;line-height:1.7;">Your payment went through and your spot on the Aari Realty team is locked in. Here is your receipt.</div>' +
+'</td></tr>' +
+'<tr><td style="padding:20px 30px 8px;">' +
+'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-top:1px solid #ecebe4;">' +
+breakdownRows +
+'<tr><td style="padding:14px 0 0;font-size:14px;color:#111111;font-weight:600;">Total paid today</td>' +
+'<td align="right" style="padding:14px 0 0;font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-size:22px;color:#111111;">' + amountFormatted + ' &nbsp;<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2d6a4f;background:#e7f0ea;padding:3px 9px;border-radius:20px;">Paid</span></td></tr>' +
+'</table></td></tr>' +
+'<tr><td style="padding:18px 30px 6px;">' +
+'<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'A separate email has your Agent Hub login to get started.</div>' +
+'</td></tr>' +
+'<tr><td style="padding:14px 30px 4px;">' +
+'<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
+'</td></tr>' +
+'<tr><td style="padding:24px 30px 30px;">' +
+'<div style="border-top:1px solid #ecebe4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC , 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.688.1770 , join@aarirealty.com</div>' +
+'</td></tr>' +
+'</table></td></tr></table></body></html>';
 
     await resend.emails.send({
       from: 'Aari Realty <onboarding@aaritransactions.com>',
       to: email,
       cc: 'join@aarirealty.com',
-      subject: `Payment Receipt — Aari Realty (${amountFormatted})`,
+      subject: 'Payment received at Aari Realty (' + amountFormatted + ')',
       html: html
     });
 
