@@ -14,13 +14,11 @@ const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
 
 function firstOfNextMonthTs() {
   const now = new Date();
-  const ts = Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 12, 0, 0);
-  return Math.floor(ts / 1000);
+  return Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 12, 0, 0) / 1000);
 }
 function firstOfNextMonthNextYearTs() {
   const now = new Date();
-  const ts = Date.UTC(now.getUTCFullYear() + 1, now.getUTCMonth() + 1, 1, 12, 0, 0);
-  return Math.floor(ts / 1000);
+  return Math.floor(Date.UTC(now.getUTCFullYear() + 1, now.getUTCMonth() + 1, 1, 12, 0, 0) / 1000);
 }
 
 module.exports = async function handler(req, res) {
@@ -32,69 +30,80 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { payment_intent_id, plan_name, first_name, last_name, email, phone, license_number } = req.body || {};
-    if (!payment_intent_id || !email) return res.status(400).json({ error: 'payment_intent_id and email are required' });
+    const body = req.body || {};
+    // Accept the same fields the signing/copy call already sends.
+    const email = String(body.email || '').trim().toLowerCase();
+    const planName = String(body.plan || body.plan_name || '').trim();
+    const fullName = String(body.name || ((body.first_name || '') + ' ' + (body.last_name || ''))).trim();
+    const phone = String(body.phone || '').trim();
+    const license = String(body.license || body.license_number || '').trim();
+    if (!email) return res.status(400).json({ error: 'email is required' });
     if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
 
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
-    const planInfo = PLAN_MAP[plan_name] || null;
-    const fullName = ((first_name || '') + ' ' + (last_name || '')).trim();
-
+    const planInfo = PLAN_MAP[planName] || null;
     const out = { ok: true, subscriptions: {}, account: null, warnings: [] };
 
-    // 1) Retrieve the PaymentIntent to get customer + saved card
-    let pi;
+    // 1) Find the Stripe customer created at checkout (most recent for this email)
+    let customer = null;
     try {
-      pi = await stripe.paymentIntents.retrieve(payment_intent_id, { expand: ['payment_method', 'customer'] });
-    } catch (e) {
-      return res.status(400).json({ error: 'could not retrieve payment intent: ' + String(e.message || e).slice(0, 140) });
-    }
-    const customerId = typeof pi.customer === 'string' ? pi.customer : (pi.customer && pi.customer.id);
-    const pmId = typeof pi.payment_method === 'string' ? pi.payment_method : (pi.payment_method && pi.payment_method.id);
+      const list = await stripe.customers.list({ email: email, limit: 3 });
+      customer = (list.data && list.data[0]) || null;
+    } catch (e) { out.warnings.push('customer_lookup: ' + String(e.message || e).slice(0, 120)); }
 
-    // 2) Set the saved card as the customer's default (so recurring charges use it)
-    if (customerId && pmId) {
-      try {
-        await stripe.customers.update(customerId, { invoice_settings: { default_payment_method: pmId } });
-      } catch (e) { out.warnings.push('default_pm: ' + String(e.message || e).slice(0, 120)); }
+    let pmId = null;
+    if (customer) {
+      pmId = customer.invoice_settings && customer.invoice_settings.default_payment_method;
+      if (!pmId) {
+        try {
+          const pms = await stripe.paymentMethods.list({ customer: customer.id, type: 'card', limit: 1 });
+          pmId = pms.data && pms.data[0] && pms.data[0].id;
+        } catch (e) { out.warnings.push('pm_lookup: ' + String(e.message || e).slice(0, 120)); }
+      }
+    }
+
+    // 2) Set the saved card as the customer default so recurring charges use it
+    if (customer && pmId) {
+      try { await stripe.customers.update(customer.id, { invoice_settings: { default_payment_method: pmId } }); }
+      catch (e) { out.warnings.push('default_pm: ' + String(e.message || e).slice(0, 120)); }
     }
 
     // 3) Monthly plan subscription, first charge on the 1st of next month (prorated first month already collected today)
-    if (customerId && pmId && planInfo) {
+    if (customer && pmId && planInfo) {
       try {
         const monthly = await stripe.subscriptions.create({
-          customer: customerId,
+          customer: customer.id,
           items: [{ price: planInfo.price }],
           trial_end: firstOfNextMonthTs(),
           proration_behavior: 'none',
           default_payment_method: pmId,
           metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal }
-        }, { idempotencyKey: payment_intent_id + ':monthly' });
+        }, { idempotencyKey: 'aari-monthly:' + email });
         out.subscriptions.monthly = monthly.id;
       } catch (e) { out.warnings.push('monthly_sub: ' + String(e.message || e).slice(0, 140)); }
 
       // 4) Annual E&O subscription, first renewal one year out (year one collected today)
       try {
         const eo = await stripe.subscriptions.create({
-          customer: customerId,
+          customer: customer.id,
           items: [{ price: EO_PRICE }],
           trial_end: firstOfNextMonthNextYearTs(),
           proration_behavior: 'none',
           default_payment_method: pmId,
           metadata: { kind: 'agent_eo_annual', email: email, full_name: fullName }
-        }, { idempotencyKey: payment_intent_id + ':eo' });
+        }, { idempotencyKey: 'aari-eo:' + email });
         out.subscriptions.eo = eo.id;
       } catch (e) { out.warnings.push('eo_sub: ' + String(e.message || e).slice(0, 140)); }
     } else {
       out.warnings.push('missing customer, payment method, or plan; subscriptions skipped');
     }
 
-    // 5) Create the agent's Agent Hub portal account (temp password + welcome email)
+    // 5) Create the agent's Agent Hub portal account (temp password + welcome email). Idempotent by email.
     try {
       const r = await fetch(PROVISION_URL, {
         method: 'POST',
         headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: PROVISION_TOKEN, email: email, full_name: fullName, license_number: license_number || '', plan: planInfo ? planInfo.portal : '', phone: phone || '' })
+        body: JSON.stringify({ token: PROVISION_TOKEN, email: email, full_name: fullName, license_number: license, plan: planInfo ? planInfo.portal : '', phone: phone })
       });
       out.account = await r.json().catch(function () { return { ok: false }; });
     } catch (e) { out.warnings.push('provision: ' + String(e.message || e).slice(0, 140)); }
