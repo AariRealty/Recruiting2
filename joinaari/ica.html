@@ -1691,6 +1691,9 @@
           </div>
         </div>
 
+        <button type="button" id="sign-agreement-btn" onclick="signAgreement()" style="width:100%;background:#0a0a0a;color:#fff;border:none;border-radius:8px;padding:16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-bottom:12px;">Sign Agreement</button>
+        <p id="sign-msg" style="display:none;font-size:11px;font-weight:500;margin-bottom:16px;text-align:center"></p>
+        <div id="payment-block" style="display:none;">
         <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
 
         <!-- Stripe Payment Element -->
@@ -1708,6 +1711,7 @@
           <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:240px;">Pay &amp; Join Aari Realty &rarr;</button>
         </div>
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
+        </div><!-- end payment-block -->
       </div>
     </div><!-- end step-4 -->
 
@@ -2879,6 +2883,49 @@ function initialAllPages() {
     }
   };
 
+  window._icaAlreadySigned = false;
+  window.signAgreement = async function() {
+    var signBtn = document.getElementById('sign-agreement-btn');
+    var signMsg = document.getElementById('sign-msg');
+    var nameVal = (document.getElementById('associate-signature') || {}).value || '';
+    if (!nameVal.trim()) {
+      if (signMsg) { signMsg.textContent = 'Type your full legal name above to sign.'; signMsg.style.color = '#c0392b'; signMsg.style.display = 'block'; }
+      return;
+    }
+    signBtn.disabled = true;
+    signBtn.textContent = 'Signing...';
+    if (signMsg) { signMsg.style.display = 'none'; }
+    try {
+      var icaData = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+      var _v = function(id){ var e = document.getElementById(id); return e ? (e.value || e.textContent || '').trim() : ''; };
+      var _plan = new URLSearchParams(location.search).get('plan_name') || icaData.plan || icaData.plan_name || '';
+      var _agent = {
+        name: _v('associate-name') || icaData.name || '',
+        email: _v('associate-email') || icaData.email || '',
+        license: _v('associate-license') || 'N/A',
+        phone: _v('associate-phone') || icaData.phone || '',
+        plan: _plan,
+        signature: _v('associate-signature') || _v('associate-name'),
+        date: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+        mls: _v('associate-mls') || 'N/A',
+        years_licensed: _v('associate-years') || 'N/A',
+        closings_last_12_months: _v('associate-closings') || 'N/A',
+        region: _v('associate-region-val') || 'N/A',
+        realtor_association: _v('associate-association-val') || 'N/A'
+      };
+      await fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) });
+      window._icaAlreadySigned = true;
+      signBtn.style.display = 'none';
+      var payBlock = document.getElementById('payment-block');
+      if (payBlock) { payBlock.style.display = 'block'; }
+      if (signMsg) { signMsg.textContent = 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
+    } catch (e) {
+      signBtn.disabled = false;
+      signBtn.textContent = 'Sign Agreement';
+      if (signMsg) { signMsg.textContent = 'Signing failed. Please try again.'; signMsg.style.color = '#c0392b'; signMsg.style.display = 'block'; }
+    }
+  };
+
   window.processPayment = async function() {
     var payBtn = document.getElementById('pay-btn');
     var formMsg = document.getElementById('form-msg');
@@ -2941,7 +2988,7 @@ function initialAllPages() {
           region: _v('associate-region-val') || 'N/A',
           realtor_association: _v('associate-association-val') || 'N/A'
         };
-        fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) }).catch(function() {});
+        if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) }).catch(function() {}); }
         fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _agent.name, email: _agent.email, plan: _plan, amount: _amtStr, payment_id: (typeof result !== 'undefined' && result && result.paymentIntent ? result.paymentIntent.id : ''), addons: [], monthly_amount: '' }) }).catch(function() {});
       } catch (e) {}
 
@@ -2970,7 +3017,7 @@ function initialAllPages() {
 
 <script>
 /* Aari: after payment, also trigger finalize-join for recurring subscriptions + account provisioning */
-(function(){var _f=window.fetch;if(_f&&!_f.__aariWrapped){var w=function(u,o){try{if(typeof u==='string'&&u.indexOf('/api/send-ica-copy')!==-1&&o&&o.body){_f('/api/finalize-join',{method:'POST',headers:{'Content-Type':'application/json'},body:o.body}).catch(function(){});}}catch(e){}return _f.apply(this,arguments);};w.__aariWrapped=true;window.fetch=w;}})();
+(function(){var _f=window.fetch;if(_f&&!_f.__aariWrapped){var w=function(u,o){try{if(typeof u==='string'&&u.indexOf('/api/send-payment-receipt')!==-1&&o&&o.body){_f('/api/finalize-join',{method:'POST',headers:{'Content-Type':'application/json'},body:o.body}).catch(function(){});}}catch(e){}return _f.apply(this,arguments);};w.__aariWrapped=true;window.fetch=w;}})();
 </script>
 </body>
 </html>
