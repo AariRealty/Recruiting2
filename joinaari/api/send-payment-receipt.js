@@ -1,5 +1,11 @@
 const { Resend } = require('resend');
 
+// Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
+// the receipt sends from aarirealty.com via that key; otherwise fall back to the shared key + aaritransactions.com.
+const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
+const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
+const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
+
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
   res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
@@ -13,10 +19,10 @@ module.exports = async function handler(req, res) {
     if (!email || !name || !amount) {
       return res.status(400).json({ error: 'email, name, and amount are required' });
     }
-    if (!process.env.RESEND_API_KEY) {
+    if (!RESEND_KEY) {
       return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
     }
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(RESEND_KEY);
 
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const firstName = String(name).split(' ')[0];
@@ -41,38 +47,38 @@ module.exports = async function handler(req, res) {
     const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + name;
 
     const html =
-'<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-'<style>@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap);</style>' +
-'</head><body style="margin:0;padding:0;background:#f3f3f2;font-family:Montserrat,Arial,sans-serif;">' +
-'<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f2;padding:28px 12px;"><tr><td align="center">' +
-'<table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px;width:100%;background:#ffffff;border:1px solid #e6e4de;border-radius:12px;">' +
-'<tr><td style="padding:30px 30px 20px;border-bottom:1px solid #eceae4;">' +
-'<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:600;font-size:25px;color:#111111;line-height:1;">Aari Realty</div>' +
-'<div style="font-size:8px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;margin-top:4px;">Southwest Florida Brokerage</div>' +
-'</td></tr>' +
-'<tr><td style="padding:24px 30px 4px;">' +
-'<div style="font-size:10px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;font-weight:600;">Payment received</div>' +
-'<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + firstName + '</em>.</div>' +
-'</td></tr>' +
-'<tr><td style="padding:0 30px 8px;">' +
-'<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' +
-breakdownRows +
-'<tr><td style="padding:14px 0 0;font-size:14px;color:#111111;font-weight:600;">Total paid today</td>' +
-'<td align="right" style="padding:14px 0 0;font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-size:22px;color:#111111;">' + amountFormatted + ' &nbsp;<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2d6a4f;background:#e7f0ea;padding:3px 9px;border-radius:20px;">Paid</span></td></tr>' +
-'</table></td></tr>' +
-'<tr><td style="padding:16px 30px 6px;">' +
-'<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'A separate email has your Agent Hub login to get started.</div>' +
-'</td></tr>' +
-'<tr><td style="padding:14px 30px 4px;">' +
-'<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
-'</td></tr>' +
-'<tr><td style="padding:20px 30px 28px;">' +
-'<div style="border-top:1px solid #eceae4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.688.1770 &middot; join@aarirealty.com</div>' +
-'</td></tr>' +
-'</table></td></tr></table></body></html>';
+      '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
+      '<style>@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap);</style>' +
+      '</head><body style="margin:0;padding:0;background:#f3f3f2;font-family:Montserrat,Arial,sans-serif;">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f2;padding:28px 12px;"><tr><td align="center">' +
+      '<table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px;width:100%;background:#ffffff;border:1px solid #e6e4de;border-radius:12px;">' +
+      '<tr><td style="padding:30px 30px 20px;border-bottom:1px solid #eceae4;">' +
+      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:600;font-size:25px;color:#111111;line-height:1;">Aari Realty</div>' +
+      '<div style="font-size:8px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;margin-top:4px;">Southwest Florida Brokerage</div>' +
+      '</td></tr>' +
+      '<tr><td style="padding:24px 30px 4px;">' +
+      '<div style="font-size:10px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;font-weight:600;">Payment received</div>' +
+      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + firstName + '</em>.</div>' +
+      '</td></tr>' +
+      '<tr><td style="padding:0 30px 8px;">' +
+      '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' +
+      breakdownRows +
+      '<tr><td style="padding:14px 0 0;font-size:14px;color:#111111;font-weight:600;">Total paid today</td>' +
+      '<td align="right" style="padding:14px 0 0;font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-size:22px;color:#111111;">' + amountFormatted + ' &nbsp;<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2d6a4f;background:#e7f0ea;padding:3px 9px;border-radius:20px;">Paid</span></td></tr>' +
+      '</table></td></tr>' +
+      '<tr><td style="padding:16px 30px 6px;">' +
+      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'A separate email has your Agent Hub login to get started.</div>' +
+      '</td></tr>' +
+      '<tr><td style="padding:14px 30px 4px;">' +
+      '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
+      '</td></tr>' +
+      '<tr><td style="padding:20px 30px 28px;">' +
+      '<div style="border-top:1px solid #eceae4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.688.1770 &middot; join@aarirealty.com</div>' +
+      '</td></tr>' +
+      '</table></td></tr></table></body></html>';
 
     await resend.emails.send({
-      from: 'Aari Realty <onboarding@aaritransactions.com>',
+      from: FROM,
       to: email,
       cc: 'join@aarirealty.com',
       subject: 'Payment received at Aari Realty (' + amountFormatted + ')',
