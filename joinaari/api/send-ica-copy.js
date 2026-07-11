@@ -4,6 +4,13 @@ const SIGN_FN_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realt
 const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y';
 const WEB_TOKEN = 'aari-web-sign-b7Q2xM9';
 
+// Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
+// executed-ICA emails send from aarirealty.com via that key. Until then, fall back to the shared
+// RESEND_API_KEY and send from aaritransactions.com (current behavior). No breakage window.
+const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
+const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
+const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
+
 function esc(x) {
   return String(x == null ? '' : x).replace(/[&<>"']/g, function (c) {
     return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c];
@@ -24,8 +31,8 @@ module.exports = async function handler(req, res) {
   try {
     const { name, email, license, plan, signature } = req.body;
     if (!email || !name || !signature) return res.status(400).json({ error: 'email, name, and signature are required' });
-    if (!process.env.RESEND_API_KEY) return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    if (!RESEND_KEY) return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
+    const resend = new Resend(RESEND_KEY);
     const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const firstNm = firstName(name);
 
@@ -56,7 +63,7 @@ module.exports = async function handler(req, res) {
         '<p style="font-size:11px;color:#9b948a">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy, Suite 350, Fort Myers, FL 33905 &middot; Broker of Record: Marlenyi L. Paredes &middot; License BK3530153</p>' +
         '</div>';
       await resend.emails.send({
-        from: 'Aari Realty <onboarding@aaritransactions.com>',
+        from: FROM,
         to: email,
         cc: 'join@aarirealty.com',
         subject: 'Your executed ICA, Aari Realty LLC (' + formattedDate + ')',
@@ -68,13 +75,13 @@ module.exports = async function handler(req, res) {
 
     // Fallback: executed copy could not be generated. Alert the broker, acknowledge the agent, do not block signup.
     await resend.emails.send({
-      from: 'Aari Realty <onboarding@aaritransactions.com>',
+      from: FROM,
       to: 'join@aarirealty.com',
       subject: 'ACTION NEEDED: executed ICA copy failed for ' + name,
       html: '<p>Website signing succeeded but the executed PDF could not be generated or stored.</p><p>' + detailLine + '</p><p>Error: ' + esc(signErr || 'unknown') + '. Please generate and send the signed copy for this agent manually.</p>'
     });
     await resend.emails.send({
-      from: 'Aari Realty <onboarding@aaritransactions.com>',
+      from: FROM,
       to: email,
       cc: 'join@aarirealty.com',
       subject: 'We received your signature, Aari Realty LLC (' + formattedDate + ')',
