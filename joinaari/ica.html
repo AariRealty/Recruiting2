@@ -2967,6 +2967,11 @@ function initialAllPages() {
 })();
 </script>
 
+
+<script>
+/* Aari: after payment, also trigger finalize-join for recurring subscriptions + account provisioning */
+(function(){var _f=window.fetch;if(_f&&!_f.__aariWrapped){var w=function(u,o){try{if(typeof u==='string'&&u.indexOf('/api/send-ica-copy')!==-1&&o&&o.body){_f('/api/finalize-join',{method:'POST',headers:{'Content-Type':'application/json'},body:o.body}).catch(function(){});}}catch(e){}return _f.apply(this,arguments);};w.__aariWrapped=true;window.fetch=w;}})();
+</script>
 </body>
 </html>
 
