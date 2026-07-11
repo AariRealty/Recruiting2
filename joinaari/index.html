@@ -65,11 +65,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .aside-av{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e6e0d3,#cfc7b6);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:17px;color:inherit;flex-shrink:0}
 .aside-name{font-size:12.5px;font-weight:700}
 .aside-role{font-size:10.5px;color:var(--lite);margin-top:2px}
-/* BELIEF STATEMENT */
-.belief{background:var(--black);color:#fff;padding:40px 44px 52px;text-align:center}
-.belief h2{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,3.8vw,50px);font-weight:500;line-height:1.12;max-width:820px;margin:0 auto}
-.belief h2 em{font-style:italic}
-.belief p{font-size:14px;color:rgba(255,255,255,.55);max-width:540px;margin:18px auto 0;line-height:1.7}
 /* PLATFORMS TRUST BAR */
 .trustbar{background:#0a0a0a;padding:26px 0;overflow:hidden}
 .tlabel{text-align:center;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:18px}
@@ -132,7 +127,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 /* COPY POSSE MOTION */
 .rot{display:inline-block;transition:opacity .35s ease}
 .rot.out{opacity:0}
-.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .rv-in{opacity:1!important;transform:none!important}
 .compare-grid .col:nth-child(2){transition-delay:.1s}
 
@@ -326,7 +321,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   nav{padding:13px 20px}.nav-right .nav-link,.nav-phone{display:none}
   .hero{padding:40px 20px 48px}
   .grid{grid-template-columns:1fr;gap:34px}
-  .belief{padding:56px 20px}
   .compare{padding:60px 20px}.compare-grid{grid-template-columns:1fr;gap:16px}
   .how{padding:56px 20px 72px}
   .b5-grid{grid-template-columns:1fr;gap:26px}
@@ -338,27 +332,20 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
   .founder{padding:52px 20px}
   .tools{padding:56px 20px}.tool-row{padding:16px 16px;gap:14px}.tool-cta{padding:12px 18px}.founder-wrap{grid-template-columns:1fr;gap:26px}.founder-photo{max-width:320px;margin:0 auto}
+  .tm-cluster{overflow-x:auto;justify-content:flex-start;padding:24px 20px 4px;-webkit-overflow-scrolling:touch}.tm-slot{width:96px;height:96px;margin-right:-26px}.tm-slot img{width:96px;height:96px;border-width:3px}
 }
-.team{background:#fff;padding:60px 0 54px;text-align:center;overflow:hidden}.team-head{max-width:720px;margin:0 auto;padding:0 44px}.team-eye{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#8a8378;margin:0 0 14px}.team h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.05;color:#141210;margin:0 auto 16px;max-width:14ch}.team-sub{font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.6;color:#5f5b52;max-width:600px;margin:0 auto}.tm-cluster{display:flex;justify-content:center;padding:28px 0 4px}.tm-avatars{display:flex}.tm-slot{position:relative;width:72px;height:72px;border-radius:50%;margin-right:-20px}.tm-slot img{width:72px;height:72px;border-radius:50%;object-fit:cover;border:3px solid #fff;box-shadow:0 0 0 1px #ece6da;position:absolute;top:0;left:0;transition:opacity .4s ease}.follow{background:#0a0a0a;padding:52px 44px 58px}.follow-head{max-width:1080px;margin:0 auto 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}.follow-eye{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8a8378}.follow-handle{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#cfc8bd;text-decoration:none;white-space:nowrap}.follow-handle:hover{color:#fff}.follow behold-widget{max-width:1080px;margin:0 auto;display:block}.team-head h2{font-size:clamp(34px,5vw,52px);max-width:18ch}.team-manifesto{font-family:'Montserrat',sans-serif;font-size:16px;line-height:1.65;color:#4b4741;max-width:600px;margin:0 auto 30px}.team-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:820px;margin:0 auto 30px;text-align:left}.pil-t{display:block;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:#141210;margin-bottom:6px}.pil-b{display:block;font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.55;color:#6b6b6b}.team-cta{margin-bottom:6px}.tm-card .tr{font-size:9px;letter-spacing:.1em}@media(max-width:760px){.team-pillars{grid-template-columns:1fr;gap:16px;max-width:360px}}.follow-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.follow-tile{display:block;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#141210}.follow-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease,opacity .3s ease}.follow-tile:hover img{transform:scale(1.05);opacity:.88}@media(max-width:640px){.follow-grid{grid-template-columns:repeat(2,1fr)}}
-/* FREEBIES */
-.freebies{background:#fff;padding:64px 44px}
-.fb-wrap{max-width:1140px;margin:0 auto}
-.fb-head{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
-.fb-title{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4.6vw,56px);font-weight:500;line-height:1;color:#141210;margin:0}
-.fb-viewall{flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:50px;padding:14px 26px;background:#141210;color:#f5f0e8;white-space:nowrap;text-decoration:none;transition:opacity .2s}
-.fb-viewall:hover{opacity:.85}
-.fb-list{margin-top:30px}
-.fb-row{display:flex;align-items:center;gap:26px;padding:28px 0;border-top:1px solid #e7e2d7;text-decoration:none;color:inherit}
-.fb-row:last-child{border-bottom:1px solid #e7e2d7}
-.fb-thumb{width:150px;height:150px;flex-shrink:0;border-radius:14px;overflow:hidden;background:#f5f0e8;border:1px solid #e7e2d7;display:flex;align-items:center;justify-content:center}
-.fb-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.fb-body{flex:1;min-width:0}
-.fb-name{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.7vw,33px);font-weight:500;line-height:1.05;color:#141210;margin:0 0 8px}
-.fb-name em{font-style:italic;color:#a3865c}
-.fb-desc{font-family:'Montserrat',sans-serif;font-size:13.5px;line-height:1.6;color:#6b6b6b;margin:0;max-width:600px}
-.fb-cta{flex-shrink:0;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:50px;padding:14px 26px;background:#141210;color:#f5f0e8;white-space:nowrap;transition:opacity .2s}
-.fb-row:hover .fb-cta{opacity:.85}
-@media(max-width:720px){.freebies{padding:48px 22px}.fb-row{flex-direction:column;align-items:flex-start;gap:16px}.fb-thumb{width:140px;height:140px}}
+.team{background:#fff;padding:60px 0 54px;text-align:center;overflow:hidden}.team-head{max-width:720px;margin:0 auto;padding:0 44px}.team-eye{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:#8a8378;margin:0 0 14px}.team h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(30px,4vw,44px);line-height:1.05;color:#141210;margin:0 auto 16px;max-width:14ch}.team-sub{font-family:'Montserrat',sans-serif;font-size:15px;line-height:1.6;color:#5f5b52;max-width:600px;margin:0 auto}.tm-cluster{display:flex;justify-content:center;padding:28px 0 4px}.tm-avatars{display:flex}.tm-slot{position:relative;width:144px;height:144px;border-radius:50%;margin-right:-40px}.tm-slot img{width:144px;height:144px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 0 0 1px #ece6da;position:absolute;top:0;left:0;transition:opacity .5s ease}.follow{background:#0a0a0a;padding:52px 44px 58px}.follow-head{max-width:1080px;margin:0 auto 24px;display:flex;justify-content:space-between;align-items:center;gap:16px}.follow-eye{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#8a8378}.follow-handle{font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#cfc8bd;text-decoration:none;white-space:nowrap}.follow-handle:hover{color:#fff}.follow behold-widget{max-width:1080px;margin:0 auto;display:block}.team-head h2{font-size:clamp(34px,5vw,52px);max-width:18ch}.team-manifesto{font-family:'Montserrat',sans-serif;font-size:16px;line-height:1.65;color:#4b4741;max-width:600px;margin:0 auto 30px}.team-belief-line{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#8a8378;max-width:520px;margin:-14px auto 24px;line-height:1.5}.team-belief-line em{font-style:italic;color:#141210}.team-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:820px;margin:0 auto 30px;text-align:left}.pil-t{display:block;font-family:'Montserrat',sans-serif;font-weight:600;font-size:14px;color:#141210;margin-bottom:6px}.pil-b{display:block;font-family:'Montserrat',sans-serif;font-size:13px;line-height:1.55;color:#6b6b6b}.team-cta{margin-bottom:6px}.tm-card .tr{font-size:9px;letter-spacing:.1em}@media(max-width:760px){.team-pillars{grid-template-columns:1fr;gap:16px;max-width:360px}}.follow-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.follow-tile{display:block;aspect-ratio:1/1;border-radius:14px;overflow:hidden;background:#141210}.follow-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease,opacity .3s ease}.follow-tile:hover img{transform:scale(1.05);opacity:.88}@media(max-width:640px){.follow-grid{grid-template-columns:repeat(2,1fr)}}
+/* FREEBIES — plain stacked list, sits right above the email capture */
+.freebies{background:#fff;padding:48px 44px 40px}
+.freebies-inner{max-width:760px;margin:0 auto}
+.frb-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:500;margin-bottom:6px}
+.frb-sub{font-size:12.5px;color:var(--mid);margin-bottom:22px}
+.frb-row{display:flex;justify-content:space-between;align-items:baseline;gap:20px;padding:18px 0;border-top:1px solid var(--border);text-decoration:none;color:inherit}
+.frb-row:last-child{border-bottom:1px solid var(--border)}
+.frb-l{font-size:15px;font-weight:600;color:var(--ink)}
+.frb-l span{display:block;font-size:12px;font-weight:400;color:var(--mid);margin-top:3px}
+.frb-r{font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--ink);white-space:nowrap}
+@media(max-width:720px){.freebies{padding:40px 22px 32px}.frb-row{flex-wrap:wrap}}
 </style>
 </head>
 <body>
@@ -417,53 +404,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     </div>
   </div>
 </section>
-<section class="freebies" id="freebies">
-  <div class="fb-wrap">
-    <div class="fb-head">
-      <h2 class="fb-title">Freebies</h2>
-      <a href="#freebies" class="fb-viewall">View All Freebies &rarr;</a>
-    </div>
-    <div class="fb-list">
-      <a class="fb-row" href="/buyerrepresentation">
-        <div class="fb-thumb">
-          <svg viewBox="0 0 150 150" width="150" height="150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="150" height="150" fill="#f5f0e8"/>
-            <rect x="34" y="22" width="82" height="106" rx="6" fill="#ffffff" stroke="#e2ddd0"/>
-            <rect x="44" y="34" width="44" height="7" rx="3" fill="#141210"/>
-            <rect x="44" y="50" width="62" height="4" rx="2" fill="#d8d2c4"/>
-            <rect x="44" y="60" width="62" height="4" rx="2" fill="#d8d2c4"/>
-            <rect x="44" y="70" width="48" height="4" rx="2" fill="#d8d2c4"/>
-            <rect x="44" y="88" width="62" height="4" rx="2" fill="#ece7db"/>
-            <rect x="44" y="98" width="52" height="4" rx="2" fill="#ece7db"/>
-            <rect x="44" y="112" width="34" height="10" rx="5" fill="#a3865c"/>
-          </svg>
-        </div>
-        <div class="fb-body">
-          <h3 class="fb-name">Free <em>Buyer</em> Toolkit</h3>
-          <p class="fb-desc">Every buyer form, the compensation scripts, and plain English answers on who pays your agent, free, in one place. Built for Southwest Florida agents, updated for the 2024 rules.</p>
-        </div>
-        <span class="fb-cta">Get it now &rarr;</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<section class="belief">
-  <h2>Real estate doesn't clock out at five.<br><em>Neither does your broker.</em></h2>
-  <p>Nights, weekends, and the deal that goes sideways at the worst possible time. You get a licensed Florida broker who actually picks up. We have been in your shoes.</p>
-</section>
-<section class="team" id="team"><div class="team-head"><p class="team-eye">Who we are</p><h2>Not agents. Aari Business Partners.</h2><p class="team-manifesto">Everyone who joins Aari is building a business, not filling a seat, so we treat them like a partner in it. Fair splits, real support, and systems that make them look like the professional they already are. When our partners win, Aari wins. That is the whole model.</p><div class="team-pillars"><div class="pil"><span class="pil-t">Keep what you earn.</span><span class="pil-b">Splits from 75/25 to 100 percent and no franchise fees. Your upside stays yours.</span></div><div class="pil"><span class="pil-t">Never close alone.</span><span class="pil-b">Transaction coordination, a broker who answers, and compliance handled for you.</span></div><div class="pil"><span class="pil-t">Build a real business.</span><span class="pil-b">Brand, systems, and structure so you grow past the next commission check.</span></div></div><a class="btn btn-dark team-cta" href="#plans">Become an Aari Business Partner →</a></div><div class="tm-cluster"><div class="tm-avatars" id="tmAvatars"></div></div><p class="team-sub" style="margin-top:14px">Real people. Real names. The team behind the split.</p><script>(function(){var roster=[["Milennys Vargas","milennys-vargas.jpg"],["Alied Machuca","alied-machuca.jpg"],["Roosevelt Sanchez","roosevelt-sanchez.jpg"],["Flavia Aguilera","flavia-aguilera.jpg"],["Odalis Mora","odalis-mora.jpg"],["Ana Puentes","ana-puentes.jpg"],["Eileen Hernandez","eileen-hernandez.jpg"],["Jose Alejandro Paredes","alejandro-paredes.jpg"]];var wrap=document.getElementById("tmAvatars");var slots=4,size=72;var state=[];function pick(){return roster[Math.floor(Math.random()*roster.length)];}for(var i=0;i<slots;i++){var slot=document.createElement("div");slot.className="tm-slot";slot.style.zIndex=slots-i;var a=document.createElement("img"),b=document.createElement("img");a.src=roster[i%roster.length][1];a.alt=roster[i%roster.length][0];b.src=roster[(i+1)%roster.length][1];b.alt=roster[(i+1)%roster.length][0];b.style.opacity=0;slot.appendChild(a);slot.appendChild(b);wrap.appendChild(slot);state.push({front:a,back:b,on:true});}setInterval(function(){var s=state[Math.floor(Math.random()*state.length)];var next=pick();var show=s.on?s.front:s.back,hide=s.on?s.back:s.front;hide.src=next[1];hide.alt=next[0];hide.style.opacity=1;show.style.opacity=0;s.on=!s.on;},1800);})();</script></section>
-<section class="founder" id="founder"><img class="founder-img" src="meet-our-founder.png" alt="Meet the founder, Marlenyi Paredes, Broker Owner of Aari Realty LLC" /></section>
-<section class="testi" id="agents">
-  <div class="testi-head"><span class="eb">Agent love</span><h2>Don't take my word for it. <em>Take theirs.</em></h2></div>
-  <div class="testi-grid">
-    <div class="testi-card"><div class="testi-av" data-agent="alied"><img src="alied-machuca.jpg" alt="Alied Machuca"></div><div class="testi-body"><p>"You know that feeling when you're technically with a brokerage but nobody actually knows your name? I was working remotely, no check-ins, no guidance. Just me and a logo on my business card. My first week at Aari, I had systems, contacts, and a real plan. Night and day."</p><div class="nm">Alied Machuca</div><div class="rl">Aari Realty Agent</div></div></div>
-    <div class="testi-card"><div class="testi-av" data-agent="roosevelt"><img src="roosevelt-sanchez.jpg" alt="Roosevelt Sanchez"></div><div class="testi-body"><p>"I came from one of those 100 percent virtual brokerages. It sounds amazing in the interview. Then it's 9pm, you're stuck on a contract, and there's literally no one to call. Here, I still run my own business but when I need backup, someone actually picks up."</p><div class="nm">Roosevelt Sanchez Santos</div><div class="rl">Aari Realty Agent</div></div></div>
-    <div class="testi-card"><div class="testi-av" data-agent="milennys"><img src="milennys-vargas.jpg" alt="Milennys Vargas"></div><div class="testi-body"><p>"Most new agents get thrown in and told to figure it out. I got my feet wet as Aari's transaction coordinator first. Saw how files actually close, how compliance works, all the stuff that makes other agents panic. By the time I started selling, I already knew what I was doing."</p><div class="nm">Milennys Vargas</div><div class="rl">Aari Realty Agent</div></div></div>
-    <div class="testi-card"><div class="testi-av" data-agent="jose"><img src="alejandro-paredes.jpg" alt="Jose Alejandro Paredes"></div><div class="testi-body"><p>"Every brokerage says no hidden fees until you get the invoice. I had been burned before. Fees that change, support that vanishes, nobody who can explain where your money goes. Here, everything was spelled out from day one. Months in, still no surprises. That is the whole reason I stayed."</p><div class="nm">Jose Alejandro Paredes</div><div class="rl">Aari Realty Agent</div></div></div>
-  </div>
-</section>
-
 <section class="compare" id="why">
   <div class="compare-head">
     <span class="eyebrow">Why agents leave</span>
@@ -495,6 +435,48 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </div>
   <p class="compare-close">Same license. Same market. <em>A very different paycheck.</em> <a href="#plans">See the plans &rarr;</a></p>
 </section>
+<section class="team" id="team"><div class="team-head"><p class="team-eye">Who we are</p><h2>Not agents. Aari Business Partners.</h2><p class="team-manifesto">Everyone who joins Aari is building a business, not filling a seat, so we treat them like a partner in it. Fair splits, real support, and systems that make them look like the professional they already are. When our partners win, Aari wins. That is the whole model.</p><p class="team-belief-line">Real estate doesn't clock out at five. <em>Neither does your broker.</em></p><div class="team-pillars"><div class="pil"><span class="pil-t">Keep what you earn.</span><span class="pil-b">Splits from 75/25 to 100 percent and no franchise fees. Your upside stays yours.</span></div><div class="pil"><span class="pil-t">Never close alone.</span><span class="pil-b">Transaction coordination, a broker who answers, and compliance handled for you.</span></div><div class="pil"><span class="pil-t">Build a real business.</span><span class="pil-b">Brand, systems, and structure so you grow past the next commission check.</span></div></div><a class="btn btn-dark team-cta" href="#plans">Become an Aari Business Partner →</a></div><div class="tm-cluster"><div class="tm-avatars" id="tmAvatars"></div></div><p class="team-sub" style="margin-top:14px">Real people. Real names. The team behind the split.</p><script>(function(){
+  // Full current roster. Add a name+photo here and the cluster picks it up automatically, no rebuild needed.
+  var roster=[["Milennys Vargas","milennys-vargas.jpg"],["Alied Machuca","alied-machuca.jpg"],["Roosevelt Sanchez","roosevelt-sanchez.jpg"],["Flavia Aguilera","flavia-aguilera.jpg"],["Odalis Mora","odalis-mora.jpg"],["Ana Puentes","ana-puentes.jpg"],["Eileen Hernandez","eileen-hernandez.jpg"],["Jose Alejandro Paredes","alejandro-paredes.jpg"]];
+  var wrap=document.getElementById("tmAvatars");
+  var slots=[];
+  roster.forEach(function(person,i){
+    var slot=document.createElement("div");
+    slot.className="tm-slot";
+    slot.style.zIndex=roster.length-i;
+    var a=document.createElement("img"),b=document.createElement("img");
+    a.src=person[1];a.alt=person[0];
+    b.style.opacity=0;
+    slot.appendChild(a);slot.appendChild(b);
+    wrap.appendChild(slot);
+    slots.push({front:a,back:b,on:true,person:person});
+  });
+  // Every couple seconds, two random slots trade faces with a crossfade. Everyone stays visible the whole time.
+  function swapTwo(){
+    if(slots.length<2)return;
+    var i=Math.floor(Math.random()*slots.length),j;
+    do{j=Math.floor(Math.random()*slots.length);}while(j===i);
+    var pi=slots[i].person,pj=slots[j].person;
+    [[i,pj],[j,pi]].forEach(function(pair){
+      var s=slots[pair[0]],next=pair[1];
+      var show=s.on?s.front:s.back,hide=s.on?s.back:s.front;
+      hide.src=next[1];hide.alt=next[0];hide.style.opacity=1;show.style.opacity=0;
+      s.on=!s.on;s.person=next;
+    });
+  }
+  setInterval(swapTwo,2200);
+})();</script></section>
+<section class="founder" id="founder"><img class="founder-img" src="meet-our-founder.png" alt="Meet the founder, Marlenyi Paredes, Broker Owner of Aari Realty LLC" /></section>
+<section class="testi" id="agents">
+  <div class="testi-head"><span class="eb">Agent love</span><h2>Don't take my word for it. <em>Take theirs.</em></h2></div>
+  <div class="testi-grid">
+    <div class="testi-card"><div class="testi-av" data-agent="alied"><img src="alied-machuca.jpg" alt="Alied Machuca"></div><div class="testi-body"><p>"You know that feeling when you're technically with a brokerage but nobody actually knows your name? I was working remotely, no check-ins, no guidance. Just me and a logo on my business card. My first week at Aari, I had systems, contacts, and a real plan. Night and day."</p><div class="nm">Alied Machuca</div><div class="rl">Aari Realty Agent</div></div></div>
+    <div class="testi-card"><div class="testi-av" data-agent="roosevelt"><img src="roosevelt-sanchez.jpg" alt="Roosevelt Sanchez"></div><div class="testi-body"><p>"I came from one of those 100 percent virtual brokerages. It sounds amazing in the interview. Then it's 9pm, you're stuck on a contract, and there's literally no one to call. Here, I still run my own business but when I need backup, someone actually picks up."</p><div class="nm">Roosevelt Sanchez Santos</div><div class="rl">Aari Realty Agent</div></div></div>
+    <div class="testi-card"><div class="testi-av" data-agent="milennys"><img src="milennys-vargas.jpg" alt="Milennys Vargas"></div><div class="testi-body"><p>"Most new agents get thrown in and told to figure it out. I got my feet wet as Aari's transaction coordinator first. Saw how files actually close, how compliance works, all the stuff that makes other agents panic. By the time I started selling, I already knew what I was doing."</p><div class="nm">Milennys Vargas</div><div class="rl">Aari Realty Agent</div></div></div>
+    <div class="testi-card"><div class="testi-av" data-agent="jose"><img src="alejandro-paredes.jpg" alt="Jose Alejandro Paredes"></div><div class="testi-body"><p>"Every brokerage says no hidden fees until you get the invoice. I had been burned before. Fees that change, support that vanishes, nobody who can explain where your money goes. Here, everything was spelled out from day one. Months in, still no surprises. That is the whole reason I stayed."</p><div class="nm">Jose Alejandro Paredes</div><div class="rl">Aari Realty Agent</div></div></div>
+  </div>
+</section>
+
 <section class="how" id="how">
   <div class="how-head">
     <span class="eyebrow">How it works</span>
@@ -527,20 +509,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </div>
   <div class="how-cta">
     <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
-  </div>
-</section>
-<section class="faq" id="faq">
-  <div class="faq-head">
-    <span class="eb">Questions</span>
-    <h2>The stuff you're <em>actually wondering.</em></h2>
-  </div>
-  <div class="faq-list">
-    <details class="faq-item"><summary>What are the splits and the fees?<span class="pm">+</span></summary><div class="ans">Pick your structure: 75/25, 85/15, or 100 percent on a flat monthly. A $199 annual E and O and compliance fee, due when you join. Transaction fees are $499 residential and $299 vacant land. No franchise fees, and no surprise fees. Everything is spelled out before you sign.</div></details>
-    <details class="faq-item"><summary>Is it really fully virtual?<span class="pm">+</span></summary><div class="ans">Yes. Aari is a fully virtual brokerage. You run your business from anywhere in Southwest Florida, with your tools loaded and a broker who actually answers when you need one.</div></details>
-    <details class="faq-item"><summary>What support do I actually get?<span class="pm">+</span></summary><div class="ans">A licensed Florida broker who picks up, transaction coordination through Aari Transactions, a compliance review on every file, and the full stack loaded on day one, including SkySlope, FGCMLS, and more.</div></details>
-    <details class="faq-item"><summary>How does billing work?<span class="pm">+</span></summary><div class="ans">Fees run through SkySlope Books. A card on file is strongly recommended. You get a 10 day grace period, then a $25 late fee. Late payments can lead to license deactivation, so keep it current.</div></details>
-    <details class="faq-item"><summary>Can I change my plan as I grow?<span class="pm">+</span></summary><div class="ans">Yes. Start where you are today and move up when you are ready. Your structure should fit your business, not the other way around.</div></details>
-    <details class="faq-item"><summary>How fast can I join?<span class="pm">+</span></summary><div class="ans">Minutes, not weeks. Pick a plan, review and e-sign your independent contractor agreement, put a card on file, and you land in your agent portal the same day.</div></details>
   </div>
 </section>
 <section class="plans" id="plans">
@@ -603,6 +571,34 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <span class="pl-fee"><b>$499</b> residential transaction fee</span>
     <span class="pl-fee-sep"></span>
     <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
+  </div>
+</section>
+<section class="faq" id="faq">
+  <div class="faq-head">
+    <span class="eb">Questions</span>
+    <h2>The stuff you're <em>actually wondering.</em></h2>
+  </div>
+  <div class="faq-list">
+    <details class="faq-item"><summary>What are the splits and the fees?<span class="pm">+</span></summary><div class="ans">Pick your structure: 75/25, 85/15, or 100 percent on a flat monthly. A $199 annual E and O and compliance fee, due when you join. Transaction fees are $499 residential and $299 vacant land. No franchise fees, and no surprise fees. Everything is spelled out before you sign.</div></details>
+    <details class="faq-item"><summary>Is it really fully virtual?<span class="pm">+</span></summary><div class="ans">Yes. Aari is a fully virtual brokerage. You run your business from anywhere in Southwest Florida, with your tools loaded and a broker who actually answers when you need one.</div></details>
+    <details class="faq-item"><summary>What support do I actually get?<span class="pm">+</span></summary><div class="ans">A licensed Florida broker who picks up, transaction coordination through Aari Transactions, a compliance review on every file, and the full stack loaded on day one, including SkySlope, FGCMLS, and more.</div></details>
+    <details class="faq-item"><summary>How does billing work?<span class="pm">+</span></summary><div class="ans">Fees run through SkySlope Books. A card on file is strongly recommended. You get a 10 day grace period, then a $25 late fee. Late payments can lead to license deactivation, so keep it current.</div></details>
+    <details class="faq-item"><summary>Can I change my plan as I grow?<span class="pm">+</span></summary><div class="ans">Yes. Start where you are today and move up when you are ready. Your structure should fit your business, not the other way around.</div></details>
+    <details class="faq-item"><summary>How fast can I join?<span class="pm">+</span></summary><div class="ans">Minutes, not weeks. Pick a plan, review and e-sign your independent contractor agreement, put a card on file, and you land in your agent portal the same day.</div></details>
+  </div>
+</section>
+<section class="freebies" id="freebies">
+  <div class="freebies-inner">
+    <div class="frb-title">Freebies</div>
+    <div class="frb-sub">Two tools, free, no signup.</div>
+    <a class="frb-row" href="https://aaritransactions.com/contract-guide" target="_blank" rel="noopener">
+      <div class="frb-l">Deadline Calculator<span>Every FR/BAR, CRSP and NABOR deadline, calculated instantly.</span></div>
+      <div class="frb-r">Open it &rarr;</div>
+    </a>
+    <a class="frb-row" href="/buyerrepresentation">
+      <div class="frb-l">Free Buyer Toolkit<span>Every buyer form and compensation script, plain English.</span></div>
+      <div class="frb-r">Get it &rarr;</div>
+    </a>
   </div>
 </section>
 <section class="news" id="stay">
@@ -704,7 +700,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var at=document.getElementById('atrack');
   if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
     var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao+ao+ao;}
-  var rv=document.querySelectorAll('.belief h2,.belief p,.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p');
+  var rv=document.querySelectorAll('.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p');
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(el){io.observe(el);});
