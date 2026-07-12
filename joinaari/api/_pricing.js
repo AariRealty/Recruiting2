@@ -74,13 +74,11 @@ function computePrice(opts) {
 
   const fullMonthly = planMonthly + addonMonthly;
 
-  // Proration for the current month (server clock), mirroring the client.
-  const today = new Date();
-  const daysInMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0).getDate();
-  const daysRemaining = daysInMonth - today.getDate() + 1;
-  const proratedTotal = round2((fullMonthly * daysRemaining) / daysInMonth);
-
-  const subtotal = round2(ANNUAL_FEE + proratedTotal);
+  // Flat annual fee due at signup. No proration: the recurring monthly
+  // subscription already starts clean on the 1st of next month (see
+  // setup-recurring.js billing_cycle_anchor), so the join month itself
+  // is never billed.
+  const subtotal = ANNUAL_FEE;
 
   // Coupon resolved + applied server-side; client type/value is ignored.
   let discount = 0;
@@ -93,16 +91,14 @@ function computePrice(opts) {
       case 'waive_annual':
         discount = ANNUAL_FEE;
         break;
-      case 'waive_monthly':
-        discount = proratedTotal;
-        break;
       case 'percent_off':
         discount = round2((subtotal * coupon.value) / 100);
         break;
       case 'flat_off':
         discount = Math.min(coupon.value, subtotal);
         break;
-      // 'set_total' deliberately unsupported (was a test backdoor)
+      // 'waive_monthly' and 'set_total' deliberately unsupported: there is
+      // no prorated monthly left to waive, and set_total was a test backdoor.
       default:
         discount = 0;
     }
@@ -114,15 +110,12 @@ function computePrice(opts) {
     ok: true,
     totalDueToday: totalDueToday,
     monthlyAmount: fullMonthly,
-    proratedTotal: proratedTotal,
     subtotal: subtotal,
     discount: discount,
     annualFee: ANNUAL_FEE,
-    daysRemaining: daysRemaining,
-    daysInMonth: daysInMonth,
     couponApplied: coupon ? String(opts.coupon_code).trim().toUpperCase() : null,
-    // Slack for accepting a client-claimed amount: one day's proration + rounding.
-    tolerance: round2(fullMonthly / daysInMonth) + 0.02,
+    // Slack for accepting a client-claimed amount: rounding only, no proration variance.
+    tolerance: 0.02,
   };
 }
 

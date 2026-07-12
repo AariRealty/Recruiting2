@@ -199,40 +199,38 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
 .pl-fee b{color:#fff;font-weight:700}
 .pl-fee-sep{width:1px;height:16px;background:rgba(255,255,255,.14)}
-.co-overlay{position:fixed;inset:0;z-index:200;background:#0a0a0a;overflow-y:auto;display:none;padding:46px 24px 64px}
+.co-overlay{position:fixed;inset:0;z-index:200;background:#fff;overflow-y:auto;display:none;padding:46px 24px 64px}
 .co-overlay.open{display:block}
 .co-wrap{max-width:640px;margin:0 auto}
 .co-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
-.co-step{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:9px 16px}
-.co-back{font-size:14px;color:rgba(255,255,255,.55);cursor:pointer;background:none;border:none;font-family:inherit}
-.co-back:hover{color:#fff}
-.co-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,56px);font-weight:500;line-height:1.02;color:#fff;margin-bottom:10px}
-.co-sub{font-size:15px;color:rgba(255,255,255,.55);margin-bottom:30px;max-width:520px;line-height:1.6}
+.co-step{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border:1px solid var(--border);border-radius:6px;padding:9px 16px}
+.co-back{font-size:14px;color:var(--mid);cursor:pointer;background:none;border:none;font-family:inherit}
+.co-back:hover{color:var(--ink)}
+.co-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,5vw,56px);font-weight:500;line-height:1.02;color:var(--ink);margin-bottom:10px}
+.co-sub{font-size:15px;color:var(--mid);margin-bottom:30px;max-width:520px;line-height:1.6}
 .co-pane{display:none}
 .co-pane.active{display:block}
-.co-card{background:#fff;color:var(--ink);border-radius:18px;padding:32px 32px 28px}
+.co-card{background:var(--card);border:1px solid var(--border);box-shadow:0 18px 50px rgba(20,18,15,.05);color:var(--ink);border-radius:18px;padding:32px 32px 28px}
 .co-label{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lite);margin-bottom:18px}
-.co-row{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;padding:16px 0;border-top:1px solid var(--border)}
-.co-row:first-of-type{border-top:none}
-.co-row .l{font-size:16px}
-.co-row .r{font-size:20px;font-weight:700;white-space:nowrap}
-.co-row .sub{font-size:12.5px;color:var(--mid);margin-top:5px;line-height:1.45}
-.co-row .sub em{font-style:italic}
-.co-due{background:#0f0f0f;color:#fff;border-radius:14px;padding:24px 26px;margin:18px 0}
-.co-due .dl{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.co-due .dv{font-size:44px;font-weight:800;margin:8px 0 6px;letter-spacing:-.02em}
-.co-due .db{font-size:13px;color:rgba(255,255,255,.55)}
-.co-recur{display:flex;justify-content:space-between;align-items:center;gap:20px;padding-top:8px}
-.co-recur .l{font-size:15px;color:var(--mid)}
-.co-recur .r{font-size:22px;font-weight:700;white-space:nowrap}
-.co-note{text-align:center;font-size:13px;color:var(--lite);margin-top:16px}
+.co-tl{max-width:400px;margin:0 auto;position:relative;padding-left:26px}
+.co-tl::before{content:"";position:absolute;left:5px;top:10px;bottom:14px;width:1px;background:var(--border)}
+.co-tl-step{position:relative}
+.co-tl-step.now{padding-bottom:30px}
+.co-tl-dot{position:absolute;left:-26px;border-radius:50%;background:var(--ink)}
+.co-tl-step.now .co-tl-dot{top:6px;width:14px;height:14px;border:3px solid #f5f0e8}
+.co-tl-step.later .co-tl-dot{top:3px;width:8px;height:8px;background:var(--lite)}
+.co-tl-when{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--lite)}
+.co-tl-step.now .co-tl-amt{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:var(--ink);line-height:1;margin:6px 0}
+.co-tl-step.now .co-tl-desc{font-size:13px;color:var(--mid)}
+.co-tl-step.later .co-tl-when{font-size:9px}
+.co-tl-step.later .co-tl-amt{font-size:14px;font-weight:600;color:var(--mid);margin:2px 0}
 .co-sel-name{font-size:22px;font-weight:700;margin-bottom:6px}
 .co-sel-price{font-size:15px;color:var(--mid)}
 .co-change{display:inline-block;margin-top:16px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);cursor:pointer}
 .co-change:hover{color:var(--ink)}
-.co-cta{display:block;width:100%;text-align:center;background:#fff;color:#0a0a0a;border:none;border-radius:50px;padding:18px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:22px;transition:opacity .2s;font-family:inherit}
+.co-cta{display:block;width:100%;text-align:center;background:var(--ink);color:#fff;border:none;border-radius:50px;padding:18px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:22px;transition:opacity .2s;font-family:inherit}
 .co-cta:hover{opacity:.9}
-.co-foot{text-align:center;font-size:13px;color:rgba(255,255,255,.4);margin-top:16px;line-height:1.5}
+.co-foot{text-align:center;font-size:13px;color:var(--lite);margin-top:16px;line-height:1.5}
 .apply{background:var(--black);color:#fff;padding:60px 44px;text-align:center}
 .apply .eyebrow{color:inherit;letter-spacing:.26em}
 .apply h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,42px);font-weight:500;line-height:1.08;margin:14px 0 0}
@@ -652,13 +650,20 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       <h2 class="co-h" id="coJoinTitle">You're joining</h2>
       <div class="co-card">
         <div class="co-label">Summary</div>
-        <div class="co-row"><div class="l">Monthly fee</div><div class="r" id="coMonthly">$79/mo</div></div>
-        <div class="co-row"><div class="l">Annual compliance</div><div class="r">$199/year</div></div>
-        <div class="co-row"><div><div class="l">Add ons</div><div class="sub" id="coAddonSub">Aari Transactions Starter membership, on us. Two files a month coordinated for you.</div></div><div class="r">$0/mo</div></div>
-        <div class="co-due"><div class="dl">Due today</div><div class="dv" id="coDue">$244.68</div><div class="db" id="coDueBreak">$199 compliance + $45.68 prorated</div></div>
-        <div class="co-recur"><div class="l">Then, recurring monthly</div><div class="r" id="coRecur">$79/month</div></div>
+        <div class="co-tl">
+          <div class="co-tl-step now">
+            <span class="co-tl-dot"></span>
+            <div class="co-tl-when">Due today</div>
+            <div class="co-tl-amt" id="coDue">$199</div>
+            <div class="co-tl-desc">Annual compliance. First month's dues on us.</div>
+          </div>
+          <div class="co-tl-step later">
+            <span class="co-tl-dot"></span>
+            <div class="co-tl-when">Then</div>
+            <div class="co-tl-amt" id="coRecur">$79/mo</div>
+          </div>
+        </div>
       </div>
-      <p class="co-note">Prorated amount covers the remaining days in the current month.</p>
       <button class="co-cta" id="coContinue">Continue &rarr;</button>
     </div>
     <div class="co-pane" id="coStep3">
@@ -725,18 +730,15 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));openCheckout(b.getAttribute('data-plan'));});});
   try{var saved=localStorage.getItem('aari_plan');if(saved)pickPlan(saved);}catch(e){}
   var ANNUAL=199,PLAN={'Aari Growth 85/15':79,'Aari Max 100%':99};
-  function r2(n){return Math.round((n+Number.EPSILON)*100)/100;}
-  function computeDue(name){var m=PLAN[name]||79;var t=new Date(),dim=new Date(t.getFullYear(),t.getMonth()+1,0).getDate(),drem=dim-t.getDate()+1;var pro=r2(m*drem/dim);return {m:m,pro:pro,total:r2(ANNUAL+pro),drem:drem,dim:dim};}
+  var MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function nextBillLabel(){var t=new Date(),nm=new Date(t.getFullYear(),t.getMonth()+1,1);return MONTH_NAMES[nm.getMonth()]+' 1';}
+  function computeDue(name){var m=PLAN[name]||79;return {m:m,total:ANNUAL};}
   var overlay=document.getElementById('checkout'),curName=null;
   function coShow(id){['coStep2','coStep3'].forEach(function(x){document.getElementById(x).classList.toggle('active',x===id);});overlay.scrollTop=0;}
   function openCheckout(name){curName=name;var d=computeDue(name);
     document.getElementById('coJoinTitle').textContent="You're joining "+name;
-    document.getElementById('coMonthly').textContent='$'+d.m+'/mo';
-    document.getElementById('coRecur').textContent='$'+d.m+'/month';
-    document.getElementById('coDue').textContent='$'+d.total.toFixed(2);
-    document.getElementById('coDueBreak').textContent='$'+ANNUAL+' compliance + $'+d.pro.toFixed(2)+' prorated ('+d.drem+' of '+d.dim+' days)';
-    var addon=document.getElementById('coAddonSub');
-    if(name.indexOf('Mentorship')!==-1||name.indexOf('Growth')!==-1){addon.innerHTML='Aari Transactions Starter membership, on us. Two files a month coordinated for you, a $79/mo value while you are on this split.';}else{addon.innerHTML='Aari Transactions Starter available at $79/mo. Two files a month coordinated for you.';}
+    document.getElementById('coDue').textContent='$'+d.total;
+    document.getElementById('coRecur').textContent='$'+d.m+'/mo starting '+nextBillLabel();
     document.getElementById('coSelName').textContent=name;
     document.getElementById('coSelPrice').innerHTML='$'+d.m+' monthly &middot; $199/year compliance fee';
     coShow('coStep2');overlay.classList.add('open');document.body.style.overflow='hidden';}
