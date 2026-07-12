@@ -26,6 +26,9 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#141210;--black:#0a0a0a;--bg:#ffffff;--off:#f5f4f1;--card:#f5f4f1;--mid:#6b6b6b;--lite:#9b948a;--border:#e2e0d8;--green:#2f6b46;--r:18px;--r-pill:50px}
+.wave-div{line-height:0;margin:0;position:relative;z-index:3}
+.wave-div svg{width:100%;height:64px;display:block}
+@media(max-width:640px){.wave-div svg{height:38px}}
 html{scroll-behavior:smooth}
 body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
@@ -417,38 +420,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     </div>
   </div>
 </section>
-<section class="compare" id="why">
-  <div class="compare-head">
-    <span class="eyebrow">Why agents leave</span>
-    <h2>You're growing a business.<br><em>So is your brokerage. With your money.</em></h2>
-    <p>They love you on day one. Then the fees show up. The support goes quiet. And the split that sounded fair starts eating your paycheck. Sound familiar?</p>
-  </div>
-  <div class="compare-grid">
-    <div class="col col-old">
-      <div class="col-tag">What they sold you</div>
-      <h3>The big-box brokerage</h3>
-      <div class="crow"><span class="ic ic-x">&times;</span>A split that shrinks your check</div>
-      <div class="crow"><span class="ic ic-x">&times;</span>Fees you find out about later</div>
-      <div class="crow"><span class="ic ic-x">&times;</span>A broker who ghosts when it matters</div>
-      <div class="crow"><span class="ic ic-x">&times;</span>Deadlines you chase alone at midnight</div>
-      <div class="crow"><span class="ic ic-x">&times;</span>Every tool billed back to you</div>
-      <div class="crow"><span class="ic ic-x">&times;</span>Their logo grows. Your name doesn't.</div>
-    </div>
-    <div class="col col-aari">
-      <span class="col-badge">Aari Realty</span>
-      <div class="col-tag">What you actually get</div>
-      <h3>The <em>Aari</em> way</h3>
-      <div class="crow"><span class="ic ic-v">&#10003;</span>Splits from 75/25 up to 100%</div>
-      <div class="crow"><span class="ic ic-v">&#10003;</span>Clear pricing. No franchise fees.</div>
-      <div class="crow"><span class="ic ic-v">&#10003;</span>A licensed broker who picks up</div>
-      <div class="crow"><span class="ic ic-v">&#10003;</span>Transaction coordination, handled for you</div>
-      <div class="crow"><span class="ic ic-v">&#10003;</span>SkySlope, FGCMLS and more, already loaded</div>
-      <div class="crow"><span class="ic ic-v">&#10003;</span>A structure built to grow your name</div>
-    </div>
-  </div>
-  <p class="compare-close">Same license. Same market. <em>A very different paycheck.</em> <a href="#plans">See the plans &rarr;</a></p>
-</section>
-<section class="team" id="team"><div class="team-head"><p class="team-eye">Who we are</p><h2>Not agents. Aari Business Partners.</h2><p class="team-manifesto">Everyone who joins Aari is building a business, not filling a seat, so we treat them like a partner in it. Fair splits, real support, and systems that make them look like the professional they already are. When our partners win, Aari wins. That is the whole model.</p><p class="team-belief-line">Real estate doesn't clock out at five. <em>Neither does your broker.</em></p><div class="team-pillars"><div class="pil"><span class="pil-t">Keep what you earn.</span><span class="pil-b">Splits from 75/25 to 100 percent and no franchise fees. Your upside stays yours.</span></div><div class="pil"><span class="pil-t">Never close alone.</span><span class="pil-b">Transaction coordination, a broker who answers, and compliance handled for you.</span></div><div class="pil"><span class="pil-t">Build a real business.</span><span class="pil-b">Brand, systems, and structure so you grow past the next commission check.</span></div></div><a class="btn btn-dark team-cta" href="#plans">Become an Aari Business Partner →</a></div><div class="tm-cluster"><div class="tm-avatars" id="tmAvatars"></div></div><p class="team-sub" style="margin-top:14px">Real people. Real names. The team behind the split.</p><script>(function(){
+<section class="team" id="team"><div class="team-head"><p class="team-eye">Who we are</p><h2>Not agents. Aari Business Partners.</h2><p class="team-manifesto">Everyone who joins Aari is building a business, not filling a seat, so we treat them like a partner in it. When our partners win, Aari wins. That is the whole model.</p><p class="team-belief-line">Real estate doesn't clock out at five. <em>Neither does your broker.</em></p><a class="btn btn-dark team-cta" href="#plans">Become an Aari Business Partner →</a></div><div class="tm-cluster"><div class="tm-avatars" id="tmAvatars"></div></div><p class="team-sub" style="margin-top:14px">Real people. Real names. The team behind the split.</p><script>(function(){
   // Full current roster. Add a name+photo here and the cluster picks it up automatically, no rebuild needed.
   var roster=[["Milennys Vargas","milennys-vargas.jpg"],["Alied Machuca","alied-machuca.jpg"],["Roosevelt Sanchez","roosevelt-sanchez.jpg"],["Flavia Aguilera","flavia-aguilera.jpg"],["Odalis Mora","odalis-mora.jpg"],["Ana Puentes","ana-puentes.jpg"],["Eileen Hernandez","eileen-hernandez.jpg"],["Jose Alejandro Paredes","alejandro-paredes.jpg"]];
   var wrap=document.getElementById("tmAvatars");
@@ -524,6 +496,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
   </div>
 </section>
+<div class="wave-div"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,32 C240,64 480,0 720,26 C960,52 1200,4 1440,32 L1440,64 L0,64 Z" fill="#f5f0e8"></path></svg></div>
 <section class="plans" id="plans">
   <div class="pl-inner">
     <div class="pl-rail">
@@ -618,7 +591,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </form>
   <p class="news-note">Or talk to a real person: <a href="tel:2396881770" style="color:inherit">239.688.1770</a></p>
 </section>
-<section class="follow" id="follow"><div class="follow-head"><span class="follow-eye">Follow along</span><a class="follow-handle" href="https://www.instagram.com/aari.realty/" target="_blank" rel="noopener">@aari.realty ↗</a></div><div class="follow-grid" id="followGrid"></div></section><footer class="footer">
+<section class="follow" id="follow"><div class="follow-head"><span class="follow-eye">Follow along</span><a class="follow-handle" href="https://www.instagram.com/aari.realty/" target="_blank" rel="noopener">@aari.realty ↗</a></div><div class="follow-grid" id="followGrid"></div></section>
+<div class="wave-div"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C240,2 480,58 720,32 C960,6 1200,56 1440,30 L1440,64 L0,64 Z" fill="#f5f0e8"></path></svg></div>
+<footer class="footer">
   <div class="footer-grid">
     <div>
       <div class="fbrand">Aari Realty</div>
