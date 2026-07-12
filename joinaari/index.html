@@ -179,6 +179,21 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-cta:hover{opacity:.85}
 .pl-dark .pl-cta{background:#f5f0e8;color:#0a0a0a;animation:plbounce 1.5s ease-in-out infinite,plglowd 1.5s ease-in-out infinite}@keyframes plglowd{0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 0 0 4px rgba(0,0,0,.15)}}
 .pl-card.selected{outline:2px solid #b3a688;outline-offset:3px}
+.o2-toggle{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--border);border-radius:50px;padding:11px;cursor:pointer;transition:background .2s}
+.o2-toggle:hover{background:#ece7db}
+.pl-dark .o2-toggle{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#fff}
+.pl-dark .o2-toggle:hover{background:rgba(255,255,255,.14)}
+.o2-toggle .chev{transition:transform .3s ease;display:inline-block}
+.o2-panel{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,.1,.2,1)}
+.o2-panel.open{max-height:220px}
+.o2-panel-inner{padding-top:14px;display:flex;flex-direction:column;gap:9px}
+.o2-row{display:flex;justify-content:space-between;font-size:12.5px;padding:8px 12px;background:var(--card);border-radius:8px;opacity:0;transform:translateY(6px)}
+.pl-dark .o2-row{background:rgba(255,255,255,.07);color:rgba(255,255,255,.85)}
+.o2-panel.open .o2-row{animation:rowPop .35s ease forwards}
+.o2-panel.open .o2-row:nth-child(1){animation-delay:.05s}
+.o2-panel.open .o2-row:nth-child(2){animation-delay:.12s}
+.o2-panel.open .o2-row:nth-child(3){animation-delay:.19s}
+@keyframes rowPop{to{opacity:1;transform:none}}
 .pl-bar{max-width:1140px;margin:24px auto 0;background:#141210;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 30px;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
 .pl-bar-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
@@ -534,6 +549,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         
       </ul>
       <div class="pl-blurb">A full support environment to build and grow with real broker engagement.</div>
+      <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
+      <div class="o2-panel"><div class="o2-panel-inner">
+        <div class="o2-row"><span>Monthly fee</span><b>$59</b></div>
+        <div class="o2-row"><span>E&amp;O, due at signup</span><b>$199/yr</b></div>
+        <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
+      </div></div>
       <span class="pl-cta" data-plan="Aari Mentorship 75/25">My pick</span>
     </div>
     <div class="pl-card" data-plan="Aari Growth 85/15">
@@ -548,6 +569,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <li><span class="k">&#10003;</span>More control over your business</li>
       </ul>
       <div class="pl-blurb">Operate independently. Stay in control of your deals.</div>
+      <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
+      <div class="o2-panel"><div class="o2-panel-inner">
+        <div class="o2-row"><span>Monthly fee</span><b>$79</b></div>
+        <div class="o2-row"><span>E&amp;O, due at signup</span><b>$199/yr</b></div>
+        <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
+      </div></div>
       <span class="pl-cta" data-plan="Aari Growth 85/15">My pick</span>
     </div>
     <div class="pl-card" data-plan="Aari Max 100%">
@@ -561,6 +588,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <li><span class="k">&#10003;</span><b>Just brokerage access</b></li>
       </ul>
       <div class="pl-blurb">Fully independent. Self managed transactions.</div>
+      <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
+      <div class="o2-panel"><div class="o2-panel-inner">
+        <div class="o2-row"><span>Monthly fee</span><b>$99</b></div>
+        <div class="o2-row"><span>E&amp;O, due at signup</span><b>$199/yr</b></div>
+        <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
+      </div></div>
       <span class="pl-cta" data-plan="Aari Max 100%">My pick</span>
     </div>
   </div>
@@ -718,7 +751,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var ANNUAL=199,PLAN={'Aari Mentorship 75/25':59,'Aari Growth 85/15':79,'Aari Max 100%':99};
   function r2(n){return Math.round((n+Number.EPSILON)*100)/100;}
   function computeDue(name){var m=PLAN[name]||59;var t=new Date(),dim=new Date(t.getFullYear(),t.getMonth()+1,0).getDate(),drem=dim-t.getDate()+1;var pro=r2(m*drem/dim);return {m:m,pro:pro,total:r2(ANNUAL+pro),drem:drem,dim:dim};}
-  var overlay=document.getElementById('checkout'),curName='Aari Mentorship 75/25';
+  var overlay=document.getElementById('checkout'),curName=null;
   function coShow(id){['coStep2','coStep3'].forEach(function(x){document.getElementById(x).classList.toggle('active',x===id);});overlay.scrollTop=0;}
   function openCheckout(name){curName=name;var d=computeDue(name);
     document.getElementById('coJoinTitle').textContent="You're joining "+name;
@@ -735,9 +768,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   document.getElementById('coContinue').addEventListener('click',function(){coShow('coStep3');});
   [].forEach.call(document.querySelectorAll('[data-co-back2]'),function(b){b.addEventListener('click',function(){coShow('coStep2');});});
   [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
-  document.getElementById('coSign').addEventListener('click',function(){var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
+  document.getElementById('coSign').addEventListener('click',function(){if(!curName){closeCheckout();location.hash='#plans';return;}var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
   var applyBtn2=document.getElementById('applyBtn');
-  if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}openCheckout(s||'Aari Mentorship 75/25');});}
+  if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}if(s&&PLAN.hasOwnProperty(s)){openCheckout(s);}else{location.hash='#plans';}});}
 })();
 </script>
 <script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script></body>
