@@ -751,7 +751,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var ANNUAL=199,PLAN={'Aari Mentorship 75/25':59,'Aari Growth 85/15':79,'Aari Max 100%':99};
   function r2(n){return Math.round((n+Number.EPSILON)*100)/100;}
   function computeDue(name){var m=PLAN[name]||59;var t=new Date(),dim=new Date(t.getFullYear(),t.getMonth()+1,0).getDate(),drem=dim-t.getDate()+1;var pro=r2(m*drem/dim);return {m:m,pro:pro,total:r2(ANNUAL+pro),drem:drem,dim:dim};}
-  var overlay=document.getElementById('checkout'),curName='Aari Mentorship 75/25';
+  var overlay=document.getElementById('checkout'),curName=null;
   function coShow(id){['coStep2','coStep3'].forEach(function(x){document.getElementById(x).classList.toggle('active',x===id);});overlay.scrollTop=0;}
   function openCheckout(name){curName=name;var d=computeDue(name);
     document.getElementById('coJoinTitle').textContent="You're joining "+name;
@@ -768,9 +768,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   document.getElementById('coContinue').addEventListener('click',function(){coShow('coStep3');});
   [].forEach.call(document.querySelectorAll('[data-co-back2]'),function(b){b.addEventListener('click',function(){coShow('coStep2');});});
   [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
-  document.getElementById('coSign').addEventListener('click',function(){var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
+  document.getElementById('coSign').addEventListener('click',function(){if(!curName){closeCheckout();location.hash='#plans';return;}var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
   var applyBtn2=document.getElementById('applyBtn');
-  if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}openCheckout(s||'Aari Mentorship 75/25');});}
+  if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}if(s&&PLAN.hasOwnProperty(s)){openCheckout(s);}else{location.hash='#plans';}});}
 })();
 </script>
 <script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script></body>
