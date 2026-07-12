@@ -1849,6 +1849,11 @@
         <button type="button" id="sign-agreement-btn" onclick="signAgreement()" style="width:100%;background:#0a0a0a;color:#fff;border:none;border-radius:8px;padding:16px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;margin-bottom:12px;">Sign Agreement</button>
         <p id="sign-msg" style="display:none;font-size:11px;font-weight:500;margin-bottom:16px;text-align:center"></p>
         <div id="payment-block" style="display:none;">
+        <div style="border:2px solid #0a0a0a;border-radius:10px;padding:20px 22px;margin-bottom:16px;">
+          <p style="font-size:9px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:rgba(10,10,10,0.35);margin:0 0 10px;">Due Today</p>
+          <div id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:34px;font-weight:700;color:#0a0a0a;line-height:1;">$199.00</div>
+          <p id="payment-due-breakdown" style="font-size:12px;color:rgba(10,10,10,0.55);margin-top:8px;line-height:1.5;">Annual E&amp;O + compliance fee. Your monthly plan fee starts next month, nothing else is charged today.</p>
+        </div>
         <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
 
         <!-- Stripe Payment Element -->
@@ -2860,7 +2865,7 @@ function initialAllPages() {
         var dueEl = document.getElementById('payment-due-amount');
         var breakdownEl = document.getElementById('payment-due-breakdown');
         if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
-        if (breakdownEl) breakdownEl.textContent = '$199 compliance + prorated monthly';
+        if (breakdownEl) breakdownEl.textContent = 'Annual E&O + compliance fee. Your monthly plan fee starts next month, nothing else is charged today.';
       }
 
       // Move to Step 4 (payment)
