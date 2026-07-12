@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    // Entry guard: this page should only be reached with a real plan and
+    // price already chosen on the homepage. A bad link, stale bookmark, or
+    // refresh after session loss should never fall through to a fake
+    // default charge — bounce straight back to the plan grid instead.
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+      var planName = p.get('plan_name') || '';
+      var totalDue = parseFloat(p.get('total_due'));
+      if (!planName || !(totalDue > 0)) {
+        window.location.replace('/index.html#plans');
+      }
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
@@ -2866,14 +2880,9 @@ function initialAllPages() {
   async function initPaymentElement() {
     var data = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
     var params = new URLSearchParams(window.location.search);
+    // The entry guard in <head> already redirects away if total_due is
+    // missing or invalid, so a real value is guaranteed here.
     var totalDue = parseFloat(params.get('total_due')) || 0;
-    // Fallback: try to calculate from plan if total_due is missing
-    if (totalDue <= 0) {
-      var monthly = parseFloat(params.get('monthly')) || 0;
-      var compliance = 199;
-      if (monthly > 0) totalDue = monthly + compliance;
-      else totalDue = 278.20; // safe default
-    }
     // Stripe requires at least $0.50
     if (totalDue < 0.50) totalDue = 0.50;
 
@@ -3003,9 +3012,10 @@ function initialAllPages() {
       msg.style.color = '#27ae60';
       msg.style.display = 'block';
 
-      // Recalculate
+      // Recalculate. The entry guard in <head> already guarantees a real
+      // total_due made it this far.
       var params = new URLSearchParams(window.location.search);
-      var totalDue = parseFloat(params.get('total_due') || '278.20');
+      var totalDue = parseFloat(params.get('total_due')) || 0;
       var discount = data.type === 'percent_off' ? totalDue * (data.value / 100) : data.value;
       var newTotal = Math.max(0, totalDue - discount);
 
