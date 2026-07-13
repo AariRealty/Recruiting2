@@ -20,9 +20,8 @@ module.exports = async function handler(req, res) {
     // Additional coupon codes from environment variable
     // Format: CODE1:type:value, CODE2:type:value
     // Types:
-    //   waive_all        — waive annual + prorated monthly ($0 due today)
-    //   waive_annual     — waive $199 annual compliance fee only
-    //   waive_monthly    — waive prorated monthly fee only
+    //   waive_all        — waive the $199 annual E&O + Compliance fee ($0 due today)
+    //   waive_annual     — waive the $199 annual E&O + Compliance fee
     //   percent_off:N    — N% off total due today
     //   flat_off:N       — $N off total due today
     const raw = process.env.COUPON_CODES || '';
@@ -46,17 +45,11 @@ module.exports = async function handler(req, res) {
     // Build response
     var label = '';
     switch (coupon.type) {
-      case 'set_total':
-        label = 'Total set to $' + coupon.value.toFixed(2) + ' (test)';
-        break;
       case 'waive_all':
-        label = 'Annual compliance + prorated monthly waived';
+        label = 'Annual E&O + Compliance fee waived — $0 due today';
         break;
       case 'waive_annual':
         label = '$199 annual compliance fee waived';
-        break;
-      case 'waive_monthly':
-        label = 'Prorated monthly fee waived';
         break;
       case 'percent_off':
         label = coupon.value + '% off total due today';
