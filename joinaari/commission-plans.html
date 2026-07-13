@@ -115,7 +115,7 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   var cl=document.getElementById('cl');
   function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
   var cg=0,cmx=0;
-  function tw(f,t,el){var s=null,d=550;function st(x){if(!s)s=x;var p=Math.min((x-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=money(f+(t-f)*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
+  function tw(f,t,el){var s=null,d=550;function st(x){if(!s)s=x;var p=Math.min((x-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=money(f+(t-f)*e);if(p<1){requestAnimationFrame(st);}else{el.textContent=money(t);}}requestAnimationFrame(st);setTimeout(function(){el.textContent=money(t);},d+150);}
   function calc(){
     var c=+cl.value,gross=350000*0.03;
     document.getElementById('clV').textContent=c;
