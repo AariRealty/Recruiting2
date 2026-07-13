@@ -647,36 +647,15 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 </footer>
 <div class="co-overlay" id="checkout">
   <div class="co-wrap">
-    <div class="co-pane active" id="coStep2">
+    <div class="co-pane active" id="coStep3">
       <div class="co-top"><span class="co-step">Step 02</span><button class="co-back" data-co-close>Back</button></div>
-      <h2 class="co-h" id="coJoinTitle">You're joining</h2>
-      <div class="co-card">
-        <div class="co-label">Summary</div>
-        <div class="co-tl">
-          <div class="co-tl-step now">
-            <span class="co-tl-dot"></span>
-            <div class="co-tl-when">Due today</div>
-            <div class="co-tl-amt" id="coDue">$199</div>
-            <div class="co-tl-desc">Annual compliance. First month's dues on us.</div>
-          </div>
-          <div class="co-tl-step later">
-            <span class="co-tl-dot"></span>
-            <div class="co-tl-when">Then</div>
-            <div class="co-tl-amt" id="coRecur">$79/mo</div>
-          </div>
-        </div>
-      </div>
-      <button class="co-cta" id="coContinue">Continue &rarr;</button>
-    </div>
-    <div class="co-pane" id="coStep3">
-      <div class="co-top"><span class="co-step">Step 03</span><button class="co-back" data-co-back2>Back</button></div>
       <h2 class="co-h">Independent Contractor Agreement</h2>
       <p class="co-sub">Review and sign your ICA with Aari Realty LLC before completing payment.</p>
       <div class="co-card">
         <div class="co-label">Your selection</div>
         <div class="co-sel-name" id="coSelName">Aari Growth 85/15</div>
         <div class="co-sel-price" id="coSelPrice">$79 monthly &middot; $199/year compliance fee</div>
-        <div class="co-change" data-co-back2>Need to make changes?</div>
+        <div class="co-change" data-co-close>Need to make changes?</div>
       </div>
       <button class="co-cta" id="coSign">Review &amp; sign agreement &rarr;</button>
       <p class="co-foot">Fill in your details, review the full agreement, then initial and sign electronically.</p>
@@ -736,17 +715,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   function nextBillLabel(){var t=new Date(),nm=new Date(t.getFullYear(),t.getMonth()+1,1);return MONTH_NAMES[nm.getMonth()]+' 1';}
   function computeDue(name){var m=PLAN[name]||79;return {m:m,total:ANNUAL};}
   var overlay=document.getElementById('checkout'),curName=null;
-  function coShow(id){['coStep2','coStep3'].forEach(function(x){document.getElementById(x).classList.toggle('active',x===id);});overlay.scrollTop=0;}
+  function coShow(id){[].forEach.call(document.querySelectorAll('.co-pane'),function(pn){pn.classList.toggle('active',pn.id===id);});overlay.scrollTop=0;}
   function openCheckout(name){curName=name;var d=computeDue(name);
-    document.getElementById('coJoinTitle').textContent="You're joining "+name;
-    document.getElementById('coDue').textContent='$'+d.total;
-    document.getElementById('coRecur').textContent='$'+d.m+'/mo starting '+nextBillLabel();
     document.getElementById('coSelName').textContent=name;
-    document.getElementById('coSelPrice').innerHTML='$'+d.m+' monthly &middot; $199/year compliance fee';
-    coShow('coStep2');overlay.classList.add('open');document.body.style.overflow='hidden';}
+    document.getElementById('coSelPrice').innerHTML='$'+d.total+' due today &middot; then $'+d.m+'/mo &middot; first month waived';
+    coShow('coStep3');overlay.classList.add('open');document.body.style.overflow='hidden';}
   function closeCheckout(){overlay.classList.remove('open');document.body.style.overflow='';}
-  document.getElementById('coContinue').addEventListener('click',function(){coShow('coStep3');});
-  [].forEach.call(document.querySelectorAll('[data-co-back2]'),function(b){b.addEventListener('click',function(){coShow('coStep2');});});
   [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
   document.getElementById('coSign').addEventListener('click',function(){if(!curName){closeCheckout();location.hash='#plans';return;}var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
   var applyBtn2=document.getElementById('applyBtn');
