@@ -116,14 +116,15 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
   var cg=0,cmx=0;
   function tw(f,t,el){var s=null,d=550;function st(x){if(!s)s=x;var p=Math.min((x-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=money(f+(t-f)*e);if(p<1){requestAnimationFrame(st);}else{el.textContent=money(t);}}requestAnimationFrame(st);setTimeout(function(){el.textContent=money(t);},d+150);}
-  function calc(){
+  function calc(anim){
     var c=+cl.value,gross=350000*0.03;
     document.getElementById('clV').textContent=c;
     var g=c*(gross*0.85-499)-79*12-199, m=c*(gross-499)-99*12-199;
-    tw(cg,g,document.getElementById('g'));cg=g;
-    tw(cmx,m,document.getElementById('m'));cmx=m;
+    var ge=document.getElementById('g'),me=document.getElementById('m');
+    if(anim){tw(cg,g,ge);tw(cmx,m,me);}else{ge.textContent=money(g);me.textContent=money(m);}
+    cg=g;cmx=m;
   }
-  cl.addEventListener('input',calc);calc();
+  cl.addEventListener('input',function(){calc(true);});calc(false);
 })();
 </script>
 </body>
