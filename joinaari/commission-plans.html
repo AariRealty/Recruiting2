@@ -44,19 +44,19 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .calc-field input{flex:1;width:100%;background:transparent;border:none;outline:none;color:#fff;font-family:'Montserrat',sans-serif;font-size:18px;font-weight:700;padding:13px 6px}
 .calc-field input::-webkit-outer-spin-button,.calc-field input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .res-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px}
-.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.res-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:760px}
 .res-card{background:var(--cream);color:var(--ink);border-radius:12px;padding:20px 22px}
 .res-card .rn{font-size:12px;font-weight:700;letter-spacing:.02em}
 .res-card .rv{font-family:'Cormorant Garamond',serif;font-size:38px;font-weight:600;line-height:1;margin-top:8px}
-.res-card .rs{font-size:11px;color:var(--mid);margin-top:8px}
+.res-card .rs{font-size:11.5px;color:var(--mid);margin-top:10px;line-height:1.5}
 .res-card.best{outline:2px solid var(--tan);outline-offset:0}
-.res-card .rflag{font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);margin-bottom:6px;min-height:11px}
+.res-card .rflag{font-size:8.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tan);margin-bottom:8px;min-height:11px}
 .calc-fine{font-size:11px;color:rgba(255,255,255,.4);margin-top:22px;line-height:1.6;max-width:640px}
 /* PLANS STRIP */
 .plans-strip{padding:56px 0 20px}
 .sec-head{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;margin-bottom:6px}
 .sec-sub{font-size:13.5px;color:var(--mid);margin-bottom:28px}
-.plan-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.plan-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;max-width:760px}
 .plan-card{border:2px solid var(--border);border-radius:16px;padding:26px 24px;display:flex;flex-direction:column}
 .plan-card .pn{font-size:18px;font-weight:700}
 .plan-card .ps{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;line-height:1;margin-top:14px}
@@ -116,7 +116,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
   <div class="wrap">
     <p class="calc-eyebrow">Commission Calculator</p>
     <h2 class="calc-title">Your numbers, your plan.</h2>
-    <p class="calc-note">Enter what a typical year looks like for you. We apply each plan&rsquo;s split, subtract the flat per-side transaction fee, and take out the monthly and annual fees. That is your estimated net take-home.</p>
+    <p class="calc-note">These are your two producing-agent plans. Same flat fees on both &mdash; the only difference is the split, and what you get for it. On <b style="color:#fff">Growth</b>, your transactions are coordinated for you. On <b style="color:#fff">Max</b>, you keep the full split and run them yourself. Enter a typical year and see where you land.</p>
 
     <div class="calc-inputs">
       <div class="calc-field">
@@ -131,9 +131,8 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
 
     <p class="res-label">Your estimated net take-home per year</p>
     <div class="res-grid">
-      <div class="res-card"><div class="rflag">&nbsp;</div><div class="rn">Mentorship &middot; 75/25</div><div class="rv" id="net0">$0</div><div class="rs">$59/mo &middot; $199/yr E&amp;O</div></div>
-      <div class="res-card"><div class="rflag">&nbsp;</div><div class="rn">Aari Growth &middot; 85/15</div><div class="rv" id="net1">$0</div><div class="rs">$79/mo &middot; $199/yr E&amp;O</div></div>
-      <div class="res-card"><div class="rflag">&nbsp;</div><div class="rn">Aari Max &middot; 100%</div><div class="rv" id="net2">$0</div><div class="rs">$99/mo &middot; $199/yr E&amp;O</div></div>
+      <div class="res-card"><div class="rflag">Transactions coordinated</div><div class="rn">Aari Growth &middot; 85/15</div><div class="rv" id="net0">$0</div><div class="rs">We handle your offer &amp; listing submissions. $79/mo &middot; $199/yr E&amp;O.</div></div>
+      <div class="res-card"><div class="rflag">You keep the full split</div><div class="rn">Aari Max &middot; 100%</div><div class="rv" id="net1">$0</div><div class="rs">Fully independent &mdash; you run your own transactions. $99/mo &middot; $199/yr E&amp;O.</div></div>
     </div>
     <p class="calc-fine">Estimate only, for illustration. Assumes one commission side per closing and the residential transaction fee. Actual results depend on your deals, sides represented, and transaction type. Not a guarantee of earnings.</p>
   </div>
@@ -141,19 +140,17 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
 
 <section class="plans-strip">
   <div class="wrap">
-    <h2 class="sec-head">Three ways to get paid.</h2>
-    <p class="sec-sub">Pick the structure that fits how you work. Change plans later under the plan-change process.</p>
+    <h2 class="sec-head">Two ways to produce.</h2>
+    <p class="sec-sub">Want your files handled? Growth. Want to run everything yourself and keep it all? Max.</p>
     <div class="plan-cards">
       <div class="plan-card">
-        <div class="pn">Mentorship</div><div class="ps">75/25</div><div class="psl">agent / brokerage</div><div class="pp">$59<span>/mo</span></div>
-        <a href="/index.html#plans" class="pcta">Choose Mentorship</a>
-      </div>
-      <div class="plan-card">
         <div class="pn">Aari Growth</div><div class="ps">85/15</div><div class="psl">agent / brokerage</div><div class="pp">$79<span>/mo</span></div>
+        <p style="font-size:12.5px;color:var(--mid);margin-top:14px;line-height:1.55;flex:1">Transaction coordination included &mdash; your offer and listing submissions are handled for you.</p>
         <a href="/index.html#plans" class="pcta">Choose Growth</a>
       </div>
       <div class="plan-card">
-        <div class="pn">Aari Max</div><div class="ps">100%</div><div class="psl">&nbsp;</div><div class="pp">$99<span>/mo</span></div>
+        <div class="pn">Aari Max</div><div class="ps">100%</div><div class="psl">agent / brokerage</div><div class="pp">$99<span>/mo</span></div>
+        <p style="font-size:12.5px;color:var(--mid);margin-top:14px;line-height:1.55;flex:1">Fully independent. You keep the entire split and run your own transactions.</p>
         <a href="/index.html#plans" class="pcta">Choose Max</a>
       </div>
     </div>
@@ -165,7 +162,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
     <h2 class="sec-head">The fees, plainly.</h2>
     <p class="sec-sub">Every number, out in the open. Flat, not a percentage of your split.</p>
     <div class="fee-grid">
-      <div class="fee-card"><div class="fk">Monthly Fee</div><div class="fv">$59 / $79 / $99</div><div class="fd">Set by your plan &mdash; Mentorship, Growth, or Max. Your first month is waived; billing starts the 1st of the next month.</div></div>
+      <div class="fee-card"><div class="fk">Monthly Fee</div><div class="fv">$79 / $99</div><div class="fd">Set by your plan &mdash; Growth or Max. Your first month is waived; billing starts the 1st of the next month.</div></div>
       <div class="fee-card"><div class="fk">Annual Fee</div><div class="fv">$199 / year</div><div class="fd">Errors &amp; Omissions insurance plus compliance. The same for every plan, due at signup and each year after.</div></div>
       <div class="fee-card"><div class="fk">Transaction Fee</div><div class="fv">$499 / $299</div><div class="fd">Flat, per side. $499 residential sale, $299 vacant land. The same on every plan &mdash; never a percentage.</div></div>
       <div class="fee-card"><div class="fk">CRM</div><div class="fv">Included</div><div class="fd">Included in every plan, alongside the SkySlope Suite and real broker support.</div></div>
@@ -178,8 +175,8 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
     <h2 class="sec-head" style="margin-bottom:18px">Questions, answered.</h2>
     <details class="faq-item"><summary>Is there a cap or levels to unlock?<span class="pm">+</span></summary><div class="ans">No. Aari has no cap, no tiers, and nothing to &ldquo;unlock.&rdquo; Your split is your split from the day you join. What you see is what you get.</div></details>
     <details class="faq-item"><summary>Is this revenue share or a downline?<span class="pm">+</span></summary><div class="ans">No. Aari is not a revenue-share or recruiting-downline model. You are not paid on other people&rsquo;s deals, and you do not need to recruit anyone. You earn on your own production.</div></details>
-    <details class="faq-item"><summary>So what exactly do I pay?<span class="pm">+</span></summary><div class="ans">Three flat things: your monthly fee ($59, $79, or $99 by plan), a $199 annual E&amp;O and compliance fee, and a flat per-side transaction fee ($499 residential, $299 vacant land). That is the whole picture.</div></details>
-    <details class="faq-item"><summary>What is included?<span class="pm">+</span></summary><div class="ans">The SkySlope Suite, a CRM, and real broker support &mdash; on every plan. Growth also includes two service credits each month: one offer submission and one listing submission.</div></details>
+    <details class="faq-item"><summary>So what exactly do I pay?<span class="pm">+</span></summary><div class="ans">Three flat things: your monthly fee ($79 Growth or $99 Max), a $199 annual E&amp;O and compliance fee, and a flat per-side transaction fee ($499 residential, $299 vacant land). That is the whole picture.</div></details>
+    <details class="faq-item"><summary>What is included?<span class="pm">+</span></summary><div class="ans">The SkySlope Suite, a CRM, and real broker support &mdash; on both plans. <b>Growth</b> also coordinates your transactions: two service credits each month, one offer submission and one listing submission, handled for you. On <b>Max</b> you run your own.</div></details>
     <details class="faq-item"><summary>Can I change plans later?<span class="pm">+</span></summary><div class="ans">Yes. After five closed residential transactions with fully compliant files, you can request a plan change in writing, subject to broker approval. Approved changes take effect the first of the following month.</div></details>
   </div>
 </section>
@@ -199,26 +196,17 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
 
 <script>
 (function(){
-  var PLANS=[{split:0.75,monthly:59},{split:0.85,monthly:79},{split:1.00,monthly:99}];
+  var PLANS=[{split:0.85,monthly:79},{split:1.00,monthly:99}];
   var TXN=499, ANNUAL=199;
   var closings=document.getElementById('closings'), avg=document.getElementById('avg');
   function money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
   function calc(){
     var c=Math.max(0, parseFloat(closings.value)||0);
     var a=Math.max(0, parseFloat(avg.value)||0);
-    var nets=[];
     PLANS.forEach(function(p,i){
       var perDeal = a*p.split - TXN;
       var net = c*perDeal - p.monthly*12 - ANNUAL;
-      nets.push(net);
       document.getElementById('net'+i).textContent = money(net);
-    });
-    // mark the highest as "most take-home"
-    var max=Math.max.apply(null,nets);
-    document.querySelectorAll('.res-card').forEach(function(card,i){
-      var flag=card.querySelector('.rflag');
-      if(nets[i]===max && max>0){ card.classList.add('best'); flag.textContent='Most take-home'; }
-      else { card.classList.remove('best'); flag.innerHTML='&nbsp;'; }
     });
   }
   closings.addEventListener('input',calc);
