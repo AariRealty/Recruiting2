@@ -178,6 +178,16 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-dark .pl-feat .k{color:inherit}
 .pl-blurb{background:var(--tint,#faf8f4);border-radius:10px;padding:14px 16px;font-size:12.5px;color:var(--mid);line-height:1.5;margin:18px 0}
 .pl-dark .pl-blurb{background:rgba(255,255,255,.06);color:rgba(255,255,255,.7)}
+.pl-ticket{background:#fff;color:var(--ink);border:2px solid var(--border)}
+.pl-ticket .pl-inc{border-top:none;margin-top:6px;padding-top:6px}
+.pl-tear{position:relative;height:0;margin:22px -26px 4px;border-top:2px dashed #cfc9bd}
+.pl-tear::before,.pl-tear::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:#0a0a0a}
+.pl-tear::before{left:-10px}.pl-tear::after{right:-10px}
+.pl-credit{border:1px solid #e6ddcc;background:#faf7f2;border-left:4px solid #a3865c;border-radius:10px;padding:14px 16px;margin:16px 0 4px}
+.pl-credit-h{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#a3865c;margin-bottom:10px}
+.pl-credit-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.pl-credit-list li{display:flex;gap:10px;align-items:center;font-size:14px;color:var(--ink)}
+.pl-credit-list .p{font-weight:700}
 @keyframes plbounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}@keyframes plglow{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}50%{box-shadow:0 0 0 4px rgba(255,255,255,.12)}}.pl-cta{display:block;text-align:center;animation:plbounce 1.5s ease-in-out infinite,plglow 1.5s ease-in-out infinite;border-radius:50px;padding:15px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;background:#0a0a0a;color:#fff;transition:opacity .2s}
 .pl-cta:hover{opacity:.85}
 .pl-dark .pl-cta{background:#f5f0e8;color:#0a0a0a;animation:plbounce 1.5s ease-in-out infinite,plglowd 1.5s ease-in-out infinite}@keyframes plglowd{0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 0 0 4px rgba(0,0,0,.15)}}
@@ -496,7 +506,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="btn btn-light btn-lg" href="#plans">Start Your Application &rarr;</a>
   </div>
 </section>
-<div class="wave-div"><svg viewBox="0 0 1440 64" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,32 C240,64 480,0 720,26 C960,52 1200,4 1440,32 L1440,64 L0,64 Z" fill="#f5f0e8"></path></svg></div>
 <section class="plans" id="plans">
   <div class="pl-inner">
     <div class="pl-rail">
@@ -504,17 +513,22 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       <h2>Choose your <em>structure.</em></h2>
       <p>Start with how you want to get paid.</p>
     </div>
-    <div class="pl-card" data-plan="Aari Growth 85/15">
+    <div class="pl-card pl-ticket" data-plan="Aari Growth 85/15">
       <div class="pl-name">Aari Growth</div>
       <div class="pl-tagline">More control. Still supported.</div>
       <div class="pl-split">85/15</div>
       <div class="pl-splitlabel">agent / brokerage</div>
       <div class="pl-price">$79<span>/mo</span></div>
+      <div class="pl-tear"></div>
       <div class="pl-inc">Includes</div>
-      <ul class="pl-feat"><li><span class="k">✓</span><b>Aari Transactions access</b> $399 one side, $599 both sides, billed only at close</li>
-        <li><span class="k">&#10003;</span><b>Deal support when you need it</b></li>
-        <li><span class="k">&#10003;</span>More control over your business</li>
+      <ul class="pl-feat"><li><span class="k">&#10003;</span>SkySlope Suite</li>
+        <li><span class="k">&#10003;</span>Support</li>
+        <li><span class="k">&#10003;</span>CRM</li>
       </ul>
+      <div class="pl-credit">
+        <div class="pl-credit-h">2 free service credits / month</div>
+        <ul class="pl-credit-list"><li><span class="p">+</span>Offer submission</li><li><span class="p">+</span>Listing submission</li></ul>
+      </div>
       <div class="pl-blurb">Operate independently. Stay in control of your deals.</div>
       <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
       <div class="o2-panel"><div class="o2-panel-inner">
@@ -524,15 +538,17 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       </div></div>
       <span class="pl-cta" data-plan="Aari Growth 85/15">My pick</span>
     </div>
-    <div class="pl-card" data-plan="Aari Max 100%">
+    <div class="pl-card pl-ticket" data-plan="Aari Max 100%">
       <div class="pl-name">Aari Max</div>
       <div class="pl-tagline">All you.</div>
       <div class="pl-split">100%</div>
       <div class="pl-splitlabel">&nbsp;</div>
       <div class="pl-price">$99<span>/mo</span></div>
+      <div class="pl-tear"></div>
       <div class="pl-inc">Includes</div>
-      <ul class="pl-feat"><li><span class="k">✓</span><b>Aari Transactions access</b>, available at $399 a side, billed only at close</li>
-        <li><span class="k">&#10003;</span><b>Just brokerage access</b></li>
+      <ul class="pl-feat"><li><span class="k">&#10003;</span>SkySlope Suite</li>
+        <li><span class="k">&#10003;</span>Support</li>
+        <li><span class="k">&#10003;</span>CRM</li>
       </ul>
       <div class="pl-blurb">Fully independent. Self managed transactions.</div>
       <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
