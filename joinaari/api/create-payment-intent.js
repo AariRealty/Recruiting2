@@ -10,7 +10,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code } = req.body || {};
+    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code, license_number } = req.body || {};
 
     if (!first_name || !last_name || !email) {
       return res.status(400).json({ error: 'first_name, last_name, and email are required' });
@@ -60,9 +60,12 @@ module.exports = async function handler(req, res) {
       automatic_payment_methods: { enabled: true },
       description: 'Aari Realty Onboarding: ' + (plan_name || 'Commission Plan'),
       metadata: {
+        kind: 'agent_membership',
         plan: plan_name || '',
         agent_name: first_name + ' ' + last_name,
         agent_email: email,
+        license: license_number || '',
+        phone: phone || '',
         coupon: pricing.couponApplied || '',
         server_total: String(pricing.totalDueToday)
       }
