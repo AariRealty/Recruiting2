@@ -38,6 +38,14 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .calc-title{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;line-height:1.05;margin-bottom:6px}
 .calc-note{font-size:12.5px;color:rgba(255,255,255,.55);margin-bottom:28px;max-width:560px;line-height:1.6}
 .calc-inputs{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:640px;margin-bottom:30px}
+.calc-inputs.three{grid-template-columns:repeat(3,1fr);max-width:840px}
+.benefit{margin-top:20px;max-width:760px;background:rgba(163,134,92,.14);border:1px solid rgba(163,134,92,.4);border-left:4px solid var(--tan);border-radius:12px;padding:18px 22px}
+.benefit .bh{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--tan);margin-bottom:8px}
+.benefit .bt{font-size:15px;line-height:1.55;color:#fff}
+.benefit .bt b{color:var(--tan)}
+.rescheck{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:7px}
+.rescheck li{font-size:12px;display:flex;gap:8px;color:var(--ink)}
+.rescheck .x{color:var(--lite)}
 .calc-field label{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:9px}
 .calc-input-wrap{display:flex;align-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:0 14px}
 .calc-input-wrap .pre{font-size:16px;font-weight:700;color:rgba(255,255,255,.5)}
@@ -116,24 +124,29 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
   <div class="wrap">
     <p class="calc-eyebrow">Commission Calculator</p>
     <h2 class="calc-title">Your numbers, your plan.</h2>
-    <p class="calc-note">These are your two producing-agent plans. Same flat fees on both &mdash; the only difference is the split, and what you get for it. On <b style="color:#fff">Growth</b>, your transactions are coordinated for you. On <b style="color:#fff">Max</b>, you keep the full split and run them yourself. Enter a typical year and see where you land.</p>
+    <p class="calc-note">Same flat fees on both. On <b style="color:#fff">Max</b> you keep the full split and pay full price any time you need a coordinator. On <b style="color:#fff">Growth</b> you trade a little of the split for <b style="color:#fff">transaction coordination at half price</b> &mdash; on every file, all year.</p>
 
-    <div class="calc-inputs">
+    <div class="calc-inputs three">
       <div class="calc-field">
         <label for="closings">Closings per year</label>
         <div class="calc-input-wrap"><input id="closings" type="number" min="0" step="1" value="12" inputmode="numeric"></div>
       </div>
       <div class="calc-field">
-        <label for="avg">Average commission per deal</label>
-        <div class="calc-input-wrap"><span class="pre">$</span><input id="avg" type="number" min="0" step="100" value="9500" inputmode="numeric"></div>
+        <label for="price">Average sale price</label>
+        <div class="calc-input-wrap"><span class="pre">$</span><input id="price" type="number" min="0" step="5000" value="350000" inputmode="numeric"></div>
+      </div>
+      <div class="calc-field">
+        <label for="comm">Your side commission</label>
+        <div class="calc-input-wrap"><input id="comm" type="number" min="0" step="0.25" value="3" inputmode="decimal"><span class="pre" style="margin-left:2px">%</span></div>
       </div>
     </div>
 
     <p class="res-label">Your estimated net take-home per year</p>
     <div class="res-grid">
-      <div class="res-card"><div class="rflag">Transactions coordinated</div><div class="rn">Aari Growth &middot; 85/15</div><div class="rv" id="net0">$0</div><div class="rs">We handle your offer &amp; listing submissions. $79/mo &middot; $199/yr E&amp;O.</div></div>
+      <div class="res-card"><div class="rflag">Transactions coordinated</div><div class="rn">Aari Growth &middot; 85/15</div><div class="rv" id="net0">$0</div><div class="rs">Full-file TC at half price &mdash; $199.50/side vs $399. $79/mo &middot; $199/yr E&amp;O.</div></div>
       <div class="res-card"><div class="rflag">You keep the full split</div><div class="rn">Aari Max &middot; 100%</div><div class="rv" id="net1">$0</div><div class="rs">Fully independent &mdash; you run your own transactions. $99/mo &middot; $199/yr E&amp;O.</div></div>
     </div>
+<div class="benefit"><div class="bh">Transaction coordination, half price</div><div class="bt" id="tcText">&nbsp;</div></div>
     <p class="calc-fine">Estimate only, for illustration. Assumes one commission side per closing and the residential transaction fee. Actual results depend on your deals, sides represented, and transaction type. Not a guarantee of earnings.</p>
   </div>
 </section>
@@ -145,7 +158,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
     <div class="plan-cards">
       <div class="plan-card">
         <div class="pn">Aari Growth</div><div class="ps">85/15</div><div class="psl">agent / brokerage</div><div class="pp">$79<span>/mo</span></div>
-        <p style="font-size:12.5px;color:var(--mid);margin-top:14px;line-height:1.55;flex:1">Transaction coordination included &mdash; your offer and listing submissions are handled for you.</p>
+        <p style="font-size:12.5px;color:var(--mid);margin-top:14px;line-height:1.55;flex:1">Transaction coordination at half price &mdash; $199.50 a side instead of $399, on every file.</p>
         <a href="/index.html#plans" class="pcta">Choose Growth</a>
       </div>
       <div class="plan-card">
@@ -176,7 +189,7 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
     <details class="faq-item"><summary>Is there a cap or levels to unlock?<span class="pm">+</span></summary><div class="ans">No. Aari has no cap, no tiers, and nothing to &ldquo;unlock.&rdquo; Your split is your split from the day you join. What you see is what you get.</div></details>
     <details class="faq-item"><summary>Is this revenue share or a downline?<span class="pm">+</span></summary><div class="ans">No. Aari is not a revenue-share or recruiting-downline model. You are not paid on other people&rsquo;s deals, and you do not need to recruit anyone. You earn on your own production.</div></details>
     <details class="faq-item"><summary>So what exactly do I pay?<span class="pm">+</span></summary><div class="ans">Three flat things: your monthly fee ($79 Growth or $99 Max), a $199 annual E&amp;O and compliance fee, and a flat per-side transaction fee ($499 residential, $299 vacant land). That is the whole picture.</div></details>
-    <details class="faq-item"><summary>What is included?<span class="pm">+</span></summary><div class="ans">The SkySlope Suite, a CRM, and real broker support &mdash; on both plans. <b>Growth</b> also coordinates your transactions: two service credits each month, one offer submission and one listing submission, handled for you. On <b>Max</b> you run your own.</div></details>
+    <details class="faq-item"><summary>What is included?<span class="pm">+</span></summary><div class="ans">The SkySlope Suite, a CRM, and real broker support &mdash; on both plans. <b>Growth</b> also gives you Aari Transactions at <b>half price on full-file coordination</b>: $199.50 a side instead of $399. On <b>Max</b> you pay the standard rate.</div></details>
     <details class="faq-item"><summary>Can I change plans later?<span class="pm">+</span></summary><div class="ans">Yes. After five closed residential transactions with fully compliant files, you can request a plan change in writing, subject to broker approval. Approved changes take effect the first of the following month.</div></details>
   </div>
 </section>
@@ -196,21 +209,23 @@ footer{background:var(--black);color:rgba(255,255,255,.5);text-align:center;padd
 
 <script>
 (function(){
-  var PLANS=[{split:0.85,monthly:79},{split:1.00,monthly:99}];
   var TXN=499, ANNUAL=199;
-  var closings=document.getElementById('closings'), avg=document.getElementById('avg');
+  var G={split:0.85,monthly:79}, X={split:1.00,monthly:99};
+  var closings=document.getElementById('closings'), price=document.getElementById('price'), comm=document.getElementById('comm');
   function money(n){ return '$'+Math.round(n).toLocaleString('en-US'); }
   function calc(){
     var c=Math.max(0, parseFloat(closings.value)||0);
-    var a=Math.max(0, parseFloat(avg.value)||0);
-    PLANS.forEach(function(p,i){
-      var perDeal = a*p.split - TXN;
-      var net = c*perDeal - p.monthly*12 - ANNUAL;
-      document.getElementById('net'+i).textContent = money(net);
-    });
+    var gross=(Math.max(0,parseFloat(price.value)||0))*(Math.max(0,parseFloat(comm.value)||0))/100;
+    var gNet=c*(gross*G.split-TXN)-G.monthly*12-ANNUAL;
+    var xNet=c*(gross*X.split-TXN)-X.monthly*12-ANNUAL;
+    document.getElementById('net0').textContent=money(gNet);
+    document.getElementById('net1').textContent=money(xNet);
+    var gap=xNet-gNet, gPerDeal=gross*G.split-TXN;
+    var perFile=199.50;
+    var tcVal=Math.round(c)*perFile;
+    document.getElementById('tcText').innerHTML='On Growth, full-file transaction coordination is <b>half price &mdash; $199.50 a side, not $399</b>. Across '+Math.round(c)+' files that is about <b>'+money(tcVal)+'</b> of coordination handled at half cost, on top of your take-home. On Max you pay full price every time you use one.';
   }
-  closings.addEventListener('input',calc);
-  avg.addEventListener('input',calc);
+  [closings,price,comm].forEach(function(el){el.addEventListener('input',calc)});
   calc();
 })();
 </script>
