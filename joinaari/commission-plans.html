@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Commission Plans | Aari Realty</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#141210;--black:#0a0908;--bg:#fff;--off:#f6f4f0;--cream:#efe9df;--mid:#6b6b6b;--lite:#9b948a;--border:#e7e4dc}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:940px;margin:0 auto;padding:0 44px}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:15px 44px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600}
+.brand small{display:block;font-size:8.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-top:3px}
+.navlinks{display:flex;gap:24px;align-items:center}
+.navlinks a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)}
+.navlinks a.on{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-radius:50px;padding:13px 26px;border:1px solid var(--ink);background:var(--ink);color:#fff;transition:.2s}
+.btn:hover{background:#000}
+.hero{padding:52px 0 12px;text-align:center}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--lite);margin-bottom:14px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,5.4vw,58px);line-height:1.02}
+.hero p{font-size:15px;color:var(--mid);max-width:460px;margin:14px auto 0}
+/* SLIDER */
+.slbar{max-width:520px;margin:34px auto 6px}
+.slbar .sh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.slbar .lb{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lite)}
+.slbar .vv{font-size:20px;font-weight:800}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:50px;background:#e2ddd3;outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;border-radius:50%;background:var(--ink);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(20,18,16,.3)}
+/* TABLE */
+.tbl{padding:36px 0 20px}
+.cmp{width:100%;border-collapse:collapse}
+.cmp th,.cmp td{padding:16px 18px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+.cmp thead th{border-bottom:2px solid var(--ink)}
+.cmp .feat{color:var(--mid);font-weight:600;font-size:12px;text-transform:uppercase;white-space:nowrap}
+.cmp .ph{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
+.cmp .ph small{display:block;font-family:'Montserrat';font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px}
+.cmp .gcol{background:rgba(20,18,16,.035)}
+.cmp td.val{font-weight:700}
+.cmp .netrow td{border-bottom:none;padding-top:20px}
+.cmp .netlabel{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--lite)}
+.cmp .net{font-size:30px;font-weight:800;letter-spacing:-.02em}
+.jr td{border-bottom:none;padding-top:16px}
+.jb{display:block;text-align:center;border-radius:50px;padding:13px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.jb.g{background:var(--ink);color:#fff} .jb.x{border:1px solid var(--ink)}
+.note{font-size:11px;color:var(--lite);margin-top:16px;line-height:1.5}
+/* FAQ */
+.faq{background:var(--off);padding:52px 0}
+.sec-head{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin-bottom:16px}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:15px;font-weight:600}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item .pm{font-size:21px;color:var(--lite);transition:transform .2s}
+.faq-item[open] .pm{transform:rotate(45deg)}
+.faq-item .ans{font-size:14px;color:var(--mid);line-height:1.7;padding:0 0 20px;max-width:720px}
+.closer{text-align:center;padding:56px 0}
+.closer h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600}
+.closer p{font-size:13px;color:var(--mid);margin:12px 0 22px}
+footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;padding:22px;font-size:11px}
+@media(max-width:760px){.wrap{padding:0 22px}nav{padding:14px 22px}.navlinks a:not(.on){display:none}.cmp th,.cmp td{padding:12px 10px;font-size:12.5px}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/index.html" class="brand">Aari Realty<small>Southwest Florida Brokerage</small></a>
+  <div class="navlinks"><a href="/index.html#plans">Plans</a><a href="/mentorship.html">Mentorship</a><a href="/index.html#plans" class="btn">Apply &rarr;</a></div>
+</nav>
+
+<section class="hero"><div class="wrap">
+  <p class="eyebrow">Commission Plans</p>
+  <h1>Everything, side by side.</h1>
+  <p>Drag your closings. The net take-home updates live.</p>
+  <div class="slbar">
+    <div class="sh"><span class="lb">Closings per year</span><span class="vv" id="clV">12</span></div>
+    <input type="range" id="cl" min="1" max="40" step="1" value="12">
+  </div>
+  <p class="note" style="text-align:center">Based on a $350,000 average sale at 3% per side.</p>
+</div></section>
+
+<section class="tbl"><div class="wrap">
+  <table class="cmp">
+    <thead><tr><th></th><th class="gcol"><span class="ph">Growth<small>85 / 15</small></span></th><th><span class="ph">Max<small>100%</small></span></th></tr></thead>
+    <tbody>
+      <tr><td class="feat">Monthly</td><td class="val gcol">$79</td><td class="val">$99</td></tr>
+      <tr><td class="feat">Annual E&amp;O</td><td class="val gcol">$199</td><td class="val">$199</td></tr>
+      <tr><td class="feat">Transaction</td><td class="val gcol">$499</td><td class="val">$499</td></tr>
+      <tr><td class="feat">CRM</td><td class="val gcol">Included</td><td class="val">Included</td></tr>
+      <tr class="netrow"><td class="netlabel">Net take-home</td><td class="gcol"><span class="net" id="g">$0</span></td><td><span class="net" id="m">$0</span></td></tr>
+      <tr class="jr"><td></td><td class="gcol"><a href="/index.html#plans" class="jb g">Join Growth &rarr;</a></td><td><a href="/index.html#plans" class="jb x">Join Max &rarr;</a></td></tr>
+    </tbody>
+  </table>
+  <p class="note">Net of the flat $499 per file, the monthly fee, and the $199 annual E&amp;O. No cap, no tiers, no revenue share. New agents start on the <a href="/mentorship.html" style="text-decoration:underline">Mentorship plan</a>.</p>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <h2 class="sec-head">How Aari actually works.</h2>
+  <details class="faq-item"><summary>Is there a cap or levels to unlock?<span class="pm">+</span></summary><div class="ans">No. No cap, no tiers, nothing to unlock. Your split is yours from day one.</div></details>
+  <details class="faq-item"><summary>Is this revenue share or a downline?<span class="pm">+</span></summary><div class="ans">No. You earn on your own production only. No recruiting to get paid.</div></details>
+  <details class="faq-item"><summary>Can I change plans later?<span class="pm">+</span></summary><div class="ans">Yes. After five closed residential transactions with compliant files, request a change in writing, subject to broker approval.</div></details>
+</div></section>
+
+<section class="closer"><div class="wrap">
+  <h2>Pick your plan.</h2>
+  <p>Run the numbers, then start your application.</p>
+  <a href="/index.html#plans" class="btn">See the plans &rarr;</a>
+</div></section>
+
+<footer>Aari Realty LLC &middot; Broker of Record: Marlenyi L. Paredes &middot; BK3530153 &middot; Fort Myers, FL &middot; 239.688.1770</footer>
+
+<script>
+(function(){
+  var cl=document.getElementById('cl');
+  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  var cg=0,cmx=0;
+  function tw(f,t,el){var s=null,d=550;function st(x){if(!s)s=x;var p=Math.min((x-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=money(f+(t-f)*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}
+  function calc(){
+    var c=+cl.value,gross=350000*0.03;
+    document.getElementById('clV').textContent=c;
+    var g=c*(gross*0.85-499)-79*12-199, m=c*(gross-499)-99*12-199;
+    tw(cg,g,document.getElementById('g'));cg=g;
+    tw(cmx,m,document.getElementById('m'));cmx=m;
+  }
+  cl.addEventListener('input',calc);calc();
+})();
+</script>
+</body>
+</html>
