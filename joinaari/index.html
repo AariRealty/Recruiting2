@@ -395,9 +395,22 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .frb-go{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .25s}
 .frb-panel:hover .frb-go{transform:scale(1.08)}
 @media(max-width:720px){.freebies{padding:56px 22px}.freebies-inner{grid-template-columns:1fr;gap:28px}}
+
+.annc{background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 24px;font-size:12.5px;font-weight:500;text-align:center;flex-wrap:wrap}
+.annc b{font-weight:700}
+.annc .go{color:#fff;font-weight:700;letter-spacing:.1em;font-size:11px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,.55);padding-bottom:2px;white-space:nowrap}
+.cost{font-size:14px;color:var(--ink);font-weight:600;margin:18px 0 26px;padding-left:14px;border-left:3px solid var(--ink);max-width:460px}
+.of-big{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;line-height:1;margin-top:6px}
+.of-then{font-size:12.5px;color:var(--mid);margin-top:8px}
+.of-then b{color:var(--ink)}
+.of-list{list-style:none;margin:20px 0 22px;padding-top:18px;border-top:1px solid var(--border)}
+.of-list li{display:flex;gap:10px;align-items:flex-start;font-size:13px;padding:7px 0;color:var(--ink)}
+.of-chk{flex-shrink:0;width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;font-size:10px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.of-cta{width:100%;justify-content:center}
 </style>
 </head>
 <body>
+<div class="annc"><span><b>Join today and skip this month's plan fee.</b> Just the $199 to start.</span><a class="go" href="#plans">Start today &rarr;</a></div>
 <nav>
   <a class="brand" href="#">Aari Realty<small>Southwest Florida Brokerage</small></a>
   <div class="nav-right">
@@ -414,25 +427,25 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   <div class="grid">
     <div>
       <span class="eyebrow">Broker-owned &middot; Southwest Florida</span>
-      <h1 class="h1">Your business.<br>Your rules.<br><em id="rot" class="rot">Real support.</em></h1>
-      <p class="sub">You built your book. Don't hand your upside to a brokerage that vanishes when it gets hard. <strong>Splits from 85/15 to 100%</strong>, transaction coordination done for you, and a broker who actually answers.</p>
+      <h1 class="h1">Keep up to 100%.<br>Get a broker who<br>actually <em>shows up.</em></h1>
+      <p class="sub">The Southwest Florida brokerage built for agents who want a fair split, real broker support, and <strong>compliance handled</strong>, so you can focus on selling. When our agents win, Aari wins. That is the whole model.</p>
+      <p class="cost">Every month at the wrong brokerage is another closing at someone else's split.</p>
       <div class="cta-row">
         <a class="btn btn-dark btn-lg" href="#plans">Start Your Application &rarr;</a>
         <a class="btn btn-ghost" href="#plans">See the plans &rarr;</a>
       </div>
-      <div class="signal">
-        <span class="pills"><b style="background:#2a2a2a">FL</b><b style="background:#3a3a3a">85</b><b style="background:#3a3a3a">$</b></span>
-        <span>Plans from <strong>$79/mo</strong> &middot; Splits to 100% &middot; No franchise fees.</span>
-      </div>
     </div>
     <div class="aside">
-      <span class="aside-badge">Broker-owned</span>
-      <div class="aside-label">Who this is for</div>
-      <p class="aside-quote">"Not every agent wants the same thing. Some want mentorship, some want 100 percent. I built Aari so you pick the structure that fits you."</p>
-      <div class="aside-by">
-        <div class="aside-av">MP</div>
-        <div><div class="aside-name">Marlenyi Paredes</div><div class="aside-role">Qualifying Broker &amp; Owner &middot; Aari Realty LLC &middot; BK3530153</div></div>
-      </div>
+      <span class="aside-badge">Join today</span>
+      <div class="aside-label">Your plan fee this month</div>
+      <div class="of-big">$0</div>
+      <div class="of-then">billing starts the 1st &middot; only <b>$199</b> due today</div>
+      <ul class="of-list">
+        <li><span class="of-chk">&#10003;</span>Keep up to 100% of your commission</li>
+        <li><span class="of-chk">&#10003;</span>A broker who answers, compliance first</li>
+        <li><span class="of-chk">&#10003;</span>Your tools and support loaded day one</li>
+      </ul>
+      <a class="btn btn-dark of-cta" href="#plans">Start your application &rarr;</a>
     </div>
   </div>
 </section>
