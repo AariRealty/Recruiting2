@@ -132,22 +132,18 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
 @media(max-width:820px){.wrap{padding:0 22px}nav{padding:14px 22px}.ogrid{grid-template-columns:1fr}.navlinks a:not(.btn){display:none}.bval{font-size:18px}}
 
 .credits{background:var(--off);padding:56px 24px}
-.cred-inner{max-width:640px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:18px;padding:34px 36px}
-.cred-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lite);margin-bottom:12px}
-.cred-h{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:600;line-height:1.04}
+.cred-inner{max-width:640px;margin:0 auto}
+.cred-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lite);text-align:center;margin-bottom:10px}
+.cred-h{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;text-align:center;line-height:1.05}
 .cred-h em{font-style:italic;color:#8a827a}
-.cred-sub{font-size:13.5px;color:var(--mid);margin:10px 0 18px;line-height:1.6}
-.cred-list{list-style:none}
-.cred-list li{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--border)}
-.cred-list li:first-child{border-top:none}
-.cr-nm{font-size:14.5px;font-weight:700}
-.cr-ds{font-size:12px;color:var(--mid);margin-top:2px}
-.cr-amt{display:flex;align-items:center;gap:12px}
-.cr-was{font-size:15px;color:var(--lite);text-decoration:line-through;text-decoration-thickness:1.5px}
-.cr-now{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;padding:5px 11px;border-radius:50px}
-.cred-foot{margin-top:16px;padding-top:16px;border-top:2px solid var(--ink);display:flex;justify-content:space-between;align-items:baseline;font-weight:800}
-.cred-total{font-family:'Cormorant Garamond',serif;font-size:30px}
-.cred-ps{font-size:12px;color:var(--mid);margin-top:10px;font-style:italic}
+.cred-tiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:22px}
+.cred-tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px 14px;text-align:center}
+.cred-tile .nm{font-size:14px;font-weight:800}
+.cred-tile .was{font-size:13px;color:var(--lite);text-decoration:line-through;margin:8px 0}
+.cred-tile .free{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 0;border-radius:50px}
+.cred-val{text-align:center;font-size:13px;color:var(--mid);margin-top:16px}
+.cred-val b{color:var(--ink)}
+@media(max-width:560px){.cred-tiles{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -201,15 +197,13 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
 <section class="credits">
   <div class="cred-inner">
     <p class="cred-eyebrow">Two service credits, every month</p>
-    <h2 class="cred-h">The invoice you'll <em>never get.</em></h2>
-    <p class="cred-sub">Pick two of these a month. We handle them. Here's what you'd pay anywhere else, and what you pay here.</p>
-    <ul class="cred-list">
-      <li><div><div class="cr-nm">Offer Prep &middot; Basic</div><div class="cr-ds">BBA, offer, GG, and compensation</div></div><div class="cr-amt"><span class="cr-was">$79</span><span class="cr-now">Free</span></div></li>
-      <li><div><div class="cr-nm">Listing Docs Only</div><div class="cr-ds">Listing package and disclosures</div></div><div class="cr-amt"><span class="cr-was">$99</span><span class="cr-now">Free</span></div></li>
-      <li><div><div class="cr-nm">MLS Setup Only</div><div class="cr-ds">MLS entry, photos, ShowingTime</div></div><div class="cr-amt"><span class="cr-was">$149</span><span class="cr-now">Free</span></div></li>
-    </ul>
-    <div class="cred-foot"><span>What you keep, every month</span><span class="cred-total">up to $298</span></div>
-    <p class="cred-ps">Two credits a month. Your pick. You're welcome.</p>
+    <h2 class="cred-h">Pick 2. <em>On us.</em></h2>
+    <div class="cred-tiles">
+      <div class="cred-tile"><div class="nm">Offer Prep</div><div class="was">$79</div><span class="free">Free</span></div>
+      <div class="cred-tile"><div class="nm">Listing Docs</div><div class="was">$99</div><span class="free">Free</span></div>
+      <div class="cred-tile"><div class="nm">MLS Setup</div><div class="was">$149</div><span class="free">Free</span></div>
+    </div>
+    <p class="cred-val">Up to <b>$298 a month</b>, handled for you. Your pick.</p>
   </div>
 </section>
 
