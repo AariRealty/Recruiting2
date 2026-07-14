@@ -684,10 +684,11 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   <span class="eb">Not ready to switch?</span>
   <h2>Stay close. <em>Grow anyway.</em></h2>
   <p>Broker level tips on systems, compliance, and closing clean, straight to your inbox. No spam, unsubscribe anytime.</p>
-  <form class="news-form" onsubmit="return false;">
-    <input type="email" placeholder="you@email.com" aria-label="Email address" />
+  <form class="news-form" id="newsForm">
+    <input type="email" id="newsEmail" placeholder="you@email.com" aria-label="Email address" required />
     <button type="submit">Send me the tips</button>
   </form>
+  <p id="newsOk" style="display:none;font-size:14px;color:#fff;font-weight:600;position:relative;z-index:2;margin-top:6px">You&#39;re in. Broker tips are on the way.</p>
   <p class="news-note">Or talk to a real person: <a href="tel:2396881770" style="color:inherit">239.688.1770</a></p>
 </section>
 <section class="follow" id="follow"><div class="follow-head"><span class="follow-eye">Follow along</span><a class="follow-handle" href="https://www.instagram.com/aari.realty/" target="_blank" rel="noopener">@aari.realty ↗</a></div><div class="follow-grid" id="followGrid"></div></section>
@@ -800,5 +801,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 })();
 </script>
 <script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script><script>(function(){var c=document.querySelectorAll(".ment-card");if(!c.length)return;if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.2});c.forEach(function(e){io.observe(e);});}setTimeout(function(){c.forEach(function(e){e.classList.add("in");});},1600);})();</script>
+<script>(function(){var f=document.getElementById('newsForm');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var i=document.getElementById('newsEmail');var em=(i.value||'').trim();if(!em||em.indexOf('@')<1)return;var b=f.querySelector('button');b.disabled=true;b.textContent='Sending...';fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-lead-capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'joinaari-newsletter'})}).then(function(r){return r.json();}).then(function(){f.style.display='none';document.getElementById('newsOk').style.display='block';}).catch(function(){b.disabled=false;b.textContent='Send me the tips';i.value='';i.placeholder='Try again';});});})();</script>
 </body>
 </html>
