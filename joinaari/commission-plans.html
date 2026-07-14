@@ -61,6 +61,20 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;heigh
 .closer p{font-size:13px;color:var(--mid);margin:12px 0 22px}
 footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;padding:22px;font-size:11px}
 @media(max-width:760px){.wrap{padding:0 22px}nav{padding:14px 22px}.navlinks a:not(.on){display:none}.cmp th,.cmp td{padding:12px 10px;font-size:12.5px}}
+
+.credits{background:var(--off);padding:52px 24px}
+.cred-inner{max-width:640px;margin:0 auto}
+.cred-eyebrow{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lite);text-align:center;margin-bottom:10px}
+.cred-h{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;text-align:center;line-height:1.05}
+.cred-h em{font-style:italic;color:#8a827a}
+.cred-tiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:22px}
+.cred-tile{background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px 14px;text-align:center}
+.cred-tile .nm{font-size:14px;font-weight:800}
+.cred-tile .was{font-size:13px;color:var(--lite);text-decoration:line-through;margin:8px 0}
+.cred-tile .free{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:#fff;padding:6px 0;border-radius:50px}
+.cred-val{text-align:center;font-size:13px;color:var(--mid);margin-top:16px}
+.cred-val b{color:var(--ink)}
+@media(max-width:560px){.cred-tiles{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -94,6 +108,19 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   </table>
   <p class="note">Net of the flat $499 per file, the monthly fee, and the $199 annual E&amp;O. No cap, no tiers, no revenue share. New agents start on the <a href="/mentorship.html" style="text-decoration:underline">Mentorship plan</a>.</p>
 </div></section>
+
+<section class="credits">
+  <div class="cred-inner">
+    <p class="cred-eyebrow">Two service credits, every month</p>
+    <h2 class="cred-h">Pick 2. <em>On us.</em></h2>
+    <div class="cred-tiles">
+      <div class="cred-tile"><div class="nm">Offer Prep</div><div class="was">$79</div><span class="free">Free</span></div>
+      <div class="cred-tile"><div class="nm">Listing Docs</div><div class="was">$99</div><span class="free">Free</span></div>
+      <div class="cred-tile"><div class="nm">MLS Setup</div><div class="was">$149</div><span class="free">Free</span></div>
+    </div>
+    <p class="cred-val">Up to <b>$298 a month</b>, handled for you. Your pick.</p>
+  </div>
+</section>
 
 <section class="faq"><div class="wrap">
   <h2 class="sec-head">How Aari actually works.</h2>
