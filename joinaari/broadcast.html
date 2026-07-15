@@ -1,0 +1,88 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow">
+<title>Aari Broadcast</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#141210;--mid:#6b6b6b;--lite:#9b948a;--off:#f6f4f0;--border:#e2e0d8;--grn:#2f6b46}
+body{font-family:'Montserrat',sans-serif;background:var(--off);color:var(--ink);padding:30px 16px}
+.wrap{max-width:640px;margin:0 auto}
+.brand{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;text-align:center}
+.sub{text-align:center;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);margin:4px 0 24px}
+.card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px 26px;margin-bottom:16px}
+label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--lite);margin-bottom:7px}
+input,textarea{width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-family:'Montserrat',sans-serif;font-size:14px;color:var(--ink);background:var(--off);outline:none}
+input:focus,textarea:focus{border-color:var(--ink)}
+textarea{min-height:220px;resize:vertical;line-height:1.6}
+.row{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.row>div{flex:1;min-width:180px}
+button{background:var(--ink);color:#fff;border:none;border-radius:50px;padding:13px 26px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+button.ghost{background:#fff;color:var(--ink);border:1px solid var(--ink)}
+button:disabled{opacity:.5;cursor:default}
+.count{text-align:center;font-size:14px;font-weight:600;margin:2px 0 14px}
+.count b{font-size:22px;font-family:'Cormorant Garamond',serif}
+.msg{font-size:13px;margin-top:12px;text-align:center;min-height:18px}
+.msg.ok{color:var(--grn);font-weight:600}.msg.err{color:#a32d2d;font-weight:600}
+.hint{font-size:11.5px;color:var(--lite);margin-top:8px;line-height:1.5}
+.hide{display:none}
+</style></head><body>
+<div class="wrap">
+  <div class="brand">Aari Broadcast</div>
+  <div class="sub">Blog & email to your list</div>
+
+  <div class="card" id="lock">
+    <label>Passcode</label>
+    <div class="row"><div><input type="password" id="pass" placeholder="Enter your broadcast passcode"></div><button id="unlock">Unlock</button></div>
+    <div class="msg err" id="lockMsg"></div>
+  </div>
+
+  <div id="app" class="hide">
+    <div class="count" id="count"></div>
+    <div class="card">
+      <label>Subject line</label>
+      <input type="text" id="subject" placeholder="e.g. This week in Southwest Florida real estate">
+      <div style="height:16px"></div>
+      <label>Your message</label>
+      <textarea id="body" placeholder="Write your blog post or email here. Plain text is fine, blank lines become paragraphs. You can also paste HTML."></textarea>
+      <div class="hint">Every send automatically includes your address and a one-click unsubscribe, so you stay compliant.</div>
+    </div>
+    <div class="card">
+      <div class="row">
+        <div><label>Send a test to yourself first</label><input type="email" id="testEmail" placeholder="you@aarirealty.com"></div>
+        <button class="ghost" id="sendTest">Send test</button>
+      </div>
+      <div style="height:16px"></div>
+      <button id="sendAll" style="width:100%">Send to all subscribers</button>
+      <div class="msg" id="msg"></div>
+    </div>
+  </div>
+</div>
+<script>
+var FN='https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-broadcast';
+var token='',count=0;
+function toHtml(t){t=t.trim();if(/<[a-z][\s\S]*>/i.test(t))return t;return t.split(/\n{2,}/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');}
+function post(payload){return fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(r){return r.json();});}
+document.getElementById('unlock').addEventListener('click',function(){
+  var p=document.getElementById('pass').value.trim();var lm=document.getElementById('lockMsg');lm.textContent='';
+  post({token:p,count_only:true}).then(function(j){
+    if(j&&j.ok){token=p;count=j.count;document.getElementById('lock').classList.add('hide');document.getElementById('app').classList.remove('hide');document.getElementById('count').innerHTML='<b>'+count+'</b> active subscriber'+(count===1?'':'s')+' on your list';}
+    else{lm.textContent='Wrong passcode.';}
+  }).catch(function(){lm.textContent='Connection error, try again.';});
+});
+document.getElementById('sendTest').addEventListener('click',function(){
+  var m=document.getElementById('msg');m.className='msg';m.textContent='';
+  var s=document.getElementById('subject').value.trim(),b=document.getElementById('body').value.trim(),te=document.getElementById('testEmail').value.trim();
+  if(!s||!b){m.className='msg err';m.textContent='Add a subject and a message first.';return;}
+  if(!te){m.className='msg err';m.textContent='Enter your test email.';return;}
+  var btn=this;btn.disabled=true;btn.textContent='Sending...';
+  post({token:token,subject:s,html:toHtml(b),test_email:te}).then(function(j){btn.disabled=false;btn.textContent='Send test';if(j&&j.ok){m.className='msg ok';m.textContent='Test sent to '+te+'. Check your inbox.';}else{m.className='msg err';m.textContent='Send failed.';}}).catch(function(){btn.disabled=false;btn.textContent='Send test';m.className='msg err';m.textContent='Send failed.';});
+});
+document.getElementById('sendAll').addEventListener('click',function(){
+  var m=document.getElementById('msg');m.className='msg';m.textContent='';
+  var s=document.getElementById('subject').value.trim(),b=document.getElementById('body').value.trim();
+  if(!s||!b){m.className='msg err';m.textContent='Add a subject and a message first.';return;}
+  if(!confirm('Send this to all '+count+' subscribers? This cannot be undone.'))return;
+  var btn=this;btn.disabled=true;btn.textContent='Sending to '+count+'...';
+  post({token:token,subject:s,html:toHtml(b)}).then(function(j){btn.disabled=false;btn.textContent='Send to all subscribers';if(j&&j.ok){m.className='msg ok';m.textContent='Sent to '+j.sent+' of '+j.recipient_count+(j.failed?(' ('+j.failed+' failed)'):'')+'.';}else{m.className='msg err';m.textContent='Send failed.';}}).catch(function(){btn.disabled=false;btn.textContent='Send to all subscribers';m.className='msg err';m.textContent='Send failed.';});
+});
+</script>
+</body></html>
