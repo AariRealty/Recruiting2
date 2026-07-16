@@ -447,7 +447,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .m2-main{padding:70px 44px 78px;text-align:center;position:relative}
 .m2-blob{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(138,130,122,.09),transparent 70%);top:-130px;right:-120px;animation:m2drift 8s ease-in-out infinite;pointer-events:none}
 @keyframes m2drift{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-16px)}}
-.m2-main>*{position:relative;z-index:2}
+.m2-main>*:not(.m2-blob){position:relative;z-index:2}
 .m2-kick{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8a827a}
 .m2-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,5vw,62px);line-height:1.0;letter-spacing:-.01em;color:var(--ink);margin:15px auto 20px;max-width:15ch}
 .m2-h em{font-style:italic;color:#8a827a}
