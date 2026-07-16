@@ -473,19 +473,22 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 
 .cmp-scan{position:absolute;left:0;right:0;height:130px;top:-130px;background:linear-gradient(180deg,transparent,rgba(138,130,122,.11),transparent);pointer-events:none;z-index:1}
 .cmp>*:not(.cmp-scan){position:relative;z-index:2}
-.cmp.anim.in .cmp-scan{animation:cmpscan 1.9s cubic-bezier(.4,0,.2,1) .1s 1 forwards}
 @keyframes cmpscan{from{top:-130px}to{top:100%}}
-.cmp.anim .cmp-row>span{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s cubic-bezier(.22,1,.36,1)}
-.cmp.anim .cmp-row>span .cmp-k{transform:scale(0);transition:transform .4s cubic-bezier(.34,1.56,.64,1)}
-.cmp.anim.in .cmp-row>span{opacity:1;transform:none}
-.cmp.anim.in .cmp-row>span .cmp-k{transform:scale(1)}
-.cmp.anim.in .cmp-row>span:nth-child(1),.cmp.anim.in .cmp-row>span:nth-child(1) .cmp-k{transition-delay:.5s}
-.cmp.anim.in .cmp-row>span:nth-child(2),.cmp.anim.in .cmp-row>span:nth-child(2) .cmp-k{transition-delay:.95s}
-.cmp.anim.in .cmp-row>span:nth-child(3),.cmp.anim.in .cmp-row>span:nth-child(3) .cmp-k{transition-delay:1.4s}
-.cmp.anim .cmp-cta{opacity:0;transform:translateY(8px);transition:opacity .5s ease,transform .5s ease}
-.cmp.anim.in .cmp-cta{opacity:1;transform:none;transition-delay:1.85s;animation:cmppulse 2.8s ease-in-out 2.4s infinite}
+@keyframes cmpUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes cmpPop{from{transform:scale(0)}to{transform:scale(1)}}
 @keyframes cmppulse{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
-@media(prefers-reduced-motion:reduce){.cmp.anim .cmp-row>span,.cmp.anim .cmp-cta{opacity:1;transform:none}.cmp.anim .cmp-row>span .cmp-k{transform:scale(1)}.cmp-scan{display:none}.cmp.anim.in .cmp-cta{animation:none}}
+.cmp.anim .cmp-row>span{opacity:0}
+.cmp.anim .cmp-row>span .cmp-k{transform:scale(0)}
+.cmp.anim .cmp-cta{opacity:0}
+.cmp.anim.in .cmp-scan{animation:cmpscan 1.9s cubic-bezier(.4,0,.2,1) .1s 1 forwards}
+.cmp.anim.in .cmp-row>span:nth-child(1){animation:cmpUp .5s cubic-bezier(.22,1,.36,1) .5s both}
+.cmp.anim.in .cmp-row>span:nth-child(2){animation:cmpUp .5s cubic-bezier(.22,1,.36,1) .95s both}
+.cmp.anim.in .cmp-row>span:nth-child(3){animation:cmpUp .5s cubic-bezier(.22,1,.36,1) 1.4s both}
+.cmp.anim.in .cmp-row>span:nth-child(1) .cmp-k{animation:cmpPop .4s cubic-bezier(.34,1.56,.64,1) .5s both}
+.cmp.anim.in .cmp-row>span:nth-child(2) .cmp-k{animation:cmpPop .4s cubic-bezier(.34,1.56,.64,1) .95s both}
+.cmp.anim.in .cmp-row>span:nth-child(3) .cmp-k{animation:cmpPop .4s cubic-bezier(.34,1.56,.64,1) 1.4s both}
+.cmp.anim.in .cmp-cta{animation:cmpUp .5s ease 1.85s both,cmppulse 2.8s ease-in-out 4.4s infinite}
+@media(prefers-reduced-motion:reduce){.cmp.anim .cmp-row>span,.cmp.anim .cmp-cta{opacity:1}.cmp.anim .cmp-row>span .cmp-k{transform:scale(1)}.cmp-scan{display:none}.cmp.anim.in .cmp-cta,.cmp.anim.in .cmp-row>span,.cmp.anim.in .cmp-row>span .cmp-k,.cmp.anim.in .cmp-scan{animation:none}}
 </style>
 </head>
 <body>
