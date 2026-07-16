@@ -857,7 +857,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var at=document.getElementById('atrack');
   if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
     var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao+ao+ao;}
-  document.documentElement.classList.add('jsrv');var rv=document.querySelectorAll('.team-head,.tm-cluster,.team-sub,.founder-img,.testi-head,.testi-grid,.how-head,.how .b5-grid,.how-cta,.pl-rail,.plans .pl-card,.pl-bar,.freebies-inner,.faq-head,.faq-list,.news .eb,.news h2,.news p,.news-form,.follow-head,.follow-grid');rv.forEach(function(e){e.classList.add('rv');});['.testi-grid','.faq-list','.follow-grid','.freebies .frb-panels'].forEach(function(q){var g=document.querySelector(q); if(g){g.classList.add('rv-stag');}});
+  document.documentElement.classList.add('jsrv');var rv=document.querySelectorAll('.team-head,.tm-cluster,.team-sub,.founder-img,.testi-head,.testi-grid,.how-head,.how .b5-grid,.how-cta,.pl-rail,.plans .pl-card,.pl-bar,.freebies-inner,.freebies .frb-panels,.faq-head,.faq-list,.news .eb,.news h2,.news p,.news-form,.follow-head,.follow-grid');rv.forEach(function(e){e.classList.add('rv');});['.testi-grid','.faq-list','.follow-grid','.freebies .frb-panels'].forEach(function(q){var g=document.querySelector(q); if(g){g.classList.add('rv-stag');}});
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(el){io.observe(el);});setTimeout(function(){rv.forEach(function(el){el.classList.add('rv-in');});},8000);
