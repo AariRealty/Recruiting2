@@ -129,7 +129,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .how-cta{text-align:center;margin-top:34px}
 .sd{line-height:0}
 .sdi{display:block;width:100%;height:clamp(28px,4vw,50px)}
-.ment{background:#fff;padding:24px 44px 30px}
+.ment{background:#fff;padding:0;overflow:hidden}
 .ment-card{max-width:780px;margin:0 auto;background:var(--ink);color:#fff;border-radius:30px;padding:64px 48px;text-align:center;position:relative;overflow:hidden;box-shadow:0 30px 70px rgba(20,18,16,.18);opacity:0;transform:translateY(30px);transition:opacity .7s,transform .8s cubic-bezier(.22,1,.36,1)}
 .ment-card.in{opacity:1;transform:none}
 .ment-card>*{position:relative;z-index:2}
@@ -434,6 +434,42 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .ment-pts li{display:flex;gap:10px;font-size:13.5px;line-height:1.55;color:rgba(255,255,255,.72)}
 .ment-pts .k{color:#cfc7bb;font-weight:700;font-size:11px;margin-top:3px}
 .ment-pts b{color:#fff;font-weight:700}
+
+.m2-band{background:var(--ink);padding:15px 0;overflow:hidden;white-space:nowrap;position:relative}
+.m2-band::before,.m2-band::after{content:'';position:absolute;top:0;bottom:0;width:90px;z-index:2;pointer-events:none}
+.m2-band::before{left:0;background:linear-gradient(90deg,#141210,transparent)}
+.m2-band::after{right:0;background:linear-gradient(270deg,#141210,transparent)}
+.m2-track{display:inline-block;animation:m2scroll 30s linear infinite;will-change:transform}
+.m2-q{display:inline-flex;align-items:baseline;gap:11px;padding:0 30px}
+.m2-q i{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#fff}
+.m2-q em{font-style:normal;font-size:9.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.38);white-space:nowrap}
+@keyframes m2scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.m2-main{padding:70px 44px 78px;text-align:center;position:relative}
+.m2-blob{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(138,130,122,.09),transparent 70%);top:-130px;right:-120px;animation:m2drift 8s ease-in-out infinite;pointer-events:none}
+@keyframes m2drift{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-16px)}}
+.m2-main>*{position:relative;z-index:2}
+.m2-kick{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#8a827a}
+.m2-h{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,5vw,62px);line-height:1.0;letter-spacing:-.01em;color:var(--ink);margin:15px auto 20px;max-width:15ch}
+.m2-h em{font-style:italic;color:#8a827a}
+.m2-p{font-size:15px;line-height:1.75;color:#5f5b52;max-width:58ch;margin:0 auto 10px}
+.m2-beat{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:var(--ink);margin:0 auto 44px}
+.m2-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1080px;margin:0 auto 42px;text-align:left}
+.m2-c{padding:0 24px;border-left:1px solid var(--border);opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.m2-c:first-child{border-left:none;padding-left:0}
+.m2-c:last-child{padding-right:0}
+.m2-grid.in .m2-c{opacity:1;transform:none}
+.m2-grid.in .m2-c:nth-child(1){transition-delay:.05s}
+.m2-grid.in .m2-c:nth-child(2){transition-delay:.18s}
+.m2-grid.in .m2-c:nth-child(3){transition-delay:.31s}
+.m2-grid.in .m2-c:nth-child(4){transition-delay:.44s}
+.m2-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:#ded8cd;line-height:1;margin-bottom:12px;display:block}
+.m2-c b{display:block;font-size:14px;color:var(--ink);margin-bottom:7px;line-height:1.35}
+.m2-c span{font-size:12.5px;color:var(--mid);line-height:1.6}
+.m2-close{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:23px;color:#8a827a;margin-bottom:26px}
+.m2-cta{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;background:var(--ink);color:#fff;border-radius:50px;padding:16px 32px;text-decoration:none;animation:mpulse 2.8s ease-in-out infinite}
+@media(max-width:900px){.m2-grid{grid-template-columns:1fr 1fr;gap:28px 0}.m2-c{border-left:none;padding-left:0}.m2-main{padding:56px 22px 62px}}
+@media(max-width:560px){.m2-grid{grid-template-columns:1fr}.m2-q i{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.m2-track,.m2-blob,.m2-cta{animation:none}.m2-c{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -566,17 +602,32 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="btn btn-dark btn-lg" href="#plans">Start Your Application &rarr;</a>
   </div>
 </section>
-<div class="sd" style="background:#f5f0e8"><svg class="sdi" viewBox="0 0 1200 50" preserveAspectRatio="none"><path fill="#fff" d="M0,50 L0,30 C80,10 200,10 280,30 C360,50 440,50 520,30 C600,10 720,10 800,30 C880,50 960,50 1040,30 C1120,15 1160,22 1200,30 L1200,50 Z"/></svg></div>
+<div class="sd" style="background:#f5f0e8"><svg class="sdi" viewBox="0 0 1200 50" preserveAspectRatio="none"><path fill="#141210" d="M0,50 L0,30 C80,10 200,10 280,30 C360,50 440,50 520,30 C600,10 720,10 800,30 C880,50 960,50 1040,30 C1120,15 1160,22 1200,30 L1200,50 Z"/></svg></div>
 <section class="ment">
-  <div class="ment-card">
-    <span class="ment-kick">Brand new agents</span>
-    <h2>You’re not too new.<br>You’re at the <em>wrong brokerage.</em></h2>
-    <p>Aari Mentorship puts a real broker on your contracts and your calls until you’ve closed five clean deals. Then you fly, your rules.</p>
-    <ul class="ment-pts">
-      <li><span class="k">&#10003;</span><span><b>Your paperwork has an owner. It isn&rsquo;t you.</b> A coordinator runs the file, $199 a side instead of $399, billed at closing.</span></li>
-      <li><span class="k">&#10003;</span><span><b>You&rsquo;ll learn contracts from an attorney.</b> Not a YouTube video. Live classes with the brokerage&rsquo;s counsel.</span></li>
-    </ul>
-    <a href="/mentorship.html" class="ment-cta">Start on Mentorship &rarr;</a>
+  <div class="m2-band"><div class="m2-track">
+    <span class="m2-q"><i>&ldquo;We&rsquo;ve got you.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;You&rsquo;ll never be alone.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;Full support, day one.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;My door&rsquo;s always open.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;We&rsquo;ve got you.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;You&rsquo;ll never be alone.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;Full support, day one.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+    <span class="m2-q"><i>&ldquo;My door&rsquo;s always open.&rdquo;</i><em>&mdash; every brokerage you&rsquo;re about to tour</em></span>
+  </div></div>
+  <div class="m2-main">
+    <div class="m2-blob"></div>
+    <span class="m2-kick">Brand new agents</span>
+    <h2 class="m2-h">You&rsquo;re not too new. You&rsquo;re at the <em>wrong brokerage.</em></h2>
+    <p class="m2-p">Your license came in the mail last week. Since then, four brokers have taken you to coffee and every one of them said that exact sentence. Not one of them told you what happens the first time a contract lands in your inbox and you have no idea what you&rsquo;re looking at.</p>
+    <p class="m2-beat">You&rsquo;ll find out on a Tuesday. Alone.</p>
+    <div class="m2-grid">
+      <div class="m2-c"><span class="m2-num">01</span><b>Your paperwork has an owner. It isn&rsquo;t you.</b><span>A coordinator runs the file. $199 a side instead of $399, billed at closing. Nothing out of pocket.</span></div>
+      <div class="m2-c"><span class="m2-num">02</span><b>A real broker on every contract. Not a hotline.</b><span>Not a group chat. Not a portal. Me.</span></div>
+      <div class="m2-c"><span class="m2-num">03</span><b>You&rsquo;ll learn contracts from an attorney.</b><span>Not a YouTube video. Live classes with the brokerage&rsquo;s counsel.</span></div>
+      <div class="m2-c"><span class="m2-num">04</span><b>Pick 2. On us.</b><span>Offer Prep, Listing Docs, or MLS Setup. Every month, up to $298.</span></div>
+    </div>
+    <p class="m2-close">You go find the clients. We&rsquo;ll handle the paperwork.</p>
+    <a href="/mentorship.html" class="m2-cta">Start on Mentorship &mdash; $59/mo &rarr;</a>
   </div>
 </section>
 <div class="sd" style="background:#fff"><svg class="sdi" viewBox="0 0 1200 50" preserveAspectRatio="none"><path fill="#0a0a0a" d="M0,50 L0,42 C600,-8 900,58 1200,10 L1200,50 Z"/></svg></div>
@@ -810,7 +861,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}if(s&&PLAN.hasOwnProperty(s)){openCheckout(s);}else{location.hash='#plans';}});}
 })();
 </script>
-<script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script><script>(function(){var c=document.querySelectorAll(".ment-card");if(!c.length)return;if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.2});c.forEach(function(e){io.observe(e);});}setTimeout(function(){c.forEach(function(e){e.classList.add("in");});},1600);})();</script>
+<script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script><script>(function(){var c=document.querySelectorAll(".ment-card,.m2-grid");if(!c.length)return;if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.2});c.forEach(function(e){io.observe(e);});}setTimeout(function(){c.forEach(function(e){e.classList.add("in");});},1600);})();</script>
 <script>(function(){var f=document.getElementById('newsForm');if(!f)return;f.addEventListener('submit',function(e){e.preventDefault();var i=document.getElementById('newsEmail');var em=(i.value||'').trim();if(!em||em.indexOf('@')<1)return;var b=f.querySelector('button');b.disabled=true;b.textContent='Sending...';fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-lead-capture',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'joinaari-newsletter'})}).then(function(r){return r.json();}).then(function(){f.style.display='none';document.getElementById('newsOk').style.display='block';}).catch(function(){b.disabled=false;b.textContent='Send me the tips';i.value='';i.placeholder='Try again';});});})();</script>
 </body>
 </html>
