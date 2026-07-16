@@ -144,9 +144,17 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .ment-card .md{position:absolute;border-radius:50%;background:#c9b492;z-index:1;animation:ndfloat 6s ease-in-out infinite}
 /* COPY POSSE MOTION */
 .rot{display:inline-block;transition:opacity .35s ease}
-.rot.out{opacity:0}
-.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
-.rv-in{opacity:1!important;transform:none!important}
+.rot.out{opacity:0}.jsrv .rv{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.jsrv .rv.rv-in{opacity:1!important;transform:none!important}
+.jsrv .rv-stag>*{opacity:0;transform:translateY(20px);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1)}
+.jsrv .rv-stag.rv-in>*{opacity:1;transform:none}
+.jsrv .rv-stag.rv-in>*:nth-child(1){transition-delay:.05s}
+.jsrv .rv-stag.rv-in>*:nth-child(2){transition-delay:.14s}
+.jsrv .rv-stag.rv-in>*:nth-child(3){transition-delay:.23s}
+.jsrv .rv-stag.rv-in>*:nth-child(4){transition-delay:.32s}
+.jsrv .rv-stag.rv-in>*:nth-child(5){transition-delay:.41s}
+.jsrv .rv-stag.rv-in>*:nth-child(6){transition-delay:.50s}
+@media(prefers-reduced-motion:reduce){.jsrv .rv,.jsrv .rv-stag>*{opacity:1!important;transform:none!important}}
 .compare-grid .col:nth-child(2){transition-delay:.1s}
 
 .how{position:relative;z-index:2;padding-top:56px}
@@ -849,10 +857,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   var at=document.getElementById('atrack');
   if(at){var aitems=['Join Aari','Southwest Florida','Broker owned','Splits to 100%','Real support','Fort Myers'];
     var ao=aitems.map(function(t){return '<span>'+t+'</span>';}).join('');at.innerHTML=ao+ao+ao+ao;}
-  var rv=document.querySelectorAll('.compare-head,.compare-grid .col,.compare-close,.how-head,.how .b5-grid,.how-cta,.pl-rail,.eco-head,.eco-grid .eco-card,.founder-copy .eyebrow,.founder-copy h2,.founder-copy p,.apply .eyebrow,.apply h2,.apply p');
+  document.documentElement.classList.add('jsrv');var rv=document.querySelectorAll('.team-head,.tm-cluster,.team-sub,.founder-img,.testi-head,.testi-grid,.how-head,.how .b5-grid,.how-cta,.pl-rail,.plans .pl-card,.pl-bar,.freebies-inner,.faq-head,.faq-list,.news .eb,.news h2,.news p,.news-form,.follow-head,.follow-grid');rv.forEach(function(e){e.classList.add('rv');});['.testi-grid','.faq-list','.follow-grid','.freebies .frb-panels'].forEach(function(q){var g=document.querySelector(q); if(g){g.classList.add('rv-stag');}});
   if('IntersectionObserver' in window){
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
-    rv.forEach(function(el){io.observe(el);});
+    rv.forEach(function(el){io.observe(el);});setTimeout(function(){rv.forEach(function(el){el.classList.add('rv-in');});},8000);
   }else{rv.forEach(function(el){el.classList.add('rv-in');});}
   var plans=document.querySelectorAll('.pl-card'),selNote=document.getElementById('selNote'),applyBtn=document.getElementById('applyBtn');
   function pickPlan(name){
