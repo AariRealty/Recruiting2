@@ -169,9 +169,19 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   .nav-menu-bottom{margin-top:14px;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
   .nav-menu-phone{font-size:12px;font-weight:500;color:var(--mid);text-decoration:none}
   .nav-menu-login{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
-  .hero{height:auto;min-height:70vh;padding:80px 20px 60px}
-  .agrid{grid-template-columns:1fr}
+  .hero{height:auto;min-height:0;padding:64px 20px 48px}
+  .hero .cta-row{flex-direction:column;align-items:center;gap:10px}
+  .hero .cta-row .btn{width:100%;max-width:280px;justify-content:center}
+  .scrolltag{display:none}
+  .marq{display:none}
+  .quote{display:none}
+  .stand{display:none}
+  .apart{padding:48px 0}
+  .agrid{grid-template-columns:1fr;gap:12px}
   .acell,.agrid .acell:nth-child(1),.agrid .acell:nth-child(2),.agrid .acell:nth-child(3),.agrid .acell:nth-child(4){transform:none}
+  .acell{padding:24px 22px}
+  .acell .arw{display:none}
+  .closer{padding:56px 0}
 }
 
 .credits{background:var(--off);padding:56px 24px}
@@ -250,7 +260,7 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   </div>
 </div></section>
 
-<section class="apart"><div class="wrap">
+<section class="apart" id="apart"><div class="wrap">
   <p class="eb reveal">What sets us apart</p>
   <h2 class="reveal">Why start <em>here.</em></h2>
   <div class="agrid">
