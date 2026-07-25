@@ -29,6 +29,9 @@ nav{padding:14px 44px;display:flex;justify-content:space-between;align-items:cen
 .nm-arrow{font-size:12px;color:var(--lite)}
 .mhero-mobile{display:none}
 .cred-mobile-h{display:none}
+.cred-mobile-tokens{display:none}
+.cred-mobile-services{display:none}
+.cred-mobile-note{display:none}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:50px;padding:13px 26px;border:1px solid #fff;background:#fff;color:var(--ink);transition:.2s;cursor:pointer}
 .btn:hover{background:var(--cream);border-color:var(--cream)}
 .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
@@ -215,15 +218,25 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   .credits{padding:40px 20px}
   .cred-eyebrow{display:none}
   .cred-h{display:none}
-  .cred-mobile-h{display:block;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;text-align:center;line-height:1.08;margin-bottom:20px}
+  .cred-tiles{display:none!important}
+  .cred-val{display:none!important}
+  .cred-mobile-h{display:block;font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:500;text-align:center;line-height:1.08;margin-bottom:4px}
   .cred-mobile-h em{font-style:italic;color:var(--mid)}
-  .cred-tiles{grid-template-columns:1fr;gap:0;border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-top:0}
-  .cred-tile{border-radius:0;border:none;border-bottom:1px solid var(--border);padding:14px 20px;text-align:left;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:12px;opacity:0;transform:translateY(12px);transition:opacity .4s ease,transform .4s ease}
-  .cred-tile:last-child{border-bottom:none}
-  .cred-tile.in{opacity:1;transform:none}
-  .cred-tile .nm{font-size:13px}
-  .cred-tile .was{margin:0}
-  .cred-tile .free{display:inline-block;padding:4px 14px}
+  .cred-mobile-sub{display:block;font-size:12px;color:var(--lite);text-align:center;margin-bottom:24px}
+  .cred-mobile-tokens{display:flex;justify-content:center;gap:14px;margin-bottom:20px}
+  .cred-token{width:140px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 14px;text-align:center;opacity:0;transform:translateY(14px);transition:opacity .45s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+  .cred-token.in{opacity:1;transform:none}
+  .cred-token-icon{width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-family:'Cormorant Garamond',serif;font-size:15px;font-weight:700}
+  .cred-token-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:4px}
+  .cred-token-desc{font-size:10px;color:var(--lite);line-height:1.4}
+  .cred-mobile-services{display:block;background:#fff;border-radius:12px;border:1px solid var(--border);padding:14px 16px;margin-bottom:16px;opacity:0;transform:translateY(14px);transition:opacity .45s ease .15s,transform .45s cubic-bezier(.22,1,.36,1) .15s}
+  .cred-mobile-services.in{opacity:1;transform:none}
+  .cred-srv-label{font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--lite);margin-bottom:10px}
+  .cred-srv-list{display:flex;gap:8px;flex-wrap:wrap}
+  .cred-srv{font-size:11px;font-weight:600;color:var(--ink);padding:6px 12px;background:var(--off);border-radius:8px}
+  .cred-mobile-note{display:block;font-size:11px;color:var(--mid);text-align:center;opacity:0;transform:translateY(10px);transition:opacity .4s ease .25s,transform .4s ease .25s}
+  .cred-mobile-note.in{opacity:1;transform:none}
+  .cred-mobile-note b{color:var(--ink)}
   .closer{padding:56px 0}
 }
 
@@ -330,7 +343,14 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   <div class="cred-inner">
     <p class="cred-eyebrow">Two service credits, every month</p>
     <h2 class="cred-h">Pick 2. <em>On us.</em></h2>
-    <h2 class="cred-mobile-h">Your first two files?<br><em>On us.</em></h2>
+    <h2 class="cred-mobile-h">Pick two. <em>Every month.</em></h2>
+    <p class="cred-mobile-sub">Two service credits included with your plan.</p>
+    <div class="cred-mobile-tokens">
+      <div class="cred-token"><div class="cred-token-icon">1</div><div class="cred-token-label">Credit 1</div><div class="cred-token-desc">Use on any service below</div></div>
+      <div class="cred-token"><div class="cred-token-icon">2</div><div class="cred-token-label">Credit 2</div><div class="cred-token-desc">Use on any service below</div></div>
+    </div>
+    <div class="cred-mobile-services"><p class="cred-srv-label">Available services</p><div class="cred-srv-list"><span class="cred-srv">Offer Prep</span><span class="cred-srv">Listing Docs</span><span class="cred-srv">MLS Setup</span></div></div>
+    <p class="cred-mobile-note">Up to <b>$298/mo</b> in value, included free.</p>
     <div class="cred-tiles">
       <div class="cred-tile"><div class="nm">Offer Prep</div><div class="was">$79</div><span class="free">Free</span></div>
       <div class="cred-tile"><div class="nm">Listing Docs</div><div class="was">$99</div><span class="free">Free</span></div>
@@ -409,10 +429,13 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   }
 
   if(window.innerWidth<=820){
-    var ct=document.querySelectorAll('.cred-tile');
-    if(ct.length){
+    var credEls=document.querySelectorAll('.cred-token,.cred-mobile-services,.cred-mobile-note');
+    if(credEls.length){
       var cio=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');cio.unobserve(e.target);}});},{threshold:.2});
-      ct.forEach(function(t,i){t.style.transitionDelay=(i*.1)+'s';cio.observe(t);});
+      credEls.forEach(function(el,i){
+        if(el.classList.contains('cred-token')) el.style.transitionDelay=(i*.12)+'s';
+        cio.observe(el);
+      });
     }
   }
 })();
