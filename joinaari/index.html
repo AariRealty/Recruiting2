@@ -377,11 +377,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   nav{padding:10px 14px}.nav-right .nav-link,.nav-phone{display:none}
   .nav-right .btn{padding:12px 22px;font-size:10px;letter-spacing:.12em;border-radius:50px}
   .brand img{height:32px!important}
-  .annc{padding:7px 20px;font-size:10px;gap:8px}
+  .annc{padding:7px 12px;font-size:9px;white-space:nowrap}
   .annc-full{display:none}
-  .annc-short{display:contents}
-  .annc .go.annc-short{display:inline}
-  .annc .go{font-size:8px;letter-spacing:.08em}
+  .annc-short{display:inline}
+  .annc .go{display:none}
   .nav-right{gap:6px}
   .nav-chat-pill{display:inline-flex;align-items:center;font-family:'Montserrat',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);border:1px solid var(--border);border-radius:50px;padding:9px 14px;text-decoration:none;transition:all .2s}
   @keyframes navPulse{0%,100%{box-shadow:0 0 0 0 rgba(20,18,16,0.4)}50%{box-shadow:0 0 0 8px rgba(20,18,16,0)}}
@@ -513,7 +512,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 </style>
 </head>
 <body>
-<div class="annc"><span class="annc-full"><b>Join today and skip this month's plan fee.</b> Just the $199 to start.</span><span class="annc-short"><b>Skip this month's plan fee.</b> $199 to start.</span><a class="go annc-full" href="#plans">Start today &rarr;</a><a class="go annc-short" href="#plans">Start &rarr;</a></div>
+<div class="annc"><span class="annc-full"><i>Starting at $59/mo. Skip this month's plan fee to start.</i></span><span class="annc-short"><i>Starting at $59/mo. Skip this month's plan fee to start.</i></span><a class="go annc-full" href="#plans">Start today &rarr;</a><a class="go annc-short" href="#plans">Start &rarr;</a></div>
 <nav>
   <a class="brand" href="#"><img src="logo.png" alt="Aari Realty" style="height:44px;width:auto;display:block" /></a>
   <div class="nav-right">
