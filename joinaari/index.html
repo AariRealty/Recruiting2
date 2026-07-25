@@ -40,6 +40,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .nav-link:hover{color:var(--ink)}
 .nav-phone{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--mid)}
 .brand-img{display:none}
+.nav-hamburger{display:none}
+.nav-menu{display:none}
 .nav-chat-pill{display:none}
 .annc-short{display:none}
 .btn{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-radius:var(--r-pill);padding:12px 24px;cursor:pointer;transition:all .2s;border:1px solid var(--ink)}
@@ -384,6 +386,20 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .annc-short{display:inline}
   .annc .go{display:none}
   .nav-right{gap:6px}
+  .nav-hamburger{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4.5px;width:32px;height:32px;border:none;background:none;cursor:pointer;padding:4px}
+  .nav-hamburger span{display:block;width:17px;height:1.5px;background:var(--ink);border-radius:1px;transition:transform .25s,opacity .25s}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  .nav-menu{display:none;background:#f0ece4;padding:18px 22px 20px;border-bottom:1px solid var(--border)}
+  .nav-menu.open{display:block}
+  .nav-menu-links{list-style:none;display:flex;flex-direction:column}
+  .nav-menu-links li a{display:flex;align-items:baseline;justify-content:space-between;padding:12px 0;font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:500;color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(20,18,16,.08)}
+  .nav-menu-links li:last-child a{border-bottom:none}
+  .nav-menu-links li a .nm-arrow{font-family:'Montserrat',sans-serif;font-size:10px;color:#a3865c}
+  .nav-menu-bottom{margin-top:14px;display:flex;align-items:center;justify-content:space-between}
+  .nav-menu-phone{font-size:12px;font-weight:500;color:var(--mid);text-decoration:none}
+  .nav-menu-login{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--border);padding-bottom:2px}
   .nav-chat-pill{display:inline-flex;align-items:center;font-family:'Montserrat',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mid);border:1px solid var(--border);border-radius:50px;padding:9px 14px;text-decoration:none;transition:all .2s}
   @keyframes navPulse{0%,100%{box-shadow:0 0 0 0 rgba(20,18,16,0.4)}50%{box-shadow:0 0 0 8px rgba(20,18,16,0)}}
   .nav-right .btn{animation:navPulse 1.6s ease-in-out 4}
@@ -526,9 +542,22 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="nav-link" href="https://aari-agent-hub.netlify.app" target="_blank" rel="noopener">Log in</a>
     <span class="nav-phone">239.688.1770</span>
     <a class="nav-chat-pill" href="sms:2396881771">Chat</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     <a class="btn btn-dark" href="#plans">Apply &rarr;</a>
   </div>
 </nav>
+<div class="nav-menu" id="navMenu">
+  <ul class="nav-menu-links">
+    <li><a href="#plans">Plans <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="/mentorship.html">Mentorship <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="#how">How it works <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="#faq">FAQ <span class="nm-arrow">&rarr;</span></a></li>
+  </ul>
+  <div class="nav-menu-bottom">
+    <a class="nav-menu-phone" href="tel:2396881770">239.688.1770</a>
+    <a class="nav-menu-login" href="https://aari-agent-hub.netlify.app" target="_blank" rel="noopener">Log in &rarr;</a>
+  </div>
+</div>
 <section class="hero">
   <div class="dots" id="dots"></div>
   <div class="grid">
@@ -911,5 +940,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches){c.classList.add('anim');}
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.28});io.observe(c);}else{c.classList.add('in');}
 setTimeout(function(){c.classList.add('in');},9000);})();</script>
+<script>(function(){var h=document.getElementById('navHamburger'),m=document.getElementById('navMenu');if(!h||!m)return;h.addEventListener('click',function(){h.classList.toggle('open');m.classList.toggle('open');});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open');m.classList.remove('open');});});})();</script>
 </body>
 </html>
