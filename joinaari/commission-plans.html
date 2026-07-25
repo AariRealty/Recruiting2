@@ -38,7 +38,6 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;heigh
 .cmp .feat{color:var(--mid);font-weight:600;font-size:12px;text-transform:uppercase;white-space:nowrap}
 .cmp .ph{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
 .cmp .ph small{display:block;font-family:'Montserrat';font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px}
-.cmp .gcol{background:rgba(20,18,16,.035)}
 .cmp td.val{font-weight:700}
 .cmp .netrow td{border-bottom:none;padding-top:20px}
 .cmp .netlabel{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--lite)}
@@ -85,7 +84,7 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
 
 <section class="hero"><div class="wrap">
   <p class="eyebrow">Commission Plans</p>
-  <h1>Everything, side by side.</h1>
+  <h1>Run your numbers.</h1>
   <p>Drag your closings. The net take-home updates live.</p>
   <div class="slbar">
     <div class="sh"><span class="lb">Closings per year</span><span class="vv" id="clV">12</span></div>
@@ -96,17 +95,17 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
 
 <section class="tbl"><div class="wrap">
   <table class="cmp">
-    <thead><tr><th></th><th class="gcol"><span class="ph">Growth<small>85 / 15</small></span></th><th><span class="ph">Max<small>100%</small></span></th></tr></thead>
+    <thead><tr><th></th><th><span class="ph">Max<small>100% Commission</small></span></th></tr></thead>
     <tbody>
-      <tr><td class="feat">Monthly</td><td class="val gcol">$79</td><td class="val">$99</td></tr>
-      <tr><td class="feat">Annual E&amp;O</td><td class="val gcol">$199</td><td class="val">$199</td></tr>
-      <tr><td class="feat">Transaction</td><td class="val gcol">$499</td><td class="val">$499</td></tr>
-      <tr><td class="feat">CRM</td><td class="val gcol">Included</td><td class="val">Included</td></tr>
-      <tr class="netrow"><td class="netlabel">Net take-home</td><td class="gcol"><span class="net" id="g">$0</span></td><td><span class="net" id="m">$0</span></td></tr>
-      <tr class="jr"><td></td><td class="gcol"><a href="/index.html#plans" class="jb g">Join Growth &rarr;</a></td><td><a href="/index.html#plans" class="jb x">Join Max &rarr;</a></td></tr>
+      <tr><td class="feat">Monthly</td><td class="val">$99</td></tr>
+      <tr><td class="feat">Annual E&amp;O</td><td class="val">$199</td></tr>
+      <tr><td class="feat">Transaction</td><td class="val">$499</td></tr>
+      <tr><td class="feat">CRM</td><td class="val">Included</td></tr>
+      <tr class="netrow"><td class="netlabel">Net take-home</td><td><span class="net" id="m">$0</span></td></tr>
+      <tr class="jr"><td></td><td><a href="/index.html#plans" class="jb g">Join Max &rarr;</a></td></tr>
     </tbody>
   </table>
-  <p class="note">Net of the flat $499 per file, the monthly fee, and the $199 annual E&amp;O. No cap, no tiers, no revenue share. New agents start on the <a href="/mentorship.html" style="text-decoration:underline">Mentorship plan</a>.</p>
+  <p class="note">Net of the flat $499 per file, the $99/mo fee, and the $199 annual E&amp;O. No cap, no tiers, no revenue share. New agents start on the <a href="/mentorship.html" style="text-decoration:underline">Mentorship plan</a>.</p>
 </div></section>
 
 <section class="credits">
@@ -141,15 +140,15 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
 (function(){
   var cl=document.getElementById('cl');
   function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
-  var cg=0,cmx=0;
+  var prev=0;
   function tw(f,t,el){var s=null,d=550;function st(x){if(!s)s=x;var p=Math.min((x-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=money(f+(t-f)*e);if(p<1){requestAnimationFrame(st);}else{el.textContent=money(t);}}requestAnimationFrame(st);setTimeout(function(){el.textContent=money(t);},d+150);}
   function calc(anim){
     var c=+cl.value,gross=350000*0.03;
     document.getElementById('clV').textContent=c;
-    var g=c*(gross*0.85-499)-79*12-199, m=c*(gross-499)-99*12-199;
-    var ge=document.getElementById('g'),me=document.getElementById('m');
-    if(anim){tw(cg,g,ge);tw(cmx,m,me);}else{ge.textContent=money(g);me.textContent=money(m);}
-    cg=g;cmx=m;
+    var m=c*(gross-499)-99*12-199;
+    var me=document.getElementById('m');
+    if(anim){tw(prev,m,me);}else{me.textContent=money(m);}
+    prev=m;
   }
   cl.addEventListener('input',function(){calc(true);});calc(false);
 })();

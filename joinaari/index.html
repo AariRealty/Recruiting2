@@ -239,6 +239,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .o2-panel.open .o2-row:nth-child(3){animation-delay:.19s}
 @keyframes rowPop{to{opacity:1;transform:none}}
 .pl-bar{max-width:1140px;margin:24px auto 0;background:#141210;border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:20px 30px;display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+.pl-calc-mobile{display:none}
 .pl-bar-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
 .pl-fee b{color:#fff;font-weight:700}
@@ -423,7 +424,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:26px;min-height:0}
   .leadmag{padding:0 20px}.leadmag-wrap{grid-template-columns:1fr;gap:0}.leadmag-photo{max-width:270px;margin:0 auto}.leadmag-photo img{margin-top:-64px}.leadmag-copy{padding:8px 0 54px;text-align:center}
-  .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{flex-direction:column;gap:12px}.pl-fee-sep{display:none}
+  .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{display:none}.pl-calc-link{display:none}.pl-calc-mobile{display:block;text-align:center;margin-top:14px}.pl-calc-mobile a{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);padding-bottom:3px;text-decoration:none}
   .apply{padding:52px 20px}
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
   .founder{padding:52px 0}.founder-img{width:100%;max-width:none;border-radius:0}
@@ -802,6 +803,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
       </div></div>
       <span class="pl-cta" data-plan="Aari Max 100%">Go Max &rarr;</span>
+      <div class="pl-calc-mobile"><a href="/commission-plans.html">Run your numbers &rarr;</a></div>
     </div>
   </div>
   <div class="pl-bar">
@@ -812,7 +814,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <span class="pl-fee-sep"></span>
     <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
   </div>
-  <div style="text-align:center;margin:20px auto 0"><a href="/commission-plans.html" style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px">Compare all plans and run your numbers &rarr;</a></div>
+  <div class="pl-calc-link" style="text-align:center;margin:20px auto 0"><a href="/commission-plans.html" style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px">Compare all plans and run your numbers &rarr;</a></div>
 </section>
 <section class="cmpsec">
   <div class="cmp">
