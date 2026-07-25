@@ -27,6 +27,7 @@ nav{padding:14px 44px;display:flex;justify-content:space-between;align-items:cen
 .nav-hamburger{display:none}
 .nav-menu{display:none}
 .nm-arrow{font-size:12px;color:var(--lite)}
+.mhero-mobile{display:none}
 .btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border-radius:50px;padding:13px 26px;border:1px solid #fff;background:#fff;color:var(--ink);transition:.2s;cursor:pointer}
 .btn:hover{background:var(--cream);border-color:var(--cream)}
 .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
@@ -169,18 +170,31 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   .nav-menu-bottom{margin-top:14px;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
   .nav-menu-phone{font-size:12px;font-weight:500;color:var(--mid);text-decoration:none}
   .nav-menu-login{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
-  .hero{height:auto;min-height:0;padding:64px 20px 48px}
-  .hero .cta-row{flex-direction:column;align-items:center;gap:10px}
-  .hero .cta-row .btn{width:100%;max-width:280px;justify-content:center}
+  .mhero-mobile{display:block;background:#fff;padding:40px 22px 44px;text-align:center}
+  .mhero-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#141210;background:#c9b492;border-radius:50px;padding:7px 16px;margin-bottom:18px}
+  .mhero-h{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;line-height:1.05;color:var(--ink);margin-bottom:14px}
+  .mhero-p{font-size:14px;color:var(--mid);line-height:1.65;max-width:340px;margin:0 auto 24px}
+  .mhero-cta{display:block;max-width:320px;margin:0 auto 12px;text-align:center;background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:50px;padding:16px 28px;text-decoration:none}
+  .mhero-note{font-size:11px;color:var(--lite);letter-spacing:.02em}
+  .hero{display:none}
   .scrolltag{display:none}
   .marq{display:none}
   .quote{display:none}
   .stand{display:none}
-  .apart{padding:48px 0}
-  .agrid{grid-template-columns:1fr;gap:12px}
-  .acell,.agrid .acell:nth-child(1),.agrid .acell:nth-child(2),.agrid .acell:nth-child(3),.agrid .acell:nth-child(4){transform:none}
-  .acell{padding:24px 22px}
+  .apart{padding:0}
+  .apart .wrap{padding:0}
+  .apart .eb{display:none}
+  .apart h2{display:none}
+  .agrid{grid-template-columns:1fr;gap:0;background:var(--ink);border-radius:20px;padding:24px 22px;margin:0 20px}
+  .acell,.agrid .acell:nth-child(1),.agrid .acell:nth-child(2),.agrid .acell:nth-child(3),.agrid .acell:nth-child(4){transform:none;background:transparent;border:none;border-radius:0;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .acell:last-child{border-bottom:none}
+  .acell .n{display:inline-flex;width:22px;height:22px;font-size:0;background:#c9b492;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 6L5 8.5L9.5 3.5' stroke='%23141210' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:11px;border-radius:50%;margin-bottom:8px}
+  .acell h3{color:#fff;font-size:15px}
+  .acell p{color:rgba(255,255,255,.6);font-size:12.5px}
+  .acell p em{color:rgba(255,255,255,.85)}
   .acell .arw{display:none}
+  .acell .aside{color:rgba(255,255,255,.4)}
+  .credits{padding:40px 20px}
   .closer{padding:56px 0}
 }
 
@@ -230,6 +244,13 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   </div>
 </div>
 
+<div class="mhero-mobile">
+  <div class="mhero-badge">Mentorship &mdash; $59/mo</div>
+  <h1 class="mhero-h">Your first contract<br>shouldn&rsquo;t scare you.</h1>
+  <p class="mhero-p">A broker reviews every file. An attorney teaches the contracts. Two transactions handled free every month. You&rsquo;re not figuring this out alone.</p>
+  <a href="ica.html?plan_name=Aari%20Mentorship%2075%2F25&total_due=199.00" class="mhero-cta">Start on Mentorship &rarr;</a>
+  <span class="mhero-note">$199 one-time to start &middot; First month waived</span>
+</div>
 <header class="hero">
   <div class="heroinner" id="heroinner">
     <span class="sticker">New here? Perfect.</span>
