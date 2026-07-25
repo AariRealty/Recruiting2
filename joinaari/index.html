@@ -39,6 +39,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .nav-link{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s}
 .nav-link:hover{color:var(--ink)}
 .nav-phone{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--mid)}
+.brand-img{display:none}
 .nav-chat-pill{display:none}
 .annc-short{display:none}
 .btn{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-radius:var(--r-pill);padding:12px 24px;cursor:pointer;transition:all .2s;border:1px solid var(--ink)}
@@ -376,7 +377,8 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 
   nav{padding:10px 14px}.nav-right .nav-link,.nav-phone{display:none}
   .nav-right .btn{padding:12px 22px;font-size:10px;letter-spacing:.12em;border-radius:50px}
-  .brand img{height:32px!important}
+  .brand-text{display:none}
+  .brand-img{display:block;height:32px;width:auto}
   .annc{padding:7px 12px;font-size:9px;white-space:nowrap}
   .annc-full{display:none}
   .annc-short{display:inline}
@@ -512,9 +514,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 </style>
 </head>
 <body>
-<div class="annc"><span class="annc-full"><i>Starting at $59/mo. Skip this month's plan fee to start.</i></span><span class="annc-short"><i>Starting at $59/mo. Skip this month's plan fee to start.</i></span><a class="go annc-full" href="#plans">Start today &rarr;</a><a class="go annc-short" href="#plans">Start &rarr;</a></div>
+<div class="annc"><span class="annc-full"><b>Join today and skip this month's plan fee.</b> Just the $199 to start.</span><span class="annc-short"><i>Starting at $59/mo. Skip this month's plan fee to start.</i></span><a class="go annc-full" href="#plans">Start today &rarr;</a><a class="go annc-short" href="#plans">Start &rarr;</a></div>
 <nav>
-  <a class="brand" href="#"><img src="logo.png" alt="Aari Realty" style="height:44px;width:auto;display:block" /></a>
+  <a class="brand" href="#"><span class="brand-text">Aari Realty<small>Southwest Florida Brokerage</small></span><img class="brand-img" src="logo.png" alt="Aari Realty" /></a>
   <div class="nav-right">
     <a class="nav-link" href="#plans">Plans</a>
     <a class="nav-link" href="/mentorship.html">Mentorship</a>
