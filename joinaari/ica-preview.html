@@ -65,6 +65,10 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
 .ica-footer p{font-family:'Montserrat',sans-serif!important;font-size:10px!important;color:rgba(255,255,255,.45)!important;margin-top:8px!important;line-height:1.8!important}
 .ica-footer a{color:rgba(255,255,255,.7)}
 
+.nm-btn{text-align:center;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:12px;padding:14px 16px;text-decoration:none}
+.nm-btn-dark{background:var(--ink);color:#fff}
+.nm-btn-outline{background:#fff;color:var(--ink);border:1px solid var(--border)}
+
 @media(max-width:640px){
   nav{padding:12px 16px}
   .brand-text{display:none}
@@ -81,6 +85,11 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
   .nav-menu-links{list-style:none;display:flex;flex-direction:column;gap:8px}
   .nav-menu-links li a{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fff;border-radius:12px;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;box-shadow:0 1px 3px rgba(20,18,16,.04)}
   .nm-arrow{font-size:12px;color:var(--lite)}
+  .nav-menu-actions{margin-top:14px;display:flex;gap:8px}
+  .nav-menu-actions .nm-btn{flex:1}
+  .nav-menu-bottom{margin-top:14px;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+  .nav-menu-phone{font-size:12px;font-weight:500;color:var(--mid);text-decoration:none}
+  .nav-menu-login{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
   .ica-hero{padding:40px 20px 36px}
   .ica-hero h1{font-size:28px}
   .ica-hero p{font-size:13px}
@@ -108,6 +117,7 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
     <a class="nav-link" href="/#how">How it works</a>
     <a class="nav-link" href="/#faq">FAQ</a>
     <a class="nav-link" href="/ica-preview.html">ICA</a>
+    <a class="nav-link" href="https://aari-agent-hub.netlify.app" target="_blank" rel="noopener">Log in</a>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     <a class="btn btn-dark" href="/#plans">Apply &rarr;</a>
   </div>
@@ -120,6 +130,14 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
     <li><a href="/#faq">FAQ <span class="nm-arrow">&rarr;</span></a></li>
     <li><a href="/ica-preview.html">ICA Package <span class="nm-arrow">&rarr;</span></a></li>
   </ul>
+  <div class="nav-menu-actions">
+    <a class="nm-btn nm-btn-dark" href="/#plans">Apply &rarr;</a>
+    <a class="nm-btn nm-btn-outline" href="sms:2396881771">Chat &rarr;</a>
+  </div>
+  <div class="nav-menu-bottom">
+    <a class="nav-menu-phone" href="tel:2396881770">239.688.1770</a>
+    <a class="nav-menu-login" href="https://aari-agent-hub.netlify.app" target="_blank" rel="noopener">Log in &rarr;</a>
+  </div>
 </div>
 
 <div class="ica-hero">
@@ -1166,7 +1184,7 @@ Step 6 &mdash; Fixed 50/50 Split &mdash; Aari Realty LLC: $3,688.00 &middot; Ass
 
 <footer class="ica-footer">
   <div class="fbrand">Aari Realty</div>
-  <p>Licensed Real Estate Brokerage &middot; Fort Myers, Florida<br>&copy; 2025 Aari Realty LLC. All rights reserved.<br><a href="mailto:info@aarirealty.com">info@aarirealty.com</a></p>
+  <p>Licensed Real Estate Brokerage &middot; Fort Myers, Florida<br>&copy; 2026 Aari Realty LLC. All rights reserved.<br><a href="mailto:info@aarirealty.com">info@aarirealty.com</a></p>
 </footer>
 
 <script>
