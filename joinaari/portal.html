@@ -123,10 +123,35 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media(max-width:900px){
-    .topbar{padding:14px 20px}
-    .topbar nav{display:none}
-    .wrap{padding:32px 20px 80px}
+    .topbar{padding:14px 20px;flex-wrap:wrap;gap:10px}
+    .topbar nav{display:flex;gap:14px;width:100%;border-top:1px solid var(--line);padding-top:10px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+    .topbar nav::-webkit-scrollbar{display:none}
+    .topbar nav a{font-size:10px;white-space:nowrap}
+    .topbar .agent-chip{display:none}
+    .wrap{padding:24px 16px 64px}
+    .welcome h1{font-size:28px}
+    .welcome p{font-size:12px}
     .grid-2,.grid-3{grid-template-columns:1fr}
+    .section-head{flex-direction:column;gap:4px}
+    .section-head .eyebrow{font-size:8px}
+    .section-head h2{font-size:22px}
+    .row{flex-wrap:wrap;gap:8px;padding:14px 16px}
+    .row .row-title{font-size:12px}
+    .row .row-sub{font-size:9px}
+    .badge{font-size:8px;padding:4px 9px}
+    .btn-sm{padding:7px 14px;font-size:9px}
+    .stat .num{font-size:32px}
+    .stat .lbl{font-size:9px;letter-spacing:1.5px}
+    .stat{padding:16px}
+    .card{padding:18px}
+    .card h3{font-size:17px}
+    .card p{font-size:12px}
+    .res a{padding:12px 14px;font-size:11px}
+    footer{padding:24px 20px}
+    .gate-card .mark{font-size:36px;letter-spacing:4px}
+    .gate-card .sub{margin-bottom:28px}
+    .gate-card input{padding:14px 16px;font-size:14px}
+    .gate-note{font-size:8px}
   }
 </style>
 </head>
