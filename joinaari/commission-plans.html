@@ -26,79 +26,82 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-f
 .hero h1 em{font-style:italic;color:var(--lite)}
 .hero-sub{font-size:14px;color:var(--mid);max-width:420px;margin:0 auto}
 
-/* INPUTS */
-.inputs{background:var(--bg);padding:0 44px 44px}
-.inputs-inner{max-width:600px;margin:0 auto}
-.inputs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+/* INPUTS — clean row */
+.inputs{background:var(--bg);padding:0 44px 20px}
+.inputs-inner{max-width:560px;margin:0 auto}
+.inputs-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
 .field label{display:block;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lite);margin-bottom:6px}
-.field-input{width:100%;border:1px solid var(--border);border-radius:10px;padding:14px 14px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
-.field-input:focus{border-color:var(--ink)}
-.field-prefix{position:relative}
-.field-prefix .field-input{padding-left:28px}
-.field-prefix::before{content:'$';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--lite);pointer-events:none;margin-top:10px}
-.field-suffix{position:relative}
-.field-suffix .field-input{padding-right:28px}
-.field-suffix::after{content:'%';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--lite);pointer-events:none;margin-top:10px}
+.fi{width:100%;border:1px solid var(--border);border-radius:10px;padding:14px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
+.fi:focus{border-color:var(--ink)}
+.fp{position:relative}
+.fp .fi{padding-left:28px}
+.fp::before{content:'$';position:absolute;left:14px;bottom:15px;font-size:14px;font-weight:600;color:var(--lite);pointer-events:none}
+.fs{position:relative}
+.fs .fi{padding-right:28px}
+.fs::after{content:'%';position:absolute;right:14px;bottom:15px;font-size:14px;font-weight:600;color:var(--lite);pointer-events:none}
 
-/* COMPARISON COLUMNS */
-.compare{padding:32px 44px 0}
-.compare-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-
-.col-card{border-radius:18px;padding:28px 22px;overflow:hidden}
-.col-them{background:var(--bg);border:1px solid var(--border)}
-.col-aari{background:var(--ink);color:#fff}
-
-.col-eye{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px}
-.col-them .col-eye{color:var(--lite)}
-.col-aari .col-eye{color:rgba(255,255,255,.4)}
-.col-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:20px;line-height:1.15}
-.col-aari .col-title{color:#fff}
-
-.col-row{margin-bottom:14px}
-.col-row label{display:block;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lite);margin-bottom:5px}
-.col-aari .col-row label{color:rgba(255,255,255,.4)}
-
-.col-input{width:100%;border:1px solid var(--border);border-radius:8px;padding:11px 12px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
-.col-input:focus{border-color:var(--ink)}
-
-.col-row-prefix{position:relative}
-.col-row-prefix .col-input{padding-left:22px}
-.col-row-prefix::before{content:'$';position:absolute;left:12px;bottom:12px;font-size:12px;font-weight:600;color:var(--lite);pointer-events:none}
-.col-row-suffix{position:relative}
-.col-row-suffix .col-input{padding-right:24px}
-.col-row-suffix::after{content:'%';position:absolute;right:12px;bottom:12px;font-size:12px;font-weight:600;color:var(--lite);pointer-events:none}
-
-.col-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-
-.col-static{font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:11px 12px}
-.col-aari .col-row label{color:rgba(255,255,255,.35)}
+/* SPLIT QUESTION */
+.split-q{background:var(--bg);padding:0 44px 44px}
+.split-inner{max-width:560px;margin:0 auto;background:var(--off);border-radius:16px;padding:24px 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.split-label{flex:1;min-width:180px}
+.split-label strong{display:block;font-size:14px;font-weight:700;margin-bottom:2px}
+.split-label span{font-size:11px;color:var(--lite)}
+.split-input{position:relative;width:100px;flex-shrink:0}
+.split-input .fi{font-size:22px;font-weight:800;text-align:center;padding:16px 30px 16px 14px;background:#fff}
+.split-input::after{content:'%';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:700;color:var(--lite);pointer-events:none}
 
 /* RESULTS */
-.results{padding:32px 44px 0}
-.results-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.res-card{border-radius:16px;padding:28px 22px;text-align:center}
+.results{padding:24px 44px 0}
+.results-inner{max-width:560px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.res-card{border-radius:16px;padding:28px 20px;text-align:center}
 .res-them{background:var(--bg);border:1px solid var(--border)}
 .res-aari{background:var(--ink);color:#fff}
-.res-eye{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.res-eye{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
 .res-them .res-eye{color:var(--lite)}
 .res-aari .res-eye{color:rgba(255,255,255,.4)}
-.res-num{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,38px);font-weight:600;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
-.res-detail{font-size:10px;color:var(--lite)}
+.res-num{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,6vw,42px);font-weight:600;line-height:1;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.res-detail{font-size:10px;color:var(--lite);line-height:1.4}
 .res-aari .res-detail{color:rgba(255,255,255,.4)}
-.res-bar{height:5px;border-radius:50px;margin-top:14px}
+.res-bar{height:5px;border-radius:50px;margin-top:16px;transition:width .5s cubic-bezier(.22,1,.36,1)}
 .res-them .res-bar{background:var(--border)}
 .res-aari .res-bar{background:#fff}
 
 /* DIFFERENCE */
-.diff{padding:24px 44px 44px}
-.diff-inner{max-width:600px;margin:0 auto}
+.diff{padding:14px 44px 0}
+.diff-inner{max-width:560px;margin:0 auto}
 .diff-card{background:var(--ink);border-radius:16px;padding:28px;text-align:center}
 .diff-eye{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
-.diff-num{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,8vw,52px);font-weight:600;color:#fff;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.diff-num{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,9vw,56px);font-weight:600;color:#fff;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
 .diff-sub{font-size:12px;color:rgba(255,255,255,.45)}
 
+/* CUSTOMIZE TOGGLE */
+.customize{padding:28px 44px 0}
+.cust-inner{max-width:560px;margin:0 auto}
+.cust-toggle{display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;font-size:11px;font-weight:600;color:var(--lite);padding:14px;border:1px solid var(--border);border-radius:12px;background:var(--bg);transition:border-color .2s}
+.cust-toggle:hover{border-color:var(--ink);color:var(--ink)}
+.cust-arrow{font-size:14px;transition:transform .25s ease}
+.cust-toggle.open .cust-arrow{transform:rotate(180deg)}
+.cust-panel{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.cust-panel.open{max-height:600px}
+.cust-grid{padding:20px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.cust-grid .field label{font-size:8px}
+.cust-grid .fi{font-size:13px;padding:11px 12px}
+.cust-grid .fp .fi{padding-left:22px}
+.cust-grid .fp::before{left:12px;bottom:12px;font-size:12px}
+.cust-grid .fs .fi{padding-right:24px}
+.cust-grid .fs::after{right:12px;bottom:12px;font-size:12px}
+
+/* AARI FEES */
+.aari-fees{padding:28px 44px 0}
+.af-inner{max-width:560px;margin:0 auto;background:var(--bg);border-radius:16px;padding:24px 28px}
+.af-h{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:16px;text-align:center}
+.af-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border)}
+.af-row:last-child{border-bottom:none}
+.af-label{font-size:11px;font-weight:600;color:var(--lite);text-transform:uppercase;letter-spacing:.06em}
+.af-val{font-size:14px;font-weight:700}
+
 /* CTA */
-.cta-section{text-align:center;padding:0 44px 48px}
+.cta-section{text-align:center;padding:36px 44px 48px}
 .cta-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:50px;padding:16px 36px;background:var(--ink);color:#fff;transition:.2s;margin-bottom:12px}
 .cta-btn:hover{background:#000}
 .cta-mentor{font-size:11px;color:var(--lite)}
@@ -120,17 +123,20 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
   nav{padding:14px 22px}
   .navlinks a:not(.btn-nav){display:none}
   .hero{padding:36px 22px 28px}
-  .inputs{padding:0 22px 32px}
-  .inputs-grid{grid-template-columns:1fr;gap:12px}
-  .compare{padding:24px 22px 0}
-  .compare-inner{grid-template-columns:1fr;gap:14px}
-  .col-card{padding:24px 20px}
-  .results{padding:24px 22px 0}
-  .results-inner{grid-template-columns:1fr 1fr;gap:12px}
+  .inputs{padding:0 22px 16px}
+  .inputs-row{grid-template-columns:1fr;gap:12px}
+  .split-q{padding:0 22px 36px}
+  .split-inner{padding:20px 22px;gap:14px}
+  .split-input{width:90px}
+  .split-input .fi{font-size:20px;padding:14px 28px 14px 12px}
+  .results{padding:20px 22px 0}
   .res-card{padding:22px 16px}
-  .diff{padding:16px 22px 36px}
+  .diff{padding:12px 22px 0}
   .diff-card{padding:24px 20px}
-  .cta-section{padding:0 22px 40px}
+  .customize{padding:24px 22px 0}
+  .aari-fees{padding:24px 22px 0}
+  .af-inner{padding:20px 22px}
+  .cta-section{padding:28px 22px 40px}
   .wrap{padding:0 22px}
 }
 </style>
@@ -149,96 +155,32 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
 
 <section class="inputs">
   <div class="inputs-inner">
-    <div class="inputs-grid">
+    <div class="inputs-row">
       <div class="field">
         <label>Avg Sale Price</label>
-        <div class="field-prefix"><input type="text" class="field-input" id="price" value="350,000" inputmode="numeric"></div>
+        <div class="fp"><input type="text" class="fi" id="price" value="350,000" inputmode="numeric"></div>
       </div>
       <div class="field">
         <label>Your Commission %</label>
-        <div class="field-suffix"><input type="text" class="field-input" id="comm" value="3" inputmode="decimal"></div>
+        <div class="fs"><input type="text" class="fi" id="comm" value="3" inputmode="decimal"></div>
       </div>
       <div class="field">
         <label>Deals Per Year</label>
-        <input type="text" class="field-input" id="deals" value="12" inputmode="numeric">
+        <input type="text" class="fi" id="deals" value="12" inputmode="numeric">
       </div>
     </div>
   </div>
 </section>
 
-<section class="compare">
-  <div class="compare-inner">
-
-    <div class="col-card col-them">
-      <p class="col-eye">Current Brokerage</p>
-      <h3 class="col-title">Your Current<br>Brokerage</h3>
-      <div class="col-row-2">
-        <div class="col-row col-row-suffix">
-          <label>Commission Split (You)</label>
-          <input type="text" class="col-input" id="t-split" value="70" inputmode="decimal">
-        </div>
-        <div class="col-row col-row-suffix">
-          <label>Franchise Fee</label>
-          <input type="text" class="col-input" id="t-franchise" value="6" inputmode="decimal">
-        </div>
-      </div>
-      <div class="col-row-2">
-        <div class="col-row col-row-prefix">
-          <label>Monthly Fee</label>
-          <input type="text" class="col-input" id="t-monthly" value="85" inputmode="numeric">
-        </div>
-        <div class="col-row col-row-prefix">
-          <label>Transaction Fee</label>
-          <input type="text" class="col-input" id="t-trans" value="295" inputmode="numeric">
-        </div>
-      </div>
-      <div class="col-row-2">
-        <div class="col-row col-row-prefix">
-          <label>Annual Fee</label>
-          <input type="text" class="col-input" id="t-annual" value="599" inputmode="numeric">
-        </div>
-        <div class="col-row col-row-prefix">
-          <label>Annual Cap (0 = None)</label>
-          <input type="text" class="col-input" id="t-cap" value="0" inputmode="numeric">
-        </div>
-      </div>
+<section class="split-q">
+  <div class="split-inner">
+    <div class="split-label">
+      <strong>What % do you keep at your current brokerage?</strong>
+      <span>Before desk fees and transaction costs</span>
     </div>
-
-    <div class="col-card col-aari">
-      <p class="col-eye">Aari Realty</p>
-      <h3 class="col-title">100%<br>Commission</h3>
-      <div class="col-row-2">
-        <div class="col-row">
-          <label>Commission Split</label>
-          <div class="col-static">100%</div>
-        </div>
-        <div class="col-row">
-          <label>Franchise Fee</label>
-          <div class="col-static">None</div>
-        </div>
-      </div>
-      <div class="col-row-2">
-        <div class="col-row">
-          <label>Monthly Fee</label>
-          <div class="col-static">$99</div>
-        </div>
-        <div class="col-row">
-          <label>Transaction Fee</label>
-          <div class="col-static">$499</div>
-        </div>
-      </div>
-      <div class="col-row-2">
-        <div class="col-row">
-          <label>Annual E&amp;O</label>
-          <div class="col-static">$199</div>
-        </div>
-        <div class="col-row">
-          <label>Cap</label>
-          <div class="col-static">None</div>
-        </div>
-      </div>
+    <div class="split-input">
+      <input type="text" class="fi" id="t-split" value="70" inputmode="decimal">
     </div>
-
   </div>
 </section>
 
@@ -247,13 +189,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
     <div class="res-card res-them">
       <p class="res-eye">Your Current Brokerage</p>
       <div class="res-num" id="r-them">$0</div>
-      <p class="res-detail">Annual net &middot; fees <span id="r-them-fees">$0</span></p>
+      <p class="res-detail">Annual net<br>fees: <span id="r-them-fees">$0</span></p>
       <div class="res-bar" id="bar-them"></div>
     </div>
     <div class="res-card res-aari">
       <p class="res-eye">Aari Realty</p>
       <div class="res-num" id="r-aari">$0</div>
-      <p class="res-detail">Annual net &middot; fees <span id="r-aari-fees">$0</span></p>
+      <p class="res-detail">Annual net<br>fees: <span id="r-aari-fees">$0</span></p>
       <div class="res-bar" id="bar-aari"></div>
     </div>
   </div>
@@ -266,6 +208,50 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
       <div class="diff-num" id="r-diff">$0</div>
       <p class="diff-sub">more per year with Aari</p>
     </div>
+  </div>
+</section>
+
+<section class="customize">
+  <div class="cust-inner">
+    <div class="cust-toggle" id="custToggle">
+      Customize your brokerage fees <span class="cust-arrow">&#9662;</span>
+    </div>
+    <div class="cust-panel" id="custPanel">
+      <div class="cust-grid">
+        <div class="field">
+          <label>Franchise Fee %</label>
+          <div class="fs"><input type="text" class="fi" id="t-franchise" value="6" inputmode="decimal"></div>
+        </div>
+        <div class="field">
+          <label>Monthly Fee</label>
+          <div class="fp"><input type="text" class="fi" id="t-monthly" value="85" inputmode="numeric"></div>
+        </div>
+        <div class="field">
+          <label>Transaction Fee</label>
+          <div class="fp"><input type="text" class="fi" id="t-trans" value="295" inputmode="numeric"></div>
+        </div>
+        <div class="field">
+          <label>Annual Fee</label>
+          <div class="fp"><input type="text" class="fi" id="t-annual" value="599" inputmode="numeric"></div>
+        </div>
+        <div class="field">
+          <label>Annual Cap (0 = None)</label>
+          <div class="fp"><input type="text" class="fi" id="t-cap" value="0" inputmode="numeric"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="aari-fees">
+  <div class="af-inner">
+    <h3 class="af-h">Aari&rsquo;s fees. That&rsquo;s it.</h3>
+    <div class="af-row"><span class="af-label">Commission</span><span class="af-val">100%</span></div>
+    <div class="af-row"><span class="af-label">Monthly</span><span class="af-val">$99</span></div>
+    <div class="af-row"><span class="af-label">Transaction</span><span class="af-val">$499 per file</span></div>
+    <div class="af-row"><span class="af-label">Annual E&amp;O</span><span class="af-val">$199</span></div>
+    <div class="af-row"><span class="af-label">Franchise Fee</span><span class="af-val">None</span></div>
+    <div class="af-row"><span class="af-label">Cap</span><span class="af-val">None</span></div>
   </div>
 </section>
 
@@ -288,9 +274,18 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
   function num(id){return parseFloat(document.getElementById(id).value.replace(/,/g,''))||0;}
   function money(n){return '$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
 
+  // Toggle customize panel
+  var tog=document.getElementById('custToggle');
+  var pan=document.getElementById('custPanel');
+  tog.addEventListener('click',function(){
+    tog.classList.toggle('open');
+    pan.classList.toggle('open');
+  });
+
   function calc(){
     var price=num('price'), commPct=num('comm')/100, deals=num('deals');
     var grossPerDeal=price*commPct;
+    var tGross=grossPerDeal*deals;
 
     // Their brokerage
     var tSplit=num('t-split')/100;
@@ -300,21 +295,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
     var tAnnual=num('t-annual');
     var tCap=num('t-cap');
 
-    var tGrossTotal=grossPerDeal*deals;
-    var tCommAfterSplit=tGrossTotal*tSplit;
-    var tFranchiseFee=tGrossTotal*tFranchise;
-    var tFees=tFranchiseFee+tMonthly*12+tTrans*deals+tAnnual;
-    if(tCap>0&&tFees>tCap) tFees=tCap;
-    var tNet=tCommAfterSplit-tFranchiseFee-tMonthly*12-tTrans*deals-tAnnual;
+    var tKeep=tGross*tSplit;
+    var tFranchiseCost=tGross*tFranchise;
+    var tOtherFees=tMonthly*12+tTrans*deals+tAnnual;
+    var tTotalFees=tGross*(1-tSplit)+tFranchiseCost+tOtherFees;
+    if(tCap>0&&tTotalFees>tCap) tTotalFees=tCap;
+    var tNet=tGross-tTotalFees;
 
-    // Aari
-    var aNet=grossPerDeal*deals-499*deals-99*12-199;
-    var aFees=499*deals+99*12+199;
-
-    var tFeesTotal=tGrossTotal-tNet;
+    // Aari: 100% split, $99/mo, $499/deal, $199 E&O
+    var aFees=99*12+499*deals+199;
+    var aNet=tGross-aFees;
 
     document.getElementById('r-them').textContent=money(tNet);
-    document.getElementById('r-them-fees').textContent=money(tFeesTotal);
+    document.getElementById('r-them-fees').textContent=money(tTotalFees);
     document.getElementById('r-aari').textContent=money(aNet);
     document.getElementById('r-aari-fees').textContent=money(aFees);
 
@@ -326,11 +319,10 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
     document.getElementById('bar-aari').style.width=Math.max(0,Math.round(aNet/maxNet*100))+'%';
   }
 
-  document.querySelectorAll('.field-input,.col-input').forEach(function(el){
+  document.querySelectorAll('.fi').forEach(function(el){
     el.addEventListener('input',calc);
   });
 
-  // Format price field with commas
   var priceEl=document.getElementById('price');
   priceEl.addEventListener('blur',function(){
     var v=parseFloat(this.value.replace(/,/g,''));
