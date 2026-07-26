@@ -8,50 +8,104 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{--ink:#141210;--black:#0a0908;--bg:#fff;--off:#f6f4f0;--cream:#efe9df;--mid:#6b6b6b;--lite:#9b948a;--border:#e7e4dc}
-body{font-family:'Montserrat',sans-serif;background:var(--black);color:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{font-family:'Montserrat',sans-serif;background:var(--off);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}
-nav{position:sticky;top:0;z-index:50;background:rgba(10,9,8,.92);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.08);padding:15px 44px;display:flex;justify-content:space-between;align-items:center}
-.brand{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:#fff}
-.brand small{display:block;font-size:8.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-top:3px}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:15px 44px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600}
+.brand small{display:block;font-size:8.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-top:3px}
 .navlinks{display:flex;gap:24px;align-items:center}
-.navlinks a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.5)}
-.btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-radius:50px;padding:13px 26px;border:1px solid #fff;background:#fff;color:var(--ink);transition:.2s}
-.btn:hover{background:var(--cream)}
-
-.calc{min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 44px 40px;text-align:center}
-.calc-eyebrow{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:16px}
-.calc h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,5vw,52px);line-height:1.06;margin-bottom:8px}
-.calc h1 em{font-style:italic;color:rgba(255,255,255,.45)}
-.calc-sub{font-size:14px;color:rgba(255,255,255,.45);max-width:400px;margin:0 auto 40px}
-
-.slbar{width:100%;max-width:480px;margin:0 auto 48px}
-.slbar .sh{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
-.slbar .lb{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.slbar .vv{font-size:22px;font-weight:800}
-input[type=range]{-webkit-appearance:none;width:100%;height:4px;border-radius:50px;background:rgba(255,255,255,.12);outline:none}
-input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;cursor:pointer;border:none;box-shadow:0 2px 12px rgba(0,0,0,.4)}
-
-.big-num{font-family:'Cormorant Garamond',serif;font-size:clamp(64px,14vw,120px);font-weight:600;letter-spacing:-.03em;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums}
-.big-label{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:32px}
-.calc-note{font-size:12px;color:rgba(255,255,255,.3);max-width:400px;margin:0 auto 36px;line-height:1.6}
-
-.calc-cta{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:50px;padding:16px 36px;background:#fff;color:var(--ink);transition:.2s;margin-bottom:16px}
-.calc-cta:hover{background:var(--cream)}
-.calc-mentor{font-size:11px;color:rgba(255,255,255,.3)}
-.calc-mentor a{text-decoration:underline;text-underline-offset:3px}
-
-.details{background:var(--ink);padding:48px 44px}
-.details-inner{max-width:640px;margin:0 auto}
-.details-h{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;text-align:center;margin-bottom:28px;color:#fff}
-.fee-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid rgba(255,255,255,.1);border-radius:16px;overflow:hidden}
-.fee-cell{padding:22px 24px;border-bottom:1px solid rgba(255,255,255,.06)}
-.fee-cell:nth-child(even){text-align:right}
-.fee-label{font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.fee-val{font-size:16px;font-weight:700;color:#fff}
-.fee-grid .fee-cell:nth-last-child(-n+2){border-bottom:none}
-
-.faq{background:var(--off);padding:52px 0;color:var(--ink)}
+.navlinks a{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mid)}
+.btn-nav{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-radius:50px;padding:13px 26px;border:1px solid var(--ink);background:var(--ink);color:#fff;transition:.2s}
+.btn-nav:hover{background:#000}
 .wrap{max-width:940px;margin:0 auto;padding:0 44px}
+
+/* HERO */
+.hero{background:var(--bg);padding:48px 44px 40px;text-align:center}
+.hero-eye{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--lite);margin-bottom:14px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(32px,5vw,50px);line-height:1.06;margin-bottom:8px}
+.hero h1 em{font-style:italic;color:var(--lite)}
+.hero-sub{font-size:14px;color:var(--mid);max-width:420px;margin:0 auto}
+
+/* INPUTS */
+.inputs{background:var(--bg);padding:0 44px 44px}
+.inputs-inner{max-width:600px;margin:0 auto}
+.inputs-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.field label{display:block;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lite);margin-bottom:6px}
+.field-input{width:100%;border:1px solid var(--border);border-radius:10px;padding:14px 14px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
+.field-input:focus{border-color:var(--ink)}
+.field-prefix{position:relative}
+.field-prefix .field-input{padding-left:28px}
+.field-prefix::before{content:'$';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--lite);pointer-events:none;margin-top:10px}
+.field-suffix{position:relative}
+.field-suffix .field-input{padding-right:28px}
+.field-suffix::after{content:'%';position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:14px;font-weight:600;color:var(--lite);pointer-events:none;margin-top:10px}
+
+/* COMPARISON COLUMNS */
+.compare{padding:32px 44px 0}
+.compare-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+
+.col-card{border-radius:18px;padding:28px 22px;overflow:hidden}
+.col-them{background:var(--bg);border:1px solid var(--border)}
+.col-aari{background:var(--ink);color:#fff}
+
+.col-eye{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:4px}
+.col-them .col-eye{color:var(--lite)}
+.col-aari .col-eye{color:rgba(255,255,255,.4)}
+.col-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;margin-bottom:20px;line-height:1.15}
+.col-aari .col-title{color:#fff}
+
+.col-row{margin-bottom:14px}
+.col-row label{display:block;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lite);margin-bottom:5px}
+.col-aari .col-row label{color:rgba(255,255,255,.4)}
+
+.col-input{width:100%;border:1px solid var(--border);border-radius:8px;padding:11px 12px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
+.col-input:focus{border-color:var(--ink)}
+
+.col-row-prefix{position:relative}
+.col-row-prefix .col-input{padding-left:22px}
+.col-row-prefix::before{content:'$';position:absolute;left:12px;bottom:12px;font-size:12px;font-weight:600;color:var(--lite);pointer-events:none}
+.col-row-suffix{position:relative}
+.col-row-suffix .col-input{padding-right:24px}
+.col-row-suffix::after{content:'%';position:absolute;right:12px;bottom:12px;font-size:12px;font-weight:600;color:var(--lite);pointer-events:none}
+
+.col-row-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.col-static{font-size:13px;font-weight:700;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:11px 12px}
+.col-aari .col-row label{color:rgba(255,255,255,.35)}
+
+/* RESULTS */
+.results{padding:32px 44px 0}
+.results-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.res-card{border-radius:16px;padding:28px 22px;text-align:center}
+.res-them{background:var(--bg);border:1px solid var(--border)}
+.res-aari{background:var(--ink);color:#fff}
+.res-eye{font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+.res-them .res-eye{color:var(--lite)}
+.res-aari .res-eye{color:rgba(255,255,255,.4)}
+.res-num{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5vw,38px);font-weight:600;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.res-detail{font-size:10px;color:var(--lite)}
+.res-aari .res-detail{color:rgba(255,255,255,.4)}
+.res-bar{height:5px;border-radius:50px;margin-top:14px}
+.res-them .res-bar{background:var(--border)}
+.res-aari .res-bar{background:#fff}
+
+/* DIFFERENCE */
+.diff{padding:24px 44px 44px}
+.diff-inner{max-width:600px;margin:0 auto}
+.diff-card{background:var(--ink);border-radius:16px;padding:28px;text-align:center}
+.diff-eye{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:6px}
+.diff-num{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,8vw,52px);font-weight:600;color:#fff;line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.diff-sub{font-size:12px;color:rgba(255,255,255,.45)}
+
+/* CTA */
+.cta-section{text-align:center;padding:0 44px 48px}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border-radius:50px;padding:16px 36px;background:var(--ink);color:#fff;transition:.2s;margin-bottom:12px}
+.cta-btn:hover{background:#000}
+.cta-mentor{font-size:11px;color:var(--lite)}
+.cta-mentor a{text-decoration:underline;text-underline-offset:3px}
+
+/* FAQ */
+.faq{background:var(--cream);padding:52px 0;color:var(--ink)}
 .sec-head{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;margin-bottom:16px}
 .faq-item{border-bottom:1px solid var(--border)}
 .faq-item summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:15px;font-weight:600}
@@ -60,21 +114,23 @@ input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;heigh
 .faq-item[open] .pm{transform:rotate(45deg)}
 .faq-item .ans{font-size:14px;color:var(--mid);line-height:1.7;padding:0 0 20px;max-width:720px}
 
-.closer{text-align:center;padding:56px 0;background:var(--bg);color:var(--ink)}
-.closer h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.6vw,42px);font-weight:600}
-.closer p{font-size:13px;color:var(--mid);margin:12px 0 22px}
-.closer .btn{background:var(--ink);color:#fff;border-color:var(--ink)}
-.closer .btn:hover{background:#000}
+footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;padding:22px;font-size:11px}
 
-footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;padding:22px;font-size:11px}
-
-@media(max-width:760px){
+@media(max-width:640px){
   nav{padding:14px 22px}
-  .navlinks a:not(.btn){display:none}
-  .calc{padding:48px 22px 32px;min-height:auto}
-  .big-num{font-size:clamp(56px,16vw,80px)}
-  .details{padding:40px 22px}
-  .fee-cell{padding:16px 18px}
+  .navlinks a:not(.btn-nav){display:none}
+  .hero{padding:36px 22px 28px}
+  .inputs{padding:0 22px 32px}
+  .inputs-grid{grid-template-columns:1fr;gap:12px}
+  .compare{padding:24px 22px 0}
+  .compare-inner{grid-template-columns:1fr;gap:14px}
+  .col-card{padding:24px 20px}
+  .results{padding:24px 22px 0}
+  .results-inner{grid-template-columns:1fr 1fr;gap:12px}
+  .res-card{padding:22px 16px}
+  .diff{padding:16px 22px 36px}
+  .diff-card{padding:24px 20px}
+  .cta-section{padding:0 22px 40px}
   .wrap{padding:0 22px}
 }
 </style>
@@ -82,42 +138,140 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
 <body>
 <nav>
   <a href="/index.html" class="brand">Aari Realty<small>Southwest Florida Brokerage</small></a>
-  <div class="navlinks"><a href="/index.html#plans">Plans</a><a href="/mentorship.html">Mentorship</a><a href="/index.html#plans" class="btn">Apply &rarr;</a></div>
+  <div class="navlinks"><a href="/index.html#plans">Plans</a><a href="/mentorship.html">Mentorship</a><a href="/index.html#plans" class="btn-nav">Apply &rarr;</a></div>
 </nav>
 
-<section class="calc">
-  <p class="calc-eyebrow">100% Commission</p>
-  <h1>Keep what <em>you earn.</em></h1>
-  <p class="calc-sub">Slide your closings. See what you actually take home.</p>
-
-  <div class="slbar">
-    <div class="sh"><span class="lb">Closings per year</span><span class="vv" id="clV">12</span></div>
-    <input type="range" id="cl" min="1" max="40" step="1" value="12">
-  </div>
-
-  <div class="big-num" id="m">$0</div>
-  <p class="big-label">Your net take-home</p>
-
-  <p class="calc-note">Based on a $350,000 average sale at 3% per side. Net of the $499 flat transaction fee, $99/mo, and $199 annual E&amp;O.</p>
-
-  <a href="/index.html#plans" class="calc-cta">Start your application &rarr;</a>
-  <p class="calc-mentor">New to real estate? <a href="/mentorship.html">Start with Mentorship</a></p>
+<section class="hero">
+  <p class="hero-eye">Commission Calculator</p>
+  <h1>See what you <em>actually keep.</em></h1>
+  <p class="hero-sub">Enter your numbers. Compare your current brokerage to Aari.</p>
 </section>
 
-<section class="details">
-  <div class="details-inner">
-    <h2 class="details-h">The only fees. Ever.</h2>
-    <div class="fee-grid">
-      <div class="fee-cell"><span class="fee-label">Monthly</span></div>
-      <div class="fee-cell"><span class="fee-val">$99</span></div>
-      <div class="fee-cell"><span class="fee-label">Transaction fee</span></div>
-      <div class="fee-cell"><span class="fee-val">$499 per file</span></div>
-      <div class="fee-cell"><span class="fee-label">Annual E&amp;O</span></div>
-      <div class="fee-cell"><span class="fee-val">$199</span></div>
-      <div class="fee-cell"><span class="fee-label">CRM + Tools</span></div>
-      <div class="fee-cell"><span class="fee-val">Included</span></div>
+<section class="inputs">
+  <div class="inputs-inner">
+    <div class="inputs-grid">
+      <div class="field">
+        <label>Avg Sale Price</label>
+        <div class="field-prefix"><input type="text" class="field-input" id="price" value="350,000" inputmode="numeric"></div>
+      </div>
+      <div class="field">
+        <label>Your Commission %</label>
+        <div class="field-suffix"><input type="text" class="field-input" id="comm" value="3" inputmode="decimal"></div>
+      </div>
+      <div class="field">
+        <label>Deals Per Year</label>
+        <input type="text" class="field-input" id="deals" value="12" inputmode="numeric">
+      </div>
     </div>
   </div>
+</section>
+
+<section class="compare">
+  <div class="compare-inner">
+
+    <div class="col-card col-them">
+      <p class="col-eye">Current Brokerage</p>
+      <h3 class="col-title">Your Current<br>Brokerage</h3>
+      <div class="col-row-2">
+        <div class="col-row col-row-suffix">
+          <label>Commission Split (You)</label>
+          <input type="text" class="col-input" id="t-split" value="70" inputmode="decimal">
+        </div>
+        <div class="col-row col-row-suffix">
+          <label>Franchise Fee</label>
+          <input type="text" class="col-input" id="t-franchise" value="6" inputmode="decimal">
+        </div>
+      </div>
+      <div class="col-row-2">
+        <div class="col-row col-row-prefix">
+          <label>Monthly Fee</label>
+          <input type="text" class="col-input" id="t-monthly" value="85" inputmode="numeric">
+        </div>
+        <div class="col-row col-row-prefix">
+          <label>Transaction Fee</label>
+          <input type="text" class="col-input" id="t-trans" value="295" inputmode="numeric">
+        </div>
+      </div>
+      <div class="col-row-2">
+        <div class="col-row col-row-prefix">
+          <label>Annual Fee</label>
+          <input type="text" class="col-input" id="t-annual" value="599" inputmode="numeric">
+        </div>
+        <div class="col-row col-row-prefix">
+          <label>Annual Cap (0 = None)</label>
+          <input type="text" class="col-input" id="t-cap" value="0" inputmode="numeric">
+        </div>
+      </div>
+    </div>
+
+    <div class="col-card col-aari">
+      <p class="col-eye">Aari Realty</p>
+      <h3 class="col-title">100%<br>Commission</h3>
+      <div class="col-row-2">
+        <div class="col-row">
+          <label>Commission Split</label>
+          <div class="col-static">100%</div>
+        </div>
+        <div class="col-row">
+          <label>Franchise Fee</label>
+          <div class="col-static">None</div>
+        </div>
+      </div>
+      <div class="col-row-2">
+        <div class="col-row">
+          <label>Monthly Fee</label>
+          <div class="col-static">$99</div>
+        </div>
+        <div class="col-row">
+          <label>Transaction Fee</label>
+          <div class="col-static">$499</div>
+        </div>
+      </div>
+      <div class="col-row-2">
+        <div class="col-row">
+          <label>Annual E&amp;O</label>
+          <div class="col-static">$199</div>
+        </div>
+        <div class="col-row">
+          <label>Cap</label>
+          <div class="col-static">None</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="results">
+  <div class="results-inner">
+    <div class="res-card res-them">
+      <p class="res-eye">Your Current Brokerage</p>
+      <div class="res-num" id="r-them">$0</div>
+      <p class="res-detail">Annual net &middot; fees <span id="r-them-fees">$0</span></p>
+      <div class="res-bar" id="bar-them"></div>
+    </div>
+    <div class="res-card res-aari">
+      <p class="res-eye">Aari Realty</p>
+      <div class="res-num" id="r-aari">$0</div>
+      <p class="res-detail">Annual net &middot; fees <span id="r-aari-fees">$0</span></p>
+      <div class="res-bar" id="bar-aari"></div>
+    </div>
+  </div>
+</section>
+
+<section class="diff">
+  <div class="diff-inner">
+    <div class="diff-card">
+      <p class="diff-eye">You could keep</p>
+      <div class="diff-num" id="r-diff">$0</div>
+      <p class="diff-sub">more per year with Aari</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <a href="/index.html#plans" class="cta-btn">Start your application &rarr;</a>
+  <p class="cta-mentor">New to real estate? <a href="/mentorship.html">Start with Mentorship</a></p>
 </section>
 
 <section class="faq"><div class="wrap">
@@ -127,29 +281,63 @@ footer{background:var(--black);color:rgba(255,255,255,.45);text-align:center;pad
   <details class="faq-item"><summary>Can I change plans later?<span class="pm">+</span></summary><div class="ans">Yes. After five closed residential transactions with compliant files, request a change in writing, subject to broker approval.</div></details>
 </div></section>
 
-<section class="closer"><div class="wrap">
-  <h2>Keep your commission.</h2>
-  <p>Run the numbers, then start your application.</p>
-  <a href="/index.html#plans" class="btn">See the plans &rarr;</a>
-</div></section>
-
 <footer>Aari Realty LLC &middot; Broker of Record: Marlenyi L. Paredes &middot; BK3530153 &middot; Fort Myers, FL &middot; 239.688.1770</footer>
 
 <script>
 (function(){
-  var cl=document.getElementById('cl');
-  function money(n){return '$'+Math.round(n).toLocaleString('en-US');}
-  var prev=0;
-  function tw(f,t,el){var s=null,d=600;function st(x){if(!s)s=x;var p=Math.min((x-s)/d,1),e=1-Math.pow(1-p,3);el.textContent=money(f+(t-f)*e);if(p<1){requestAnimationFrame(st);}else{el.textContent=money(t);}}requestAnimationFrame(st);}
-  function calc(anim){
-    var c=+cl.value,gross=350000*0.03;
-    document.getElementById('clV').textContent=c;
-    var m=c*(gross-499)-99*12-199;
-    var me=document.getElementById('m');
-    if(anim){tw(prev,m,me);}else{me.textContent=money(m);}
-    prev=m;
+  function num(id){return parseFloat(document.getElementById(id).value.replace(/,/g,''))||0;}
+  function money(n){return '$'+Math.round(Math.abs(n)).toLocaleString('en-US');}
+
+  function calc(){
+    var price=num('price'), commPct=num('comm')/100, deals=num('deals');
+    var grossPerDeal=price*commPct;
+
+    // Their brokerage
+    var tSplit=num('t-split')/100;
+    var tFranchise=num('t-franchise')/100;
+    var tMonthly=num('t-monthly');
+    var tTrans=num('t-trans');
+    var tAnnual=num('t-annual');
+    var tCap=num('t-cap');
+
+    var tGrossTotal=grossPerDeal*deals;
+    var tCommAfterSplit=tGrossTotal*tSplit;
+    var tFranchiseFee=tGrossTotal*tFranchise;
+    var tFees=tFranchiseFee+tMonthly*12+tTrans*deals+tAnnual;
+    if(tCap>0&&tFees>tCap) tFees=tCap;
+    var tNet=tCommAfterSplit-tFranchiseFee-tMonthly*12-tTrans*deals-tAnnual;
+
+    // Aari
+    var aNet=grossPerDeal*deals-499*deals-99*12-199;
+    var aFees=499*deals+99*12+199;
+
+    var tFeesTotal=tGrossTotal-tNet;
+
+    document.getElementById('r-them').textContent=money(tNet);
+    document.getElementById('r-them-fees').textContent=money(tFeesTotal);
+    document.getElementById('r-aari').textContent=money(aNet);
+    document.getElementById('r-aari-fees').textContent=money(aFees);
+
+    var diff=aNet-tNet;
+    document.getElementById('r-diff').textContent=money(diff);
+
+    var maxNet=Math.max(tNet,aNet,1);
+    document.getElementById('bar-them').style.width=Math.max(0,Math.round(tNet/maxNet*100))+'%';
+    document.getElementById('bar-aari').style.width=Math.max(0,Math.round(aNet/maxNet*100))+'%';
   }
-  cl.addEventListener('input',function(){calc(true);});calc(false);
+
+  document.querySelectorAll('.field-input,.col-input').forEach(function(el){
+    el.addEventListener('input',calc);
+  });
+
+  // Format price field with commas
+  var priceEl=document.getElementById('price');
+  priceEl.addEventListener('blur',function(){
+    var v=parseFloat(this.value.replace(/,/g,''));
+    if(!isNaN(v)) this.value=Math.round(v).toLocaleString('en-US');
+  });
+
+  calc();
 })();
 </script>
 </body>
