@@ -65,12 +65,11 @@ module.exports = async function handler(req, res) {
       await resend.emails.send({
         from: FROM,
         to: email,
-        cc: 'join@aarirealty.com',
         subject: 'Your executed ICA, Aari Realty LLC (' + formattedDate + ')',
         html: agentHtml,
         attachments: [{ filename: signed.filename || 'Aari-Realty-ICA-signed.pdf', content: signed.pdf_base64 }]
       });
-      return res.status(200).json({ success: true, pdf_path: signed.pdf_path, signature_id: signed.signature_id });
+      return res.status(200).json({ success: true, pdf_path: signed.pdf_path, signature_id: signed.signature_id, pdf_base64: signed.pdf_base64, pdf_filename: signed.filename || 'Aari-Realty-ICA-signed.pdf' });
     }
 
     // Fallback: executed copy could not be generated. Alert the broker, acknowledge the agent, do not block signup.

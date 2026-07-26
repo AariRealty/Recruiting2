@@ -59,8 +59,7 @@ module.exports = async function handler(req, res) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>Aari.</h1>
-      <p style="letter-spacing:8px;opacity:1;font-weight:400;">R E A L T Y</p>
+      <img src="https://joinaari.com/logo.png" alt="Aari Realty" style="height:48px;width:auto;filter:brightness(0)invert(1);" />
       <p>CHATBOT ESCALATION</p>
     </div>
     <div class="body">
