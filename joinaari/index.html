@@ -171,16 +171,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .accent-marq .marquee-track{animation:marquee 50s linear infinite}
 .accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:inherit;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
-.leadmag{background:#f5f0e8;padding:0 44px;overflow:visible;position:relative}
-.leadmag-wrap{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:520px 1fr;gap:40px;align-items:end}
-.leadmag-photo{position:relative;line-height:0;z-index:3}
-.leadmag-photo img{display:block;width:100%;margin-top:-150px}
-.leadmag-copy{align-self:center;padding:64px 0 72px}
-.leadmag-copy .eyebrow{color:inherit;letter-spacing:.26em}
-.leadmag-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,3.8vw,50px);font-weight:500;line-height:1.03;letter-spacing:-.01em;margin:14px 0 0}
-.leadmag-copy h2 em{font-style:italic;color:inherit}
-.leadmag-copy p{font-size:15px;color:var(--mid);line-height:1.75;max-width:470px;margin:18px 0 26px}
-.leadmag-note{font-size:12px;color:var(--lite);margin-top:14px}
 .plans{background:#0a0a0a;color:#fff;padding:64px 44px 68px}
 .pl-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:248px 1fr 1fr;gap:22px;align-items:start}
 .pl-rail{padding-top:6px}
@@ -453,7 +443,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-grid{grid-template-columns:1fr;gap:26px}
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:26px;min-height:0}
-  .leadmag{padding:0 20px}.leadmag-wrap{grid-template-columns:1fr;gap:0}.leadmag-photo{max-width:270px;margin:0 auto}.leadmag-photo img{margin-top:-64px}.leadmag-copy{padding:8px 0 54px;text-align:center}
   .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{display:none}.pl-calc-link{display:none}.pl-calc-mobile{display:block;text-align:center;margin-top:14px}.pl-calc-mobile a{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);padding-bottom:3px;text-decoration:none}
   .apply{padding:52px 20px}
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
@@ -1023,12 +1012,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('rv-in');io.unobserve(e.target);}});},{threshold:.12});
     rv.forEach(function(el){io.observe(el);});setTimeout(function(){rv.forEach(function(el){el.classList.add('rv-in');});},8000);
   }else{rv.forEach(function(el){el.classList.add('rv-in');});}
-  var plans=document.querySelectorAll('.pl-card'),selNote=document.getElementById('selNote'),applyBtn=document.getElementById('applyBtn');
+  var plans=document.querySelectorAll('.pl-card');
   function pickPlan(name){
     plans.forEach(function(p){p.classList.toggle('selected',p.getAttribute('data-plan')===name);});
     try{localStorage.setItem('aari_plan',name);}catch(e){}
-    if(selNote)selNote.innerHTML='Selected plan: <b>'+name+'</b>';
-    if(applyBtn)applyBtn.setAttribute('href','https://joinaari.com/#plan='+encodeURIComponent(name));
   }
   plans.forEach(function(p){p.addEventListener('click',function(){pickPlan(p.getAttribute('data-plan'));});});
   document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));openCheckout(b.getAttribute('data-plan'));});});
@@ -1046,8 +1033,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   function closeCheckout(){overlay.classList.remove('open');document.body.style.overflow='';}
   [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
   document.getElementById('coSign').addEventListener('click',function(){if(!curName){closeCheckout();location.hash='#plans';return;}var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
-  var applyBtn2=document.getElementById('applyBtn');
-  if(applyBtn2){applyBtn2.addEventListener('click',function(e){e.preventDefault();var s=null;try{s=localStorage.getItem('aari_plan');}catch(_){}if(s&&PLAN.hasOwnProperty(s)){openCheckout(s);}else{location.hash='#plans';}});}
 })();
 </script>
 <script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script><script>(function(){var c=document.querySelectorAll(".ment-card,.m2-grid");if(!c.length)return;if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.2});c.forEach(function(e){io.observe(e);});}setTimeout(function(){c.forEach(function(e){e.classList.add("in");});},1600);})();</script>
