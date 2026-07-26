@@ -363,7 +363,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 
 
 @keyframes ndfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-.news .wrap,.news-form,.news h2,.news .eb,.news p,.news-note{position:relative;z-index:2}
+.news-card{display:contents}
+.news-lead-m{display:none}
+.news .wrap,.news-card,.news-form,.news h2,.news .eb,.news p,.news-note{position:relative;z-index:2}
 .seamwave{display:block;width:100%;height:56px;margin-bottom:-4px}
 .footer{background:#0a0a0a;color:#fff;padding:56px 44px 26px}
 .footer-grid{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
@@ -379,7 +381,15 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 @media(max-width:900px){
   .testi{padding:40px 20px}.testi-grid{grid-template-columns:1fr;gap:12px}
   .faq{padding:56px 20px}
-  .news{padding:52px 20px}
+  .news{padding:44px 24px 40px}
+  .news h2{font-size:28px;margin-bottom:14px}
+  .news-card{display:block;background:#fff;border-radius:18px;padding:24px 20px 22px;border:1px solid #e2e0d8;margin-bottom:20px}
+  .news-lead{display:none}
+  .news-lead-m{display:block;font-size:13px;color:#5f5b52;line-height:1.6;margin:0 0 18px;text-align:left}
+  .news-lead-m b{color:#141210;font-weight:600}
+  .news-form{gap:8px}
+  .news-form input{min-width:0;background:#f9f8f5;border-radius:12px;padding:14px 16px;font-size:13px}
+  .news-form button{border-radius:12px;padding:14px 20px;font-size:10px}
   .footer{padding:36px 20px 24px;text-align:center}
   .footer-grid{grid-template-columns:1fr;gap:0}
   .footer .ftag{display:none}
@@ -912,12 +922,15 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 <section class="news" id="stay">
   <span class="eb">Not ready to switch?</span>
   <h2>Then don&rsquo;t. <em>Just stop learning this the hard way.</em></h2>
-  <p>Compliance, contracts, forms, and the law changes that actually hit your deals. Plus the near misses I catch on real files, so they don&rsquo;t happen to yours. Free. You don&rsquo;t owe me a thing.</p>
+  <div class="news-card">
+  <p class="news-lead">Compliance, contracts, forms, and the law changes that actually hit your deals. Plus the near misses I catch on real files, so they don&rsquo;t happen to yours. Free. You don&rsquo;t owe me a thing.</p>
+  <p class="news-lead-m">Compliance updates, contract pitfalls, and the near misses I catch on real files &mdash; so they don&rsquo;t happen to yours. <b>Free. No strings.</b></p>
   <form class="news-form" id="newsForm">
     <input type="email" id="newsEmail" placeholder="you@email.com" aria-label="Email address" required />
     <button type="submit">Send it</button>
   </form>
   <p id="newsOk" style="display:none;font-size:14px;color:#141210;font-weight:600;position:relative;z-index:2;margin-top:6px">You&#39;re in. Watch your inbox.</p>
+  </div>
   <p class="news-note">Or talk to a real person: <a href="tel:2396881770" style="color:inherit">239.688.1770</a></p>
 </section>
 <footer class="footer">
