@@ -449,6 +449,9 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .frb-panel p{font-size:12.5px;color:var(--mid);margin-top:6px;max-width:460px;line-height:1.5}
 .frb-go{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;transition:transform .25s}
 .frb-panel:hover .frb-go{transform:scale(1.08)}
+.frb-soon{opacity:.55;cursor:default}
+.frb-soon:hover{transform:none;box-shadow:none}
+.frb-coming{font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lite);flex-shrink:0}
 @media(max-width:720px){.freebies{padding:56px 22px}.freebies-inner{grid-template-columns:1fr;gap:28px}}
 
 .annc{background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;gap:16px;padding:10px 24px;font-size:12.5px;font-weight:500;text-align:center;flex-wrap:wrap}
@@ -858,10 +861,10 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <div><h3>Deadline Calculator</h3><p>Every FR/BAR, CRSP, and NABOR deadline, the second you enter your effective date.</p></div>
         <span class="frb-go">&rarr;</span>
       </a>
-      <a class="frb-panel" href="/buyerrepresentation">
+      <div class="frb-panel frb-soon">
         <div><h3>Free Buyer Toolkit</h3><p>Every buyer form and compensation script, plain English, ready to send.</p></div>
-        <span class="frb-go">&rarr;</span>
-      </a>
+        <span class="frb-coming">Coming Soon</span>
+      </div>
     </div>
   </div>
 </section>
