@@ -89,7 +89,8 @@ module.exports = async function handler(req, res) {
 <body>
   <div class="container">
     <div class="header">
-      <h1>AARI.</h1>
+      <h1>Aari.</h1>
+      <p style="letter-spacing:8px;opacity:1;font-weight:400;">R E A L T Y</p>
       <p>NEW AGENT ONBOARDING SUMMARY</p>
     </div>
     <div class="body">
