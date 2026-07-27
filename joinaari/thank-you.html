@@ -59,30 +59,30 @@ main{max-width:700px;margin:0 auto;padding:44px 32px 70px}
 <main>
   <div class="hero" id="hero">
     <svg class="check" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M25 41 l10 10 l20 -22"/></svg>
-    <p class="eyebrow">Payment received (obviously)</p>
-    <h1>You did it<span id="name-wrap">, <em class="name" id="first-name">friend</em></span>.</h1>
-    <p class="sub">Officially one of us now. No takebacks. Sit tight, here's everything happening while you catch your breath.</p>
+    <p class="eyebrow">Welcome to Aari</p>
+    <h1>You did it<span id="name-wrap">, <em class="name" id="first-name"></em></span>.</h1>
+    <p class="sub">You're officially <em>in</em>. Take a breath&hellip; here's everything happening on our end so you don't have to wonder.</p>
   </div>
 
   <div class="tlwrap">
     <p class="tllabel">Where you are</p>
     <div class="tl">
-      <div class="node done"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12 l5 5 l11 -12"/></svg></div><div class="t"><b>Your spot is locked.</b><p>Paid and confirmed. We're not letting you go now.</p><span class="tag">Done</span></div></div>
-      <div class="node done"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 8 h8 M8 12 h8 M8 16 h5"/></svg></div><div class="t"><b>Receipt, sent.</b><p>Already sitting in your inbox. Go peek.</p><span class="tag">Done</span></div></div>
-      <div class="node live"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 l9 6 l9 -6"/></svg></div><div class="t"><b>Your login is on its way.</b><p>Your Agent Hub account is building itself as you read this. Give it a few minutes.</p><span class="tag">In progress</span></div></div>
-      <div class="node next"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 21 v-16 a2 2 0 0 1 2 -2 h7 a2 2 0 0 1 2 2 v16 M14 12 h4 M16 10 l2 2 l-2 2"/></svg></div><div class="t"><b>Then you're off.</b><p>Log in, sign your agreement, grab your tools. Go close something.</p><span class="tag">Next</span></div></div>
+      <div class="node done"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12 l5 5 l11 -12"/></svg></div><div class="t"><b>Your seat is saved.</b><p>Paid, confirmed, and yours. Welcome in.</p><span class="tag">Done</span></div></div>
+      <div class="node done"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 8 h8 M8 12 h8 M8 16 h5"/></svg></div><div class="t"><b>Your receipt and signed agreement are in your inbox.</b><p>Already sitting there. Go peek when you can.</p><span class="tag">Done</span></div></div>
+      <div class="node live"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 l9 6 l9 -6"/></svg></div><div class="t"><b>Your Hub access is being built.</b><p>Your Agent Hub account is being set up as you read this. Give it a few minutes to land in your inbox.</p><span class="tag">In progress</span></div></div>
+      <div class="node next"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 21 v-16 a2 2 0 0 1 2 -2 h7 a2 2 0 0 1 2 2 v16 M14 12 h4 M16 10 l2 2 l-2 2"/></svg></div><div class="t"><b>Then the real work begins.</b><p>Log in, set your password, and meet your tools. Then let's go build something big.</p><span class="tag">Next</span></div></div>
     </div>
   </div>
 
   <div class="card">
-    <p>Give the login email a minute to land (email loves the drama), then walk into <b>the Hub</b> whenever you're ready.</p>
-    <a href="https://aari-agent-hub.netlify.app" class="btn">Take me to the Hub &rarr;</a>
+    <p>Give the email a minute to land (email loves the drama)&hellip; then step into <b>the Hub</b> whenever you're ready. So glad you're here.</p>
+    <a href="https://hub.joinaari.com" class="btn">Step into the Hub &rarr;</a>
   </div>
   <div class="contact">Questions? Text or call Marlenyi at 239.688.1770 &middot; <a href="mailto:join@aarirealty.com">join@aarirealty.com</a></div>
 </main>
 <script>
 (function(){
-  var p=new URLSearchParams(location.search);var f=(p.get('first_name')||'').replace(/[ "'&<>]/g,'');if(f){document.getElementById('first-name').textContent=f;}
+  var p=new URLSearchParams(location.search);var f=(p.get('first_name')||'').replace(/[ "'&<>]/g,'');if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
   // confetti burst in the hero
   var h=document.getElementById('hero'),cols=['#ffffff','#c9c4ba','#8f8a80'];
   for(var i=0;i<18;i++){var c=document.createElement('span');c.className='conf';c.style.left=(4+Math.random()*92)+'%';c.style.background=cols[i%3];c.style.animationDuration=(2.4+Math.random()*1.6)+'s';c.style.animationDelay=(Math.random()*.9)+'s';h.appendChild(c);}
