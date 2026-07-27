@@ -358,16 +358,7 @@
       font-weight: bold;
     }
 
-    #ica-shared-content .ica-section {
-      background: #ffffff;
-      border: none;
-      border-radius: 8px;
-      padding: 32px;
-      margin-bottom: 24px;
-      color: #0a0a0a;
-    }
-
-        .ica-doc-list {
+    .ica-doc-list {
       list-style: none;
       padding: 0;
       margin: 16px 0;
@@ -1130,11 +1121,7 @@
   if(!container) return;
 
   var sections = [c.agreement, c.commission, c.operations, c.acknowledgments];
-  var fullHtml = '';
-  sections.forEach(function(section){
-    fullHtml += '<div class="ica-section">' + section + '</div>';
-  });
-  container.innerHTML = fullHtml;
+  container.innerHTML = '<div class="ica-section">' + sections.join('') + '</div>';
 })();
 
 // ========== SUB-STEP NAVIGATION (within Step 1) ==========
