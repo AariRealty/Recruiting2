@@ -1,3 +1,4 @@
+const Stripe = require('stripe');
 const { Resend } = require('resend');
 
 // Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
@@ -5,6 +6,8 @@ const { Resend } = require('resend');
 const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
 const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
 const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
+
+function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -16,17 +19,30 @@ module.exports = async function handler(req, res) {
 
   try {
     const { name, email, plan, amount, payment_id, addons, monthly_amount } = req.body;
-    if (!email || !name || !amount) {
-      return res.status(400).json({ error: 'email, name, and amount are required' });
+    if (!email || !name) {
+      return res.status(400).json({ error: 'email and name are required' });
     }
     if (!RESEND_KEY) {
       return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
     }
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
+    }
     const resend = new Resend(RESEND_KEY);
+    const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+    // Look up the actual amount from Stripe instead of trusting client-supplied value
+    let actualAmount;
+    if (payment_id) {
+      const pi = await stripe.paymentIntents.retrieve(payment_id);
+      actualAmount = (pi.amount / 100).toFixed(2);
+    } else {
+      actualAmount = Number(amount || 0).toFixed(2);
+    }
 
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const firstName = String(name).split(' ')[0];
-    const total = Number(amount);
+    const total = Number(actualAmount);
     const EO = 199;
     const membershipToday = Math.max(0, total - EO);
     const fmt = function (n) { return '$' + Number(n).toFixed(2); };
@@ -44,11 +60,10 @@ module.exports = async function handler(req, res) {
     }
 
     const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + '/mo, billed monthly. ') : '';
-    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + name;
+    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + esc(name);
 
     const html =
       '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-      '<style>@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap);</style>' +
       '</head><body style="margin:0;padding:0;background:#f3f3f2;font-family:Montserrat,Arial,sans-serif;">' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f2;padding:28px 12px;"><tr><td align="center">' +
       '<table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px;width:100%;background:#ffffff;border:1px solid #e6e4de;border-radius:12px;">' +
@@ -58,7 +73,7 @@ module.exports = async function handler(req, res) {
       '</td></tr>' +
       '<tr><td style="padding:24px 30px 4px;">' +
       '<div style="font-size:10px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;font-weight:600;">Payment received</div>' +
-      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + firstName + '</em>.</div>' +
+      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + esc(firstName) + '</em>.</div>' +
       '</td></tr>' +
       '<tr><td style="padding:0 30px 8px;">' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' +

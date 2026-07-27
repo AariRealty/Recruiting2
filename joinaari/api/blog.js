@@ -8,11 +8,21 @@
 const BLOG_FN = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-blog';
 const SITE = 'https://joinaari.com';
 
-// ---- escaping. body_html is broker-authored so it renders as-is; everything
-// ---- that lands in an attribute or a text node gets escaped.
+// ---- escaping. body_html is broker-authored but sanitized before rendering;
+// ---- everything that lands in an attribute or a text node gets escaped.
 const esc = (s) => String(s == null ? '' : s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+
+function sanitizeHtml(html) {
+  return html
+    .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+    .replace(/\bon\w+\s*=/gi, 'data-blocked=')
+    .replace(/<iframe\b[^>]*>/gi, '')
+    .replace(/<object\b[^>]*>/gi, '')
+    .replace(/<embed\b[^>]*>/gi, '')
+    .replace(/javascript\s*:/gi, 'blocked:');
+}
 
 const fmtDate = (iso) => {
   if (!iso) return '';
@@ -190,7 +200,7 @@ module.exports = async function handler(req, res) {
   <h1>${esc(post.title)}</h1>
   <div class="byline">${esc(post.author_name || 'Marlenyi Paredes')}${dateStr ? ' &middot; ' + esc(dateStr) : ''}</div>
   ${post.cover_url ? `<img class="cover" src="${esc(post.cover_url)}" alt="${esc(post.title)}">` : ''}
-  <div class="body">${post.body_html || ''}</div>
+  <div class="body">${sanitizeHtml(post.body_html || '')}</div>
   ${ENDCAP}
 </article></div>`,
       });

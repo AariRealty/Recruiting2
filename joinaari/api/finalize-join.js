@@ -9,8 +9,8 @@ const PLAN_MAP = {
 const EO_PRICE = 'price_1TrolNHTQU4zpF236LAkKbqi';
 
 const PROVISION_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-agent-provision';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y';
-const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
+const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
+const PROVISION_TOKEN = process.env.PROVISION_TOKEN;
 
 function firstOfNextMonthTs() {
   const now = new Date();
@@ -22,6 +22,10 @@ function firstOfNextMonthNextYearTs() {
 }
 
 module.exports = async function handler(req, res) {
+  if (!SUPABASE_ANON || !PROVISION_TOKEN) {
+    return res.status(500).json({ error: 'Server configuration error.' });
+  }
+
   const allowed = ['https://joinaari.com', 'https://joinaari.vercel.app'];
   res.setHeader('Access-Control-Allow-Origin', allowed.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');

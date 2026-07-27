@@ -1,7 +1,9 @@
+// DEPRECATED: Use finalize-join.js instead. This endpoint is retained for backwards compatibility.
 const Stripe = require('stripe');
 const { computePrice } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
+  console.warn('[setup-recurring] DEPRECATED: This endpoint is superseded by finalize-join.js');
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
   res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
