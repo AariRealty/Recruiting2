@@ -9,86 +9,142 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-
 .top{border-bottom:1px solid var(--border);padding:15px 40px;display:flex;justify-content:space-between;align-items:center}
 .brand{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
 .top .ph{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mid)}
-main{max-width:700px;margin:0 auto;padding:44px 32px 70px}
-/* HERO (dark, celebratory) */
-.hero{background:var(--black);color:#fff;border-radius:24px;padding:44px 40px 40px;text-align:center;position:relative;overflow:hidden}
-.conf{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;opacity:0;animation:drop linear forwards}
-@keyframes drop{0%{opacity:0;transform:translateY(-20px) rotate(0)}10%{opacity:1}100%{opacity:.9;transform:translateY(340px) rotate(520deg)}}
+main{max-width:440px;margin:0 auto;padding:28px 20px 60px}
+
+/* HERO */
+.hero{background:var(--black);color:#fff;border-radius:24px;padding:44px 32px 38px;text-align:center;position:relative;overflow:hidden}
+.conf{position:absolute;top:-14px;border-radius:2px;opacity:0;animation:drop linear forwards}
+@keyframes drop{0%{opacity:0;transform:translateY(-20px) rotate(0) scale(.7)}8%{opacity:1;transform:scale(1)}100%{opacity:.85;transform:translateY(380px) rotate(580deg)}}
 .check{width:72px;height:72px;margin:0 auto 18px;position:relative;z-index:2}
-.check circle{fill:none;stroke:#fff;stroke-width:4;stroke-dasharray:214;stroke-dashoffset:214;animation:dc 1s ease-out .2s forwards}
-.check path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:dc .5s ease-out .9s forwards}
-@keyframes dc{to{stroke-dashoffset:0}}
-.eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:12px;position:relative;z-index:2}
-.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,6.5vw,56px);font-weight:600;line-height:1.02;position:relative;z-index:2}
+.check circle{fill:none;stroke:#fff;stroke-width:4;stroke-dasharray:214;stroke-dashoffset:214;animation:draw-circle 1s ease-out .3s forwards}
+.check path{fill:none;stroke:#fff;stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:60;stroke-dashoffset:60;animation:draw-check .45s ease-out 1s forwards}
+@keyframes draw-circle{to{stroke-dashoffset:0}}
+@keyframes draw-check{to{stroke-dashoffset:0}}
+.check-burst{position:absolute;inset:0;z-index:1}
+.check-burst span{position:absolute;width:4px;height:4px;border-radius:50%;background:#fff;top:50%;left:50%;opacity:0;animation:burst .6s ease-out 1.3s forwards}
+@keyframes burst{0%{opacity:1;transform:translate(-50%,-50%) scale(0)}60%{opacity:1}100%{opacity:0;transform:translate(var(--bx),var(--by)) scale(1)}}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:10px;position:relative;z-index:2;opacity:0;animation:fade-up .5s ease .6s forwards}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,7vw,52px);font-weight:600;line-height:1.05;position:relative;z-index:2;opacity:0;animation:fade-up .6s ease .75s forwards}
 .hero h1 em{font-style:italic}
-.hero .sub{font-size:14px;color:rgba(255,255,255,.72);max-width:440px;margin:14px auto 0;line-height:1.7;position:relative;z-index:2}
-/* TIMELINE */
-.tlwrap{margin-top:40px}
-.tllabel{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lite);margin-bottom:18px}
-.tl{position:relative;padding-left:2px}
-.tl::before{content:"";position:absolute;left:23px;top:24px;bottom:56px;width:2px;background:var(--border)}
-.tl::after{content:"";position:absolute;left:23px;top:24px;width:2px;height:0;background:var(--ink);animation:fill 2.6s cubic-bezier(.4,.1,.2,1) .4s forwards}
-@keyframes fill{to{height:46%}}
-.node{display:flex;gap:22px;padding:16px 0;position:relative;opacity:0;transform:translateX(-12px);animation:pop .55s ease forwards}
-.node:nth-child(1){animation-delay:.3s}.node:nth-child(2){animation-delay:.55s}.node:nth-child(3){animation-delay:.8s}.node:nth-child(4){animation-delay:1.05s}
-.node:last-child{padding-bottom:0}
-@keyframes pop{to{opacity:1;transform:none}}
-.ic{width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2}
-.node.done .ic{background:var(--ink);border-color:var(--ink)}
-.ic svg{width:22px;height:22px}
-.node.done .ic svg{stroke:#fff}.ic svg{stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.node.live .ic{border-color:var(--ink)}
-.node.live .ic::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid var(--ink);opacity:0;animation:ping 1.8s ease-out infinite}
-@keyframes ping{0%{opacity:.5;transform:scale(1)}70%{opacity:0;transform:scale(1.35)}100%{opacity:0}}
-.node.live .ic svg{animation:bob 1.6s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(-3px)}}
-.t b{font-size:14.5px}.t p{font-size:13px;color:var(--mid);margin-top:4px;line-height:1.6}
-.t .tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-top:7px;padding:3px 9px;border-radius:50px}
-.node.done .tag{background:var(--ink);color:#fff}.node.live .tag{background:var(--off);color:var(--ink)}.node.next .tag{border:1px solid var(--border);color:var(--lite)}
+.hero .sub{font-size:14px;color:rgba(255,255,255,.65);max-width:400px;margin:12px auto 0;line-height:1.7;position:relative;z-index:2;opacity:0;animation:fade-up .5s ease .9s forwards}
+@keyframes fade-up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* PROGRESS */
+.progress-section{margin-top:32px}
+.where{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lite);margin-bottom:12px;opacity:0;animation:fade-up .4s ease 1.2s forwards}
+.progress-row{display:flex;align-items:center;gap:12px;margin-bottom:24px;opacity:0;animation:fade-up .4s ease 1.35s forwards}
+.progress-bar{flex:1;height:5px;background:var(--border);border-radius:5px;overflow:hidden;position:relative}
+.progress-bar .fill{width:0;height:100%;background:var(--ink);border-radius:5px;animation:fill-bar 1.8s cubic-bezier(.4,.05,.1,1) 1.6s forwards;position:relative}
+.progress-bar .fill::after{content:"";position:absolute;right:0;top:-1px;width:12px;height:7px;background:var(--ink);border-radius:4px;box-shadow:0 0 8px rgba(20,18,16,.3);opacity:0;animation:glow-dot .4s ease 3.2s forwards}
+@keyframes fill-bar{to{width:55%}}
+@keyframes glow-dot{to{opacity:1}}
+.progress-pct{font-size:12px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums;min-width:32px;text-align:right}
+
+/* CARDS */
+.card-stack{display:flex;flex-direction:column;gap:10px}
+.cs{border:1px solid var(--border);border-radius:16px;padding:20px;display:flex;gap:16px;align-items:flex-start;opacity:0;transform:translateY(20px) scale(.97);transition:border-color .3s,box-shadow .3s}
+.cs:nth-child(1){animation:card-in .55s cubic-bezier(.2,.8,.3,1) 1.5s forwards}
+.cs:nth-child(2){animation:card-in .55s cubic-bezier(.2,.8,.3,1) 1.75s forwards}
+.cs:nth-child(3){animation:card-in .55s cubic-bezier(.2,.8,.3,1) 2s forwards}
+.cs:nth-child(4){animation:card-in .55s cubic-bezier(.2,.8,.3,1) 2.25s forwards}
+@keyframes card-in{to{opacity:1;transform:none}}
+.cs.done{border-color:var(--ink);background:var(--off)}
+.cs.live{border-color:var(--ink);animation:card-in .55s cubic-bezier(.2,.8,.3,1) 2s forwards, live-glow 2.4s ease-in-out 3s infinite}
+@keyframes live-glow{0%,100%{box-shadow:0 0 0 0 rgba(20,18,16,0)}50%{box-shadow:0 0 0 6px rgba(20,18,16,.06)}}
+.num{width:38px;height:38px;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0;color:var(--lite);position:relative}
+.cs.done .num{background:var(--ink);border-color:var(--ink);color:#fff}
+.cs.live .num{border-color:var(--ink);color:var(--ink)}
+.num svg{width:16px;height:16px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.num svg path{stroke-dasharray:24;stroke-dashoffset:24}
+.cs:nth-child(1) .num svg path{animation:draw-check .35s ease 2s forwards}
+.cs:nth-child(2) .num svg path{animation:draw-check .35s ease 2.25s forwards}
+.cs.live .num::after{content:"";position:absolute;inset:-5px;border-radius:50%;border:2px solid transparent;border-top-color:var(--ink);animation:spin 1.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.ci b{font-size:14px;display:block;margin-bottom:3px}
+.ci p{font-size:13px;color:var(--mid);line-height:1.6}
+.badge-c{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:50px;margin-top:7px}
+.cs.done .badge-c{background:var(--ink);color:#fff}
+.cs.live .badge-c{background:transparent;color:var(--ink);border:1px solid var(--ink);animation:badge-pulse 2s ease-in-out infinite}
+@keyframes badge-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.cs.next .badge-c{border:1px solid var(--border);color:var(--lite)}
+
 /* CTA */
-.card{border:1px solid var(--border);border-radius:18px;padding:26px 28px;margin:34px 0 0;text-align:center}
-.card p{font-size:13.5px;color:var(--mid);line-height:1.7;margin-bottom:18px}
-.card p b{color:var(--ink)}
-.btn{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:15px 32px;border-radius:50px;text-decoration:none;transition:transform .2s;animation:pulse 2.8s ease-in-out infinite}
+.cta-card{border:1px solid var(--border);border-radius:18px;padding:24px;text-align:center;margin-top:28px;opacity:0;animation:fade-up .5s ease 2.6s forwards}
+.cta-card p{font-size:13.5px;color:var(--mid);line-height:1.7;margin-bottom:16px}
+.cta-card p b{color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;padding:15px 32px;border-radius:50px;text-decoration:none;position:relative;overflow:hidden;transition:transform .2s}
 .btn:hover{transform:scale(1.04)}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(20,18,16,.2)}50%{box-shadow:0 0 0 12px rgba(20,18,16,0)}}
-.contact{font-size:13px;color:var(--mid);text-align:center;line-height:1.8;margin-top:34px}
+.btn::after{content:"";position:absolute;top:50%;left:50%;width:0;height:0;background:rgba(255,255,255,.12);border-radius:50%;transform:translate(-50%,-50%);animation:btn-ripple 2.8s ease-out 3s infinite}
+@keyframes btn-ripple{0%{width:0;height:0;opacity:.5}100%{width:300px;height:300px;opacity:0}}
+.back-link{display:block;text-align:center;margin-top:14px;opacity:0;animation:fade-up .4s ease 2.8s forwards}
+.back-link a{font-size:12px;color:var(--mid);text-decoration:underline;text-underline-offset:3px}
+.contact{font-size:13px;color:var(--mid);text-align:center;line-height:1.8;margin-top:28px;opacity:0;animation:fade-up .4s ease 3s forwards}
 .contact a{color:var(--ink)}
-@media(max-width:600px){.top{padding:14px 20px}main{padding:30px 20px}.hero{padding:34px 24px}}
+.footer{text-align:center;font-size:10px;color:var(--lite);margin-top:24px;line-height:1.8;padding-bottom:20px;opacity:0;animation:fade-up .4s ease 3.2s forwards}
+.footer a{color:var(--lite);text-decoration:none;font-size:10px}
+@media(max-width:600px){.top{padding:14px 20px}.hero{padding:34px 24px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important}}
 </style></head><body>
 <div class="top"><span class="brand">Aari Realty LLC</span><span class="ph">239.688.1770</span></div>
 <main>
   <div class="hero" id="hero">
-    <svg class="check" viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M25 41 l10 10 l20 -22"/></svg>
+    <div class="check">
+      <div class="check-burst" id="burst"></div>
+      <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="34"/><path d="M25 41 l10 10 l20 -22"/></svg>
+    </div>
     <p class="eyebrow">Welcome to Aari</p>
     <h1>You did it<span id="name-wrap">, <em class="name" id="first-name"></em></span>.</h1>
     <p class="sub">You're officially <em>in</em>. Take a breath&hellip; here's everything happening on our end so you don't have to wonder.</p>
   </div>
 
-  <div class="tlwrap">
-    <p class="tllabel">Where you are</p>
-    <div class="tl">
-      <div class="node done"><div class="ic"><svg viewBox="0 0 24 24"><path d="M4 12 l5 5 l11 -12"/></svg></div><div class="t"><b>Your seat is saved.</b><p>Paid, confirmed, and yours. Welcome in.</p><span class="tag">Done</span></div></div>
-      <div class="node done"><div class="ic"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M8 8 h8 M8 12 h8 M8 16 h5"/></svg></div><div class="t"><b>Your receipt and signed agreement are in your inbox.</b><p>Already sitting there. Go peek when you can.</p><span class="tag">Done</span></div></div>
-      <div class="node live"><div class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7 l9 6 l9 -6"/></svg></div><div class="t"><b>Your Hub access is being built.</b><p>Your Agent Hub account is being set up as you read this. Give it a few minutes to land in your inbox.</p><span class="tag">In progress</span></div></div>
-      <div class="node next"><div class="ic"><svg viewBox="0 0 24 24"><path d="M5 21 v-16 a2 2 0 0 1 2 -2 h7 a2 2 0 0 1 2 2 v16 M14 12 h4 M16 10 l2 2 l-2 2"/></svg></div><div class="t"><b>Then the real work begins.</b><p>Log in, set your password, and meet your tools. Then let's go build something big.</p><span class="tag">Next</span></div></div>
+  <div class="progress-section">
+    <p class="where">Where you are</p>
+    <div class="progress-row">
+      <div class="progress-bar"><div class="fill"></div></div>
+      <span class="progress-pct" id="pct">0%</span>
+    </div>
+
+    <div class="card-stack">
+      <div class="cs done">
+        <div class="num"><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-12"/></svg></div>
+        <div class="ci"><b>Your seat is saved.</b><p>Paid, confirmed, and yours. Welcome in.</p><span class="badge-c">Done</span></div>
+      </div>
+      <div class="cs done">
+        <div class="num"><svg viewBox="0 0 24 24"><path d="M4 12l5 5 11-12"/></svg></div>
+        <div class="ci"><b>Your receipt and signed agreement are in your inbox.</b><p>Already sitting there. Go peek when you can.</p><span class="badge-c">Done</span></div>
+      </div>
+      <div class="cs live">
+        <div class="num">3</div>
+        <div class="ci"><b>Your Hub access is being built.</b><p>Your Agent Hub account is being set up as you read this. Give it a few minutes to land in your inbox.</p><span class="badge-c">In progress</span></div>
+      </div>
+      <div class="cs next">
+        <div class="num">4</div>
+        <div class="ci"><b>Then the real work begins.</b><p>Log in, set your password, and meet your tools. Then let's go build something big.</p><span class="badge-c">Next</span></div>
+      </div>
     </div>
   </div>
 
-  <div class="card">
+  <div class="cta-card">
     <p>Give the email a minute to land (email loves the drama)&hellip; then step into <b>the Hub</b> whenever you're ready. So glad you're here.</p>
     <a href="https://hub.joinaari.com" class="btn">Step into the Hub &rarr;</a>
-    <div style="margin-top:14px"><a href="https://joinaari.com" style="font-size:12px;color:var(--mid);text-decoration:underline;text-underline-offset:3px;">Back to joinaari.com</a></div>
   </div>
+  <div class="back-link"><a href="https://joinaari.com">Back to joinaari.com</a></div>
   <div class="contact">Questions? Text or call Marlenyi at 239.688.1770 &middot; <a href="mailto:join@aarirealty.com">join@aarirealty.com</a></div>
-  <div style="text-align:center;font-size:10px;color:var(--lite);margin-top:28px;line-height:1.8;padding-bottom:20px;">Aari Realty LLC &middot; Broker of Record: Marlenyi L. Paredes &middot; BK3530153 &middot; Fort Myers, FL &middot; 239.688.1770 &middot; Equal Housing Opportunity<br><a href="/privacy.html" style="color:var(--lite);text-decoration:none;font-size:10px;">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms.html" style="color:var(--lite);text-decoration:none;font-size:10px;">Terms</a></div>
+  <div class="footer">Aari Realty LLC &middot; Broker of Record: Marlenyi L. Paredes &middot; BK3530153 &middot; Fort Myers, FL &middot; 239.688.1770 &middot; Equal Housing Opportunity<br><a href="/privacy.html">Privacy</a> &nbsp;&middot;&nbsp; <a href="/terms.html">Terms</a></div>
 </main>
 <script>
 (function(){
-  var p=new URLSearchParams(location.search);var f=(p.get('first_name')||'').replace(/[ "'&<>]/g,'');if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
-  // confetti burst in the hero
-  var h=document.getElementById('hero'),cols=['#ffffff','#c9c4ba','#8f8a80'];
-  for(var i=0;i<18;i++){var c=document.createElement('span');c.className='conf';c.style.left=(4+Math.random()*92)+'%';c.style.background=cols[i%3];c.style.animationDuration=(2.4+Math.random()*1.6)+'s';c.style.animationDelay=(Math.random()*.9)+'s';h.appendChild(c);}
+  var p=new URLSearchParams(location.search);var f=(p.get('first_name')||'').replace(/[^a-zA-ZÀ-ɏ\s'-]/g,'').trim();if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
+
+  var h=document.getElementById('hero'),cols=['#ffffff','#c9c4ba','#8f8a80','#d4c9b8'];
+  for(var i=0;i<24;i++){var c=document.createElement('span');c.className='conf';c.style.left=(3+Math.random()*94)+'%';c.style.background=cols[i%4];c.style.animationDuration=(2+Math.random()*2)+'s';c.style.animationDelay=(Math.random()*.8)+'s';c.style.width=(6+Math.random()*6)+'px';c.style.height=(8+Math.random()*8)+'px';h.appendChild(c);}
+
+  var burst=document.getElementById('burst');
+  for(var j=0;j<10;j++){var s=document.createElement('span');var angle=(j/10)*Math.PI*2;var dist=28+Math.random()*16;s.style.setProperty('--bx',Math.cos(angle)*dist+'px');s.style.setProperty('--by',Math.sin(angle)*dist+'px');s.style.width=(3+Math.random()*3)+'px';s.style.height=s.style.width;burst.appendChild(s);}
+
+  var pct=document.getElementById('pct'),target=55,start=null;
+  function count(ts){if(!start)start=ts;var pr=Math.min((ts-start)/1800,1);var v=Math.round(pr*target);pct.textContent=v+'%';if(pr<1)requestAnimationFrame(count);}
+  setTimeout(function(){requestAnimationFrame(count);},1600);
 })();
 </script>
 </body></html>
