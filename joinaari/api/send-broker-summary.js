@@ -31,6 +31,10 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'name and email are required' });
     }
 
+    if (pdf_base64 && pdf_base64.length > 5 * 1024 * 1024) {
+      return res.status(413).json({ error: 'Payload too large' });
+    }
+
     if (!RESEND_KEY) {
       return res.status(500).json({ error: 'Resend API key not configured' });
     }

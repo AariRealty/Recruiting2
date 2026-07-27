@@ -10,12 +10,12 @@ module.exports = async function handler(req, res) {
   }
 
   if (req.method !== "POST") {
-    return res.status(200).json({ full_name: null, license_number: null, error: "method_not_allowed" });
+    return res.status(405).json({ full_name: null, license_number: null, error: "method_not_allowed" });
   }
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return res.status(200).json({
+    return res.status(500).json({
       full_name: null,
       license_number: null,
       error: "missing_api_key",
@@ -25,7 +25,7 @@ module.exports = async function handler(req, res) {
   try {
     const { image, media_type } = req.body || {};
     if (!image || !media_type) {
-      return res.status(200).json({
+      return res.status(400).json({
         full_name: null,
         license_number: null,
         error: "missing_payload",
@@ -68,7 +68,7 @@ module.exports = async function handler(req, res) {
     if (!apiResponse.ok) {
       let errDetail = "";
       try { errDetail = await apiResponse.text(); } catch(e) {}
-      return res.status(200).json({
+      return res.status(502).json({
         full_name: null,
         license_number: null,
         error: "api_error",
@@ -81,7 +81,7 @@ module.exports = async function handler(req, res) {
       result.content && result.content[0] ? result.content[0].text.trim() : "";
 
     if (!responseText) {
-      return res.status(200).json({
+      return res.status(502).json({
         full_name: null,
         license_number: null,
         error: "empty_response",
@@ -93,7 +93,7 @@ module.exports = async function handler(req, res) {
       const jsonMatch = responseText.match(/\{[\s\S]*\}/);
       parsed = JSON.parse(jsonMatch ? jsonMatch[0] : responseText);
     } catch (e) {
-      return res.status(200).json({
+      return res.status(422).json({
         full_name: null,
         license_number: null,
         error: "parse_error",
@@ -106,7 +106,7 @@ module.exports = async function handler(req, res) {
       license_number: parsed.license_number || null,
     });
   } catch (err) {
-    return res.status(200).json({
+    return res.status(500).json({
       full_name: null,
       license_number: null,
       error: "server_error",

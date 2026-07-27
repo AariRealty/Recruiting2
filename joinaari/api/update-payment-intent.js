@@ -10,7 +10,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { client_secret, amount, customer_id, first_name, last_name, email, plan_name, addons, coupon_code } = req.body;
+    const { client_secret, amount, customer_id, first_name, last_name, email, plan_name, addons, coupon_code, payment_intent_id } = req.body;
 
     if (!client_secret) {
       return res.status(400).json({ error: 'client_secret is required' });
@@ -32,7 +32,7 @@ module.exports = async function handler(req, res) {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
     // Extract PaymentIntent ID from client secret (format: pi_xxx_secret_yyy)
-    const piId = client_secret.split('_secret_')[0];
+    const piId = payment_intent_id || client_secret.split('_secret_')[0];
     const amountCents = Math.max(50, Math.round(pricing.totalDueToday * 100));
 
     // Update the PaymentIntent amount to the server-computed value
