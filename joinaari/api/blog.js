@@ -95,7 +95,7 @@ footer a{display:block;font-size:12.5px;color:rgba(255,255,255,.62);text-decorat
 footer a:hover{color:#fff}
 .fbot{max-width:1080px;margin:0 auto;padding-top:22px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:11px;color:rgba(255,255,255,.35)}
 .fbot a{display:inline-block;margin-left:16px;font-size:11px}
-@media(max-width:860px){nav{padding:14px 20px}.nav-link,.nav-phone{display:none}.fgrid{grid-template-columns:1fr;gap:24px}footer{padding:44px 22px 26px}.bhead{padding:48px 20px 32px}}
+@media(max-width:860px){nav{padding:14px 20px}.nav-link,.nav-phone{display:none}.nav-login{display:inline}.fgrid{grid-template-columns:1fr;gap:24px}footer{padding:44px 22px 26px}.bhead{padding:48px 20px 32px}}
 `;
 
 const NAV = `<nav>
@@ -105,7 +105,7 @@ const NAV = `<nav>
     <a class="nav-link" href="/mentorship.html">Mentorship</a>
     <a class="nav-link" href="/blog">Blog</a>
     <a class="nav-link" href="/#faq">FAQ</a>
-    <a class="nav-link" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in</a>
+    <a class="nav-link nav-login" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in</a>
     <a class="btn-dark" href="/#plans">Start Your Application &rarr;</a>
   </div>
 </nav>`;
