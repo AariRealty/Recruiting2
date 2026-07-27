@@ -70,6 +70,22 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
 .nm-btn-dark{background:var(--ink);color:#fff}
 .nm-btn-outline{background:#fff;color:var(--ink);border:1px solid var(--border)}
 
+/* Tab navigation */
+.ica-tabs{display:flex;gap:6px;overflow-x:auto;padding:14px 44px;border-bottom:1px solid var(--border);position:sticky;top:57px;background:rgba(255,255,255,.98);backdrop-filter:blur(8px);z-index:40;margin:0 -44px 24px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ica-tabs::-webkit-scrollbar{display:none}
+.ica-tab-btn{background:none;border:1px solid var(--border);color:var(--mid);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:9px 16px;border-radius:50px;cursor:pointer;white-space:nowrap;transition:all .2s;flex-shrink:0}
+.ica-tab-btn:hover{color:var(--ink);border-color:var(--ink)}
+.ica-tab-btn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+.ica-panel{display:none}
+.ica-panel.active{display:block}
+.ica-panel > h2:first-child{margin-top:0}
+
+/* Embed mode: strip chrome so this can iframe cleanly inside the Hub sign-in gate */
+body.embed nav, body.embed .ica-hero, body.embed .ica-cta-bar, body.embed .ica-footer, body.embed .abot-bubble, body.embed .abot-panel, body.embed .nav-menu{display:none !important}
+body.embed .ica-wrap{padding-top:20px}
+body.embed .cover-page{display:none}
+body.embed .ica-tabs{top:0}
+
 @media(max-width:640px){
   nav{padding:12px 16px}
   .brand-text{display:none}
@@ -105,6 +121,8 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
   table td{padding:6px 8px;font-size:12px}
   .ica-cta-bar{flex-direction:column;gap:10px;padding:14px 20px}
   .ica-cta-bar p{font-size:12px!important;text-align:center}
+  .ica-tabs{padding:12px 20px;margin:0 -20px 20px}
+  .ica-tab-btn{font-size:10px;padding:8px 13px}
 }
 </style>
 </head>
@@ -161,6 +179,20 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
   <p class="cover-brokerage">Aari Realty LLC</p>
 </div>
 
+
+<!-- ============================== TAB NAVIGATION ============================== -->
+
+<div class="ica-tabs" role="tablist" aria-label="Agreement sections">
+  <button class="ica-tab-btn active" data-tab="agreement" role="tab" aria-selected="true">The Agreement</button>
+  <button class="ica-tab-btn" data-tab="commission" role="tab" aria-selected="false">Commission</button>
+  <button class="ica-tab-btn" data-tab="operations" role="tab" aria-selected="false">Operations</button>
+  <button class="ica-tab-btn" data-tab="acknowledgments" role="tab" aria-selected="false">Acknowledgments</button>
+</div>
+
+
+<!-- ============================== PANEL 1: THE AGREEMENT (ICA) ============================== -->
+
+<div class="ica-panel active" data-panel="agreement">
 
 <!-- ============================== INCORPORATED DOCUMENTS ============================== -->
 
@@ -438,6 +470,12 @@ table tr:nth-child(even) td{background:rgba(20,18,16,.02)}
 
 
 <!-- ============================== COMMISSION STRUCTURE ADDENDUM ============================== -->
+
+</div><!-- /.ica-panel agreement -->
+
+<!-- ============================== PANEL 2: COMMISSION ============================== -->
+
+<div class="ica-panel" data-panel="commission">
 
 <h2>Commission Structure Addendum</h2>
 
@@ -720,6 +758,12 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 
 <!-- ============================== OPERATIONS & COMPLIANCE MANUAL ============================== -->
+
+</div><!-- /.ica-panel commission -->
+
+<!-- ============================== PANEL 3: OPERATIONS ============================== -->
+
+<div class="ica-panel" data-panel="operations">
 
 <h2>Operations &amp; Compliance Manual</h2>
 
@@ -1160,6 +1204,12 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== W-9 COLLECTION & TAX ACKNOWLEDGMENT ============================== -->
 
+</div><!-- /.ica-panel operations -->
+
+<!-- ============================== PANEL 4: ACKNOWLEDGMENTS ============================== -->
+
+<div class="ica-panel" data-panel="acknowledgments">
+
 <h2>W-9 Collection &amp; Tax Acknowledgment</h2>
 
 <p>This acknowledgment must be completed at onboarding. No commission disbursement will be made to the Associate until a valid IRS Form W-9 is received by Aari Realty LLC.</p>
@@ -1392,6 +1442,8 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p>By executing this Agreement, the Associate acknowledges that they have read, understand, and agree to all terms and conditions set forth in this Independent Contractor Agreement and all Incorporated Documents. Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
 
 
+</div><!-- /.ica-panel acknowledgments -->
+
 </div><!-- /.ica-wrap -->
 
 <div class="ica-cta-bar">
@@ -1408,6 +1460,25 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 (function(){
   var h=document.getElementById('navHamburger'),m=document.getElementById('navMenu');
   if(h&&m){h.addEventListener('click',function(){h.classList.toggle('open');m.classList.toggle('open');});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){h.classList.remove('open');m.classList.remove('open');});});}
+
+  // Tab navigation
+  var tabs=document.querySelectorAll('.ica-tab-btn');
+  var panels=document.querySelectorAll('.ica-panel');
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){
+      var target=t.dataset.tab;
+      tabs.forEach(function(b){var on=b===t;b.classList.toggle('active',on);b.setAttribute('aria-selected',on?'true':'false');});
+      panels.forEach(function(p){p.classList.toggle('active',p.dataset.panel===target);});
+      var tabsEl=document.querySelector('.ica-tabs');
+      var off=tabsEl?tabsEl.offsetTop:0;
+      window.scrollTo({top:off-8,behavior:'smooth'});
+    });
+  });
+
+  // Embed mode: ?embed=1 hides page chrome so this page can be iframed
+  if(/[?&]embed=1/.test(location.search)){
+    document.body.classList.add('embed');
+  }
 })();
 </script>
 <!-- Aari Chatbot -->
