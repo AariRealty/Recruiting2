@@ -10,7 +10,7 @@ const EO_PRICE = 'price_1TrolNHTQU4zpF236LAkKbqi';
 
 const PROVISION_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-agent-provision';
 const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
-const PROVISION_TOKEN = process.env.PROVISION_TOKEN;
+const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
 
 function firstOfNextMonthTs() {
   const now = new Date();
@@ -22,7 +22,7 @@ function firstOfNextMonthNextYearTs() {
 }
 
 module.exports = async function handler(req, res) {
-  if (!SUPABASE_ANON || !PROVISION_TOKEN) {
+  if (!SUPABASE_ANON) {
     return res.status(500).json({ error: 'Server configuration error.' });
   }
 
