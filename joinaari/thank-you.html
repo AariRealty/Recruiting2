@@ -26,11 +26,12 @@ main{max-width:700px;margin:0 auto;padding:44px 32px 70px}
 .tlwrap{margin-top:40px}
 .tllabel{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--lite);margin-bottom:18px}
 .tl{position:relative;padding-left:2px}
-.tl::before{content:"";position:absolute;left:23px;top:24px;bottom:26px;width:2px;background:var(--border)}
+.tl::before{content:"";position:absolute;left:23px;top:24px;bottom:56px;width:2px;background:var(--border)}
 .tl::after{content:"";position:absolute;left:23px;top:24px;width:2px;height:0;background:var(--ink);animation:fill 2.6s cubic-bezier(.4,.1,.2,1) .4s forwards}
 @keyframes fill{to{height:46%}}
 .node{display:flex;gap:22px;padding:16px 0;position:relative;opacity:0;transform:translateX(-12px);animation:pop .55s ease forwards}
 .node:nth-child(1){animation-delay:.3s}.node:nth-child(2){animation-delay:.55s}.node:nth-child(3){animation-delay:.8s}.node:nth-child(4){animation-delay:1.05s}
+.node:last-child{padding-bottom:0}
 @keyframes pop{to{opacity:1;transform:none}}
 .ic{width:48px;height:48px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:2}
 .node.done .ic{background:var(--ink);border-color:var(--ink)}
