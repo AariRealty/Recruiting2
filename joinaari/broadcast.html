@@ -58,13 +58,14 @@ button:disabled{opacity:.5;cursor:default}
 </div>
 <script>
 var FN='https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-broadcast';
-var token='',count=0;
+var token='',count=0,nonce='';
+function generateNonce(){return Date.now().toString(36)+'-'+Math.random().toString(36).slice(2);}
 function toHtml(t){t=t.trim();if(/<[a-z][\s\S]*>/i.test(t))return t;return t.split(/\n{2,}/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');}
-function post(payload){return fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(r){return r.json();});}
+function post(payload){if(!token){return Promise.reject(new Error('Not authenticated'));}payload.nonce=nonce;nonce=generateNonce();return fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).then(function(r){if(!r.ok){throw new Error('Request failed: '+r.status);}return r.json();});}
 document.getElementById('unlock').addEventListener('click',function(){
   var p=document.getElementById('pass').value.trim();var lm=document.getElementById('lockMsg');lm.textContent='';
-  post({token:p,count_only:true}).then(function(j){
-    if(j&&j.ok){token=p;count=j.count;document.getElementById('lock').classList.add('hide');document.getElementById('app').classList.remove('hide');document.getElementById('count').innerHTML='<b>'+count+'</b> active subscriber'+(count===1?'':'s')+' on your list';}
+  fetch(FN,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:p,count_only:true})}).then(function(r){return r.json();}).then(function(j){
+    if(j&&j.ok){token=p;nonce=generateNonce();count=j.count;document.getElementById('lock').classList.add('hide');document.getElementById('app').classList.remove('hide');document.getElementById('count').innerHTML='<b>'+count+'</b> active subscriber'+(count===1?'':'s')+' on your list';}
     else{lm.textContent='Wrong passcode.';}
   }).catch(function(){lm.textContent='Connection error, try again.';});
 });

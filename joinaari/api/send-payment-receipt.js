@@ -1,3 +1,4 @@
+const Stripe = require('stripe');
 const { Resend } = require('resend');
 
 // Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
@@ -16,17 +17,30 @@ module.exports = async function handler(req, res) {
 
   try {
     const { name, email, plan, amount, payment_id, addons, monthly_amount } = req.body;
-    if (!email || !name || !amount) {
-      return res.status(400).json({ error: 'email, name, and amount are required' });
+    if (!email || !name) {
+      return res.status(400).json({ error: 'email and name are required' });
     }
     if (!RESEND_KEY) {
       return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
     }
+    if (!process.env.STRIPE_SECRET_KEY) {
+      return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
+    }
     const resend = new Resend(RESEND_KEY);
+    const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+
+    // Look up the actual amount from Stripe instead of trusting client-supplied value
+    let actualAmount;
+    if (payment_id) {
+      const pi = await stripe.paymentIntents.retrieve(payment_id);
+      actualAmount = (pi.amount / 100).toFixed(2);
+    } else {
+      actualAmount = Number(amount || 0).toFixed(2);
+    }
 
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const firstName = String(name).split(' ')[0];
-    const total = Number(amount);
+    const total = Number(actualAmount);
     const EO = 199;
     const membershipToday = Math.max(0, total - EO);
     const fmt = function (n) { return '$' + Number(n).toFixed(2); };
@@ -48,7 +62,6 @@ module.exports = async function handler(req, res) {
 
     const html =
       '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
-      '<style>@import url(https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap);</style>' +
       '</head><body style="margin:0;padding:0;background:#f3f3f2;font-family:Montserrat,Arial,sans-serif;">' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f3f3f2;padding:28px 12px;"><tr><td align="center">' +
       '<table role="presentation" width="520" cellpadding="0" cellspacing="0" style="max-width:520px;width:100%;background:#ffffff;border:1px solid #e6e4de;border-radius:12px;">' +

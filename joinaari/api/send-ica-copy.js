@@ -1,8 +1,8 @@
 const { Resend } = require('resend');
 
 const SIGN_FN_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-sign-ica-web';
-const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y';
-const WEB_TOKEN = 'aari-web-sign-b7Q2xM9';
+const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
+const WEB_TOKEN = process.env.WEB_TOKEN;
 
 // Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
 // executed-ICA emails send from aarirealty.com via that key. Until then, fall back to the shared
@@ -21,6 +21,10 @@ function firstName(f) {
 }
 
 module.exports = async function handler(req, res) {
+  if (!SUPABASE_ANON || !WEB_TOKEN) {
+    return res.status(500).json({ error: 'Server configuration error.' });
+  }
+
   const allowed = ['https://joinaari.com', 'https://joinaari.vercel.app'];
   res.setHeader('Access-Control-Allow-Origin', allowed.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');

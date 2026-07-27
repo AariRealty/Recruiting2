@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
 
     // Validate the key format
     if (!process.env.STRIPE_SECRET_KEY.startsWith('sk_')) {
-      return res.status(500).json({ error: 'STRIPE_SECRET_KEY is invalid. It must start with sk_test_ or sk_live_.' });
+      return res.status(500).json({ error: 'Payment configuration error. Please contact support.' });
     }
 
     // C1: price is computed server-side from the plan/add-on/coupon SELECTION.
@@ -45,10 +45,11 @@ module.exports = async function handler(req, res) {
     const amountCents = Math.max(50, Math.round(pricing.totalDueToday * 100));
 
     // Create or find Stripe customer
-    const customer = await stripe.customers.create({
+    const existing = await stripe.customers.list({ email, limit: 1 });
+    const customer = existing.data[0] || await stripe.customers.create({
       name: first_name + ' ' + last_name,
       email: email,
-      phone: phone || undefined
+      metadata: { phone: phone || '' }
     });
 
     // Create PaymentIntent with card explicitly enabled
