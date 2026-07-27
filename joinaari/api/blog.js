@@ -95,7 +95,7 @@ const NAV = `<nav>
     <a class="nav-link" href="/mentorship.html">Mentorship</a>
     <a class="nav-link" href="/blog">Blog</a>
     <a class="nav-link" href="/#faq">FAQ</a>
-    <a class="nav-link" href="https://aari-agent-hub.netlify.app" target="_blank" rel="noopener">Log in</a>
+    <a class="nav-link" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in</a>
     <a class="btn-dark" href="/#plans">Start Your Application &rarr;</a>
   </div>
 </nav>`;
