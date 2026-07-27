@@ -81,7 +81,7 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     console.error('[create-payment-intent] Error:', err.type, err.message);
     const detail = err.type === 'StripeAuthenticationError'
-      ? 'Invalid Stripe API key. Check STRIPE_SECRET_KEY in Vercel.'
+      ? 'Payment configuration error. Please contact support.'
       : err.message;
     return res.status(500).json({ error: 'Failed to create payment intent', detail: detail });
   }

@@ -7,6 +7,8 @@ const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
 const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
 const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
 
+function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
   res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
@@ -58,7 +60,7 @@ module.exports = async function handler(req, res) {
     }
 
     const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + '/mo, billed monthly. ') : '';
-    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + name;
+    const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + esc(name);
 
     const html =
       '<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">' +
@@ -71,7 +73,7 @@ module.exports = async function handler(req, res) {
       '</td></tr>' +
       '<tr><td style="padding:24px 30px 4px;">' +
       '<div style="font-size:10px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;font-weight:600;">Payment received</div>' +
-      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + firstName + '</em>.</div>' +
+      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + esc(firstName) + '</em>.</div>' +
       '</td></tr>' +
       '<tr><td style="padding:0 30px 8px;">' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' +
