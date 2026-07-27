@@ -2,7 +2,7 @@ const { Resend } = require('resend');
 
 const SIGN_FN_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-sign-ica-web';
 const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
-const WEB_TOKEN = process.env.WEB_TOKEN;
+const WEB_TOKEN = 'aari-web-sign-b7Q2xM9';
 
 // Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
 // executed-ICA emails send from aarirealty.com via that key. Until then, fall back to the shared
@@ -21,7 +21,7 @@ function firstName(f) {
 }
 
 module.exports = async function handler(req, res) {
-  if (!SUPABASE_ANON || !WEB_TOKEN) {
+  if (!SUPABASE_ANON) {
     return res.status(500).json({ error: 'Server configuration error.' });
   }
 
