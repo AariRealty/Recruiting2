@@ -99,13 +99,13 @@ footer a:hover{color:#fff}
 `;
 
 const NAV = `<nav>
-  <a class="brand" href="/">Aari Realty<small>Southwest Florida Brokerage</small></a>
+  <a class="brand" href="/"><img src="/logo.png" alt="Aari Realty" style="height:42px;width:auto;display:block" /></a>
   <div class="nav-right">
     <a class="nav-link" href="/#plans">Plans</a>
     <a class="nav-link" href="/mentorship.html">Mentorship</a>
     <a class="nav-link" href="/blog">Blog</a>
     <a class="nav-link" href="/#faq">FAQ</a>
-    <a class="nav-link" href="https://aari-agent-hub.netlify.app" target="_blank" rel="noopener">Log in</a>
+    <a class="nav-link" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in</a>
     <a class="btn-dark" href="/#plans">Start Your Application &rarr;</a>
   </div>
 </nav>`;
