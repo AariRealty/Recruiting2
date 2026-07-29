@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /portal.html
+Disallow: /thank-you.html
+Disallow: /broadcast.html
+Disallow: /api/
+
+Sitemap: https://joinaari.com/sitemap.xml
