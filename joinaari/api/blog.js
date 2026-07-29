@@ -146,6 +146,7 @@ function shell({ title, desc, canonical, ogImage, jsonLd, body }) {
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${esc(canonical)}">
+<meta property="og:site_name" content="Aari Realty">
 ${ogImage ? `<meta property="og:image" content="${esc(ogImage)}">` : ''}
 <meta name="twitter:card" content="${ogImage ? 'summary_large_image' : 'summary'}">
 <meta name="twitter:title" content="${esc(title)}">
