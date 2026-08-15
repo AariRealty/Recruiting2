@@ -59,6 +59,7 @@ window.ICA_CONTENT = {
 
 <h4>Compliance with Laws and Rules</h4>
 <p>Comply with all applicable Florida Statutes, FREC Rules, MLS Rules, the NAR Code of Ethics, and all Company policies.</p>
+<p>Laws, administrative rules, MLS rules, and industry practice standards change. The Associate&rsquo;s obligation is to comply with each requirement as it exists at the time of the transaction, not as it may be described in this Agreement or any Incorporated Document. Where a requirement referenced in this Agreement is amended, superseded, stayed, vacated, or repealed, the current requirement governs and this Agreement is read accordingly. The Company publishes current compliance guidance in the Agent Hub. Lack of awareness of a change is not a defense to a violation.</p>
 
 <h4>Incorporated Documents</h4>
 <p>Abide by all documents incorporated by reference, including but not limited to the Commission Structure Addendum, Exhibit A: Commission Fee Schedule, Operations &amp; Compliance Manual, and all other written policies issued by the Company.</p>
@@ -425,10 +426,12 @@ window.ICA_CONTENT = {
   </thead>
   <tbody>
     <tr><td>Commercial Sale or Commercial Lease</td><td>$399.00</td></tr>
-    <tr><td>Residential Rental</td><td>$299.00</td></tr>
+    <tr><td>Residential Rental &mdash; Landlord Representation</td><td>$299.00</td></tr>
+    <tr><td>Residential Rental &mdash; Tenant Representation</td><td>$99.00</td></tr>
   </tbody>
 </table>
 </div>
+<p><em>Effective August 23, 2026: the Residential Rental fee for Tenant Representation is a flat $99.00 per side, collected from the tenant at closing per Section 2.2(b) below, itemized on the Closing Disclosure like the transaction processing fee. Landlord Representation remains at $299.00 per side. All other transaction fees are unchanged.</em></p>
 
 <p>Transaction and compliance fees are assessed per side for any transaction facilitated or processed under the Company&rsquo;s brokerage license. If the Associate represents both sides of a transaction where legally permitted, the applicable transaction fee applies to each side. If a transaction fee is not collected at closing, the Company may deduct the fee from commissions or invoice the Associate directly.</p>
 <p><strong>Payment and Collection of the Transaction Fee.</strong></p>
@@ -819,17 +822,17 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h4>32.7 Material Breach.</h4>
 <p>Any violation of this Section is a Material Breach and may result in immediate termination and reporting to DBPR.</p>
 
-<h3>SECTION 33. FINCEN RESIDENTIAL REAL ESTATE REPORTING</h3>
-<h4>33.1 Acknowledgment.</h4>
-<p>The Associate acknowledges the FinCEN Residential Real Estate Reporting Rule, 31 CFR Part 1031, effective March 1, 2026, which requires reporting of certain non financed transfers of residential real property to legal entities and trusts.</p>
-<h4>33.2 Identification and Notice.</h4>
-<p>The Associate must identify any transaction involving a non financed transfer where the transferee is a legal entity or trust, and must notify the Broker and the settlement agent in writing at contract execution.</p>
-<h4>33.3 Cooperation.</h4>
-<p>The Associate must cooperate fully with the Broker, the settlement agent, and legal counsel in gathering beneficial ownership information and any other information required under the Rule.</p>
-<h4>33.4 No Independent Filing Authority.</h4>
-<p>The Associate has no authority or obligation to file any report under the Rule on behalf of the Company.</p>
-<h4>33.5 Designation Prohibited.</h4>
-<p>The Associate must not sign, initial, accept, or otherwise agree to any designation agreement, reporting assignment, or written arrangement under 31 CFR Part 1031 that places the reporting obligation on Aari Realty LLC or on the Associate. Any request from a title company, closing agent, attorney, or other party in the reporting cascade to accept the reporting obligation must be forwarded to the Broker unanswered. Unauthorized acceptance of a reporting designation is a Material Breach.</p>
+<h3>SECTION 33. FEDERAL REPORTING AND ANTI-MONEY LAUNDERING COOPERATION</h3>
+<h4>33.1 Identification and Notice.</h4>
+<p>The Associate must identify and report to the Broker in writing, at contract execution, any non-financed transfer where the transferee is a legal entity or trust.</p>
+<h4>33.2 Cooperation.</h4>
+<p>The Associate must cooperate with the Broker, settlement agent, and counsel in gathering ownership or source-of-funds information required under any applicable federal reporting or anti-money-laundering requirement then in effect.</p>
+<h4>33.3 No Independent Filing Authority.</h4>
+<p>The Associate has no authority to file any federal report on the Company&rsquo;s behalf.</p>
+<h4>33.4 Designation Prohibited.</h4>
+<p>The Associate must not sign, initial, accept, or agree to any designation agreement, reporting assignment, or written arrangement that places a federal reporting obligation on Aari Realty LLC or on the Associate. Any such request from a title company, closing agent, attorney, or other party must be forwarded to the Broker unanswered. Unauthorized acceptance is a Material Breach.</p>
+<h4>33.5 Current Requirements.</h4>
+<p>Current federal reporting requirements are published in the Agent Hub. The Associate is responsible for the version in effect at the time of each transaction.</p>
 
 <h3>SECTION 34. PERSONAL ASSISTANTS</h3>
 <h4>34.1 Definitions.</h4>
