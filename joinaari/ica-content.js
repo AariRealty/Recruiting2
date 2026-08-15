@@ -77,10 +77,11 @@ window.ICA_CONTENT = {
 <p>Associates must not transmit wire transfer instructions via email or text. All wire instructions must be verbally confirmed by the client directly with the title company. Any violation constitutes an immediate termination event and may result in withheld commissions and disciplinary action.</p>
 
 <h4>MLS Compliance</h4>
-<p>The Associate must submit any listing to the MLS within twenty four (24) hours of any public marketing of the property, consistent with the NAR Clear Cooperation Policy and the rules of the applicable MLS.</p>
-<p>Public marketing includes yard signs, social media posts, flyers, email distribution, public facing websites, printed advertising, multi brokerage networks, and any communication of the property&rsquo;s availability to an audience outside Aari Realty LLC.</p>
-<p>Separately, the Associate must upload the fully executed listing agreement to the compliance platform within forty eight (48) hours of execution. This is a file completion requirement and is not an MLS submission deadline.</p>
-<p>If the seller directs that the property not be publicly marketed, the Associate must obtain and upload written seller instruction to that effect before any delay in MLS submission.</p>
+<p>The Associate must comply with the listing submission, cooperation, and marketing rules of each MLS in which the Associate participates, as those rules exist at the time of the transaction. Deadlines, triggers, and definitions are set by the applicable MLS and are published by that board. The Associate is responsible for knowing the current rule.</p>
+<p><strong>Company file completion (not an MLS deadline):</strong> the fully executed listing agreement must be uploaded to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution.</p>
+<p><strong>Seller-directed non-marketing:</strong> where a seller directs that a property not be publicly marketed, the Associate must satisfy the applicable MLS&rsquo;s own requirements for that election, including any agreement or notice the MLS requires to be filed with the board, and must upload proof of that filing to the Company&rsquo;s compliance platform.</p>
+<p><strong>Broker notice:</strong> any MLS inquiry, citation, fine, or disciplinary communication must be reported to the Broker within twenty-four (24) hours.</p>
+<p><strong>Fine responsibility:</strong> any fine, penalty, or sanction imposed by any MLS as a result of the Associate&rsquo;s violation is the Associate&rsquo;s sole financial responsibility, and the Company may offset amounts it pays on the Associate&rsquo;s behalf against future commission disbursements.</p>
 
 <h4>Social Media &amp; Advertising</h4>
 <p>Any advertising, marketing, or social media content that uses the Company&rsquo;s name, branding, or implies affiliation requires prior written Broker approval, except where Associates use pre-cleared Company templates.</p>
@@ -696,10 +697,11 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p>The Associate must disclose to the Qualifying Broker any transaction covered by this Addendum prior to contract execution. The Associate&rsquo;s status as a real estate licensee must be disclosed in the purchase contract or other applicable transaction documents.</p>
 
 <h3>SECTION 21. MLS &amp; BRAND STANDARDS ADDENDUM</h3>
-<p>The Associate must submit any listing to the MLS within twenty four (24) hours of any public marketing of the property, consistent with the NAR Clear Cooperation Policy and the rules of the applicable MLS.</p>
-<p>Public marketing includes yard signs, social media posts, flyers, email distribution, public facing websites, printed advertising, multi brokerage networks, and any communication of the property&rsquo;s availability to an audience outside Aari Realty LLC.</p>
-<p>Separately, the Associate must upload the fully executed listing agreement to the compliance platform within forty eight (48) hours of execution. This is a file completion requirement and is not an MLS submission deadline.</p>
-<p>If the seller directs that the property not be publicly marketed, the Associate must obtain and upload written seller instruction to that effect before any delay in MLS submission.</p>
+<p>The Associate must comply with the listing submission, cooperation, and marketing rules of each MLS in which the Associate participates, as those rules exist at the time of the transaction. Deadlines, triggers, and definitions are set by the applicable MLS and are published by that board. The Associate is responsible for knowing the current rule.</p>
+<p><strong>Company file completion (not an MLS deadline):</strong> the fully executed listing agreement must be uploaded to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution.</p>
+<p><strong>Seller-directed non-marketing:</strong> where a seller directs that a property not be publicly marketed, the Associate must satisfy the applicable MLS&rsquo;s own requirements for that election, including any agreement or notice the MLS requires to be filed with the board, and must upload proof of that filing to the Company&rsquo;s compliance platform.</p>
+<p><strong>Broker notice:</strong> any MLS inquiry, citation, fine, or disciplinary communication must be reported to the Broker within twenty-four (24) hours.</p>
+<p><strong>Fine responsibility:</strong> any fine, penalty, or sanction imposed by any MLS as a result of the Associate&rsquo;s violation is the Associate&rsquo;s sole financial responsibility, and the Company may offset amounts it pays on the Associate&rsquo;s behalf against future commission disbursements.</p>
 <p>All advertising must include Aari Realty LLC as broker of record. Team/DBA usage requires prior written Broker approval. Social media posts are advertising and must meet broker ID and fair housing standards.</p>
 
 <h3>SECTION 22. TEAM ADDENDUM</h3>
@@ -1120,11 +1122,10 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h4>2.2 Multiple Board Compliance.</h4>
 <p>Where the Associate participates in more than one MLS board, they are responsible for knowing and complying with the specific rules of each board. Rules vary by board. The more restrictive rule applies in all cases of conflict unless the Broker directs otherwise in writing.</p>
 
-<h4>2.3 Clear Cooperation Compliance</h4>
-<p>The Associate must submit any listing to the MLS within twenty four (24) hours of any public marketing of the property, consistent with the NAR Clear Cooperation Policy and the rules of the applicable MLS.</p>
-<p>Public marketing includes yard signs, social media posts, flyers, email distribution, public facing websites, printed advertising, multi brokerage networks, and any communication of the property&rsquo;s availability to an audience outside Aari Realty LLC.</p>
-<p>Separately, the Associate must upload the fully executed listing agreement to the compliance platform within forty eight (48) hours of execution. This is a file completion requirement and is not an MLS submission deadline.</p>
-<p>If the seller directs that the property not be publicly marketed, the Associate must obtain and upload written seller instruction to that effect before any delay in MLS submission.</p>
+<h4>2.3 Listing Submission, Cooperation &amp; Marketing</h4>
+<p>The Associate must comply with the listing submission, cooperation, and marketing rules of each MLS in which the Associate participates, as those rules exist at the time of the transaction. Deadlines, triggers, and definitions are set by the applicable MLS and are published by that board. The Associate is responsible for knowing the current rule.</p>
+<p><strong>Company file completion (not an MLS deadline):</strong> the fully executed listing agreement must be uploaded to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution.</p>
+<p><strong>Seller-directed non-marketing:</strong> where a seller directs that a property not be publicly marketed, the Associate must satisfy the applicable MLS&rsquo;s own requirements for that election, including any agreement or notice the MLS requires to be filed with the board, and must upload proof of that filing to the Company&rsquo;s compliance platform.</p>
 
 <h4>2.4 NAR Settlement Compliance.</h4>
 <p>The Associate must comply with all MLS rule changes implemented in connection with the NAR settlement effective August 17, 2024, including the prohibition on offering buyer broker compensation in any MLS field, across all boards in which they participate.</p>
