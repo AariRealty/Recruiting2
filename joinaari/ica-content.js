@@ -431,7 +431,7 @@ window.ICA_CONTENT = {
   </tbody>
 </table>
 </div>
-<p><em>Effective August 23, 2026: the Residential Rental fee for Tenant Representation is a flat $99.00 per side, collected from the tenant at closing per Section 2.2(b) below, itemized on the Closing Disclosure like the transaction processing fee. Landlord Representation remains at $299.00 per side. All other transaction fees are unchanged.</em></p>
+<p><em>Effective August 18, 2026: the Residential Rental fee for Tenant Representation is a flat $99.00 per side, collected from the tenant at closing per Section 2.2(b) below, itemized on the Closing Disclosure like the transaction processing fee. Landlord Representation remains at $299.00 per side. All other transaction fees are unchanged.</em></p>
 
 <p>Transaction and compliance fees are assessed per side for any transaction facilitated or processed under the Company&rsquo;s brokerage license. If the Associate represents both sides of a transaction where legally permitted, the applicable transaction fee applies to each side. If a transaction fee is not collected at closing, the Company may deduct the fee from commissions or invoice the Associate directly.</p>
 <p><strong>Payment and Collection of the Transaction Fee.</strong></p>
