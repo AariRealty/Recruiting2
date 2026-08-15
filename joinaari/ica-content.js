@@ -1116,7 +1116,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h4 id="s-88-4">&sect;88.4 No Additional Compensation.</h4>
 <p>The Associate will not receive any referral fee, bonus, or additional compensation from any affiliated entity beyond the compensation structure set forth in Exhibit A: Commission Fee Schedule.</p>
 
-<p><strong>Legal Reference:</strong> This disclosure is made pursuant to RESPA Section 8(c)(4), 12 U.S.C. &sect;2607(c)(4), and 24 C.F.R. &sect;3500.15. This disclosure does not constitute legal advice. Associates should consult with a licensed attorney regarding their individual compliance obligations.</p>
+<p><strong>Legal Reference:</strong> This disclosure is made pursuant to RESPA Section 8(c)(4), 12 U.S.C. &sect;2607(c)(4), and the affiliated business arrangement disclosure requirements of Regulation X as currently codified. This disclosure does not constitute legal advice. Associates should consult with a licensed attorney regarding their individual compliance obligations.</p>
 
 
 <!-- ============================== MLS RULES ACKNOWLEDGMENT ============================== -->
@@ -1141,8 +1141,8 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p>Where a seller directs that a property not be submitted to or publicly marketed through an MLS, the Associate must satisfy that MLS&rsquo;s own requirements for the election before any advertising of the property occurs. Some boards require a signed owner agreement or written notice to be filed with the board itself, and a document held only in the Company&rsquo;s file does not satisfy that requirement. The Associate must complete the board&rsquo;s process and upload proof of the board filing, together with the seller&rsquo;s written instruction, to the compliance platform.</p>
 <p><strong>Company file completion (not an MLS deadline):</strong> the fully executed listing agreement must be uploaded to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution.</p>
 
-<h4 id="s-89-5">&sect;89.5 NAR Settlement Compliance.</h4>
-<p>The Associate must comply with all MLS rule changes implemented in connection with the NAR settlement effective August 17, 2024, including the prohibition on offering buyer broker compensation in any MLS field, across all boards in which they participate.</p>
+<h4 id="s-89-5">&sect;89.5 Practice-Change Compliance.</h4>
+<p>The Associate must comply with all NAR practice-change requirements and all MLS rule changes tied to them, as those requirements and rules exist at the time of the transaction, across every board in which the Associate participates. Those requirements and rules change on the schedule of NAR and each MLS. The Associate is responsible for knowing the current version.</p>
 
 <h4 id="s-89-6">&sect;89.6 MLS Fines.</h4>
 <p>Any fine, penalty, or sanction imposed by any MLS board as a result of the Associate&rsquo;s violation of MLS rules is the Associate&rsquo;s sole financial responsibility. Aari Realty LLC reserves the right to offset any MLS fines paid by the brokerage on the Associate&rsquo;s behalf against future commission disbursements.</p>
@@ -1161,10 +1161,10 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <h2 id="s-90">Buyer Brokerage Agreement Policy Acknowledgment</h2>
 
-<p>This acknowledgment is required in connection with the NAR settlement effective August 17, 2024, and must be signed at onboarding before the Associate may represent any buyer client.</p>
+<p>This acknowledgment is required in connection with the NAR practice-change requirements applicable to buyer representation, and must be signed at onboarding before the Associate may represent any buyer client.</p>
 
 <h3 id="s-90-1">&sect;90.1 Background</h3>
-<p>Effective August 17, 2024, the National Association of Realtors (NAR) implemented practice changes requiring that all buyer&rsquo;s agents enter into a written Buyer Brokerage Agreement with buyer clients before touring any property. These requirements are incorporated into FGCMLS rules and are subject to oversight by FREC as part of the Qualifying Broker&rsquo;s supervisory obligations under Florida Statute &sect;475.278.</p>
+<p>Under NAR practice-change requirements, a written Buyer Brokerage Agreement between the Associate and the buyer client is required before any property is toured. The MLS rules of every board in which the Associate participates incorporate this requirement, and the Qualifying Broker&rsquo;s supervisory obligations under Florida law apply. The Associate is responsible for knowing the current NAR requirement, the current rule of each applicable board, and the current Florida supervisory rule at the time of the transaction.</p>
 
 <h3 id="s-90-mandatory-requirements">Mandatory Requirements</h3>
 
@@ -1178,7 +1178,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p>All buyer broker compensation terms must be clearly disclosed in the Buyer Brokerage Agreement. The Associate may not make any verbal representations about compensation that differ from the written agreement.</p>
 
 <h4 id="s-90-5">&sect;90.5 No MLS Compensation Offers.</h4>
-<p>The Associate must not communicate or offer buyer broker compensation through any MLS field, in compliance with NAR settlement requirements and current FGCMLS rules.</p>
+<p>The Associate must not communicate or offer buyer broker compensation through any MLS field or MLS-facilitated channel where the applicable NAR requirement or the applicable board&rsquo;s rule prohibits it. Because these requirements and rules vary by board and change on NAR&rsquo;s and each board&rsquo;s schedule, the Associate is responsible for knowing the current rule of every board in which the Associate participates before publishing any listing.</p>
 
 <h4 id="s-90-6">&sect;90.6 Broker Submission.</h4>
 <p>A copy of every executed Buyer Brokerage Agreement must be submitted to the compliance platform within forty-eight (48) hours of execution.</p>
