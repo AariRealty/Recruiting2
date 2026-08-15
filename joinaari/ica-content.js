@@ -1118,7 +1118,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h4 id="s-88-4">&sect;88.4 No Additional Compensation.</h4>
 <p>The Associate will not receive any referral fee, bonus, or additional compensation from any affiliated entity beyond the compensation structure set forth in Exhibit A: Commission Fee Schedule.</p>
 
-<p><strong>Legal Reference:</strong> This disclosure is made pursuant to RESPA Section 8(c)(4), 12 U.S.C. &sect;2607(c)(4), and the affiliated business arrangement disclosure requirements of Regulation X as currently codified. This disclosure does not constitute legal advice. Associates should consult with a licensed attorney regarding their individual compliance obligations.</p>
+<p><strong>Legal Reference:</strong> This disclosure is made pursuant to RESPA Section 8(c)(4), 12 U.S.C. &sect;2607(c)(4), and the affiliated business arrangement disclosure requirements of the applicable RESPA implementing regulations as currently in effect. This disclosure does not constitute legal advice. Associates should consult with a licensed attorney regarding their individual compliance obligations.</p>
 
 
 <!-- ============================== MLS RULES ACKNOWLEDGMENT ============================== -->
@@ -1253,11 +1253,11 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <h2 id="s-version-history">Version History</h2>
 
-<p>Each entry lists the effective date, the sections affected, and a one-line summary of the change. This block is the only place in the document that carries revision dates. Revision notes shall not appear inside the body of any operative provision.</p>
+<p>Each entry lists the effective date, the sections affected, and a one-line summary of the change. This block is the only place in the document that carries revision dates. Revision notes shall not appear inside the body of any operative provision. Entries in this block describe changes in general terms. They do not quote, cite, or name the specific statutes, rules, boards, or regulations that were removed or corrected.</p>
 
 <ul class="bullet-list">
   <li><strong>August 15, 2026 &middot; &sect;55 (Broker Execution &amp; Review Addendum):</strong> Broadens Associate authority to execute on behalf of the Company on standard contracts, compensation, and referral agreements. Establishes retained counsel as the exclusive channel for arbitration, mediation, and litigation matters, including the arbitration provision within any real estate contract.</li>
-  <li><strong>August 15, 2026 &middot; &sect;89.5, Buyer Brokerage Ack intro, &sect;90.1, &sect;90.5, &sect;88 Legal Reference:</strong> Removes NAR-settlement date restatements, removes FGCMLS by name, removes incorrect Florida Statute &sect;475.278 citation, and updates obsolete 24 C.F.R. &sect;3500.15 to current Regulation X (12 C.F.R. Part 1024). Rewrites four passages rule-neutral.</li>
+  <li><strong>August 15, 2026 &middot; &sect;89.5, Buyer Brokerage Ack intro, &sect;90.1, &sect;90.5, &sect;88 Legal Reference:</strong> Removes dated NAR practice-change restatements, removes board-specific naming, removes an incorrect Florida statute citation, and replaces an obsolete federal regulation citation with a rule-neutral reference. Rewrites four passages rule-neutral.</li>
   <li><strong>August 15, 2026 &middot; &sect;6, &sect;7, &sect;28, &sect;50, &sect;55, &sect;60, &sect;64.2, &sect;73.3:</strong> E&amp;O retention capped at the current policy declarations amount with a $1,000 payment-plan trigger. E&amp;O exclusions expanded to match actual carrier endorsement. Personal-Transactions E&amp;O exclusion cross-referenced in every Personal-Transactions provision. Post-Termination Compensation Floor trigger defined and made controlling over &sect;73.3 Broker discretion. &sect;50 file-submission citation corrected to &sect;475.5015 and FREC Rule 61J2-10.030. Revision stamp relocated from &sect;55 body to this Version History block.</li>
 </ul>
 
