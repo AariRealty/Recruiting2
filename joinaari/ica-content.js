@@ -620,16 +620,24 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h3>SECTION 11. BROKER EXECUTION &amp; REVIEW ADDENDUM</h3>
 
 <h4>11.1 Broker Signature Required for:</h4>
-<p>Seller to Buyer&rsquo;s Broker Compensation Agreement; Buyer Broker Compensation Agreement; Arbitration or Commission-Disbursement Agreements; Outside-Broker Referral Agreements; Company-Generated Lead Transactions; Associate Personal Transactions; and any form, addendum, or agreement that includes a designated Broker Signature or Broker Authorization field.</p>
+<p>Commission Disbursement Authorizations (CDAs); Associate Personal Transactions; and any modification to the Independent Contractor Agreement, Exhibit A, or any Aari-generated agreement between the Company and the Associate.</p>
 
 <h4>11.2 Associate Signature Permitted</h4>
-<p>For standard FAR/BAR real estate contracts and addenda that do not require Broker authorization or signature. Signature block format: Aari Realty LLC | [Associate&rsquo;s Full Name]</p>
+<p>Associates are authorized to execute the following on behalf of the Company without Broker initial or signature: all standard Florida Realtors and NAR contracts (FR/BAR AS IS, FR/BAR Standard, CRSP-17, NABOR, Residential Lease, Vacant Land) and their addenda; Buyer Broker Agreements and Seller-to-Buyer&rsquo;s-Broker Compensation Agreements; and Outside-Broker Referral Agreements. Signature block format: Aari Realty LLC | [Associate&rsquo;s Full Name]. By signing on behalf of the Company, the Associate warrants that the form is a Florida Realtors, NAR, or Aari-provided template used unmodified, and that terms fall within the standard commission and compensation framework in Exhibit A.</p>
 
-<h4>11.3 Recordkeeping</h4>
+<h4>11.3 Arbitration &amp; Legal Disputes</h4>
+<p>Any arbitration, mediation, or litigation matter is handled by the Company&rsquo;s retained counsel. Associates may not sign, initial, or respond to any arbitration demand, mediation notice, subpoena, or legal correspondence on behalf of the Company. Associates may not execute or initial the arbitration provision within any real estate contract &mdash; the arbitration line on any FR/BAR, AS IS, CRSP, or other form must be left unexecuted for Broker review. All such items must be routed to the Broker within twenty-four (24) hours of receipt.</p>
+
+<h4>11.4 Prohibited Conduct</h4>
+<p>Associates may not: alter or modify Company-provided or state-approved contract templates without written Broker approval; sign, initial, or negotiate arbitration, mediation, or litigation documents; bind the Company to fee arrangements that fall outside Exhibit A; or provide legal advice to clients or interpret contract provisions in dispute.</p>
+
+<h4>11.5 Recordkeeping</h4>
 <p>All executed documents must be uploaded into the Company&rsquo;s compliance system within forty-eight (48) hours of signature. No Commission Disbursement Authorization (CDA) will be issued until all required documents are uploaded, checklists are complete, and the file has been reviewed and approved by the Broker.</p>
 
-<h4>11.4 Review Turnaround</h4>
+<h4>11.6 Review Turnaround</h4>
 <p>The Broker will review submitted contracts within forty-eight (48) hours during normal business hours (Monday through Friday, 9:00 AM to 5:00 PM EST, excluding holidays) for complete submissions. Incomplete submissions restart the review period upon resubmission.</p>
+
+<p><em>Revised August 15, 2026 &mdash; Broadens Associate authority to execute on behalf of the Company on standard contracts, compensation, and referral agreements. Establishes retained counsel as the exclusive channel for arbitration, mediation, and litigation matters, including the arbitration provision within any real estate contract.</em></p>
 
 <h3>SECTION 12. FAIR HOUSING POLICY</h3>
 <p>Aari Realty LLC is committed to full compliance with federal, state, and local fair housing laws, including: Federal Fair Housing Act (Title VIII of the Civil Rights Act of 1968, as amended); Florida Fair Housing Act (Chapter 760, Florida Statutes); Americans with Disabilities Act (ADA); and all applicable local ordinances.</p>
