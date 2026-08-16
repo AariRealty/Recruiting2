@@ -295,7 +295,7 @@
 
   sections.forEach(function(section) {
     // Insert page breaks before each <h2> and add page footers
-    var parts = section.split(/(?=<h2>)/g);
+    var parts = section.split(/(?=<h2[^>]*>|<h3[^>]*data-page-break="true")/g);
     parts.forEach(function(part, i) {
       if (part.trim()) {
         if (fullHtml) fullHtml += footer + '\n' + pb + '\n';
