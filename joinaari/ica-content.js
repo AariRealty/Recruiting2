@@ -550,6 +550,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
     <tr><td>Personal Transaction (Residential)</td><td>$499.00, same as standard</td></tr>
     <tr><td>Personal Transaction (Land)</td><td>$299.00, same as standard</td></tr>
     <tr><td>Admin Cost Rate</td><td>$150/hour</td></tr>
+    <tr><td>Administrative Processing Fee (per occurrence)</td><td>$99.00</td></tr>
     <tr><td>Late Payment Fee</td><td>$25.00</td></tr>
     <tr><td>Returned Payment Fee</td><td>$25.00</td></tr>
     <tr><td>Reactivation Fee</td><td>$50.00</td></tr>
@@ -559,7 +560,9 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
   </tbody>
 </table>
 </div>
-<p>Grace Period: a five (5) calendar day grace period applies to all recurring fees (Monthly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments. &ldquo;Personal transaction&rdquo; is defined in the CSA and ICA and includes transactions in which the Associate or a related party has a beneficial interest.</p>
+<p>Grace Period: a five (5) calendar day grace period applies to all recurring fees (Monthly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments.</p>
+<p>Administrative Processing Fee: $99.00 applies each time the Company receives, processes, disburses, or refunds funds outside of a standard closing disbursement, and each time the Company processes the cancellation, withdrawal, or termination of an executed listing agreement, buyer brokerage agreement, or purchase-and-sale contract. Each triggering event is a separate occurrence and a separate fee. By way of example, a transaction in which the Company processes a retainer and later processes a cancellation incurs two fees. This fee does not apply to a standard closing in which the Company receives its commission through the settlement agent, and it does not apply in addition to a transaction fee on a transaction that closes. The fee is deducted from the Associate&rsquo;s next commission disbursement, or invoiced directly if no disbursement is pending. This fee is also the fee referenced in the Operations &amp; Compliance Manual for transactions deemed Abandoned Commissions.</p>
+<p>&ldquo;Personal transaction&rdquo; is defined in the CSA and ICA and includes transactions in which the Associate or a related party has a beneficial interest.</p>
 
 <h3 id="s-43">&sect;43. Referral Compensation and Incentives</h3>
 <h4 id="s-43-1">&sect;43.1 Incoming Third-Party Referrals</h4>
@@ -1259,6 +1262,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
   <li><strong>August 15, 2026 &middot; &sect;6, &sect;7, &sect;28, &sect;50, &sect;55, &sect;60, &sect;64.2, &sect;73.3:</strong> E&amp;O retention capped at the current policy declarations amount with a $1,000 payment-plan trigger. E&amp;O exclusions expanded to match actual carrier endorsement. Personal-Transactions E&amp;O exclusion cross-referenced in every Personal-Transactions provision. Post-Termination Compensation Floor trigger defined and made controlling over &sect;73.3 Broker discretion. &sect;50 file-submission citation corrected to &sect;475.5015 and FREC Rule 61J2-10.030. Revision stamp relocated from &sect;55 body to this Version History block.</li>
   <li><strong>August 15, 2026 &middot; &sect;11, &sect;38&ndash;&sect;44, &sect;86&ndash;&sect;92, new Acknowledgments header, ica-print.html:</strong> Unified top-level section heading levels. Every &sect;-numbered section is now h3. Reserved h2 for document-level titles. Added a parent Acknowledgments header. Removed a legacy page-break-only h2 title above &sect;11. Adopted an explicit data-page-break attribute so PDF page breaks are opt-in and controlled at the heading itself. Anchor ids and prose unchanged.</li>
   <li><strong>August 15, 2026 &middot; &sect;7, &sect;8, &sect;18, Incorporated Documents list:</strong> Replaced an undefined qualitative trigger inside the Post-Termination Compensation Floor with a concrete, act-based standard the Associate can verify against their own conduct. Removed references to an Incorporated Document that had no defined section, replacing them with pointers to the actual controlling sections. Removed a second phantom entry from the Incorporated Documents list.</li>
+  <li><strong>August 15, 2026 &middot; &sect;42:</strong> Added a Company administrative processing fee to Exhibit A, applied per occurrence when the Company receives, processes, disburses, or refunds funds outside of a standard closing disbursement, or processes a cancellation, withdrawal, or termination of an executed contract. Each triggering event is a separate fee and does not apply in addition to a transaction fee on a closed deal. Cured a dangling Exhibit A reference from an earlier section on Abandoned Commissions.</li>
 </ul>
 
 
