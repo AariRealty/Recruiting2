@@ -12,7 +12,6 @@ window.ICA_CONTENT = {
   <li>Commission Structure Addendum (CSA)</li>
   <li>Exhibit A: Commission Fee Schedule</li>
   <li>Operations &amp; Compliance Manual</li>
-  <li>Transaction File Requirements Addendum</li>
   <li>Fair Housing Policy</li>
   <li>Advertising Policy</li>
   <li>Social Media Policy</li>
@@ -20,7 +19,6 @@ window.ICA_CONTENT = {
   <li>Record Retention &amp; Confidentiality Policy</li>
   <li>Referral Bonus Policy</li>
   <li>Indemnification, Defense &amp; Offsets Addendum</li>
-  <li>Statement of Understanding &amp; Policy Acknowledgment</li>
 </ul>
 
 <p><strong>NOTICE &amp; AMENDMENT:</strong> Written notice may be provided by email or electronic posting in the Company&rsquo;s document portal. Unless a different effective date is stated, amendments take effect immediately upon notice. Continued affiliation after the effective date constitutes acceptance of all updated or newly incorporated documents.</p>
@@ -151,7 +149,7 @@ window.ICA_CONTENT = {
 <p>Commissions are payable only on transactions supported by a fully executed purchase-and-sale agreement dated before termination or inactivation, and remain subject to file completion, Broker approval, cleared funds, and offsets.</p>
 
 <h4>Post-Termination Compensation Floor</h4>
-<p>For transactions with fully executed purchase-and-sale agreements dated before termination where the Associate performed the material duties of the transaction prior to termination, meaning the Associate secured the executed purchase-and-sale agreement and remained the representing licensee of record through the date of termination, the Company shall disburse not less than fifty percent (50%) of the net commission otherwise due (after transaction fees and direct transaction-related offsets only) within thirty (30) days of closing, provided that: (i) the Associate submits available transaction documents within ten (10) business days of the Company&rsquo;s written request; (ii) the Associate cooperates reasonably with file completion; and (iii) no fraud, conversion, or Material Breach directly related to that transaction has occurred. This floor is the controlling minimum for all post-departure compensation and supersedes any contrary statement of Broker discretion elsewhere in this Agreement or any Incorporated Document.</p>
+<p>For transactions with fully executed purchase-and-sale agreements dated before termination where the Associate performed the material duties of the transaction prior to termination, meaning the Associate secured the executed purchase-and-sale agreement and remained the representing licensee of record through the date of termination, the Company shall disburse not less than fifty percent (50%) of the net commission otherwise due (after transaction fees and direct transaction-related offsets only) within thirty (30) days of closing, provided that: (i) the Associate submits available transaction documents within ten (10) business days of the Company&rsquo;s written request; (ii) the Associate, within five (5) business days of the Broker&rsquo;s written request, responds in writing and provides the specific transaction documents, platform access, client contact information, or vendor contact information identified in that request, and signs and returns any Commission Disbursement Authorization or offset consent the Broker submits within five (5) business days of receipt; and (iii) no fraud, conversion, or Material Breach directly related to that transaction has occurred. This floor is the controlling minimum for all post-departure compensation and supersedes any contrary statement of Broker discretion elsewhere in this Agreement or any Incorporated Document.</p>
 
 <h4>Good Standing</h4>
 <p>Good Standing means the Associate satisfies all of the following: (a) maintains a current, active Florida real estate license in good standing with DBPR; (b) has no outstanding fees, balances, or debts owed to the Company; (c) has no material policy violations or unresolved compliance issues; (d) maintains current proof of E&amp;O insurance and auto insurance with the Company listed as additional insured when transporting clients; (e) complies with all document submission deadlines and file completion requirements; and (f) is not subject to any active suspension, investigation, or disciplinary action.</p>
@@ -167,7 +165,7 @@ window.ICA_CONTENT = {
 <p>Any overpayment must be repaid within five (5) business days of notice. The Associate authorizes the Company to deduct unpaid balances, overpayments, fees, fines, or obligations from any commission disbursement, provided that: (i) offsets shall not exceed fifty percent (50%) of any single commission disbursement without the Associate&rsquo;s prior written consent, except where the underlying obligation relates to that specific transaction; (ii) the Company shall provide written notice of any offset at least three (3) business days before disbursement; and (iii) for offsets exceeding fifty percent (50%), the Company shall offer a written payment plan option of not less than ninety (90) days.</p>
 
 <h3 id="s-8">&sect;8. Transaction Compliance</h3>
-<p>The Associate must comply with all requirements set forth in the Operations &amp; Compliance Manual and Transaction File Requirements Addendum. All documents must be submitted in the compliance platform by the deadlines specified. Failure to comply may result in withheld or forfeited commissions, suspension, or termination. The Associate acknowledges that compliance is a condition precedent to payment.</p>
+<p>The Associate must comply with all requirements set forth in the Operations &amp; Compliance Manual, including the transaction documentation and file submission requirements in &sect;50 and &sect;51. All documents must be submitted in the compliance platform by the deadlines specified. Failure to comply may result in withheld or forfeited commissions, suspension, or termination. The Associate acknowledges that compliance is a condition precedent to payment.</p>
 
 <h3 id="s-9">&sect;9. Client Ownership</h3>
 
@@ -250,7 +248,7 @@ window.ICA_CONTENT = {
 <h3 id="s-18">&sect;18. Entire Agreement; Notice; Order of Precedence; No Assignment</h3>
 
 <h4>Entire Agreement</h4>
-<p>This ICA, together with all Incorporated Documents (CSA, Operations &amp; Compliance Manual, Transaction File Requirements Addendum, E&amp;O Addendum, Fair Housing Policy, Advertising Policy, Referral Bonus Policy, and Exhibit A: Commission Fee Schedule), constitutes the entire agreement between the parties. Informational summaries, fee overviews, or marketing materials are non-binding and do not modify this Agreement, the CSA, or Exhibit A.</p>
+<p>This ICA, together with all Incorporated Documents (CSA, Operations &amp; Compliance Manual, E&amp;O Addendum, Fair Housing Policy, Advertising Policy, Referral Bonus Policy, and Exhibit A: Commission Fee Schedule), constitutes the entire agreement between the parties. Informational summaries, fee overviews, or marketing materials are non-binding and do not modify this Agreement, the CSA, or Exhibit A.</p>
 
 <h4>Modification and Notice</h4>
 <p>The Company may amend this Agreement and all Incorporated Documents at any time, effective immediately upon delivery of notice. Continued affiliation after notice constitutes acceptance of all updated terms. No mutual signature is required for amendments to Incorporated Documents, policies, fee schedules, or addenda. The sole exception is that no amendment to commission rates, splits, transaction fees, or fee schedules shall alter the economic terms of any transaction supported by a fully executed purchase-and-sale agreement or listing agreement dated prior to the delivery of such notice.</p>
@@ -1260,6 +1258,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
   <li><strong>August 15, 2026 &middot; &sect;89.5, Buyer Brokerage Ack intro, &sect;90.1, &sect;90.5, &sect;88 Legal Reference:</strong> Removes dated NAR practice-change restatements, removes board-specific naming, removes an incorrect Florida statute citation, and replaces an obsolete federal regulation citation with a rule-neutral reference. Rewrites four passages rule-neutral.</li>
   <li><strong>August 15, 2026 &middot; &sect;6, &sect;7, &sect;28, &sect;50, &sect;55, &sect;60, &sect;64.2, &sect;73.3:</strong> E&amp;O retention capped at the current policy declarations amount with a $1,000 payment-plan trigger. E&amp;O exclusions expanded to match actual carrier endorsement. Personal-Transactions E&amp;O exclusion cross-referenced in every Personal-Transactions provision. Post-Termination Compensation Floor trigger defined and made controlling over &sect;73.3 Broker discretion. &sect;50 file-submission citation corrected to &sect;475.5015 and FREC Rule 61J2-10.030. Revision stamp relocated from &sect;55 body to this Version History block.</li>
   <li><strong>August 15, 2026 &middot; &sect;11, &sect;38&ndash;&sect;44, &sect;86&ndash;&sect;92, new Acknowledgments header, ica-print.html:</strong> Unified top-level section heading levels. Every &sect;-numbered section is now h3. Reserved h2 for document-level titles. Added a parent Acknowledgments header. Removed a legacy page-break-only h2 title above &sect;11. Adopted an explicit data-page-break attribute so PDF page breaks are opt-in and controlled at the heading itself. Anchor ids and prose unchanged.</li>
+  <li><strong>August 15, 2026 &middot; &sect;7, &sect;8, &sect;18, Incorporated Documents list:</strong> Replaced an undefined qualitative trigger inside the Post-Termination Compensation Floor with a concrete, act-based standard the Associate can verify against their own conduct. Removed references to an Incorporated Document that had no defined section, replacing them with pointers to the actual controlling sections. Removed a second phantom entry from the Incorporated Documents list.</li>
 </ul>
 
 
