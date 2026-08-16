@@ -82,7 +82,7 @@ window.ICA_CONTENT = {
 <p><strong>Fine responsibility:</strong> any fine, penalty, or sanction imposed by any MLS as a result of the Associate&rsquo;s violation is the Associate&rsquo;s sole financial responsibility, and the Company may offset amounts it pays on the Associate&rsquo;s behalf against future commission disbursements.</p>
 
 <h4>Social Media &amp; Advertising</h4>
-<p>Any advertising, marketing, or social media content that uses the Company&rsquo;s name, branding, or implies affiliation requires prior written Broker approval, except where Associates use pre-cleared Company templates.</p>
+<p>Any advertising or marketing that uses the Company&rsquo;s name, branding, or implies affiliation requires prior written Broker approval, except where Associates use pre-cleared Company templates.</p>
 
 <h4>TCPA Compliance</h4>
 <p>Associates must comply with all federal and state laws governing telemarketing, text messaging, and electronic communications, including maintaining documentation of client consent, as further governed by Section 84 of the Operations and Compliance Manual.</p>
@@ -720,7 +720,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p><strong>Company file completion (not an MLS deadline):</strong> the fully executed listing agreement must be uploaded to the Company&rsquo;s compliance platform within forty-eight (48) hours of execution.</p>
 <p><strong>Broker notice:</strong> any MLS inquiry, citation, fine, complaint, or disciplinary communication must be reported to the Broker within twenty-four (24) hours.</p>
 <p><strong>Fine responsibility:</strong> any fine, penalty, or sanction imposed by any MLS as a result of the Associate&rsquo;s violation is the Associate&rsquo;s sole financial responsibility, and the Company may offset amounts it pays on the Associate&rsquo;s behalf against future commission disbursements.</p>
-<p>All advertising must include Aari Realty LLC as broker of record. Team/DBA usage requires prior written Broker approval. Social media posts are advertising and must meet broker ID and fair housing standards.</p>
+<p>Advertising and broker identification requirements are governed by Section 57.</p>
 
 <h3 id="s-66">&sect;66. TEAM ADDENDUM</h3>
 
@@ -1270,6 +1270,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
   <li><strong>August 16, 2026 &middot; &sect;42:</strong> Clarified the triggering events for the administrative processing fee and confirmed that it does not apply where a transaction fee is charged for the same event.</li>
   <li><strong>August 16, 2026 &middot; &sect;42:</strong> Added an express carve-out so that a file deemed an Abandoned Commission under the Operations &amp; Compliance Manual carries the administrative processing fee even where a transaction fee was already charged on the underlying transaction. Failure to complete a file is treated as a separate administrative event.</li>
   <li><strong>August 16, 2026 &middot; &sect;57:</strong> Rewrote the Advertising Policy rule-neutral. Removed language that restated a stricter internal reach than the governing rule requires by narrowing the identification obligation to advertisements as defined by the current FREC and MLS rules, deleting a category broader than advertisements, and dropping a static-profile requirement the Company does not intend to own. Preserved the brokerage-identification requirement on advertisements, the prominence rule, the team-name and DBA prior-written-approval requirement, the silence-is-not-approval rule, and the prohibition on misleading content.</li>
+  <li><strong>August 16, 2026 &middot; &sect;4, &sect;65:</strong> Consolidated advertising and broker-identification rules to a single operative section. In &sect;4, narrowed the pre-approval trigger from a category that reached beyond advertising to advertising and marketing only. In &sect;65, deleted a definitional expansion that treated all social media posts as advertisements and replaced the identification restatement with a cross-reference to the governing section, so the identification rule is stated once and in one place. MLS-specific procedural obligations in &sect;65 were preserved.</li>
 </ul>
 
 
