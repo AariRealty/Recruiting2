@@ -186,9 +186,7 @@ window.ICA_CONTENT = {
 
 <!-- ============================== ICA SECTIONS 11-20 ============================== -->
 
-<h2>Independent Contractor Agreement: Sections 11 to 20</h2>
-
-<h3 id="s-11">&sect;11. Indemnification</h3>
+<h3 id="s-11" data-page-break="true">&sect;11. Indemnification</h3>
 <p>For indemnification, defense, and offsets, see the Indemnification, Defense, and Offsets Addendum, which is incorporated by reference and controls this topic. Broker may exercise withholding and offsets consistent with that Addendum and the Operations &amp; Compliance Manual.</p>
 
 <h3 id="s-12">&sect;12. Term &amp; Termination</h3>
@@ -355,7 +353,7 @@ window.ICA_CONTENT = {
 
 <h2>Commission Fee Schedule: Exhibit A</h2>
 
-<h4 id="s-38">&sect;38. Commission Plans</h4>
+<h3 id="s-38">&sect;38. Commission Plans</h3>
 
 <h4 id="s-38-1">&sect;38.1 Available Commission Plans</h4>
 <p>At onboarding, the Associate selects one of the three commission plans below as their initial commission plan of record. All three plans are available at signup, subject to Broker review and acceptance. Based on the Associate&rsquo;s experience, supervision needs, compliance history, and regulatory risk profile, the Broker may require a newer or higher-risk Associate to begin on the Mentorship Path. After onboarding, an Associate may request to change plans under Section 38.3.</p>
@@ -413,7 +411,7 @@ window.ICA_CONTENT = {
 
 <p><strong>Downgrade Rule.</strong> The same eligibility, process, effective date, and frequency limit apply in both directions. Moving from Max back to Growth requires the same process.</p>
 
-<h4 id="s-39">&sect;39. Transaction Types and Transaction Fee Application</h4>
+<h3 id="s-39">&sect;39. Transaction Types and Transaction Fee Application</h3>
 
 <h4 id="s-39-1">&sect;39.1 Standard Transaction Fees (Per Side, All Plans)</h4>
 <div class="table-wrap">
@@ -487,7 +485,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <em>Illustrative only. Reflects the fixed 50/50 split that overrides the assigned agent&rsquo;s standard commission plan per Section 35.2. Does not create entitlement or guarantee payment.</em>
 </p>
 
-<h4 id="s-40">&sect;40. Minimum Commission Allocation</h4>
+<h3 id="s-40">&sect;40. Minimum Commission Allocation</h3>
 <p>Commission is negotiable and is not set, fixed, controlled, recommended, or required by Aari Realty LLC. The Associate determines all compensation terms directly with the client.</p>
 <p>This Section applies to (a) all Associates operating under the Mentorship Path plan, and (b) all Referral Sourced Transactions, regardless of the Associate&rsquo;s commission plan.</p>
 <p>For the transactions described above, the Company&rsquo;s minimum allocation per transaction is:</p>
@@ -502,7 +500,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p>If the compensation negotiated between the Associate and the client produces less than the Company&rsquo;s minimum allocation, the difference is absorbed entirely from the Associate&rsquo;s share of the commission. The Company&rsquo;s portion is not reduced. The applicable transaction fee under Section 39.1 or Section 39.3 continues to apply in full.</p>
 <p>Nothing in this Section requires the Associate to charge any client a specific rate, minimum fee, or pricing structure.</p>
 
-<h4 id="s-41">&sect;41. Annual and Ongoing Compliance Fees</h4>
+<h3 id="s-41">&sect;41. Annual and Ongoing Compliance Fees</h3>
 
 <h4 id="s-41-1">&sect;41.1 Monthly Brokerage Fee</h4>
 <div class="table-wrap">
@@ -541,7 +539,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <p>The E&amp;O + Compliance Fee is invoiced approximately two (2) months prior to the Associate&rsquo;s anniversary month and is due on the first (1st) day of the anniversary month in subsequent years, as further described in the CSA. The fee is non-refundable.</p>
 <p><strong>At onboarding, only the E&amp;O + Compliance Fee ($199.00) is due today.</strong> The Associate&rsquo;s first month&rsquo;s Monthly Brokerage Fee is waived in full and is not charged at signup. Monthly Brokerage Fee billing begins on the first (1st) day of the calendar month following the Associate&rsquo;s onboarding month, at the rate set forth in Section 41.1 above. The E&amp;O + Compliance Fee applies to all Associates regardless of commission plan; the Monthly Brokerage Fee varies by plan. Both fees are applied and enforced in accordance with the CSA.</p>
 
-<h4 id="s-42">&sect;42. Administrative and Conditional Fees</h4>
+<h3 id="s-42">&sect;42. Administrative and Conditional Fees</h3>
 <div class="table-wrap">
 <table>
   <thead>
@@ -565,7 +563,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 </div>
 <p>Grace Period: a five (5) calendar day grace period applies to all recurring fees (Monthly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments. &ldquo;Personal transaction&rdquo; is defined in the CSA and ICA and includes transactions in which the Associate or a related party has a beneficial interest.</p>
 
-<h4 id="s-43">&sect;43. Referral Compensation and Incentives</h4>
+<h3 id="s-43">&sect;43. Referral Compensation and Incentives</h3>
 <h4 id="s-43-1">&sect;43.1 Incoming Third-Party Referrals</h4>
 <p>Administrative Fee: 10% of referral payment. Minimum Fee: $100.00. Maximum Fee: not to exceed the total referral payment.</p>
 
@@ -576,7 +574,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h4 id="s-43-2">&sect;43.2 Recruiting Incentive</h4>
 <p>Recruiting rewards are governed by the CSA. The current recruiting incentive is $100.00, payable upon satisfaction of all conditions set forth in the CSA.</p>
 
-<h4 id="s-44">&sect;44. Enforcement and Application</h4>
+<h3 id="s-44">&sect;44. Enforcement and Application</h3>
 <p>All fees, offsets, payment enforcement, license status consequences, survival obligations, and dispute resolution provisions applicable to compensation matters are governed by the ICA and CSA, and are incorporated herein by reference. This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in the ICA Definitions section. No amendment alters transactions already under a fully executed contract as of the date of notice.</p>
 
 
@@ -1030,7 +1028,9 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== W-9 COLLECTION & TAX ACKNOWLEDGMENT ============================== -->`,
 
-  acknowledgments: `<h2 id="s-86">W-9 Collection &amp; Tax Acknowledgment</h2>
+  acknowledgments: `<h2 id="s-acknowledgments-block">Acknowledgments</h2>
+
+<h3 id="s-86" data-page-break="true">W-9 Collection &amp; Tax Acknowledgment</h3>
 
 <p>This acknowledgment must be completed at onboarding. No commission disbursement will be made to the Associate until a valid IRS Form W-9 is received by Aari Realty LLC.</p>
 
@@ -1058,7 +1058,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== LICENSE VERIFICATION ============================== -->
 
-<h2 id="s-87">License Verification &amp; Active Status Acknowledgment</h2>
+<h3 id="s-87" data-page-break="true">License Verification &amp; Active Status Acknowledgment</h3>
 
 <p>This acknowledgment is required before the Associate may conduct any real estate activity under Aari Realty LLC&rsquo;s brokerage license.</p>
 
@@ -1088,7 +1088,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== RESPA AFFILIATED BUSINESS DISCLOSURE ============================== -->
 
-<h2 id="s-88">Affiliated Business Disclosure: RESPA Compliance</h2>
+<h3 id="s-88" data-page-break="true">Affiliated Business Disclosure: RESPA Compliance</h3>
 
 <p>This disclosure is required under the Real Estate Settlement Procedures Act (RESPA), 12 U.S.C. &sect;2607(c)(4), and must be signed at onboarding by all Associates affiliated with Aari Realty LLC.</p>
 
@@ -1123,7 +1123,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== MLS RULES ACKNOWLEDGMENT ============================== -->
 
-<h2 id="s-89">MLS Rules Acknowledgment</h2>
+<h3 id="s-89" data-page-break="true">MLS Rules Acknowledgment</h3>
 
 <p>This acknowledgment must be signed at onboarding before the Associate may access or use any MLS system under Aari Realty LLC&rsquo;s membership. Aari Realty LLC maintains membership in multiple MLS boards. The Associate&rsquo;s obligations under this Acknowledgment apply equally to all boards through which they conduct business.</p>
 
@@ -1161,7 +1161,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== BUYER BROKERAGE AGREEMENT POLICY ============================== -->
 
-<h2 id="s-90">Buyer Brokerage Agreement Policy Acknowledgment</h2>
+<h3 id="s-90" data-page-break="true">Buyer Brokerage Agreement Policy Acknowledgment</h3>
 
 <p>This acknowledgment is required in connection with the NAR practice-change requirements applicable to buyer representation, and must be signed at onboarding before the Associate may represent any buyer client.</p>
 
@@ -1197,7 +1197,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== WIRE FRAUD & CYBERSECURITY ============================== -->
 
-<h2 id="s-91">Wire Fraud &amp; Cybersecurity Acknowledgment</h2>
+<h3 id="s-91" data-page-break="true">Wire Fraud &amp; Cybersecurity Acknowledgment</h3>
 
 <p>This standalone acknowledgment supplements the wire safety provisions in the Independent Contractor Agreement and creates an independent record of the Associate&rsquo;s awareness of wire fraud risks and protocols. It must be signed at onboarding.</p>
 
@@ -1244,7 +1244,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <!-- ============================== CONFIRMATION OF COMMUNICATION ============================== -->
 
-<h2 id="s-92">Confirmation of Communication</h2>
+<h3 id="s-92" data-page-break="true">Confirmation of Communication</h3>
 
 <p>By signing this Agreement, the Associate confirms that all notices, disclosures, and communications from Aari Realty LLC may be delivered electronically to the email address and phone number on file with the Brokerage. The Associate is responsible for keeping this contact information current and agrees to notify the Brokerage in writing of any changes.</p>
 
@@ -1259,6 +1259,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
   <li><strong>August 15, 2026 &middot; &sect;55 (Broker Execution &amp; Review Addendum):</strong> Broadens Associate authority to execute on behalf of the Company on standard contracts, compensation, and referral agreements. Establishes retained counsel as the exclusive channel for arbitration, mediation, and litigation matters, including the arbitration provision within any real estate contract.</li>
   <li><strong>August 15, 2026 &middot; &sect;89.5, Buyer Brokerage Ack intro, &sect;90.1, &sect;90.5, &sect;88 Legal Reference:</strong> Removes dated NAR practice-change restatements, removes board-specific naming, removes an incorrect Florida statute citation, and replaces an obsolete federal regulation citation with a rule-neutral reference. Rewrites four passages rule-neutral.</li>
   <li><strong>August 15, 2026 &middot; &sect;6, &sect;7, &sect;28, &sect;50, &sect;55, &sect;60, &sect;64.2, &sect;73.3:</strong> E&amp;O retention capped at the current policy declarations amount with a $1,000 payment-plan trigger. E&amp;O exclusions expanded to match actual carrier endorsement. Personal-Transactions E&amp;O exclusion cross-referenced in every Personal-Transactions provision. Post-Termination Compensation Floor trigger defined and made controlling over &sect;73.3 Broker discretion. &sect;50 file-submission citation corrected to &sect;475.5015 and FREC Rule 61J2-10.030. Revision stamp relocated from &sect;55 body to this Version History block.</li>
+  <li><strong>August 15, 2026 &middot; &sect;11, &sect;38&ndash;&sect;44, &sect;86&ndash;&sect;92, new Acknowledgments header, ica-print.html:</strong> Unified top-level section heading levels. Every &sect;-numbered section is now h3. Reserved h2 for document-level titles. Added a parent Acknowledgments header. Removed a legacy page-break-only h2 title above &sect;11. Adopted an explicit data-page-break attribute so PDF page breaks are opt-in and controlled at the heading itself. Anchor ids and prose unchanged.</li>
 </ul>
 
 
