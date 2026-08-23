@@ -1,0 +1,9 @@
+{
+  "name": "content-manager",
+  "version": "0.3.0",
+  "description": "Turn your Coffee & Contracts account into a weekly content engine — last week's Instagram performance, this week's posts customized to your voice, strategy tied to what's working, and off-social content ideas, delivered every Sunday.",
+  "author": {
+    "name": "Coffee & Contracts"
+  },
+  "keywords": ["real estate", "content", "instagram", "coffee and contracts", "social media"]
+}

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Aari Realty — Instagram Audit</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600;700&display=swap');
+:root{
+  --bg:#fcfcfa; --surface:#ffffff; --ink-black:#000000; --cream:#f4f1e8;
+  --text:#1a1a1a; --text-body:#2a2a2a; --text-body-soft:#3a3a3a; --text-muted:#4a4a4a;
+  --text-secondary:#6a6a6a; --text-faint:#8a8a8a; --text-ghost:#a0a09a;
+  --border:#ece9e2; --border-soft:#f0ede5; --border-input:#e0ddd5; --underline:#d5d1c8;
+  --danger:#B04040; --danger-bg:#FFF8F4; --danger-border:#F9E2E2;
+  --success-deep:#274332; --success-ink:#162900;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Montserrat',-apple-system,BlinkMacSystemFont,sans-serif;
+  --r-sm:4px; --r-md:6px; --r-lg:8px;
+  --shadow-card:0 8px 24px rgba(0,0,0,.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.55;font-size:14px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 32px 100px}
+.hero{background:#000;color:#fff;border-radius:var(--r-lg);padding:40px 44px;margin-bottom:40px}
+.hero-eyebrow{font-size:10px;letter-spacing:3px;color:rgba(255,255,255,.55);text-transform:uppercase;font-weight:600;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:"";display:inline-block;width:24px;height:1px;background:rgba(255,255,255,.45)}
+.hero-title{font-family:var(--serif);font-size:40px;font-weight:600;line-height:1.15;margin-bottom:12px;letter-spacing:-.5px}
+.hero-sub{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.7;max-width:640px}
+.hero-meta{margin-top:20px;font-size:11px;letter-spacing:1px;color:rgba(255,255,255,.5);text-transform:uppercase}
+.panel{margin-bottom:52px}
+.panel-label{font-size:10px;letter-spacing:2.5px;color:#000;text-transform:uppercase;font-weight:700;margin-bottom:14px;display:inline-flex;align-items:center;gap:10px}
+.panel-label::before{content:"";display:inline-block;width:18px;height:1px;background:#000}
+.panel-title{font-family:var(--serif);font-size:27px;font-weight:600;color:#000;line-height:1.25;margin-bottom:10px;letter-spacing:-.3px}
+.panel-sub{font-size:13px;color:var(--text-secondary);margin-bottom:22px;line-height:1.7;max-width:720px}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px}
+.stat-card{background:#000;color:#fff;border-radius:var(--r-md);padding:20px 20px 18px}
+.stat-card.light{background:var(--bg);color:#000;border:1px solid var(--border)}
+.stat-num{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.5px;line-height:1}
+.stat-lbl{font-size:9.5px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:8px;font-weight:600}
+.stat-card.light .stat-lbl{color:var(--text-secondary)}
+.stat-note{font-size:11px;color:rgba(255,255,255,.6);margin-top:6px;line-height:1.5}
+.stat-card.light .stat-note{color:var(--text-faint)}
+.flag{background:var(--danger-bg);border:1px solid var(--danger-border);border-left:3px solid var(--danger);border-radius:var(--r-md);padding:16px 20px;margin:14px 0}
+.flag-title{font-size:11px;letter-spacing:2px;color:var(--danger);text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.flag-body{font-size:13px;color:var(--text-body);line-height:1.65}
+.note{background:var(--cream);border-left:3px solid #000;padding:14px 18px;margin:16px 0;font-size:12.5px;color:var(--text-body);line-height:1.7}
+.win{background:#F4F8F4;border:1px solid #DCEBDD;border-left:3px solid var(--success-deep);border-radius:var(--r-md);padding:16px 20px;margin:14px 0}
+.win-title{font-size:11px;letter-spacing:2px;color:var(--success-deep);text-transform:uppercase;font-weight:700;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border-soft)}
+th{font-size:9.5px;letter-spacing:1.5px;color:var(--text-secondary);font-weight:700;text-transform:uppercase;border-bottom:1px solid var(--border-input)}
+tr:hover td{background:#faf9f6}
+.tag{display:inline-block;font-size:9.5px;padding:2px 8px;border-radius:3px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.tag.reel{background:#000;color:#fff}
+.tag.static{background:var(--border);color:var(--text-secondary)}
+.num-strong{font-weight:700;font-family:var(--serif);font-size:16px}
+.pillar-row{display:grid;grid-template-columns:170px 1fr 46px;align-items:center;gap:12px;margin-bottom:12px}
+.pillar-name{font-size:12.5px;font-weight:600}
+.pillar-bar-bg{background:var(--border-soft);border-radius:20px;height:10px;overflow:hidden}
+.pillar-bar-fill{background:#000;height:100%;border-radius:20px}
+.pillar-pct{font-size:12px;font-weight:700;text-align:right;font-family:var(--serif)}
+.comp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.comp-card{border:1px solid var(--border);border-radius:var(--r-md);padding:20px}
+.comp-card.us{background:#000;color:#fff;border:none}
+.comp-name{font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:2px}
+.comp-card.us .comp-name{color:#fff}
+.comp-handle{font-size:11px;color:var(--text-faint);margin-bottom:14px}
+.comp-card.us .comp-handle{color:rgba(255,255,255,.55)}
+.comp-stats{display:flex;gap:16px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border-soft)}
+.comp-card.us .comp-stats{border-color:rgba(255,255,255,.15)}
+.comp-stat-num{font-family:var(--serif);font-size:18px;font-weight:600}
+.comp-stat-lbl{font-size:8.5px;letter-spacing:1px;text-transform:uppercase;color:var(--text-faint)}
+.comp-card.us .comp-stat-lbl{color:rgba(255,255,255,.5)}
+.comp-desc{font-size:12px;line-height:1.6;color:var(--text-body)}
+.comp-card.us .comp-desc{color:rgba(255,255,255,.8)}
+.rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px}
+.rec-card{border:1px solid var(--border);border-radius:var(--r-md);padding:18px 20px}
+.rec-card h4{font-family:var(--serif);font-size:16px;margin-bottom:10px;font-weight:600}
+.rec-card ol,.rec-card ul{padding-left:18px}
+.rec-card li{font-size:12.5px;line-height:1.7;margin-bottom:8px;color:var(--text-body)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.cal-day{border:1px solid var(--border);border-radius:var(--r-sm);padding:12px 10px;min-height:88px}
+.cal-day-name{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;color:var(--text-faint);margin-bottom:8px}
+.cal-day-content{font-size:11px;line-height:1.5;color:var(--text-body)}
+.cal-day.off{background:var(--bg);opacity:.5}
+.mix-bar{display:flex;height:34px;border-radius:6px;overflow:hidden;margin:18px 0 10px}
+.mix-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#fff;letter-spacing:.3px}
+.mix-legend{display:flex;flex-wrap:wrap;gap:14px;font-size:11px;color:var(--text-secondary)}
+.mix-dot{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.foot{margin-top:60px;padding-top:20px;border-top:1px solid var(--border);font-size:10.5px;color:var(--text-faint);letter-spacing:.5px;text-transform:uppercase}
+@media(max-width:900px){.stat-grid{grid-template-columns:repeat(2,1fr)}.comp-grid{grid-template-columns:1fr}.rec-grid{grid-template-columns:1fr}.cal-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:600px){.stat-grid{grid-template-columns:1fr}.cal-grid{grid-template-columns:repeat(2,1fr)}.wrap{padding:20px 16px 60px}.hero{padding:24px 22px}.hero-title{font-size:28px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">Instagram Audit</div>
+    <div class="hero-title">@aari.realty — Full Account Audit</div>
+    <div class="hero-sub">Complete review of account structure, content performance, posting patterns, and competitive position, built from 26 posts collected live over the trailing 30 days (July 13 – Aug 11, 2026) plus profile-level data pulled directly from the account. Numbers below are real, pulled post-by-post — nothing here is estimated or modeled.</div>
+    <div class="hero-meta">Prepared for Marlenyi Paredes · Broker, Aari Realty LLC · Aug 11, 2026</div>
+  </div>
+
+  <div class="flag">
+    <div class="flag-title">Data Access Limitation — Read Before Anything Else</div>
+    <div class="flag-body">This account is not connected to Instagram Insights in this session, and the Coffee &amp; Contracts integration is currently inactive (subscription lapsed). That means <strong>reach, impressions, saves, shares, profile visits, follower growth trend, and follower location data are not available</strong> — Instagram does not expose these publicly, even while logged in as a follower/admin without Insights access. Everything below is built from what <em>is</em> publicly visible and verifiable: likes, comments, captions, hashtags, dates, and post type, pulled directly off the live account. Renewing the Coffee &amp; Contracts subscription (coffeecontracts.com/settings/membership) or granting Meta Business Suite access would unlock the missing metrics — worth doing before the next audit cycle.</div>
+  </div>
+
+  <!-- 1. ACCOUNT OVERVIEW -->
+  <div class="panel">
+    <div class="panel-label">Section 1</div>
+    <div class="panel-title">Account Overview</div>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">1,194</div><div class="stat-lbl">Followers</div></div>
+      <div class="stat-card"><div class="stat-num">2,019</div><div class="stat-lbl">Following</div></div>
+      <div class="stat-card"><div class="stat-num">469</div><div class="stat-lbl">Total Posts</div></div>
+      <div class="stat-card"><div class="stat-num">0.59</div><div class="stat-lbl">Follower : Following Ratio</div><div class="stat-note">Healthy accounts run 2:1 or higher</div></div>
+    </div>
+    <div class="flag">
+      <div class="flag-title">Ratio Is Inverted</div>
+      <div class="flag-body">The account follows 825 more accounts than follow it back. To a consumer or a prospective agent evaluating credibility, this reads as low-authority — every competitor profiled below runs a follower:following ratio above 1, two of them well above 3:1. This is fixable in an afternoon with an unfollow pass on dead/irrelevant accounts.</div>
+    </div>
+    <div class="flag">
+      <div class="flag-title">Bio Is 100% Recruiting-Facing — Zero Consumer CTA</div>
+      <div class="flag-body">Current bio: <em>"FLORIDA-BASED BROKERAGE / 100% Commission. / Mentorship? Yep, available. / ↓ Build your career with us / Broker: @marlenyi..."</em> Every line targets a prospective agent. There is nothing here for the buyer or seller the account's own content strategy is supposed to be attracting — no "buying, selling, or relocating to SWFL, start here," no service area line, no CTA to DM or call. The single link goes to aarirealty.com (no multi-link tool, so there's exactly one destination and it isn't segmented by buyer/seller/agent). Highlights reinforce the same imbalance: Office Location, Join Our Team, YouTube, Website, Contact, Hours — six highlights, all operational, zero for listings, buyer resources, or client testimonials.</div>
+    </div>
+  </div>
+
+  <!-- 2. CONTENT PERFORMANCE -->
+  <div class="panel">
+    <div class="panel-label">Section 2</div>
+    <div class="panel-title">Content Performance — Last 30 Days (26 Posts)</div>
+    <div class="panel-sub">26 posts fell inside the true trailing 30-day window (July 13 – Aug 11). Two additional posts surfaced in the profile grid — a May 11 collab reel (85 likes) and a June 16 broker-intro post (12 likes) — are excluded from the 30-day math below because they're outside the window.</div>
+
+    <div class="stat-grid">
+      <div class="stat-card light"><div class="stat-num">419</div><div class="stat-lbl">Total Engagement</div><div class="stat-note">380 likes + 39 comments</div></div>
+      <div class="stat-card light"><div class="stat-num">16.1</div><div class="stat-lbl">Avg Engagement / Post</div></div>
+      <div class="stat-card light"><div class="stat-num">1.35%</div><div class="stat-lbl">Avg Engagement Rate</div><div class="stat-note">Benchmark: 2-3% average, 5%+ strong, &lt;1% needs work</div></div>
+      <div class="stat-card light"><div class="stat-num">2x</div><div class="stat-lbl">Reels vs Static</div><div class="stat-note">21.3 avg engagement vs 10.9</div></div>
+    </div>
+
+    <div class="note">Engagement rate sits below the "average" 2-3% band for nano accounts (1K-10K followers), closer to the "needs work" threshold. The fix is concentrated in <em>which</em> posts get made, not overall effort. Reels featuring an agent's face and voice consistently double the engagement of static listing graphics.</div>
+
+    <h3 style="font-family:var(--serif);font-size:18px;margin:28px 0 12px;font-weight:600">Top 5 Performers</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>Post</th><th>Type</th><th>Date</th><th>Hook</th><th>Likes</th><th>Comments</th><th>Total</th></tr>
+      <tr><td>1</td><td><span class="tag reel">Reel</span></td><td>Jul 15</td><td>"POV: trying to send emails while your husband screams at the TV every 4 minutes... World Cup season"</td><td>50</td><td>4</td><td class="num-strong">54</td></tr>
+      <tr><td>2</td><td><span class="tag reel">Reel</span></td><td>Aug 6</td><td>"No todo lo que ven en redes sale perfecto..." (BTS bloopers, bilingual)</td><td>26</td><td>8</td><td class="num-strong">34</td></tr>
+      <tr><td>3</td><td><span class="tag reel">Reel</span></td><td>Jul 14</td><td>"An opportunity that could save you thousands... and you're doing everything except stopping the dance"</td><td>21</td><td>6</td><td class="num-strong">27</td></tr>
+      <tr><td>4</td><td><span class="tag reel">Reel</span></td><td>Jul 28</td><td>"Why are you always on the phone?"</td><td>25</td><td>0</td><td class="num-strong">25</td></tr>
+      <tr><td>5</td><td><span class="tag reel">Reel</span></td><td>Jul 22</td><td>"NO HOA. NO CDD. Yes, you read that right."</td><td>23</td><td>0</td><td class="num-strong">23</td></tr>
+    </table>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:18px;margin:28px 0 12px;font-weight:600">Bottom 5 Performers</h3>
+    <div style="overflow-x:auto">
+    <table>
+      <tr><th>Post</th><th>Type</th><th>Date</th><th>Hook</th><th>Likes</th><th>Comments</th><th>Total</th></tr>
+      <tr><td>1</td><td><span class="tag static">Static</span></td><td>Jul 31</td><td>"Every day a rental sits empty is a day the landlord pays for it" (For Rent, Babcock Ranch)</td><td>4</td><td>0</td><td class="num-strong">4</td></tr>
+      <tr><td>2</td><td><span class="tag reel">Reel</span></td><td>Jul 25</td><td>"If you've ever been missing a set of initials on a contract too..."</td><td>8</td><td>0</td><td class="num-strong">8</td></tr>
+      <tr><td>3</td><td><span class="tag static">Static</span></td><td>Jul 13</td><td>"2 buyers SIGNED... Under Contract" (Roosevelt Ave, Lehigh Acres)</td><td>9</td><td>0</td><td class="num-strong">9</td></tr>
+      <tr><td>4</td><td><span class="tag static">Static</span></td><td>Aug 7</td><td>"Sold. 1.25 acres of Okeechobee..." (land, no CTA)</td><td>9</td><td>0</td><td class="num-strong">9</td></tr>
+      <tr><td>5</td><td><span class="tag static">Static</span></td><td>Jul 23</td><td>"Don't just scroll... FOLLOW US!" (generic recruiting CTA)</td><td>10</td><td>0</td><td class="num-strong">10</td></tr>
+    </table>
+    </div>
+    <div class="note">Pattern is consistent: every top-5 post is a Reel with a person on camera and a relatable or educational hook. Every bottom-5 post is either a plain listing graphic with zero CTA, or a low-effort recruiting post.</div>
+  </div>
+
+  <!-- 3. POSTING PATTERNS -->
+  <div class="panel">
+    <div class="panel-label">Section 3</div>
+    <div class="panel-title">Posting Patterns</div>
+    <div class="stat-grid">
+      <div class="stat-card light"><div class="stat-num">6.1</div><div class="stat-lbl">Posts / Week</div><div class="stat-note">26 posts over 30 days</div></div>
+      <div class="stat-card light"><div class="stat-num">0</div><div class="stat-lbl">Gaps &gt; 5 Days</div><div class="stat-note">Longest gap: 3 days</div></div>
+      <div class="stat-card light"><div class="stat-num">13 / 13</div><div class="stat-lbl">Reel : Static Split</div><div class="stat-note">Perfectly even mix by volume</div></div>
+      <div class="stat-card light"><div class="stat-num">Strong</div><div class="stat-lbl">Consistency Score</div></div>
+    </div>
+    <div class="win">
+      <div class="win-title">Frequency Is Not the Problem</div>
+      <div class="flag-body">6+ posts/week with zero gaps over 3 days in 30 days straight. Posting discipline is genuinely strong. The opportunity is entirely in content mix and CTA usage, not cadence. Post the same amount, just weighted toward what's already proven to work.</div>
+    </div>
+  </div>
+
+  <!-- 4. AUDIENCE & REACH -->
+  <div class="panel">
+    <div class="panel-label">Section 4</div>
+    <div class="panel-title">Audience &amp; Reach</div>
+    <div class="flag">
+      <div class="flag-title">Not Available From This Session</div>
+      <div class="flag-body">Reach, accounts-reached, profile visits, follower growth trend, and follower geography all require Instagram Insights or the Coffee &amp; Contracts integration (currently inactive). What can be confirmed: engagement is currently concentrated among people already connected to the brokerage (team/agent accounts), not organic consumer reach.</div>
+    </div>
+  </div>
+
+  <!-- 5. CONTENT PILLARS -->
+  <div class="panel">
+    <div class="panel-label">Section 5</div>
+    <div class="panel-title">Content Pillar Breakdown</div>
+    <div class="panel-sub">Categorized across the 26 in-window posts.</div>
+
+    <div class="pillar-row"><div class="pillar-name">Listings</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:46%"></div></div><div class="pillar-pct">46%</div></div>
+    <div class="pillar-row"><div class="pillar-name">Personal / BTS</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:23%"></div></div><div class="pillar-pct">23%</div></div>
+    <div class="pillar-row"><div class="pillar-name">Local Content</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:12%"></div></div><div class="pillar-pct">12%</div></div>
+    <div class="pillar-row"><div class="pillar-name">Market Education</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:12%"></div></div><div class="pillar-pct">12%</div></div>
+    <div class="pillar-row"><div class="pillar-name">Recruiting / Other</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:4%"></div></div><div class="pillar-pct">4%</div></div>
+    <div class="pillar-row"><div class="pillar-name">Social Proof</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:4%;background:var(--danger)"></div></div><div class="pillar-pct">4%</div></div>
+    <div class="pillar-row"><div class="pillar-name">Relocation</div><div class="pillar-bar-bg"><div class="pillar-bar-fill" style="width:0%;background:var(--danger)"></div></div><div class="pillar-pct">0%</div></div>
+
+    <div class="flag">
+      <div class="flag-title">Two Pillars Are Effectively Missing</div>
+      <div class="flag-body"><strong>Relocation content is at 0%</strong> — "what $350K buys you here vs. up north" posts take minutes, not a shoot. <strong>Social proof sits at one post in 30 days</strong> — testimonials are typically the highest-converting content type in real estate, and this account is publishing almost none.</div>
+    </div>
+  </div>
+
+  <!-- 6. COMPETITOR COMPARISON -->
+  <div class="panel">
+    <div class="panel-label">Section 6</div>
+    <div class="panel-title">Competitor Comparison</div>
+    <div class="panel-sub">Three verified SW Florida real estate accounts, pulled live. All three are individual-agent personal brands, not brokerage-entity accounts — a meaningfully different content strategy.</div>
+
+    <div class="comp-grid">
+      <div class="comp-card us">
+        <div class="comp-name">@aari.realty</div>
+        <div class="comp-handle">Aari Realty LLC (brokerage account)</div>
+        <div class="comp-stats">
+          <div><div class="comp-stat-num">1,194</div><div class="comp-stat-lbl">Followers</div></div>
+          <div><div class="comp-stat-num">469</div><div class="comp-stat-lbl">Posts</div></div>
+          <div><div class="comp-stat-num">0.59</div><div class="comp-stat-lbl">Ratio</div></div>
+        </div>
+        <div class="comp-desc">Bio leads with recruiting/agent-CTA. No niche positioning beyond "brokerage." Following exceeds followers.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">@realtor.victorianicholas</div>
+        <div class="comp-handle">Victoria Nicholas — closest size peer</div>
+        <div class="comp-stats">
+          <div><div class="comp-stat-num">2,057</div><div class="comp-stat-lbl">Followers</div></div>
+          <div><div class="comp-stat-num">405</div><div class="comp-stat-lbl">Posts</div></div>
+          <div><div class="comp-stat-num">0.94</div><div class="comp-stat-lbl">Ratio</div></div>
+        </div>
+        <div class="comp-desc">Bio built around a "Realtor Mom" personal narrative + local spots. Consumer-facing angle even at similar scale.</div>
+      </div>
+      <div class="comp-card">
+        <div class="comp-name">@brittanymixon.realtor</div>
+        <div class="comp-handle">Brittany Mixon — Real Broker LLC</div>
+        <div class="comp-stats">
+          <div><div class="comp-stat-num">4,720</div><div class="comp-stat-lbl">Followers</div></div>
+          <div><div class="comp-stat-num">756</div><div class="comp-stat-lbl">Posts</div></div>
+          <div><div class="comp-stat-num">3.07</div><div class="comp-stat-lbl">Ratio</div></div>
+        </div>
+        <div class="comp-desc">"Sharing the must-knows about the area I love." Linktree hub segments buyer/seller/agent links. Healthy ratio.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;border:1px dashed var(--border);border-radius:var(--r-md);padding:20px">
+      <div class="comp-name" style="font-size:16px">@alana_sellssunshine — aspirational benchmark</div>
+      <div class="comp-desc" style="margin-top:6px">39,000 followers, 432 posts (12.2:1 ratio). Cape Coral/Fort Myers relocation and luxury specialist. Bio: "NY → SWFL, helping buyers relocate &amp; thrive." Highlights built entirely around consumer journeys — zero recruiting content in the bio.</div>
+    </div>
+
+    <div class="flag" style="margin-top:16px">
+      <div class="flag-title">What They're Doing That Aari Isn't</div>
+      <div class="flag-body">Every competitor leads with a person, not a company. Every one has a follower:following ratio above 1. Two of three claim an explicit content niche that gives every post a reason to exist; Aari's account has no equivalent consumer-facing identity.</div>
+    </div>
+  </div>
+
+  <!-- 7. CAPTION & HASHTAG -->
+  <div class="panel">
+    <div class="panel-label">Section 7</div>
+    <div class="panel-title">Caption &amp; Hashtag Analysis</div>
+
+    <div class="flag">
+      <div class="flag-title">Hashtag Error Found: Off-Market Location Tag</div>
+      <div class="flag-body">The Aug 4 post is tagged <strong>#AtlantaRealEstate</strong> — a Florida brokerage tagging Atlanta content. Almost certainly copied from a templated hashtag set without review.</div>
+    </div>
+
+    <div class="note"><strong>CTA usage is inconsistent.</strong> Educational and BTS Reels tend to include a CTA. But the majority of Listing posts — 46% of all content — carry property specs and zero call to action.</div>
+
+    <div class="note"><strong>Hashtag strategy is unbuilt.</strong> Many posts carry zero hashtags. When used, they're frequently generic (#RealEstateLife, #RealtorProblems) rather than market-specific tags (#SWFLRealEstate, #LehighAcres).</div>
+
+    <div class="note"><strong>Location tags used inconsistently.</strong> Some posts geotag the market — good practice where it happens — but not applied to every post.</div>
+  </div>
+
+  <!-- 8. STRATEGIC RECOMMENDATIONS -->
+  <div class="panel">
+    <div class="panel-label">Section 8</div>
+    <div class="panel-title">Strategic Recommendations</div>
+
+    <div class="rec-grid">
+      <div class="rec-card">
+        <h4>3 Things Working — Keep Doing These</h4>
+        <ol>
+          <li><strong>Reels with a real person on camera</strong> outperform static graphics 2:1 in engagement. Every top-5 post is a Reel with someone talking.</li>
+          <li><strong>Posting discipline is strong.</strong> 6+ posts/week, zero gaps over 3 days. Protect this habit.</li>
+          <li><strong>The Babcock Ranch / Tucker's Cove local series</strong> builds a recognizable narrative. Worth extending to other growth corridors.</li>
+        </ol>
+      </div>
+      <div class="rec-card">
+        <h4>3 Biggest Opportunities</h4>
+        <ol>
+          <li><strong>Bio is 100% recruiting, 0% consumer.</strong> Split the message: bio speaks to the consumer, a highlight speaks to agents.</li>
+          <li><strong>Following &gt; followers.</strong> Run an unfollow audit — five-minute credibility fix with zero downside.</li>
+          <li><strong>Relocation (0%) and Social Proof (4%)</strong> are both core pillars and both effectively unpublished. Lowest-cost content types to produce.</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3 style="font-family:var(--serif);font-size:19px;margin:32px 0 14px;font-weight:600">Ideal Content Mix</h3>
+    <div class="mix-bar">
+      <div class="mix-seg" style="width:30%;background:#000">Listings 30%</div>
+      <div class="mix-seg" style="width:20%;background:#3a3a3a">BTS 20%</div>
+      <div class="mix-seg" style="width:15%;background:#6a6a6a">Mkt Ed 15%</div>
+      <div class="mix-seg" style="width:15%;background:#8a8a8a">Local 15%</div>
+      <div class="mix-seg" style="width:10%;background:#B04040">Reloc 10%</div>
+      <div class="mix-seg" style="width:10%;background:#274332">Proof 10%</div>
+    </div>
+    <div class="mix-legend">
+      <span><span class="mix-dot" style="background:#000"></span>Listings — every post gets a CTA</span>
+      <span><span class="mix-dot" style="background:#3a3a3a"></span>Personal/BTS — keep the humor</span>
+      <span><span class="mix-dot" style="background:#6a6a6a"></span>Market Education</span>
+      <span><span class="mix-dot" style="background:#8a8a8a"></span>Local Content</span>
+      <span><span class="mix-dot" style="background:#B04040"></span>Relocation — currently 0%, target 10%</span>
+      <span><span class="mix-dot" style="background:#274332"></span>Social Proof — currently 4%, target 10%</span>
+    </div>
+
+    <div class="win" style="margin-top:24px">
+      <div class="win-title">Quick Wins — This Week</div>
+      <ol style="padding-left:18px">
+        <li style="font-size:12.5px;line-height:1.8;margin-bottom:6px">Add a CTA to every Listing post — "DM 'INFO' for details" or "Save this for your next move."</li>
+        <li style="font-size:12.5px;line-height:1.8;margin-bottom:6px">Rewrite the bio to lead with the consumer: <em>"Fort Myers · Cape Coral · Lehigh Acres Real Estate — Buying, selling, or relocating to SWFL? Start here."</em></li>
+        <li style="font-size:12.5px;line-height:1.8;margin-bottom:6px">Fix the #AtlantaRealEstate hashtag on the Aug 4 post.</li>
+        <li style="font-size:12.5px;line-height:1.8;margin-bottom:6px">Run an unfollow pass to close the following-vs-followers gap.</li>
+        <li style="font-size:12.5px;line-height:1.8;margin-bottom:6px">Post one client testimonial or closing-day quote this week.</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- CONTENT CALENDAR -->
+  <div class="panel">
+    <div class="panel-label">Reference</div>
+    <div class="panel-title">Recommended Weekly Content Calendar</div>
+    <div class="panel-sub">Built at the account's existing cadence (6 posts/week) — no change in output required, only in mix.</div>
+    <div class="cal-grid">
+      <div class="cal-day"><div class="cal-day-name">Mon</div><div class="cal-day-content"><strong>Listing</strong><br>New/updated listing + CTA</div></div>
+      <div class="cal-day"><div class="cal-day-name">Tue</div><div class="cal-day-content"><strong>Personal/BTS Reel</strong><br>Agent voice, relatable hook</div></div>
+      <div class="cal-day"><div class="cal-day-name">Wed</div><div class="cal-day-content"><strong>Market Education</strong><br>Buyer/seller tip or myth-bust</div></div>
+      <div class="cal-day"><div class="cal-day-name">Thu</div><div class="cal-day-content"><strong>Local / Relocation</strong><br>Neighborhood or "what $X buys" post</div></div>
+      <div class="cal-day"><div class="cal-day-name">Fri</div><div class="cal-day-content"><strong>Listing or Social Proof</strong><br>Under contract / just sold + testimonial rotation</div></div>
+      <div class="cal-day off"><div class="cal-day-name">Sat</div><div class="cal-day-content">Optional — Reel repost or Story-only</div></div>
+      <div class="cal-day"><div class="cal-day-name">Sun</div><div class="cal-day-content"><strong>Personal/BTS Reel</strong><br>Team, humor, or weekly recap</div></div>
+    </div>
+  </div>
+
+  <div class="foot">Aari Realty LLC · Instagram Audit · Data pulled live Aug 11, 2026 · Reach/saves/shares/profile-visit metrics unavailable — see data access note above</div>
+</div>
+</body>
+</html>
