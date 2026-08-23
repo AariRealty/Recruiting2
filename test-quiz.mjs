@@ -20,7 +20,7 @@ console.log('Functions:', fnCheck);
 
 // Screen 1: pick second option (growth)
 await page.evaluate(() => {
-  const cards = document.querySelectorAll('#s1 .a-card');
+  const cards = document.querySelectorAll('#s1 .dh-option');
   if (cards[1]) pickOne(cards[1], 's1');
 });
 await page.waitForTimeout(500);
@@ -37,7 +37,7 @@ await page.waitForTimeout(800);
 
 // Screen 2: pick second option (growth)
 await page.evaluate(() => {
-  const cards = document.querySelectorAll('#s2 .a-card');
+  const cards = document.querySelectorAll('#s2 .dh-option');
   if (cards[1]) pickOne(cards[1], 's2');
 });
 await page.waitForTimeout(500);
@@ -49,7 +49,7 @@ await page.waitForTimeout(800);
 
 // Screen 3: pick second option (growth)
 await page.evaluate(() => {
-  const cards = document.querySelectorAll('#s3 .a-card');
+  const cards = document.querySelectorAll('#s3 .dh-option');
   if (cards[1]) pickOne(cards[1], 's3');
 });
 await page.waitForTimeout(500);
@@ -61,7 +61,7 @@ await page.waitForTimeout(800);
 
 // Screen 4: pick second option (growth)
 await page.evaluate(() => {
-  const cards = document.querySelectorAll('#s4 .a-card');
+  const cards = document.querySelectorAll('#s4 .dh-option');
   if (cards[1]) pickOne(cards[1], 's4');
 });
 await page.waitForTimeout(500);
