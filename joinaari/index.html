@@ -236,25 +236,36 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
 .pl-fee b{color:#fff;font-weight:700}
 .pl-fee-sep{width:1px;height:16px;background:rgba(255,255,255,.14)}
-.ment-compact{max-width:480px;margin:40px auto 0;background:#151310;border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:28px 26px;color:#fff;text-align:center;position:relative;overflow:hidden}
-.mc-badge{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#141210;background:#c9b492;border-radius:50px;padding:5px 14px;margin-bottom:14px}
-.mc-h{font-family:'Cormorant Garamond',serif;font-size:clamp(22px,3vw,26px);font-weight:500;font-style:italic;line-height:1.15;text-wrap:balance}
-.mc-h em{font-style:normal;color:#8a827a}
-.mc-meta{display:flex;gap:14px;justify-content:center;align-items:center;margin-top:12px;font-size:11px;color:rgba(255,255,255,.45);font-weight:600;flex-wrap:wrap}
-.mc-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.25)}
-.mc-toggle{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:18px;padding:10px;cursor:pointer;user-select:none;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.1);border-radius:50px;transition:all .2s}
-.mc-toggle:hover{color:rgba(255,255,255,.7);border-color:rgba(255,255,255,.2)}
+.mc-ticket{max-width:340px;margin:40px auto 0;background:#fff;color:var(--ink);border:2px solid var(--border);border-radius:16px;padding:30px 26px 26px;text-align:center;position:relative}
+.mc-flag{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:#c9b492;color:#141210;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;padding:6px 16px;border-radius:50px;white-space:nowrap}
+.mc-name{font-size:22px;font-weight:700;margin-top:6px}
+.mc-tag{font-size:13px;color:var(--mid);margin-top:4px}
+.mc-split{font-size:56px;font-weight:800;letter-spacing:-.03em;line-height:1;margin-top:18px}
+.mc-splitlabel{font-size:12px;color:var(--lite);margin-top:6px}
+.mc-price{font-size:24px;font-weight:800;margin-top:8px}
+.mc-price span{font-size:14px;font-weight:600;color:var(--mid)}
+.mc-tear{position:relative;height:0;margin:22px -26px 4px;border-top:2px dashed #cfc9bd}
+.mc-tear::before,.mc-tear::after{content:"";position:absolute;top:-11px;width:20px;height:20px;border-radius:50%;background:#0a0a0a}
+.mc-tear::before{left:-10px}.mc-tear::after{right:-10px}
+.mc-toggle{margin-top:10px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--border);border-radius:50px;padding:11px;cursor:pointer;transition:background .2s}
+.mc-toggle:hover{background:#ece7db}
 .mc-chev{font-size:12px;transition:transform .3s;display:inline-block}
-.mc-expand{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.ment-compact.open .mc-expand{max-height:500px}
-.mc-expand-inner{padding-top:18px;margin-top:18px;border-top:1px solid rgba(255,255,255,.08);text-align:left}
-.mc-item{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12.5px;color:rgba(255,255,255,.7);line-height:1.45;align-items:flex-start}
-.mc-item:last-of-type{border-bottom:none}
-.mc-item b{color:#fff;font-weight:600}
-.mc-check{width:18px;height:18px;border-radius:50%;background:#c9b492;flex-shrink:0;margin-top:1px;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 6L5 8.5L9.5 3.5' stroke='%23141210' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center;background-size:10px}
-.mc-cta{display:block;text-align:center;margin-top:16px;padding:13px;border-radius:50px;background:#fff;color:#141210;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:opacity .2s}
+.mc-expand{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,.1,.2,1)}
+.mc-ticket.open .mc-expand{max-height:600px}
+.mc-expand-inner{padding-top:14px;text-align:left}
+.mc-feat{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.mc-feat li{display:flex;gap:10px;align-items:center;font-size:13px}
+.mc-feat .k{color:var(--ink);font-weight:700;flex-shrink:0}
+.mc-credit{border:1px solid #e6ddcc;background:#faf7f2;border-left:4px solid #a3865c;border-radius:10px;padding:14px 16px;margin-bottom:4px}
+.mc-credit-h{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.mc-credit-sub{font-size:11.5px;color:var(--mid);margin-bottom:10px;line-height:1.5}
+.mc-credit-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.mc-credit-list li{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink);line-height:1.4}
+.mc-credit-list b{font-weight:700}
+.mc-credit-pip{width:6px;height:6px;border-radius:50%;background:#a3865c;flex-shrink:0;margin-top:5px}
+.mc-cta{display:block;text-align:center;margin-top:18px;border-radius:50px;padding:14px;background:#141210;color:#fff;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;transition:opacity .2s}
 .mc-cta:hover{opacity:.85}
-@media(max-width:900px){.ment-compact{max-width:100%;margin-top:32px}}
+@media(max-width:900px){.mc-ticket{max-width:100%;margin-top:32px}}
 .co-overlay{position:fixed;inset:0;z-index:200;background:#fff;overflow-y:auto;display:none;padding:46px 24px 64px}
 .co-overlay.open{display:block}
 .co-wrap{max-width:640px;margin:0 auto}
@@ -854,17 +865,32 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
   </div>
   <div class="pl-calc-link" style="text-align:center;margin:20px auto 0"><a href="/commission-plans.html" style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px">Compare all plans and run your numbers &rarr;</a></div>
-  <div class="ment-compact">
-    <div class="mc-badge">New agents</div>
-    <h3 class="mc-h">You&rsquo;re not too new. You&rsquo;re at the wrong <em>brokerage.</em></h3>
-    <div class="mc-meta"><span>75/25 split</span><span class="mc-dot"></span><span>$59/mo</span><span class="mc-dot"></span><span>Broker on every contract</span></div>
-    <div class="mc-toggle" onclick="var c=this.closest('.ment-compact');c.classList.toggle('open');this.querySelector('.mc-chev').style.transform=c.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See what&rsquo;s included <span class="mc-chev">&#9662;</span></div>
+  <div class="mc-ticket">
+    <div class="mc-flag">New agents</div>
+    <div class="mc-name">Mentorship Path</div>
+    <div class="mc-tag">Learn by doing real deals.</div>
+    <div class="mc-split">75/25</div>
+    <div class="mc-splitlabel">agent / brokerage</div>
+    <div class="mc-price">$59<span>/mo</span></div>
+    <div class="mc-tear"></div>
+    <div class="mc-toggle" onclick="var c=this.closest('.mc-ticket');c.classList.toggle('open');this.querySelector('.mc-chev').style.transform=c.classList.contains('open')?'rotate(180deg)':'rotate(0)'">What&rsquo;s included <span class="mc-chev">&#9662;</span></div>
     <div class="mc-expand"><div class="mc-expand-inner">
-      <div class="mc-item"><span class="mc-check"></span><span><b>Your paperwork has an owner.</b> A coordinator runs the file. $199 a side, billed at closing.</span></div>
-      <div class="mc-item"><span class="mc-check"></span><span><b>A real broker on every contract.</b> Not a group chat. Not a portal. Me.</span></div>
-      <div class="mc-item"><span class="mc-check"></span><span><b>Learn contracts from an attorney.</b> Live classes with the brokerage&rsquo;s counsel.</span></div>
-      <div class="mc-item"><span class="mc-check"></span><span><b>Pick 2. On us.</b> Offer Prep, Listing Docs, or MLS Setup. Every month, up to $298.</span></div>
-      <a href="/mentorship.html" class="mc-cta">Start on Mentorship &rarr;</a>
+      <ul class="mc-feat">
+        <li><span class="k">&#10003;</span>First 3 transactions guided by broker</li>
+        <li><span class="k">&#10003;</span>Transaction coordinator on every deal</li>
+        <li><span class="k">&#10003;</span>Live classes with brokerage attorney</li>
+        <li><span class="k">&#10003;</span>SkySlope Suite + Aari CRM</li>
+      </ul>
+      <div class="mc-credit">
+        <div class="mc-credit-h">2 service credits / month</div>
+        <p class="mc-credit-sub">Pick any 2 each month &mdash; we handle it, you watch and learn:</p>
+        <ul class="mc-credit-list">
+          <li><span class="mc-credit-pip"></span><b>Offer Preparation</b> &mdash; your offer written and submitted</li>
+          <li><span class="mc-credit-pip"></span><b>Listing Input</b> &mdash; your listing entered into MLS</li>
+          <li><span class="mc-credit-pip"></span><b>Listing Paperwork</b> &mdash; your listing docs prepared and ready</li>
+        </ul>
+      </div>
+      <a href="/mentorship.html" class="mc-cta">Start with Mentorship &rarr;</a>
     </div></div>
   </div>
 </section>
