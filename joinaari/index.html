@@ -173,12 +173,12 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:inherit;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
 .plans{background:#0a0a0a;color:#fff;padding:64px 44px 68px}
-.pl-inner{max-width:1140px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
-.pl-rail{padding-top:6px;text-align:center;margin-bottom:8px}
+.pl-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:248px 1fr 1fr 1fr;gap:22px;align-items:start}
+.pl-rail{padding-top:6px}
 .pl-step{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:9px 16px;margin-bottom:26px}
 .pl-rail h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.4vw,46px);font-weight:500;line-height:1.02;color:#fff}
 .pl-rail h2 em{font-style:italic}
-.pl-rail p{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px;max-width:340px;margin-left:auto;margin-right:auto;line-height:1.6}
+.pl-rail p{font-size:13px;color:rgba(255,255,255,.5);margin-top:16px;max-width:210px;line-height:1.6}
 .pl-card{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:30px 26px 26px;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s}
 .pl-card:hover{transform:translateY(-4px)}
 .pl-dark{background:#151310;color:#fff;border:1px solid rgba(255,255,255,.1)}
@@ -215,14 +215,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-cta:hover{opacity:.85}
 .pl-dark .pl-cta{background:#f5f0e8;color:#0a0a0a;animation:plbounce 1.5s ease-in-out infinite,plglowd 1.5s ease-in-out infinite}@keyframes plglowd{0%,100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}50%{box-shadow:0 0 0 4px rgba(0,0,0,.15)}}
 .pl-card.selected{outline:2px solid #b3a688;outline-offset:3px}
-.pl-carousel{position:relative;width:100%;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:visible}
-.pl-carousel .pl-card{position:absolute;left:50%;top:50%;width:320px;max-width:85vw;transition:transform .55s cubic-bezier(.4,0,.2,1),opacity .55s ease;box-shadow:0 12px 40px rgba(0,0,0,.4)}
-.pl-carousel-prev,.pl-carousel-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:100;transition:background .2s;font-size:20px;color:rgba(255,255,255,.6);-webkit-user-select:none;user-select:none}
-.pl-carousel-prev:hover,.pl-carousel-next:hover{background:rgba(255,255,255,.15)}
-.pl-carousel-prev{left:0}.pl-carousel-next{right:0}
-.pl-carousel-dots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:100}
-.pl-carousel-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.15);cursor:pointer;transition:all .3s}
-.pl-carousel-dot.active{background:#c9b492;border-color:#c9b492;transform:scale(1.2)}
 .o2-toggle{margin-top:16px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--card);border:1px solid var(--border);border-radius:50px;padding:11px;cursor:pointer;transition:background .2s}
 .o2-toggle:hover{background:#ece7db}
 .pl-dark .o2-toggle{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#fff}
@@ -452,7 +444,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-grid{grid-template-columns:1fr;gap:26px}
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:26px;min-height:0}
-  .plans{padding:56px 20px 60px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{display:none}.pl-calc-link{display:none}.pl-calc-mobile{display:block;text-align:center;margin-top:14px}.pl-calc-mobile a{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);padding-bottom:3px;text-decoration:none}.pl-carousel{min-height:540px}.pl-carousel .pl-card{width:280px}.pl-carousel-prev{left:-4px}.pl-carousel-next{right:-4px}
+  .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{display:none}.pl-calc-link{display:none}.pl-calc-mobile{display:block;text-align:center;margin-top:14px}.pl-calc-mobile a{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);padding-bottom:3px;text-decoration:none}
   .apply{padding:52px 20px}
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
   .founder{padding:52px 0}.founder-img{width:100%;max-width:none;border-radius:0}
@@ -788,7 +780,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       <h2>Choose your <em>structure.</em></h2>
       <p>Your old brokerage keeps a cut of every check. Here, you keep 85 or 100.</p>
     </div>
-    <div class="pl-carousel" id="plCarousel">
     <div class="pl-card pl-ticket" data-plan="Aari Growth 85/15">
       <div class="pl-name">Aari Growth</div>
       <div class="pl-tagline">More control. Still supported.</div>
@@ -874,10 +865,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
       </div></div>
       <span class="pl-cta" data-plan="Mentorship Path 75/25">Start with Mentorship &rarr;</span>
-    </div>
-    <div class="pl-carousel-prev" id="plPrev">&#8249;</div>
-    <div class="pl-carousel-next" id="plNext">&#8250;</div>
-    <div class="pl-carousel-dots" id="plDots"></div>
     </div>
   </div>
   <div class="pl-bar">
@@ -1057,81 +1044,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   function closeCheckout(){overlay.classList.remove('open');document.body.style.overflow='';}
   [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
   document.getElementById('coSign').addEventListener('click',function(){if(!curName){closeCheckout();location.hash='#plans';return;}var d=computeDue(curName);location.href='ica.html?plan_name='+encodeURIComponent(curName)+'&total_due='+d.total.toFixed(2);});
-})();
-</script>
-<script>(function(){
-  var carousel=document.getElementById('plCarousel');
-  if(!carousel)return;
-  var cards=[].slice.call(carousel.querySelectorAll('.pl-card'));
-  cards.forEach(function(c){c.classList.remove('rv','rv-in');});
-  var dotsEl=document.getElementById('plDots');
-  var count=cards.length;
-  var current=0;
-  var autoTimer=null;
-
-  cards.forEach(function(c,i){
-    var dot=document.createElement('div');
-    dot.className='pl-carousel-dot'+(i===0?' active':'');
-    dot.setAttribute('data-i',i);
-    dot.addEventListener('click',function(){goTo(parseInt(this.getAttribute('data-i')));});
-    dotsEl.appendChild(dot);
-  });
-
-  function updateDots(){
-    var dots=dotsEl.querySelectorAll('.pl-carousel-dot');
-    for(var i=0;i<dots.length;i++)dots[i].classList.toggle('active',i===current);
-  }
-
-  function layout(){
-    for(var i=0;i<count;i++){
-      var c=cards[i];
-      var pos=((i-current)%count+count)%count;
-      if(pos===0){
-        c.style.transform='translate(-50%,-50%) translateX(0px) translateY(0px) scale(1) rotate(0deg)';
-        c.style.zIndex=100;c.style.opacity='1';c.style.pointerEvents='auto';
-      }else if(pos===1){
-        c.style.transform='translate(-50%,-50%) translateX(42px) translateY(14px) scale(0.94) rotate(3deg)';
-        c.style.zIndex=90;c.style.opacity='0.6';c.style.pointerEvents='auto';
-      }else if(pos===count-1){
-        c.style.transform='translate(-50%,-50%) translateX(-42px) translateY(14px) scale(0.94) rotate(-3deg)';
-        c.style.zIndex=90;c.style.opacity='0.6';c.style.pointerEvents='auto';
-      }else{
-        c.style.transform='translate(-50%,-50%) translateX(0px) translateY(28px) scale(0.88) rotate(0deg)';
-        c.style.zIndex=80;c.style.opacity='0.3';c.style.pointerEvents='none';
-      }
-    }
-  }
-
-  function goTo(idx){
-    current=((idx%count)+count)%count;
-    updateDots();layout();resetAuto();
-  }
-  function goNext(){goTo(current+1);}
-  function goPrev(){goTo(current-1);}
-
-  document.getElementById('plNext').addEventListener('click',goNext);
-  document.getElementById('plPrev').addEventListener('click',goPrev);
-
-  cards.forEach(function(c,i){
-    c.addEventListener('click',function(e){
-      if(i!==current&&!e.target.closest('.pl-cta')&&!e.target.closest('.o2-toggle')){
-        goTo(i);
-      }
-    });
-  });
-
-  var touchStart=null;
-  carousel.addEventListener('touchstart',function(e){touchStart=e.touches[0].clientX;},{passive:true});
-  carousel.addEventListener('touchend',function(e){
-    if(touchStart===null)return;
-    var dx=e.changedTouches[0].clientX-touchStart;
-    if(Math.abs(dx)>40){if(dx<0)goNext();else goPrev();}
-    touchStart=null;
-  },{passive:true});
-
-  function resetAuto(){clearInterval(autoTimer);autoTimer=setInterval(goNext,5000);}
-
-  layout();resetAuto();
 })();
 </script>
 <script>(function(){fetch("https://feeds.behold.so/ACp6LlbvoYRdCFOQql8g").then(function(r){return r.json();}).then(function(j){var g=document.getElementById("followGrid");if(!g||!j.posts)return;g.innerHTML=j.posts.slice(0,6).map(function(p){var im=p.sizes&&p.sizes.medium?p.sizes.medium.mediaUrl:p.thumbnailUrl;return '<a class="follow-tile" href="'+p.permalink+'" target="_blank" rel="noopener"><img loading="lazy" src="'+im+'" alt="Aari Realty on Instagram"></a>';}).join("");}).catch(function(){});})();</script><script>(function(){var c=document.querySelectorAll(".ment-card,.m2-grid");if(!c.length)return;if("IntersectionObserver" in window){var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.2});c.forEach(function(e){io.observe(e);});}setTimeout(function(){c.forEach(function(e){e.classList.add("in");});},1600);})();</script>
