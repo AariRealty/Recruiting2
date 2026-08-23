@@ -1,15 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Script from "next/script";
 import Tiles from "@/components/Tiles";
 import Commission from "@/components/Commission";
 import NewAgents from "@/components/NewAgents";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import PlanFinderQuiz from "@/components/PlanFinderQuiz";
 
 export default function Home() {
+  const [quizOpen, setQuizOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-black text-white">
+      <PlanFinderQuiz open={quizOpen} onClose={() => setQuizOpen(false)} />
       {/* Header */}
       <header className="pt-16 pb-12 px-4 text-center">
         <h1 className="text-3xl sm:text-4xl font-bold tracking-wide mb-2">
@@ -48,6 +53,19 @@ export default function Home() {
                 <span className="text-white/70 text-sm">{item}</span>
               </div>
             ))}
+          </div>
+
+          {/* Find Your Plan */}
+          <div className="text-center mb-16">
+            <button
+              onClick={() => setQuizOpen(true)}
+              className="bg-white text-black font-bold text-sm tracking-wider uppercase px-8 py-4 rounded-full hover:bg-gray-200 transition-colors cursor-pointer"
+            >
+              Find Your Plan →
+            </button>
+            <p className="text-white/30 text-xs mt-3">
+              Answer 4 quick questions
+            </p>
           </div>
 
           {/* Calendar */}
