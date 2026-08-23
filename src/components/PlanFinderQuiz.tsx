@@ -30,7 +30,7 @@ const questions = [
       {
         value: "max",
         label: "Just let me run",
-        hint: "I handle everything — just give me the tools",
+        hint: "I handle everything, just give me the tools",
       },
     ],
   },
@@ -123,7 +123,7 @@ const questions = [
       {
         value: "minimal",
         label: "Just let me do my thing",
-        hint: "I'm experienced — I just need a license to hang",
+        hint: "I'm experienced, just need a license to hang",
       },
     ],
   },
@@ -218,7 +218,13 @@ function SlideToConfirm({
       if (!dragging.current) return;
       dragging.current = false;
       const maxLeft = getMaxLeft();
-      if (marginLeft > maxLeft * 0.85) {
+      if (!moved.current) {
+        setMarginLeft(maxLeft);
+        setTimeout(() => {
+          setMarginLeft(0);
+          onConfirm();
+        }, 400);
+      } else if (marginLeft > maxLeft * 0.85) {
         setMarginLeft(maxLeft);
         setTimeout(() => {
           setMarginLeft(0);
@@ -826,27 +832,39 @@ export default function PlanFinderQuiz({
                         className="w-full rounded-full py-2.5 px-4 text-[10.5px] font-semibold text-[#6b6b6b] border border-[#e2e0d8] bg-transparent hover:border-[#141210] hover:text-[#141210] transition-all cursor-pointer"
                         style={{ fontFamily: "inherit" }}
                       >
-                        Never mind &mdash; I just want my 100%
+                        Give me 100%
                       </button>
                       <button
                         onClick={showMentorshipSwitch}
                         className="w-full rounded-full py-2.5 px-4 text-[10.5px] font-semibold text-[#6b6b6b] border border-[#e2e0d8] bg-transparent hover:border-[#141210] hover:text-[#141210] transition-all cursor-pointer leading-[1.35]"
                         style={{ fontFamily: "inherit" }}
                       >
-                        Oops &mdash; I&apos;m a new agent with less than 3
-                        transactions
+                        I&apos;m brand new
                       </button>
                     </>
                   )}
                   {result === "max" && (
-                    <button
-                      onClick={showMentorshipSwitch}
-                      className="w-full rounded-full py-2.5 px-4 text-[10.5px] font-semibold text-[#6b6b6b] border border-[#e2e0d8] bg-transparent hover:border-[#141210] hover:text-[#141210] transition-all cursor-pointer leading-[1.35]"
-                      style={{ fontFamily: "inherit" }}
-                    >
-                      Oops &mdash; I&apos;m a new agent with less than 3
-                      transactions
-                    </button>
+                    <>
+                      <button
+                        onClick={() => {
+                          setResult("growth");
+                          setMorphed(null);
+                          setLostItems(new Set());
+                          launchConfetti();
+                        }}
+                        className="w-full rounded-full py-2.5 px-4 text-[10.5px] font-semibold text-[#6b6b6b] border border-[#e2e0d8] bg-transparent hover:border-[#141210] hover:text-[#141210] transition-all cursor-pointer"
+                        style={{ fontFamily: "inherit" }}
+                      >
+                        I want backup
+                      </button>
+                      <button
+                        onClick={showMentorshipSwitch}
+                        className="w-full rounded-full py-2.5 px-4 text-[10.5px] font-semibold text-[#6b6b6b] border border-[#e2e0d8] bg-transparent hover:border-[#141210] hover:text-[#141210] transition-all cursor-pointer leading-[1.35]"
+                        style={{ fontFamily: "inherit" }}
+                      >
+                        I&apos;m brand new
+                      </button>
+                    </>
                   )}
                 </div>
               )}
