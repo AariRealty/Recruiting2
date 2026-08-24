@@ -173,7 +173,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .accent-marq .marquee-track span{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:21px;color:inherit;padding:0 26px;display:inline-flex;align-items:center}
 .accent-marq .marquee-track span::after{content:"\2605";color:rgba(245,240,232,.35);font-size:10px;margin-left:26px}
 .plans{background:#0a0a0a;color:#fff;padding:64px 44px 68px}
-.pl-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:248px 1fr 1fr 1fr;gap:22px;align-items:start}
+.pl-inner{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:248px 1fr 1fr;gap:22px;align-items:start}
 .pl-rail{padding-top:6px}
 .pl-step{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:6px;padding:9px 16px;margin-bottom:26px}
 .pl-rail h2{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.4vw,46px);font-weight:500;line-height:1.02;color:#fff}
@@ -236,6 +236,37 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
 .pl-fee b{color:#fff;font-weight:700}
 .pl-fee-sep{width:1px;height:16px;background:rgba(255,255,255,.14)}
+.ment-path{background:linear-gradient(180deg,#0a0a0a 0%,#12100d 40%,#1a1610 100%);padding:80px 44px;position:relative;overflow:hidden}
+.ment-path::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(201,180,146,.04) 0%,transparent 60%);pointer-events:none}
+.mp-inner{max-width:1080px;margin:0 auto}
+.mp-top{text-align:center;margin-bottom:52px}
+.mp-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,180,146,.12);border:1px solid rgba(201,180,146,.25);border-radius:50px;padding:8px 18px 8px 12px;margin-bottom:24px}
+.mp-eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
+.mp-eyebrow span{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.mp-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.8vw,50px);font-weight:500;line-height:1.06;color:#fff}
+.mp-h em{font-style:italic;color:var(--gold)}
+.mp-sub{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;max-width:500px;margin:16px auto 0}
+.mp-body{display:grid;grid-template-columns:1fr 340px;gap:50px;align-items:start}
+.mp-steps{display:flex;flex-direction:column;gap:0;padding-top:8px}
+.mp-step-item{display:grid;grid-template-columns:40px 1fr;gap:18px;position:relative}
+.mp-step-marker{display:flex;flex-direction:column;align-items:center}
+.mp-step-num{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;position:relative;z-index:1}
+.mp-step-num.active{background:var(--gold);color:var(--ink)}
+.mp-step-num.future{background:rgba(255,255,255,.08);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.12)}
+.mp-step-line{width:2px;flex:1;min-height:30px}
+.mp-step-line.gold{background:linear-gradient(180deg,var(--gold),var(--gold-dark))}
+.mp-step-line.none{background:transparent}
+.mp-step-content{padding:6px 0 36px}
+.mp-step-content h4{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
+.mp-step-content p{font-size:12.5px;color:rgba(255,255,255,.4);line-height:1.6;max-width:360px}
+.mp-step-content.future-text h4{color:rgba(255,255,255,.35)}
+.mp-step-content.future-text p{color:rgba(255,255,255,.2)}
+.mp-step-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:8px}
+.mp-step-tag.now{background:rgba(201,180,146,.15);color:var(--gold)}
+.mp-step-tag.next{background:rgba(255,255,255,.06);color:rgba(255,255,255,.3)}
+.ment-path .pl-card{cursor:pointer;transition:transform .2s;box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.ment-path .pl-card:hover{transform:translateY(-4px)}
+.ment-path .pl-tear::before,.ment-path .pl-tear::after{background:#12100d}
 .co-overlay{position:fixed;inset:0;z-index:200;background:#fff;overflow-y:auto;display:none;padding:46px 24px 64px}
 .co-overlay.open{display:block}
 .co-wrap{max-width:640px;margin:0 auto}
@@ -445,6 +476,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:26px;min-height:0}
   .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{display:none}.pl-calc-link{display:none}.pl-calc-mobile{display:block;text-align:center;margin-top:14px}.pl-calc-mobile a{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);padding-bottom:3px;text-decoration:none}
+  .ment-path{padding:60px 20px}.mp-body{grid-template-columns:1fr;gap:36px}.mp-h{font-size:34px}.mp-step-content{padding-bottom:24px}.ment-path .pl-card{max-width:360px;margin:0 auto}
   .apply{padding:52px 20px}
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
   .founder{padding:52px 0}.founder-img{width:100%;max-width:none;border-radius:0}
@@ -834,38 +866,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       <span class="pl-cta" data-plan="Aari Max 100%">Go Max &rarr;</span>
       <div class="pl-calc-mobile"><a href="/commission-plans.html">Run your numbers &rarr;</a></div>
     </div>
-    <div class="pl-card pl-ticket" data-plan="Mentorship Path 75/25">
-      <div class="pl-flag" style="background:#c9b492;color:#141210">New agents</div>
-      <div class="pl-name">Mentorship</div>
-      <div class="pl-tagline">Learn by doing real deals.</div>
-      <div class="pl-split">75/25</div>
-      <div class="pl-splitlabel">agent / brokerage</div>
-      <div class="pl-price">$59<span>/mo</span></div>
-      <div class="pl-tear"></div>
-      <div class="pl-inc">Includes</div>
-      <ul class="pl-feat"><li><span class="k">&#10003;</span>First 3 transactions guided by broker</li>
-        <li><span class="k">&#10003;</span>Transaction coordinator on every deal</li>
-        <li><span class="k">&#10003;</span>Live classes with brokerage attorney</li>
-        <li><span class="k">&#10003;</span>SkySlope Suite + Aari CRM</li>
-        <li><span class="k">&#10003;</span>2 service credits / month</li>
-      </ul>
-      <div class="pl-credit">
-        <div class="pl-credit-h">2 service credits / month</div>
-        <p style="font-size:11.5px;color:var(--mid);margin-bottom:10px;line-height:1.5">Pick any 2 each month, we handle it, you watch and learn:</p>
-        <ul class="pl-credit-list">
-          <li><span class="p">&#10003;</span> Offer Preparation</li>
-          <li><span class="p">&#10003;</span> Listing Input</li>
-          <li><span class="p">&#10003;</span> Listing Paperwork</li>
-        </ul>
-      </div>
-      <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
-      <div class="o2-panel"><div class="o2-panel-inner">
-        <div class="o2-row"><span>Monthly fee</span><b>$59</b></div>
-        <div class="o2-row"><span>E&amp;O, due at signup</span><b>$199/yr</b></div>
-        <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
-      </div></div>
-      <span class="pl-cta" data-plan="Mentorship Path 75/25">Start with Mentorship &rarr;</span>
-    </div>
   </div>
   <div class="pl-bar">
     <span class="pl-bar-label">All plans</span>
@@ -876,6 +876,96 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
   </div>
   <div class="pl-calc-link" style="text-align:center;margin:20px auto 0"><a href="/commission-plans.html" style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px">Compare all plans and run your numbers &rarr;</a></div>
+</section>
+<section class="ment-path" id="mentorship">
+  <div class="mp-inner">
+    <div class="mp-top">
+      <div class="mp-eyebrow">
+        <span class="mp-eyebrow-dot"></span>
+        <span>New Agents</span>
+      </div>
+      <h2 class="mp-h">Start guided.<br><em>Graduate ready.</em></h2>
+      <p class="mp-sub">Mentorship isn't a plan you're stuck in. It's a launchpad. Close your first 3 deals with the broker beside you, then move up when you're ready.</p>
+    </div>
+    <div class="mp-body">
+      <div class="mp-steps">
+        <div class="mp-step-item rv">
+          <div class="mp-step-marker">
+            <div class="mp-step-num active">1</div>
+            <div class="mp-step-line gold"></div>
+          </div>
+          <div class="mp-step-content">
+            <span class="mp-step-tag now">You are here</span>
+            <h4>Broker-guided deals</h4>
+            <p>Your first 3 transactions are reviewed and guided before close. You're never alone on a live deal.</p>
+          </div>
+        </div>
+        <div class="mp-step-item rv">
+          <div class="mp-step-marker">
+            <div class="mp-step-num active">2</div>
+            <div class="mp-step-line gold"></div>
+          </div>
+          <div class="mp-step-content">
+            <h4>TC on every deal</h4>
+            <p>A transaction coordinator handles the paperwork so you focus on learning the client relationship.</p>
+          </div>
+        </div>
+        <div class="mp-step-item rv">
+          <div class="mp-step-marker">
+            <div class="mp-step-num active">3</div>
+            <div class="mp-step-line gold"></div>
+          </div>
+          <div class="mp-step-content">
+            <h4>Learn from an attorney, not a mistake</h4>
+            <p>Live legal classes with the brokerage attorney. Know the contracts before you write them.</p>
+          </div>
+        </div>
+        <div class="mp-step-item rv">
+          <div class="mp-step-marker">
+            <div class="mp-step-num future">4</div>
+            <div class="mp-step-line none"></div>
+          </div>
+          <div class="mp-step-content future-text">
+            <span class="mp-step-tag next">When you're ready</span>
+            <h4>Upgrade to Aari Growth (85/15)</h4>
+            <p>Keep everything. Bigger split. No pressure, no timeline. You move up when you say so.</p>
+          </div>
+        </div>
+      </div>
+      <div class="pl-card pl-ticket" data-plan="Mentorship Path 75/25">
+        <div class="pl-flag" style="background:#c9b492;color:#141210">New agents</div>
+        <div class="pl-name">Mentorship</div>
+        <div class="pl-tagline">Learn by doing real deals.</div>
+        <div class="pl-split">75/25</div>
+        <div class="pl-splitlabel">agent / brokerage</div>
+        <div class="pl-price">$59<span>/mo</span></div>
+        <div class="pl-tear"></div>
+        <div class="pl-inc">Includes</div>
+        <ul class="pl-feat"><li><span class="k">&#10003;</span>First 3 transactions guided by broker</li>
+          <li><span class="k">&#10003;</span>Transaction coordinator on every deal</li>
+          <li><span class="k">&#10003;</span>Live classes with brokerage attorney</li>
+          <li><span class="k">&#10003;</span>SkySlope Suite + Aari CRM</li>
+          <li><span class="k">&#10003;</span>2 service credits / month</li>
+        </ul>
+        <div class="pl-credit">
+          <div class="pl-credit-h">2 service credits / month</div>
+          <p style="font-size:11.5px;color:var(--mid);margin-bottom:10px;line-height:1.5">Pick any 2 each month, we handle it, you watch and learn:</p>
+          <ul class="pl-credit-list">
+            <li><span class="p">&#10003;</span> Offer Preparation</li>
+            <li><span class="p">&#10003;</span> Listing Input</li>
+            <li><span class="p">&#10003;</span> Listing Paperwork</li>
+          </ul>
+        </div>
+        <div class="o2-toggle" onclick="event.stopPropagation();var p=this.nextElementSibling;p.classList.toggle('open');this.querySelector('.chev').style.transform=p.classList.contains('open')?'rotate(180deg)':'rotate(0)'">See the numbers <span class="chev">▾</span></div>
+        <div class="o2-panel"><div class="o2-panel-inner">
+          <div class="o2-row"><span>Monthly fee</span><b>$59</b></div>
+          <div class="o2-row"><span>E&amp;O, due at signup</span><b>$199/yr</b></div>
+          <div class="o2-row"><span>Transaction fee</span><b>$499 / $299</b></div>
+        </div></div>
+        <span class="pl-cta" data-plan="Mentorship Path 75/25">Start with Mentorship &rarr;</span>
+      </div>
+    </div>
+  </div>
 </section>
 <section class="cmpsec">
   <div class="cmp">
@@ -1031,7 +1121,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   plans.forEach(function(p){p.addEventListener('click',function(){pickPlan(p.getAttribute('data-plan'));});});
   document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));openCheckout(b.getAttribute('data-plan'));});});
   try{var saved=localStorage.getItem('aari_plan');if(saved)pickPlan(saved);}catch(e){}
-  var ANNUAL=199,PLAN={'Aari Growth 85/15':79,'Aari Max 100%':99};
+  var ANNUAL=199,PLAN={'Aari Growth 85/15':79,'Aari Max 100%':99,'Mentorship Path 75/25':59};
   var MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
   function nextBillLabel(){var t=new Date(),nm=new Date(t.getFullYear(),t.getMonth()+1,1);return MONTH_NAMES[nm.getMonth()]+' 1';}
   function computeDue(name){var m=PLAN[name]||79;return {m:m,total:ANNUAL};}
