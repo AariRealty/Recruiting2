@@ -236,39 +236,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 .pl-fee{font-size:13px;color:rgba(255,255,255,.6)}
 .pl-fee b{color:#fff;font-weight:700}
 .pl-fee-sep{width:1px;height:16px;background:rgba(255,255,255,.14)}
-.ment-path{background:linear-gradient(180deg,#0a0a0a 0%,#12100d 40%,#1a1610 100%);padding:80px 44px;position:relative;overflow:hidden}
-.ment-path::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:900px;height:900px;background:radial-gradient(circle,rgba(201,180,146,.04) 0%,transparent 60%);pointer-events:none}
-.mp-inner{max-width:1080px;margin:0 auto}
-.mp-top{text-align:center;margin-bottom:52px}
-.mp-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(201,180,146,.12);border:1px solid rgba(201,180,146,.25);border-radius:50px;padding:8px 18px 8px 12px;margin-bottom:24px}
-.mp-eyebrow-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0}
-.mp-eyebrow span{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-.mp-h{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,3.8vw,50px);font-weight:500;line-height:1.06;color:#fff}
-.mp-h em{font-style:italic;color:var(--gold)}
-.mp-sub{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;max-width:500px;margin:16px auto 0}
-.mp-body{max-width:560px;margin:0 auto}
-.mp-steps{display:flex;flex-direction:column;gap:0}
-.mp-step-item{display:grid;grid-template-columns:40px 1fr;gap:18px;position:relative}
-.mp-step-marker{display:flex;flex-direction:column;align-items:center}
-.mp-step-num{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0;position:relative;z-index:1}
-.mp-step-num.active{background:var(--gold);color:var(--ink)}
-.mp-step-num.future{background:rgba(255,255,255,.08);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.12)}
-.mp-step-line{width:2px;flex:1;min-height:30px}
-.mp-step-line.gold{background:linear-gradient(180deg,var(--gold),var(--gold-dark))}
-.mp-step-line.none{background:transparent}
-.mp-step-content{padding:6px 0 36px}
-.mp-step-content h4{font-size:15px;font-weight:700;color:#fff;margin-bottom:6px}
-.mp-step-content p{font-size:12.5px;color:rgba(255,255,255,.4);line-height:1.6;max-width:360px}
-.mp-step-content.future-text h4{color:rgba(255,255,255,.35)}
-.mp-step-content.future-text p{color:rgba(255,255,255,.2)}
-.mp-step-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:8px}
-.mp-step-tag.now{background:rgba(201,180,146,.15);color:var(--gold)}
-.mp-step-tag.next{background:rgba(255,255,255,.06);color:rgba(255,255,255,.3)}
-.mp-cta-wrap{text-align:center;margin-top:8px;padding-left:58px}
-.mp-price-peek{font-size:18px;font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-.01em}
-.mp-price-peek span{font-size:13px;font-weight:600;color:rgba(255,255,255,.45)}
-.mp-cta{display:inline-block;background:var(--gold);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:16px 36px;border-radius:50px;text-decoration:none;transition:opacity .2s}
-.mp-cta:hover{opacity:.85}
 .co-overlay{position:fixed;inset:0;z-index:200;background:#fff;overflow-y:auto;display:none;padding:46px 24px 64px}
 .co-overlay.open{display:block}
 .co-wrap{max-width:640px;margin:0 auto}
@@ -478,7 +445,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .b5-nav{flex-direction:row;overflow-x:auto;gap:8px}
   .b5-content{border-left:none;border-top:1px solid var(--border);padding-left:0;padding-top:26px;min-height:0}
   .plans{padding:56px 20px 60px}.pl-inner{grid-template-columns:1fr;gap:26px}.pl-rail{text-align:center}.pl-rail p{margin-left:auto;margin-right:auto}.pl-bar{display:none}.pl-calc-link{display:none}.pl-calc-mobile{display:block;text-align:center;margin-top:14px}.pl-calc-mobile a{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);border-bottom:1px solid var(--border);padding-bottom:3px;text-decoration:none}
-  .ment-path{padding:60px 20px}.mp-h{font-size:34px}.mp-step-content{padding-bottom:24px}.mp-cta-wrap{padding-left:0}
   .apply{padding:52px 20px}
   .eco{padding:56px 20px}.eco-grid{grid-template-columns:1fr;gap:16px}
   .founder{padding:52px 0}.founder-img{width:100%;max-width:none;border-radius:0}
@@ -910,68 +876,6 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <span class="pl-fee"><b>$299</b> vacant land transaction fee</span>
   </div>
   <div class="pl-calc-link" style="text-align:center;margin:20px auto 0"><a href="/commission-plans.html" style="font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:4px">Compare all plans and run your numbers &rarr;</a></div>
-</section>
-<section class="ment-path" id="mentorship">
-  <div class="mp-inner">
-    <div class="mp-top">
-      <div class="mp-eyebrow">
-        <span class="mp-eyebrow-dot"></span>
-        <span>New Agents</span>
-      </div>
-      <h2 class="mp-h">Start guided.<br><em>Graduate ready.</em></h2>
-      <p class="mp-sub">Mentorship isn't a plan you're stuck in. It's a launchpad. Close your first 3 deals with the broker beside you, then move up when you're ready.</p>
-    </div>
-    <div class="mp-body">
-      <div class="mp-steps">
-        <div class="mp-step-item">
-          <div class="mp-step-marker">
-            <div class="mp-step-num active">1</div>
-            <div class="mp-step-line gold"></div>
-          </div>
-          <div class="mp-step-content">
-            <span class="mp-step-tag now">You are here</span>
-            <h4>Broker-guided deals</h4>
-            <p>Your first 3 transactions are reviewed and guided before close. You're never alone on a live deal.</p>
-          </div>
-        </div>
-        <div class="mp-step-item">
-          <div class="mp-step-marker">
-            <div class="mp-step-num active">2</div>
-            <div class="mp-step-line gold"></div>
-          </div>
-          <div class="mp-step-content">
-            <h4>TC on every deal</h4>
-            <p>A transaction coordinator handles the paperwork so you focus on learning the client relationship.</p>
-          </div>
-        </div>
-        <div class="mp-step-item">
-          <div class="mp-step-marker">
-            <div class="mp-step-num active">3</div>
-            <div class="mp-step-line gold"></div>
-          </div>
-          <div class="mp-step-content">
-            <h4>Learn from an attorney, not a mistake</h4>
-            <p>Live legal classes with the brokerage attorney. Know the contracts before you write them.</p>
-          </div>
-        </div>
-        <div class="mp-step-item">
-          <div class="mp-step-marker">
-            <div class="mp-step-num future">4</div>
-            <div class="mp-step-line none"></div>
-          </div>
-          <div class="mp-step-content future-text">
-            <span class="mp-step-tag next">When you're ready</span>
-            <h4>Upgrade to Aari Growth (85/15)</h4>
-            <p>Keep everything. Bigger split. No pressure, no timeline. You move up when you say so.</p>
-          </div>
-        </div>
-      </div>
-      <div class="mp-cta-wrap">
-        <div class="mp-price-peek">75/25 <span>split</span> &middot; $59<span>/mo</span></div>
-        <a class="mp-cta" href="#plans" onclick="var c=document.querySelector('[data-plan=&quot;Mentorship Path 75/25&quot;]');if(c){c.scrollIntoView({behavior:'smooth',block:'center'});c.classList.add('selected');}">See the Mentorship plan &rarr;</a>
-      </div>
-    </div>
-  </div>
 </section>
 <section class="cmpsec">
   <div class="cmp">
