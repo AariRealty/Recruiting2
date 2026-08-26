@@ -8,10 +8,14 @@ the live Hub build, byte identical to what the publish workflow put in the
 - 1,482,843 bytes
 - Line numbers below refer to that file and nothing else.
 
-**This document is a transcription.** Nothing here has been corrected, tidied or
-improved. Where something looks wrong or improvable it is called out in a
-`> Note` block and left alone. Deciding what to change is the hub-next build's
-call, not this document's.
+**Sections 1 to 7 are a transcription.** Nothing in them has been corrected,
+tidied or improved. Where something looks wrong or improvable it is called out
+in a `> Note` block and left alone.
+
+**Part two is analysis, not transcription.** It is clearly fenced off below, it
+is not part of the payload, and it carries decisions Marlenyi has already made.
+It lives here rather than in a separate file because a reference you have to
+leave in order to find the caveats is a worse reference.
 
 ---
 
@@ -24,6 +28,13 @@ call, not this document's.
 5. [The tier editor's inline save](#5-the-tier-editors-inline-save)
 6. [The gap prompt logic, every field it checks](#6-the-gap-prompt-logic-every-field-it-checks)
 7. [`contact_type` and `vendor_type` filter logic](#7-contact_type-and-vendor_type-filter-logic)
+
+**Part two, analysis**
+
+- A. [The snooze downgrade, exact five versus five or more](#a-the-snooze-downgrade-exact-five-versus-five-or-more)
+- B. [pre_household_tier, drop the restore](#b-pre_household_tier-drop-the-restore)
+- C. [Two live data issues to clean up](#c-two-live-data-issues-to-clean-up)
+- D. [Six dead filter options, not two](#d-six-dead-filter-options-not-two)
 
 ---
 
@@ -690,9 +701,236 @@ It is compared only on the vendor tab, at line 6988, and vendors carry a null
 
 ---
 
-## What is not in here
+## What is not in the transcription
 
 **Duplicates are out of scope for this pass** and were not transcribed.
 
-Nothing in this document has been executed, tested or modified. It is a reading
-of the file as it stands.
+Nothing in sections 1 to 7 has been executed, tested or modified. They are a
+reading of the file as it stands. Part two below is analysis and is labelled as
+such.
+
+---
+---
+
+# Part two: analysis
+
+**Everything above this line is transcription. Everything below it is not.**
+
+This part was written on 26 August 2026. It is analysis, recommendation and
+recorded decision. None of it is in `hub_payload.html` and none of it has been
+applied to the old Hub, which is frozen. Every factual claim below was verified
+against the live database (Supabase project `fnlrgmuvtgwzjsihqxcn`) on the same
+date; the queries are read only and are named where the numbers appear.
+
+---
+
+## A. The snooze downgrade, exact five versus five or more
+
+Relates to [section 2](#2-the-snooze-downgrade-at-five). The transcribed
+condition is `newCount === 5`, at line 8550 in the Database copy and line 12370
+in the Today copy.
+
+### The state of the data
+
+| Fact | Value |
+| --- | --- |
+| Column definition | `snooze_count integer NOT NULL DEFAULT 0` |
+| Contacts in the book | 223 |
+| Contacts with `snooze_count` above 0 | 0 |
+| Highest `snooze_count` in the book | 0 |
+| Contacts currently snoozed | 0 |
+
+Nobody has ever been postponed. The column cannot hold a null or a fraction.
+
+### Can the count actually skip five
+
+There is one increment path, `(Number(c.snooze_count)||0) + 1`, written twice
+and identically at lines 8544 and 12364. A row's written value is always its
+cached value plus one, so it cannot advance by two on its own. Three ways five
+is still missed:
+
+1. **The household cascade.** `patch` carries `snooze_count: newCount` and
+   `__dbUpdateWithCascade` writes it to every member, so a spouse's own count is
+   replaced by the primary's. That usually lowers the spouse, which delays the
+   downgrade rather than skipping it, and `patch.tier` cascades in the same
+   write, so the household still downgrades together. Survivable under `===`.
+2. **Stale cache across devices.** The real one. Logging a conversation resets
+   the count to 0. If that happens on the phone while a laptop tab still holds
+   the old row at 5, the laptop's next postpone writes 6. Five never lands and
+   the downgrade never fires for that contact again.
+3. **Editing the column by hand** in Supabase. Any value above 5 puts the
+   contact permanently out of reach of the check.
+
+### Recommendation
+
+Adopt `>=`, and do it in the new build rather than the old one. Now is the
+cheapest possible moment: with every contact at 0 there is no back catalogue of
+people above five who would all downgrade at once, which is the only real
+hazard `>=` introduces.
+
+Bare `>= 5` re-fires on every postpone from five upward, which re-appends the
+note each time and walks a contact A to B to C on consecutive postpones. Gate it
+on the crossing so it still fires exactly once, which is what `===` was buying:
+
+```js
+var prevCount = Number(c.snooze_count)||0;
+var newCount  = prevCount + 1;
+if(newCount >= 5 && prevCount < 5){
+  // downgrade once, on the crossing
+}
+```
+
+---
+
+## B. pre_household_tier, drop the restore
+
+Relates to [section 5](#5-the-tier-editors-inline-save). Decision made by
+Marlenyi on 26 August 2026.
+
+### What it does today
+
+A snapshot of each contact's own tier, taken **once** when a household is linked
+and spent **once** when it is unlinked.
+
+- **Link**, lines 6703 and 6710: store each contact's current tier in
+  `pre_household_tier`, then set both contacts to the better of the two tiers.
+- **Unlink**, line 6729:
+  `var restoredTier = m.pre_household_tier || m.tier || null;`
+
+### The snapshot is never refreshed
+
+Verified against all three tier write paths. None of them touches
+`pre_household_tier`:
+
+| Path | Line | Writes `pre_household_tier` |
+| --- | --- | --- |
+| Sort screen tier buttons, `__dbSortSetTier` | 7358 | no |
+| Edit form save, household tier cascade | 8730 | no |
+| Auto downgrade inside the postpone patch | 8550 | no |
+
+The only writes are at link (6703, 6710), at unlink (6733) and in the link
+rollback (6715).
+
+### What that means in practice
+
+Every tier change made while a couple is linked is discarded the moment they are
+unlinked, manual and automatic alike.
+
+Link a couple, watch them go cold, move the household from A to C by hand. A
+year later they separate and the household is unlinked. Both contacts snap back
+to the tier they held on the day they were linked. A year of judgment is undone
+in one click, with no confirmation and no note.
+
+The auto downgrade behaves the same way, and leaves a contradiction behind. If a
+household drops A to B for postponing five times, unlinking restores A, but the
+note appended at line 8551 survives. The record then reads
+`Auto-downgraded from tier A to B on <date>` while the tier field says `A`.
+
+### Decision: build without the restore
+
+> Marlenyi, 26 August 2026: "Drop the restore entirely. `pre_household_tier` is
+> solving a problem I do not have. If I raise someone's tier while they are
+> linked, that is a decision I made about that person and unlinking should not
+> undo it. Refreshing the snapshot on every write is more code to maintain a
+> behavior nobody wants."
+
+So, for the new build:
+
+- Unlink clears `household_id` and `household_primary` and **leaves `tier`
+  exactly as it is**. The current tier is the truest thing known about that
+  contact.
+- Do not write `pre_household_tier` on link. Do not read it on unlink.
+- Levelling both contacts to the better tier **at link time** is unaffected and
+  stays. That is a separate, wanted behavior.
+
+The old Hub is not being changed. This applies to the new build only.
+
+---
+
+## C. Two live data issues to clean up
+
+Both found while verifying part A and part B, both present in the live database
+on 26 August 2026, neither of them a code path. They need cleaning up in the new
+build whichever way the code goes.
+
+### C1. Carlos Sanabria is one click from a silent two tier drop
+
+Of the 8 contacts across 4 households, exactly one has a `pre_household_tier`
+that differs from the tier showing today.
+
+| Household | Contact | Primary | Tier now | `pre_household_tier` | On unlink today |
+| --- | --- | --- | --- | --- | --- |
+| `43157b2e` | Suslay Lopez | yes | A | A | stays A |
+| `43157b2e` | Carlos Sanabria | no | A | **C** | **drops to C** |
+| `4fefba34` | Jorge Quijada | no | B | B | stays B |
+| `4fefba34` | Soraya Quijada | no | B | B | stays B |
+| `97db25ea` | Beatriz Garcia Alvarez | yes | A | A | stays A |
+| `97db25ea` | Jorge Alvarez | no | A | A | stays A |
+| `db5eb6c5` | Anna Maria Gariti | yes | A | A | stays A |
+| `db5eb6c5` | Salvatore Gariti | no | A | A | stays A |
+
+Carlos was a C who was levelled to A by being linked to Suslay. Under the
+current code, unlinking that household drops him two tiers with no confirmation
+and no note. Under the decision in part B the drop cannot happen, because the
+restore is gone. Either way the stale snapshot should not be carried into the
+new schema.
+
+### C2. The Quijada household has no primary
+
+`household_primary` is `boolean NOT NULL DEFAULT false`. Household `4fefba34`
+has **both** rows set to `false`. The other three households each have exactly
+one primary, as expected.
+
+This matters because the household rules are written in terms of the primary.
+The comment at line 8562 states the spec as "Postponing the primary postpones
+the household," and `__dbRenderHouseholdCard` draws a Primary badge and a
+"Make primary" button by reading that flag. A household with no primary has no
+defined answer for either.
+
+Worth checking during the new build whether a household can be created without a
+primary, or whether `__dbMakePrimary` can leave one cleared. Lines 6741 onward
+sequence the two writes so the unique index is never momentarily violated by
+clearing the current primary **first**, which is a plausible way to end up with
+none if the second write fails.
+
+---
+
+## D. Six dead filter options, not two
+
+Relates to [section 7](#7-contact_type-and-vendor_type-filter-logic), which
+originally flagged two. Verified against the full book on 26 August 2026.
+
+Every value actually in use:
+
+| `record_class` | `contact_type` | `vendor_type` | Contacts |
+| --- | --- | --- | --- |
+| client | Buyer and Seller | · | 195 |
+| client | Buyer | · | 12 |
+| client | Seller | · | 6 |
+| vendor | · | Title | 5 |
+| vendor | · | Agent | 3 |
+| vendor | · | Lender | 2 |
+
+Total 223. Note that `record_class` is the client versus vendor axis, **not** the
+buyer versus seller axis. The role axis is `contact_type`. Vendors carry a null
+`contact_type` and filter on `vendor_type` instead.
+
+Offered in the filters and used by nobody:
+
+| List | Line | Dead options |
+| --- | --- | --- |
+| `contact_type` | 6905 | `Investor`, `Renter` |
+| `vendor_type` | 6906 | `Inspector`, `Contractor`, `Photographer`, `Other` |
+
+Six in total. Selecting any of them returns an empty list every time. Both lists
+are hardcoded rather than derived from the column, so they can drift in either
+direction. In the new build, drive both from the data or from a check constraint
+so the filter and the book cannot disagree.
+
+---
+
+## What part two does not cover
+
+Duplicates remain out of scope, as noted above. Nothing in this document has
+been applied to `hub_payload.html`, which is unchanged and frozen at blob sha
+`604cb205efb99f453ff44419ac5304e0b819f7cf`.
