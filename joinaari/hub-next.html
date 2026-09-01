@@ -6873,6 +6873,18 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
   window.__dbOpenDetail = function(id){ return __dbOpenDetail(id); };
   window.__loadDatabase = function(){ return loadDatabase(); };
 
+  function showGoalToast(msg){
+    var t=document.getElementById('ge-toast');
+    if(!t){
+      t=document.createElement('div'); t.id='ge-toast';
+      t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#222;color:#fff;padding:10px 20px;border-radius:8px;font:500 13px/1.4 Montserrat,sans-serif;z-index:300;opacity:0;transition:opacity .25s;pointer-events:none;max-width:90vw;text-align:center;';
+      document.body.appendChild(t);
+    }
+    t.textContent=msg; t.style.opacity='1';
+    clearTimeout(t._tid);
+    t._tid=setTimeout(function(){ t.style.opacity='0'; },2800);
+  }
+
   function __dbEsc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function __dbToday(){ var d=new Date(); return d.toISOString().slice(0,10); }
   function __dbFmtShort(iso){
