@@ -411,7 +411,7 @@ window.ICA_CONTENT = {
       <td>Full-support plan: transaction coordination, marketing, accountability, and 1:1 broker access.</td>
     </tr>
     <tr>
-      <td>Growth</td>
+      <td>Aari Growth</td>
 <td style="width:88px;text-align:center;vertical-align:middle;"><span style="display:inline-block;width:66px;border-bottom:1px solid #0a0a0a;">&nbsp;</span></td>
       <td>85% / 15%</td>
       <td>$499</td>
@@ -419,7 +419,7 @@ window.ICA_CONTENT = {
       <td>More independence, with deal support when you need it.</td>
     </tr>
     <tr>
-      <td>Max</td>
+      <td>Aari Max</td>
 <td style="width:88px;text-align:center;vertical-align:middle;"><span style="display:inline-block;width:66px;border-bottom:1px solid #0a0a0a;">&nbsp;</span></td>
       <td>100%</td>
       <td>$499</td>
@@ -432,7 +432,7 @@ window.ICA_CONTENT = {
 <p><strong>The Associate initials in the Initial column of the plan selected.</strong> The initial identifies the commission plan the Associate selects as their initial commission plan of record under this Section. A single initial is placed on one row only. The Associate does not initial the other two rows.</p>
 
 <h4 id="s-38-2">&sect;38.2 Commission Plan Selection</h4>
-<p>At onboarding, the Associate selects one commission plan as their initial plan of record: Mentorship Path (75% Associate / 25% Company) at $59/month, Aari Growth (85% / 15%) at $79/month, or Aari Max (100%) at $99/month. The selected plan sets the Associate&rsquo;s split and Monthly Brokerage Fee under Section 41.1. Selection is subject to Broker review and acceptance; the Broker may place a newer or higher-risk Associate on the Mentorship Path in furtherance of the Broker&rsquo;s supervisory obligations under Florida law. The $199 annual E&amp;O + Compliance Fee applies to all plans. The selected plan remains in effect until changed under Section 38.3.</p>
+<p>At onboarding, the Associate selects one commission plan as their initial plan of record: Mentorship Path (75% Associate / 25% Company), Aari Growth (85% / 15%), or Aari Max (100%). The selected plan sets the Associate&rsquo;s split under Section 38.1. The Quarterly Brokerage Fee is the same on every plan and is set forth in Section 41.1. Selection is subject to Broker review and acceptance; the Broker may place a newer or higher-risk Associate on the Mentorship Path in furtherance of the Broker&rsquo;s supervisory obligations under Florida law. The $199 annual E&amp;O + Compliance Fee applies to all plans. The selected plan remains in effect until changed under Section 38.3.</p>
 
 <p><strong>Service Credits.</strong> Associates on a commission plan in which the Company receives a percentage share of commission receive two (2) service credits per calendar month. Each credit is redeemable for one offer submission, one MLS listing input, or one listing paperwork preparation performed by Aari Transactions LLC. Credits do not roll over and expire at the end of the month in which they are issued. Credits do not apply to transaction coordination. Services beyond the monthly credits are available at the rates published by Aari Transactions LLC. Associates on a plan in which the Associate receives one hundred percent of commission do not receive service credits.</p>
 
@@ -450,7 +450,37 @@ window.ICA_CONTENT = {
 
 <p><strong>Frequency Limit.</strong> An Associate may not submit a new plan change request within sixty (60) days of their most recent Plan Change Activation Date.</p>
 
-<p><strong>Downgrade Rule.</strong> The same eligibility, process, activation date, and frequency limit apply in both directions. Moving from Max back to Growth requires the same process.</p>
+<p><strong>Downgrade Rule.</strong> The same eligibility, process, activation date, and frequency limit apply in both directions. Moving from Aari Max back to Aari Growth requires the same process.</p>
+
+
+<h4 id="s-38-4">&sect;38.4 Anniversary Plan Progression</h4>
+
+<p><strong>The progression.</strong> The three commission plans form a progression. At each anniversary of the Associate&rsquo;s affiliation with the Company, the Associate moves one step up the progression, in this order:</p>
+<div class="table-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Current plan</th>
+      <th>Next plan</th>
+      <th>When</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>A plan carried over from a prior agreement</td><td>Mentorship Path, 75% / 25%</td><td>First anniversary</td></tr>
+    <tr><td>Mentorship Path, 75% / 25%</td><td>Aari Growth, 85% / 15%</td><td>Next anniversary</td></tr>
+    <tr><td>Aari Growth, 85% / 15%</td><td>Aari Max, 100%</td><td>Next anniversary</td></tr>
+    <tr><td>Aari Max, 100%</td><td>No further step</td><td>Top of the progression</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>One step per anniversary.</strong> A step under this Section moves the Associate to the next plan in the order above and no further. The Associate does not skip a step and does not take two steps in the same year. A step under this Section never moves the Associate to a lower Associate percentage.</p>
+
+<p><strong>The step takes effect at signature.</strong> A step under this Section takes effect at the moment the Associate executes the then-current version of this Agreement at their anniversary, and not on the date the Broker approves the step. Until that execution, the Associate&rsquo;s plan of record, split, and fees remain those stated in the version of this Agreement the Associate has actually executed. An Associate already on Aari Max executes the then-current version at their anniversary with no change of plan and no change of split.</p>
+
+<p><strong>Adoption is not simultaneous.</strong> A revision of this Agreement takes effect for an Associate only when that Associate executes it. An Associate who holds an earlier version continues on the plan, split, and fee schedule stated in the version they executed until they execute a later one. Associates therefore hold different versions of this Agreement, and different fee schedules, at the same time. That is the intended operation of this Section and not an inconsistency.</p>
+
+<p><strong>Relationship to Section 38.3.</strong> Section 38.3 governs a plan change the Associate requests between anniversaries and operates separately from this Section. A step under this Section is not a request under Section 38.3: it does not require the qualifying transactions stated there, it does not use the Plan Change Activation Date stated there, and it does not count against the frequency limit stated there.</p>
 
 <h3 id="s-39">&sect;39. Transaction Types and Transaction Fee Application</h3>
 
@@ -551,24 +581,22 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 
 <h3 id="s-41">&sect;41. Annual and Ongoing Compliance Fees</h3>
 
-<h4 id="s-41-1">&sect;41.1 Monthly Brokerage Fee</h4>
+<h4 id="s-41-1">&sect;41.1 Quarterly Brokerage Fee</h4>
 <div class="table-wrap">
 <table>
   <thead>
     <tr>
-      <th>Plan</th>
-      <th>Monthly Brokerage Fee</th>
+      <th>Fee</th>
+      <th>Amount</th>
       <th>Billing Schedule</th>
     </tr>
   </thead>
   <tbody>
-    <tr><td>Mentorship Path</td><td>$59.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr>
-    <tr><td>Aari Growth</td><td>$79.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr>
-    <tr><td>Aari Max</td><td>$99.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr>
+    <tr><td>Quarterly Brokerage Fee</td><td>$99.00 per quarter</td><td>Billed quarterly, beginning the quarter after onboarding; applies to all plans</td></tr>
   </tbody>
 </table>
 </div>
-<p>The Monthly Brokerage Fee is set by the Associate&rsquo;s commission plan. Billing dates, the first month waiver, and the treatment of a billing cycle in which the Associate terminates are governed by Section 68.</p>
+<p>The Quarterly Brokerage Fee is $99.00 per quarter on every commission plan. It does not vary by plan and it does not vary by split. Billing dates, the first quarter waiver, and the treatment of a billing cycle in which the Associate terminates are governed by Section 68.</p>
 
 <h4 id="s-41-2">&sect;41.2 E&amp;O + Compliance Fee</h4>
 <div class="table-wrap">
@@ -586,7 +614,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 </table>
 </div>
 <p>The E&amp;O + Compliance Fee is invoiced approximately two (2) months prior to the Associate&rsquo;s anniversary month and is due on the first (1st) day of the anniversary month in subsequent years, as further described in the CSA. The fee is non-refundable.</p>
-<p><strong>At onboarding, only the E&amp;O + Compliance Fee ($199.00) is due today.</strong> Monthly Brokerage Fee billing, including the first month waiver, is set forth in Section 68 and applied at the rate stated in Section 41.1 above. The E&amp;O + Compliance Fee applies to all Associates regardless of commission plan; the Monthly Brokerage Fee varies by plan. Both fees are applied and enforced in accordance with the CSA.</p>
+<p><strong>At onboarding, only the E&amp;O + Compliance Fee ($199.00) is due today.</strong> Quarterly Brokerage Fee billing, including the first quarter waiver, is set forth in Section 68 and applied at the rate stated in Section 41.1 above. Both the E&amp;O + Compliance Fee and the Quarterly Brokerage Fee apply to all Associates regardless of commission plan. Both fees are applied and enforced in accordance with the CSA.</p>
 
 <h3 id="s-42">&sect;42. Administrative and Conditional Fees</h3>
 <div class="table-wrap">
@@ -614,7 +642,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 </table>
 </div>
 <p>E&amp;O Payment Plan Threshold: the amount above which the Company offers a written payment plan for a retention or deductible obligation under Section 6.</p>
-<p>Grace Period: a five (5) calendar day grace period applies to all recurring fees (Monthly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments.</p>
+<p>Grace Period: a five (5) calendar day grace period applies to all recurring fees (Quarterly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments.</p>
 <p>Administrative Processing Fee: $99.00 applies each time the Company receives, processes, disburses, or refunds funds outside of a standard sale closing, and each time the Company processes the cancellation, withdrawal, or termination of an executed listing agreement, buyer brokerage agreement, or purchase-and-sale contract. Triggering events include, by way of example and not limitation: a retainer or advance collected from a client; a cancellation fee collected by or on behalf of the Associate; a bonus, placement fee, or similar payment paid to the Company by a third party; and a tenant placement. Each triggering event is a separate occurrence and a separate fee. A transaction in which the Company processes a retainer and later processes a cancellation incurs two fees. This fee does not apply to any event on which a transaction fee under Section 39 is charged. Where a transaction fee applies, the transaction fee is the only Company charge for that event. This fee therefore does not apply to a standard sale closing in which the Company receives its commission through the settlement agent, and does not apply in addition to the transaction fee on a completed rental, lease, or commercial transaction. Notwithstanding the exclusion above, this fee applies to any transaction deemed an Abandoned Commission under the Operations &amp; Compliance Manual, whether or not a transaction fee was charged on that transaction. Failure to complete a file is a separate administrative event from the transaction itself. The fee is deducted from the Associate&rsquo;s next commission disbursement, or invoiced directly if no disbursement is pending.</p>
 <p><strong>File Completion.</strong> Documents must be uploaded to the compliance platform within the deadlines stated in the Operations &amp; Compliance Manual. Failure to upload required documents within the applicable deadline carries a fee of $49.00 per occurrence. Where a transaction file is not created or submitted until the date of closing or later, a fee of $199.00 applies. Total file completion fees under this paragraph shall not exceed $199.00 per transaction file.</p>
 <p><strong>Commission Disbursement Authorization.</strong> Where the Associate fails to submit all required closing documentation, including the Commission Disbursement Authorization, within fourteen (14) days following closing or the Company&rsquo;s receipt of commission funds, an administrative processing fee equal to twenty percent (20%) of the gross commission earned on that transaction applies and may be deducted from commission proceeds prior to disbursement. The Company shall notify the Associate in writing at least five (5) business days before assessing this fee, identifying the specific documents outstanding and the action required. No fee applies where the Associate has provided every document identified in the Company&rsquo;s written notice and the file remains incomplete for reasons outside the Associate&rsquo;s control. An Associate is entitled to one waiver of this fee at the Broker&rsquo;s discretion, upon signing an acknowledgment that this provision will be enforced on any subsequent occurrence.</p>
@@ -816,7 +844,7 @@ Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $
 <h3 id="s-68">&sect;68. BILLING &amp; FIRST-MONTH WAIVER ADDENDUM</h3>
 
 <h4 id="s-68-1">&sect;68.1 Recurring Fees</h4>
-<p>All recurring fees applicable to Associates, including the Monthly Brokerage Fee and the annual E&amp;O + Compliance Fee, are non-refundable. A Monthly Brokerage Fee charged for a billing cycle in which the Associate terminates is not refunded or prorated. The Monthly Brokerage Fee is due on the same day of each month as the Associate&rsquo;s onboarding date, beginning one month after onboarding. The Associate&rsquo;s first month is waived in full; no Monthly Brokerage Fee is charged for the first month following onboarding. Where the Associate&rsquo;s onboarding date is the thirty-first day of a month, the fee is due on the first day of the following month in any month having fewer than thirty-one days. The annual E&amp;O + Compliance Fee, in the amount set forth in Exhibit A, is due at the time of onboarding, and thereafter on the Associate&rsquo;s onboarding anniversary date each year. <strong>Only the E&amp;O + Compliance Fee is due at signup</strong>; the first month&rsquo;s Monthly Brokerage Fee is not charged at onboarding. All fee amounts and billing schedules are governed exclusively by Exhibit A: Commission Fee Schedule, as amended from time to time.</p>
+<p>All recurring fees applicable to Associates, including the Quarterly Brokerage Fee and the annual E&amp;O + Compliance Fee, are non-refundable. A Quarterly Brokerage Fee charged for a billing cycle in which the Associate terminates is not refunded or prorated. The Quarterly Brokerage Fee is due on the same day of the month as the Associate&rsquo;s onboarding date, every third month, beginning three months after onboarding. The Associate&rsquo;s first quarter is waived in full; no Quarterly Brokerage Fee is charged for the three months following onboarding. Where the Associate&rsquo;s onboarding day of the month does not occur in a month in which the fee falls due, the fee is due on the first day of the following month. The annual E&amp;O + Compliance Fee, in the amount set forth in Exhibit A, is due at the time of onboarding, and thereafter on the Associate&rsquo;s onboarding anniversary date each year. <strong>Only the E&amp;O + Compliance Fee is due at signup</strong>; the first quarter&rsquo;s Quarterly Brokerage Fee is not charged at onboarding. All fee amounts and billing schedules are governed exclusively by Exhibit A: Commission Fee Schedule, as amended from time to time.</p>
 
 <h4 id="s-68-2">&sect;68.2 Payment Enforcement</h4>
 <p>Failed payments may result in late payment fees, returned payment fees, and reactivation fees when returning from Inactive status, each as set forth in Exhibit A. Those fees apply on the terms stated in Exhibit A.</p>
