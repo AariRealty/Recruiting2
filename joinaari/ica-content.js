@@ -394,6 +394,7 @@ window.ICA_CONTENT = {
   <thead>
     <tr>
       <th>Plan</th>
+      <th>Initial</th>
       <th>Split</th>
       <th>Txn Fee (Residential)</th>
       <th>Txn Fee (Vacant Land)</th>
@@ -403,6 +404,7 @@ window.ICA_CONTENT = {
   <tbody>
     <tr>
       <td>Mentorship Path</td>
+<td style="width:88px;text-align:center;vertical-align:middle;"><span style="display:inline-block;width:66px;border-bottom:1px solid #0a0a0a;">&nbsp;</span></td>
       <td>75% / 25%</td>
       <td>$499</td>
       <td>$299</td>
@@ -410,6 +412,7 @@ window.ICA_CONTENT = {
     </tr>
     <tr>
       <td>Growth</td>
+<td style="width:88px;text-align:center;vertical-align:middle;"><span style="display:inline-block;width:66px;border-bottom:1px solid #0a0a0a;">&nbsp;</span></td>
       <td>85% / 15%</td>
       <td>$499</td>
       <td>$299</td>
@@ -417,6 +420,7 @@ window.ICA_CONTENT = {
     </tr>
     <tr>
       <td>Max</td>
+<td style="width:88px;text-align:center;vertical-align:middle;"><span style="display:inline-block;width:66px;border-bottom:1px solid #0a0a0a;">&nbsp;</span></td>
       <td>100%</td>
       <td>$499</td>
       <td>$299</td>
@@ -425,6 +429,7 @@ window.ICA_CONTENT = {
   </tbody>
 </table>
 </div>
+<p><strong>The Associate initials in the Initial column of the plan selected.</strong> The initial identifies the commission plan the Associate selects as their initial commission plan of record under this Section. A single initial is placed on one row only. The Associate does not initial the other two rows.</p>
 
 <h4 id="s-38-2">&sect;38.2 Commission Plan Selection</h4>
 <p>At onboarding, the Associate selects one commission plan as their initial plan of record: Mentorship Path (75% Associate / 25% Company) at $59/month, Aari Growth (85% / 15%) at $79/month, or Aari Max (100%) at $99/month. The selected plan sets the Associate&rsquo;s split and Monthly Brokerage Fee under Section 41.1. Selection is subject to Broker review and acceptance; the Broker may place a newer or higher-risk Associate on the Mentorship Path in furtherance of the Broker&rsquo;s supervisory obligations under Florida law. The $199 annual E&amp;O + Compliance Fee applies to all plans. The selected plan remains in effect until changed under Section 38.3.</p>
