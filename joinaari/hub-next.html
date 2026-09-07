@@ -12883,6 +12883,12 @@ function wireResources(){
   var SB_URL='https://fnlrgmuvtgwzjsihqxcn.supabase.co';
   var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y';
 
+  if(typeof supabase==='undefined'){
+    var ld=document.getElementById('auth-loading');
+    if(ld){ld.innerHTML='<div style="text-align:center;color:#c9b492;font-family:Montserrat,sans-serif"><p style="font-size:14px;margin-bottom:12px">Unable to connect.</p><button onclick="location.reload()" style="background:#c9b492;color:#0a0a0a;border:none;border-radius:50px;padding:12px 28px;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;font-family:inherit">Retry</button></div>';}
+    return;
+  }
+
   var sb=supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true}});
   window.__sb=sb;
 
@@ -12974,15 +12980,17 @@ function wireResources(){
       });
   }
 
-  // Fallback: if loading screen stays for more than 6s, show login
-  var _loadingTimeout=setTimeout(function(){ showLogin(); },6000);
+  // Fallback: if loading screen stays visible for more than 8s, force login
+  var _loadingTimeout=setTimeout(function(){
+    if(!$loading.hidden){ showLogin(); }
+  },8000);
 
   // Check for existing session on load
   sb.auth.getSession().then(function(res){
-    clearTimeout(_loadingTimeout);
     if(res.data&&res.data.session){
       resolveRole(res.data.session.user);
     } else {
+      clearTimeout(_loadingTimeout);
       showLogin();
     }
   }).catch(function(){
