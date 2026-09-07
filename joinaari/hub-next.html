@@ -12974,14 +12974,19 @@ function wireResources(){
       });
   }
 
+  // Fallback: if loading screen stays for more than 6s, show login
+  var _loadingTimeout=setTimeout(function(){ showLogin(); },6000);
+
   // Check for existing session on load
   sb.auth.getSession().then(function(res){
+    clearTimeout(_loadingTimeout);
     if(res.data&&res.data.session){
       resolveRole(res.data.session.user);
     } else {
       showLogin();
     }
   }).catch(function(){
+    clearTimeout(_loadingTimeout);
     showLogin();
   });
 
