@@ -594,6 +594,15 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
 
 .cmp-scan{position:absolute;left:0;right:0;height:130px;top:-130px;background:linear-gradient(180deg,transparent,rgba(138,130,122,.11),transparent);pointer-events:none;z-index:1}
 .cmp>*:not(.cmp-scan){position:relative;z-index:2}
+.ref-sec{background:#fff;padding:56px 44px}
+.ref-card{max-width:780px;margin:0 auto;background:#0a0a0a;border-radius:20px;padding:48px 44px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.ref-card .ref-eye{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.45)}
+.ref-card h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.4vw,40px);font-weight:500;line-height:1.06;color:#fff;margin:10px 0 0}
+.ref-card h2 em{font-style:italic;color:#cfc7bb}
+.ref-card p{font-size:14px;color:rgba(255,255,255,.65);line-height:1.65;margin:14px 0 0;max-width:440px}
+.ref-cta{display:inline-flex;align-items:center;gap:9px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;background:#f5f0e8;color:#0a0a0a;border-radius:50px;padding:16px 30px;text-decoration:none;transition:transform .2s;white-space:nowrap;align-self:center}
+.ref-cta:hover{transform:translateY(-2px)}
+@media(max-width:900px){.ref-sec{padding:40px 20px}.ref-card{grid-template-columns:1fr;gap:20px;padding:32px 24px;text-align:center}.ref-card p{margin-left:auto;margin-right:auto}.ref-cta{justify-content:center}}
 @keyframes cmpscan{from{top:-130px}to{top:100%}}
 @keyframes cmpUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes cmpPop{from{transform:scale(0)}to{transform:scale(1)}}
@@ -925,6 +934,16 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <details class="faq-item"><summary>Is Aari Realty a franchise?<span class="pm">+</span></summary><div class="ans">No. Aari Realty is an independent brokerage, broker-owned by Marlenyi Paredes. No franchise fees, no corporate layers, no revenue share to a parent company.</div></details>
     <details class="faq-item"><summary>Can I leave at any time?<span class="pm">+</span></summary><div class="ans">Yes. Either party can terminate at any time, with or without cause, upon written notice. No long-term contracts, no exit penalties. You have five calendar days to return company property and update your profiles.</div></details>
     <details class="faq-item"><summary>How does E and O insurance work?<span class="pm">+</span></summary><div class="ans">The broker maintains an E and O policy covering professional services. You are included at no extra cost beyond the $199 annual fee. If a claim arises from your conduct, you are responsible for the deductible. Report potential claims within 24 hours.</div></details>
+  </div>
+</section>
+<section class="ref-sec" id="referrals">
+  <div class="ref-card">
+    <div>
+      <span class="ref-eye">Not hanging your license?</span>
+      <h2>Send referrals. <em>Still get paid.</em></h2>
+      <p>You have a license and a network. Aari Referrals lets you earn on the deals you send &mdash; no monthly fee, no active listing required. Just a check when the deal closes.</p>
+    </div>
+    <a class="ref-cta" href="https://aaritransactions.com/aari-referrals.html" target="_blank" rel="noopener">Learn more &rarr;</a>
   </div>
 </section>
 <svg class="seamwave" viewBox="0 0 1200 56" preserveAspectRatio="none"><path d="M0,28 C280,56 520,4 720,26 C920,48 1060,18 1200,32 L1200,56 L0,56 Z" fill="#f5f0e8"/></svg>
