@@ -2,6 +2,14 @@
   "buildCommand": "",
   "outputDirectory": ".",
   "framework": null,
+  "headers": [
+    {
+      "source": "/hub-next.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    }
+  ],
   "functions": {
     "api/parse-license.js": {
       "maxDuration": 30
