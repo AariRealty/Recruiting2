@@ -2,7 +2,11 @@ const { Resend } = require('resend');
 
 const SIGN_FN_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-sign-ica-web';
 const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
-const WEB_TOKEN = 'aari-web-sign-b7Q2xM9';
+// Shared secret for the signing function. No default: the literal that used to sit here
+// is in git history and anyone holding it could create a signature of record against any
+// email address, so it has to stop working rather than be swapped in place. Unset means
+// this handler refuses and says so.
+const WEB_TOKEN = process.env.AARI_WEB_SIGN_TOKEN || '';
 
 // Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
 // executed-ICA emails send from aarirealty.com via that key. Until then, fall back to the shared
@@ -23,6 +27,9 @@ function firstName(f) {
 module.exports = async function handler(req, res) {
   if (!SUPABASE_ANON) {
     return res.status(500).json({ error: 'Server configuration error.' });
+  }
+  if (!WEB_TOKEN) {
+    return res.status(503).json({ error: 'AARI_WEB_SIGN_TOKEN is not set in this environment. Set it here and in the Supabase edge function secrets, same value in both, then retry.' });
   }
 
   const allowed = ['https://joinaari.com', 'https://joinaari.vercel.app'];
