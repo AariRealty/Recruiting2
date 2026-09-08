@@ -12909,19 +12909,31 @@ function wireResources(){
   var _pendingMember=null;
   var _splashStart=Date.now();
   var _minSplash=4000;
+  var _pendingAction=null;
 
   function hideAll(){
     $loading.hidden=true; $login.hidden=true; $cpScreen.hidden=true; $hub.hidden=true;
   }
 
-  function showLogin(errEl,errMsg){
+  function _afterSplash(fn){
     var elapsed=Date.now()-_splashStart;
     var wait=Math.max(0,_minSplash-elapsed);
-    setTimeout(function(){
+    if(wait>0){setTimeout(fn,wait);}else{fn();}
+  }
+
+  function showLogin(errEl,errMsg){
+    _afterSplash(function(){
       hideAll(); $login.hidden=false;
       document.body.style.background='#000';
       if(errEl&&errMsg){errEl.textContent=errMsg;errEl.hidden=false;}
-    },wait);
+    });
+  }
+
+  function showSplashThenHub(member){
+    hideAll(); $loading.hidden=false;
+    var logo=$loading.querySelector('.al-logo');
+    if(logo){logo.style.animation='none';void logo.offsetHeight;logo.style.animation='alZoom 3s ease-in-out forwards';}
+    setTimeout(function(){ showHub(member); },2500);
   }
 
   function showChangePass(member){
@@ -12979,7 +12991,11 @@ function wireResources(){
           showChangePass(res.data);
           return;
         }
-        showHub(res.data);
+        if(_pendingAction==='hub'){
+          _afterSplash(function(){ showHub(res.data); });
+        } else {
+          showSplashThenHub(res.data);
+        }
       })
       .catch(function(){
         sb.auth.signOut();
@@ -12995,6 +13011,7 @@ function wireResources(){
   // Check for existing session on load
   sb.auth.getSession().then(function(res){
     if(res.data&&res.data.session){
+      _pendingAction='hub';
       resolveRole(res.data.session.user);
     } else {
       clearTimeout(_loadingTimeout);
@@ -13024,6 +13041,8 @@ function wireResources(){
           showErr($loginErr,msg);
           return;
         }
+        _pendingAction='login';
+        hideAll(); $loading.hidden=false;
         resolveRole(res.data.user);
       })
       .catch(function(err){
