@@ -4224,13 +4224,13 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
   // is last_login_at; "not activated" means activated_at is null and the
   // account still carries must_change_password, so the invite was never taken up.
   var ROSTER=[
-    ['Marlenyi L. Paredes','Broker','100% Max &middot; exempt','1.00',2,9675,'Aug 15','ok'],
-    ['Milennys Vargas','Agent &middot; TC','100% Max','1.00',4,10968,'never','never'],
+    ['Marlenyi L. Paredes','Broker','100% Max &middot; exempt','1.00',3,19275,'Aug 15','ok'],
+    ['Milennys Vargas','Agent &middot; TC','100% Max','1.00',6,29890,'never','never'],
     ['Eileen Hernandez','Agent &middot; TC','70 / 30','0.70',0,0,'Aug 5','ok'],
     ['Alejandro Paredes','Agent','100% Max','1.00',0,0,'never','never'],
     ['Alied Machuca','Agent','80 / 20','0.80',1,960,'never','pending'],
-    ['Flavia Aguilera','Agent','80 / 20','0.80',1,747,'never','pending'],
-    ['Roosevelt Sanchez','Agent','80 / 20','0.80',1,0,'never','pending'],
+    ['Flavia Aguilera','Agent','80 / 20','0.80',2,747,'never','pending'],
+    ['Roosevelt Sanchez','Agent','80 / 20','0.80',2,2800,'never','pending'],
     ['Ana Puentes','Agent &middot; suspended','85 / 15','0.85',1,3125,'never','susp']
   ];
   var SEATBADGE={ok:['chip gh','active'],never:['chip red','never signed in'],
@@ -4239,24 +4239,27 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
   // All 56 rows. status counts match the Hub's own chips: 3 active,
   // 52 closed, 1 terminated. The terminated one is a legacy draft.
   var TX_ACTIVE=[
-    ['816 Frederick Reid St E, Lehigh Acres','draft','Marlenyi L. Paredes','buyer','Aug 14',null,
-     'Initial deposit (escrow) &middot; Jul 28 &middot; 18 days past due','Mileydi Perez &middot; FR/BAR As Is'],
-    ['4700 SW 32nd Ave, Naples','submitted','Milennys Vargas','seller','Aug 5',17877,'',''],
-    ['1502 Rush Ave, Lehigh Acres','submitted','Flavia Aguilera','buyer','Aug 17',0,'','']
+    ['1219 Hibiscus Ave, Lehigh Acres','pending','Alied Machuca','listing','Sep 1',10470,'','Under contract &middot; Reyes Enterprises Inc'],
+    ['3000 12th St W, Lehigh Acres','pending','Alied Machuca','buyer','Sep 7',900,'','JMV Builders LLC &middot; land purchase']
   ];
   var TX_TERMINATED=[
     ['223 Lane Ave, Jacksonville','draft','Marlenyi L. Paredes','buyer','Apr 29',null,'','Legacy import from Cloze']
   ];
   var CLOSED=[
+    ['1502 Rush Ave, Lehigh Acres','Flavia Aguilera','buyer','Aug 17',0],
+    ['816 Frederick Reid St E, Lehigh Acres','Marlenyi L. Paredes','buyer','Aug 14',9600],
+    ['4700 SW 32nd Ave, Naples','Milennys Vargas','seller','Aug 5',17877],
+    ['44494 Diamond Trl, Punta Gorda','Roosevelt Sanchez','rental','Jul 31',2200],
     ['NW 308th St, Okeechobee','Marlenyi L. Paredes','seller','Jul 22',300],
     ['1607 Roosevelt Ave, Lehigh Acres','Milennys Vargas','buyer','Jul 17',1000],
-    ['11162 Sunset Preserve Dr, Fort Myers','Roosevelt Sanchez','tenant','Jul 15',0],
+    ['11162 Sunset Preserve Dr, Fort Myers','Roosevelt Sanchez','tenant','Jul 15',600],
     ['19183 NW 288th St, Okeechobee','Milennys Vargas','seller','Jul 14',1350],
     ['1514 Wagner Ave, Lehigh Acres','Flavia Aguilera','buyer','Jun 30',747],
     ['3222 Deason Ave, Jacksonville','Milennys Vargas','buyer','Jun 18',8398],
     ['7896 1st Place, Labelle','Ana Puentes','buyer','May 11',3125],
-    ['1109 Congress Ave, Lehigh Acres','Marlenyi L. Paredes','seller','Apr 28',9375],
+    ['1109 Congress Ave, Lehigh Acres','Marlenyi L. Paredes','seller','Apr 27',9375],
     ['4917 2nd St W, Lehigh Acres','Alied Machuca','buyer','Apr 27',960],
+    ['425 Fawnwood Ave, Lake Placid','Milennys Vargas','seller','Apr 24',1045],
     ['425 Fawnwood Ave, Lake Placid','Milennys Vargas','buyer','Apr 24',220]
   ];
   // realty_listings as at 21 Aug 2026. All seven now carry an agent_id; the
@@ -4293,7 +4296,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
             '<span class="num">'+r[6]+'</span>',
             '<span class="'+b[0]+'">'+b[1]+'</span>'
           ]); }))+
-        '<div class="note">Closed and GCI count company files only; the 42 legacy imports are excluded.</div></div>'+
+        '<div class="note">Closed and GCI count 15 company files only; the 42 legacy imports are excluded.</div></div>'+
 
       '<div class="card dark" style="grid-area:1/4/3/5">'+head('Needs attention')+
         '<div class="fill">'+
@@ -4305,12 +4308,12 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 
       '<div class="card warm" style="grid-area:2/1/3/2">'+head('Production split')+
         '<div class="fill" style="display:flex;flex-direction:column;justify-content:center">'+
-        lr('Milennys Vargas','4 files',100,'$10,968')+
-        lr('Marlenyi L. Paredes','2 files',88,'$9,675')+
-        lr('Ana Puentes','1 file &middot; suspended',28,'$3,125')+
-        lr('Alied Machuca','1 file',9,'$960')+
-        lr('Flavia Aguilera','1 file',7,'$747')+
-        lr('Roosevelt Sanchez','1 file &middot; a lease',1,'$0')+
+        lr('Milennys Vargas','6 files',100,'$29,890')+
+        lr('Marlenyi L. Paredes','3 files',65,'$19,275')+
+        lr('Ana Puentes','1 file &middot; suspended',10,'$3,125')+
+        lr('Roosevelt Sanchez','2 files',9,'$2,800')+
+        lr('Alied Machuca','1 file',3,'$960')+
+        lr('Flavia Aguilera','2 files',2,'$747')+
         '</div><div class="note">Every closed file has an agent. Four of them resolve through realty_members rather than agents.</div></div>'+
 
       '<div class="card" style="grid-area:2/2/3/3">'+head('Commission plans')+
@@ -4338,15 +4341,15 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
   function txTable(){
     var rows=[], note='';
     if(txFilter==='active'){ rows=TX_ACTIVE.map(function(r){return txRow(r,false)});
-      note='One is a draft that never got submitted and is already past its closing date, and its escrow deadline went by on Jul 28.'; }
+      note='Both files are from the SkySlope import, scheduled to close in September.'; }
     else if(txFilter==='closed'){ rows=CLOSED.map(function(r){return txRow(r,true)});
-      note='Ten company files worth $25,475. The other 42 closed rows are legacy imports carried in under Marlenyi and are not listed here.'; }
+      note='Fifteen company files worth $56,797. The other 42 closed rows are legacy imports carried in under Marlenyi and are not listed here.'; }
     else if(txFilter==='terminated'){ rows=TX_TERMINATED.map(function(r){return txRow(r,false)});
       note='A legacy draft from the Cloze import that was never worked.'; }
     else { rows=TX_ACTIVE.map(function(r){return txRow(r,false)})
              .concat(TX_TERMINATED.map(function(r){return txRow(r,false)}))
              .concat(CLOSED.map(function(r){return txRow(r,true)}));
-      note='All 56 rows less the 42 legacy closings, which are summarised rather than listed.'; }
+      note='All 60 rows less the 42 legacy closings, which are summarised rather than listed.'; }
     return table(['Property','Status','Agent','Side','Closing','GCI'],rows)+
       '<div class="note">'+note+'</div>';
   }
@@ -4357,8 +4360,8 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
         '<div class="ch"><div class="ct">Transactions</div>'+
         '<span class="chip gh">Every file, next deadline first</span></div>'+
         '<div class="txsegs" role="group" aria-label="Filter transactions">'+
-          seg('active','Active',3)+seg('closed','Closed',52)+
-          seg('terminated','Terminated',1)+seg('all','All',56)+'</div>'+
+          seg('active','Active',2)+seg('closed','Closed',57)+
+          seg('terminated','Terminated',1)+seg('all','All',60)+'</div>'+
         '<div id="txbody">'+txTable()+'</div></div>'+
 
       '<div class="card warm" style="grid-area:2/1/3/3">'+head('Active listings','<span class="chip gh">7 live</span>')+
@@ -4371,16 +4374,16 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 
       '<div class="card dark" style="grid-area:2/3/3/5">'+head('What the file list is telling you')+
         '<div class="fill">'+
-        flag('816 Frederick Reid is 18 days past its escrow deadline','Initial deposit was due Jul 28. The file is still a draft, its closing date of Aug 14 has passed, and no commission is recorded.')+
-        flag('Two submitted files carry no contract type','4700 SW 32nd Ave and 1502 Rush Ave both show no contract type, so nothing is driving their deadlines.')+
-        flag('42 of the 52 closings are legacy imports','They all sit under your name from the Cloze migration. Ten files are genuine company production.',1)+
+        flag('Two SkySlope files pending review','1219 Hibiscus Ave closes Sep 1, 3000 12th St W closes Sep 7. Both are assigned to Alied Machuca.')+
+        flag('All three August closings are now in the ledger','816 Frederick Reid, 4700 SW 32nd Ave and 1502 Rush Ave all closed and paid.')+
+        flag('42 of the 57 closings are legacy imports','They all sit under your name from the Cloze migration. Fifteen files are genuine company production.',1)+
         '</div></div>'+
       txBrokerCard();
   }
 
   function pageMoney(){
     return '<div class="card" style="grid-area:1/1/2/2">'+head('Closed GCI')+
-        '<div class="fill"></div><div class="big">$25,475</div><div class="bigsub">10 company files this year</div></div>'+
+        '<div class="fill"></div><div class="big">$56,797</div><div class="bigsub">15 company files this year</div></div>'+
       '<div class="card" style="grid-area:1/2/2/3">'+head('Monthly overhead')+
         '<div class="fill"></div><div class="big">$1,459</div><div class="bigsub">12 active recurring expenses</div></div>'+
       '<div class="card warm" style="grid-area:1/3/2/4">'+head('Open invoices')+
@@ -9857,7 +9860,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
   var NA='<div class="bignum"><div class="v" data-count="9675" data-money="1">$0</div><div class="l">Earned</div></div>'+
          '<div class="bignum"><div class="v" data-count="2">0</div><div class="l">Closed</div></div>'+
          '<div class="bignum"><div class="v" data-count="1">0</div><div class="l">Listed</div></div>';
-  var FB='Live from the Aari database: 7 active seats plus one suspended, 4 files in pipeline totalling $1,395,799, and 10 genuine closings, the 52 paid rows include 42 legacy imports. 2 files awaiting review, 5 live announcements. Classes, calendar entries, goal target and execution splits are illustrative.';
+  var FB='Live from the Aari database: 7 active seats plus one suspended, 2 files in pipeline totalling $379,000, and 15 genuine closings, the 57 paid rows include 42 legacy imports. 2 files awaiting review, 5 live announcements. Classes, calendar entries, goal target and execution splits are illustrative.';
   var FA='Your own producer side, live from the Aari database: 2 closed files worth $9,675, one active listing at $345,000, one unsubmitted draft, 207 contacts, on 100% Max fee exempt. The income goal and the classes are illustrative.';
 
   var grid=document.getElementById('grid'),nums=document.getElementById('nums'),greet=document.getElementById('greet'),
@@ -11595,15 +11598,15 @@ function wireResources(){
     return bcard('1/1/2/3','Where the company stands','<span class="chip gh">live</span>',
       '<div class="fill">'+
       sr('Active agents','chip dk','6')+
-      sr('Files open','chip gh','3 &middot; all past their date')+
+      sr('Files open','chip gh','2 &middot; both closing in Sep')+
       sr('Listings live','chip gh','7 &middot; $1,165,200')+
-      sr('Closings this year','chip gh','10 genuine')+
+      sr('Closings this year','chip gh','15 genuine')+
       sr('Monthly overhead','chip red','$1,677.68')+
       sr('Unpaid invoices','chip red','$245.00')+
       '</div>','Every figure here is a count off the tables the other panels read. Nothing on this card is typed in.')+
     bcard('1/3/2/5','What needs you today','<span class="chip red">6</span>',
       '<div class="fill">'+
-      flag('Three files are past their closing date','816 Frederick Reid (Aug 14), 4700 SW 32nd Ave (Aug 5) and 1502 Rush Ave (Aug 17) are all still open.')+
+      flag('Two files closing in September','1219 Hibiscus Ave (Sep 1) and 3000 12th St W (Sep 7), both under Alied Machuca from the SkySlope import.')+
       flag('Nobody has an anniversary date','start_date is null on all seven, so the plan-selection prompt cannot fire.')+
       flag('Four roster emails are wrong','Roosevelt, Alied, Flavia and Alejandro. Anything the Hub sends goes nowhere.',1)+
       flag('Odalis Mora is not on the roster','She has an invoice and an email address, but no realty_members row.',1)+
@@ -11611,7 +11614,7 @@ function wireResources(){
     bcard('2/1/3/5','The twelve broker surfaces','',
       '<div class="band">'+
       [['Roster Command','8 members'],['Control Panel','account creation'],['Agent Inventory','7 listings'],
-       ['Deadline Radar','695 rows'],['Team Production','56 files'],['Transaction Review','3 open'],
+       ['Deadline Radar','695 rows'],['Team Production','60 files'],['Transaction Review','2 open'],
        ['Recruits','empty'],['Onboarding','empty'],['Blog Posts','1 post'],
        ['Email','9 leads'],['Team Email','1 sent'],['Revenue and Fees','$1,677.68/mo']].map(function(x){
         return '<div class="stat"><div class="sv">'+x[0]+'</div><div class="sl">'+x[1]+'</div></div>'; }).join('')+
