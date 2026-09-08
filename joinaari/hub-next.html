@@ -12907,14 +12907,21 @@ function wireResources(){
   var $cpBtn=document.getElementById('cp-submit');
 
   var _pendingMember=null;
+  var _splashStart=Date.now();
+  var _minSplash=4000;
 
   function hideAll(){
     $loading.hidden=true; $login.hidden=true; $cpScreen.hidden=true; $hub.hidden=true;
   }
 
-  function showLogin(){
-    hideAll(); $login.hidden=false;
-    document.body.style.background='#000';
+  function showLogin(errEl,errMsg){
+    var elapsed=Date.now()-_splashStart;
+    var wait=Math.max(0,_minSplash-elapsed);
+    setTimeout(function(){
+      hideAll(); $login.hidden=false;
+      document.body.style.background='#000';
+      if(errEl&&errMsg){errEl.textContent=errMsg;errEl.hidden=false;}
+    },wait);
   }
 
   function showChangePass(member){
@@ -12960,14 +12967,12 @@ function wireResources(){
       .then(function(res){
         if(res.error||!res.data||!res.data.role){
           sb.auth.signOut();
-          showLogin();
-          showErr($loginErr,'Your account is not registered with Aari Realty. Contact the broker.');
+          showLogin($loginErr,'Your account is not registered with Aari Realty. Contact the broker.');
           return;
         }
         if(res.data.status==='suspended'){
           sb.auth.signOut();
-          showLogin();
-          showErr($loginErr,'Your account has been suspended. Contact the broker.');
+          showLogin($loginErr,'Your account has been suspended. Contact the broker.');
           return;
         }
         if(res.data.must_change_password){
@@ -12978,8 +12983,7 @@ function wireResources(){
       })
       .catch(function(){
         sb.auth.signOut();
-        showLogin();
-        showErr($loginErr,'Unable to verify your account. Try again.');
+        showLogin($loginErr,'Unable to verify your account. Try again.');
       });
   }
 
