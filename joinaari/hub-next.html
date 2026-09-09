@@ -11,13 +11,13 @@
 *{box-sizing:border-box;margin:0;padding:0}
 [hidden]{display:none!important}
 body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-#auth-loading{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000;flex-direction:column;overflow:hidden}
+#auth-loading{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;flex-direction:column;overflow:hidden}
 #auth-loading .al-logo{width:72vw;max-width:360px;height:auto;opacity:0;transform:scale(.15);animation:alZoom 5s ease-in-out forwards}
 #auth-loading .al-spin{width:18px;height:18px;border:1.5px solid rgba(201,180,146,.12);border-top-color:rgba(201,180,146,.45);border-radius:50%;margin-top:32px;opacity:0;animation:alSpin .8s linear infinite,alFadeIn .4s ease 4.8s forwards}
 @keyframes alZoom{from{opacity:0;transform:scale(.15)}to{opacity:1;transform:scale(1)}}
 @keyframes alSpin{to{transform:rotate(360deg)}}
 @keyframes alFadeIn{to{opacity:1}}
-#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000;padding:20px}
+#login-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;padding:20px;overflow-y:auto}
 .login-card{background:#fff;border-radius:16px;padding:48px 40px 40px;width:100%;max-width:380px;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.4)}
 .login-card h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:26px;font-weight:500;color:#141210;margin-bottom:6px}
 .login-card .login-sub{font-size:13px;color:#8a8378;margin-bottom:28px}
@@ -31,7 +31,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 .login-btn:hover{opacity:.85}
 .login-btn:disabled{opacity:.4;cursor:not-allowed}
 #login-error,#cp-error{margin-top:16px;padding:12px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;color:#B04040;font-size:13px;text-align:left;line-height:1.5}
-#change-pass-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:#000;padding:20px}
+#change-pass-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:#000;padding:20px;overflow-y:auto}
 .cp-card{background:#fff;border-radius:16px;padding:48px 40px 40px;width:100%;max-width:380px;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,.4)}
 .cp-card h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:24px;font-weight:500;color:#141210;margin-bottom:6px}
 .cp-card .cp-sub{font-size:13px;color:#8a8378;margin-bottom:28px;line-height:1.5}
