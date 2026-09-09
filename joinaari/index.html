@@ -30,7 +30,7 @@
 .wave-div{line-height:0;margin:0;position:relative;z-index:3}
 .wave-div svg{width:100%;height:64px;display:block}
 @media(max-width:640px){.wave-div svg{height:38px}}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden}
 body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;line-height:1.6}
 a{color:inherit;text-decoration:none}
 nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:15px 44px;display:flex;justify-content:space-between;align-items:center}
@@ -432,13 +432,13 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   .nav-menu-login{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
   @keyframes navPulse{0%,100%{box-shadow:0 0 0 0 rgba(20,18,16,0.4)}50%{box-shadow:0 0 0 8px rgba(20,18,16,0)}}
   .nav-right .btn{animation:navPulse 1.6s ease-in-out 4}
-  .hero{padding:40px 20px 48px;text-align:center}
-  .h1{text-align:center}
-  .sub{margin-left:auto;margin-right:auto;text-align:center}
-  .cost{text-align:center!important;border-left:none!important;padding-left:0!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important}
+  .hero{padding:28px 20px 36px;text-align:center}
+  .h1{text-align:center;font-size:clamp(34px,9vw,48px)}
+  .sub{margin-left:auto;margin-right:auto;text-align:center;margin-top:14px;margin-bottom:18px;font-size:14px}
+  .cost{text-align:center!important;border-left:none!important;padding-left:0!important;max-width:none!important;margin-left:auto!important;margin-right:auto!important;margin-top:12px!important;margin-bottom:18px!important;font-size:13px!important}
   .cta-row{justify-content:center}
   .cta-row .btn-dark{display:inline-flex}
-  .grid{grid-template-columns:1fr;gap:34px}
+  .grid{grid-template-columns:1fr;gap:22px}
   .compare{padding:60px 20px}.compare-grid{grid-template-columns:1fr;gap:16px}
   .how{padding:56px 20px 72px}
   .b5-grid{grid-template-columns:1fr;gap:26px}
@@ -658,7 +658,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     <a class="nav-link" href="#faq">FAQ</a>
     <a class="nav-link" href="/ica-preview.html">ICA</a>
     <a class="nav-link" href="/blog">Blog</a>
-    <a class="nav-link nav-login" href="/hub-next.html">Log in</a>
+    <a class="nav-link nav-login" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in</a>
     <span class="nav-phone">239.688.1770</span>
     <a class="nav-chat-pill" href="sms:2396881771">Chat</a>
     <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
@@ -679,7 +679,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   </div>
   <div class="nav-menu-bottom">
     <a class="nav-menu-phone" href="tel:2396881770">239.688.1770</a>
-    <a class="nav-menu-login" href="/hub-next.html">Log in &rarr;</a>
+    <a class="nav-menu-login" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in &rarr;</a>
   </div>
 </div>
 <section class="hero">
@@ -1200,7 +1200,7 @@ var msgs=document.getElementById('abotMsgs');
 var input=document.getElementById('abotInput');
 var closeBtn=document.getElementById('abotClose');
 var sendBtn=document.getElementById('abotSend');
-function addMsg(text,type){var d=document.createElement('div');d.className='abot-msg '+type;d.innerHTML=text;msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
+function addMsg(text,type){var d=document.createElement('div');d.className='abot-msg '+type;if(type==='user'){d.textContent=text;}else{d.innerHTML=text;}msgs.appendChild(d);msgs.scrollTop=msgs.scrollHeight;}
 function addChips(chips){var wrap=document.createElement('div');wrap.className='abot-chips';chips.forEach(function(c){var b=document.createElement('button');b.className='abot-chip';b.textContent=c;b.addEventListener('click',function(){handleQ(c);});wrap.appendChild(b);});msgs.appendChild(wrap);msgs.scrollTop=msgs.scrollHeight;}
 function findAnswer(q){var tokens=q.toLowerCase().replace(/[^a-z0-9\s$%]/g,'').split(/\s+/).filter(function(t){return t.length>1;});var best=null,bestScore=0;QA.forEach(function(item){var score=0;tokens.forEach(function(t){item.k.forEach(function(k){if(k===t)score+=3;else if(k.indexOf(t)>-1||t.indexOf(k)>-1)score+=1;});});if(score>bestScore){bestScore=score;best=item;}});if(bestScore>=3)return best.a;return null;}
 var missCount=0;var collectStep=0;var visitorName=’’;var visitorEmail=’’;
@@ -1218,7 +1218,7 @@ var CONVO=[
 ];
 function checkConvo(q,name){for(var i=0;i<CONVO.length;i++){if(CONVO[i].r.test(q.trim()))return CONVO[i].a(name);}return null;}
 function getSuggestions(q){var tokens=q.toLowerCase().replace(/[^a-z0-9\s$%]/g,’’).split(/\s+/).filter(function(t){return t.length>1;});var scored=[];QA.forEach(function(item){var score=0;tokens.forEach(function(t){item.k.forEach(function(k){if(k===t)score+=3;else if(k.indexOf(t)>-1||t.indexOf(k)>-1)score+=1;});});if(score>0)scored.push({q:item.q,score:score});});scored.sort(function(a,b){return b.score-a.score;});return scored.slice(0,4).map(function(s){return s.q;});}
-function handleQ(q){if(q===’Text Marlenyi directly’){addMsg(q,’user’);setTimeout(function(){addMsg("Opening a text to Marlenyi now…",’bot’);setTimeout(function(){window.location.href=’sms:239.688.1771’;},600);},300);return;}if(collectStep===0){addMsg(q,’user’);input.value=’’;if(GREETING.test(q.trim())){setTimeout(function(){addMsg("Hey there! Welcome to Aari Realty. What’s your first name?",’bot’);},400);return;}visitorName=q.trim();collectStep=1;setTimeout(function(){addMsg("Nice to meet you, "+escapeHtml(visitorName)+"! Drop your email below… just so we can follow up if needed. By sharing your info, you agree to our <a href=\"/privacy.html\" target=\"_blank\">Privacy Policy</a>.",’bot’);},400);return;}if(collectStep===1){addMsg(q,’user’);input.value=’’;if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(q.trim())){setTimeout(function(){addMsg("Hmm, that doesn’t look like an email. Mind trying again?",’bot’);},400);return;}visitorEmail=q.trim();collectStep=2;setTimeout(function(){addMsg("Perfect, "+escapeHtml(visitorName)+". Got questions about joining? Splits, fees, mentorship… the whole deal. Ask away.",’bot’);addChips(["What are the splits?","How much does it cost?","Tell me about Mentorship","How fast can I join?"]);},400);return;}addMsg(q,’user’);input.value=’’;setTimeout(function(){var convo=checkConvo(q,visitorName);if(convo){addMsg(convo,’bot’);return;}var ans=findAnswer(q);if(ans){missCount=0;addMsg(ans,’bot’);}else{missCount++;if(missCount>=3){missCount=0;var history=[];msgs.querySelectorAll(‘.abot-msg’).forEach(function(m){history.push({text:m.textContent,type:m.classList.contains(‘user’)?’user’:’bot’});});fetch(‘/api/chatbot-escalation’,{method:’POST’,headers:{‘Content-Type’:’application/json’},body:JSON.stringify({contact:visitorName+’ (‘+visitorEmail+’)’,messages:history,page:window.location.pathname})}).catch(function(){});addMsg("Real talk, "+escapeHtml(visitorName)+"… I’m clearly not the right one to answer this. I just forwarded our whole conversation to Marlenyi. She’s the broker, she’ll know. Expect to hear from her at "+escapeHtml(visitorEmail)+" pretty quickly.",’bot’);addChips(["Text Marlenyi directly"]);}else if(missCount===2){addMsg("I’m striking out here and I’d rather be honest about it than waste your time. Here are the big topics I actually know well, or you can go straight to the source.",’bot’);addChips(["What are the splits?","How much does it cost?","How fast can I join?","Text Marlenyi directly"]);}else{var suggestions=getSuggestions(q);if(suggestions.length>0){addMsg("I’ll be straight with you… I don’t have a great answer for that one. But I might be able to help with one of these?",’bot’);addChips(suggestions);}else{addMsg("That’s outside what I know, and I’d rather tell you that than make something up. Here’s what I <em>can</em> help with, or just call us at <b>239.688.1770</b>.",’bot’);addChips(["What are the splits?","How much does it cost?","Tell me about Mentorship","How fast can I join?"]);}}}},400);}
+function handleQ(q){if(q===’Text Marlenyi directly’){addMsg(q,’user’);setTimeout(function(){addMsg("Opening a text to Marlenyi now…",’bot’);setTimeout(function(){window.location.href=’sms:239.688.1771’;},600);},300);return;}if(collectStep===0){addMsg(q,’user’);input.value=’’;if(GREETING.test(q.trim())){setTimeout(function(){addMsg("Hey there! Welcome to Aari Realty. What’s your first name?",’bot’);},400);return;}visitorName=q.trim();collectStep=1;setTimeout(function(){addMsg("Nice to meet you, "+escapeHtml(visitorName)+"! Drop your email below… just so we can follow up if needed. By sharing your info, you agree to our <a href=\"/privacy.html\" target=\"_blank\">Privacy Policy</a>.",’bot’);},400);return;}if(collectStep===1){addMsg(q,’user’);input.value=’’;if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(q.trim())){setTimeout(function(){addMsg("Hmm, that doesn’t look like an email. Mind trying again?",’bot’);},400);return;}visitorEmail=q.trim();collectStep=2;setTimeout(function(){addMsg("Perfect, "+escapeHtml(visitorName)+". Got questions about joining? Splits, fees, mentorship… the whole deal. Ask away.",’bot’);addChips(["What are the splits?","How much does it cost?","Tell me about Mentorship","How fast can I join?"]);},400);return;}addMsg(q,’user’);input.value=’’;setTimeout(function(){var convo=checkConvo(q,visitorName);if(convo){addMsg(convo,’bot’);return;}var ans=findAnswer(q);if(ans){missCount=0;addMsg(ans,’bot’);}else{missCount++;if(missCount>=3){missCount=0;var history=[];msgs.querySelectorAll(‘.abot-msg’).forEach(function(m){history.push({text:m.textContent,type:m.classList.contains(‘user’)?’user’:’bot’});});fetch(‘/api/chatbot-escalation’,{method:’POST’,headers:{‘Content-Type’:’application/json’},body:JSON.stringify({contact:visitorName+’ (‘+visitorEmail+’)’,messages:history,page:window.location.pathname})}).catch(function(){addMsg("Hmm, I wasn't able to forward that. You can reach Marlenyi directly at <b>239.688.1771</b> or <b>marlenyi@aarirealty.com</b>.",'bot');});addMsg("Real talk, "+escapeHtml(visitorName)+"… I’m clearly not the right one to answer this. I just forwarded our whole conversation to Marlenyi. She’s the broker, she’ll know. Expect to hear from her at "+escapeHtml(visitorEmail)+" pretty quickly.",’bot’);addChips(["Text Marlenyi directly"]);}else if(missCount===2){addMsg("I’m striking out here and I’d rather be honest about it than waste your time. Here are the big topics I actually know well, or you can go straight to the source.",’bot’);addChips(["What are the splits?","How much does it cost?","How fast can I join?","Text Marlenyi directly"]);}else{var suggestions=getSuggestions(q);if(suggestions.length>0){addMsg("I’ll be straight with you… I don’t have a great answer for that one. But I might be able to help with one of these?",’bot’);addChips(suggestions);}else{addMsg("That’s outside what I know, and I’d rather tell you that than make something up. Here’s what I <em>can</em> help with, or just call us at <b>239.688.1770</b>.",’bot’);addChips(["What are the splits?","How much does it cost?","Tell me about Mentorship","How fast can I join?"]);}}}},400);}
 function openChat(){bubble.classList.add('open');panel.classList.add('open');if(!msgs.hasChildNodes()){addMsg("Hey! Before we dive in… what’s your first name?",'bot');}input.focus();}
 bubble.addEventListener('click',openChat);
 closeBtn.addEventListener('click',function(){panel.classList.remove('open');bubble.classList.remove('open');});
