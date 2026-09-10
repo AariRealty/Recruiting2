@@ -1,0 +1,301 @@
+name: Deploy Edge Functions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/**'
+      - 'supabase/config.toml'
+      - 'joinaari/hub-next.html'
+  workflow_dispatch:
+    inputs:
+      function:
+        description: 'Function slug to deploy (exactly one, must be in config.toml)'
+        required: true
+        type: string
+
+concurrency:
+  group: deploy-functions
+  cancel-in-progress: false
+
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+  PROJECT_ID: fnlrgmuvtgwzjsihqxcn
+
+jobs:
+
+  # ── Push to main: plan only, deploy nothing ──────────────────────
+  plan:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Fail if access token is missing
+        run: |
+          if [ -z "$SUPABASE_ACCESS_TOKEN" ]; then
+            echo "::error::SUPABASE_ACCESS_TOKEN repository secret is not set."
+            exit 1
+          fi
+
+      - name: Report what changed
+        id: changed
+        run: |
+          set -euo pipefail
+
+          SHARED_CHANGED=$(git diff --name-only HEAD~1 HEAD -- \
+            'supabase/functions/_shared/' \
+            'supabase/functions/_email-templates/' \
+            'supabase/functions/import_map.json' \
+            'supabase/config.toml' 2>/dev/null | head -1)
+
+          if [ -n "$SHARED_CHANGED" ]; then
+            echo "::notice::Shared code or config changed — a full redeploy would be needed."
+            TARGETS=$(python3 -c "
+          import tomllib
+          with open('supabase/config.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          fns = sorted(cfg.get('functions', {}).keys())
+          print(' '.join(fns))
+          ")
+          else
+            TARGETS=$(git diff --name-only HEAD~1 HEAD -- 'supabase/functions/' | \
+              grep -oP 'supabase/functions/\K[^/]+' | \
+              grep -vE '^(_shared|_email-templates|import_map\.json)$' | \
+              sort -u | tr '\n' ' ')
+          fi
+
+          COUNT=$(echo "$TARGETS" | wc -w)
+          echo "targets=$TARGETS" >> "$GITHUB_OUTPUT"
+          echo ""
+          echo "========================================"
+          echo "PLAN ONLY — nothing is being deployed"
+          echo "========================================"
+          echo "Functions that changed: $COUNT"
+          for fn in $TARGETS; do
+            echo "  - $fn"
+          done
+          echo ""
+          echo "To deploy, use: Actions → Deploy Edge Functions → Run workflow"
+          echo "and enter one function slug at a time."
+
+      - name: Drift check
+        run: |
+          set -euo pipefail
+
+          DECLARED_COUNT=$(python3 -c "
+          import tomllib
+          with open('supabase/config.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          print(len(cfg.get('functions', {})))
+          ")
+
+          DEPLOYED_COUNT=$(curl -sf \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+            "https://api.supabase.com/v1/projects/$PROJECT_ID/functions" \
+            | python3 -c "import sys,json; print(len(json.load(sys.stdin)))")
+
+          echo "Declared in config.toml: $DECLARED_COUNT"
+          echo "Deployed on Supabase:    $DEPLOYED_COUNT"
+
+          if [ "$DEPLOYED_COUNT" -gt "$DECLARED_COUNT" ]; then
+            echo "::error::DRIFT: $DEPLOYED_COUNT deployed but only $DECLARED_COUNT declared. Someone deployed outside the pipeline."
+            exit 1
+          fi
+
+  # ── Manual dispatch: deploy exactly one function ─────────────────
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Fail if access token is missing
+        run: |
+          if [ -z "$SUPABASE_ACCESS_TOKEN" ]; then
+            echo "::error::SUPABASE_ACCESS_TOKEN repository secret is not set."
+            exit 1
+          fi
+
+      - name: Validate input
+        run: |
+          set -euo pipefail
+          FN="${{ inputs.function }}"
+
+          if [ -z "$FN" ]; then
+            echo "::error::Function slug is required."
+            exit 1
+          fi
+
+          if echo "$FN" | grep -qE '[,; *]'; then
+            echo "::error::One function at a time. No wildcards, no comma-separated lists."
+            exit 1
+          fi
+
+          DECLARED=$(python3 -c "
+          import tomllib, sys
+          with open('supabase/config.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          fn_cfg = cfg.get('functions', {}).get('$FN')
+          if fn_cfg is None:
+              print('UNDECLARED')
+          else:
+              print(str(fn_cfg.get('verify_jwt', True)).lower())
+          ")
+
+          if [ "$DECLARED" = "UNDECLARED" ]; then
+            echo "::error::$FN is NOT declared in config.toml. Refusing to deploy."
+            exit 1
+          fi
+
+          echo "Function: $FN"
+          echo "config.toml declares verify_jwt=$DECLARED"
+          echo "declared=$DECLARED" >> "$GITHUB_OUTPUT"
+
+      - name: Install Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Deploy
+        id: deploy
+        run: |
+          set -euo pipefail
+          FN="${{ inputs.function }}"
+
+          DECLARED=$(python3 -c "
+          import tomllib
+          with open('supabase/config.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          print(str(cfg['functions']['$FN'].get('verify_jwt', True)).lower())
+          ")
+
+          echo ""
+          echo "========================================"
+          echo "Deploying: $FN (verify_jwt=$DECLARED)"
+          echo "========================================"
+
+          if [ "$DECLARED" = "false" ]; then
+            supabase functions deploy "$FN" \
+              --project-ref "$PROJECT_ID" \
+              --no-verify-jwt
+          else
+            supabase functions deploy "$FN" \
+              --project-ref "$PROJECT_ID"
+          fi
+
+      - name: Verify verify_jwt post-deploy
+        run: |
+          set -euo pipefail
+          FN="${{ inputs.function }}"
+
+          DECLARED=$(python3 -c "
+          import tomllib
+          with open('supabase/config.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          print(str(cfg['functions']['$FN'].get('verify_jwt', True)).lower())
+          ")
+
+          ACTUAL=$(curl -sf \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+            "https://api.supabase.com/v1/projects/$PROJECT_ID/functions/$FN" \
+            | python3 -c "import sys,json; print(str(json.load(sys.stdin).get('verify_jwt', True)).lower())")
+
+          echo "Declared: verify_jwt=$DECLARED"
+          echo "Actual:   verify_jwt=$ACTUAL"
+
+          if [ "$DECLARED" != "$ACTUAL" ]; then
+            echo "::error::verify_jwt MISMATCH for $FN: declared=$DECLARED, actual=$ACTUAL"
+            exit 1
+          fi
+
+          echo "Verified: $FN verify_jwt=$ACTUAL"
+
+      - name: Drift check
+        if: always()
+        run: |
+          DECLARED_COUNT=$(python3 -c "
+          import tomllib
+          with open('supabase/config.toml', 'rb') as f:
+              cfg = tomllib.load(f)
+          print(len(cfg.get('functions', {})))
+          ")
+
+          DEPLOYED_COUNT=$(curl -sf \
+            -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" \
+            "https://api.supabase.com/v1/projects/$PROJECT_ID/functions" \
+            | python3 -c "import sys,json; print(len(json.load(sys.stdin)))")
+
+          echo "Declared in config.toml: $DECLARED_COUNT"
+          echo "Deployed on Supabase:    $DEPLOYED_COUNT"
+
+          if [ "$DEPLOYED_COUNT" -gt "$DECLARED_COUNT" ]; then
+            echo "::warning::DRIFT: $DEPLOYED_COUNT deployed but only $DECLARED_COUNT declared. Someone deployed outside the pipeline."
+          fi
+
+  # ── Publish hub_next.html to the storage bucket on merge ────────
+  #
+  # The edge function realty-hub downloads hub_next.html from the
+  # realty-hub storage bucket at serve time. Without this step, a
+  # merge that changes the file updates Vercel (unused under Option A)
+  # but leaves the bucket stale. hub-file-io backs up the previous
+  # version automatically before overwriting.
+  publish-hub:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if hub-next.html changed
+        id: check
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect change
+        id: detect
+        run: |
+          if git diff --name-only HEAD~1 HEAD | grep -q '^joinaari/hub-next.html$'; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publish to bucket
+        if: steps.detect.outputs.changed == 'true'
+        env:
+          HUB_IO_SECRET: ${{ secrets.HUB_IO_SECRET }}
+          SB_URL: https://fnlrgmuvtgwzjsihqxcn.supabase.co
+        run: |
+          set -euo pipefail
+
+          if [ -z "$HUB_IO_SECRET" ]; then
+            echo "::error::HUB_IO_SECRET repository secret is not set. Cannot publish to bucket."
+            exit 1
+          fi
+
+          FILE="joinaari/hub-next.html"
+          SIZE=$(wc -c < "$FILE")
+          echo "Publishing hub_next.html ($SIZE bytes) to realty-hub bucket..."
+
+          HTTP_CODE=$(curl -sf -o /tmp/publish-response.json -w "%{http_code}" \
+            -X POST \
+            -H "x-io-secret: $HUB_IO_SECRET" \
+            -H "Content-Type: text/html; charset=utf-8" \
+            --data-binary "@$FILE" \
+            "$SB_URL/functions/v1/hub-file-io?path=hub_next.html")
+
+          echo "HTTP $HTTP_CODE"
+          cat /tmp/publish-response.json
+
+          if [ "$HTTP_CODE" -ne 200 ]; then
+            echo "::error::Bucket publish failed with HTTP $HTTP_CODE"
+            exit 1
+          fi
+
+          echo ""
+          echo "========================================"
+          echo "hub_next.html published to bucket"
+          echo "========================================"
