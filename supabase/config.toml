@@ -1,0 +1,537 @@
+# Supabase Edge Functions — verify_jwt manifest
+# Generated from the live API on 8 September 2026.
+# This is the source of truth. The deploy workflow reads it,
+# deploys with the declared setting, and verifies the result.
+# Functions not listed here must not be deployed.
+
+# 176 functions total
+# 96 with verify_jwt = false
+# 80 with verify_jwt = true
+
+[functions."aari-daily-digest"]
+verify_jwt = false
+
+[functions."aari-raa-pdf-email"]
+verify_jwt = false
+
+[functions."aari-sa-pdf-email"]
+verify_jwt = true
+
+[functions."admin-migrate-ica"]
+verify_jwt = true
+
+[functions."admin-preview-welcome"]
+verify_jwt = true
+
+[functions."admin-resend-domains"]
+verify_jwt = false
+
+[functions."agent-request-tc-reassign"]
+verify_jwt = false
+
+[functions."backfill-membership-stripe-ids"]
+verify_jwt = true
+
+[functions."books-sync"]
+verify_jwt = false
+
+[functions."broker-review-ping"]
+verify_jwt = true
+
+[functions."carddav-connect"]
+verify_jwt = true
+
+[functions."carddav-fetch-diff"]
+verify_jwt = true
+
+[functions."carddav-mark-dismissed"]
+verify_jwt = true
+
+[functions."carddav-probe"]
+verify_jwt = true
+
+[functions."closed-payment-reminder"]
+verify_jwt = true
+
+[functions."cloze-sync-contacts"]
+verify_jwt = false
+
+[functions."create-listing-checkout"]
+verify_jwt = false
+
+[functions."deadline-feed"]
+verify_jwt = false
+
+[functions."decode-unsubscribe-token"]
+verify_jwt = false
+
+[functions."dev-hub-fetch"]
+verify_jwt = true
+
+[functions."dev-upload-test"]
+verify_jwt = true
+
+[functions."effective-date-confirm"]
+verify_jwt = false
+
+[functions."eileen-daily-summary"]
+verify_jwt = false
+
+[functions."email-flag"]
+verify_jwt = false
+
+[functions."eod-report"]
+verify_jwt = true
+
+[functions."extract-contract-fields"]
+verify_jwt = true
+
+[functions."file-action"]
+verify_jwt = false
+
+[functions."friday-summary"]
+verify_jwt = false
+
+[functions."gcal-sync"]
+verify_jwt = true
+
+[functions."generate-listing-description"]
+verify_jwt = false
+
+[functions."generate-signed-agreement-pdf"]
+verify_jwt = false
+
+[functions."google-calendar-fetch"]
+verify_jwt = true
+
+[functions."google-oauth-callback"]
+verify_jwt = false
+
+[functions."google-oauth-init"]
+verify_jwt = false
+
+[functions."hash-stored-pdf"]
+verify_jwt = false
+
+[functions."hotfix-broker-module-2026-08-12"]
+verify_jwt = true
+
+[functions."hub-diag"]
+verify_jwt = false
+
+[functions."hub-diag-2026-07-14"]
+verify_jwt = false
+
+[functions."hub-diag3"]
+verify_jwt = false
+
+[functions."hub-file-io"]
+verify_jwt = false
+
+[functions."hub-inject-broker"]
+verify_jwt = false
+
+[functions."hub-inject-calendar"]
+verify_jwt = false
+
+[functions."hub-inject-financial"]
+verify_jwt = false
+
+[functions."hub-inject-onboarding"]
+verify_jwt = false
+
+[functions."hub-inject-txnguide"]
+verify_jwt = false
+
+[functions."hub-mod-admin"]
+verify_jwt = true
+
+[functions."hub-repair-body"]
+verify_jwt = false
+
+[functions."hub-slice"]
+verify_jwt = false
+
+[functions."hub-storage-inspect"]
+verify_jwt = true
+
+[functions."hub-swap-home"]
+verify_jwt = false
+
+[functions."ica-public-url"]
+verify_jwt = false
+
+[functions."ics-sync"]
+verify_jwt = true
+
+[functions."import-contract-from-email"]
+verify_jwt = false
+
+[functions."loan-deadline-ping"]
+verify_jwt = false
+
+[functions."masterdata-import"]
+verify_jwt = true
+
+[functions."nudge-milennys-4700"]
+verify_jwt = true
+
+[functions."nudge-tc"]
+verify_jwt = true
+
+[functions."patch-tx-view-toggle"]
+verify_jwt = true
+
+[functions."payment-reminder"]
+verify_jwt = true
+
+[functions."platform-alert"]
+verify_jwt = true
+
+[functions."platform-alert-action"]
+verify_jwt = false
+
+[functions."platform-alert-inbound"]
+verify_jwt = false
+
+[functions."pop-geocode"]
+verify_jwt = true
+
+[functions."preview-new-file-email"]
+verify_jwt = true
+
+[functions."preview-tc-invoice"]
+verify_jwt = true
+
+[functions."public-submit"]
+verify_jwt = false
+
+[functions."put-frag"]
+verify_jwt = false
+
+[functions."quo-incoming-webhook"]
+verify_jwt = true
+
+[functions."realty-admin"]
+verify_jwt = true
+
+[functions."realty-agent-invite"]
+verify_jwt = true
+
+[functions."realty-agent-join"]
+verify_jwt = false
+
+[functions."realty-agent-provision"]
+verify_jwt = true
+
+[functions."realty-agent-welcome"]
+verify_jwt = true
+
+[functions."realty-agreement-url"]
+verify_jwt = false
+
+[functions."realty-billing"]
+verify_jwt = true
+
+[functions."realty-blog"]
+verify_jwt = false
+
+[functions."realty-blog-ai"]
+verify_jwt = true
+
+[functions."realty-blog-notify"]
+verify_jwt = true
+
+[functions."realty-blog-public"]
+verify_jwt = false
+
+[functions."realty-broadcast"]
+verify_jwt = true
+
+[functions."realty-calendar"]
+verify_jwt = true
+
+[functions."realty-calendar-share"]
+verify_jwt = true
+
+[functions."realty-clause-probe"]
+verify_jwt = true
+
+[functions."realty-clause-register"]
+verify_jwt = true
+
+[functions."realty-contract-flags"]
+verify_jwt = true
+
+[functions."realty-contract-probe"]
+verify_jwt = true
+
+[functions."realty-diag"]
+verify_jwt = true
+
+[functions."realty-doc"]
+verify_jwt = false
+
+[functions."realty-drip-run"]
+verify_jwt = false
+
+[functions."realty-events"]
+verify_jwt = true
+
+[functions."realty-finance"]
+verify_jwt = true
+
+[functions."realty-finance-ingest"]
+verify_jwt = true
+
+[functions."realty-heartbeat"]
+verify_jwt = true
+
+[functions."realty-hub"]
+verify_jwt = true
+
+[functions."realty-hub-fileio"]
+verify_jwt = false
+
+[functions."realty-ica-notice"]
+verify_jwt = true
+
+[functions."realty-lead-capture"]
+verify_jwt = false
+
+[functions."realty-lead-unsubscribe"]
+verify_jwt = false
+
+[functions."realty-ledger"]
+verify_jwt = true
+
+[functions."realty-news-ingest"]
+verify_jwt = false
+
+[functions."realty-onboarding-board"]
+verify_jwt = true
+
+[functions."realty-parcel-lookup"]
+verify_jwt = true
+
+[functions."realty-provision-pending-agent"]
+verify_jwt = true
+
+[functions."realty-selftest"]
+verify_jwt = true
+
+[functions."retrieve-agreement"]
+verify_jwt = true
+
+[functions."realty-set-license"]
+verify_jwt = true
+
+[functions."realty-sign-ica"]
+verify_jwt = false
+
+[functions."realty-sign-ica-web"]
+verify_jwt = false
+
+[functions."realty-skyslope-sync"]
+verify_jwt = true
+
+[functions."realty-stage-hub"]
+verify_jwt = false
+
+[functions."realty-tx"]
+verify_jwt = true
+
+[functions."realty-tx-file-edit"]
+verify_jwt = true
+
+[functions."realty-tx-review"]
+verify_jwt = true
+
+[functions."realty-upload-base"]
+verify_jwt = true
+
+[functions."realty-uploads"]
+verify_jwt = false
+
+[functions."realty-uploads-extract"]
+verify_jwt = false
+
+[functions."realty-weekly-digest"]
+verify_jwt = false
+
+[functions."record-signed-agreement"]
+verify_jwt = true
+
+[functions."resend-check-status"]
+verify_jwt = true
+
+[functions."resend-domain-add"]
+verify_jwt = false
+
+[functions."resend-domain-check"]
+verify_jwt = false
+
+[functions."resend-domain-setup"]
+verify_jwt = false
+
+[functions."resend-webhook"]
+verify_jwt = false
+
+[functions."save-push-subscription"]
+verify_jwt = true
+
+[functions."send-agent-broadcast"]
+verify_jwt = false
+
+[functions."send-agent-introduction"]
+verify_jwt = false
+
+[functions."send-agent-nps-request"]
+verify_jwt = false
+
+[functions."send-agent-reply"]
+verify_jwt = false
+
+[functions."send-agent-weekly-digest"]
+verify_jwt = true
+
+[functions."send-agent-welcome"]
+verify_jwt = true
+
+[functions."send-broker-escalation-sms-to-agent"]
+verify_jwt = false
+
+[functions."send-checklist"]
+verify_jwt = false
+
+[functions."send-checkout-nudge"]
+verify_jwt = false
+
+[functions."send-delete-request"]
+verify_jwt = true
+
+[functions."send-file-notification"]
+verify_jwt = true
+
+[functions."send-file-submitted-sms-to-agent"]
+verify_jwt = false
+
+[functions."send-intake-confirmation"]
+verify_jwt = false
+
+[functions."send-manual-owner-ping"]
+verify_jwt = true
+
+[functions."send-membership-event"]
+verify_jwt = false
+
+[functions."send-mls-update-nudge"]
+verify_jwt = false
+
+[functions."send-morning-briefing-sms"]
+verify_jwt = false
+
+[functions."send-other-side-offer"]
+verify_jwt = true
+
+[functions."send-review-approved"]
+verify_jwt = false
+
+[functions."send-review-request"]
+verify_jwt = false
+
+[functions."send-tc-acceptance-sms"]
+verify_jwt = false
+
+[functions."send-tc-acceptance-to-agent"]
+verify_jwt = false
+
+[functions."send-tc-agent-message"]
+verify_jwt = true
+
+[functions."send-tc-assignment"]
+verify_jwt = false
+
+[functions."send-tc-assignment-sms"]
+verify_jwt = false
+
+[functions."send-tc-invoice-emails"]
+verify_jwt = false
+
+[functions."send-tc-message"]
+verify_jwt = false
+
+[functions."send-tc-new-file"]
+verify_jwt = false
+
+[functions."send-tc-pool-broadcast"]
+verify_jwt = false
+
+[functions."send-tc-reply-to-agent"]
+verify_jwt = false
+
+[functions."send-tc-status-ping"]
+verify_jwt = false
+
+[functions."send-web-push"]
+verify_jwt = false
+
+[functions."send-win-back"]
+verify_jwt = false
+
+[functions."skyslope-tm"]
+verify_jwt = true
+
+[functions."stripe-webhook"]
+verify_jwt = false
+
+[functions."submit-nps-response"]
+verify_jwt = false
+
+[functions."submit-tc-invoice"]
+verify_jwt = true
+
+[functions."super-processor"]
+verify_jwt = false
+
+[functions."tc-accept-file"]
+verify_jwt = true
+
+[functions."tc-invoice-reminder"]
+verify_jwt = true
+
+[functions."tc-invoice-unpaid-reminder"]
+verify_jwt = true
+
+[functions."tc-paid-notify"]
+verify_jwt = false
+
+[functions."temp-hub-peek"]
+verify_jwt = false
+
+[functions."temp-hub-write"]
+verify_jwt = false
+
+[functions."temp-money-fix"]
+verify_jwt = false
+
+[functions."temp-money-grep"]
+verify_jwt = false
+
+[functions."temp-upload-pdf"]
+verify_jwt = true
+
+[functions."test-anthropic-key"]
+verify_jwt = false
+
+[functions."test-check-email"]
+verify_jwt = true
+
+[functions."tmp-hub-storage-tool"]
+verify_jwt = false
+
+[functions."update-email-preferences"]
+verify_jwt = false
+
+[functions."validate-promo-code"]
+verify_jwt = false
