@@ -28,11 +28,11 @@ function deriveInitials(name: string){ return String(name||'').trim().split(/\s+
 // If a future version changes the fee, this changes in the same deploy that makes that version
 // current. Ahead of it, the certificate states a fee no signed agreement contains; behind it,
 // it states a superseded one.
-function planInfo(raw: string): { code:'75_25'|'85_15'|'100_max'; name:string; split:string; fee:string } | null {
+function planInfo(raw: string): { code:'75_25'|'85_15'|'100_max'; name:string; split:string; fee:string; feeAmount:string; article:string } | null {
   const s = String(raw||'').toLowerCase();
-  if (/mentor|75_25|(^|[^0-9])75([^0-9]|$)/.test(s)) return { code:'75_25', name:'Mentorship Path', split:'75/25', fee:'$59.00/month' };
-  if (/growth|85_15|(^|[^0-9])85([^0-9]|$)/.test(s)) return { code:'85_15', name:'Aari Growth', split:'85/15', fee:'$79.00/month' };
-  if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code:'100_max', name:'Aari Max', split:'100/0', fee:'$99.00/month' };
+  if (/mentor|75_25|(^|[^0-9])75([^0-9]|$)/.test(s)) return { code:'75_25', name:'Mentorship Path', split:'75/25', fee:'$59.00/month', feeAmount:'$59.00', article:'a' };
+  if (/growth|85_15|(^|[^0-9])85([^0-9]|$)/.test(s)) return { code:'85_15', name:'Aari Growth', split:'85/15', fee:'$79.00/month', feeAmount:'$79.00', article:'an' };
+  if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code:'100_max', name:'Aari Max', split:'100/0', fee:'$99.00/month', feeAmount:'$99.00', article:'a' };
   return null;
 }
 function planDisplay(raw: string): string {
@@ -71,7 +71,7 @@ async function blocked(userId: string|null, code: string, detail: Record<string,
   }
 }
 
-async function buildSignedPdf(baseBytes: Uint8Array, sigPngBytes: Uint8Array | null, info: any): Promise<Uint8Array> {
+async function buildSignedPdf(baseBytes: Uint8Array, sigPngBytes: Uint8Array | null, brokerSigBytes: Uint8Array, info: any): Promise<Uint8Array> {
   const pdf = await PDFDocument.load(baseBytes);
   const helv = await pdf.embedFont(StandardFonts.Helvetica);
   const helvB = await pdf.embedFont(StandardFonts.HelveticaBold);
@@ -89,41 +89,68 @@ async function buildSignedPdf(baseBytes: Uint8Array, sigPngBytes: Uint8Array | n
     }
   }
 
-  const pInfo = planInfo(String(info.plan||''));
+  const pInfo = planInfo(String(info.plan||’’));
   if (ini && pInfo && info.layout) {
     const idx = info.layout.page1 - 1;
     const spot = info.layout.coords[pInfo.code];
     if (!spot || !Number.isFinite(Number(spot.x)) || !Number.isFinite(Number(spot.y))) {
-      throw new Error('no coordinates configured for plan ' + pInfo.code + ' on version ' + info.version_label);
+      throw new Error(‘no coordinates configured for plan ‘ + pInfo.code + ‘ on version ‘ + info.version_label);
     }
     if (idx < 0 || idx >= pages.length) {
-      throw new Error('plan_initial_page ' + info.layout.page1 + ' is out of range for a ' + pages.length + ' page base PDF');
+      throw new Error(‘plan_initial_page ‘ + info.layout.page1 + ‘ is out of range for a ‘ + pages.length + ‘ page base PDF’);
     }
     pages[idx].drawText(ini, { x: Number(spot.x), y: Number(spot.y), size:10, font:helvB, color:bodyC });
   }
 
+  // --- Page 68 (execution page): agent signature, broker countersignature, names, dates ---
+  const execPage = pages[pages.length - 1];
+  const execGray = rgb(0.26,0.25,0.22);
+
+  // Agent side (left column)
+  execPage.drawText(info.typed_name || info.name, { x:76, y:462, size:11, font:helv, color:bodyC });
+  if (sigPngBytes) {
+    try {
+      const agentPng = await pdf.embedPng(sigPngBytes);
+      const agentDims = agentPng.scaleToFit(200, 48);
+      execPage.drawImage(agentPng, { x:76, y:400, width:agentDims.width, height:agentDims.height });
+    } catch(_e){
+      execPage.drawText(info.typed_name || info.name, { x:76, y:412, size:16, font:helvI, color:bodyC });
+    }
+  } else {
+    execPage.drawText(info.typed_name || info.name, { x:76, y:412, size:16, font:helvI, color:bodyC });
+  }
+  const dateShort = info.signed_date_short || info.signed_display;
+  execPage.drawText(dateShort, { x:76, y:344, size:9, font:helv, color:execGray });
+
+  // Broker side (right column) — name and license are pre-printed in the base PDF
+  const brokerPng = await pdf.embedPng(brokerSigBytes);
+  const brokerDims = brokerPng.scaleToFit(200, 48);
+  execPage.drawImage(brokerPng, { x:328, y:400, width:brokerDims.width, height:brokerDims.height });
+  execPage.drawText(dateShort, { x:328, y:344, size:9, font:helv, color:execGray });
+
+  // --- Certificate page (page 69) ---
   const page = pdf.addPage([612, 792]);
   const dark = rgb(0.102,0.102,0.102); const gray = rgb(0.42,0.40,0.36); const body = bodyC;
   page.drawRectangle({ x:0, y:752, width:612, height:40, color:dark });
-  page.drawText('SIGNATURE CERTIFICATE', { x:612-56-helvB.widthOfTextAtSize('SIGNATURE CERTIFICATE',9), y:772, size:9, font:helvB, color:rgb(1,1,1) });
-  page.drawText('AARI REALTY LLC · FLORIDA LICENSED BROKERAGE', { x:612-56-helv.widthOfTextAtSize('AARI REALTY LLC · FLORIDA LICENSED BROKERAGE',6.5), y:760, size:6.5, font:helv, color:rgb(0.8,0.78,0.73) });
+  page.drawText(‘SIGNATURE CERTIFICATE’, { x:612-56-helvB.widthOfTextAtSize(‘SIGNATURE CERTIFICATE’,9), y:772, size:9, font:helvB, color:rgb(1,1,1) });
+  page.drawText(‘AARI REALTY LLC · FLORIDA LICENSED BROKERAGE’, { x:612-56-helv.widthOfTextAtSize(‘AARI REALTY LLC · FLORIDA LICENSED BROKERAGE’,6.5), y:760, size:6.5, font:helv, color:rgb(0.8,0.78,0.73) });
   let y = 700;
-  page.drawText('Certificate of Electronic Signature', { x:56, y, size:20, font:helvB, color:body }); y -= 10;
+  page.drawText(‘Certificate of Electronic Signature’, { x:56, y, size:20, font:helvB, color:body }); y -= 10;
   page.drawLine({ start:{x:56,y}, end:{x:556,y}, thickness:1, color:dark }); y -= 30;
   const label=(t:string)=>{ page.drawText(t.toUpperCase(), { x:56, y, size:7.5, font:helvB, color:gray }); y-=15; };
   const line=(t:string,f=helv,s=11)=>{ page.drawText(t, { x:56, y, size:s, font:f, color:body }); y-=Math.round(s*1.6); };
-  label('Agreement');
-  line('Aari Realty LLC — Independent Contractor Agreement', helvB, 12);
-  line('Full package including all incorporated documents and Exhibit A');
-  line('Version: ' + (info.version_label||''), helv, 10); y-=12;
-  label('Signed by');
+  label(‘Agreement’);
+  line(‘Aari Realty LLC — Independent Contractor Agreement’, helvB, 12);
+  line(‘Full package including all incorporated documents and Exhibit A’);
+  line(‘Version: ‘ + (info.version_label||’’), helv, 10); y-=12;
+  label(‘Signed by’);
   line(info.name, helvB, 13);
-  line('Typed legal name: ' + info.typed_name, helv, 10);
-  line('Initials: ' + ini, helv, 10);
-  if (info.license) line('License: ' + info.license, helv, 10);
-  if (info.plan && info.plan!=='—') line('Commission Plan: ' + planDisplay(info.plan), helv, 10);
+  line(‘Typed legal name: ‘ + info.typed_name, helv, 10);
+  line(‘Initials: ‘ + ini, helv, 10);
+  if (info.license) line(‘License: ‘ + info.license, helv, 10);
+  if (info.plan && info.plan!==’—‘) line(‘Commission Plan: ‘ + planDisplay(info.plan), helv, 10);
   y-=8;
-  page.drawText('SIGNATURE', { x:56, y, size:7.5, font:helvB, color:gray }); y-=6;
+  page.drawText(‘SIGNATURE’, { x:56, y, size:7.5, font:helvB, color:gray }); y-=6;
   if (sigPngBytes) {
     try {
       const png = await pdf.embedPng(sigPngBytes);
@@ -131,27 +158,42 @@ async function buildSignedPdf(baseBytes: Uint8Array, sigPngBytes: Uint8Array | n
       page.drawImage(png, { x:56, y:y-dims.height, width:dims.width, height:dims.height });
       page.drawLine({ start:{x:56,y:y-dims.height-4}, end:{x:56+250,y:y-dims.height-4}, thickness:0.75, color:gray });
       y -= (dims.height + 22);
-    } catch(_e){ page.drawText('[signature on file]', { x:56, y:y-14, size:10, font:helv, color:body }); y-=34; }
+    } catch(_e){ page.drawText(‘[signature on file]’, { x:56, y:y-14, size:10, font:helv, color:body }); y-=34; }
   } else {
-    const sig = String(info.typed_signature || info.name || '');
+    const sig = String(info.typed_signature || info.name || ‘’);
     page.drawText(sig, { x:60, y:y-32, size:26, font:helvI, color:body });
     page.drawLine({ start:{x:56,y:y-40}, end:{x:56+260,y:y-40}, thickness:0.75, color:gray });
-    page.drawText('Typed electronic signature', { x:56, y:y-52, size:7, font:helv, color:gray });
+    page.drawText(‘Typed electronic signature’, { x:56, y:y-52, size:7, font:helv, color:gray });
     y -= 68;
   }
-  label('Execution Details');
-  line('Signed at: ' + info.signed_display, helv, 10);
-  line('IP address: ' + (info.ip||'not recorded'), helv, 10);
-  line('Device: ' + (info.ua||'not recorded').slice(0,80), helv, 9);
-  line('Document hash (SHA-256): ' + info.sha.slice(0,48) + '…', helv, 8); y-=14;
-  const stmt = ['By signing above, the Associate intends to electronically sign this Agreement and consents to','the use of electronic records and signatures. Under the federal ESIGN Act (15 U.S.C. § 7001 et','seq.) and Florida’s Uniform Electronic Transactions Act (Ch. 668, Fla. Stat.), this electronic','signature has the same legal force and effect as a handwritten signature.'];
-  page.drawText('ESIGN / UETA CONSENT', { x:56, y, size:7.5, font:helvB, color:gray }); y-=14;
+  y-=4;
+  label(‘Countersigned by’);
+  line(‘Marlenyi L. Paredes, Broker of Record’, helvB, 12);
+  line(‘Aari Realty LLC, License BK3530153’, helv, 10);
+  y-=4;
+  page.drawText(‘BROKER COUNTERSIGNATURE’, { x:56, y, size:7.5, font:helvB, color:gray }); y-=6;
+  try {
+    const bpng = await pdf.embedPng(brokerSigBytes);
+    const bdims = bpng.scaleToFit(200, 55);
+    page.drawImage(bpng, { x:56, y:y-bdims.height, width:bdims.width, height:bdims.height });
+    page.drawLine({ start:{x:56,y:y-bdims.height-4}, end:{x:56+220,y:y-bdims.height-4}, thickness:0.75, color:gray });
+    y -= (bdims.height + 14);
+  } catch(_e){ page.drawText(‘[countersignature on file]’, { x:56, y:y-14, size:10, font:helv, color:body }); y-=28; }
+  line(‘Applied automatically under standing broker authorization at the time of agent execution.’, helv, 8);
+  y-=8;
+  label(‘Execution Details’);
+  line(‘Signed at: ‘ + info.signed_display, helv, 10);
+  line(‘IP address: ‘ + (info.ip||’not recorded’), helv, 10);
+  line(‘Device: ‘ + (info.ua||’not recorded’).slice(0,80), helv, 9);
+  line(‘Document hash (SHA-256): ‘ + info.sha.slice(0,48) + ‘…’, helv, 8); y-=10;
+  const stmt = [‘By signing above, the Associate intends to electronically sign this Agreement and consents to’,’the use of electronic records and signatures. Under the federal ESIGN Act (15 U.S.C. § 7001 et’,’seq.) and Florida’s Uniform Electronic Transactions Act (Ch. 668, Fla. Stat.), this electronic’,’signature has the same legal force and effect as a handwritten signature.’];
+  page.drawText(‘ESIGN / UETA CONSENT’, { x:56, y, size:7.5, font:helvB, color:gray }); y-=14;
   for(const l of stmt){ page.drawText(l, { x:56, y, size:8.5, font:helv, color:body }); y-=13; }
   page.drawRectangle({ x:0, y:0, width:612, height:34, color:dark });
-  page.drawText('Aari.', { x:56, y:12, size:13, font:helvB, color:rgb(1,1,1) });
-  const cf='CONFIDENTIAL — BROKERAGE FILE RECORD';
+  page.drawText(‘Aari.’, { x:56, y:12, size:13, font:helvB, color:rgb(1,1,1) });
+  const cf=’CONFIDENTIAL — BROKERAGE FILE RECORD’;
   page.drawText(cf, { x:306-helv.widthOfTextAtSize(cf,6.5)/2, y:13, size:6.5, font:helv, color:rgb(0.56,0.53,0.49) });
-  page.drawText('Broker of Record: Marlenyi L. Paredes · BK3530153', { x:56, y:44, size:8, font:helv, color:gray });
+  page.drawText(‘Broker of Record: Marlenyi L. Paredes · BK3530153’, { x:56, y:44, size:8, font:helv, color:gray });
   return await pdf.save();
 }
 
@@ -339,6 +381,11 @@ Deno.serve(async (req: Request) => {
       return json({ error:'agreement_layout_missing_plan', plan: pInfo.code, version_label: ver.version_label,
         detail:'Version '+ver.version_label+' has no coordinates for plan '+pInfo.code+'. Nothing was signed and nothing was recorded.' }, 409);
     }
+    if (!planAcknowledged) {
+      await blocked(signer.id, 'plan_not_acknowledged', { plan: pInfo.code, version: ver.version_label }, req);
+      return json({ error:'plan_not_acknowledged', plan: pInfo.code, version_label: ver.version_label,
+        detail:'The compensation plan disclosure was not acknowledged. The agreement cannot be executed without the agent confirming they understand the plan terms. Nothing was signed and nothing was recorded.' }, 409);
+    }
   }
 
   const layout = resolveLayout(ver);
@@ -357,9 +404,17 @@ Deno.serve(async (req: Request) => {
   if(dlErr || !baseFile) return json({error:'base pdf not found: '+(dlErr?.message||ver.base_pdf_path)},500);
   const baseBytes = new Uint8Array(await baseFile.arrayBuffer());
 
+  const { data:counterSigFile, error:csErr } = await admin.storage.from('internal-assets').download('countersignatures/marlenyi-paredes.png');
+  if (csErr || !counterSigFile) {
+    await blocked(signer.id, 'broker_countersig_failed', { detail: csErr?.message ?? 'file missing', version: ver.version_label }, req);
+    return json({ error:'broker_countersig_failed', detail:'The broker countersignature could not be loaded. Nothing was signed and nothing was recorded.' }, 500);
+  }
+  const brokerSigBytes = new Uint8Array(await counterSigFile.arrayBuffer());
+
   const sigBytes = b64ToBytes(sigUrl.split(',')[1]||'');
   const now = new Date();
   const signedDisplay = now.toLocaleString('en-US',{ timeZone:'America/New_York', dateStyle:'long', timeStyle:'short' }) + ' ET';
+  const signedDateShort = now.toLocaleDateString('en-US',{ timeZone:'America/New_York', month:'long', day:'numeric', year:'numeric' });
   const ip = (req.headers.get('x-forwarded-for')?.split(',')[0]||'').trim();
   const ua = req.headers.get('user-agent')||'';
 
@@ -368,7 +423,7 @@ Deno.serve(async (req: Request) => {
 
   let outBytes: Uint8Array;
   try {
-    outBytes = await buildSignedPdf(baseBytes, sigBytes, { name:signer.name, typed_name:typed, typed_signature:'', initials:initialsIn, license:signer.license, plan:signer.plan, layout, version_label:ver.version_label, signed_display:signedDisplay, ip, ua, sha:preSha });
+    outBytes = await buildSignedPdf(baseBytes, sigBytes, brokerSigBytes, { name:signer.name, typed_name:typed, typed_signature:'', initials:initialsIn, license:signer.license, plan:signer.plan, layout, version_label:ver.version_label, signed_display:signedDisplay, signed_date_short:signedDateShort, ip, ua, sha:preSha });
   } catch (e) {
     return json({ error:'stamp_failed', detail:String((e as Error)?.message||e).slice(0,300) }, 409);
   }
@@ -405,21 +460,23 @@ Deno.serve(async (req: Request) => {
   }
   const isResign = priorCount > 0;
 
-  const { data:sigRow } = await admin.from('realty_agreement_signatures').insert({ agent_id:signer.id, signer_email:signer.email, signer_name:signer.name, version_id:ver.id, version_label:ver.version_label, commission_plan: (signer.plan && signer.plan!=='—')?signer.plan:null, source: isTest?'website':'hub', signed_at:now.toISOString(), ip_address:ip||null, user_agent:ua||null, signature_image_path:storedSigPath, pdf_path:pdfPath, pdf_sha256:sha, record_origin:'signed', plan_acknowledged_at: planAcknowledged ? now.toISOString() : null }).select('id').single();
+  const { data:sigRow } = await admin.from('realty_agreement_signatures').insert({ agent_id:signer.id, signer_email:signer.email, signer_name:signer.name, version_id:ver.id, version_label:ver.version_label, commission_plan: (signer.plan && signer.plan!=='—')?signer.plan:null, source: isTest?'website':'hub', signed_at:now.toISOString(), ip_address:ip||null, user_agent:ua||null, signature_image_path:storedSigPath, pdf_path:pdfPath, pdf_sha256:sha, record_origin:'signed', plan_acknowledged_at: planAcknowledged ? now.toISOString() : null, broker_countersigned_at: now.toISOString() }).select('id').single();
 
   const pdfB64 = bytesToB64(outBytes);
 
   const agentRows: Array<[string,string]> = [
     ['Agent', signer.name],
     ['License', signer.license || 'not on file'],
-    ['Signed', signedDisplay]
+    ['Signed', signedDisplay],
+    ['Countersigned', 'Marlenyi L. Paredes, Broker of Record']
   ];
   const brokerRows: Array<[string,string]> = [
     ['Agent', signer.name],
     ['License', signer.license || 'not on file'],
     ['Phone', signer.phone ? prettyPhone(signer.phone) : 'not on file'],
     ['Email', signer.email],
-    ['Signed', signedDisplay]
+    ['Signed', signedDisplay],
+    ['Countersigned', 'Marlenyi L. Paredes, Broker of Record']
   ];
 
   const agentSubject = isResign ? 'Your updated Aari agreement is signed.' : 'It is official. Your Aari agreement is signed.';

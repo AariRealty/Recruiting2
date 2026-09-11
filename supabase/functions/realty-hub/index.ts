@@ -25,11 +25,11 @@ function inject(html: string, slot: string, content: string): string {
   if (html.includes(slot)) return html.replace(slot, () => content)
   return html.replace('</body>', () => content + '\n</body>')
 }
-function planInfo(raw: string): { code: string; name: string; split: string; fee: string } | null {
+function planInfo(raw: string): { code: string; name: string; split: string; fee: string; feeAmount: string; article: string } | null {
   const s = String(raw || '').toLowerCase()
-  if (/mentor|75_25|(^|[^0-9])75([^0-9]|$)/.test(s)) return { code: '75_25', name: 'Mentorship Path', split: '75/25', fee: '$59.00/month' }
-  if (/growth|85_15|(^|[^0-9])85([^0-9]|$)/.test(s)) return { code: '85_15', name: 'Aari Growth', split: '85/15', fee: '$79.00/month' }
-  if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code: '100_max', name: 'Aari Max', split: '100/0', fee: '$99.00/month' }
+  if (/mentor|75_25|(^|[^0-9])75([^0-9]|$)/.test(s)) return { code: '75_25', name: 'Mentorship Path', split: '75/25', fee: '$59.00/month', feeAmount: '$59.00', article: 'a' }
+  if (/growth|85_15|(^|[^0-9])85([^0-9]|$)/.test(s)) return { code: '85_15', name: 'Aari Growth', split: '85/15', fee: '$79.00/month', feeAmount: '$79.00', article: 'an' }
+  if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code: '100_max', name: 'Aari Max', split: '100/0', fee: '$99.00/month', feeAmount: '$99.00', article: 'a' }
   return null
 }
 function dedupeGlobals(html: string): string {
@@ -162,12 +162,21 @@ Deno.serve(async (req: Request) => {
         }
       }
 
+      const pi = member.commission_plan ? planInfo(member.commission_plan) : null
+      if (member.commission_plan && !pi) {
+        const todayStr = new Date().toISOString().slice(0, 10)
+        const { count } = await admin.from('audit_log').select('*', { count: 'exact', head: true }).eq('actor_id', user.id).eq('action', 'realty_ica_plan_not_signable').gte('created_at', todayStr + 'T00:00:00Z')
+        if ((count ?? 0) === 0) {
+          await audit(user.id, 'realty_member', 'realty_ica_plan_not_signable', 'realty_members', user.id, { commission_plan: member.commission_plan, version: ver.version_label }, req)
+        }
+        return json({ required: false, reason: 'plan_not_signable' })
+      }
+
       const { data: sigs } = await admin.from('realty_agreement_signatures').select('version_id, version_label, signed_at').or('agent_id.eq.' + user.id + ',signer_email.eq.' + String(member.user_id ? '' : '') + '').order('signed_at', { ascending: false })
       let rows = sigs ?? []
       if (!rows.length) { const { data: byId } = await admin.from('realty_agreement_signatures').select('version_id, version_label, signed_at').eq('agent_id', user.id).order('signed_at', { ascending: false }); rows = byId ?? [] }
       const signedCurrent = rows.some((r) => r.version_id === ver.id)
-      const pi = member.commission_plan ? planInfo(member.commission_plan) : null
-      return json({ required: !signedCurrent, reason: signedCurrent ? null : (rows.length ? 'version_update' : 'never_signed'), version_label: ver.version_label, effective_date: ver.effective_date, materiality: ver.materiality, last_signed_version: rows.length ? rows[0].version_label : null, plan_set: !!member.commission_plan, plan_code: pi?.code ?? null, plan_name: pi?.name ?? null, plan_split: pi?.split ?? null, plan_fee: pi?.fee ?? null, license_set: !!member.license_number })
+      return json({ required: !signedCurrent, reason: signedCurrent ? null : (rows.length ? 'version_update' : 'never_signed'), version_label: ver.version_label, effective_date: ver.effective_date, materiality: ver.materiality, last_signed_version: rows.length ? rows[0].version_label : null, plan_set: !!member.commission_plan, plan_code: pi?.code ?? null, plan_name: pi?.name ?? null, plan_split: pi?.split ?? null, plan_fee: pi?.fee ?? null, plan_fee_amount: pi?.feeAmount ?? null, plan_article: pi?.article ?? null, license_set: !!member.license_number })
     }
     if (action === 'set_license') {
       const raw = String(body?.license_number ?? '').trim().toUpperCase()
