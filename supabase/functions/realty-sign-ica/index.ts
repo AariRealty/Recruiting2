@@ -274,6 +274,7 @@ Deno.serve(async (req: Request) => {
   }
 
   const consent = bodyIn?.consent===true;
+  const planAcknowledged = bodyIn?.plan_acknowledged===true;
   const typed = String(bodyIn?.typed_name??'').trim();
   const sigUrl = String(bodyIn?.signature_data_url??'');
   const initialsIn = String(bodyIn?.initials??'').trim();
@@ -404,7 +405,7 @@ Deno.serve(async (req: Request) => {
   }
   const isResign = priorCount > 0;
 
-  const { data:sigRow } = await admin.from('realty_agreement_signatures').insert({ agent_id:signer.id, signer_email:signer.email, signer_name:signer.name, version_id:ver.id, version_label:ver.version_label, commission_plan: (signer.plan && signer.plan!=='—')?signer.plan:null, source: isTest?'website':'hub', signed_at:now.toISOString(), ip_address:ip||null, user_agent:ua||null, signature_image_path:storedSigPath, pdf_path:pdfPath, pdf_sha256:sha, record_origin:'signed' }).select('id').single();
+  const { data:sigRow } = await admin.from('realty_agreement_signatures').insert({ agent_id:signer.id, signer_email:signer.email, signer_name:signer.name, version_id:ver.id, version_label:ver.version_label, commission_plan: (signer.plan && signer.plan!=='—')?signer.plan:null, source: isTest?'website':'hub', signed_at:now.toISOString(), ip_address:ip||null, user_agent:ua||null, signature_image_path:storedSigPath, pdf_path:pdfPath, pdf_sha256:sha, record_origin:'signed', plan_acknowledged_at: planAcknowledged ? now.toISOString() : null }).select('id').single();
 
   const pdfB64 = bytesToB64(outBytes);
 

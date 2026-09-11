@@ -25,6 +25,13 @@ function inject(html: string, slot: string, content: string): string {
   if (html.includes(slot)) return html.replace(slot, () => content)
   return html.replace('</body>', () => content + '\n</body>')
 }
+function planInfo(raw: string): { code: string; name: string; split: string; fee: string } | null {
+  const s = String(raw || '').toLowerCase()
+  if (/mentor|75_25|(^|[^0-9])75([^0-9]|$)/.test(s)) return { code: '75_25', name: 'Mentorship Path', split: '75/25', fee: '$59.00/month' }
+  if (/growth|85_15|(^|[^0-9])85([^0-9]|$)/.test(s)) return { code: '85_15', name: 'Aari Growth', split: '85/15', fee: '$79.00/month' }
+  if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code: '100_max', name: 'Aari Max', split: '100/0', fee: '$99.00/month' }
+  return null
+}
 function dedupeGlobals(html: string): string {
   return html.replace('const SB_URL=', 'window.SB_URL=').replace('const SB_KEY=', 'window.SB_KEY=').replace('const sb=window.supabase.createClient', 'window.sb=window.sb||window.supabase.createClient')
 }
@@ -159,7 +166,8 @@ Deno.serve(async (req: Request) => {
       let rows = sigs ?? []
       if (!rows.length) { const { data: byId } = await admin.from('realty_agreement_signatures').select('version_id, version_label, signed_at').eq('agent_id', user.id).order('signed_at', { ascending: false }); rows = byId ?? [] }
       const signedCurrent = rows.some((r) => r.version_id === ver.id)
-      return json({ required: !signedCurrent, reason: signedCurrent ? null : (rows.length ? 'version_update' : 'never_signed'), version_label: ver.version_label, effective_date: ver.effective_date, materiality: ver.materiality, last_signed_version: rows.length ? rows[0].version_label : null, plan_set: !!member.commission_plan, license_set: !!member.license_number })
+      const pi = member.commission_plan ? planInfo(member.commission_plan) : null
+      return json({ required: !signedCurrent, reason: signedCurrent ? null : (rows.length ? 'version_update' : 'never_signed'), version_label: ver.version_label, effective_date: ver.effective_date, materiality: ver.materiality, last_signed_version: rows.length ? rows[0].version_label : null, plan_set: !!member.commission_plan, plan_code: pi?.code ?? null, plan_name: pi?.name ?? null, plan_split: pi?.split ?? null, plan_fee: pi?.fee ?? null, license_set: !!member.license_number })
     }
     if (action === 'set_license') {
       const raw = String(body?.license_number ?? '').trim().toUpperCase()
