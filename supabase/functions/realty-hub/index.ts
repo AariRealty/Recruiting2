@@ -53,6 +53,14 @@ async function gateScript(): Promise<string> {
     return '<script>\n' + js + '\n</' + 'script>'
   } catch (_e) { return '' }
 }
+async function agreementsScript(): Promise<string> {
+  try {
+    const { data } = await admin.from('realty_config').select('value').eq('key', 'hub_agreements_js').maybeSingle()
+    const js = data?.value ?? ''
+    if (!js) return ''
+    return '<script>\n' + js + '\n</' + 'script>'
+  } catch (_e) { return '' }
+}
 
 async function computeBrokerFinancials(brokerId: string) {
   const now = new Date()
@@ -394,6 +402,27 @@ Deno.serve(async (req: Request) => {
       return json({ ok: true })
     }
 
+    if (action === 'my_agreements') {
+      const { data: rows } = await admin.from('realty_agreement_signatures')
+        .select('id, version_label, signed_at, commission_plan, pdf_path')
+        .eq('agent_id', user.id)
+        .order('signed_at', { ascending: false })
+      return json({ agreements: (rows ?? []).map(r => ({ id: r.id, version_label: r.version_label, signed_at: r.signed_at, commission_plan: r.commission_plan, has_document: !!r.pdf_path })) })
+    }
+    if (action === 'agreement_download') {
+      const sigId = String(body?.signature_id ?? '')
+      if (!sigId) return json({ error: 'signature_id required' }, 400)
+      const { data: sig } = await admin.from('realty_agreement_signatures')
+        .select('id, pdf_path, agent_id, version_label')
+        .eq('id', sigId).maybeSingle()
+      if (!sig || sig.agent_id !== user.id) return json({ error: 'forbidden' }, 403)
+      if (!sig.pdf_path) return json({ error: 'no_document', detail: 'No PDF is on file for this signature.' }, 404)
+      const { data: signed } = await admin.storage.from('signed-agreements').createSignedUrl(sig.pdf_path, 300)
+      if (!signed?.signedUrl) return json({ error: 'download_failed' }, 500)
+      await audit(user.id, 'realty_member', 'realty_agreement_downloaded', 'realty_agreement_signatures', sigId, { version_label: sig.version_label }, req)
+      return json({ url: signed.signedUrl })
+    }
+
     return json({ error: 'unknown_action' }, 400)
   }
 
@@ -419,6 +448,8 @@ Deno.serve(async (req: Request) => {
   // behind instead of serving a page with no agreement check on it.
   if (!gate) await audit(user.id, 'realty_member', 'realty_hub_gate_empty', 'realty_members', user.id, { build }, req)
   html = inject(html, '<!--ICA_GATE_SLOT-->', gate)
+  html = inject(html, '<!--AGREEMENTS_SLOT-->', await agreementsScript())
+  html = html.replace(/location\.replace\(location\.pathname\)/g, 'location.replace(location.pathname+location.search)')
   const patch: Record<string, unknown> = { last_login_at: new Date().toISOString() }
   if (!member.activated_at) patch.activated_at = new Date().toISOString()
   await admin.from('realty_members').update(patch).eq('user_id', user.id)
