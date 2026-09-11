@@ -140,7 +140,17 @@ Deno.serve(async (req: Request) => {
         if (ann <= jd) ann.setFullYear(ann.getFullYear() + 1)
         const windowEnd = new Date(ann)
         windowEnd.setDate(windowEnd.getDate() + SIGNING_WINDOW_DAYS)
-        if (today < ann || today >= windowEnd) {
+        let inWindow = today >= ann && today < windowEnd
+        if (!inWindow) {
+          const prevAnn = new Date(ann)
+          prevAnn.setFullYear(prevAnn.getFullYear() - 1)
+          if (prevAnn > jd) {
+            const prevEnd = new Date(prevAnn)
+            prevEnd.setDate(prevEnd.getDate() + SIGNING_WINDOW_DAYS)
+            inWindow = today >= prevAnn && today < prevEnd
+          }
+        }
+        if (!inWindow) {
           return json({ required: false, reason: 'not_due' })
         }
       }
