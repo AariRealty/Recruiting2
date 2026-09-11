@@ -124,16 +124,23 @@ Deno.serve(async (req: Request) => {
       const { data: ver } = await admin.from('realty_agreement_versions').select('id, version_label, effective_date, materiality').eq('is_current', true).maybeSingle()
       if (!ver) return json({ required: false, reason: 'no_current_version' })
 
-      // Legacy pass-through: only prompt on or after anniversary.
+      // Legacy pass-through: prompt only during a 30-day window starting on the
+      // agent's recurring anniversary (same month/day as join date, each year).
+      // Outside the window the agent passes straight through — no prompt of any kind.
       // Marlenyi has no join date — null is handled explicitly, she is always eligible.
+      // 30 days is Marlenyi's business decision, not a technical one.
+      const SIGNING_WINDOW_DAYS = 30
       const { data: sub } = await admin.from('realty_agent_subscriptions').select('agent_join_date').eq('agent_id', user.id).maybeSingle()
       const joinDate: string | null = sub?.agent_join_date ?? null
       if (joinDate !== null) {
-        const ann = new Date(joinDate + 'T00:00:00')
-        ann.setFullYear(ann.getFullYear() + 1)
-        const now = new Date()
-        now.setHours(0, 0, 0, 0)
-        if (now < ann) {
+        const jd = new Date(joinDate + 'T00:00:00')
+        const today = new Date()
+        today.setHours(0, 0, 0, 0)
+        let ann = new Date(today.getFullYear(), jd.getMonth(), jd.getDate())
+        if (ann <= jd) ann.setFullYear(ann.getFullYear() + 1)
+        const windowEnd = new Date(ann)
+        windowEnd.setDate(windowEnd.getDate() + SIGNING_WINDOW_DAYS)
+        if (today < ann || today >= windowEnd) {
           return json({ required: false, reason: 'not_due' })
         }
       }
