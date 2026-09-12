@@ -1,6 +1,8 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2'
 
 const admin = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+const RESEND_KEY = Deno.env.get('REALTY_RESEND_API_KEY') ?? Deno.env.get('RESEND_API_KEY') ?? ''
+const BROKER_EMAIL = 'marlenyi@aarirealty.com'
 const CORS: Record<string, string> = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS' }
 function json(body: unknown, status = 200) { return new Response(JSON.stringify(body), { status, headers: { ...CORS, 'Content-Type': 'application/json' } }) }
 async function audit(actorId: string | null, actorType: string, action: string, targetTable: string, targetId: string | null, details: Record<string, unknown>, req: Request) {
@@ -423,6 +425,47 @@ Deno.serve(async (req: Request) => {
       if (!signed?.signedUrl) return json({ error: 'download_failed' }, 500)
       await audit(user.id, 'realty_member', 'realty_agreement_downloaded', 'realty_agreement_signatures', sigId, { version_label: sig.version_label }, req)
       return json({ url: signed.signedUrl })
+    }
+
+    if (action === 'ask_question') {
+      const question = String(body?.question ?? '').trim()
+      if (!question || question.length > 2000) return json({ error: 'question required (max 2000 chars)' }, 400)
+      const { error: insErr } = await admin.from('realty_agent_questions').insert({ user_id: user.id, agent_name: member.full_name, question })
+      if (insErr) return json({ error: insErr.message }, 500)
+      await audit(user.id, 'realty_member', 'agent_question_submitted', 'realty_agent_questions', null, { question: question.slice(0, 200) }, req)
+      if (RESEND_KEY) {
+        const html = '<div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:20px">' +
+          '<h2 style="margin:0 0 8px">Agent question</h2>' +
+          '<p style="margin:0 0 16px;color:#555"><b>' + member.full_name.replace(/[<>&'"]/g, '') + '</b> asked a question in the Hub</p>' +
+          '<div style="background:#f5f5f5;border-radius:8px;padding:16px;margin:0 0 16px"><p style="margin:0;white-space:pre-wrap">' + question.replace(/[<>&]/g, (c: string) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' })[c]!) + '</p></div>' +
+          '<p style="margin:0;font-size:13px;color:#888">Reply to this email or log in to the Hub to respond.</p></div>'
+        try {
+          await fetch('https://api.resend.com/emails', { method: 'POST', headers: { 'Authorization': `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Aari Realty <onboarding@aarirealty.com>', to: [BROKER_EMAIL], subject: 'Agent question from ' + member.full_name, html }) })
+        } catch (_e) { /* email is best-effort */ }
+      }
+      return json({ ok: true, message: 'Your question has been sent to the broker. You will hear back soon.' })
+    }
+
+    if (action === 'my_questions') {
+      const { data } = await admin.from('realty_agent_questions').select('id, question, status, broker_note, created_at').eq('user_id', user.id).order('created_at', { ascending: false }).limit(20)
+      return json({ questions: data ?? [] })
+    }
+
+    if (action === 'list_questions') {
+      if (!isBroker) return json({ error: 'forbidden' }, 403)
+      const { data } = await admin.from('realty_agent_questions').select('id, user_id, agent_name, question, status, broker_note, created_at').order('created_at', { ascending: false }).limit(50)
+      return json({ questions: data ?? [] })
+    }
+
+    if (action === 'answer_question') {
+      if (!isBroker) return json({ error: 'forbidden' }, 403)
+      const qId = String(body?.question_id ?? '')
+      const note = String(body?.note ?? '').trim()
+      const status = body?.status === 'dismissed' ? 'dismissed' : 'answered'
+      if (!qId) return json({ error: 'question_id required' }, 400)
+      const { error: upErr } = await admin.from('realty_agent_questions').update({ status, broker_note: note || null }).eq('id', qId)
+      if (upErr) return json({ error: upErr.message }, 500)
+      return json({ ok: true })
     }
 
     return json({ error: 'unknown_action' }, 400)
