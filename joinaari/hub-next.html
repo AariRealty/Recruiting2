@@ -5397,6 +5397,52 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       planHtml+goalHtml;
   }
 
+  /* ---------- My Agreements ---------- */
+  var _agmtsLoaded=false, _agmtsData=[];
+  function _agmtsFetch(){
+    sb.auth.getSession().then(function(res){
+      if(!res.data||!res.data.session) return;
+      sb.functions.invoke('realty-hub',{body:{action:'my_agreements'}}).then(function(r){
+        if(r.error) return;
+        var d=r.data; if(typeof d==='string') try{d=JSON.parse(d);}catch(e){return;}
+        _agmtsData=d.agreements||[];
+        _agmtsLoaded=true;
+        if(subEntry()[0]==='My Agreements') render();
+      });
+    });
+  }
+  function _agmtDownload(sigId){
+    sb.auth.getSession().then(function(res){
+      if(!res.data||!res.data.session) return;
+      sb.functions.invoke('realty-hub',{body:{action:'agreement_download',signature_id:sigId}}).then(function(r){
+        if(r.error) return;
+        var d=r.data; if(typeof d==='string') try{d=JSON.parse(d);}catch(e){return;}
+        if(d.url) window.open(d.url,'_blank');
+        else if(d.error==='no_document') alert('No PDF on file for this agreement.');
+      });
+    });
+  }
+  function pageAgreements(){
+    if(!_agmtsLoaded){ _agmtsFetch(); return '<div class="card" style="grid-area:1/1/2/5">'+head('My Agreements')+'<div class="fill" style="padding:24px 0;text-align:center;color:var(--soft)">Loading…</div></div>'; }
+    if(!_agmtsData.length) return '<div class="card" style="grid-area:1/1/2/5">'+head('My Agreements')+empty('No agreements on file','Signed agreements will appear here once recorded.')+'</div>';
+    var mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function fmtDate(s){
+      if(!s) return '';
+      var d=new Date(s);
+      return mos[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
+    }
+    function planLabel(c){
+      if(!c) return '';
+      var m={'70_30':'70 / 30','80_20':'80 / 20','90_10':'90 / 10','100_0':'100 / 0'};
+      return m[c]||c.replace(/_/g,' / ');
+    }
+    var rows=_agmtsData.map(function(a){
+      var dl=a.has_document?'<button type="button" class="chip gh" data-dl="'+esc(a.id)+'" style="cursor:pointer">Download</button>':'<span style="font-size:11px;color:var(--soft)">No document on file</span>';
+      return '<div class="row" style="align-items:center"><div style="flex:1;min-width:0"><div class="rname">'+esc(a.version_label||'Agreement')+'</div><div class="rmeta">Signed '+fmtDate(a.signed_at)+(a.commission_plan?' &middot; '+esc(planLabel(a.commission_plan)):'')+'</div></div><div>'+dl+'</div></div>';
+    }).join('');
+    return '<div class="card" style="grid-area:1/1/2/5">'+head('My Agreements','<span class="chip gh">'+_agmtsData.length+'</span>')+'<div class="rows">'+rows+'</div></div>';
+  }
+
   /* ---------- Database ----------
      agent_contacts for Marlenyi: 207 rows, 204 clients and 3 vendors. Four
      households hold 8 of those rows, so the book is 202 people. Tiers on the
@@ -12194,14 +12240,14 @@ function wireResources(){
       ['Deals',  [['Files',pageDeals],['Review',pageTxReview],
                   ['Listings',pageInventory],['Compliance',pageCompliance]]],
       ['People', [['Team',pageTeam],['Roster',pageRoster]]],
-      ['Money',  [['Overview',pageMoney],['Costs',pageRevenue],['Production',pageProduction]]],
+      ['Money',  [['Overview',pageMoney],['Costs',pageRevenue],['Production',pageProduction],['Agreements',pageAgreements]]],
       ['Reach',  [['Announcements',pageAnn],['Classes',pageClasses]]]
     ],
     agent:[
       ['Today',  [['My day',pageToday]]],
       ['Deals',  [['Pipeline',pagePipeline],['Transactions',pageTxns]]],
       ['People', [['Database',pageDatabase],['Pop bys',pagePopby]]],
-      ['Money',  [['Goal Engine',pageGoal],['My plan',pagePlan]]],
+      ['Money',  [['Goal Engine',pageGoal],['My plan',pagePlan],['My Agreements',pageAgreements]]],
       ['Reach',  [['Announcements',pageAnn],['Classes',pageClasses]]]
     ]
   };
@@ -12230,7 +12276,9 @@ function wireResources(){
     Database:'All contact counts are live out of agent_contacts.',
     Transactions:'Files imported by the broker appear here for you to review. Actions are visible but not yet connected.',
     'Pop bys':'All 100 geocoded rows out of agent_contacts, with the live panel\'s own ranking, weekly target and route seeding copied across rather than rewritten. The basemap is the one thing that could not come: this session\'s network policy blocks tile.openstreetmap.org, so the map is drawn from the stored coordinates and distances are straight-line, not driving.',
-    'Goal Engine':'Nine inputs, one output: the number of conversations you need every day to hit your income target. Set your numbers and save — the row goes to realty_agent_goals for the current year.'
+    'Goal Engine':'Nine inputs, one output: the number of conversations you need every day to hit your income target. Set your numbers and save — the row goes to realty_agent_goals for the current year.',
+    'My Agreements':'Every agreement you have signed with Aari Realty, newest first. Download the PDF of any agreement that has a document on file.',
+    'Agreements':'Every agreement signed by your agents, newest first. Each row shows the version, date signed and commission plan at time of signing.'
   };
 
   var role='agent', tab='Dashboard';
@@ -12943,7 +12991,7 @@ function wireResources(){
       ['Today','Today',0],['My Dashboard',null,0],['Pipeline','Deals',0],
       ['Transactions','Deals',1],['Database','People',0],['Pop bys','People',1],
       ['Calendar','Today',0],['Numbers',null,0]]],
-    ['Plan',[['Goal Engine','Money',0],['Weekly Review',null,0]]],
+    ['Plan',[['Goal Engine','Money',0],['My Agreements','Money',2],['Weekly Review',null,0]]],
     ['Develop',[['Academy Levels',null,0],['Script Vault',null,0]]],
     ['Resources',[
       ['My Files',null,0],['Announcements','Reach',0],['Training Academy','Reach',1],
@@ -13111,6 +13159,9 @@ function wireResources(){
     grid.innerHTML = sub[1] ? sub[1]() : (isB?BROKER():AGENT());
     paintSubs();
     paintTicker(); paintFunnel(); paintOneline();
+    [].forEach.call(grid.querySelectorAll('[data-dl]'),function(btn){
+      btn.onclick=function(){ _agmtDownload(btn.getAttribute('data-dl')); };
+    });
     // a Needs-you lane goes to the tab that owns it
     [].forEach.call(grid.querySelectorAll('[data-owed]'),function(btn){
       btn.onclick=function(){
