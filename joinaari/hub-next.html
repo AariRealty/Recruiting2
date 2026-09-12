@@ -28,7 +28,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 .login-card label{display:block;text-align:left;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#8a8378;margin-bottom:6px}
 .login-card input[type="email"],.login-card input[type="password"],.login-card input[type="text"]{width:100%;padding:12px 14px;border:1px solid #e2e0d8;border-radius:10px;font-family:inherit;font-size:15px;color:#141210;margin-bottom:16px;outline:none;transition:border-color .2s;background:#fff}
 .login-card input:focus{border-color:#c9b492}
-.login-btn{width:100%;padding:14px;background:#0a0a0a;color:#fff;border:none;border-radius:50px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:4px;transition:opacity .2s}
+.login-btn{width:100%;padding:14px;background:#0b0a09;color:#fff;border:none;border-radius:50px;font-family:inherit;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;margin-top:4px;transition:opacity .2s}
 .login-btn:hover{opacity:.85}
 .login-btn:disabled{opacity:.4;cursor:not-allowed}
 #login-error,#cp-error{margin-top:16px;padding:12px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;color:#B04040;font-size:13px;text-align:left;line-height:1.5}
@@ -1931,7 +1931,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     .mcover:not([hidden]){display:block;position:sticky;top:0;height:100vh;height:100dvh;
       z-index:3;overflow:hidden;
       margin:calc(0px - var(--bodypad)) calc(50% - 50vw) 0;
-      background:radial-gradient(110% 70% at 50% 4%,#1a1a1a 0%,#111 50%,#0a0a0a 100%)}
+      background:radial-gradient(110% 70% at 50% 4%,#332b20 0%,#17130f 50%,#0b0a09 100%)}
     .mcphoto{position:absolute;top:24%;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:center;
       overflow:hidden;z-index:2;
       -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 14%);
@@ -1947,18 +1947,18 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
        band laid on the photograph instead of light falling away. */
     .mcsofttop{position:absolute;left:0;right:0;top:0;height:46%;z-index:4;pointer-events:none;
       background:linear-gradient(to bottom,
-        rgba(10,10,10,.74) 0%,  rgba(10,10,10,.66) 8%,  rgba(10,10,10,.55) 16%,
-        rgba(10,10,10,.42) 25%, rgba(10,10,10,.29) 36%, rgba(10,10,10,.17) 50%,
-        rgba(10,10,10,.09) 64%, rgba(10,10,10,.03) 82%, rgba(10,10,10,0) 100%)}
+        rgba(14,13,11,.74) 0%,  rgba(14,13,11,.66) 8%,  rgba(14,13,11,.55) 16%,
+        rgba(14,13,11,.42) 25%, rgba(14,13,11,.29) 36%, rgba(14,13,11,.17) 50%,
+        rgba(14,13,11,.09) 64%, rgba(14,13,11,.03) 82%, rgba(14,13,11,0) 100%)}
     .mcsoftbot{position:absolute;left:0;right:0;bottom:0;height:44%;z-index:4;pointer-events:none;
       background:linear-gradient(to top,
-        rgba(10,10,10,.80) 0%,  rgba(10,10,10,.70) 10%, rgba(10,10,10,.57) 20%,
-        rgba(10,10,10,.43) 31%, rgba(10,10,10,.30) 43%, rgba(10,10,10,.18) 56%,
-        rgba(10,10,10,.09) 71%, rgba(10,10,10,.03) 86%, rgba(10,10,10,0) 100%)}
+        rgba(14,13,11,.80) 0%,  rgba(14,13,11,.70) 10%, rgba(14,13,11,.57) 20%,
+        rgba(14,13,11,.43) 31%, rgba(14,13,11,.30) 43%, rgba(14,13,11,.18) 56%,
+        rgba(14,13,11,.09) 71%, rgba(14,13,11,.03) 86%, rgba(14,13,11,0) 100%)}
     /* Softer washes leave the words short of contrast, so each glyph carries
        its own shadow. A shadow has no edge; a deeper gradient would put the
        bands straight back. */
-    .mchead,.mcbottom{text-shadow:0 1px 14px rgba(10,10,10,.88),0 0 3px rgba(10,10,10,.55)}
+    .mchead,.mcbottom{text-shadow:0 1px 14px rgba(14,13,11,.88),0 0 3px rgba(14,13,11,.55)}
     /* top group: the welcome, the name, the day */
     /* The brand mark belongs on the cover -- that is the title page. It is the
        real artwork, not a set-by-hand version of it, turned white for the dark
@@ -1993,7 +1993,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     @keyframes mcbreathe{0%,100%{opacity:.55;transform:translateY(0)}
       50%{opacity:1;transform:translateY(-3px)}}
     /* The menu is not on the cover at all. It rises with the sheet. */
-    body.mcov{background:#0a0a0a}
+    body.mcov{background:#0b0a09}
     body.mcov #btabs{transition:transform .34s var(--ease)}
     body.mcov.atcover #btabs{transform:translateY(calc(var(--navh, 98px) + 40px))}
     /* the hub, now a sheet that rises over the cover */
@@ -2004,7 +2004,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       padding-bottom:calc(var(--navh,98px) + 20px)}
     body.mcov .mcgrab{display:flex;flex-direction:column;align-items:center;gap:9px;width:100%;
       border:0;background:none;padding:11px 0 14px;font-family:inherit;cursor:pointer}
-    body.mcov .mcgrab i{width:38px;height:4px;border-radius:999px;background:#d0d0d0;display:block}
+    body.mcov .mcgrab i{width:38px;height:4px;border-radius:999px;background:#d8d3c8;display:block}
     body.mcov .mcgrab span{font-size:11.5px;letter-spacing:1.3px;text-transform:uppercase;
       font-weight:700;color:var(--soft)}
   }
@@ -2220,8 +2220,8 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 #panel-database .db-tab{background:transparent;border:0;border-bottom:2px solid transparent;padding:10px 14px;font:600 11px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;color:#8a857c;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
 #panel-database .db-tab.active{color:#0a0a0a;border-bottom-color:#0a0a0a}
 #panel-database .db-tab-n{background:#f5f2ea;color:#0a0a0a;font-size:10px;padding:2px 7px;border-radius:10px;font-weight:700;letter-spacing:.3px}
-#panel-database .db-tab.active .db-tab-n{background:#0a0a0a;color:#fff}
-#panel-database .db-new{margin-left:auto;background:#0a0a0a;color:#fff;border:0;padding:8px 14px;border-radius:4px;font:700 10px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;align-self:center}
+#panel-database .db-tab.active .db-tab-n{background:#0b0a09;color:#fff}
+#panel-database .db-new{margin-left:auto;background:#0b0a09;color:#fff;border:0;padding:8px 14px;border-radius:4px;font:700 10px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;align-self:center}
 /* Health chips are now tappable filters — tap to filter the list to that
    state, tap the active one again to clear. No health color; the aesthetic
    stays quiet, the interaction does the work. */
@@ -2571,14 +2571,14 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 #panel-database .db-field input:focus,#panel-database .db-field select:focus,#panel-database .db-field textarea:focus{border-color:#0a0a0a}
 #panel-database .db-field textarea{min-height:80px;resize:vertical}
 #panel-database .db-field-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
-#panel-database .db-save-btn{background:#0a0a0a;color:#fff;border:0;border-radius:4px;padding:11px 16px;font:700 11px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;width:100%;margin-top:8px}
+#panel-database .db-save-btn{background:#0b0a09;color:#fff;border:0;border-radius:4px;padding:11px 16px;font:700 11px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;width:100%;margin-top:8px}
 #panel-database .db-save-btn:disabled{opacity:.55;cursor:default}
 #panel-database .db-save-hint{margin-top:6px;font-size:11px;color:#8a857c;text-align:center}
 /* Log activity — one tap, no modal. */
 #panel-database .db-log-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:10px}
 @media(min-width:640px){#panel-database .db-log-row{grid-template-columns:repeat(8,1fr)}}
 #panel-database .db-log-btn{background:#f7f4ec;border:1px solid #eae6dd;color:#0a0a0a;border-radius:4px;padding:11px 6px;font:700 10px 'Montserrat',sans-serif;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;font-family:inherit;transition:background .12s ease,color .12s ease}
-#panel-database .db-log-btn:hover{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+#panel-database .db-log-btn:hover{background:#0b0a09;color:#fff;border-color:#0a0a0a}
 #panel-database .db-log-btn:disabled{opacity:.55;cursor:default}
 #panel-database .db-log-note{width:100%;background:#fff;border:1px solid #eae6dd;border-radius:4px;padding:9px 11px;font:400 13px 'Montserrat',sans-serif;color:#0a0a0a;outline:0;font-family:inherit;margin-bottom:6px;box-sizing:border-box}
 #panel-database .db-log-hint{font-size:10.5px;color:#8a857c;margin-bottom:8px}
@@ -2724,7 +2724,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 
 /* Daily scoreboard — visible at the moment of logging. Turns logging into
    a scoreboard instead of data entry. Sourced from realty_agent_goals.daily. */
-#panel-database .db-scorebar{background:#0a0a0a;color:#f7f4ec;border-radius:6px;padding:18px 22px;margin:14px 0 12px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;cursor:default}
+#panel-database .db-scorebar{background:#0b0a09;color:#f7f4ec;border-radius:6px;padding:18px 22px;margin:14px 0 12px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;cursor:default}
 #panel-database .db-scorebar.tappable{cursor:pointer;transition:background .12s ease}
 #panel-database .db-scorebar.tappable:hover{background:#141210}
 #panel-database .db-score-num{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:48px;line-height:1;letter-spacing:-1.5px;color:#f7f4ec}
@@ -2742,7 +2742,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 /* Quick-actions row (log with no contact). Sits between scorebar and tabs. */
 #panel-database .db-quick-actions{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
 #panel-database .db-quick-btn{background:#fff;border:1px solid #0a0a0a;color:#0a0a0a;padding:9px 14px;border-radius:4px;font:700 10px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit}
-#panel-database .db-quick-btn:hover{background:#0a0a0a;color:#fff}
+#panel-database .db-quick-btn:hover{background:#0b0a09;color:#fff}
 
 /* Row-level quick-log conversation button. Sits inside .db-row-top on the
    right. On mobile the whole row is swipeable — see JS. */
@@ -2761,7 +2761,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 }
 
 /* No-contact log modal */
-#db-nocontact-modal{display:none;position:fixed;inset:0;background:rgba(10,10,10,.45);z-index:250;align-items:center;justify-content:center;padding:16px}
+#db-nocontact-modal{display:none;position:fixed;inset:0;background:rgba(14,13,11,.45);z-index:250;align-items:center;justify-content:center;padding:16px}
 #db-nocontact-modal.show{display:flex}
 #db-nocontact-modal .db-nc-card{background:#fff;border:1px solid #eae6dd;border-radius:6px;padding:26px 24px;max-width:440px;width:100%}
 #db-nocontact-modal .db-nc-title{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:24px;color:#0a0a0a;margin:0 0 6px}
@@ -2770,11 +2770,11 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
 #db-nocontact-modal .db-nc-buttons{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
 @media(min-width:640px){#db-nocontact-modal .db-nc-buttons{grid-template-columns:repeat(8,1fr)}}
 #db-nocontact-modal .db-nc-btn{background:#f7f4ec;border:1px solid #eae6dd;color:#0a0a0a;border-radius:4px;padding:11px 6px;font:700 10px 'Montserrat',sans-serif;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;font-family:inherit}
-#db-nocontact-modal .db-nc-btn:hover{background:#0a0a0a;color:#fff;border-color:#0a0a0a}
+#db-nocontact-modal .db-nc-btn:hover{background:#0b0a09;color:#fff;border-color:#0a0a0a}
 #db-nocontact-modal .db-nc-close{background:transparent;border:0;color:#6a6560;font:600 10px 'Montserrat',sans-serif;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;font-family:inherit;padding:0}
 
 /* Event dialog */
-.ev-dlg-overlay{position:fixed;inset:0;background:rgba(10,10,10,.5);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
+.ev-dlg-overlay{position:fixed;inset:0;background:rgba(14,13,11,.5);z-index:300;display:flex;align-items:center;justify-content:center;padding:16px}
 .ev-dlg{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px 24px 20px;max-width:420px;width:100%;max-height:90vh;overflow-y:auto}
 .ev-dlg-h{font-family:var(--serif);font-weight:600;font-size:22px;color:var(--ink);margin-bottom:18px}
 .ev-field{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
