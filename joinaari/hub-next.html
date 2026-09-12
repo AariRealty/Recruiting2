@@ -5047,6 +5047,133 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
      c:['ICA §3','Manual §13','Manual §14','Manual §21']}
   ];
   var askThread=[], askIdx=0, askCite=true;
+  var askFlow=null,askStep=0,askData={};
+  var ASK_TOOLS=[
+    {id:'caption',label:'Write a Caption'},
+    {id:'description',label:'Property Description'},
+    {id:'remarks',label:'Confidential Remarks'},
+    {id:'broker',label:'Ask the Broker'}
+  ];
+  var FLOWS={
+    caption:[
+      {msg:'What type of post is this for?',btn:['Just Listed','Just Sold','Open House','Price Drop','Coming Soon'],k:'type'},
+      {msg:'What area, city or neighborhood?',k:'area'},
+      {msg:'Give me 2–3 standout features of the property (updated kitchen, pool, corner lot…)',k:'features'},
+      {msg:'What tone?',btn:['Professional','Exciting','Luxury','Friendly'],k:'tone'}
+    ],
+    description:[
+      {msg:'What type of property?',btn:['Single Family','Condo','Townhouse','Multi-family','Land'],k:'propType'},
+      {msg:'Bedrooms and bathrooms? (e.g. 3/2)',k:'beds'},
+      {msg:'Approximate square footage?',k:'sqft'},
+      {msg:'List the top features and upgrades (new roof, granite counters, impact windows…)',k:'features'},
+      {msg:'Neighborhood highlights? (schools, parks, shopping, highway access)',k:'hood'},
+      {msg:'What area, city or community?',k:'area'}
+    ],
+    remarks:[
+      {msg:'What type of confidential remark?',btn:['Showing Instructions','Property Condition','Seller Motivation','Offer Terms','HOA / Restrictions'],k:'cat'}
+    ]
+  };
+  function startFlow(id){
+    if(id==='broker'){
+      askThread.push({who:'ai',text:'<p>Type your question below and I’ll send it straight to the broker. You’ll hear back by email or in the Hub.</p>'});
+      askFlow='broker';askStep=0;askData={};askRepaint();return;
+    }
+    var f=FLOWS[id]; if(!f) return;
+    askFlow=id;askStep=0;askData={};
+    var s=f[0];
+    askThread.push({who:'ai',text:'<p>'+s.msg+'</p>',btns:s.btn||null});
+    askRepaint();
+  }
+  function advanceFlow(input){
+    if(!askFlow||askFlow==='broker') return false;
+    var f=FLOWS[askFlow]; if(!f) return false;
+    var s=f[askStep]; if(!s) return false;
+    askData[s.k]=input;
+    var last=askThread[askThread.length-1];
+    if(last&&last.btns) delete last.btns;
+    askStep++;
+    if(askStep>=f.length){
+      var result;
+      if(askFlow==='caption') result=buildCaption(askData);
+      else if(askFlow==='description') result=buildDescription(askData);
+      else if(askFlow==='remarks') result=buildRemarks(askData);
+      else result='<p>Done.</p>';
+      askThread.push({who:'ai',text:result,copyable:true});
+      askFlow=null;askStep=0;askData={};
+      askRepaint();return true;
+    }
+    var ns=f[askStep];
+    askThread.push({who:'ai',text:'<p>'+ns.msg+'</p>',btns:ns.btn||null});
+    askRepaint();return true;
+  }
+  function buildCaption(d){
+    var feats=d.features.split(/,\s*|\s+and\s+/i).map(function(s){return s.trim()}).filter(Boolean);
+    var fs=feats[0]||'amazing features';
+    if(feats.length>=3) fs=feats[0]+', '+feats[1]+' and '+feats[2];
+    else if(feats.length===2) fs=feats[0]+' and '+feats[1];
+    var tag='#AariRealty #'+d.area.replace(/[^A-Za-z0-9]/g,'');
+    var C={
+      'Just Listed':['New Listing in '+d.area+' — Featuring '+fs+'. Contact me for a private showing.\n\n'+tag+' #JustListed',
+        'JUST LISTED in '+d.area+'! Featuring '+fs+' — this one won’t last long! DM me for details.\n\n'+tag+' #JustListed #NewListing',
+        'A distinguished residence in '+d.area+'. Featuring '+fs+'. Showings by appointment.\n\n'+tag+' #JustListed',
+        'Just listed this beauty in '+d.area+' with '+fs+'. Message me if you’re interested!\n\n'+tag+' #JustListed'],
+      'Just Sold':['Another successful closing in '+d.area+'. Congratulations to my client on this home with '+fs+'.\n\n'+tag+' #JustSold',
+        'SOLD! Another one off the market in '+d.area+'! Featuring '+fs+' — my client is thrilled!\n\n'+tag+' #JustSold',
+        'Closed. A remarkable '+d.area+' property with '+fs+' has found its new owner.\n\n'+tag+' #JustSold',
+        'And just like that… SOLD in '+d.area+'! Featuring '+fs+' — this one was a gem.\n\n'+tag+' #JustSold'],
+      'Open House':['Open House this weekend in '+d.area+'. Featuring '+fs+'. Come see it for yourself.\n\n'+tag+' #OpenHouse',
+        'OPEN HOUSE ALERT! Come tour this home in '+d.area+' — '+fs+'. You have to see it in person!\n\n'+tag+' #OpenHouse',
+        'You are invited to preview this property in '+d.area+'. Featuring '+fs+'.\n\n'+tag+' #OpenHouse',
+        'Hosting an Open House in '+d.area+' this weekend! Featuring '+fs+' and more — swing by!\n\n'+tag+' #OpenHouse'],
+      'Price Drop':['Price Improvement in '+d.area+'. This property with '+fs+' is now at a new price.\n\n'+tag+' #PriceImprovement',
+        'PRICE DROP in '+d.area+'! Featuring '+fs+' at an incredible new value. Don’t wait!\n\n'+tag+' #PriceDrop',
+        'A refined opportunity at a new price point in '+d.area+'. Featuring '+fs+'.\n\n'+tag+' #PriceAdjustment',
+        'Great news! The price just dropped on this '+d.area+' property with '+fs+'. Now’s your chance!\n\n'+tag+' #PriceDrop'],
+      'Coming Soon':['Coming Soon to '+d.area+'. Featuring '+fs+'. Stay tuned.\n\n'+tag+' #ComingSoon',
+        'COMING SOON in '+d.area+'! Featuring '+fs+' — want first access? DM me!\n\n'+tag+' #ComingSoon',
+        'A new offering in '+d.area+'. Featuring '+fs+'. Pre-market details available.\n\n'+tag+' #ComingSoon',
+        'Something exciting is coming to '+d.area+'! Featuring '+fs+' — message me to get on the list!\n\n'+tag+' #ComingSoon']
+    };
+    var ti={'Professional':0,'Exciting':1,'Luxury':2,'Friendly':3};
+    var idx=ti[d.tone]||0;
+    var arr=C[d.type]||C['Just Listed'];
+    var cap=(arr[idx]||arr[0]);
+    return '<p class="cptxt" style="white-space:pre-wrap;background:var(--surf);border-radius:8px;padding:12px;font-size:14px;line-height:1.5">'+
+      cap.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
+  }
+  function buildDescription(d){
+    var bb=d.beds.match(/(\d+)\s*[\/,\s]\s*(\d+)/);
+    var beds=bb?bb[1]:'',baths=bb?bb[2]:'';
+    if(!beds){var m=d.beds.match(/\d+/);beds=m?m[0]:'';}
+    var feats=d.features.split(/,\s*|\s+and\s+/i).map(function(s){return s.trim()}).filter(Boolean);
+    var fs='';
+    if(feats.length>=3) fs=feats.slice(0,-1).join(', ')+' and '+feats[feats.length-1];
+    else if(feats.length===2) fs=feats[0]+' and '+feats[1];
+    else if(feats.length===1) fs=feats[0];
+    var lines=[];
+    lines.push('Welcome to this '+d.propType.toLowerCase()+' in '+d.area+'.');
+    if(beds&&baths&&d.sqft) lines.push('Offering '+beds+' bedrooms, '+baths+' bathrooms and '+d.sqft+' square feet of living space.');
+    else if(beds&&baths) lines.push('This '+beds+'-bedroom, '+baths+'-bathroom home is move-in ready.');
+    if(fs) lines.push('Highlights include '+fs+'.');
+    if(d.hood&&d.hood.trim()) lines.push('Conveniently situated near '+d.hood.trim()+'.');
+    lines.push('Schedule your private showing today!');
+    return '<p class="cptxt" style="white-space:pre-wrap;background:var(--surf);border-radius:8px;padding:12px;font-size:14px;line-height:1.5">'+
+      lines.join('\n\n').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
+  }
+  function buildRemarks(d){
+    var T={
+      'Showing Instructions':'[Lockbox on front door / Call listing agent 30 min prior / Tenant occupied, 24-hour notice required / Vacant, go and show]. Please remove shoes. Do not discuss price, terms or seller motivation with occupants.',
+      'Property Condition':'Seller is aware of [describe condition, e.g., roof age 15 yrs, HVAC replaced 2022, water heater 2020]. Buyer to verify all conditions during inspection period. [Add any known defects that must be disclosed per Florida law.]',
+      'Seller Motivation':'[Seller is motivated / Seller has relocated / Estate sale / Divorce sale / Short sale subject to lender approval]. [Seller prefers quick close / Seller flexible on closing date]. Do not share motivation with buyer or buyer’s agent.',
+      'Offer Terms':'Seller prefers [30-day close / title company: (name) / specific terms]. All offers must include pre-approval letter and proof of funds for cash offers. [Seller will not contribute to closing costs / Seller may contribute up to X%.] [Escalation clauses will / will not be considered.]',
+      'HOA / Restrictions':'HOA: [Name], dues $[amount] [monthly / quarterly / annually]. [Rental restrictions: min lease term / no rentals first X years / X% cap]. [Pet restrictions]. [Approval required, application fee $X, processing X days]. Buyer to verify all HOA documents during inspection period.'
+    };
+    var tmpl=T[d.cat]||'Enter your confidential remarks here.';
+    var html=tmpl.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    html=html.replace(/\[([^\]]+)\]/g,'<mark style="background:var(--mark,#fff3cd);padding:1px 4px;border-radius:3px">[$1]</mark>');
+    return '<p style="font-size:14px;margin-bottom:8px">Here is a template for <b>'+(d.cat||'').replace(/</g,'&lt;')+'</b>. Fill in the highlighted brackets:</p>'+
+      '<div class="cptxt" style="white-space:pre-wrap;background:var(--surf);border-radius:8px;padding:12px;font-size:14px;line-height:1.6">'+html+'</div>';
+  }
 
   function askMsg(m){
     if(m.who==='me') return '<div class="msg me"><div class="mav">'+ME+'</div>'+
@@ -5063,7 +5190,15 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       (askCite&&m.cites?'<div class="cites">'+m.cites.map(function(c){
         return '<span class="cite">'+c+'</span>'; }).join('')+'</div>':'')+
       '</div></article>';
-    return '<div class="msg"><div class="mav">A</div><div class="mbub">'+m.text+'</div></div>';
+    var html='<div class="msg"><div class="mav">A</div><div class="mbub">';
+    if(m.copyable) html+='<div class="cptxt-wrap">';
+    html+=m.text;
+    if(m.copyable) html+='</div><button class="cpbtn" type="button" style="margin-top:8px;background:var(--acc);color:#fff;border:none;border-radius:6px;padding:6px 16px;font-size:13px;cursor:pointer">Copy</button>';
+    if(m.btns) html+='<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:10px">'+m.btns.map(function(b){
+      return '<button class="qrbtn" type="button" data-qr="'+b.replace(/"/g,'&quot;')+'" style="background:var(--surf);border:1px solid var(--rule);border-radius:16px;padding:6px 14px;font-size:13px;cursor:pointer;color:var(--text);transition:background .15s">'+b+'</button>';
+    }).join('')+'</div>';
+    html+='</div></div>';
+    return html;
   }
   function askThreadHtml(){
     if(!askThread.length) return '<div class="empty" style="margin:0"><div class="et">Nothing asked yet</div>'+
@@ -5072,13 +5207,13 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
   }
   function pageAsk(){
     return '<div class="card" style="grid-area:1/1/2/4">'+
-      '<div class="eyebrow">Now you know</div>'+
-      '<div class="serifhead">Ask about the paperwork.</div>'+
-      '<div class="asksub">The ICA, the 32-section Operations and Compliance Manual, and the Florida Realtors '+
-      'and NAR form set. Every answer names the section it came from.</div>'+
+      '<div class="eyebrow">Your assistant</div>'+
+      '<div class="serifhead">How can I help?</div>'+
+      '<div class="asksub">Write captions, draft property descriptions, get help with confidential remarks, '+
+      'or ask anything about the ICA and the Manual. Pick a tool or type your question.</div>'+
       '<div class="composer">'+
         '<textarea class="cinput" id="askin" rows="2" aria-label="Ask a question" '+
-        'placeholder="Ask about the ICA, the manual, NAR or a Florida Realtors form&hellip;"></textarea>'+
+        'placeholder="Type a question, or pick a tool below&hellip;"></textarea>'+
         '<div class="cbar">'+
           '<button class="cbtn round" type="button" aria-label="Attach a document">+</button>'+
           '<button class="cbtn" type="button" id="askcite" aria-pressed="'+askCite+'">Cite sources</button>'+
@@ -5086,7 +5221,10 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
           '<button class="csend" type="button" id="asksend" aria-label="Send"><span class="si">&#8593;</span></button>'+
         '</div>'+
       '</div>'+
-      '<div class="sugg">'+ASK_QA.map(function(x,i){
+      '<div class="sugg">'+ASK_TOOLS.map(function(t){
+        return '<button class="sug tool" type="button" data-flow="'+t.id+'" style="background:var(--acc);color:#fff;border:none">'+t.label+'</button>';
+      }).join('')+'</div>'+
+      '<div class="sugg" style="margin-top:4px">'+ASK_QA.map(function(x,i){
         return '<button class="sug" type="button" data-ask="'+i+'">'+x.q+'</button>'; }).join('')+
       '</div>'+
       '<div class="disc">Answers are drafted from Aari&rsquo;s own documents, not legal advice. Where money, '+
@@ -5110,6 +5248,23 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     var t=document.getElementById('askthread'); if(!t) return;
     t.innerHTML=askThreadHtml();
     t.scrollTop=t.scrollHeight;
+    t.querySelectorAll('.qrbtn').forEach(function(b){
+      b.onclick=function(){
+        var val=b.getAttribute('data-qr');
+        askThread.push({who:'me',text:val.replace(/</g,'&lt;')});
+        advanceFlow(val);
+      };
+    });
+    t.querySelectorAll('.cpbtn').forEach(function(b){
+      b.onclick=function(){
+        var box=b.closest('.mbub').querySelector('.cptxt');
+        if(!box) return;
+        navigator.clipboard.writeText(box.innerText).then(function(){
+          b.textContent='Copied!';
+          setTimeout(function(){b.textContent='Copy'},1500);
+        });
+      };
+    });
   }
   function askSend(i){
     var qa=ASK_QA[i]; if(!qa) return;
@@ -5128,18 +5283,47 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     grid.querySelectorAll('[data-ask]').forEach(function(b){
       b.onclick=function(){ askSend(+b.getAttribute('data-ask')); };
     });
+    grid.querySelectorAll('[data-flow]').forEach(function(b){
+      b.onclick=function(){ startFlow(b.getAttribute('data-flow')); };
+    });
     var cite=document.getElementById('askcite');
     if(cite) cite.onclick=function(){
       askCite=!askCite; cite.setAttribute('aria-pressed',askCite?'true':'false'); askRepaint();
     };
     var clear=document.getElementById('askclear');
-    if(clear) clear.onclick=function(){ askThread=[]; askRepaint(); };
+    if(clear) clear.onclick=function(){ askThread=[]; askFlow=null;askStep=0;askData={}; askRepaint(); };
     send.onclick=function(){
       var el=document.getElementById('askin'), v=(el.value||'').trim();
-      if(!v) return askSend(askIdx++ % ASK_QA.length);
+      if(!v){
+        if(askFlow) return;
+        return askSend(askIdx++ % ASK_QA.length);
+      }
       askThread.push({who:'me',text:v.replace(/</g,'&lt;')});
+      el.value='';
+      if(askFlow==='broker'){
+        askThread.push({who:'ai',text:'<p>Sending your question to the broker...</p>'});
+        askRepaint();
+        sb.functions.invoke('realty-hub',{body:{action:'ask_question',question:v}}).then(function(r){
+          if(r.error){askThread[askThread.length-1]={who:'ai',text:'<p>Could not send. Try again later.</p>'};askRepaint();return;}
+          var d=r.data;if(typeof d==='string')try{d=JSON.parse(d);}catch(e){}
+          askThread[askThread.length-1]={who:'ai',text:d&&d.ok
+            ?'<p>Your question has been sent to the broker. You will hear back soon.</p>'
+            :'<p>Could not send: '+((d&&d.error)||'unknown error')+'</p>'};
+          askFlow=null;
+          askRepaint();
+        }).catch(function(){askThread[askThread.length-1]={who:'ai',text:'<p>Network error. Try again later.</p>'};askRepaint();});
+        return;
+      }
+      if(askFlow){
+        advanceFlow(v);
+        return;
+      }
+      var vl=v.toLowerCase();
+      if(vl.indexOf('caption')!==-1||vl.indexOf('post')!==-1){startFlow('caption');return;}
+      if(vl.indexOf('description')!==-1||vl.indexOf('listing')!==-1){startFlow('description');return;}
+      if(vl.indexOf('confidential')!==-1||vl.indexOf('remark')!==-1){startFlow('remarks');return;}
       askThread.push({who:'ai',text:'<p>Sending your question to the broker...</p>'});
-      el.value=''; askRepaint();
+      askRepaint();
       sb.functions.invoke('realty-hub',{body:{action:'ask_question',question:v}}).then(function(r){
         if(r.error){askThread[askThread.length-1]={who:'ai',text:'<p>Could not send. Try again later.</p>'};askRepaint();return;}
         var d=r.data;if(typeof d==='string')try{d=JSON.parse(d);}catch(e){}
