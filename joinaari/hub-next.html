@@ -5431,14 +5431,15 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       var d=new Date(s);
       return mos[d.getMonth()]+' '+d.getDate()+', '+d.getFullYear();
     }
-    function planLabel(c){
-      if(!c) return '';
-      var m={'70_30':'70 / 30','80_20':'80 / 20','90_10':'90 / 10','100_0':'100 / 0'};
-      return m[c]||c.replace(/_/g,' / ');
-    }
     var rows=_agmtsData.map(function(a){
       var dl=a.has_document?'<button type="button" class="chip gh" data-dl="'+esc(a.id)+'" style="cursor:pointer">Download</button>':'<span style="font-size:11px;color:var(--soft)">No document on file</span>';
-      return '<div class="row" style="align-items:center"><div style="flex:1;min-width:0"><div class="rname">'+esc(a.version_label||'Agreement')+'</div><div class="rmeta">Signed '+fmtDate(a.signed_at)+(a.commission_plan?' &middot; '+esc(planLabel(a.commission_plan)):'')+'</div></div><div>'+dl+'</div></div>';
+      var meta='Signed '+fmtDate(a.signed_at);
+      if(a.plan_label) meta+=' · '+esc(a.plan_label);
+      if(a.broker_countersigned_at) meta+=' · Countersigned '+fmtDate(a.broker_countersigned_at);
+      var sub='';
+      if(a.pdf_sha256) sub+='<div class="rmeta" style="font-size:10px;font-family:monospace;opacity:.55">'+esc(a.pdf_sha256)+'</div>';
+      if(a.record_note) sub+='<div class="rmeta">'+esc(a.record_note)+'</div>';
+      return '<div class="row" style="align-items:center"><div style="flex:1;min-width:0"><div class="rname">'+esc(a.version_label||'Agreement')+'</div><div class="rmeta">'+meta+'</div>'+sub+'</div><div>'+dl+'</div></div>';
     }).join('');
     return '<div class="card" style="grid-area:1/1/2/5">'+head('My Agreements','<span class="chip gh">'+_agmtsData.length+'</span>')+'<div class="rows">'+rows+'</div></div>';
   }
@@ -13918,6 +13919,5 @@ function wireResources(){
 <!--ICA_GATE_SLOT-->
 <!--TX_SLOT-->
 <!--BROKER_SLOT-->
-<!--AGREEMENTS_SLOT-->
 </body>
 </html>

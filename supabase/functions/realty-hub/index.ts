@@ -32,6 +32,16 @@ function planInfo(raw: string): { code: string; name: string; split: string; fee
   if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code: '100_max', name: 'Aari Max', split: '100/0', fee: '$99.00/month', feeAmount: '$99.00', article: 'a' }
   return null
 }
+function planDisplayLabel(code: string): string {
+  const labels: Record<string, string> = {
+    '70_30': '70/30, legacy',
+    '80_20': '80/20, legacy',
+    '75_25': 'Mentorship Path, 75/25',
+    '85_15': 'Aari Growth, 85/15',
+    '100_max': 'Aari Max, 100/0',
+  }
+  return labels[code] ?? code
+}
 function dedupeGlobals(html: string): string {
   return html.replace('const SB_URL=', 'window.SB_URL=').replace('const SB_KEY=', 'window.SB_KEY=').replace('const sb=window.supabase.createClient', 'window.sb=window.sb||window.supabase.createClient')
 }
@@ -48,14 +58,6 @@ function advanceDate(dateStr: string, frequency: string): string {
 async function gateScript(): Promise<string> {
   try {
     const { data } = await admin.from('realty_config').select('value').eq('key', 'ica_gate_js').maybeSingle()
-    const js = data?.value ?? ''
-    if (!js) return ''
-    return '<script>\n' + js + '\n</' + 'script>'
-  } catch (_e) { return '' }
-}
-async function agreementsScript(): Promise<string> {
-  try {
-    const { data } = await admin.from('realty_config').select('value').eq('key', 'hub_agreements_js').maybeSingle()
     const js = data?.value ?? ''
     if (!js) return ''
     return '<script>\n' + js + '\n</' + 'script>'
@@ -404,10 +406,10 @@ Deno.serve(async (req: Request) => {
 
     if (action === 'my_agreements') {
       const { data: rows } = await admin.from('realty_agreement_signatures')
-        .select('id, version_label, signed_at, commission_plan, pdf_path')
+        .select('id, version_label, signed_at, commission_plan, pdf_path, broker_countersigned_at, pdf_sha256, record_origin, record_note')
         .eq('agent_id', user.id)
         .order('signed_at', { ascending: false })
-      return json({ agreements: (rows ?? []).map(r => ({ id: r.id, version_label: r.version_label, signed_at: r.signed_at, commission_plan: r.commission_plan, has_document: !!r.pdf_path })) })
+      return json({ agreements: (rows ?? []).map(r => ({ id: r.id, version_label: r.version_label, signed_at: r.signed_at, commission_plan: r.commission_plan, plan_label: r.commission_plan ? planDisplayLabel(r.commission_plan) : null, has_document: !!r.pdf_path, broker_countersigned_at: r.broker_countersigned_at ?? null, pdf_sha256: r.pdf_sha256 ? String(r.pdf_sha256).slice(0, 12) : null, record_origin: r.record_origin ?? null, record_note: r.record_note ?? null })) })
     }
     if (action === 'agreement_download') {
       const sigId = String(body?.signature_id ?? '')
@@ -439,7 +441,6 @@ Deno.serve(async (req: Request) => {
   // behind instead of serving a page with no agreement check on it.
   if (!gate) await audit(user.id, 'realty_member', 'realty_hub_gate_empty', 'realty_members', user.id, { build }, req)
   html = inject(html, '<!--ICA_GATE_SLOT-->', gate)
-  html = inject(html, '<!--AGREEMENTS_SLOT-->', await agreementsScript())
   const patch: Record<string, unknown> = { last_login_at: new Date().toISOString() }
   if (!member.activated_at) patch.activated_at = new Date().toISOString()
   await admin.from('realty_members').update(patch).eq('user_id', user.id)
