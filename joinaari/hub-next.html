@@ -5137,13 +5137,17 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     send.onclick=function(){
       var el=document.getElementById('askin'), v=(el.value||'').trim();
       if(!v) return askSend(askIdx++ % ASK_QA.length);
-      // A typed question has no canned answer behind it; say so rather than
-      // inventing one, since this is compliance material.
       askThread.push({who:'me',text:v.replace(/</g,'&lt;')});
-      askThread.push({who:'ai',text:'<p>This mockup answers the three questions below the box. '+
-        'Wiring it to the real manual is a separate job, the text is already in the Hub, it needs '+
-        'a search index and a model call.</p>'});
+      askThread.push({who:'ai',text:'<p>Sending your question to the broker...</p>'});
       el.value=''; askRepaint();
+      sb.functions.invoke('realty-hub',{body:{action:'ask_question',question:v}}).then(function(r){
+        if(r.error){askThread[askThread.length-1]={who:'ai',text:'<p>Could not send. Try again later.</p>'};askRepaint();return;}
+        var d=r.data;if(typeof d==='string')try{d=JSON.parse(d);}catch(e){}
+        askThread[askThread.length-1]={who:'ai',text:d&&d.ok
+          ?'<p>Your question has been sent to the broker. You will hear back soon.</p>'
+          :'<p>Could not send: '+((d&&d.error)||'unknown error')+'</p>'};
+        askRepaint();
+      }).catch(function(){askThread[askThread.length-1]={who:'ai',text:'<p>Network error. Try again later.</p>'};askRepaint();});
     };
   }
 
