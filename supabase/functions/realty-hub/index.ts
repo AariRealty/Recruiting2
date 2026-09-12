@@ -426,16 +426,7 @@ Deno.serve(async (req: Request) => {
     return json({ error: 'unknown_action' }, 400)
   }
 
-  // Which document to serve. The preview query string is the override during
-  // the transition to hub_next and stays broker only, because widening it is
-  // the cutover itself and that is a decision, not a side effect of this
-  // change. The shell default is untouched.
-  //
-  // Both documents now go through the same composition below. hub_next used to
-  // return here, before dedupeGlobals and all three injects, which is why it
-  // carried no transaction module, no broker module, and, quietly, no ICA gate.
-  const wantsNext = new URL(req.url).searchParams.get('preview') === 'next' && member.role === 'broker'
-  const build = wantsNext ? 'hub_next.html' : 'hub_payload.html'
+  const build = 'hub_next.html'
 
   let html = await loadModule(build, modCtx)
   if (!html) { await audit(user.id, 'realty_member', 'realty_hub_payload_error', 'realty_members', user.id, { message: 'hub payload missing', build }, req); return json({ error: 'content_unavailable' }, 500) }
@@ -452,8 +443,6 @@ Deno.serve(async (req: Request) => {
   const patch: Record<string, unknown> = { last_login_at: new Date().toISOString() }
   if (!member.activated_at) patch.activated_at = new Date().toISOString()
   await admin.from('realty_members').update(patch).eq('user_id', user.id)
-  await audit(user.id, 'realty_member', wantsNext ? 'realty_hub_preview' : 'realty_hub_access', 'realty_members', user.id, { role: member.role, build }, req)
-  // The new build is not cached while it is still changing under her.
-  const cache = wantsNext ? 'no-store' : 'private, max-age=300, must-revalidate'
-  return new Response(html, { headers: { ...CORS, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': cache } })
+  await audit(user.id, 'realty_member', 'realty_hub_access', 'realty_members', user.id, { role: member.role, build }, req)
+  return new Response(html, { headers: { ...CORS, 'Content-Type': 'text/plain; charset=utf-8', 'Cache-Control': 'private, max-age=300, must-revalidate' } })
 })
