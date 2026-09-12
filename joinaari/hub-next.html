@@ -1932,10 +1932,8 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       z-index:3;overflow:hidden;
       margin:calc(0px - var(--bodypad)) calc(50% - 50vw) 0;
       background:radial-gradient(110% 70% at 50% 4%,#332b20 0%,#17130f 50%,#0b0a09 100%)}
-    .mcphoto{position:absolute;top:24%;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:center;
-      overflow:hidden;z-index:2;
-      -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 14%);
-      mask-image:linear-gradient(to bottom,transparent 0%,#000 14%)}
+    .mcphoto{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:center;
+      overflow:hidden;z-index:2}
     /* Fill the cover whatever shape the photograph is. Sizing by width let a
        shorter picture end partway down the screen, and its own top edge landed
        inside the fade -- which is exactly the hard line across the cover. With
@@ -1945,11 +1943,11 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     /* Two washes with a clear middle. Nine stops over a long run rather than
        a few over a short one -- a short gradient steps visibly and reads as a
        band laid on the photograph instead of light falling away. */
-    .mcsofttop{position:absolute;left:0;right:0;top:0;height:46%;z-index:4;pointer-events:none;
+    .mcsofttop{position:absolute;left:0;right:0;top:0;height:32%;z-index:4;pointer-events:none;
       background:linear-gradient(to bottom,
-        rgba(14,13,11,.74) 0%,  rgba(14,13,11,.66) 8%,  rgba(14,13,11,.55) 16%,
-        rgba(14,13,11,.42) 25%, rgba(14,13,11,.29) 36%, rgba(14,13,11,.17) 50%,
-        rgba(14,13,11,.09) 64%, rgba(14,13,11,.03) 82%, rgba(14,13,11,0) 100%)}
+        rgba(14,13,11,.38) 0%,  rgba(14,13,11,.32) 10%, rgba(14,13,11,.24) 22%,
+        rgba(14,13,11,.16) 36%, rgba(14,13,11,.09) 54%, rgba(14,13,11,.04) 74%,
+        rgba(14,13,11,0) 100%)}
     .mcsoftbot{position:absolute;left:0;right:0;bottom:0;height:44%;z-index:4;pointer-events:none;
       background:linear-gradient(to top,
         rgba(14,13,11,.80) 0%,  rgba(14,13,11,.70) 10%, rgba(14,13,11,.57) 20%,
