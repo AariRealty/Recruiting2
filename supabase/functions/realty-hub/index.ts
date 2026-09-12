@@ -449,7 +449,6 @@ Deno.serve(async (req: Request) => {
   if (!gate) await audit(user.id, 'realty_member', 'realty_hub_gate_empty', 'realty_members', user.id, { build }, req)
   html = inject(html, '<!--ICA_GATE_SLOT-->', gate)
   html = inject(html, '<!--AGREEMENTS_SLOT-->', await agreementsScript())
-  html = html.replace(/location\.replace\(location\.pathname\)/g, 'location.replace(location.pathname+location.search)')
   const patch: Record<string, unknown> = { last_login_at: new Date().toISOString() }
   if (!member.activated_at) patch.activated_at = new Date().toISOString()
   await admin.from('realty_members').update(patch).eq('user_id', user.id)
