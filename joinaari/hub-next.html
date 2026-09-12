@@ -12986,13 +12986,13 @@ function wireResources(){
         '<button type="button">Change photo</button></div></div>'+
       '<div class="mk">Your details</div>'+
       '<div class="mf">'+
-        fld('Licence',P.licence,0)+
-        fld('Licence expires','not on file',1)+
-        fld('Anniversary','not on file',1)+
-        fld('Phone',P.phone,0)+
-        fld('Email',P.email,0)+
-        fld('Home address','no field yet',1)+
-        fld('Counties',P.area,0)+
+        mfld('Licence',P.licence,0)+
+        mfld('Licence expires','not on file',1)+
+        mfld('Anniversary','not on file',1)+
+        mfld('Phone',P.phone,0)+
+        mfld('Email',P.email,0)+
+        mfld('Home address','no field yet',1)+
+        mfld('Counties',P.area,0)+
       '</div>'+
       '<div class="mnote"><b>Licence expires</b> and <b>Anniversary</b> are empty because join and '+
         'expiry dates live in the subscription notes and yours carries none, for the seven '+
@@ -13023,7 +13023,7 @@ function wireResources(){
     });
   }
 
-  function fld(label,value,missing){
+  function mfld(label,value,missing){
     return '<button class="mfr" type="button"><span class="lb">'+esc(label)+'</span>'+
       '<span class="vl'+(missing?' miss':'')+'">'+esc(value)+'</span>'+
       '<span class="go">&#8250;</span></button>';
