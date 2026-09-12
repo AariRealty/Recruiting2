@@ -13428,10 +13428,7 @@ function wireResources(){
   }
 
   function showSplashThenHub(member){
-    hideAll(); $loading.hidden=false;
-    var logo=$loading.querySelector('.al-logo');
-    if(logo){logo.style.animation='none';void logo.offsetHeight;logo.style.animation='alZoom 3s ease-in-out forwards';}
-    setTimeout(function(){ showHub(member); },2500);
+    showHub(member);
   }
 
   function showChangePass(member){
