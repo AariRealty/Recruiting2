@@ -1931,7 +1931,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     .mcover:not([hidden]){display:block;position:sticky;top:0;height:100vh;height:100dvh;
       z-index:3;overflow:hidden;
       margin:calc(0px - var(--bodypad)) calc(50% - 50vw) 0;
-      background:radial-gradient(110% 70% at 50% 4%,#332b20 0%,#17130f 50%,#0b0a09 100%)}
+      background:radial-gradient(110% 70% at 50% 4%,#1a1a1a 0%,#111 50%,#0a0a0a 100%)}
     .mcphoto{position:absolute;top:24%;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:center;
       overflow:hidden;z-index:2;
       -webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 14%);
@@ -1947,18 +1947,18 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
        band laid on the photograph instead of light falling away. */
     .mcsofttop{position:absolute;left:0;right:0;top:0;height:46%;z-index:4;pointer-events:none;
       background:linear-gradient(to bottom,
-        rgba(14,13,11,.74) 0%,  rgba(14,13,11,.66) 8%,  rgba(14,13,11,.55) 16%,
-        rgba(14,13,11,.42) 25%, rgba(14,13,11,.29) 36%, rgba(14,13,11,.17) 50%,
-        rgba(14,13,11,.09) 64%, rgba(14,13,11,.03) 82%, rgba(14,13,11,0) 100%)}
+        rgba(10,10,10,.74) 0%,  rgba(10,10,10,.66) 8%,  rgba(10,10,10,.55) 16%,
+        rgba(10,10,10,.42) 25%, rgba(10,10,10,.29) 36%, rgba(10,10,10,.17) 50%,
+        rgba(10,10,10,.09) 64%, rgba(10,10,10,.03) 82%, rgba(10,10,10,0) 100%)}
     .mcsoftbot{position:absolute;left:0;right:0;bottom:0;height:44%;z-index:4;pointer-events:none;
       background:linear-gradient(to top,
-        rgba(14,13,11,.80) 0%,  rgba(14,13,11,.70) 10%, rgba(14,13,11,.57) 20%,
-        rgba(14,13,11,.43) 31%, rgba(14,13,11,.30) 43%, rgba(14,13,11,.18) 56%,
-        rgba(14,13,11,.09) 71%, rgba(14,13,11,.03) 86%, rgba(14,13,11,0) 100%)}
+        rgba(10,10,10,.80) 0%,  rgba(10,10,10,.70) 10%, rgba(10,10,10,.57) 20%,
+        rgba(10,10,10,.43) 31%, rgba(10,10,10,.30) 43%, rgba(10,10,10,.18) 56%,
+        rgba(10,10,10,.09) 71%, rgba(10,10,10,.03) 86%, rgba(10,10,10,0) 100%)}
     /* Softer washes leave the words short of contrast, so each glyph carries
        its own shadow. A shadow has no edge; a deeper gradient would put the
        bands straight back. */
-    .mchead,.mcbottom{text-shadow:0 1px 14px rgba(11,10,9,.88),0 0 3px rgba(11,10,9,.55)}
+    .mchead,.mcbottom{text-shadow:0 1px 14px rgba(10,10,10,.88),0 0 3px rgba(10,10,10,.55)}
     /* top group: the welcome, the name, the day */
     /* The brand mark belongs on the cover -- that is the title page. It is the
        real artwork, not a set-by-hand version of it, turned white for the dark
@@ -1993,7 +1993,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
     @keyframes mcbreathe{0%,100%{opacity:.55;transform:translateY(0)}
       50%{opacity:1;transform:translateY(-3px)}}
     /* The menu is not on the cover at all. It rises with the sheet. */
-    body.mcov{background:#0b0a09}
+    body.mcov{background:#0a0a0a}
     body.mcov #btabs{transition:transform .34s var(--ease)}
     body.mcov.atcover #btabs{transform:translateY(calc(var(--navh, 98px) + 40px))}
     /* the hub, now a sheet that rises over the cover */
@@ -2003,7 +2003,7 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       padding-left:var(--bodypad);padding-right:var(--bodypad)}
     body.mcov .mcgrab{display:flex;flex-direction:column;align-items:center;gap:9px;width:100%;
       border:0;background:none;padding:11px 0 14px;font-family:inherit;cursor:pointer}
-    body.mcov .mcgrab i{width:38px;height:4px;border-radius:999px;background:#d8d3c8;display:block}
+    body.mcov .mcgrab i{width:38px;height:4px;border-radius:999px;background:#d0d0d0;display:block}
     body.mcov .mcgrab span{font-size:11.5px;letter-spacing:1.3px;text-transform:uppercase;
       font-weight:700;color:var(--soft)}
   }
@@ -3051,6 +3051,8 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
           <div class="framebtns">
             <button class="btn" type="button" id="framefit">Fit head</button>
             <button class="btn" type="button" id="framectr">Centre</button>
+            <button class="btn" type="button" id="framephoto">Change photo</button>
+            <input type="file" accept="image/*" id="f-photo" hidden>
           </div>
           <label class="rangelab" for="f-zoomy">Vertical</label>
           <input type="range" id="f-zoomy" min="0" max="100" step="1" aria-label="Vertical position">
@@ -10264,12 +10266,50 @@ body{font-family:'Montserrat',system-ui,sans-serif;-webkit-font-smoothing:antial
       var p=PROFILE[role];
       FIELDS.forEach(function(k){ fld(k).value=p[k]; });
       draftPos={x:p.pos.x,y:p.pos.y}; paintFrame();
+      if(frameimg&&p.photoUrl) frameimg.src=p.photoUrl;
       fld('plan').value=(role==='broker')?'Broker of record, not on an agent plan'
                                          :'100% Max &middot; fee exempt &middot; split 1.00';
       dlg.showModal();
     };
   }
   document.getElementById('editcancel').onclick=function(){ dlg.close(); };
+  var photoBtn=document.getElementById('framephoto'),
+      photoInput=document.getElementById('f-photo');
+  if(photoBtn&&photoInput){
+    photoBtn.onclick=function(){ photoInput.click(); };
+    photoInput.onchange=function(){
+      var file=photoInput.files[0]; if(!file) return;
+      var reader=new FileReader();
+      reader.onload=function(ev){
+        var img=new Image();
+        img.onload=function(){
+          var canvas=document.createElement('canvas');
+          var w=img.width,h=img.height;
+          if(w>800){h=h*(800/w);w=800;}
+          if(h>800){w=w*(800/h);h=800;}
+          canvas.width=w;canvas.height=h;
+          canvas.getContext('2d').drawImage(img,0,0,w,h);
+          canvas.toBlob(function(blob){
+            if(!window.__hubUploadPhoto) return;
+            photoBtn.disabled=true;photoBtn.textContent='Uploading…';
+            window.__hubUploadPhoto(blob,function(err,url){
+              photoBtn.disabled=false;photoBtn.textContent='Change photo';
+              if(err){alert('Upload failed: '+err);return;}
+              PROFILE[role].photoUrl=url;
+              if(frameimg) frameimg.src=url;
+              var pcI=document.querySelector('#pcard .photo img');
+              if(pcI){pcI.src=url;pcI.hidden=false;}
+              var mcI=document.querySelector('.mcphoto img');
+              if(mcI){mcI.src=url;mcI.hidden=false;}
+            });
+          },'image/webp',0.85);
+        };
+        img.src=ev.target.result;
+      };
+      reader.readAsDataURL(file);
+      photoInput.value='';
+    };
+  }
   // title and area have no database column — mark read-only
   (function(){
     var t=fld('title'),a=fld('area');
@@ -12880,6 +12920,7 @@ function wireResources(){
     document.getElementById('mcunit').textContent=f.u;
     var mcImg=cov.querySelector('.mcphoto img');
     if(mcImg) mcImg.hidden=((window.__memberRole||role)!=='broker');
+    if(mcImg&&PROFILE[role].photoUrl) mcImg.src=PROFILE[role].photoUrl;
   }
   /* Navigating to a page puts you at the top of it. Once you have come through
      the cover, the top of the page means the top of the hub, not the cover
@@ -13126,6 +13167,7 @@ function wireResources(){
     animate(); wireRsvp(); startDeck(); wireProfile(); wireToday(); wireAlso(); swArm(); wireBars(); wireCal(); wireGoal(); wireAsk(); wireTx(); wireSub(); wireDb(); wireResources(); wirePopby(); wireGoalEngine(); wireTxns();
     var _pcImg=document.querySelector('#pcard .photo img');
     if(_pcImg) _pcImg.hidden=!isB;
+    if(_pcImg&&PROFILE[role].photoUrl) _pcImg.src=PROFILE[role].photoUrl;
     var _pcMono=document.querySelector('#pcard .mono');
     if(_pcMono) _pcMono.textContent=ME;
     var gb=document.getElementById('gearbtn');
@@ -13410,11 +13452,13 @@ function wireResources(){
       window.__hubProfile[r].email=member.email||'';
       window.__hubProfile[r].phone=member.phone||'';
       window.__hubProfile[r].licence=member.license_number||'';
+      window.__hubProfile[r].photoUrl=member.photo_url||'';
       if(r==='broker'){
         window.__hubProfile.agent.name=name;
         window.__hubProfile.agent.email=member.email||'';
         window.__hubProfile.agent.phone=member.phone||'';
         window.__hubProfile.agent.licence=member.license_number||'';
+        window.__hubProfile.agent.photoUrl=member.photo_url||'';
       }
       if(member.commission_plan!==undefined){
         var sp=parseFloat(member.agent_split)||0;
@@ -13454,7 +13498,7 @@ function wireResources(){
 
   function resolveRole(user){
     sb.from('realty_members')
-      .select('role,full_name,status,email,phone,license_number,must_change_password,user_id,commission_plan,agent_split,fee_exempt')
+      .select('role,full_name,status,email,phone,license_number,must_change_password,user_id,commission_plan,agent_split,fee_exempt,photo_url')
       .eq('user_id',user.id)
       .single()
       .then(function(res){
@@ -13618,6 +13662,25 @@ function wireResources(){
           if(r.error){ cb&&cb(r.error.message); return; }
           cb&&cb(null);
         });
+    });
+  };
+
+  window.__hubUploadPhoto=function(blob,cb){
+    sb.auth.getSession().then(function(res){
+      if(!res.data||!res.data.session){cb('Not signed in');return;}
+      var uid=res.data.session.user.id;
+      var path='headshots/'+uid+'/photo.webp';
+      sb.storage.from('headshots').upload(path,blob,{
+        cacheControl:'3600',upsert:true,contentType:'image/webp'
+      }).then(function(r){
+        if(r.error){cb(r.error.message);return;}
+        var url=sb.storage.from('headshots').getPublicUrl(path).data.publicUrl+'?t='+Date.now();
+        sb.from('realty_members').update({photo_url:url,updated_at:new Date().toISOString()})
+          .eq('user_id',uid).then(function(r2){
+            if(r2.error){cb(r2.error.message);return;}
+            cb(null,url);
+          });
+      });
     });
   };
 
