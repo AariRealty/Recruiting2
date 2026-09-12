@@ -186,7 +186,7 @@ async function buildSignedPdf(baseBytes: Uint8Array, sigPngBytes: Uint8Array | n
   line('IP address: ' + (info.ip||'not recorded'), helv, 10);
   line('Device: ' + (info.ua||'not recorded').slice(0,80), helv, 9);
   line('Document hash (SHA-256): ' + info.sha.slice(0,48) + '…', helv, 8); y-=10;
-  const stmt = ['By signing above, the Associate intends to electronically sign this Agreement and consents to','the use of electronic records and signatures. Under the federal ESIGN Act (15 U.S.C. § 7001 et','seq.) and Florida's Uniform Electronic Transactions Act (Ch. 668, Fla. Stat.), this electronic','signature has the same legal force and effect as a handwritten signature.'];
+  const stmt = ['By signing above, the Associate intends to electronically sign this Agreement and consents to','the use of electronic records and signatures. Under the federal ESIGN Act (15 U.S.C. § 7001 et','seq.) and Florida\'s Uniform Electronic Transactions Act (Ch. 668, Fla. Stat.), this electronic','signature has the same legal force and effect as a handwritten signature.'];
   page.drawText('ESIGN / UETA CONSENT', { x:56, y, size:7.5, font:helvB, color:gray }); y-=14;
   for(const l of stmt){ page.drawText(l, { x:56, y, size:8.5, font:helv, color:body }); y-=13; }
   page.drawRectangle({ x:0, y:0, width:612, height:34, color:dark });
