@@ -137,8 +137,105 @@ body.embed .ica-tabs{top:0}
   .ica-tab-btn{font-size:10px;padding:8px 13px}
 }
 </style>
+<style>
+:root{
+  --promo-bg:#141210;
+  --promo-fg:#ffffff;
+  --promo-accent:#c9a227;
+}
+#promo-bar{
+  position:sticky;top:0;z-index:9000;
+  background:var(--promo-bg);color:var(--promo-fg);
+  font-family:inherit;font-size:14px;line-height:1.4;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:11px 44px 11px 16px;text-align:center;
+}
+#promo-bar b{font-weight:700}
+#promo-bar .promo-code{
+  border:1px solid rgba(255,255,255,.45);border-radius:3px;
+  padding:2px 8px;letter-spacing:1px;font-weight:700;white-space:nowrap;
+}
+#promo-bar a{color:var(--promo-fg);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+#promo-bar .promo-x{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:0;color:var(--promo-fg);opacity:.6;
+  font-size:20px;line-height:1;cursor:pointer;padding:4px 8px;
+}
+#promo-bar .promo-x:hover{opacity:1}
+@media(max-width:700px){
+  #promo-bar{font-size:12.5px;padding:10px 40px 10px 12px;gap:8px;flex-wrap:wrap}
+}
+
+#promo-modal{
+  position:fixed;inset:0;z-index:9500;
+  background:rgba(10,9,8,.72);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .35s cubic-bezier(.16,1,.3,1);
+}
+#promo-modal.show{opacity:1;pointer-events:auto}
+#promo-modal .promo-card{
+  background:#fff;color:#141210;max-width:460px;width:100%;
+  padding:40px 34px 30px;border-radius:4px;position:relative;
+  transform:translateY(14px);transition:transform .45s cubic-bezier(.16,1,.3,1);
+  max-height:90vh;overflow-y:auto;
+}
+#promo-modal.show .promo-card{transform:none}
+#promo-modal .promo-eyebrow{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  font-weight:700;color:var(--promo-accent);margin:0 0 12px;
+}
+#promo-modal h2{font-size:27px;line-height:1.2;margin:0 0 14px;font-weight:600}
+#promo-modal p{font-size:15px;line-height:1.6;margin:0 0 16px}
+#promo-modal .promo-code-big{
+  display:block;text-align:center;border:1px dashed #141210;border-radius:4px;
+  padding:13px;font-size:20px;font-weight:700;letter-spacing:3px;margin:0 0 18px;
+}
+#promo-modal .promo-cta{
+  display:block;text-align:center;background:#141210;color:#fff;
+  text-decoration:none;padding:14px 32px;border-radius:4px;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  transition:opacity .3s ease;
+}
+#promo-modal .promo-cta:hover{opacity:.82}
+#promo-modal .promo-terms{font-size:11.5px;line-height:1.55;color:#6d6a64;margin:16px 0 0}
+#promo-modal .promo-x{
+  position:absolute;right:12px;top:10px;background:none;border:0;
+  font-size:26px;line-height:1;color:#141210;opacity:.45;cursor:pointer;padding:4px 8px;
+}
+#promo-modal .promo-x:hover{opacity:1}
+@media(max-width:560px){
+  #promo-modal .promo-card{padding:34px 22px 26px}
+  #promo-modal h2{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){
+  #promo-modal,#promo-modal .promo-card{transition:none}
+}
+</style>
 </head>
 <body>
+<div id="promo-bar" hidden>
+  <span><b>$199 off your first year.</b> <span id="promo-bar-when"></span></span>
+  <span class="promo-code">SWITCH199</span>
+  <a href="/commission-plans.html">See the plans</a>
+  <button class="promo-x" type="button" aria-label="Dismiss">&times;</button>
+</div>
+
+<div id="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title" hidden>
+  <div class="promo-card">
+    <button class="promo-x" type="button" aria-label="Close">&times;</button>
+    <p class="promo-eyebrow">Limited to 25 agents</p>
+    <h2 id="promo-modal-title">Switching brokerages costs money. This covers it.</h2>
+    <p>Moving is the expensive part. Board transfer, new signage, the gap while your files settle. We are waiving $199 of your first year compliance cost so the move itself is not the reason you stay.</p>
+    <p>Use this code at checkout.</p>
+    <span class="promo-code-big">SWITCH199</span>
+    <a class="promo-cta" href="/commission-plans.html">See the plans</a>
+    <p class="promo-terms">
+      $199 off the first year compliance charge, applied once at checkout with code SWITCH199.
+      Limited to the first 25 agents. Offer ends 31 March 2027. New Aari Realty agents only.
+      Cannot be combined with another offer. Aari Realty LLC.
+    </p>
+  </div>
+</div>
 
 <nav>
   <a class="brand" href="/"><span class="brand-text">Aari Realty<small>Southwest Florida Brokerage</small></span><img class="brand-img" src="logo.png" alt="Aari Realty" /></a>
@@ -355,6 +452,59 @@ bubble.addEventListener('click',openChat);
 closeBtn.addEventListener('click',function(){panel.classList.remove('open');bubble.classList.remove('open');});
 sendBtn.addEventListener('click',function(){var v=input.value.trim();if(v)handleQ(v);});
 input.addEventListener('keydown',function(e){if(e.key==='Enter'){var v=input.value.trim();if(v)handleQ(v);}});
+})();
+</script>
+<script>
+(function(){
+  var END   = new Date('2027-03-31T23:59:59-04:00');
+  var NOW   = new Date();
+  if (NOW >= END) return;
+
+  var bar   = document.getElementById('promo-bar');
+  var modal = document.getElementById('promo-modal');
+  if (!bar || !modal) return;
+
+  function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function read(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function fresh(k,days){
+    var t = read(k);
+    return t && (Date.now() - Number(t)) < days*864e5;
+  }
+
+  var days = Math.ceil((END - NOW)/864e5);
+  document.getElementById('promo-bar-when').textContent =
+    days <= 30 ? (days === 1 ? 'Last day.' : days + ' days left.') : 'Ends March 31.';
+
+  if (!fresh('aariPromoBarDismissed', 30)) bar.hidden = false;
+  bar.querySelector('.promo-x').addEventListener('click', function(){
+    bar.hidden = true;
+    store('aariPromoBarDismissed', Date.now());
+  });
+
+  if (fresh('aariPromoModalSeen', 30)) return;
+
+  var opened = false;
+  function open(){
+    if (opened) return;
+    opened = true;
+    modal.hidden = false;
+    requestAnimationFrame(function(){ modal.classList.add('show'); });
+    store('aariPromoModalSeen', Date.now());
+    document.removeEventListener('mouseout', exit);
+  }
+  function close(){
+    modal.classList.remove('show');
+    setTimeout(function(){ modal.hidden = true; }, 400);
+  }
+  function exit(e){ if (!e.relatedTarget && e.clientY <= 0) open(); }
+
+  var timer = setTimeout(open, 8000);
+  document.addEventListener('mouseout', exit);
+
+  modal.querySelector('.promo-x').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) close(); });
+  modal.querySelector('.promo-cta').addEventListener('click', function(){ clearTimeout(timer); });
 })();
 </script>
 </body>
