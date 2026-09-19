@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="canonical" href="https://joinaari.com/cost" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Real Estate Brokerage Cost Calculator","provider":{"@type":"RealEstateAgent","name":"Aari Realty LLC","url":"https://joinaari.com/"},"description":"Calculate what your brokerage actually costs you per year. Compare your current fees against Aari Realty side-by-side.","areaServed":["Fort Myers","Cape Coral","Lehigh Acres","Southwest Florida"]}</script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="What Does Your Brokerage Cost? | Aari Realty">
+<meta property="og:description" content="Calculate what your brokerage actually costs you per year. Side-by-side comparison with live numbers.">
+<meta property="og:image" content="https://joinaari.com/og-image.png">
+<meta property="og:url" content="https://joinaari.com/cost">
+<meta property="og:site_name" content="Aari Realty">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Does Your Brokerage Cost? | Aari Realty">
+<meta name="twitter:description" content="Calculate what your brokerage actually costs you per year. Side-by-side comparison with live numbers.">
+<meta name="twitter:image" content="https://joinaari.com/og-image.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cost Calculator | Aari Realty</title>
+<meta name="description" content="Calculate what your brokerage actually costs you per year. Enter your deal info, fill in your current fees, and compare against Aari Realty side-by-side. No data stored.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#141210;--black:#0a0908;--bg:#fff;--off:#f6f4f0;--cream:#efe9df;--mid:#6b6b6b;--lite:#9b948a;--border:#e7e4dc;--green:#2f6b46}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:15px 44px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;line-height:1}
+.brand small{display:block;font-family:'Montserrat',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mid);margin-top:3px}
+.brand-img{display:block;height:42px;width:auto}
+.brand-text{display:none}
+.nav-right{display:flex;align-items:center;gap:26px}
+.nav-link{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);transition:color .2s}
+.nav-link:hover{color:var(--ink)}
+.nav-phone{font-size:11px;font-weight:500;letter-spacing:.06em;color:var(--mid)}
+.nav-hamburger{display:none}
+.nav-menu{display:none}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;border-radius:50px;padding:13px 26px;transition:.2s}
+.btn-dark{border:1px solid var(--ink);background:var(--ink);color:#fff}
+.btn-dark:hover{background:#000}
+
+.wrap{max-width:940px;margin:0 auto;padding:0 44px}
+
+.hero{padding:56px 44px 36px;text-align:center}
+.hero-eye{font-size:10px;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--lite);margin-bottom:14px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(30px,5vw,48px);line-height:1.06;margin-bottom:10px}
+.hero h1 em{font-style:italic;color:var(--lite)}
+.hero-sub{font-size:13px;color:var(--mid);max-width:440px;margin:0 auto}
+.hero-note{font-size:10px;color:var(--lite);margin-top:12px;letter-spacing:.04em}
+
+.deal{padding:0 44px 28px}
+.deal-inner{max-width:640px;margin:0 auto}
+.deal-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.deal-field{background:var(--off);border-radius:14px;padding:16px 16px 14px}
+.deal-lbl{font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--lite);margin-bottom:5px}
+.deal-input{width:100%;border:none;background:transparent;font-family:'Montserrat',sans-serif;font-size:17px;font-weight:700;color:var(--ink);outline:none}
+
+.columns{padding:0 44px 28px}
+.columns-inner{max-width:640px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.col{border-radius:20px;padding:28px 22px;box-shadow:0 4px 24px rgba(20,18,16,.05)}
+.col-eye{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:4px}
+.col-title{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin-bottom:22px;line-height:1.1}
+.col-row{margin-bottom:16px}
+.col-row:last-child{margin-bottom:0}
+.col-row-lbl{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:5px}
+.col-them{background:#fff;border:1px solid var(--border)}
+.col-them .col-eye{color:var(--lite)}
+.col-them .col-title{color:var(--ink)}
+.col-them .col-row-lbl{color:var(--lite)}
+.col-them .ci{width:100%;border:1px solid var(--border);border-radius:10px;padding:11px 12px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
+.col-them .ci:focus{border-color:var(--ink);background:#fff}
+.col-aari{background:var(--ink);color:#fff}
+.col-aari .col-eye{color:rgba(255,255,255,.35)}
+.col-aari .col-title{color:#fff}
+.col-aari .col-row-lbl{color:rgba(255,255,255,.35)}
+.col-aari .cs{font-family:'Montserrat',sans-serif;font-size:14px;font-weight:700;color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:11px 12px}
+.plan-tabs{display:flex;gap:6px;margin-bottom:18px}
+.plan-tab{flex:1;text-align:center;font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:8px 4px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.45);transition:.2s}
+.plan-tab.active{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.3)}
+
+.results{background:var(--off);padding:32px 44px}
+.results-inner{max-width:640px;margin:0 auto}
+.res-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.res{border-radius:18px;padding:26px 20px;text-align:center;box-shadow:0 2px 16px rgba(20,18,16,.04)}
+.res-them{background:#fff}
+.res-aari{background:var(--ink);color:#fff}
+.res-eye{font-size:8px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px}
+.res-them .res-eye{color:var(--lite)}
+.res-aari .res-eye{color:rgba(255,255,255,.4)}
+.res-num{font-family:'Montserrat',sans-serif;font-weight:800;line-height:1;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.res-them .res-num{font-size:clamp(20px,3.5vw,26px);color:var(--mid)}
+.res-aari .res-num{font-size:clamp(22px,4vw,28px);color:#fff}
+.res-detail{font-size:9px;line-height:1.4}
+.res-them .res-detail{color:var(--lite)}
+.res-aari .res-detail{color:rgba(255,255,255,.4)}
+.res-bar{height:4px;border-radius:50px;margin-top:14px;transition:width .5s cubic-bezier(.22,1,.36,1)}
+.res-them .res-bar{background:var(--border)}
+.res-aari .res-bar{background:rgba(255,255,255,.25)}
+
+.diff{background:var(--cream);border-radius:18px;padding:28px;text-align:center;box-shadow:0 2px 16px rgba(20,18,16,.04)}
+.diff-eye{font-size:8px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--lite);margin-bottom:6px}
+.diff-num{font-family:'Montserrat',sans-serif;font-size:clamp(28px,6vw,38px);font-weight:800;color:var(--ink);line-height:1;margin-bottom:4px;font-variant-numeric:tabular-nums}
+.diff-sub{font-size:11px;color:var(--mid)}
+
+.optin{padding:52px 44px;text-align:center;background:var(--bg)}
+.optin-inner{max-width:460px;margin:0 auto}
+.optin-eye{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--lite);margin-bottom:12px}
+.optin h2{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,36px);font-weight:500;line-height:1.1;margin-bottom:10px}
+.optin-sub{font-size:13px;color:var(--mid);line-height:1.6;margin-bottom:28px}
+.optin-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.optin-field{border:1px solid var(--border);border-radius:10px;padding:13px 14px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:500;color:var(--ink);background:var(--off);outline:none;transition:border-color .2s}
+.optin-field:focus{border-color:var(--ink);background:#fff}
+.optin-field::placeholder{color:var(--lite)}
+.optin-submit{grid-column:1/-1;background:var(--ink);color:#fff;border:none;border-radius:50px;padding:15px 28px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:.2s}
+.optin-submit:hover{background:#000}
+.optin-submit:disabled{opacity:.5;cursor:default}
+.optin-consent{font-size:10.5px;color:var(--lite);line-height:1.6;max-width:380px;margin:0 auto}
+.optin-consent a{text-decoration:underline;text-underline-offset:2px}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;width:0;overflow:hidden;tab-index:-1}
+.optin-ok{display:none;padding:24px;text-align:center}
+.optin-ok h3{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:8px}
+.optin-ok p{font-size:13px;color:var(--mid);line-height:1.6}
+
+.nm-btn{text-align:center;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:12px;padding:14px 16px;text-decoration:none}
+.nm-btn-dark{background:var(--ink);color:#fff}
+.nm-btn-outline{background:#fff;color:var(--ink);border:1px solid var(--border)}
+
+footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;padding:22px;font-size:11px}
+
+@media(max-width:640px){
+  nav{padding:12px 16px}
+  .nav-right .nav-link,.nav-phone{display:none}.nav-right .nav-login{display:inline}
+  .nav-right{gap:10px}
+  .nav-right .btn{display:none!important}
+  .brand-text{display:none}
+  .brand-img{display:block;height:42px;width:auto}
+  .nav-hamburger{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;border:none;background:none;cursor:pointer;padding:4px}
+  .nav-hamburger span{display:block;width:20px;height:1.5px;background:var(--ink);border-radius:1px;transition:transform .25s,opacity .25s}
+  .nav-hamburger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-hamburger.open span:nth-child(2){opacity:0}
+  .nav-hamburger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  .nav-menu{display:none;position:fixed;top:57px;left:0;right:0;z-index:59;background:var(--off);padding:16px 16px 20px;border-bottom:1px solid var(--border)}
+  .nav-menu.open{display:block}
+  .nav-menu-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .nav-menu-links li a{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#fff;border-radius:12px;font-family:'Montserrat',sans-serif;font-size:14px;font-weight:600;color:var(--ink);text-decoration:none;box-shadow:0 1px 3px rgba(20,18,16,.04)}
+  .nav-menu-links li a .nm-arrow{font-size:12px;color:var(--lite)}
+  .nav-menu-actions{margin-top:14px;display:flex;gap:8px}
+  .nav-menu-actions .nm-btn{flex:1}
+  .nav-menu-bottom{margin-top:14px;display:flex;align-items:center;justify-content:space-between;padding:0 4px}
+  .nav-menu-phone{font-size:12px;font-weight:500;color:var(--mid);text-decoration:none}
+  .nav-menu-login{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);text-decoration:none}
+  .hero{padding:36px 22px 28px}
+  .deal{padding:0 22px 20px}
+  .deal-row{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .deal-field{padding:12px 12px 10px}
+  .deal-input{font-size:15px}
+  .columns{padding:0 22px 24px}
+  .columns-inner{grid-template-columns:1fr;gap:14px}
+  .col{padding:24px 20px}
+  .results{padding:24px 22px}
+  .res-row{gap:12px}
+  .res{padding:22px 16px}
+  .diff{padding:24px 20px}
+  .optin{padding:36px 22px}
+  .optin-form{grid-template-columns:1fr}
+  .wrap{padding:0 22px}
+}
+</style>
+<style>
+:root{
+  --promo-bg:#141210;
+  --promo-fg:#ffffff;
+  --promo-accent:#141210;
+}
+#promo-bar{
+  position:sticky;top:0;z-index:9000;
+  background:var(--promo-bg);color:var(--promo-fg);
+  font-family:inherit;font-size:14px;line-height:1.4;
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  padding:11px 44px 11px 16px;text-align:center;
+}
+#promo-bar b{font-weight:700}
+#promo-bar .promo-code{
+  border:1px solid rgba(255,255,255,.45);border-radius:3px;
+  padding:2px 8px;letter-spacing:1px;font-weight:700;white-space:nowrap;
+}
+#promo-bar a{color:var(--promo-fg);text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+#promo-bar .promo-x{
+  position:absolute;right:12px;top:50%;transform:translateY(-50%);
+  background:none;border:0;color:var(--promo-fg);opacity:.6;
+  font-size:20px;line-height:1;cursor:pointer;padding:4px 8px;
+}
+#promo-bar .promo-x:hover{opacity:1}
+@media(max-width:700px){
+  #promo-bar{font-size:12.5px;padding:10px 40px 10px 12px;gap:8px;flex-wrap:wrap}
+}
+
+#promo-modal{
+  position:fixed;inset:0;z-index:9500;
+  background:rgba(10,9,8,.72);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .35s cubic-bezier(.16,1,.3,1);
+}
+#promo-modal.show{opacity:1;pointer-events:auto}
+#promo-modal .promo-card{
+  background:#fff;color:#141210;max-width:460px;width:100%;
+  padding:40px 34px 30px;border-radius:4px;position:relative;
+  transform:translateY(14px);transition:transform .45s cubic-bezier(.16,1,.3,1);
+  max-height:90vh;overflow-y:auto;
+}
+#promo-modal.show .promo-card{transform:none}
+#promo-modal .promo-eyebrow{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  font-weight:700;color:var(--promo-accent);margin:0 0 12px;
+}
+#promo-modal h2{font-size:27px;line-height:1.2;margin:0 0 14px;font-weight:600}
+#promo-modal p{font-size:15px;line-height:1.6;margin:0 0 16px}
+#promo-modal .promo-code-big{
+  display:block;text-align:center;border:1px dashed #141210;border-radius:4px;
+  padding:13px;font-size:20px;font-weight:700;letter-spacing:3px;margin:0 0 18px;
+}
+#promo-modal .promo-cta{
+  display:block;text-align:center;background:#141210;color:#fff;
+  text-decoration:none;padding:14px 32px;border-radius:4px;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  transition:opacity .3s ease;
+}
+#promo-modal .promo-cta:hover{opacity:.82}
+#promo-modal .promo-terms{font-size:11.5px;line-height:1.55;color:#6d6a64;margin:16px 0 0}
+#promo-modal .promo-x{
+  position:absolute;right:12px;top:10px;background:none;border:0;
+  font-size:26px;line-height:1;color:#141210;opacity:.45;cursor:pointer;padding:4px 8px;
+}
+#promo-modal .promo-x:hover{opacity:1}
+@media(max-width:560px){
+  #promo-modal .promo-card{padding:34px 22px 26px}
+  #promo-modal h2{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){
+  #promo-modal,#promo-modal .promo-card{transition:none}
+}
+</style>
+</head>
+<body>
+<div id="promo-bar" hidden>
+  <span><b>First 25 agents switching to Aari:</b> <span id="promo-bar-when"></span></span>
+  <span class="promo-code">SWITCH199</span>
+  <a href="/commission-plans.html">See the plans</a>
+  <button class="promo-x" type="button" aria-label="Dismiss">&times;</button>
+</div>
+
+<div id="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title" hidden>
+  <div class="promo-card">
+    <button class="promo-x" type="button" aria-label="Close">&times;</button>
+    <p class="promo-eyebrow">Limited to 25 agents</p>
+    <h2 id="promo-modal-title">Switching brokerages costs money. This covers it.</h2>
+    <p>Moving is the expensive part. Board transfer, new signage, the gap while your files settle. We are waiving $199 of your first year compliance cost so the move itself is not the reason you stay.</p>
+    <p>Use this code at checkout.</p>
+    <span class="promo-code-big">SWITCH199</span>
+    <a class="promo-cta" href="/commission-plans.html">See the plans</a>
+    <p class="promo-terms">
+      $199 off the first year compliance charge, applied once at checkout with code SWITCH199.
+      Limited to the first 25 agents. Offer ends 31 March 2027. New Aari Realty agents only.
+      Cannot be combined with another offer. Aari Realty LLC.
+    </p>
+  </div>
+</div>
+
+<nav>
+  <a class="brand" href="/index.html"><span class="brand-text">Aari Realty<small>Southwest Florida Brokerage</small></span><img class="brand-img" src="logo.png" alt="Aari Realty" /></a>
+  <div class="nav-right">
+    <a class="nav-link" href="/index.html#plans">Plans</a>
+    <a class="nav-link" href="/mentorship.html">Mentorship</a>
+    <a class="nav-link" href="/index.html#how">How it works</a>
+    <a class="nav-link" href="/index.html#faq">FAQ</a>
+    <a class="nav-link" href="/ica-preview.html">ICA</a>
+    <a class="nav-link" href="/blog">Blog</a>
+    <a class="nav-link nav-login" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in</a>
+    <span class="nav-phone">239.688.1770</span>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    <a class="btn btn-dark" href="/index.html#plans">Apply &rarr;</a>
+  </div>
+</nav>
+<div class="nav-menu" id="navMenu">
+  <ul class="nav-menu-links">
+    <li><a href="/index.html#plans">Plans <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="/mentorship.html">Mentorship <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="/index.html#how">How it works <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="/index.html#faq">FAQ <span class="nm-arrow">&rarr;</span></a></li>
+    <li><a href="/ica-preview.html">ICA Package <span class="nm-arrow">&rarr;</span></a></li>
+  </ul>
+  <div class="nav-menu-actions">
+    <a class="nm-btn nm-btn-dark" href="/index.html#plans">Apply &rarr;</a>
+    <a class="nm-btn nm-btn-outline" href="sms:2396881771">Chat &rarr;</a>
+  </div>
+  <div class="nav-menu-bottom">
+    <a class="nav-menu-phone" href="tel:2396881770">239.688.1770</a>
+    <a class="nav-menu-login" href="https://hub.joinaari.com" target="_blank" rel="noopener">Log in &rarr;</a>
+  </div>
+</div>
+
+<section class="hero">
+  <p class="hero-eye">Cost Calculator</p>
+  <h1>What does your brokerage <em>actually cost?</em></h1>
+  <p class="hero-sub">Enter your deal info, fill in your current fees, and see the difference.</p>
+  <p class="hero-note">Nothing you enter is stored or transmitted. The math runs in your browser.</p>
+</section>
+
+<section class="deal">
+  <div class="deal-inner">
+    <div class="deal-row">
+      <div class="deal-field">
+        <p class="deal-lbl">Avg Sale Price</p>
+        <input class="deal-input" id="price" value="$400,000" inputmode="numeric">
+      </div>
+      <div class="deal-field">
+        <p class="deal-lbl">Commission %</p>
+        <input class="deal-input" id="comm" value="3" inputmode="decimal">
+      </div>
+      <div class="deal-field">
+        <p class="deal-lbl">Deals / Year</p>
+        <input class="deal-input" id="deals" value="12" inputmode="numeric">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="columns">
+  <div class="columns-inner">
+    <div class="col col-them">
+      <p class="col-eye">Edit these</p>
+      <p class="col-title">Your brokerage</p>
+      <div class="col-row">
+        <p class="col-row-lbl">Agent Split %</p>
+        <input class="ci" id="tSplit" value="70" inputmode="numeric">
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Monthly Fee</p>
+        <input class="ci" id="tMonthly" value="$200" inputmode="numeric">
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">E&amp;O / Compliance (Annual)</p>
+        <input class="ci" id="tEO" value="$500" inputmode="numeric">
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Transaction Fee</p>
+        <input class="ci" id="tTxn" value="$400" inputmode="numeric">
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Franchise Fee %</p>
+        <input class="ci" id="tFranchise" value="6" inputmode="decimal">
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Technology Fee (Monthly)</p>
+        <input class="ci" id="tTech" value="$50" inputmode="numeric">
+      </div>
+    </div>
+    <div class="col col-aari">
+      <p class="col-eye">Aari Realty</p>
+      <p class="col-title">Your new numbers</p>
+      <div class="plan-tabs" id="planTabs">
+        <button class="plan-tab" data-plan="mentor">75/25</button>
+        <button class="plan-tab" data-plan="growth">85/15</button>
+        <button class="plan-tab active" data-plan="max">100%</button>
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Agent Split</p>
+        <div class="cs" id="aSplit">100%</div>
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Monthly Fee</p>
+        <div class="cs" id="aMonthly">$99/mo</div>
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">E&amp;O / Compliance (Annual)</p>
+        <div class="cs" id="aEO">$199</div>
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Transaction Fee</p>
+        <div class="cs" id="aTxn">$499</div>
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Franchise Fee</p>
+        <div class="cs">0%</div>
+      </div>
+      <div class="col-row">
+        <p class="col-row-lbl">Technology Fee</p>
+        <div class="cs">$0</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="results">
+  <div class="results-inner">
+    <div class="res-row">
+      <div class="res res-them">
+        <p class="res-eye">Your Brokerage</p>
+        <p class="res-num" id="rThem">$0</p>
+        <p class="res-detail" id="rThemDetail">per year after fees</p>
+        <div class="res-bar" id="rThemBar" style="width:0;background:var(--border)"></div>
+      </div>
+      <div class="res res-aari">
+        <p class="res-eye">Aari Realty</p>
+        <p class="res-num" id="rAari">$0</p>
+        <p class="res-detail" id="rAariDetail">per year after fees</p>
+        <div class="res-bar" id="rAariBar" style="width:0;background:rgba(255,255,255,.25)"></div>
+      </div>
+    </div>
+    <div class="diff" id="diffCard">
+      <p class="diff-eye">You Keep More At Aari</p>
+      <p class="diff-num" id="diffNum">$0</p>
+      <p class="diff-sub" id="diffSub">more per year</p>
+    </div>
+  </div>
+</section>
+
+<section class="optin" id="optinSection">
+  <div class="optin-inner">
+    <p class="optin-eye">Take This With You</p>
+    <h2>Get the spreadsheet version</h2>
+    <p class="optin-sub">Same line items, same formulas, yours to keep. Change the numbers and it recalculates in Excel or Google Sheets.</p>
+    <form id="optinForm" class="optin-form" autocomplete="on">
+      <input class="optin-field" type="text" name="first_name" id="optName" placeholder="First name" required autocomplete="given-name">
+      <input class="optin-field" type="email" name="email" id="optEmail" placeholder="Email" required autocomplete="email">
+      <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off">
+      <button class="optin-submit" type="submit" id="optBtn">Send me the spreadsheet</button>
+    </form>
+    <p class="optin-consent">By submitting, you are requesting the cost comparison spreadsheet and agreeing to receive our monthly newsletter for Southwest Florida agents. Unsubscribe anytime. <a href="/privacy.html">Privacy policy</a>.</p>
+    <div class="optin-ok" id="optinOk">
+      <h3>Check your inbox.</h3>
+      <p>We sent a confirmation link. Click it and the spreadsheet is yours.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905 &middot; Broker: Marlenyi L. Paredes &middot; License BK3530153 &middot; <a href="/privacy.html" style="color:rgba(255,255,255,.55);text-decoration:underline;text-underline-offset:2px">Privacy</a> &middot; <a href="/terms.html" style="color:rgba(255,255,255,.55);text-decoration:underline;text-underline-offset:2px">Terms</a>
+</footer>
+
+<script>
+(function(){
+  var ham = document.getElementById('navHamburger');
+  var menu = document.getElementById('navMenu');
+  if (ham && menu) {
+    ham.addEventListener('click', function(){ ham.classList.toggle('open'); menu.classList.toggle('open'); });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var plans = {
+    mentor: { split: 75, monthly: 59, label: '75%', monthlyLabel: '$59/mo' },
+    growth: { split: 85, monthly: 79, label: '85%', monthlyLabel: '$79/mo' },
+    max:    { split: 100, monthly: 99, label: '100%', monthlyLabel: '$99/mo' },
+  };
+  var plan = plans.max;
+  var AARI_EO = 199;
+  var AARI_TXN = 499;
+
+  function num(id) {
+    var v = document.getElementById(id).value;
+    return parseFloat(v.replace(/[^0-9.\-]/g, '')) || 0;
+  }
+  function fmt(n) {
+    var neg = n < 0;
+    var s = Math.abs(Math.round(n)).toLocaleString('en-US');
+    return (neg ? '-$' : '$') + s;
+  }
+
+  function calc() {
+    var price = num('price');
+    var commPct = num('comm') / 100;
+    var dealsYr = num('deals');
+    var tSplit = num('tSplit') / 100;
+    var tMonthly = num('tMonthly');
+    var tEO = num('tEO');
+    var tTxn = num('tTxn');
+    var tFranchise = num('tFranchise') / 100;
+    var tTech = num('tTech');
+
+    var gross = price * commPct;
+
+    var tNet = gross * tSplit - gross * tFranchise - tTxn;
+    var tAnnual = tNet * dealsYr - (tMonthly + tTech) * 12 - tEO;
+
+    var aSplit = plan.split / 100;
+    var aNet = gross * aSplit - AARI_TXN;
+    var aAnnual = aNet * dealsYr - plan.monthly * 12 - AARI_EO;
+
+    var diff = aAnnual - tAnnual;
+
+    document.getElementById('rThem').textContent = fmt(tAnnual);
+    document.getElementById('rAari').textContent = fmt(aAnnual);
+    document.getElementById('rThemDetail').textContent = fmt(tNet) + '/deal × ' + dealsYr + ' – ' + fmt((tMonthly + tTech) * 12 + tEO) + ' fees';
+    document.getElementById('rAariDetail').textContent = fmt(aNet) + '/deal × ' + dealsYr + ' – ' + fmt(plan.monthly * 12 + AARI_EO) + ' fees';
+
+    var maxVal = Math.max(tAnnual, aAnnual, 1);
+    document.getElementById('rThemBar').style.width = Math.max(0, Math.min(100, (tAnnual / maxVal) * 100)) + '%';
+    document.getElementById('rAariBar').style.width = Math.max(0, Math.min(100, (aAnnual / maxVal) * 100)) + '%';
+
+    document.getElementById('diffNum').textContent = fmt(Math.abs(diff));
+    if (diff >= 0) {
+      document.getElementById('diffCard').querySelector('.diff-eye').textContent = 'You Keep More At Aari';
+      document.getElementById('diffSub').textContent = 'more per year';
+    } else {
+      document.getElementById('diffCard').querySelector('.diff-eye').textContent = 'Difference';
+      document.getElementById('diffSub').textContent = 'less per year at Aari';
+    }
+  }
+
+  document.querySelectorAll('.deal-input, .ci').forEach(function(el) {
+    el.addEventListener('input', calc);
+  });
+
+  document.getElementById('planTabs').addEventListener('click', function(e) {
+    var btn = e.target.closest('.plan-tab');
+    if (!btn) return;
+    document.querySelectorAll('.plan-tab').forEach(function(t){ t.classList.remove('active'); });
+    btn.classList.add('active');
+    plan = plans[btn.dataset.plan];
+    document.getElementById('aSplit').textContent = plan.label;
+    document.getElementById('aMonthly').textContent = plan.monthlyLabel;
+    calc();
+  });
+
+  calc();
+})();
+</script>
+
+<script>
+(function(){
+  var form = document.getElementById('optinForm');
+  var ok = document.getElementById('optinOk');
+  var btn = document.getElementById('optBtn');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    var payload = {
+      first_name: document.getElementById('optName').value.trim(),
+      email: document.getElementById('optEmail').value.trim(),
+      company: form.elements.company.value,
+      source: 'joinaari.com/cost',
+      list: 'agent_newsletter',
+      consent_text: 'Requested the cost comparison spreadsheet from the cost calculator page.',
+      consented_at: new Date().toISOString(),
+    };
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    }).then(function(){ show(); }).catch(function(){ show(); });
+    function show() {
+      form.style.display = 'none';
+      document.querySelector('.optin-consent').style.display = 'none';
+      ok.style.display = 'block';
+    }
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var END   = new Date('2027-03-31T23:59:59-04:00');
+  var NOW   = new Date();
+  if (NOW >= END) return;
+
+  var bar   = document.getElementById('promo-bar');
+  var modal = document.getElementById('promo-modal');
+  if (!bar || !modal) return;
+
+  function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function read(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+  function fresh(k,days){
+    var t = read(k);
+    return t && (Date.now() - Number(t)) < days*864e5;
+  }
+
+  var days = Math.ceil((END - NOW)/864e5);
+  var offer = 'we cover $199 of your first year. ';
+  document.getElementById('promo-bar-when').textContent =
+    days <= 30
+      ? offer + (days === 1 ? 'Last day.' : days + ' days left.')
+      : offer + 'Ends March 31, 2027.';
+
+  if (!fresh('aariPromoBarDismissed', 30)) bar.hidden = false;
+  bar.querySelector('.promo-x').addEventListener('click', function(){
+    bar.hidden = true;
+    store('aariPromoBarDismissed', Date.now());
+  });
+
+  if (fresh('aariPromoModalSeen', 30)) return;
+
+  var opened = false;
+  function open(){
+    if (opened) return;
+    opened = true;
+    modal.hidden = false;
+    requestAnimationFrame(function(){ modal.classList.add('show'); });
+    store('aariPromoModalSeen', Date.now());
+    document.removeEventListener('mouseout', exit);
+  }
+  function close(){
+    modal.classList.remove('show');
+    setTimeout(function(){ modal.hidden = true; }, 400);
+  }
+  function exit(e){ if (!e.relatedTarget && e.clientY <= 0) open(); }
+
+  var timer = setTimeout(open, 8000);
+  document.addEventListener('mouseout', exit);
+
+  modal.querySelector('.promo-x').addEventListener('click', close);
+  modal.addEventListener('click', function(e){ if (e.target === modal) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) close(); });
+  modal.querySelector('.promo-cta').addEventListener('click', function(){ clearTimeout(timer); });
+})();
+</script>
+</body>
+</html>

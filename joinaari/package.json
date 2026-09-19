@@ -2,9 +2,12 @@
   "name": "joinaari",
   "private": true,
   "dependencies": {
-    "resend": "^3.0.0",
-    "stripe": "^14.0.0",
     "@sparticuz/chromium": "^131.0.0",
-    "puppeteer-core": "^23.0.0"
+    "puppeteer-core": "^23.0.0",
+    "resend": "^3.0.0",
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {
+    "exceljs": "^4.4.0"
   }
 }
