@@ -21,6 +21,10 @@ const ADDON_PRICES = {
 
 const ANNUAL_FEE = 199; // E&O + compliance, due today, also billed annually
 
+const PROMO_RULES = {
+  SWITCH199: { maxRedemptions: 25, expiresAt: '2027-03-31T23:59:59-04:00' },
+};
+
 function round2(n) {
   return Math.round((n + Number.EPSILON) * 100) / 100;
 }
@@ -41,7 +45,14 @@ function resolveCoupon(code) {
       };
     }
   });
-  return coupons[String(code).trim().toUpperCase()] || null;
+  var key = String(code).trim().toUpperCase();
+  var coupon = coupons[key] || null;
+  if (!coupon) return null;
+
+  var rule = PROMO_RULES[key];
+  if (rule && new Date() >= new Date(rule.expiresAt)) return null;
+
+  return coupon;
 }
 
 // Compute the authoritative amounts from a plan selection.
@@ -119,4 +130,4 @@ function computePrice(opts) {
   };
 }
 
-module.exports = { PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, computePrice, resolveCoupon };
+module.exports = { PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon };
