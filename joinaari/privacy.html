@@ -43,7 +43,7 @@
 :root{
   --promo-bg:#141210;
   --promo-fg:#ffffff;
-  --promo-accent:#c9a227;
+  --promo-accent:#141210;
 }
 #promo-bar{
   position:sticky;top:0;z-index:9000;
@@ -116,7 +116,7 @@
 </head>
 <body>
 <div id="promo-bar" hidden>
-  <span><b>$199 off your first year.</b> <span id="promo-bar-when"></span></span>
+  <span><b>First 25 agents switching to Aari:</b> <span id="promo-bar-when"></span></span>
   <span class="promo-code">SWITCH199</span>
   <a href="/commission-plans.html">See the plans</a>
   <button class="promo-x" type="button" aria-label="Dismiss">&times;</button>
@@ -245,8 +245,11 @@
   }
 
   var days = Math.ceil((END - NOW)/864e5);
+  var offer = 'we cover $199 of your first year. ';
   document.getElementById('promo-bar-when').textContent =
-    days <= 30 ? (days === 1 ? 'Last day.' : days + ' days left.') : 'Ends March 31.';
+    days <= 30
+      ? offer + (days === 1 ? 'Last day.' : days + ' days left.')
+      : offer + 'Ends March 31, 2027.';
 
   if (!fresh('aariPromoBarDismissed', 30)) bar.hidden = false;
   bar.querySelector('.promo-x').addEventListener('click', function(){
