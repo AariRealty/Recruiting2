@@ -1,3 +1,5 @@
+var { PROMO_RULES } = require('./_pricing');
+
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
   res.setHeader('Access-Control-Allow-Origin', __allowedOrigins.indexOf(req.headers.origin) !== -1 ? req.headers.origin : 'https://joinaari.com');
@@ -40,6 +42,26 @@ module.exports = async function handler(req, res) {
 
     if (!coupon) {
       return res.status(404).json({ error: 'Invalid coupon code' });
+    }
+
+    var rule = PROMO_RULES[lookup];
+    if (rule) {
+      if (new Date() >= new Date(rule.expiresAt)) {
+        return res.status(410).json({ error: 'expired', message: 'This offer ended on March 31, 2027.' });
+      }
+      var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (svcKey) {
+        var countRes = await fetch(
+          'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions?code=eq.' + encodeURIComponent(lookup) + '&select=id',
+          { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } }
+        );
+        if (countRes.ok) {
+          var redeemed = await countRes.json();
+          if (redeemed.length >= rule.maxRedemptions) {
+            return res.status(410).json({ error: 'exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' });
+          }
+        }
+      }
     }
 
     // Build response

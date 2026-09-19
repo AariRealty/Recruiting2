@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { computePrice } = require('./_pricing');
+const { computePrice, PROMO_RULES } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -30,6 +30,28 @@ module.exports = async function handler(req, res) {
     const pricing = computePrice({ plan_name: plan_name, addons: addons, coupon_code: coupon_code });
     if (!pricing.ok) {
       return res.status(400).json({ error: 'Invalid plan selection', detail: pricing.error });
+    }
+
+    if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
+      var rule = PROMO_RULES[pricing.couponApplied];
+      if (new Date() >= new Date(rule.expiresAt)) {
+        return res.status(410).json({ error: 'coupon_expired', message: 'This offer ended on March 31, 2027.' });
+      }
+      var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+      if (!svcKey) {
+        return res.status(500).json({ error: 'Promo validation unavailable. Contact support.' });
+      }
+      var countRes = await fetch(
+        'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions?code=eq.' + encodeURIComponent(pricing.couponApplied) + '&select=id',
+        { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } }
+      );
+      if (!countRes.ok) {
+        return res.status(500).json({ error: 'Promo validation unavailable. Contact support.' });
+      }
+      var redeemed = await countRes.json();
+      if (redeemed.length >= rule.maxRedemptions) {
+        return res.status(410).json({ error: 'coupon_exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' });
+      }
     }
 
     // Loud (non-fatal) signal if the browser's number disagrees with ours.
@@ -71,6 +93,31 @@ module.exports = async function handler(req, res) {
         server_total: String(pricing.totalDueToday)
       }
     });
+
+    if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
+      try {
+        var rk = process.env.SUPABASE_SERVICE_ROLE_KEY;
+        if (rk) {
+          await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions', {
+            method: 'POST',
+            headers: {
+              'apikey': rk,
+              'Authorization': 'Bearer ' + rk,
+              'Content-Type': 'application/json',
+              'Prefer': 'return=minimal',
+            },
+            body: JSON.stringify({
+              code: pricing.couponApplied,
+              payment_intent_id: paymentIntent.id,
+              agent_email: email,
+              amount_waived: Math.round(pricing.discount),
+            }),
+          });
+        }
+      } catch (e) {
+        console.error('[create-payment-intent] promo_redemptions write failed:', e.message);
+      }
+    }
 
     return res.status(200).json({
       client_secret: paymentIntent.client_secret,

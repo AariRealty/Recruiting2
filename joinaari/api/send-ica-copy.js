@@ -1,19 +1,8 @@
-const { Resend } = require('resend');
+var sendViaProxy = require('./_send-via-proxy');
 
 const SIGN_FN_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-sign-ica-web';
 const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
-// Shared secret for the signing function. No default: the literal that used to sit here
-// is in git history and anyone holding it could create a signature of record against any
-// email address, so it has to stop working rather than be swapped in place. Unset means
-// this handler refuses and says so.
 const WEB_TOKEN = process.env.AARI_WEB_SIGN_TOKEN || '';
-
-// Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
-// executed-ICA emails send from aarirealty.com via that key. Until then, fall back to the shared
-// RESEND_API_KEY and send from aaritransactions.com (current behavior). No breakage window.
-const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
-const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
-const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
 
 function esc(x) {
   return String(x == null ? '' : x).replace(/[&<>"']/g, function (c) {
@@ -42,12 +31,9 @@ module.exports = async function handler(req, res) {
   try {
     const { name, email, license, plan, signature } = req.body;
     if (!email || !name || !signature) return res.status(400).json({ error: 'email, name, and signature are required' });
-    if (!RESEND_KEY) return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
-    const resend = new Resend(RESEND_KEY);
     const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const firstNm = firstName(name);
 
-    // 1) Build, store, and record the executed copy through the portal (the source of truth)
     let signed = null, signErr = null;
     try {
       const r = await fetch(SIGN_FN_URL, {
@@ -73,29 +59,31 @@ module.exports = async function handler(req, res) {
         '<hr style="border:none;border-top:1px solid #e2e0d8;margin:18px 0">' +
         '<p style="font-size:11px;color:#9b948a">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy, Suite 350, Fort Myers, FL 33905 &middot; Broker of Record: Marlenyi L. Paredes &middot; License BK3530153</p>' +
         '</div>';
-      await resend.emails.send({
-        from: FROM,
+      await sendViaProxy({
+        lane: 'internal',
         to: email,
         subject: 'Your executed ICA, Aari Realty LLC (' + formattedDate + ')',
         html: agentHtml,
-        attachments: [{ filename: signed.filename || 'Aari-Realty-ICA-signed.pdf', content: signed.pdf_base64 }]
+        emailType: 'ica_copy',
+        attachments: [{ filename: signed.filename || 'Aari-Realty-ICA-signed.pdf', content: signed.pdf_base64 }],
       });
       return res.status(200).json({ success: true, pdf_path: signed.pdf_path, signature_id: signed.signature_id, pdf_base64: signed.pdf_base64, pdf_filename: signed.filename || 'Aari-Realty-ICA-signed.pdf' });
     }
 
-    // Fallback: executed copy could not be generated. Alert the broker, acknowledge the agent, do not block signup.
-    await resend.emails.send({
-      from: FROM,
+    await sendViaProxy({
+      lane: 'internal',
       to: 'join@aarirealty.com',
       subject: 'ACTION NEEDED: executed ICA copy failed for ' + name,
-      html: '<p>Website signing succeeded but the executed PDF could not be generated or stored.</p><p>' + detailLine + '</p><p>Error: ' + esc(signErr || 'unknown') + '. Please generate and send the signed copy for this agent manually.</p>'
+      html: '<p>Website signing succeeded but the executed PDF could not be generated or stored.</p><p>' + detailLine + '</p><p>Error: ' + esc(signErr || 'unknown') + '. Please generate and send the signed copy for this agent manually.</p>',
+      emailType: 'ica_copy_failed',
     });
-    await resend.emails.send({
-      from: FROM,
+    await sendViaProxy({
+      lane: 'internal',
       to: email,
       cc: 'join@aarirealty.com',
       subject: 'We received your signature, Aari Realty LLC (' + formattedDate + ')',
-      html: '<div style="font-family:-apple-system,Arial,sans-serif;max-width:560px;color:#141210;line-height:1.6"><p style="font-size:14px">Hi ' + esc(firstNm) + ', we received your signature on your Aari Realty Independent Contractor Agreement. Your fully executed copy will arrive shortly. If you do not see it within a day, reply to this email.</p><p style="font-size:11px;color:#9b948a">Aari Realty LLC &middot; License BK3530153</p></div>'
+      html: '<div style="font-family:-apple-system,Arial,sans-serif;max-width:560px;color:#141210;line-height:1.6"><p style="font-size:14px">Hi ' + esc(firstNm) + ', we received your signature on your Aari Realty Independent Contractor Agreement. Your fully executed copy will arrive shortly. If you do not see it within a day, reply to this email.</p><p style="font-size:11px;color:#9b948a">Aari Realty LLC &middot; License BK3530153</p></div>',
+      emailType: 'ica_copy_fallback',
     });
     return res.status(200).json({ success: true, executed_copy: false, note: 'fallback sent; broker alerted' });
   } catch (err) {

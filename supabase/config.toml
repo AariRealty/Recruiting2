@@ -83,6 +83,9 @@ verify_jwt = false
 [functions."eod-report"]
 verify_jwt = true
 
+[functions."export-cold-batch"]
+verify_jwt = true
+
 [functions."extract-contract-fields"]
 verify_jwt = true
 
@@ -409,6 +412,9 @@ verify_jwt = false
 
 [functions."send-delete-request"]
 verify_jwt = true
+
+[functions."send-email-proxy"]
+verify_jwt = false
 
 [functions."send-file-notification"]
 verify_jwt = true
