@@ -1,11 +1,5 @@
 const Stripe = require('stripe');
-const { Resend } = require('resend');
-
-// Realty-only Resend key (aarirealty.com verified). When REALTY_RESEND_API_KEY is set in Vercel,
-// the receipt sends from aarirealty.com via that key; otherwise fall back to the shared key + aaritransactions.com.
-const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
-const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
-const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
+var sendViaProxy = require('./_send-via-proxy');
 
 function esc(s) { return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
@@ -22,16 +16,11 @@ module.exports = async function handler(req, res) {
     if (!email || !name) {
       return res.status(400).json({ error: 'email and name are required' });
     }
-    if (!RESEND_KEY) {
-      return res.status(500).json({ error: 'RESEND_API_KEY not configured' });
-    }
     if (!process.env.STRIPE_SECRET_KEY) {
       return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
     }
-    const resend = new Resend(RESEND_KEY);
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
-    // Look up the actual amount from Stripe instead of trusting client-supplied value
     let actualAmount;
     if (payment_id) {
       const pi = await stripe.paymentIntents.retrieve(payment_id);
@@ -92,12 +81,13 @@ module.exports = async function handler(req, res) {
       '</td></tr>' +
       '</table></td></tr></table></body></html>';
 
-    await resend.emails.send({
-      from: FROM,
+    await sendViaProxy({
+      lane: 'internal',
       to: email,
       cc: 'join@aarirealty.com',
       subject: 'Payment received at Aari Realty (' + amountFormatted + ')',
-      html: html
+      html: html,
+      emailType: 'payment_receipt',
     });
 
     return res.status(200).json({ success: true });

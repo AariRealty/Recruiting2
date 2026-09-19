@@ -1,4 +1,4 @@
-const { Resend } = require('resend');
+var sendViaProxy = require('./_send-via-proxy');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -15,12 +15,6 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'messages required' });
     }
 
-    const apiKey = process.env.REALTY_RESEND_API_KEY || process.env.RESEND_API_KEY;
-    if (!apiKey) {
-      return res.status(500).json({ error: 'Resend API key not configured' });
-    }
-
-    const resend = new Resend(apiKey);
     const now = new Date();
     const date = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'America/New_York' });
@@ -32,10 +26,6 @@ module.exports = async function handler(req, res) {
       }
       return '<div style="margin:6px 0;padding:10px 14px;background:#f5f4f1;border:1px solid #e7e4dc;border-radius:14px 14px 14px 4px;max-width:80%;font-size:13px;line-height:1.5;color:#141210;">' + escapeHtml(m.text) + '</div>';
     }).join('');
-
-    const fromAddr = process.env.REALTY_RESEND_API_KEY
-      ? 'Ask Aari <onboarding@aarirealty.com>'
-      : 'Ask Aari <onboarding@aaritransactions.com>';
 
     const html = `<!DOCTYPE html>
 <html>
@@ -90,11 +80,12 @@ module.exports = async function handler(req, res) {
 </body>
 </html>`;
 
-    await resend.emails.send({
-      from: fromAddr,
+    await sendViaProxy({
+      lane: 'internal',
       to: 'join@aarirealty.com',
-      subject: `Chatbot Escalation — ${contact || 'Visitor on ' + pageName}`,
-      html: html
+      subject: 'Chatbot Escalation — ' + (contact || 'Visitor on ' + pageName),
+      html: html,
+      emailType: 'chatbot_escalation',
     });
 
     return res.status(200).json({ success: true });

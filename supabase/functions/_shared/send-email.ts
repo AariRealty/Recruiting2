@@ -13,6 +13,7 @@ interface SendEmailOptions {
   template?: string;
   payload?: Record<string, unknown>;
   replyTo?: string;
+  cc?: string;
   attachments?: Array<{ filename: string; content: string }>;
 }
 
@@ -82,6 +83,7 @@ export async function sendEmail(opts: SendEmailOptions): Promise<SendResult> {
       html: opts.html,
     };
     if (opts.replyTo) body.reply_to = opts.replyTo;
+    if (opts.cc) body.cc = [opts.cc];
     if (opts.attachments?.length) body.attachments = opts.attachments;
 
     const r = await fetch("https://api.resend.com/emails", {

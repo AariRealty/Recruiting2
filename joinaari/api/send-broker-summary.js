@@ -1,8 +1,4 @@
-const { Resend } = require('resend');
-
-const REALTY_KEY = process.env.REALTY_RESEND_API_KEY || '';
-const RESEND_KEY = REALTY_KEY || process.env.RESEND_API_KEY || '';
-const FROM = REALTY_KEY ? 'Aari Realty <onboarding@aarirealty.com>' : 'Aari Realty <onboarding@aaritransactions.com>';
+var sendViaProxy = require('./_send-via-proxy');
 
 function esc(x) {
   return String(x == null ? '' : x).replace(/[&<>"']/g, function (c) {
@@ -35,11 +31,6 @@ module.exports = async function handler(req, res) {
       return res.status(413).json({ error: 'Payload too large' });
     }
 
-    if (!RESEND_KEY) {
-      return res.status(500).json({ error: 'Resend API key not configured' });
-    }
-
-    const resend = new Resend(RESEND_KEY);
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const amountFormatted = amount ? '$' + Number(amount).toFixed(2) : 'N/A';
     const monthlyFormatted = monthly_amount ? '$' + Number(monthly_amount).toFixed(2) + '/mo' : 'N/A';
@@ -101,17 +92,18 @@ module.exports = async function handler(req, res) {
 </body>
 </html>`;
 
-    const emailOpts = {
-      from: FROM,
+    var emailOpts = {
+      lane: 'internal',
       to: 'join@aarirealty.com',
       subject: 'New Agent Signed — ' + name + ' (' + (plan || 'N/A') + ')',
-      html: html
+      html: html,
+      emailType: 'broker_summary',
     };
     if (pdf_base64 && pdf_filename) {
       emailOpts.attachments = [{ filename: pdf_filename, content: pdf_base64 }];
     }
 
-    await resend.emails.send(emailOpts);
+    await sendViaProxy(emailOpts);
 
     return res.status(200).json({ success: true });
   } catch (err) {
