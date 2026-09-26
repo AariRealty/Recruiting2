@@ -471,12 +471,12 @@ Deno.serve(async (req: Request) => {
     return json({ error: 'unknown_action' }, 400)
   }
 
-  // Which document to serve. The preview query string is the override during
-  // the transition to hub_next and stays broker only, because widening it is
-  // the cutover itself and that is a decision, not a side effect of this
-  // change. Restored 26 Sept 2026 (v44): v43 had hardcoded hub_next for every
-  // role, which removed the ?hub=live rollback. Approved by Marlenyi, option A.
-  const wantsNext = new URL(req.url).searchParams.get('preview') === 'next' && member.role === 'broker'
+  // Which document to serve. v45, 26 Sept 2026, approved by Marlenyi (option A):
+  // the broker gets hub_next at the plain URL; agents stay on hub_payload until
+  // the cutover proof passes. preview=live sends the broker back to hub_payload
+  // once the shell passes it through.
+  const preview = new URL(req.url).searchParams.get('preview')
+  const wantsNext = member.role === 'broker' && preview !== 'live'
   const build = wantsNext ? 'hub_next.html' : 'hub_payload.html'
 
   let html = await loadModule(build, modCtx)
