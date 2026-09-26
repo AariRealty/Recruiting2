@@ -1,6 +1,8 @@
 import { createClient } from 'jsr:@supabase/supabase-js@2'
 
 const admin = createClient(Deno.env.get('SUPABASE_URL')!, Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!)
+const RESEND_KEY = Deno.env.get('REALTY_RESEND_API_KEY') ?? Deno.env.get('RESEND_API_KEY') ?? ''
+const BROKER_EMAIL = 'marlenyi@aarirealty.com'
 const CORS: Record<string, string> = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type', 'Access-Control-Allow-Methods': 'GET, POST, OPTIONS' }
 function json(body: unknown, status = 200) { return new Response(JSON.stringify(body), { status, headers: { ...CORS, 'Content-Type': 'application/json' } }) }
 async function audit(actorId: string | null, actorType: string, action: string, targetTable: string, targetId: string | null, details: Record<string, unknown>, req: Request) {
@@ -24,6 +26,23 @@ function inject(html: string, slot: string, content: string): string {
   if (!content) return html
   if (html.includes(slot)) return html.replace(slot, () => content)
   return html.replace('</body>', () => content + '\n</body>')
+}
+function planInfo(raw: string): { code: string; name: string; split: string; fee: string; feeAmount: string; article: string } | null {
+  const s = String(raw || '').toLowerCase()
+  if (/mentor|75_25|(^|[^0-9])75([^0-9]|$)/.test(s)) return { code: '75_25', name: 'Mentorship Path', split: '75/25', fee: '$59.00/month', feeAmount: '$59.00', article: 'a' }
+  if (/growth|85_15|(^|[^0-9])85([^0-9]|$)/.test(s)) return { code: '85_15', name: 'Aari Growth', split: '85/15', fee: '$79.00/month', feeAmount: '$79.00', article: 'an' }
+  if (/max|100_max|(^|[^0-9])100([^0-9]|$)/.test(s)) return { code: '100_max', name: 'Aari Max', split: '100/0', fee: '$99.00/month', feeAmount: '$99.00', article: 'a' }
+  return null
+}
+function planDisplayLabel(code: string): string {
+  const labels: Record<string, string> = {
+    '70_30': '70/30, legacy',
+    '80_20': '80/20, legacy',
+    '75_25': 'Mentorship Path, 75/25',
+    '85_15': 'Aari Growth, 85/15',
+    '100_max': 'Aari Max, 100/0',
+  }
+  return labels[code] ?? code
 }
 function dedupeGlobals(html: string): string {
   return html.replace('const SB_URL=', 'window.SB_URL=').replace('const SB_KEY=', 'window.SB_KEY=').replace('const sb=window.supabase.createClient', 'window.sb=window.sb||window.supabase.createClient')
@@ -155,11 +174,21 @@ Deno.serve(async (req: Request) => {
         }
       }
 
+      const pi = member.commission_plan ? planInfo(member.commission_plan) : null
+      if (member.commission_plan && !pi) {
+        const todayStr = new Date().toISOString().slice(0, 10)
+        const { count } = await admin.from('audit_log').select('*', { count: 'exact', head: true }).eq('actor_id', user.id).eq('action', 'realty_ica_plan_not_signable').gte('created_at', todayStr + 'T00:00:00Z')
+        if ((count ?? 0) === 0) {
+          await audit(user.id, 'realty_member', 'realty_ica_plan_not_signable', 'realty_members', user.id, { commission_plan: member.commission_plan, version: ver.version_label }, req)
+        }
+        return json({ required: false, reason: 'plan_not_signable' })
+      }
+
       const { data: sigs } = await admin.from('realty_agreement_signatures').select('version_id, version_label, signed_at').or('agent_id.eq.' + user.id + ',signer_email.eq.' + String(member.user_id ? '' : '') + '').order('signed_at', { ascending: false })
       let rows = sigs ?? []
       if (!rows.length) { const { data: byId } = await admin.from('realty_agreement_signatures').select('version_id, version_label, signed_at').eq('agent_id', user.id).order('signed_at', { ascending: false }); rows = byId ?? [] }
       const signedCurrent = rows.some((r) => r.version_id === ver.id)
-      return json({ required: !signedCurrent, reason: signedCurrent ? null : (rows.length ? 'version_update' : 'never_signed'), version_label: ver.version_label, effective_date: ver.effective_date, materiality: ver.materiality, last_signed_version: rows.length ? rows[0].version_label : null, plan_set: !!member.commission_plan, license_set: !!member.license_number })
+      return json({ required: !signedCurrent, reason: signedCurrent ? null : (rows.length ? 'version_update' : 'never_signed'), version_label: ver.version_label, effective_date: ver.effective_date, materiality: ver.materiality, last_signed_version: rows.length ? rows[0].version_label : null, plan_set: !!member.commission_plan, plan_code: pi?.code ?? null, plan_name: pi?.name ?? null, plan_split: pi?.split ?? null, plan_fee: pi?.fee ?? null, plan_fee_amount: pi?.feeAmount ?? null, plan_article: pi?.article ?? null, license_set: !!member.license_number })
     }
     if (action === 'set_license') {
       const raw = String(body?.license_number ?? '').trim().toUpperCase()
@@ -377,17 +406,76 @@ Deno.serve(async (req: Request) => {
       return json({ ok: true })
     }
 
+    if (action === 'my_agreements') {
+      const { data: rows } = await admin.from('realty_agreement_signatures')
+        .select('id, version_label, signed_at, commission_plan, pdf_path, broker_countersigned_at, pdf_sha256, record_origin, record_note')
+        .eq('agent_id', user.id)
+        .order('signed_at', { ascending: false })
+      return json({ agreements: (rows ?? []).map(r => ({ id: r.id, version_label: r.version_label, signed_at: r.signed_at, commission_plan: r.commission_plan, plan_label: r.commission_plan ? planDisplayLabel(r.commission_plan) : null, has_document: !!r.pdf_path, broker_countersigned_at: r.broker_countersigned_at ?? null, pdf_sha256: r.pdf_sha256 ? String(r.pdf_sha256).slice(0, 12) : null, record_origin: r.record_origin ?? null, record_note: r.record_note ?? null })) })
+    }
+    if (action === 'agreement_download') {
+      const sigId = String(body?.signature_id ?? '')
+      if (!sigId) return json({ error: 'signature_id required' }, 400)
+      const { data: sig } = await admin.from('realty_agreement_signatures')
+        .select('id, pdf_path, agent_id, version_label')
+        .eq('id', sigId).maybeSingle()
+      if (!sig || sig.agent_id !== user.id) return json({ error: 'forbidden' }, 403)
+      if (!sig.pdf_path) return json({ error: 'no_document', detail: 'No PDF is on file for this signature.' }, 404)
+      const { data: signed } = await admin.storage.from('signed-agreements').createSignedUrl(sig.pdf_path, 300)
+      if (!signed?.signedUrl) return json({ error: 'download_failed' }, 500)
+      await audit(user.id, 'realty_member', 'realty_agreement_downloaded', 'realty_agreement_signatures', sigId, { version_label: sig.version_label }, req)
+      return json({ url: signed.signedUrl })
+    }
+
+    if (action === 'ask_question') {
+      const question = String(body?.question ?? '').trim()
+      if (!question || question.length > 2000) return json({ error: 'question required (max 2000 chars)' }, 400)
+      const { error: insErr } = await admin.from('realty_agent_questions').insert({ user_id: user.id, agent_name: member.full_name, question })
+      if (insErr) return json({ error: insErr.message }, 500)
+      await audit(user.id, 'realty_member', 'agent_question_submitted', 'realty_agent_questions', null, { question: question.slice(0, 200) }, req)
+      if (RESEND_KEY) {
+        const html = '<div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;padding:20px">' +
+          '<h2 style="margin:0 0 8px">Agent question</h2>' +
+          '<p style="margin:0 0 16px;color:#555"><b>' + member.full_name.replace(/[<>&'"]/g, '') + '</b> asked a question in the Hub</p>' +
+          '<div style="background:#f5f5f5;border-radius:8px;padding:16px;margin:0 0 16px"><p style="margin:0;white-space:pre-wrap">' + question.replace(/[<>&]/g, (c: string) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' })[c]!) + '</p></div>' +
+          '<p style="margin:0;font-size:13px;color:#888">Reply to this email or log in to the Hub to respond.</p></div>'
+        try {
+          await fetch('https://api.resend.com/emails', { method: 'POST', headers: { 'Authorization': `Bearer ${RESEND_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ from: 'Aari Realty <onboarding@aarirealty.com>', to: [BROKER_EMAIL], subject: 'Agent question from ' + member.full_name, html }) })
+        } catch (_e) { /* email is best-effort */ }
+      }
+      return json({ ok: true, message: 'Your question has been sent to the broker. You will hear back soon.' })
+    }
+
+    if (action === 'my_questions') {
+      const { data } = await admin.from('realty_agent_questions').select('id, question, status, broker_note, created_at').eq('user_id', user.id).order('created_at', { ascending: false }).limit(20)
+      return json({ questions: data ?? [] })
+    }
+
+    if (action === 'list_questions') {
+      if (!isBroker) return json({ error: 'forbidden' }, 403)
+      const { data } = await admin.from('realty_agent_questions').select('id, user_id, agent_name, question, status, broker_note, created_at').order('created_at', { ascending: false }).limit(50)
+      return json({ questions: data ?? [] })
+    }
+
+    if (action === 'answer_question') {
+      if (!isBroker) return json({ error: 'forbidden' }, 403)
+      const qId = String(body?.question_id ?? '')
+      const note = String(body?.note ?? '').trim()
+      const status = body?.status === 'dismissed' ? 'dismissed' : 'answered'
+      if (!qId) return json({ error: 'question_id required' }, 400)
+      const { error: upErr } = await admin.from('realty_agent_questions').update({ status, broker_note: note || null }).eq('id', qId)
+      if (upErr) return json({ error: upErr.message }, 500)
+      return json({ ok: true })
+    }
+
     return json({ error: 'unknown_action' }, 400)
   }
 
   // Which document to serve. The preview query string is the override during
   // the transition to hub_next and stays broker only, because widening it is
   // the cutover itself and that is a decision, not a side effect of this
-  // change. The shell default is untouched.
-  //
-  // Both documents now go through the same composition below. hub_next used to
-  // return here, before dedupeGlobals and all three injects, which is why it
-  // carried no transaction module, no broker module, and, quietly, no ICA gate.
+  // change. Restored 26 Sept 2026 (v44): v43 had hardcoded hub_next for every
+  // role, which removed the ?hub=live rollback. Approved by Marlenyi, option A.
   const wantsNext = new URL(req.url).searchParams.get('preview') === 'next' && member.role === 'broker'
   const build = wantsNext ? 'hub_next.html' : 'hub_payload.html'
 
