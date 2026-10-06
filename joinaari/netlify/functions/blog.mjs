@@ -1,5 +1,7 @@
+import { createRequire } from 'node:module';
 import vercelAdapter from '../lib/vercel-adapter.mjs';
-import handler from '../../api/blog.js';
+var nodeRequire = createRequire(import.meta.url);
+var handler = nodeRequire('../../api/blog.js');
 
 var adapted = vercelAdapter(handler);
 

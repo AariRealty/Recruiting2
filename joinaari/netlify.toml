@@ -6,9 +6,10 @@
 [build.environment]
   NODE_VERSION = "24"
 
-[functions]
-  node_bundler = "esbuild"
+# Serve the pages byte for byte. No link rewriting by Netlify.
+[build.processing.html]
+  pretty_urls = false
 
+# The browser files are read from disk at run time, so they are named here.
 [functions."ica-pdf"]
-  external_node_modules = ["@sparticuz/chromium"]
   included_files = ["node_modules/@sparticuz/chromium/bin/**"]
