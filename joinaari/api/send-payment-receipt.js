@@ -77,7 +77,7 @@ module.exports = async function handler(req, res) {
       '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
       '</td></tr>' +
       '<tr><td style="padding:20px 30px 28px;">' +
-      '<div style="border-top:1px solid #eceae4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.688.1770 &middot; join@aarirealty.com</div>' +
+      '<div style="border-top:1px solid #eceae4;padding-top:16px;font-size:10px;color:#b7b4ab;line-height:1.8;">Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>239.789.4701 &middot; join@aarirealty.com</div>' +
       '</td></tr>' +
       '</table></td></tr></table></body></html>';
 
