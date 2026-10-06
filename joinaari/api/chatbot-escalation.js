@@ -74,7 +74,7 @@ module.exports = async function handler(req, res) {
     </div>
     <div class="footer">
       Aari Realty LLC &middot; 9160 Forum Corporate Pkwy Suite 350, Fort Myers, FL 33905<br>
-      (239) 688-1770 &middot; join@aarirealty.com
+      (239) 789-4701 &middot; join@aarirealty.com
     </div>
   </div>
 </body>
