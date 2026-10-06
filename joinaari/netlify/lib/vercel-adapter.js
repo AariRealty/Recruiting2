@@ -2,9 +2,14 @@ var Buffer = require('buffer').Buffer;
 
 module.exports = function vercelAdapter(handler) {
   return async function netlifyHandler(event) {
+    var rawBody = event.body;
+    if (rawBody && event.isBase64Encoded) {
+      rawBody = Buffer.from(rawBody, 'base64').toString('utf-8');
+    }
+
     var body;
-    if (event.body) {
-      try { body = JSON.parse(event.body); } catch (_) { body = event.body; }
+    if (rawBody) {
+      try { body = JSON.parse(rawBody); } catch (_) { body = rawBody; }
     }
 
     var req = {
@@ -29,9 +34,11 @@ module.exports = function vercelAdapter(handler) {
       },
       send: function (data) {
         if (Buffer.isBuffer(data)) {
+          if (!_headers['content-type']) _headers['content-type'] = 'application/octet-stream';
           _body = data.toString('base64');
           _isBase64 = true;
         } else {
+          if (!_headers['content-type']) _headers['content-type'] = 'text/html; charset=utf-8';
           _body = String(data);
         }
         return res;
@@ -44,8 +51,8 @@ module.exports = function vercelAdapter(handler) {
     } catch (err) {
       console.error('vercel-adapter caught:', err);
       _status = 500;
-      _headers['content-type'] = 'application/json';
-      _body = JSON.stringify({ error: 'Internal server error', detail: String(err && err.message) });
+      _headers = { 'content-type': 'application/json' };
+      _body = JSON.stringify({ error: 'Internal server error' });
       _isBase64 = false;
     }
 
