@@ -1,28 +1,28 @@
-var Buffer = require('buffer').Buffer;
+export default function vercelAdapter(handler) {
+  return async function (request) {
+    var url = new URL(request.url);
+    var query = {};
+    url.searchParams.forEach(function (v, k) { query[k] = v; });
 
-module.exports = function vercelAdapter(handler) {
-  return async function netlifyHandler(event) {
-    var rawBody = event.body;
-    if (rawBody && event.isBase64Encoded) {
-      rawBody = Buffer.from(rawBody, 'base64').toString('utf-8');
-    }
+    var headers = {};
+    request.headers.forEach(function (v, k) { headers[k] = v; });
 
     var body;
-    if (rawBody) {
-      try { body = JSON.parse(rawBody); } catch (_) { body = rawBody; }
+    var text = await request.text();
+    if (text) {
+      try { body = JSON.parse(text); } catch (_) { body = text; }
     }
 
     var req = {
-      method: event.httpMethod,
-      headers: event.headers || {},
-      query: event.queryStringParameters || {},
+      method: request.method,
+      headers: headers,
+      query: query,
       body: body
     };
 
     var _status = 200;
     var _headers = {};
-    var _body = '';
-    var _isBase64 = false;
+    var _body = null;
 
     var res = {
       status: function (code) { _status = code; return res; },
@@ -33,10 +33,9 @@ module.exports = function vercelAdapter(handler) {
         return res;
       },
       send: function (data) {
-        if (Buffer.isBuffer(data)) {
+        if (data instanceof Uint8Array || (typeof Buffer !== 'undefined' && Buffer.isBuffer(data))) {
           if (!_headers['content-type']) _headers['content-type'] = 'application/octet-stream';
-          _body = data.toString('base64');
-          _isBase64 = true;
+          _body = data;
         } else {
           if (!_headers['content-type']) _headers['content-type'] = 'text/html; charset=utf-8';
           _body = String(data);
@@ -50,17 +49,14 @@ module.exports = function vercelAdapter(handler) {
       await handler(req, res);
     } catch (err) {
       console.error('vercel-adapter caught:', err);
+      _headers['content-type'] = 'application/json';
       _status = 500;
-      _headers = { 'content-type': 'application/json' };
       _body = JSON.stringify({ error: 'Internal server error' });
-      _isBase64 = false;
     }
 
-    return {
-      statusCode: _status,
-      headers: _headers,
-      body: _body,
-      isBase64Encoded: _isBase64
-    };
+    return new Response(_body, {
+      status: _status,
+      headers: _headers
+    });
   };
-};
+}
