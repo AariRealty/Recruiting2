@@ -682,7 +682,7 @@ window.ICA_CONTENT = {
 <p>Company property return deadlines are set forth in Section 13.</p>
 
 <h4 id="s-69-2">&sect;69.2 File Completion.</h4>
-<p>Departed Associates must deliver all final documents and complete all outstanding files within ten (10) business days of termination. Files not completed within this timeframe shall be deemed Abandoned Commissions and subject to fees per Exhibit A. Escalation applies to files that remain incomplete after closing as set forth in Exhibit A.</p>
+<p>For transactions that closed before the termination date, the departed Associate must deliver all final documents and complete those files within ten (10) business days of termination. Files not completed within this timeframe shall be deemed Abandoned Commissions and subject to fees per Exhibit A. Transactions still pending on the termination date are governed by the departure share in Exhibit A, Section 39.4, and the file completion fees and Final Deadline in Exhibit A, measured from the closing date. Escalation applies to files that remain incomplete after closing as set forth in Exhibit A.</p>
 
 <h4 id="s-69-3">&sect;69.3 Financial Settlement.</h4>
 <p>Pending payouts processed per ICA and CSA order of precedence.</p>
