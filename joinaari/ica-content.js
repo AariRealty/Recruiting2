@@ -155,7 +155,7 @@ window.ICA_CONTENT = {
 <p>The Broker may extend disbursement beyond three business days by written notice to the Associate stating the reason. An extension under this provision shall not exceed ten (10) business days unless the delay arises from a compliance issue, a dispute, or an offset that the Broker identifies in the notice, in which case the extension continues until that matter is resolved. Notice of extension does not constitute a breach of this Agreement.</p>
 
 <h4>Abandoned Commissions</h4>
-<p>Associate must submit the completed compliance file and all commission disbursement documents within forty-eight (48) calendar hours after the closing date shown on the settlement statement. A transaction for which the compliance file and disbursement documents are not submitted within this period, or which is deemed an Abandoned Commission under Section 69.2, is subject to the Administrative Processing Fee set forth in Exhibit A.</p>
+<p>Associate must submit the completed compliance file and all commission disbursement documents within forty-eight (48) calendar hours after the closing date shown on the settlement statement. A transaction for which the compliance file and disbursement documents are not submitted within this period, or which is deemed an Abandoned Commission under Section 69.2, is subject to the file completion fees, the Late Closing Documentation Fee, and the Final Deadline set forth in Exhibit A.</p>
 
 <h4>Post-Termination Commissions</h4>
 <p>Commissions are payable only on transactions supported by a fully executed purchase-and-sale agreement dated before termination or inactivation, and remain subject to file completion, Broker approval, cleared funds, and offsets. This provision is subject to the Post-Termination Compensation Floor and its exclusion for transactions originating from Company-Generated Leads.</p>
@@ -215,7 +215,7 @@ window.ICA_CONTENT = {
 <p>This Agreement begins on the Effective Date and continues until terminated by either party under this Section. There is no minimum term and no renewal requirement. Fee billing cycles run from the Associate&rsquo;s onboarding anniversary date and are governed by Exhibit A.</p>
 
 <h4>Termination At-Will</h4>
-<p>Either party may terminate this Agreement at any time, with or without cause, upon written notice. Termination shall be effective immediately upon delivery of such notice. Termination shall not affect the Broker&rsquo;s right to collect any earned but unpaid fees, commissions, transaction charges, or other amounts due under this Agreement. All provisions relating to compensation, file retention, compliance, confidentiality, recordkeeping, and any obligations that by their nature are intended to survive termination shall survive termination of this Agreement.</p>
+<p>Either party may terminate this Agreement at any time, with or without cause, upon written notice. Termination shall be effective immediately upon delivery of such notice. The Associate shall give the Company thirty (30) days written notice before ending affiliation. Fees for ending affiliation without that notice, and for ending affiliation within the first year, are set forth in Exhibit A: Commission Fee Schedule. The Company may end the affiliation immediately upon written notice. Termination shall not affect the Broker&rsquo;s right to collect any earned but unpaid fees, commissions, transaction charges, or other amounts due under this Agreement. All provisions relating to compensation, file retention, compliance, confidentiality, recordkeeping, and any obligations that by their nature are intended to survive termination shall survive termination of this Agreement.</p>
 
 <h3 id="s-13">&sect;13. Post-Termination Obligations</h3>
 <p>Upon termination of this Agreement, the Associate must: cease all use of Company logos, branding, templates, and platforms; complete all outstanding compliance file requirements; reconcile commissions in accordance with the CSA; and update all online profiles within five (5) calendar days to remove Company affiliation.</p>
@@ -386,252 +386,107 @@ window.ICA_CONTENT = {
 
 <h2>Commission Fee Schedule: Exhibit A</h2>
 
+<p><strong>Aari Realty LLC &middot; Licensed Real Estate Brokerage</strong></p>
+<p><strong>Version 5.1 &middot; Issued October 6, 2026 &middot; Effective on the date notice of this Exhibit is sent to the Associate</strong></p>
+<p>This Exhibit A is an Incorporated Document of the Independent Contractor Agreement ("ICA") between Aari Realty LLC ("Company") and the Associate. It governs commission plans, splits, fees, pricing, thresholds, and billing schedules. Section references are to the Company's current ICA. Where an Associate's signed agreement uses different numbering, the reference is to the provision of that agreement covering the same subject. Capitalized terms have the meanings given in the ICA.</p>
+<p><strong>Associates Affiliated Before the Effective Date.</strong> An Associate affiliated with the Company before the Effective Date keeps the commission plan, split, and recurring fee stated in the Associate's signed agreement until the Associate selects a commission plan under Section 38 at or after the Associate's next onboarding anniversary date. All other terms of this Exhibit apply to that Associate from the Effective Date.</p>
 <h3 id="s-38">&sect;38. Commission Plans</h3>
-
 <h4 id="s-38-1">&sect;38.1 Available Commission Plans</h4>
-<p>At onboarding, the Associate selects one of the three commission plans below as their initial commission plan of record. All three plans are available at signup, subject to Broker review and acceptance. Based on the Associate&rsquo;s experience, supervision needs, compliance history, and regulatory risk profile, the Broker may require a newer or higher-risk Associate to begin on the Mentorship Path. After onboarding, an Associate may request to change plans under Section 38.3.</p>
+<p>At onboarding, the Associate selects one of the three commission plans below as their initial commission plan of record. All three plans are available at signup, subject to Broker review and acceptance. Based on the Associate's experience, supervision needs, compliance history, and regulatory risk profile, the Broker may require a newer or higher risk Associate to begin on the Mentorship Path. After onboarding, an Associate may request to change plans under Section 38.3.</p>
 <div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Plan</th>
-      <th>Split</th>
-      <th>Txn Fee (Residential)</th>
-      <th>Txn Fee (Vacant Land)</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Mentorship Path</td>
-      <td>75% / 25%</td>
-      <td>$499</td>
-      <td>$299</td>
-      <td>Full-support plan: transaction coordination, marketing, accountability, and 1:1 broker access.</td>
-    </tr>
-    <tr>
-      <td>Growth</td>
-      <td>85% / 15%</td>
-      <td>$499</td>
-      <td>$299</td>
-      <td>More independence, with deal support when you need it.</td>
-    </tr>
-    <tr>
-      <td>Max</td>
-      <td>100%</td>
-      <td>$499</td>
-      <td>$299</td>
-      <td>Fully independent, brokerage access only.</td>
-    </tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Plan</th><th>Split (Associate / Company)</th><th>Transaction Fee (per side)</th><th>Description</th></tr></thead><tbody><tr><td>Mentorship Path</td><td>75% / 25%</td><td>$499 residential or commercial. 10% on vacant land and rentals, minimum $100, maximum $499</td><td>Full support plan: required transaction coordination through Aari Transactions LLC (fee under Section 38.3), marketing, accountability, and 1:1 broker access.</td></tr><tr><td>Aari Growth</td><td>85% / 15%</td><td>$499 residential or commercial. 10% on vacant land and rentals, minimum $100, maximum $499</td><td>More independence, with deal support when you need it.</td></tr><tr><td>Aari Max</td><td>100%</td><td>$499 residential or commercial. 10% on vacant land and rentals, minimum $100, maximum $499</td><td>Fully independent, brokerage access only.</td></tr></tbody></table>
 </div>
-
+<p><strong>Mentorship Path.</strong> A newly licensed Associate begins on the Mentorship Path for the Associate's first three closed residential sales. A residential sale is a closed sale of a one to four unit residential property, including a condominium or townhome. Rentals and vacant land do not count. An Associate with at least three closed residential sales, at Aari Realty LLC or at another brokerage, may select any plan once the Broker verifies those sales, at the Broker's discretion. The Associate and the Broker may agree in writing that the Associate completes one or two mentored transactions first.</p>
 <h4 id="s-38-2">&sect;38.2 Commission Plan Selection</h4>
-<p>At onboarding, the Associate selects one commission plan as their initial plan of record: Mentorship Path (75% Associate / 25% Company) at $59/month, Aari Growth (85% / 15%) at $79/month, or Aari Max (100%) at $99/month. The selected plan sets the Associate&rsquo;s split and Monthly Brokerage Fee under Section 41.1. Selection is subject to Broker review and acceptance; the Broker may place a newer or higher-risk Associate on the Mentorship Path in furtherance of the Broker&rsquo;s supervisory obligations under Florida law. The $199 annual E&amp;O + Compliance Fee applies to all plans. The selected plan remains in effect until changed under Section 38.3.</p>
-
+<p>At onboarding, the Associate selects one commission plan as their initial plan of record: Mentorship Path (75% Associate / 25% Company) at $59/month, Aari Growth (85% / 15%) at $79/month, or Aari Max (100%) at $99/month. The selected plan sets the Associate's split and Monthly Brokerage Fee under Section 41.1. Selection is subject to Broker review and acceptance; the Broker may place a newer or higher risk Associate on the Mentorship Path in furtherance of the Broker's supervisory obligations under Florida law. The $199 annual E&amp;O + Compliance Fee applies to all plans. The selected plan remains in effect until changed under Section 38.3.</p>
 <p><strong>Service Credits.</strong> Associates on a commission plan in which the Company receives a percentage share of commission receive two (2) service credits per calendar month. Each credit is redeemable for one offer submission, one MLS listing input, or one listing paperwork preparation performed by Aari Transactions LLC. Credits do not roll over and expire at the end of the month in which they are issued. Credits do not apply to transaction coordination. Services beyond the monthly credits are available at the rates published by Aari Transactions LLC. Associates on a plan in which the Associate receives one hundred percent of commission do not receive service credits.</p>
-
 <h4 id="s-38-3">&sect;38.3 Commission Plan Changes</h4>
-
-<p><strong>Eligibility.</strong> An Associate may request a commission plan change only after completing a minimum of three (3) closed residential sales transactions, excluding rentals, vacant land, Personal Transactions, transactions originating from a Company-Generated Lead as defined in Section 9, and Referral-Sourced Transactions under Section 35, each with a fully compliant and completed transaction file, under Broker supervision at Aari Realty LLC. Until eligible and approved for a change, the Associate remains on the plan they selected at onboarding.</p>
-
-<p><strong>Transaction Coordination.</strong> Until the Associate has completed the three qualifying transactions stated above, the Associate must use Aari Transactions LLC for transaction coordination on every transaction. The coordination fee is the responsibility of the Associate and is deducted from commission proceeds at closing. The client is not charged for transaction coordination. After the third qualifying transaction, use of a transaction coordinator is optional unless the Broker requires it in writing for a specific transaction. Fees are set by Aari Transactions LLC and published in its current rate schedule.</p>
-
-<p><strong>Request Process.</strong> The Associate submits a written request to the Broker. The Broker will approve or deny in writing within five (5) business days. Approval is at the Broker&rsquo;s sole discretion based on compliance history, transaction quality, and performance. The Broker may deny a request without cause.</p>
-
-<p><strong>Plan Change Activation Date.</strong> An approved plan change takes effect on the first day of the calendar month following the Broker&rsquo;s written approval.</p>
-
-<p><strong>Transaction Protection.</strong> The Associate&rsquo;s current plan applies to all transactions under a fully executed purchase-and-sale agreement or listing agreement dated on or before the Broker&rsquo;s written approval date. Those transactions close under the original plan, no exceptions.</p>
-
+<p><strong>Eligibility.</strong> An Associate may request a commission plan change once the Associate has at least three closed residential sales, at Aari Realty LLC or at another brokerage, verified by the Broker. A residential sale is a closed sale of a one to four unit residential property, including a condominium or townhome. Rentals and vacant land do not count. Until eligible and approved for a change, the Associate remains on the plan in effect at onboarding.</p>
+<p><strong>Transaction Coordination Fee.</strong> Where the ICA requires transaction coordination, the service is provided by Aari Transactions LLC. The fee is deducted from the Associate's commission at closing and is payable to Aari Transactions LLC. The client is not charged for transaction coordination. Fees are set by Aari Transactions LLC and published in its current rate schedule.</p>
+<p><strong>Request Process.</strong> The Associate submits a written request to the Broker. The Broker will approve or deny in writing within five (5) business days. Approval is at the Broker's sole discretion based on compliance history, transaction quality, and performance. The Broker may deny a request without cause.</p>
+<p><strong>Plan Change Activation Date.</strong> An approved plan change takes effect on the first day of the calendar month following the Broker's written approval.</p>
+<p><strong>Transaction Protection.</strong> The Associate's current plan applies to all transactions under a fully executed purchase and sale agreement or listing agreement dated on or before the Broker's written approval date. Those transactions close under the original plan, no exceptions.</p>
 <p><strong>Frequency Limit.</strong> An Associate may not submit a new plan change request within sixty (60) days of their most recent Plan Change Activation Date.</p>
-
-<p><strong>Downgrade Rule.</strong> The same eligibility, process, activation date, and frequency limit apply in both directions. Moving from Max back to Growth requires the same process.</p>
-
+<p><strong>Downgrade Rule.</strong> The same eligibility, process, activation date, and frequency limit apply in both directions. Moving from Aari Max back to Aari Growth requires the same process.</p>
 <h3 id="s-39">&sect;39. Transaction Types and Transaction Fee Application</h3>
-
-<h4 id="s-39-1">&sect;39.1 Standard Transaction Fees (Per Side, All Plans)</h4>
+<h4 id="s-39-1">&sect;39.1 Standard Transaction Fee (Per Side, All Plans, All Transaction Types)</h4>
+<p>The transaction fee is charged per side and is the same on every commission plan. Residential and commercial transactions pay a flat fee. Vacant land sales and residential rentals pay ten percent (10%) of the gross commission received on that side, never less than $100.00 and never more than $499.00.</p>
 <div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Transaction Type</th>
-      <th>Transaction Fee (Per Side)</th>
-      <th>Applies To</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Residential Sale</td><td>$499.00</td><td>All plans</td></tr>
-    <tr><td>Vacant Land Sale</td><td>$299.00</td><td>All plans</td></tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Transaction Type</th><th>Transaction Fee (Per Side)</th></tr></thead><tbody><tr><td>Residential Sale</td><td>$499.00</td></tr><tr><td>Commercial Sale or Commercial Lease</td><td>$499.00</td></tr><tr><td>Vacant Land Sale</td><td>10% of the gross commission; minimum $100.00, maximum $499.00</td></tr><tr><td>Residential Rental, Landlord or Tenant Representation</td><td>10% of the gross commission; minimum $100.00, maximum $499.00</td></tr></tbody></table>
 </div>
-
-<h4 id="s-39-2">&sect;39.2 Commercial &amp; Rental Transaction Fees</h4>
-<div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Transaction Type</th>
-      <th>Transaction Fee (Per Side)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Commercial Sale or Commercial Lease</td><td>$499.00</td></tr>
-    <tr><td>Residential Rental &mdash; Landlord or Tenant Representation</td><td>$299.00 or 10% of commission, whichever is less; minimum $99.00</td></tr>
-  </tbody>
-</table>
-</div>
-<p>Residential Rental: the transaction fee is the lesser of $299.00 or ten percent (10%) of the commission received on that side, and in no event less than $99.00. The same rule applies to landlord representation and tenant representation.</p>
-
-<p>Transaction and compliance fees are assessed per side for any transaction facilitated or processed under the Company&rsquo;s brokerage license. If the Associate represents both sides of a transaction where legally permitted, the applicable transaction fee applies to each side. If a transaction fee is not collected at closing, the Company may deduct the fee from commissions or invoice the Associate directly.</p>
+<p><strong>Personal Transactions and Reduced Commissions.</strong> The transaction fee is owed in full even where the Associate reduces or waives the commission, including on a Personal Transaction. A residential or commercial transaction pays $499.00 whatever commission is charged. A vacant land sale or residential rental pays at least the $100.00 minimum.</p>
+<h4 id="s-39-2">&sect;39.2 Application and Collection</h4>
+<p>Commercial transactions and residential rentals are covered by the table in Section 39.1. The same rule applies to landlord representation and tenant representation.</p>
+<p>Transaction and compliance fees are assessed per side for any transaction facilitated or processed under the Company's brokerage license. If the Associate represents both sides of a transaction where legally permitted, the applicable transaction fee applies to each side.</p>
 <p><strong>Payment and Collection of the Transaction Fee.</strong></p>
-<p>(a) Designated fee. The transaction fee stated in this Section is the Company&rsquo;s designated brokerage fee, per side. The Associate shall charge the client the Company&rsquo;s designated transaction fee and may not charge the client more than that designated amount.</p>
-<p>(b) Collection. The Associate collects the designated fee from the client at closing where the client&rsquo;s signed listing or buyer brokerage agreement authorizes it and it is itemized on the Closing Disclosure. If the Associate does not collect the fee from the client, the Company deducts the designated fee from the Associate&rsquo;s commission or invoices the Associate directly.</p>
-<p>(c) Overage. The Company&rsquo;s entitlement is limited to its designated fee. On the Associate&rsquo;s own transactions, if the amount collected as a transaction fee at closing exceeds the Company&rsquo;s designated fee, the excess is paid to the Associate.</p>
-<p>(d) Company-provided leads. On Referral-Sourced transactions under Section 35, the Associate charges the Company&rsquo;s designated transaction fee and the fixed allocation set forth in Exhibit A for Referral-Sourced Transactions governs. Any additional transaction fee, or any bonus tied to the transaction, is also subject to that same allocation and is not retained by the Associate alone.</p>
-
-<h4 id="s-39-3">&sect;39.3 Referral-Sourced Transaction Fees (AARI Referrals LLC Leads)</h4>
-<p>The following flat transaction fees apply exclusively to Referral-Sourced Transactions as defined in Section 35. These fees are separate from, and replace, the plan-based transaction fees in Section 39.1 for Referral-Sourced Transactions; the assigned Associate&rsquo;s standard commission plan transaction fee does not apply.</p>
-<div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Transaction Type</th>
-      <th>Flat Transaction Fee</th>
-      <th>Deducted From</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Residential Sale</td><td>$499.00</td><td>Aari Realty LLC portion only, after referral fee, before Company/Associate allocation</td></tr>
-    <tr><td>Vacant Land Sale</td><td>$299.00</td><td>Aari Realty LLC portion only, after referral fee, before Company/Associate allocation</td></tr>
-  </tbody>
-</table>
-</div>
-<p>The transaction fee is deducted from the remaining commission retained by Aari Realty LLC after the referral fee is paid to AARI Referrals LLC. The transaction fee does not reduce the referring associate&rsquo;s compensation or the assigned Associate&rsquo;s 50% share.</p>
-
-<p style="background:rgba(10,10,10,0.03);border:1px solid rgba(10,10,10,0.1);padding:14px 16px;font-size:12px;line-height:1.7;">
-<strong>Sample: Referral-Sourced Transaction (Residential).</strong> Sale Price: $350,000 &middot; Listing Commission: 3%.<br>
-Step 1: Gross Commission received by Aari Realty LLC: $10,500.00<br>
-Step 2: Referral Fee (25% of Gross Commission) paid to AARI Referrals LLC: $2,625.00<br>
-Step 3: Remaining commission retained by Aari Realty LLC: $7,875.00<br>
-Step 4: Flat Transaction Fee (Residential) deducted from Aari Realty LLC portion: $499.00<br>
-Step 5: Remaining after transaction fee: $7,376.00<br>
-Step 6: Fixed 50/50 Split, Aari Realty LLC: $3,688.00 &middot; Assigned Agent: $3,688.00<br>
-<em>Illustrative only. Reflects the fixed allocation set forth in Exhibit A for Referral-Sourced Transactions, which overrides the assigned agent&rsquo;s standard commission plan per Section 35.2. Does not create entitlement or guarantee payment.</em>
-</p>
-
+<p>The Associate owes the transaction fee to the Company on every side. The Associate may pass the fee to the client as stated below. Where the client does not pay it at closing, the Associate pays it.</p>
+<p>(a) Charging the client. The Associate may charge the fee to the client only where it is disclosed to the client in writing, signed and dated by the client, and shown on the Closing Disclosure or settlement statement. Nothing in this Exhibit requires the Associate to charge the fee to a client.</p>
+<p>(b) Not collected at closing. If the fee is not collected from the client at closing, the Company deducts it from the Associate's commission. Where there is no commission to deduct it from, the Company invoices the Associate.</p>
+<p>(c) Amounts above the fee. On the Associate's own transactions, the Associate may charge the client a transaction fee higher than the Section 39.1 fee where the client agrees to it in writing as stated in (a). The Company keeps the Section 39.1 fee and the excess is paid to the Associate. The Broker may review any amount above the Section 39.1 fee and, in the Broker's sole discretion, reduce it or require a written amendment where the Broker determines the amount is unreasonable or exposes the Company to risk.</p>
+<p>(d) Company provided leads. On Referral Sourced Transactions under Section 35 and on transactions from a Company Generated Lead as defined in Section 9, the Associate may charge the client the Section 39.1 fee and nothing over it. Any amount collected from the client above that fee is returned to the client. On Referral Sourced Transactions the fixed allocation set forth in this Exhibit A governs. Any bonus tied to the transaction is also subject to that same allocation and is not retained by the Associate alone.</p>
+<h4 id="s-39-3">&sect;39.3 Referral Sourced Transaction Fees (AARI Referrals LLC Leads)</h4>
+<p>For Referral Sourced Transactions as defined in Section 35, the transaction fee is the amount set in Section 39.1 for that transaction type. It is charged once, in the manner stated below, and the assigned Associate does not pay a separate transaction fee on that side.</p>
+<p>Deducted from: the Aari Realty LLC portion only, after the referral fee and before the Company/Associate allocation.</p>
+<p>The transaction fee is deducted from the remaining commission retained by Aari Realty LLC after the referral fee is paid to AARI Referrals LLC. The transaction fee does not reduce the referring associate's compensation or the assigned Associate's 50% share.</p>
+<p><strong>Sample: Referral Sourced Transaction (Residential).</strong> Sale Price: $350,000. Listing Commission: 3%.</p>
+<ol><li><p>Gross Commission received by Aari Realty LLC: $10,500.00</p></li><li><p>Referral Fee (25% of Gross Commission) paid to AARI Referrals LLC: $2,625.00</p></li><li><p>Remaining commission retained by Aari Realty LLC: $7,875.00</p></li><li><p>Transaction Fee (Residential Sale) deducted from Aari Realty LLC portion: $499.00</p></li><li><p>Remaining after transaction fee: $7,376.00</p></li><li><p>Fixed 50/50 Split. Aari Realty LLC: $3,688.00. Assigned Associate: $3,688.00</p></li></ol>
+<p><em>Illustrative only. Reflects the fixed allocation set forth in this Exhibit A for Referral Sourced Transactions, which overrides the assigned Associate's standard commission plan per Section 35.2. Does not create entitlement or guarantee payment.</em></p>
 <h4 id="s-39-4">&sect;39.4 Company Assisted Transaction Allocation</h4>
-<p>For Company Assisted Transactions as defined in Section 34, after deduction of the applicable flat transaction fee, the remaining commission is allocated fifty percent (50%) to Aari Realty LLC and fifty percent (50%) to the assigned Associate. This allocation is fixed and applies regardless of the assigned Associate&rsquo;s commission plan.</p>
-
-<h4 id="s-39-5">&sect;39.5 Referral-Sourced Transaction Allocation</h4>
-<p>For Referral-Sourced Transactions as defined in Section 35: the Referral Fee is twenty-five percent (25%) of gross commission, paid to AARI Referrals LLC before any deduction. After the Referral Fee and the applicable flat transaction fee are deducted, the remaining commission is allocated fifty percent (50%) to Aari Realty LLC and fifty percent (50%) to the assigned Associate. This allocation is fixed and applies regardless of the assigned Associate&rsquo;s commission plan.</p>
-
+<p>For Company Assisted Transactions as defined in Section 34, after deduction of the applicable transaction fee, the remaining commission is allocated fifty percent (50%) to Aari Realty LLC and fifty percent (50%) to the assigned Associate. This allocation is fixed and applies regardless of the assigned Associate's commission plan.</p>
+<h4 id="s-39-5">&sect;39.5 Referral Sourced Transaction Allocation</h4>
+<p>For Referral Sourced Transactions as defined in Section 35: the Referral Fee is twenty five percent (25%) of gross commission, paid to AARI Referrals LLC before any deduction. After the Referral Fee and the applicable transaction fee are deducted, the remaining commission is allocated fifty percent (50%) to Aari Realty LLC and fifty percent (50%) to the assigned Associate. This allocation is fixed and applies regardless of the assigned Associate's commission plan.</p>
 <h4 id="s-39-6">&sect;39.6 Company Lead Transaction Allocation</h4>
-<p>For transactions originating from a Company-Generated Lead as defined in Section 9, after deduction of any referral fee and any marketing deduction approved in advance under Section 63, the remaining commission is allocated fifty percent (50%) to Aari Realty LLC and fifty percent (50%) to the Associate. This allocation is fixed and applies regardless of the Associate&rsquo;s commission plan.</p>
-
-<h3 id="s-40">&sect;40. Minimum Commission Allocation</h3>
+<p>For transactions originating from a Company Generated Lead as defined in Section 9, after deduction of any referral fee and any marketing deduction approved in advance under Section 63, the remaining commission is allocated fifty percent (50%) to Aari Realty LLC and fifty percent (50%) to the Associate. This allocation is fixed and applies regardless of the Associate's commission plan.</p>
+<h3 id="s-40">&sect;40. Commission Base and Minimum Floor</h3>
 <p>Commission is negotiable and is not set, fixed, controlled, recommended, or required by Aari Realty LLC. The Associate determines all compensation terms directly with the client.</p>
-<p>This Section applies to (a) all Associates operating under a commission plan in which the Company receives a percentage share of commission, which as of the date of this Exhibit means the Mentorship Path and Aari Growth plans, and (b) all Referral-Sourced Transactions, regardless of the Associate&rsquo;s commission plan. This Section does not apply to transactions under a commission plan in which the Associate receives one hundred percent (100%) of commission, except where the transaction is a Referral-Sourced Transaction.</p>
-<p>For the transactions described above, the Company&rsquo;s minimum allocation per transaction is:</p>
+<p>This Section applies to (a) all Associates operating under a commission plan in which the Company receives a percentage share of commission, which as of the date of this Exhibit means the Mentorship Path and Aari Growth plans, and (b) all Referral Sourced Transactions, regardless of the Associate's commission plan. This Section does not apply to transactions under a commission plan in which the Associate receives one hundred percent (100%) of commission, except where the transaction is a Referral Sourced Transaction.</p>
+<p>For the transactions described above, the Company's share is calculated on the Commission Base. The Commission Base is the greater of the gross commission actually received on that side or the floor in the table below. The Associate may charge the client any amount. If the gross commission is less than the floor, the difference comes only from the Associate's share. The Company's share never exceeds the commission actually received on that side. Referral fees are calculated on the commission actually received.</p>
 <div class="table-wrap">
-<table>
-  <tr><th>Transaction Type</th><th>Company Minimum Allocation</th></tr>
-  <tr><td>Residential and Vacant Land Sales</td><td>2.5% of sales price</td></tr>
-  <tr><td>Residential Rentals</td><td>One full month of rent</td></tr>
-  <tr><td>Commercial Leases</td><td>2.5% of total lease value</td></tr>
-</table>
+<table><thead><tr><th>Transaction Type</th><th>Floor</th></tr></thead><tbody><tr><td>Residential and Vacant Land Sales</td><td>2.5% of sales price</td></tr><tr><td>Residential Rentals</td><td>One full month of rent</td></tr><tr><td>Commercial Leases</td><td>2.5% of total lease value</td></tr></tbody></table>
 </div>
-<p>If the compensation negotiated between the Associate and the client produces less than the Company&rsquo;s minimum allocation, the difference is absorbed entirely from the Associate&rsquo;s share of the commission. The Company&rsquo;s portion is not reduced. The applicable transaction fee under Section 39.1 or Section 39.3 continues to apply in full.</p>
+<p><strong>Referral Sourced Transactions.</strong> On a Referral Sourced Transaction, the Referral Fee is calculated on the gross commission actually received. The Company's fifty percent (50%) allocation under Section 39.5 is calculated as if the gross commission equaled the Commission Base: the Commission Base, less the Referral Fee actually paid, less the transaction fee, divided by two. The Associate receives what remains of the commission actually received. The Company's allocation never exceeds the amount actually available after the Referral Fee and the transaction fee.</p>
+<p><em>Example, illustrative only. $400,000 sale. Commission collected at 2%: $8,000.00. Floor: $10,000.00. Referral Fee: $2,000.00. Transaction fee: $499.00. Company allocation: $10,000.00 less $2,000.00 less $499.00, divided by two, $3,750.50. Associate: $5,501.00 less $3,750.50, $1,750.50.</em></p>
+<p>The applicable transaction fee under Section 39.1 or Section 39.3 continues to apply in full, including where the Associate's share is zero.</p>
 <p>Nothing in this Section requires the Associate to charge any client a specific rate, minimum fee, or pricing structure.</p>
-
 <h3 id="s-41">&sect;41. Annual and Ongoing Compliance Fees</h3>
-
 <h4 id="s-41-1">&sect;41.1 Monthly Brokerage Fee</h4>
 <div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Plan</th>
-      <th>Monthly Brokerage Fee</th>
-      <th>Billing Schedule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Mentorship Path</td><td>$59.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr>
-    <tr><td>Aari Growth</td><td>$79.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr>
-    <tr><td>Aari Max</td><td>$99.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Plan</th><th>Monthly Brokerage Fee</th><th>Billing Schedule</th></tr></thead><tbody><tr><td>Mentorship Path</td><td>$59.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr><tr><td>Aari Growth</td><td>$79.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr><tr><td>Aari Max</td><td>$99.00 per month</td><td>Billed monthly, beginning the month after onboarding</td></tr></tbody></table>
 </div>
-<p>The Monthly Brokerage Fee is set by the Associate&rsquo;s commission plan. Billing dates, the first month waiver, and the treatment of a billing cycle in which the Associate terminates are governed by Section 68.</p>
-
+<p>The Monthly Brokerage Fee is set by the Associate's commission plan. Billing dates, the first month waiver, and the treatment of a billing cycle in which the Associate terminates are governed by Section 68.</p>
 <h4 id="s-41-2">&sect;41.2 E&amp;O + Compliance Fee</h4>
 <div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Fee</th>
-      <th>Amount</th>
-      <th>Billing Schedule</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>E&amp;O + Compliance Fee</td><td>$199.00 per year</td><td>Billed annually on anniversary; applies to all plans</td></tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Fee</th><th>Amount</th><th>Billing Schedule</th></tr></thead><tbody><tr><td>E&amp;O + Compliance Fee</td><td>$199.00 per year</td><td>Billed annually on anniversary; applies to all plans</td></tr></tbody></table>
 </div>
-<p>The E&amp;O + Compliance Fee is invoiced approximately two (2) months prior to the Associate&rsquo;s anniversary month and is due on the first (1st) day of the anniversary month in subsequent years, as further described in the CSA. The fee is non-refundable.</p>
-<p><strong>At onboarding, only the E&amp;O + Compliance Fee ($199.00) is due today.</strong> Monthly Brokerage Fee billing, including the first month waiver, is set forth in Section 68 and applied at the rate stated in Section 41.1 above. The E&amp;O + Compliance Fee applies to all Associates regardless of commission plan; the Monthly Brokerage Fee varies by plan. Both fees are applied and enforced in accordance with the CSA.</p>
-
+<p>The E&amp;O + Compliance Fee is invoiced approximately two (2) months before the Associate's onboarding anniversary date and is due on that anniversary date in each later year, as set forth in Section 68. The fee is not refundable.</p>
+<p><strong>At onboarding, only the E&amp;O + Compliance Fee ($199.00) is due, unless Section 41.3 applies.</strong> Monthly Brokerage Fee billing, including the first month waiver, is set forth in Section 68 and applied at the rate stated in Section 41.1 above. The E&amp;O + Compliance Fee applies to all Associates regardless of commission plan; the Monthly Brokerage Fee varies by plan. Both fees are applied and enforced in accordance with the CSA.</p>
+<h4 id="s-41-3">&sect;41.3 SWITCH199 First Year Offer</h4>
+<p>$199 off the first year compliance charge, applied once at checkout with code SWITCH199. Limited to the first 25 Associates. Offer ends March 31, 2027. New Aari Realty Associates only. Cannot be combined with another offer.</p>
+<p>For this offer, the first year compliance charge is the E&amp;O + Compliance Fee stated in Section 41.2. The offer applies to the first year only. Any Associate new to Aari Realty qualifies, including a new licensee. The first month waiver under Section 68 is a standard term, not an offer, and applies together with this offer. The E&amp;O + Compliance Fee is due at the full amount on every later anniversary.</p>
 <h3 id="s-42">&sect;42. Administrative and Conditional Fees</h3>
 <div class="table-wrap">
-<table>
-  <thead>
-    <tr>
-      <th>Fee</th>
-      <th>Amount</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>Personal Transaction (Residential)</td><td>$499.00, same as standard</td></tr>
-    <tr><td>Personal Transaction (Land)</td><td>$299.00, same as standard</td></tr>
-    <tr><td>Admin Cost Rate</td><td>$250/hour</td></tr>
-    <tr><td>Administrative Processing Fee (per occurrence)</td><td>$99.00</td></tr>
-    <tr><td>Late Document Upload (per occurrence)</td><td>$49.00</td></tr>
-    <tr><td>File Not Submitted Until Closing or Later</td><td>$199.00</td></tr>
-    <tr><td>File Completion Fee Cap (per transaction file)</td><td>$199.00</td></tr>
-    <tr><td>Late CDA and Closing Documentation (14 days post-closing)</td><td>20% of gross commission</td></tr>
-    <tr><td>Late Payment Fee</td><td>$25.00</td></tr>
-    <tr><td>Returned Payment Fee</td><td>$25.00</td></tr>
-    <tr><td>Reactivation Fee</td><td>$50.00</td></tr>
-    <tr><td>E&amp;O Payment Plan Threshold</td><td>$1,000.00</td></tr>
-  </tbody>
-</table>
+<table><thead><tr><th>Fee</th><th>Amount</th></tr></thead><tbody><tr><td>Personal Transaction (Residential)</td><td>Section 39.1 fee, same as standard</td></tr><tr><td>Personal Transaction (Land)</td><td>Section 39.1 fee, same as standard</td></tr><tr><td>Admin Cost Rate</td><td>$150 per hour</td></tr><tr><td>Administrative Fee, Payout Processing (per payout)</td><td>10% of the payout; minimum $100.00, maximum $499.00</td></tr><tr><td>Late Document Upload (per occurrence)</td><td>$49.00</td></tr><tr><td>File Not Submitted Until Closing or Later</td><td>$199.00</td></tr><tr><td>File Completion Fee Cap (per transaction file)</td><td>$199.00</td></tr><tr><td>Late Closing Documentation Fee (14 days after closing or receipt of funds)</td><td>20% of gross commission</td></tr><tr><td>Final Deadline (60 days after closing, file still incomplete)</td><td>Associate's remaining share retained by the Company</td></tr><tr><td>Late Payment Fee</td><td>$25.00</td></tr><tr><td>Returned Payment Fee</td><td>$25.00</td></tr><tr><td>Reactivation Fee</td><td>$50.00</td></tr><tr><td>Early Exit Fee (affiliation ends within one year of the first affiliation date)</td><td>$299.00</td></tr><tr><td>Short Notice Fee (affiliation ends without the written notice the ICA requires)</td><td>$99.00</td></tr><tr><td>E&amp;O Payment Plan Threshold</td><td>$1,000.00</td></tr></tbody></table>
 </div>
-<p>E&amp;O Payment Plan Threshold: the amount above which the Company offers a written payment plan for a retention or deductible obligation under Section 6.</p>
-<p>Grace Period: a five (5) calendar day grace period applies to all recurring fees (Monthly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments.</p>
-<p>Administrative Processing Fee: $99.00 applies each time the Company receives, processes, disburses, or refunds funds outside of a standard sale closing, and each time the Company processes the cancellation, withdrawal, or termination of an executed listing agreement, buyer brokerage agreement, or purchase-and-sale contract. Triggering events include, by way of example and not limitation: a retainer or advance collected from a client; a cancellation fee collected by or on behalf of the Associate; a bonus, placement fee, or similar payment paid to the Company by a third party; and a tenant placement. Each triggering event is a separate occurrence and a separate fee. A transaction in which the Company processes a retainer and later processes a cancellation incurs two fees. This fee does not apply to any event on which a transaction fee under Section 39 is charged. Where a transaction fee applies, the transaction fee is the only Company charge for that event. This fee therefore does not apply to a standard sale closing in which the Company receives its commission through the settlement agent, and does not apply in addition to the transaction fee on a completed rental, lease, or commercial transaction. Notwithstanding the exclusion above, this fee applies to any transaction deemed an Abandoned Commission under the Operations &amp; Compliance Manual, whether or not a transaction fee was charged on that transaction. Failure to complete a file is a separate administrative event from the transaction itself. The fee is deducted from the Associate&rsquo;s next commission disbursement, or invoiced directly if no disbursement is pending.</p>
+<p><strong>E&amp;O Payment Plan Threshold.</strong> The amount above which the Company offers a written payment plan for a retention or deductible obligation under Section 6.</p>
+<p><strong>Grace Period.</strong> A five (5) calendar day grace period applies to all recurring fees (Monthly Brokerage Fee and E&amp;O + Compliance Fee). Late Payment Fee: $25 applies to any balance outstanding after the grace period. Returned Payment Fee: $25 per occurrence for NSF, chargebacks, or rejected payments.</p>
+<p><strong>Administrative Fee (Payout Processing).</strong> 10% of the payout, subject to a minimum of $100.00 and a maximum of $499.00. The fee is calculated on the Associate's share of the collected funds before the fee is deducted. In no event shall the fee exceed that share. This fee is charged only when a retainer cancellation or other administrative work requires the Company to process a payout for the Associate. It is not a general listing cancellation fee. It is not charged because a listing agreement, buyer brokerage agreement, or contract is cancelled, withdrawn, or terminated. It applies only when the Company must perform payout processing work. The fee is deducted from the collected funds before the payout is issued and is never invoiced separately. The fee is taken only from the Associate's share of the collected funds and never from any amount owed to a client or other third party. This fee does not apply to a commission disbursement on a closed transaction on which a transaction fee under Section 39 is charged. It does not apply to a payout on which the Referral Administrative Fee under Section 43.1 is charged. It never applies to the recruiting incentive under Section 43.2 or to any other amount the Company pays from its own funds. The commission plan split does not apply to a retainer or cancellation payout. This fee is the only Company charge on it, on every commission plan.</p>
 <p><strong>File Completion.</strong> Documents must be uploaded to the compliance platform within the deadlines stated in the Operations &amp; Compliance Manual. Failure to upload required documents within the applicable deadline carries a fee of $49.00 per occurrence. Where a transaction file is not created or submitted until the date of closing or later, a fee of $199.00 applies. Total file completion fees under this paragraph shall not exceed $199.00 per transaction file.</p>
-<p><strong>Commission Disbursement Authorization.</strong> Where the Associate fails to submit all required closing documentation, including the Commission Disbursement Authorization, within fourteen (14) days following closing or the Company&rsquo;s receipt of commission funds, an administrative processing fee equal to twenty percent (20%) of the gross commission earned on that transaction applies and may be deducted from commission proceeds prior to disbursement. The Company shall notify the Associate in writing at least five (5) business days before assessing this fee, identifying the specific documents outstanding and the action required. No fee applies where the Associate has provided every document identified in the Company&rsquo;s written notice and the file remains incomplete for reasons outside the Associate&rsquo;s control. An Associate is entitled to one waiver of this fee at the Broker&rsquo;s discretion, upon signing an acknowledgment that this provision will be enforced on any subsequent occurrence.</p>
-<p>This paragraph assesses fees against commission proceeds. It does not forfeit an earned commission. The Associate remains entitled to the balance of the commission after application of the fees stated here and any other offset the Company is entitled to apply.</p>
-<h4 id="s-42-1">&sect;42.1 Administrative Cost Allocation.</h4>
+<p><strong>Commission Disbursement Authorization.</strong> Where the Associate fails to submit all required closing documentation, including the Commission Disbursement Authorization, within fourteen (14) days following closing or the Company's receipt of commission funds, a Late Closing Documentation Fee equal to twenty percent (20%) of the gross commission earned on that transaction applies and may be deducted from commission proceeds prior to disbursement. No notice is required before this fee applies. The deadlines are stated in this Exhibit, and any reminder the Company sends is a courtesy and not a condition of any fee. No fee applies where the Associate has submitted every required document and the file remains incomplete for reasons outside the Associate's control. An Associate is entitled to one waiver of this fee at the Broker's discretion, upon signing an acknowledgment that this provision will be enforced on any subsequent occurrence.</p>
+<p><strong>Final Deadline.</strong> Where the complete compliance file and all required closing documentation have not been submitted within sixty (60) days after closing, the Associate's remaining share of the commission on that transaction is retained by the Company. The retained amount is a reasonable estimate of the Company's cost to complete the file and of the audit and regulatory exposure an incomplete file creates, which are difficult to calculate in advance, and is not a penalty. No notice is required. This paragraph does not apply where the Associate has submitted every required document and the file remains incomplete for reasons outside the Associate's control. The Broker may release the retained balance, at the Broker's discretion, once the file is complete.</p>
+<p>The fees in this Section are assessed against commission proceeds. Until the Final Deadline, the Associate remains entitled to the balance of the commission once the file is complete and approved, after the fees stated here and any other offset the Company is entitled to apply.</p>
+<p><strong>Fees Not Set by This Exhibit.</strong> A fee an Associate negotiates directly with the Associate's own client, including any listing cancellation fee, is not a Company fee and is not set by this Exhibit. Any such fee is collected only in the name of Aari Realty LLC, as Florida law requires.</p>
+<p><strong>Exit Fees.</strong> The Early Exit Fee and the Short Notice Fee apply only to an Associate who signs the Independent Contractor Agreement in effect on or after the Effective Date. The Early Exit Fee of $299.00 applies where the Associate ends affiliation within one (1) year after the Associate's first affiliation date with the Company. The Short Notice Fee of $99.00 applies where the Associate ends affiliation without giving the written notice the ICA requires. Each fee is a reasonable estimate of the Company's onboarding, compliance, training, and file transfer costs, which are difficult to calculate in advance, and is not a penalty. Either fee may be deducted from any amount otherwise payable to the Associate. Neither fee applies where the Company ends the affiliation.</p>
+<h4 id="s-42-1">&sect;42.1 Administrative Cost Allocation</h4>
 <p>Where the Company incurs internal administrative time or outside legal costs to secure or defend a commission under Section 46 of the Operations &amp; Compliance Manual, internal administrative time is billed at the Admin Cost Rate stated in the fee table above. In transactions where the Associate receives ninety percent (90%) or more of the gross commission, cost allocation is capped at eighty percent (80%) of total costs incurred.</p>
-<p>&ldquo;Personal transaction&rdquo; is defined in the CSA and ICA and includes transactions in which the Associate or a related party has a beneficial interest.</p>
-
+<p>"Personal transaction" is defined in the CSA and ICA and includes transactions in which the Associate or a related party has a beneficial interest.</p>
 <h3 id="s-43">&sect;43. Referral Compensation and Incentives</h3>
-<h4 id="s-43-1">&sect;43.1 Incoming Third-Party Referrals</h4>
-<p>Administrative Fee: 10% of the referral payment, subject to a minimum of $100.00 and a maximum of $499.00. In no event shall the fee exceed the total referral payment.</p>
-
-<p style="background:rgba(10,10,10,0.03);border:1px solid rgba(10,10,10,0.1);padding:14px 16px;font-size:12px;line-height:1.7;">
-<strong>Third-Party Referral Network Transactions (Opcity, ReadyConnect, or Similar Platforms).</strong> Transactions sourced through third-party referral networks are governed by Section 36 and are subject to the following: the referral fee is determined exclusively by the third-party network&rsquo;s current fee schedule; Aari Realty LLC does not set, control, or guarantee the referral fee percentage or amount; referral fee percentages are subject to change at any time per the network&rsquo;s terms, and Associates are responsible for reviewing the current fee schedule before accepting any lead; after the third-party referral fee is paid, the remaining commission is distributed under the Associate&rsquo;s standard commission plan, including the applicable plan-based transaction fee per Section 39.1; the fixed allocations set forth in Exhibit A for Company Assisted Transactions and Referral-Sourced Transactions do not apply to third-party referral network transactions; and by accepting a lead, the Associate agrees to be bound by that network&rsquo;s rules, regulations, performance standards, and fee schedule in effect at the time of acceptance. Full terms are set forth in Section 36, incorporated herein by reference.
-</p>
-
+<h4 id="s-43-1">&sect;43.1 Incoming Third Party Referrals</h4>
+<p>Referral Administrative Fee: 10% of the referral payment, subject to a minimum of $100.00 and a maximum of $499.00. In no event shall the fee exceed the total referral payment.</p>
+<p><strong>Third Party Referral Network Transactions (Opcity, ReadyConnect, or Similar Platforms).</strong> Transactions sourced through third party referral networks are governed by Section 36 and are subject to the following: the referral fee is determined exclusively by the network's current fee schedule; Aari Realty LLC does not set, control, or guarantee the referral fee percentage or amount; referral fee percentages are subject to change at any time per the network's terms, and Associates are responsible for reviewing the current fee schedule before accepting any lead; after the network's referral fee is paid, the remaining commission is distributed under the Associate's standard commission plan, including the applicable plan based transaction fee per Section 39.1; the fixed allocations set forth in this Exhibit A for Company Assisted Transactions and Referral Sourced Transactions do not apply to these transactions; and by accepting a lead, the Associate agrees to be bound by that network's rules, regulations, performance standards, and fee schedule in effect at the time of acceptance. Full terms are set forth in Section 36, incorporated herein by reference.</p>
 <h4 id="s-43-2">&sect;43.2 Recruiting Incentive</h4>
 <p>Recruiting rewards are governed by the CSA. The current recruiting incentive is $100.00, payable upon satisfaction of all conditions set forth in the CSA.</p>
-
 <h3 id="s-44">&sect;44. Enforcement and Application</h3>
-<p>All fees, offsets, payment enforcement, license status consequences, survival obligations, and dispute resolution provisions applicable to compensation matters are governed by the ICA and CSA, and are incorporated herein by reference. This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in Section 18. No amendment alters transactions already under a fully executed purchase-and-sale agreement, listing agreement, or buyer brokerage agreement as of the date of notice.</p>
+<p>All fees, offsets, payment enforcement, license status consequences, survival obligations, and dispute resolution provisions applicable to compensation matters are governed by the ICA and CSA, and are incorporated herein by reference. This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in Section 18. No amendment alters transactions already under a fully executed purchase and sale agreement, listing agreement, or buyer brokerage agreement as of the date of notice.</p>
 
 
 <!-- ============================== OPERATIONS & COMPLIANCE MANUAL ============================== -->`,
