@@ -687,7 +687,7 @@ window.ICA_CONTENT = {
 <p>Pending payouts processed per ICA and CSA order of precedence.</p>
 
 <h3 id="s-70">&sect;70. AARI REFERRALS LLC REFERRAL COMPENSATION</h3>
-<p>All referral compensation rules, including associate/broker splits and any administrative retention on incoming referrals, are governed solely by the Aari Referrals LLC Referral Compensation Policy. This Manual intentionally does not restate referral percentages or admin amounts.</p>
+<p>The referral fee paid to AARI Referrals LLC on Referral Sourced Transactions, the allocation that follows it, and the Referral Administrative Fee on incoming referrals paid to Aari Realty LLC Associates are set forth in Exhibit A: Commission Fee Schedule. The compensation of AARI Referrals LLC referral associates is governed by the AARI Referrals LLC Referral Associate Agreement and its fee schedule. This Manual does not restate referral percentages or amounts.</p>
 
 <h3 id="s-71">&sect;71. SELLER IDENTITY VERIFICATION</h3>
 <h4 id="s-71-1">&sect;71.1 Verification Trigger.</h4>
