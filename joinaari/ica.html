@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <script>
+/* Signing date is always the real date of signing in Florida (America/New_York). The Start Date the Associate picks is separate. */
+function aariTodayISO(){ return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'}); }
+function aariSignedDateLong(){ return new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',year:'numeric',month:'long',day:'numeric'}); }
+document.addEventListener('DOMContentLoaded',function(){ var f=document.getElementById('associate-date'); if(f){ f.min=aariTodayISO(); if(!f.value) f.value=aariTodayISO(); } });
+</script>
+<script>
     // Entry guard: this page should only be reached with a real plan and
     // price already chosen on the homepage. A bad link, stale bookmark, or
     // refresh after session loss should never fall through to a fake
@@ -1015,9 +1021,9 @@
       </div>
 
       <div class="ica-field">
-        <label for="associate-date">Effective Date</label>
+        <label for="associate-date">Start Date</label>
         <input type="date" id="associate-date">
-        <span style="font-size:11px;color:rgba(10,10,10,0.4);margin-top:2px;">Leave as today or pick a future start date</span>
+        <span style="font-size:11px;color:rgba(10,10,10,0.4);margin-top:2px;">The day you plan to move your license to Aari. You can sign and pay today.</span>
       </div>
 
       <div class="ica-nav-row">
@@ -1067,7 +1073,7 @@
       <div class="ica-cover-divider"></div>
       <p class="ica-cover-detail"><strong id="cover-name"></strong></p>
       <p class="ica-cover-detail">Florida &middot; License <strong id="cover-license"></strong></p>
-      <p class="ica-cover-detail">Effective <strong id="cover-date"></strong></p>
+      <p class="ica-cover-detail">Start Date <strong id="cover-date"></strong></p>
       <div class="ica-cover-divider"></div>
       <p style="font-family:'Montserrat',sans-serif;font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(10,10,10,0.3);margin:0">Aari Realty LLC</p>
     </div>
@@ -1895,11 +1901,7 @@ function goToStep(step) {
     var sigTitle = document.getElementById('sig-title');
     if (sigName) sigName.value = nameVal;
     if (sigLic) sigLic.value = document.getElementById('associate-license').value || '';
-    var dateField = document.getElementById('associate-date');
-    if (sigDate && dateField && dateField.value) {
-      var d = new Date(dateField.value + 'T12:00:00');
-      sigDate.value = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
+    if (sigDate) sigDate.value = aariSignedDateLong();
     var titleSel = document.getElementById('associate-title');
     if (sigTitle && titleSel) sigTitle.value = titleSel.value || '';
   }
@@ -2050,8 +2052,7 @@ function initialAllPages() {
 
   const fullName = [firstName, lastName].filter(Boolean).join(' ');
 
-  const today = new Date();
-  const todayISO = today.toISOString().split('T')[0];
+  const todayISO = aariTodayISO();
   const effectiveDate = params.get('effective_date') || todayISO;
 
   // Pre-fill Step 1 form fields from URL params
@@ -2074,14 +2075,10 @@ function initialAllPages() {
 
   if (sigPrintedName) sigPrintedName.value = fullName;
   if (sigLicense) sigLicense.value = license;
-  if (sigDate) {
-    var d = new Date(effectiveDate + 'T12:00:00');
-    sigDate.value = d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  }
+  if (sigDate) sigDate.value = aariSignedDateLong();
   var brokerDate = document.getElementById('broker-date');
   if (brokerDate) {
-    var bd = new Date(effectiveDate + 'T12:00:00');
-    brokerDate.value = bd.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    brokerDate.value = aariSignedDateLong();
   }
 
   // Pre-select plan radio button based on URL param
@@ -2163,6 +2160,8 @@ function initialAllPages() {
         plan: selectedPlan,
         signature: signatureInput ? signatureInput.value.trim() : '',
         date: document.getElementById('associate-date').value,
+        start_date: document.getElementById('associate-date').value,
+        signed_date: aariTodayISO(),
         consent_esign: !!(_consentEl && _consentEl.checked),
         consent_text: "I agree to sign this Independent Contractor Agreement electronically, and I understand my electronic signature and initials are legally binding under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).",
         initials: _initialsArr.join(', '),
