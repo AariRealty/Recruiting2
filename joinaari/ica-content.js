@@ -490,7 +490,7 @@ window.ICA_CONTENT = {
 <h4 id="s-43-2">&sect;43.2 Recruiting Reward</h4>
 <p>Recruiting Reward: $99.00, paid within thirty (30) days after all eligibility conditions in Section 62 are met.</p>
 <h3 id="s-44">&sect;44. Enforcement and Application</h3>
-<p>All fees, offsets, payment enforcement, license status consequences, survival obligations, and dispute resolution provisions applicable to compensation matters are governed by the ICA, the CSA, and Section 68 of the Operations and Compliance Manual, and are incorporated herein by reference. This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in Section 18. No amendment alters transactions already under a fully executed purchase and sale agreement, listing agreement, or buyer brokerage agreement as of the date of notice.</p>
+<p>All fees, offsets, payment enforcement, license status consequences, survival obligations, and dispute resolution provisions applicable to compensation matters are governed by the ICA, the CSA, and Section 68 of the Operations and Compliance Manual, and are incorporated herein by reference. This Exhibit A may be amended by the Company effective immediately upon notice by any method set forth in Section 18. No amendment alters transactions already under a fully executed purchase and sale agreement, listing agreement, or buyer brokerage agreement as of the date of notice. Unless a Section states otherwise, any other fee is the amount in this Exhibit A in effect on the date the fee is charged.</p>
 
 
 <!-- ============================== OPERATIONS & COMPLIANCE MANUAL ============================== -->`,
@@ -1296,6 +1296,7 @@ window.ICA_CONTENT = {
   <li><strong>October 9, 2026 &middot; ICA &sect;12, &sect;18, Exhibit A &sect;42:</strong> The fee for ending affiliation within the first year was removed. The only fee for ending affiliation is the Short Notice Fee, which applies when the Associate leaves without the written notice the ICA requires.</li>
   <li><strong>October 9, 2026 &middot; ICA &sect;12, Exhibit A &sect;42 Short Notice Fee:</strong> An Associate who transfers the license or ends affiliation without thirty days&rsquo; written notice ends affiliation on that date and owes one additional Monthly Brokerage Fee in place of the notice period plus the Short Notice Fee. No amount changed.</li>
   <li><strong>October 9, 2026 &middot; Manual &sect;60, Good Standing:</strong> Auto insurance is now required of every Associate who drives for Company business, not only Associates who transport clients, with the Company named as additional insured and a certificate on file. An Associate who does not drive for Company business gives the Broker a signed written statement. Good Standing condition (d) now requires that certificate.</li>
+  <li><strong>October 9, 2026 &middot; Exhibit A &sect;44:</strong> Added a default rule: unless a Section states otherwise, a fee is the amount in Exhibit A in effect on the date the fee is charged. No amount changed.</li>
 </ul>
 
 
