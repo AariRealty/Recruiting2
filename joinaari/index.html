@@ -966,7 +966,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
       <span class="pl-cta" data-plan="Aari Max 100%">Go Max &rarr;</span>
       <div class="pl-calc-mobile"><a href="/commission-plans.html">Run your numbers &rarr;</a></div>
     </div>
-    <div class="pl-card pl-ticket" data-plan="Mentorship Path 75/25">
+    <div class="pl-card pl-ticket" data-plan="Aari Mentorship 75/25">
       <div class="pl-flag" style="background:#c9b492;color:#141210">New agents</div>
       <div class="pl-name">Mentorship</div>
       <div class="pl-tagline">Learn by doing real deals.</div>
@@ -995,7 +995,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
         <div class="o2-row"><span>E&amp;O, due at signup</span><b>$199/yr</b></div>
         <div class="o2-row"><span>Transaction fee</span><b>$499 / 10%</b></div>
       </div></div>
-      <span class="pl-cta" data-plan="Mentorship Path 75/25">Start with Mentorship &rarr;</span>
+      <span class="pl-cta" data-plan="Aari Mentorship 75/25">Start with Mentorship &rarr;</span>
     </div>
   </div>
   <div class="pl-bar">
@@ -1184,7 +1184,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   plans.forEach(function(p){p.addEventListener('click',function(){pickPlan(p.getAttribute('data-plan'));});});
   document.querySelectorAll('.pl-cta').forEach(function(b){b.addEventListener('click',function(e){e.stopPropagation();pickPlan(b.getAttribute('data-plan'));openCheckout(b.getAttribute('data-plan'));});});
   try{var saved=localStorage.getItem('aari_plan');if(saved)pickPlan(saved);}catch(e){}
-  var ANNUAL=199,PLAN={'Aari Growth 85/15':79,'Aari Max 100%':99,'Mentorship Path 75/25':59};
+  var ANNUAL=199,PLAN={'Aari Growth 85/15':79,'Aari Max 100%':99,'Aari Mentorship 75/25':59};
   var MONTH_NAMES=['January','February','March','April','May','June','July','August','September','October','November','December'];
   function nextBillLabel(){var t=new Date(),nm=new Date(t.getFullYear(),t.getMonth()+1,1);return MONTH_NAMES[nm.getMonth()]+' 1';}
   function computeDue(name){var m=PLAN[name]||79;return {m:m,total:ANNUAL};}
@@ -1287,7 +1287,7 @@ var QA=[
 {k:["w9","tax","1099","independent contractor","employee"],q:"Am I an employee or independent contractor?",a:"You're an independent contractor, not an employee. That means no tax withholding, no employee benefits. You handle your own tax filings and you'll get a 1099-NEC when federal law requires one. And heads up… a valid W-9 is required before any commission goes out."},
 {k:["service credit","offer prep","listing docs","mls setup"],q:"What are service credits?",a:"Mentorship and Growth agents get 2 service credits every month. Use them on Offer Prep, Listing Docs, or MLS Setup by Aari Transactions LLC, included with your plan. Pretty solid perk."},
 {k:["minimum commission","floor","lowest commission"],q:"Is there a minimum commission requirement?",a:"No. You set your commission with your client and Aari never requires a rate. On company leads and some plans, Aari's share has a minimum, and Exhibit A, Section 40 explains how it works."},
-{k:["lead","leads","company lead","opcity","readyconnect"],q:"How do company-generated leads work?",a:"Company Generated Leads are company property with a 50/50 split after referral fees and approved marketing deductions. Your transaction fee comes out of your half. Contact your lead promptly, keep working it, and keep the broker updated on its status. Third party network leads (Opcity, ReadyConnect) split 50/50 on every plan after the network's referral fee. Your transaction fee comes out of your half."}
+{k:["lead","leads","company lead","opcity","readyconnect"],q:"How do Company Generated Leads work?",a:"Company Generated Leads are company property with a 50/50 split after referral fees and approved marketing deductions. Your transaction fee comes out of your half. Contact your lead promptly, keep working it, and keep the broker updated on its status. Third party network leads (Opcity, ReadyConnect) split 50/50 on every plan after the network's referral fee. Your transaction fee comes out of your half."}
 ];
 var bubble=document.getElementById('abotBubble');
 var panel=document.getElementById('abotPanel');

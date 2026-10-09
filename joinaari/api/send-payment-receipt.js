@@ -71,7 +71,7 @@ module.exports = async function handler(req, res) {
       '<td align="right" style="padding:14px 0 0;font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-size:22px;color:#111111;">' + amountFormatted + ' &nbsp;<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2d6a4f;background:#e7f0ea;padding:3px 9px;border-radius:20px;">Paid</span></td></tr>' +
       '</table></td></tr>' +
       '<tr><td style="padding:16px 30px 6px;">' +
-      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'A separate email has your Agent Hub login to get started.</div>' +
+      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'Your Agent Hub login arrives once your license transfer to Aari shows in DBPR.</div>' +
       '</td></tr>' +
       '<tr><td style="padding:14px 30px 4px;">' +
       '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
