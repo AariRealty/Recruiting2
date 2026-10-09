@@ -1,4 +1,4 @@
-var { PROMO_RULES } = require('./_pricing');
+var { PROMO_RULES, checkPromoEligibility } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -16,7 +16,8 @@ module.exports = async function handler(req, res) {
     // NOTE: test backdoors TEST1 ($1) and AARIVIP100 ($0) removed before go-live.
     // Add real promo codes via the COUPON_CODES env var (format CODE:type:value).
     const coupons = {
-      'VIP': { type: 'percent_off', value: 50 }
+      'VIP': { type: 'percent_off', value: 50 },
+      'SWITCH199': { type: 'flat_off', value: 199 }
     };
 
     // Additional coupon codes from environment variable
@@ -44,24 +45,9 @@ module.exports = async function handler(req, res) {
       return res.status(404).json({ error: 'Invalid coupon code' });
     }
 
-    var rule = PROMO_RULES[lookup];
-    if (rule) {
-      if (new Date() >= new Date(rule.expiresAt)) {
-        return res.status(410).json({ error: 'expired', message: 'This offer ended on March 31, 2027.' });
-      }
-      var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-      if (svcKey) {
-        var countRes = await fetch(
-          'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions?code=eq.' + encodeURIComponent(lookup) + '&select=id',
-          { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } }
-        );
-        if (countRes.ok) {
-          var redeemed = await countRes.json();
-          if (redeemed.length >= rule.maxRedemptions) {
-            return res.status(410).json({ error: 'exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' });
-          }
-        }
-      }
+    if (PROMO_RULES[lookup]) {
+      var elig = await checkPromoEligibility(lookup, (req.body || {}).email, (req.body || {}).license_number);
+      if (!elig.ok) return res.status(elig.status).json({ error: elig.error, message: elig.message });
     }
 
     // Build response

@@ -34,7 +34,7 @@ function round2(n) {
 // Returns null for empty/unknown codes. (Test backdoors removed in go-live.)
 function resolveCoupon(code) {
   if (!code) return null;
-  const coupons = { VIP: { type: 'percent_off', value: 50 } };
+  const coupons = { VIP: { type: 'percent_off', value: 50 }, SWITCH199: { type: 'flat_off', value: 199 } };
   const raw = process.env.COUPON_CODES || '';
   raw.split(',').forEach(function (entry) {
     const parts = entry.trim().split(':');
@@ -130,4 +130,48 @@ function computePrice(opts) {
   };
 }
 
-module.exports = { PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon };
+// Promo eligibility (Exhibit A 41.3): limited redemptions, offer end date,
+// new Aari Realty Associates only, once per person. A spot counts only when
+// payment (or card setup on a $0 total) succeeds; see finalize-join.js.
+// Returns { ok:true } or { ok:false, status, error, message }.
+async function checkPromoEligibility(code, email, license) {
+  var key = String(code || '').trim().toUpperCase();
+  var rule = PROMO_RULES[key];
+  if (!rule) return { ok: true };
+  if (new Date() >= new Date(rule.expiresAt)) {
+    return { ok: false, status: 410, error: 'coupon_expired', message: 'This offer ended on March 31, 2027.' };
+  }
+  var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!svcKey) return { ok: false, status: 500, error: 'promo_unavailable', message: 'Promo validation unavailable. Contact support.' };
+  var base = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/';
+  var h = { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } };
+  async function rows(path) {
+    var r = await fetch(base + path, h);
+    if (!r.ok) throw new Error('lookup failed ' + r.status);
+    return r.json();
+  }
+  try {
+    var redeemed = await rows('promo_redemptions?code=eq.' + encodeURIComponent(key) + '&select=id');
+    if (redeemed.length >= rule.maxRedemptions) {
+      return { ok: false, status: 410, error: 'coupon_exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' };
+    }
+    var em = String(email || '').trim().toLowerCase();
+    var lic = String(license || '').trim().toUpperCase();
+    if (!em) return { ok: false, status: 400, error: 'email_required', message: 'Enter your email before applying a code.' };
+    var e = encodeURIComponent(em);
+    var hits = []
+      .concat(await rows('promo_redemptions?agent_email=ilike.' + e + '&select=id'))
+      .concat(await rows('realty_members?email=ilike.' + e + '&select=id'))
+      .concat(await rows('realty_agent_subscriptions?agent_email=ilike.' + e + '&select=id'))
+      .concat(await rows('realty_agreement_signatures?signer_email=ilike.' + e + '&select=id'));
+    if (lic) hits = hits.concat(await rows('realty_members?license_number=ilike.' + encodeURIComponent(lic) + '&select=id'));
+    if (hits.length) {
+      return { ok: false, status: 409, error: 'not_eligible', message: 'This offer is for agents new to Aari Realty only.' };
+    }
+  } catch (err) {
+    return { ok: false, status: 500, error: 'promo_unavailable', message: 'Promo validation unavailable. Contact support.' };
+  }
+  return { ok: true };
+}
+
+module.exports = { PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon, checkPromoEligibility };

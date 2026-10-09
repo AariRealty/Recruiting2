@@ -1174,6 +1174,17 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
         </div>
         <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Your card will be charged the one-time amount shown above. Recurring billing will be set up separately during onboarding.</p>
 
+        <!-- Promo code (Exhibit A 41.3) -->
+        <div id="coupon-box" style="margin:0 0 16px;">
+          <label for="coupon-input" style="display:block;font-size:9px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:rgba(10,10,10,0.45);margin:0 0 6px;">Promo code</label>
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="coupon-input" autocomplete="off" style="flex:1;min-width:0;border:1px solid rgba(10,10,10,0.2);border-radius:6px;padding:10px 12px;font-family:'Montserrat',sans-serif;font-size:13px;text-transform:uppercase;">
+            <button type="button" id="coupon-apply-btn" onclick="applyCoupon()" style="border:1px solid #0a0a0a;background:#fff;color:#0a0a0a;border-radius:6px;padding:10px 16px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;cursor:pointer;">Apply</button>
+          </div>
+          <p id="coupon-msg" style="display:none;font-size:11px;font-weight:500;margin:8px 0 0;"></p>
+          <p id="coupon-discount-row" style="display:none;font-size:12px;color:rgba(10,10,10,0.55);margin:6px 0 0;">Promo applied: <span id="coupon-discount-amount"></span></p>
+        </div>
+
         <!-- Stripe Payment Element -->
         <div id="stripe-payment-element" style="margin-bottom:8px;min-height:100px">
           <p id="stripe-loading-msg" style="font-family:'Lato',sans-serif;font-size:13px;color:rgba(10,10,10,0.4);text-align:center;padding:32px 0">Loading payment options...</p>
@@ -2242,7 +2253,8 @@ function initialAllPages() {
           email: email,
           phone: phone,
           amount: totalDue,
-          license_number: ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || ''), plan_name: planName
+          license_number: ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || ''), plan_name: planName,
+          coupon_code: appliedCoupon ? appliedCoupon.code : ''
         })
       });
 
@@ -2255,6 +2267,11 @@ function initialAllPages() {
 
       currentClientSecret = result.client_secret;
       currentCustomerId = result.customer_id;
+      window._payMode = result.mode || 'payment';
+      var _dueSrv = document.getElementById('payment-due-amount');
+      if (_dueSrv && typeof result.amount === 'number') _dueSrv.textContent = '$' + result.amount.toFixed(2);
+      var _payBtnM = document.getElementById('pay-btn');
+      if (_payBtnM) _payBtnM.innerHTML = window._payMode === 'setup' ? 'Save Card &amp; Join Aari Realty &rarr;' : 'Pay &amp; Join Aari Realty &rarr;';
 
       // Clear any previous Stripe mount
       var mountEl = document.getElementById('stripe-payment-element');
@@ -2317,45 +2334,33 @@ function initialAllPages() {
   window.applyCoupon = async function() {
     var code = document.getElementById('coupon-input').value.trim().toUpperCase();
     var msg = document.getElementById('coupon-msg');
-    if (!code) { msg.textContent = 'Please enter a coupon code.'; msg.style.color = '#c0392b'; msg.style.display = 'block'; return; }
-
+    var btn = document.getElementById('coupon-apply-btn');
+    function show(t, ok) { msg.textContent = t; msg.style.color = ok ? '#27ae60' : '#c0392b'; msg.style.display = 'block'; }
+    if (!code) { show('Please enter a promo code.', false); return; }
+    var data0 = window._icaData || JSON.parse(sessionStorage.getItem('ica_data') || '{}');
+    var _em = document.getElementById('associate-email');
+    var email = ((_em && _em.value) ? _em.value.trim() : '') || data0.email || '';
+    var license = ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || '').trim();
+    if (btn) btn.disabled = true;
     try {
       var resp = await fetch('/api/validate-coupon', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ code: code })
+        body: JSON.stringify({ code: code, email: email, license_number: license })
       });
       var data = await resp.json();
-      if (!resp.ok || !data.valid) {
-        msg.textContent = 'Invalid coupon code.';
-        msg.style.color = '#c0392b';
-        msg.style.display = 'block';
-        return;
-      }
+      if (!resp.ok || !data.valid) { show(data.message || 'Invalid promo code.', false); if (btn) btn.disabled = false; return; }
       appliedCoupon = data;
-      msg.textContent = 'Coupon applied: ' + (data.label || 'discount applied');
-      msg.style.color = '#27ae60';
-      msg.style.display = 'block';
-
-      // Recalculate. The entry guard in <head> already guarantees a real
-      // total_due made it this far.
-      var params = new URLSearchParams(window.location.search);
-      var totalDue = parseFloat(params.get('total_due')) || 0;
-      var discount = data.type === 'percent_off' ? totalDue * (data.value / 100) : data.value;
-      var newTotal = Math.max(0, totalDue - discount);
-
-      var _dueC = document.getElementById('payment-due-amount'); if (_dueC) _dueC.textContent = '$' + newTotal.toFixed(2);
-      document.getElementById('coupon-discount-amount').textContent = '-$' + discount.toFixed(2);
-      document.getElementById('coupon-discount-row').style.display = 'block';
-
-      // Update Stripe amount
-      if (stripeElements && newTotal > 0) {
-        stripeElements.update({ amount: Math.round(newTotal * 100) });
-      }
+      paymentMounted = false;
+      await initPaymentElement();
+      if (!paymentMounted) { appliedCoupon = null; show('Could not apply the code. Please try again.', false); if (btn) btn.disabled = false; return; }
+      show('Promo applied: ' + (data.label || data.code), true);
+      document.getElementById('coupon-input').disabled = true;
+      if (btn) btn.style.display = 'none';
     } catch (err) {
-      msg.textContent = 'Error validating coupon.';
-      msg.style.color = '#c0392b';
-      msg.style.display = 'block';
+      appliedCoupon = null;
+      show('Error validating promo code.', false);
+      if (btn) btn.disabled = false;
     }
   };
 
@@ -2414,11 +2419,17 @@ function initialAllPages() {
     formMsg.style.display = 'none';
 
     try {
-      var result = await stripe.confirmPayment({
-        elements: stripeElements,
-        confirmParams: { return_url: window.location.origin + '/index.html?payment_success=true' },
-        redirect: 'if_required'
-      });
+      var result = window._payMode === 'setup'
+        ? await stripe.confirmSetup({
+            elements: stripeElements,
+            confirmParams: { return_url: window.location.origin + '/index.html?payment_success=true' },
+            redirect: 'if_required'
+          })
+        : await stripe.confirmPayment({
+            elements: stripeElements,
+            confirmParams: { return_url: window.location.origin + '/index.html?payment_success=true' },
+            redirect: 'if_required'
+          });
 
       if (result.error) {
         formMsg.textContent = result.error.message;
@@ -2440,7 +2451,7 @@ function initialAllPages() {
         var _v = function(id){ var e = document.getElementById(id); return e ? (e.value || e.textContent || '').trim() : ''; };
         var _plan = new URLSearchParams(location.search).get('plan_name') || icaData.plan || icaData.plan_name || '';
         var _amtStr = (document.getElementById('payment-due-amount') ? document.getElementById('payment-due-amount').textContent : ('$' + (new URLSearchParams(location.search).get('total_due') || '0')));
-        var _payId = (typeof result !== 'undefined' && result && result.paymentIntent ? result.paymentIntent.id : '');
+        var _payId = (typeof result !== 'undefined' && result && result.paymentIntent ? result.paymentIntent.id : (result && result.setupIntent ? result.setupIntent.id : ''));
         fetch('/api/send-broker-summary', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

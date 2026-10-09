@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { computePrice, PROMO_RULES } = require('./_pricing');
+const { computePrice, PROMO_RULES, checkPromoEligibility } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -33,25 +33,8 @@ module.exports = async function handler(req, res) {
     }
 
     if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
-      var rule = PROMO_RULES[pricing.couponApplied];
-      if (new Date() >= new Date(rule.expiresAt)) {
-        return res.status(410).json({ error: 'coupon_expired', message: 'This offer ended on March 31, 2027.' });
-      }
-      var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-      if (!svcKey) {
-        return res.status(500).json({ error: 'Promo validation unavailable. Contact support.' });
-      }
-      var countRes = await fetch(
-        'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions?code=eq.' + encodeURIComponent(pricing.couponApplied) + '&select=id',
-        { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } }
-      );
-      if (!countRes.ok) {
-        return res.status(500).json({ error: 'Promo validation unavailable. Contact support.' });
-      }
-      var redeemed = await countRes.json();
-      if (redeemed.length >= rule.maxRedemptions) {
-        return res.status(410).json({ error: 'coupon_exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' });
-      }
+      var elig = await checkPromoEligibility(pricing.couponApplied, email, license_number);
+      if (!elig.ok) return res.status(elig.status).json({ error: elig.error, message: elig.message });
     }
 
     // Loud (non-fatal) signal if the browser's number disagrees with ours.
@@ -74,6 +57,38 @@ module.exports = async function handler(req, res) {
       metadata: { phone: phone || '' }
     });
 
+    const intentMeta = {
+      kind: 'agent_membership',
+      plan: plan_name || '',
+      agent_name: first_name + ' ' + last_name,
+      agent_email: email,
+      license: license_number || '',
+      phone: phone || '',
+      coupon: pricing.couponApplied || '',
+      server_total: String(pricing.totalDueToday),
+      discount: String(pricing.discount || 0)
+    };
+
+    // Nothing due today (promo covers the full amount): save the card for
+    // recurring fees with a SetupIntent instead of charging.
+    if (pricing.totalDueToday <= 0) {
+      const setupIntent = await stripe.setupIntents.create({
+        customer: customer.id,
+        usage: 'off_session',
+        automatic_payment_methods: { enabled: true },
+        description: 'Aari Realty Onboarding: ' + (plan_name || 'Commission Plan'),
+        metadata: intentMeta
+      });
+      return res.status(200).json({
+        mode: 'setup',
+        client_secret: setupIntent.client_secret,
+        customer_id: customer.id,
+        amount: 0,
+        discount: pricing.discount,
+        monthly: pricing.monthlyAmount
+      });
+    }
+
     // Create PaymentIntent with card explicitly enabled
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amountCents,
@@ -94,33 +109,12 @@ module.exports = async function handler(req, res) {
       }
     });
 
-    if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
-      try {
-        var rk = process.env.SUPABASE_SERVICE_ROLE_KEY;
-        if (rk) {
-          await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions', {
-            method: 'POST',
-            headers: {
-              'apikey': rk,
-              'Authorization': 'Bearer ' + rk,
-              'Content-Type': 'application/json',
-              'Prefer': 'return=minimal',
-            },
-            body: JSON.stringify({
-              code: pricing.couponApplied,
-              payment_intent_id: paymentIntent.id,
-              agent_email: email,
-              amount_waived: Math.round(pricing.discount),
-            }),
-          });
-        }
-      } catch (e) {
-        console.error('[create-payment-intent] promo_redemptions write failed:', e.message);
-      }
-    }
+    // The promo spot is recorded only after payment succeeds (finalize-join.js).
 
     return res.status(200).json({
+      mode: 'payment',
       client_secret: paymentIntent.client_secret,
+      discount: pricing.discount,
       customer_id: customer.id,
       amount: pricing.totalDueToday,
       monthly: pricing.monthlyAmount

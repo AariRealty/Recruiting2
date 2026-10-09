@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { computePrice } = require('./_pricing');
+const { computePrice, PROMO_RULES } = require('./_pricing');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -24,6 +24,11 @@ module.exports = async function handler(req, res) {
     const pricing = computePrice({ plan_name: plan_name, addons: addons, coupon_code: coupon_code });
     if (!pricing.ok) {
       return res.status(400).json({ error: 'Invalid plan selection', detail: pricing.error });
+    }
+    // Promo codes with limits (Exhibit A 41.3) are applied only through
+    // create-payment-intent, which checks eligibility. Never here.
+    if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
+      return res.status(400).json({ error: 'promo_not_allowed_here' });
     }
     if (amount !== undefined && Math.abs(parseFloat(amount) - pricing.totalDueToday) > pricing.tolerance) {
       console.warn('[update-payment-intent] client/server amount mismatch — client:', amount, 'server:', pricing.totalDueToday, 'plan:', plan_name);
