@@ -745,7 +745,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
     </p>
   </div>
 </div>
-<div class="annc"><span class="annc-full"><b>Join today and skip this month's plan fee.</b> Just the $199 to start.</span><span class="annc-short">&#9889; Skip this month's plan fee.</span><a class="go annc-full" href="#plans">Start today &rarr;</a><a class="go annc-short" href="#plans">Lock it in &rarr;</a></div>
+<div class="annc"><span class="annc-full"><b>New to Aari? Join today and skip this month's plan fee.</b> Just the $199 to start.</span><span class="annc-short">&#9889; New to Aari? Skip this month's plan fee.</span><a class="go annc-full" href="#plans">Start today &rarr;</a><a class="go annc-short" href="#plans">Lock it in &rarr;</a></div>
 <nav>
   <a class="brand" href="/"><span class="brand-text">Aari Realty<small>Southwest Florida Brokerage</small></span><img class="brand-img" src="logo.png" alt="Aari Realty" /></a>
   <div class="nav-right">
@@ -1192,7 +1192,7 @@ nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.9);backdrop-fi
   function coShow(id){[].forEach.call(document.querySelectorAll('.co-pane'),function(pn){pn.classList.toggle('active',pn.id===id);});overlay.scrollTop=0;}
   function openCheckout(name){curName=name;var d=computeDue(name);
     document.getElementById('coSelName').textContent=name;
-    document.getElementById('coSelPrice').innerHTML='$'+d.total+' due today &middot; then $'+d.m+'/mo &middot; first month waived';
+    document.getElementById('coSelPrice').innerHTML='$'+d.total+' due today &middot; then $'+d.m+'/mo &middot; first month waived for new agents';
     coShow('coStep3');overlay.classList.add('open');document.body.style.overflow='hidden';}
   function closeCheckout(){overlay.classList.remove('open');document.body.style.overflow='';}
   [].forEach.call(document.querySelectorAll('[data-co-close]'),function(b){b.addEventListener('click',closeCheckout);});
@@ -1253,7 +1253,7 @@ setTimeout(function(){c.classList.add('in');},9000);})();</script>
 function escapeHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
 var QA=[
 {k:["splits","split","commission","keep","percentage","percent","85","100","75"],q:"What are the splits?",a:"Okay so let me break this down for you… three plans. Mentorship Path is 75/25 at $59/mo. Growth is 85/15 at $79/mo. And Max… you keep 100% at just $99/mo. No cap. No tiers. No revenue share nonsense. Switching plans later? Once you're eligible and the broker approves, any deal where you already signed a listing, buyer agreement or contract with that client still closes on the plan you were on when you signed it."},
-{k:["cost","fee","fees","price","pay","charge","how much","expensive"],q:"What does it cost to join?",a:"So here's what you're looking at… $199 at signup (that covers your annual E&O and compliance). Your first month's plan fee? Waived. After that it's $59, $79, or $99/mo depending on your plan. Transaction fees are $499 per side on residential and commercial, and 10% on vacant land and rentals ($100 minimum, $499 maximum). Every fee is in Exhibit A, which you read before you sign."},
+{k:["cost","fee","fees","price","pay","charge","how much","expensive"],q:"What does it cost to join?",a:"So here's what you're looking at… $199 at signup (that covers your annual E&O and compliance). Your first month's plan fee? Waived on your first time joining Aari. After that it's $59, $79, or $99/mo depending on your plan. Transaction fees are $499 per side on residential and commercial, and 10% on vacant land and rentals ($100 minimum, $499 maximum). Every fee is in Exhibit A, which you read before you sign."},
 {k:["transaction","per deal","closing cost","transaction fee","499","299"],q:"What are the transaction fees?",a:"$499/side for residential and commercial. Vacant land and rentals pay 10% of the gross commission, minimum $100, maximum $499. And yes, if you rep both sides, the fee applies to each. Straightforward. No fine print."},
 {k:["mentorship","mentor","new agent","training","learn","beginner","new license"],q:"Tell me about the Mentorship program",a:"This one is perfect if you're newer to the game… 75/25 split at just $59/mo. But here's where it gets really good… you get full transaction coordination, 1:1 broker access, broker review on every contract you submit, AND 2 service credits per month (Offer Prep, Listing Docs, or MLS Setup by Aari Transactions LLC). Transaction coordination is billed by Aari Transactions LLC at its rate in effect when the contract is signed, deducted at closing. Not upfront."},
 {k:["plan change","upgrade","move up","switch plan","better split"],q:"Can I upgrade my plan later?",a:"Yes, and here's how it works… have three closed residential sales in the last 24 months, at Aari or at another brokerage, then submit a written request. The broker gets back to you within 5 business days. If approved, your new plan starts the day the broker approves it in writing, and the new monthly fee starts the 1st of the next month. One thing to know… you can't request another change within 90 days of the last one."},
