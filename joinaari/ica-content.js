@@ -42,7 +42,7 @@ window.ICA_CONTENT = {
 <p><strong>&ldquo;Immediately&rdquo;</strong> means without delay and, where a specific deadline is stated in Section 85 of the Operations and Compliance Manual, within that deadline. No general or default reporting period applies in place of a Section 85 deadline.</p>
 
 <h3 id="s-1">&sect;1. Independent Contractor Relationship</h3>
-<p>The Associate is engaged as an independent contractor, not an employee. The Company will not withhold taxes, provide employee benefits, or control the Associate&rsquo;s daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, and maintaining required insurance. The Associate must complete a W-9 form and will receive a Form 1099-NEC when federal law requires one.</p>
+<p>The Associate is engaged as an independent contractor, not an employee. The Company will not withhold taxes, provide employee benefits, or control the Associate&rsquo;s daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, maintaining required insurance, and the Associate&rsquo;s own MLS, board and association dues. The Associate must complete a W-9 form and will receive a Form 1099-NEC when federal law requires one.</p>
 <p>Broker retains authority to direct compliance with legal and regulatory obligations under Florida Statute Chapter 475 and FREC rules, without altering the Associate&rsquo;s independent contractor status.</p>
 
 <h4>No Authority to Bind</h4>
@@ -1308,6 +1308,7 @@ window.ICA_CONTENT = {
   <li><strong>October 9, 2026 &middot; ICA &sect;7:</strong> Personal transactions now use the single Personal Transaction definition in Section 28 of the CSA, determined when the transaction contract is executed, instead of the undefined term related party.</li>
   <li><strong>October 9, 2026 &middot; Conformance pass:</strong> One definition of Active in the ICA and Manual Section 45 (Start Date or DBPR record, whichever is later, once onboarding is complete and required fees are paid). The Late File definition covers deadlines stated in the ICA. CSA Section 34 Broker determinations are final for internal administrative purposes, subject to Section 37. CSA Section 37 points to ICA Section 15 for mediation, attorneys&rsquo; fees and costs. The Recruiting Reward amount is the amount in effect when the recruited Associate first affiliates. Solicitation calling hours refer to applicable law, as amended. Section 68.1 points to Exhibit A Section 39.2. Exhibit A Section 43.1 term spelled without a hyphen.</li>
   <li><strong>October 9, 2026 &middot; Final conformance:</strong> Defined terms Company Generated Lead and Referral Sourced Transaction spelled one way throughout. CSA Section 24 order of application includes an approved marketing deduction. Document upload deadlines in Manual Sections 50 and 55.5 run from execution as stated in the Late File definition. ICA Section 2(a) outside activity uses the Section 28 parties instead of related party. Review hours stated in Eastern Time. One earlier history entry corrected.</li>
+  <li><strong>October 9, 2026 &middot; ICA &sect;1:</strong> MLS, board and association dues are named as the Associate&rsquo;s own expense.</li>
 </ul>
 
 
