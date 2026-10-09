@@ -1124,11 +1124,13 @@
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-2"></span><span class="ica-ack-label">Commission Structure Addendum (CSA)</span></div>
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-3"></span><span class="ica-ack-label">Commission Fee Schedule: Exhibit A</span></div>
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-4"></span><span class="ica-ack-label">Operations &amp; Compliance Manual: All Addendums</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-10"></span><span class="ica-ack-label">W-9 Collection &amp; Tax Acknowledgment</span></div>
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-5"></span><span class="ica-ack-label">License Verification &amp; Active Status Acknowledgment</span></div>
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-6"></span><span class="ica-ack-label">Affiliated Business Disclosure: RESPA Compliance</span></div>
-          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-7"></span><span class="ica-ack-label">MLS Rules Acknowledgment: All Boards</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-7"></span><span class="ica-ack-label">MLS Rules Acknowledgment</span></div>
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-8"></span><span class="ica-ack-label">Buyer Brokerage Agreement Policy Acknowledgment</span></div>
           <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-9"></span><span class="ica-ack-label">Wire Fraud &amp; Cybersecurity Acknowledgment</span></div>
+          <div class="ica-ack-row"><span class="ica-ack-initial" id="ack-initial-11"></span><span class="ica-ack-label">Confirmation of Communication</span></div>
         </div>
       </div>
 
@@ -2002,7 +2004,7 @@ function goToStep(step) {
 
 function checkAllInitialed() {
   var allDone = true;
-  for (var i = 1; i <= 9; i++) {
+  for (var i = 1; i <= 11; i++) {
     var span = document.getElementById('ack-initial-' + i);
     if (!span || !span.textContent.trim()) { allDone = false; break; }
   }
@@ -2019,7 +2021,7 @@ function checkAllInitialed() {
 function initialAllPages() {
   var initials = document.getElementById('initials-input').value.trim();
   if (!initials) { alert('Please enter your initials first.'); document.getElementById('initials-input').focus(); return; }
-  for (var i = 1; i <= 9; i++) {
+  for (var i = 1; i <= 11; i++) {
     var span = document.getElementById('ack-initial-' + i);
     if (span) { span.textContent = initials; span.classList.add('initialed'); }
   }
@@ -2104,7 +2106,7 @@ function initialAllPages() {
 
   window.validateForm = function() {
     var allInitialed = true;
-    for (var i = 1; i <= 9; i++) {
+    for (var i = 1; i <= 11; i++) {
       var span = document.getElementById('ack-initial-' + i);
       if (!span || !span.textContent.trim()) { allInitialed = false; break; }
     }
@@ -2140,7 +2142,7 @@ function initialAllPages() {
       var formHearAbout = document.getElementById('associate-hear-about').value || 'N/A';
 
       var _initialsArr = [];
-      for (var _ii = 1; _ii <= 9; _ii++) {
+      for (var _ii = 1; _ii <= 11; _ii++) {
         var _sp = document.getElementById('ack-initial-' + _ii);
         _initialsArr.push(_sp ? _sp.textContent.trim() : '');
       }
@@ -2386,7 +2388,8 @@ function initialAllPages() {
         years_licensed: _v('associate-years') || 'N/A',
         closings_last_12_months: _v('associate-closings') || 'N/A',
         region: _v('associate-region-val') || 'N/A',
-        realtor_association: _v('associate-association-val') || 'N/A'
+        realtor_association: _v('associate-association-val') || 'N/A',
+        initials: ((document.getElementById('initials-input') || {}).value || '').trim()
       };
       var icaCopyRes = await fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(_agent) });
       var icaCopyData = await icaCopyRes.json().catch(function() { return {}; });
@@ -2462,7 +2465,7 @@ function initialAllPages() {
             pdf_filename: window._icaPdfFilename || ''
           })
         }).catch(function() {});
-        if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', license: _v('associate-license') || 'N/A', plan: _plan, signature: _v('associate-signature') || _v('associate-name') }) }).catch(function() {}); }
+        if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', license: _v('associate-license') || 'N/A', plan: _plan, signature: _v('associate-signature') || _v('associate-name'), initials: ((document.getElementById('initials-input') || {}).value || '').trim() }) }).catch(function() {}); }
         fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', plan: _plan, amount: _amtStr, payment_id: _payId, addons: [], monthly_amount: '' }) }).catch(function() {});
         // Trigger finalize-join for recurring subscriptions + account provisioning
         fetch('/api/finalize-join', {

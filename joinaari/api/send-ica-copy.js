@@ -29,7 +29,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { name, email, license, plan, signature } = req.body;
+    const { name, email, license, plan, signature, initials } = req.body;
     if (!email || !name || !signature) return res.status(400).json({ error: 'email, name, and signature are required' });
     const formattedDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
     const firstNm = firstName(name);
@@ -39,7 +39,7 @@ module.exports = async function handler(req, res) {
       const r = await fetch(SIGN_FN_URL, {
         method: 'POST',
         headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: WEB_TOKEN, name: name, email: email, license: license || '', plan: plan || '', signature: signature, user_agent: req.headers['user-agent'] || '' })
+        body: JSON.stringify({ token: WEB_TOKEN, name: name, email: email, license: license || '', plan: plan || '', signature: signature, initials: String(initials || '').trim().slice(0, 5), user_agent: req.headers['user-agent'] || '' })
       });
       const j = await r.json().catch(function () { return {}; });
       if (r.ok && j && j.ok) signed = j; else signErr = (j && (j.error || j.record_error)) || ('status ' + r.status);
