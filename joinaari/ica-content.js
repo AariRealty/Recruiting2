@@ -523,7 +523,7 @@ window.ICA_CONTENT = {
 <p>All Associates must maintain compliance with: Florida Statute Chapter 475; Florida Administrative Code (FAC) Rules of FREC; DBPR requirements; MLS Rules and Regulations; NAR Code of Ethics (if applicable); Fair Housing Act and Florida Fair Housing Act; and all federal, state, and local laws governing real estate transactions. Associates are responsible for maintaining an active Florida real estate license and must upload current license documentation to the Company&rsquo;s compliance platform within ten (10) business days of each renewal.</p>
 
 <h3 id="s-50">&sect;50. TRANSACTION DOCUMENTATION &amp; FILE SUBMISSION</h3>
-<p>All transactions must be submitted to the Broker for review and approval in accordance with Florida Statute &sect;475.5015 and FREC Rule 61J2-10.030. Associates must upload all transaction documents to the Company&rsquo;s designated compliance platform within forty-eight (48) hours of execution or receipt by Associate, whichever occurs later. Required Transaction Documents include but are not limited to: executed listing agreements, buyer-broker agreements, or tenant representation agreements; executed purchase and sale contracts or lease agreements; all amendments, addenda, and modifications; disclosure forms; inspection reports, repair requests, and responses; title commitments and HOA documents; closing statements; the Commission Disbursement Authorization (CDA) issued by the Broker, or equivalent; proof of earnest money deposit and disbursement records; and all written correspondence related to the transaction. Associates must ensure that transaction files are complete and submitted at least seven (7) days prior to closing for final Broker review.</p>
+<p>All transactions must be submitted to the Broker for review and approval in accordance with Section 475.5015, Florida Statutes, and the rules of the Florida Real Estate Commission, as amended. Associates must upload all transaction documents to the Company&rsquo;s designated compliance platform within forty-eight (48) hours of execution or receipt by Associate, whichever occurs later. Required Transaction Documents include but are not limited to: executed listing agreements, buyer-broker agreements, or tenant representation agreements; executed purchase and sale contracts or lease agreements; all amendments, addenda, and modifications; disclosure forms; inspection reports, repair requests, and responses; title commitments and HOA documents; closing statements; the Commission Disbursement Authorization (CDA) issued by the Broker, or equivalent; proof of earnest money deposit and disbursement records; and all written correspondence related to the transaction. Associates must ensure that transaction files are complete and submitted at least seven (7) days prior to closing for final Broker review.</p>
 <p>Any modification to a transaction, including contract extensions, addenda, or notices affecting closing dates or escrow disbursement, must be executed by all parties prior to the original expiration date and submitted for review within the deadline stated above.</p>
 <p>Consequences of Non-Compliance: Failure to submit required documents may result in commission withholding until the file is complete, suspension of system access, a mandatory compliance review meeting, and termination of this Agreement for repeated or material violations. Release of withheld amounts after cure is governed by Section 8. Fees applicable to late or incomplete submissions are set forth in Exhibit A.</p>
 
@@ -549,7 +549,7 @@ window.ICA_CONTENT = {
 </ul>
 
 <h3 id="s-53">&sect;53. TRANSACTION FILE REQUIREMENTS</h3>
-<p>All Associates must submit complete transaction files in accordance with Florida Statute &sect;475.5015 and FREC Rule 61J2-10.030. The Broker is required to maintain transaction records for a minimum of five (5) years from the date of closing or termination.</p>
+<p>All Associates must submit complete transaction files in accordance with Section 475.5015, Florida Statutes, and the rules of the Florida Real Estate Commission, as amended. The Broker maintains transaction records for at least the period required by Section 475.5015, Florida Statutes, and the rules of the Florida Real Estate Commission, as amended.</p>
 <p>Submission Deadline: Document upload deadlines and the deadline for submitting a complete file before closing are set forth in Section 50.</p>
 
 <h3 id="s-54">&sect;54. RESERVED</h3>
@@ -603,7 +603,7 @@ window.ICA_CONTENT = {
 <p>Claims Reporting: Associate must notify the Broker in writing within twenty-four (24) hours of any demand, complaint, investigation, or threatened claim and must fully cooperate in the investigation and defense. Associates must fully cooperate with the Company&rsquo;s insurance carrier and legal counsel.</p>
 
 <h3 id="s-61">&sect;61. RECORD RETENTION &amp; CONFIDENTIALITY</h3>
-<p>Aari Realty LLC is required by Florida law to maintain transaction records for a minimum of five (5) years from the date of closing or termination. Transaction-document submission is governed by Section 50.</p>
+<p>Aari Realty LLC maintains transaction records for at least the period required by Section 475.5015, Florida Statutes, and the rules of the Florida Real Estate Commission, as amended. Transaction-document submission is governed by Section 50.</p>
 <p>Associates must protect the confidentiality of client information, including financial information, personal identifying information, medical or health information, and transaction details.</p>
 
 <h3 id="s-62">&sect;62. RECRUITING REWARD POLICY</h3>
@@ -1298,6 +1298,7 @@ window.ICA_CONTENT = {
   <li><strong>October 9, 2026 &middot; Manual &sect;60, Good Standing:</strong> Auto insurance is now required of every Associate who drives for Company business, not only Associates who transport clients, with the Company named as additional insured and a certificate on file. An Associate who does not drive for Company business gives the Broker a signed written statement. Good Standing condition (d) now requires that certificate.</li>
   <li><strong>October 9, 2026 &middot; Exhibit A &sect;44:</strong> Added a default rule: unless a Section states otherwise, a fee is the amount in Exhibit A in effect on the date the fee is charged. No amount changed.</li>
   <li><strong>October 9, 2026 &middot; Exhibit A &sect;38.4:</strong> The Transaction Coordination Fee now names where the Aari Transactions LLC rate is published (aaritransactions.com). No amount added.</li>
+  <li><strong>October 9, 2026 &middot; Manual &sect;50, &sect;53, &sect;61:</strong> Record retention now refers to the period required by Florida statute and Commission rules, as amended, instead of stating a fixed number of years. An unverified rule citation was removed.</li>
 </ul>
 
 
