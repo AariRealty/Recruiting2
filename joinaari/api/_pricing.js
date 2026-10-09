@@ -142,12 +142,12 @@ async function checkPromoEligibility(code, email, license) {
     return { ok: false, status: 410, error: 'coupon_expired', message: 'This offer ended on March 31, 2027.' };
   }
   var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!svcKey) return { ok: false, status: 500, error: 'promo_unavailable', message: 'Promo validation unavailable. Contact support.' };
+  if (!svcKey) return { ok: false, status: 500, error: 'promo_unavailable', detail: 'no_service_key', message: 'Promo validation unavailable. Contact support.' };
   var base = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/';
   var h = { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } };
   async function rows(path) {
     var r = await fetch(base + path, h);
-    if (!r.ok) throw new Error('lookup failed ' + r.status);
+    if (!r.ok) throw new Error('lookup ' + r.status + ' ' + path.split('?')[0]);
     return r.json();
   }
   try {
@@ -169,7 +169,7 @@ async function checkPromoEligibility(code, email, license) {
       return { ok: false, status: 409, error: 'not_eligible', message: 'This offer is for agents new to Aari Realty only.' };
     }
   } catch (err) {
-    return { ok: false, status: 500, error: 'promo_unavailable', message: 'Promo validation unavailable. Contact support.' };
+    return { ok: false, status: 500, error: 'promo_unavailable', detail: String(err.message || err).slice(0, 80), message: 'Promo validation unavailable. Contact support.' };
   }
   return { ok: true };
 }

@@ -47,7 +47,7 @@ module.exports = async function handler(req, res) {
 
     if (PROMO_RULES[lookup]) {
       var elig = await checkPromoEligibility(lookup, (req.body || {}).email, (req.body || {}).license_number);
-      if (!elig.ok) return res.status(elig.status).json({ error: elig.error, message: elig.message });
+      if (!elig.ok) return res.status(elig.status).json({ error: elig.error, detail: elig.detail, message: elig.message });
     }
 
     // Build response
