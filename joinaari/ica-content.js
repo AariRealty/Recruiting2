@@ -42,7 +42,7 @@ window.ICA_CONTENT = {
 <p><strong>&ldquo;Immediately&rdquo;</strong> means without delay and, where a specific deadline is stated in Section 85 of the Operations and Compliance Manual, within that deadline. No general or default reporting period applies in place of a Section 85 deadline.</p>
 
 <h3 id="s-1">&sect;1. Independent Contractor Relationship</h3>
-<p>The Associate is engaged as an independent contractor, not an employee. The Company will not withhold taxes, provide employee benefits, or control the Associate&rsquo;s daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, and maintaining required insurance. The Associate must complete a W-9 form and will receive a 1099-NEC for tax purposes.</p>
+<p>The Associate is engaged as an independent contractor, not an employee. The Company will not withhold taxes, provide employee benefits, or control the Associate&rsquo;s daily work schedule. The Associate is solely responsible for tax filings, business expenses, professional tools, transportation, and maintaining required insurance. The Associate must complete a W-9 form and will receive a Form 1099-NEC when federal law requires one.</p>
 <p>Broker retains authority to direct compliance with legal and regulatory obligations under Florida Statute Chapter 475 and FREC rules, without altering the Associate&rsquo;s independent contractor status.</p>
 
 <h4>No Authority to Bind</h4>
@@ -605,7 +605,7 @@ window.ICA_CONTENT = {
 
 <h3 id="s-62">&sect;62. RECRUITING REWARD POLICY</h3>
 <p>Eligibility: To receive the Recruiting Reward: (1) the referring Associate must remain Active and not subject to termination or Material Breach proceedings from the date of referral through payment; (2) the recruited Associate must be a newly affiliated licensed Florida sales associate; (3) the recruited Associate must complete onboarding and pay all required fees; and (4) the recruited Associate must remain Active and in Good Standing for at least thirty (30) consecutive days after affiliation.</p>
-<p>Payment: The Recruiting Reward will be paid within the timeframe specified in Exhibit A following the date all eligibility requirements are satisfied. Payment will be issued via ACH, check, or other method designated by the Company. The reward is considered taxable income and will be reported to the IRS on Form 1099-NEC.</p>
+<p>Payment: The Recruiting Reward will be paid within the timeframe specified in Exhibit A following the date all eligibility requirements are satisfied. Payment will be issued via ACH, check, or other method designated by the Company. The reward is considered taxable income and is reported to the IRS on Form 1099-NEC when federal law requires.</p>
 <p>Fee Amounts: The specific amount of the Recruiting Reward and all related fees are set forth in Exhibit A: Commission Fee Schedule.</p>
 
 <h3 id="s-63">&sect;63. COMPANY LEADS ADDENDUM</h3>
@@ -976,7 +976,7 @@ window.ICA_CONTENT = {
 <ul class="bullet-list">
   <li>They are engaged as an independent contractor, not an employee of Aari Realty LLC</li>
   <li>Aari Realty LLC will not withhold federal income tax, Social Security tax, or Medicare tax from commission payments</li>
-  <li>Aari Realty LLC will issue a Form 1099-NEC for each calendar year in which the Associate receives commission payments totaling $600.00 or more</li>
+  <li>Aari Realty LLC will issue a Form 1099-NEC for each calendar year in which federal law requires one for the Associate&rsquo;s commission payments</li>
   <li>The Associate is solely responsible for all federal, state, and local tax obligations, including estimated quarterly tax payments</li>
   <li>The Associate must notify Aari Realty LLC in writing within thirty (30) days of any change to their legal name, TIN, SSN, or tax classification requiring an updated W-9</li>
 </ul>
@@ -1278,6 +1278,7 @@ window.ICA_CONTENT = {
   <li><strong>October 8, 2026 &middot; &sect;36, &sect;39.7, &sect;40, &sect;43.1:</strong> Third Party Referral Network Transactions are allocated fifty percent to the Company and fifty percent to the Associate after the network&rsquo;s referral fee, on every commission plan and however the lead was delivered, and are added to the Commission Base floor. The network platform&rsquo;s acceptance record is the record of delivery.</li>
   <li><strong>October 8, 2026 &middot; &sect;24, &sect;35, &sect;39.3 through &sect;39.7, &sect;40, &sect;63.1:</strong> On every transaction with a fixed fifty percent allocation, the transaction fee is deducted from the Associate&rsquo;s share after the allocation, and the Company&rsquo;s share is not reduced by it.</li>
   <li><strong>October 8, 2026 &middot; &sect;6, &sect;60, &sect;72.2:</strong> The Associate&rsquo;s E&amp;O retention or deductible cap is the amount in the policy declarations in effect on the date the claim is first made against the Company.</li>
+  <li><strong>October 8, 2026 &middot; &sect;1, &sect;62, &sect;86:</strong> Form 1099-NEC is issued when federal law requires one, with no reporting threshold stated in the document.</li>
 </ul>
 
 
