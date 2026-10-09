@@ -38,6 +38,8 @@ module.exports = async function handler(req, res) {
       }
     });
 
+    // Exhibit A 41.3 is authoritative for SWITCH199, whatever the env var says.
+    coupons['SWITCH199'] = { type: 'flat_off', value: 199 };
     const lookup = code.trim().toUpperCase();
     const coupon = coupons[lookup];
 

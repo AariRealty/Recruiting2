@@ -49,6 +49,8 @@ function resolveCoupon(code) {
       };
     }
   });
+  // Exhibit A 41.3 is authoritative for SWITCH199, whatever the env var says.
+  coupons.SWITCH199 = { type: 'flat_off', value: 199 };
   var key = String(code).trim().toUpperCase();
   var coupon = coupons[key] || null;
   if (!coupon) return null;
