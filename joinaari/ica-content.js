@@ -306,7 +306,7 @@ window.ICA_CONTENT = {
 <p>By executing this ICA, the Associate acknowledges and agrees to all Incorporated Documents listed above, including the Acknowledgments in Sections 86 through 92, as they exist on the Effective Date and as amended from time to time in accordance with Section 18. Continued affiliation after notice of an amendment constitutes acceptance of the amended document. No separate signatures are required on any Incorporated Document, including any Acknowledgment.</p>
 
 <h4>Effective Date Definition</h4>
-<p>&ldquo;Effective Date&rdquo; means the date on which both parties have executed this Agreement. For Incorporated Documents, the effective date of updates shall be as specified in the notice of amendment, effective immediately upon delivery.</p>
+<p>&ldquo;Effective Date&rdquo; means the date on which both parties have executed this Agreement. The Broker&rsquo;s electronic signature for the Company is applied in advance, so the Effective Date is the date the Associate signs. The Company may decline the affiliation by written notice to the Associate at any time before the Associate becomes Active, and then refunds the E&amp;O + Compliance Fee the Associate paid. For Incorporated Documents, the effective date of updates shall be as specified in the notice of amendment, effective immediately upon delivery.</p>
 <p>&ldquo;Start Date&rdquo; means the date the Associate selects when signing this Agreement as the date the Associate plans to transfer the Associate&rsquo;s license to the Company. It may be the signing date or a later date. The Associate becomes Active on the Start Date or on the date the Department of Business and Professional Regulation records the Associate&rsquo;s license under the Company, whichever is later. Until then, the Associate receives no access to Company systems, conducts no real estate activity on behalf of the Company, and is not paid by the Company.</p>
 
 <h4>Electronic Signatures</h4>
@@ -1288,6 +1288,7 @@ window.ICA_CONTENT = {
   <li><strong>October 9, 2026 &middot; Exhibit A &sect;38.3, &sect;38.4, ICA &sect;3:</strong> The Transaction Coordination Fee paragraph moved out of Commission Plan Changes into its own Section 38.4, and the references to it now point to Section 38.4. No wording, amount or rule changed.</li>
   <li><strong>October 9, 2026 &middot; CSA &sect;34, &sect;35.2:</strong> The reassignment and Referral Sourced application order now match the October 8 rule for fixed allocations: the commission is split first, and the transaction fee comes from the assigned Associate&rsquo;s share without reducing the Company&rsquo;s share.</li>
   <li><strong>October 9, 2026 &middot; Definitions, Exhibit A &sect;41.1, Manual &sect;68.1:</strong> Added Start Date, the date the Associate selects at signing to transfer the license. The Associate is Active on the Start Date or the date DBPR records the license under the Company, whichever is later, with no Company systems, business or pay before then. The free month is the month of the Start Date and the Monthly Brokerage Fee begins the first of the following month.</li>
+  <li><strong>October 9, 2026 &middot; Definitions, Execution:</strong> The Broker&rsquo;s electronic signature for the Company is applied in advance and takes effect when the Associate signs, so the Effective Date is the Associate&rsquo;s signing date. The Company may decline the affiliation in writing before the Associate becomes Active and refunds the E&amp;O + Compliance Fee paid.</li>
 </ul>
 
 
@@ -1295,6 +1296,8 @@ window.ICA_CONTENT = {
 
 <h2>Execution</h2>
 
-<p>By executing this Agreement, the Associate acknowledges that they have read, understand, and agree to all terms and conditions set forth in this Independent Contractor Agreement and all Incorporated Documents. Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>`,
+<p>By executing this Agreement, the Associate acknowledges that they have read, understand, and agree to all terms and conditions set forth in this Independent Contractor Agreement and all Incorporated Documents. Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
+
+<div class="broker-sig"><p><strong>For the Company: Aari Realty LLC</strong></p><p><img src="broker-signature.png" alt="Broker signature" style="height:70px"></p><p>Marlenyi L. Paredes, Broker of Record, BK3530153</p><p>The Broker&rsquo;s electronic signature is applied in advance on behalf of the Company and takes effect on the date the Associate signs this Agreement.</p></div>`,
 
 };
