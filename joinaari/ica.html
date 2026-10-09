@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
   <meta charset="UTF-8">  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="format-detection" content="telephone=no">
-  <title>Independent Contractor Agreement – Aari Realty LLC</title>
+  <title>Independent Contractor Agreement · Aari Realty LLC</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&family=Stalemate&display=swap" rel="stylesheet">
   <style>
     :root { --black: #0a0a0a; --white: #fafafa; }
@@ -1560,7 +1560,7 @@ function parseLicenseFile(file) {
         if (imgBase64) {
           sendToParseAPI(imgBase64, 'image/png', statusEl, origText);
         } else {
-          statusEl.textContent = origText + ' — could not read PDF';
+          statusEl.textContent = origText + ': could not read PDF';
           statusEl.style.color = '#e67e22';
         }
       });
@@ -1666,11 +1666,11 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
       var errMsg = 'please fill in manually';
       if (data.error === 'missing_api_key') errMsg = 'auto-read not configured yet';
       else if (data.error === 'api_error') errMsg = 'API error' + (data.detail ? ': ' + data.detail.substring(0, 80) : '');
-      else if (data.error === 'missing_payload') errMsg = 'upload error — try again';
-      else if (data.error === 'parse_error') errMsg = 'could not read — fill in manually';
+      else if (data.error === 'missing_payload') errMsg = 'upload error, try again';
+      else if (data.error === 'parse_error') errMsg = 'could not read, fill in manually';
       else if (data.error === 'server_error') errMsg = 'server error' + (data.detail ? ': ' + data.detail.substring(0, 80) : '');
-      else if (data.error === 'empty_response') errMsg = 'no data found — fill in manually';
-      statusEl.textContent = origText + ' — ' + errMsg;
+      else if (data.error === 'empty_response') errMsg = 'no data found, fill in manually';
+      statusEl.textContent = origText + ': ' + errMsg;
       statusEl.style.color = '#e67e22';
       console.log('License parse response:', JSON.stringify(data));
       return;
@@ -1712,13 +1712,13 @@ function sendToParseAPI(base64, mediaType, statusEl, origText) {
         }
       }
     } else {
-      statusEl.textContent = origText + ' — could not auto-read, please fill in manually';
+      statusEl.textContent = origText + ': could not auto read, please fill in manually';
       statusEl.style.color = '#e67e22';
     }
   })
   .catch(function(err) {
     console.error('License parse error:', err);
-    statusEl.textContent = origText + ' — please fill in manually';
+    statusEl.textContent = origText + ': please fill in manually';
     statusEl.style.color = '#e67e22';
   });
 }
