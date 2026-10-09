@@ -409,7 +409,7 @@ window.ICA_CONTENT = {
 <p><strong>Request Process.</strong> The Associate submits a written request to the Broker. The Broker will approve or deny in writing within five (5) business days. Approval is at the Broker's sole discretion based on compliance history, transaction quality, and performance. The Broker may deny a request without cause.</p>
 <p><strong>Plan Change Activation Date.</strong> An approved plan change takes effect on the date of the Broker's written approval. The Monthly Brokerage Fee for the new plan is charged beginning on the first day of the following calendar month.</p>
 <p><strong>Transaction Protection.</strong> The plan in effect before the Plan Change Activation Date applies to all transactions under a fully executed purchase and sale agreement or listing agreement dated before the Plan Change Activation Date. Those transactions close under the prior plan, except where the Associate departs the Company before closing, which is governed by the Departure Share in Section 39.4 and Section 7 of the ICA.</p>
-<p><strong>Frequency Limit.</strong> An Associate may not submit a new plan change request within sixty (60) days of their most recent Plan Change Activation Date.</p>
+<p><strong>Frequency Limit.</strong> An Associate may not submit a new plan change request within ninety (90) days of their most recent Plan Change Activation Date.</p>
 <p><strong>Downgrade Rule.</strong> The same eligibility, process, activation date, and frequency limit apply in both directions. Moving from Aari Max back to Aari Growth requires the same process.</p>
 <h3 id="s-39">&sect;39. Transaction Types and Transaction Fee Application</h3>
 <h4 id="s-39-1">&sect;39.1 Standard Transaction Fee (Per Side, All Plans, All Transaction Types)</h4>
@@ -1280,7 +1280,7 @@ window.ICA_CONTENT = {
   <li><strong>October 8, 2026 &middot; &sect;6, &sect;60, &sect;72.2:</strong> The Associate&rsquo;s E&amp;O retention or deductible cap is the amount in the policy declarations in effect on the date the claim is first made against the Company.</li>
   <li><strong>October 8, 2026 &middot; &sect;1, &sect;62, &sect;86:</strong> Form 1099-NEC is issued when federal law requires one, with no reporting threshold stated in the document.</li>
   <li><strong>October 8, 2026 &middot; &sect;39.4, &sect;83.5:</strong> Departure Share on a pending transaction from a Personally Generated Client: the departing Associate receives the commission plan share less a Completion Allocation of up to twenty percent of the gross commission for whoever completes the transaction, or the Broker may release the transaction to the new brokerage for a fifteen percent referral fee. Company-Generated Leads remain excluded.</li>
-  <li><strong>October 9, 2026 &middot; &sect;38.3:</strong> An approved plan change takes effect on the date of the Broker&rsquo;s written approval; the new plan&rsquo;s Monthly Brokerage Fee begins on the first day of the following month.</li>
+  <li><strong>October 9, 2026 &middot; &sect;38.3:</strong> An approved plan change takes effect on the date of the Broker&rsquo;s written approval; the new plan&rsquo;s Monthly Brokerage Fee begins on the first day of the following month. An Associate may request another plan change ninety days after the last one.</li>
 </ul>
 
 
