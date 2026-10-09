@@ -169,7 +169,7 @@ window.ICA_CONTENT = {
 <p>Good Standing means the Associate satisfies all of the following: (a) maintains a current, active Florida real estate license in good standing with DBPR; (b) has no outstanding fees, balances, or debts owed to the Company; (c) has no material policy violations or unresolved compliance issues; (d) has paid the current E&amp;O + Compliance Fee and maintains a current certificate of the auto insurance required by Section 60 of the Operations &amp; Compliance Manual, naming the Company as additional insured; (e) complies with all document submission deadlines and file completion requirements; and (f) is not subject to any active suspension, investigation, or disciplinary action.</p>
 
 <h4>Personal Transactions</h4>
-<p>Personal transactions involving the Associate or a related party are permitted only with prior Broker approval and are subject to the applicable transaction fees and compliance requirements set forth in Exhibit A: Commission Fee Schedule.</p>
+<p>A Personal Transaction, as defined in Section 28 of the CSA and determined at the time the transaction contract is executed, is permitted only with prior Broker approval and are subject to the applicable transaction fees and compliance requirements set forth in Exhibit A: Commission Fee Schedule.</p>
 <p>Personal Transactions are excluded from the Company&rsquo;s Errors &amp; Omissions coverage. The Associate is solely responsible for any resulting liability and is strongly encouraged to obtain individual coverage before proceeding.</p>
 
 <h4>Fees</h4>
@@ -1305,6 +1305,7 @@ window.ICA_CONTENT = {
   <li><strong>October 9, 2026 &middot; Version History:</strong> Three October 8 entries now describe the Late Closing Documentation Fee, the Collection Share, the Completion Allocation and the departure referral fee without restating amounts, which appear only in Exhibit A.</li>
   <li><strong>October 9, 2026 &middot; Version History corrections:</strong> Six earlier entries corrected in general terms so none describes a rule the package no longer contains (plan change frequency limit, billing cycles, record retention, first month waiver, Acknowledgments numbering, administrative cost allocation).</li>
   <li><strong>October 9, 2026 &middot; Manual &sect;55.4, Exhibit A &sect;42:</strong> A fee an Associate negotiates with the Associate&rsquo;s own client, including a listing cancellation fee, is collected only in the Company&rsquo;s name and is subject to the Broker&rsquo;s discretion; the Broker may reduce or disallow it before it is collected. Section 55.4 now allows such a fee instead of prohibiting it.</li>
+  <li><strong>October 9, 2026 &middot; ICA &sect;7:</strong> Personal transactions now use the single Personal Transaction definition in Section 28 of the CSA, determined when the transaction contract is executed, instead of the undefined term related party.</li>
 </ul>
 
 
