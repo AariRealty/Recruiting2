@@ -21,6 +21,10 @@ const ADDON_PRICES = {
 
 const ANNUAL_FEE = 199; // E&O + compliance, due today, also billed annually
 
+// Supabase anon key: public by design (same key any browser client uses).
+// Used only when the Vercel env var is not set.
+const SUPABASE_ANON_PUBLIC = process.env.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y';
+
 const PROMO_RULES = {
   SWITCH199: { maxRedemptions: 25, expiresAt: '2027-03-31T23:59:59-04:00' },
 };
@@ -142,7 +146,7 @@ async function checkPromoEligibility(code, email, license) {
     return { ok: false, status: 410, error: 'coupon_expired', message: 'This offer ended on March 31, 2027.' };
   }
   if (!String(email || '').trim()) return { ok: false, status: 400, error: 'email_required', message: 'Enter your email before applying a code.' };
-  var anon = process.env.SUPABASE_ANON_KEY;
+  var anon = SUPABASE_ANON_PUBLIC;
   if (!anon) return { ok: false, status: 500, error: 'promo_unavailable', detail: 'no_anon_key', message: 'Promo validation unavailable. Contact support.' };
   try {
     var r = await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/promo_check', {
@@ -161,4 +165,4 @@ async function checkPromoEligibility(code, email, license) {
   }
 }
 
-module.exports = { PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon, checkPromoEligibility };
+module.exports = { SUPABASE_ANON_PUBLIC, PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon, checkPromoEligibility };

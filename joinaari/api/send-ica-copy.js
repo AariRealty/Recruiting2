@@ -1,7 +1,7 @@
 var sendViaProxy = require('./_send-via-proxy');
 
 const SIGN_FN_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-sign-ica-web';
-const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
+const SUPABASE_ANON = require('./_pricing').SUPABASE_ANON_PUBLIC;
 const WEB_TOKEN = process.env.AARI_WEB_SIGN_TOKEN || '';
 
 function esc(x) {

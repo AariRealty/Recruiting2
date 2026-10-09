@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { PROMO_RULES } = require('./_pricing');
+const { PROMO_RULES, SUPABASE_ANON_PUBLIC } = require('./_pricing');
 
 // Live recurring prices (Aari Realty, acct_1Qo5qRHTQU4zpF23)
 const PLAN_MAP = {
@@ -10,7 +10,7 @@ const PLAN_MAP = {
 const EO_PRICE = 'price_1TrolNHTQU4zpF236LAkKbqi';
 
 const PROVISION_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-agent-provision';
-const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
+const SUPABASE_ANON = SUPABASE_ANON_PUBLIC;
 const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
 
 // Today's date in Florida (America/New_York) as YYYY-MM-DD.

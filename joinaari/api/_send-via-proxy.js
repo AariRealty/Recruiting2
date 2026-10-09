@@ -1,7 +1,7 @@
 var PROXY_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/send-email-proxy';
 
 module.exports = async function sendViaProxy(opts) {
-  var anon = process.env.SUPABASE_ANON_KEY;
+  var anon = require('./_pricing').SUPABASE_ANON_PUBLIC;
   if (!anon) throw new Error('SUPABASE_ANON_KEY not configured');
 
   var r = await fetch(PROXY_URL, {
