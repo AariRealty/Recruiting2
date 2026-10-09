@@ -12,9 +12,19 @@ const PROVISION_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/rea
 const SUPABASE_ANON = process.env.SUPABASE_ANON_KEY;
 const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
 
-function firstOfNextMonthTs() {
-  const now = new Date();
-  return Math.floor(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() + 1, 1, 12, 0, 0) / 1000);
+// Today's date in Florida (America/New_York) as YYYY-MM-DD.
+function todayFL() { return new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); }
+// First Monthly Brokerage Fee: the 1st of the month after the Associate's Start Date
+// (Exhibit A 41.1, Manual 68.1). A missing, invalid or past Start Date falls back to today.
+// A Start Date more than one year out is capped at one year.
+function firstOfMonthAfterStartTs(startISO) {
+  const today = todayFL();
+  let start = /^\d{4}-\d{2}-\d{2}$/.test(String(startISO || '')) ? String(startISO) : today;
+  if (start < today) start = today;
+  const t = new Date(today + 'T12:00:00Z'); const cap = new Date(Date.UTC(t.getUTCFullYear() + 1, t.getUTCMonth(), t.getUTCDate(), 12)).toISOString().slice(0, 10);
+  if (start > cap) start = cap;
+  const y = Number(start.slice(0, 4)), m = Number(start.slice(5, 7));
+  return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
 }
 function firstOfNextMonthNextYearTs() {
   const now = new Date();
@@ -41,6 +51,7 @@ module.exports = async function handler(req, res) {
     const fullName = String(body.name || ((body.first_name || '') + ' ' + (body.last_name || ''))).trim();
     const phone = String(body.phone || '').trim();
     const license = String(body.license || body.license_number || '').trim();
+    const startDate = String(body.start_date || '').trim();
     if (!email) return res.status(400).json({ error: 'email is required' });
     if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
 
@@ -72,16 +83,16 @@ module.exports = async function handler(req, res) {
       catch (e) { out.warnings.push('default_pm: ' + String(e.message || e).slice(0, 120)); }
     }
 
-    // 3) Monthly plan subscription, first charge on the 1st of next month (prorated first month already collected today)
+    // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
     if (customer && pmId && planInfo) {
       try {
         const monthly = await stripe.subscriptions.create({
           customer: customer.id,
           items: [{ price: planInfo.price }],
-          trial_end: firstOfNextMonthTs(),
+          trial_end: firstOfMonthAfterStartTs(startDate),
           proration_behavior: 'none',
           default_payment_method: pmId,
-          metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal }
+          metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '' }
         }, { idempotencyKey: 'aari-monthly:' + email });
         out.subscriptions.monthly = monthly.id;
       } catch (e) { out.warnings.push('monthly_sub: ' + String(e.message || e).slice(0, 140)); }
