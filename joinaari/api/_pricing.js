@@ -141,37 +141,24 @@ async function checkPromoEligibility(code, email, license) {
   if (new Date() >= new Date(rule.expiresAt)) {
     return { ok: false, status: 410, error: 'coupon_expired', message: 'This offer ended on March 31, 2027.' };
   }
-  var svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!svcKey) return { ok: false, status: 500, error: 'promo_unavailable', detail: 'no_service_key', message: 'Promo validation unavailable. Contact support.' };
-  var base = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/';
-  var h = { headers: { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey } };
-  async function rows(path) {
-    var r = await fetch(base + path, h);
-    if (!r.ok) throw new Error('lookup ' + r.status + ' ' + path.split('?')[0]);
-    return r.json();
-  }
+  if (!String(email || '').trim()) return { ok: false, status: 400, error: 'email_required', message: 'Enter your email before applying a code.' };
+  var anon = process.env.SUPABASE_ANON_KEY;
+  if (!anon) return { ok: false, status: 500, error: 'promo_unavailable', detail: 'no_anon_key', message: 'Promo validation unavailable. Contact support.' };
   try {
-    var redeemed = await rows('promo_redemptions?code=eq.' + encodeURIComponent(key) + '&select=id');
-    if (redeemed.length >= rule.maxRedemptions) {
-      return { ok: false, status: 410, error: 'coupon_exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' };
-    }
-    var em = String(email || '').trim().toLowerCase();
-    var lic = String(license || '').trim().toUpperCase();
-    if (!em) return { ok: false, status: 400, error: 'email_required', message: 'Enter your email before applying a code.' };
-    var e = encodeURIComponent(em);
-    var hits = []
-      .concat(await rows('promo_redemptions?agent_email=ilike.' + e + '&select=id'))
-      .concat(await rows('realty_members?email=ilike.' + e + '&select=id'))
-      .concat(await rows('realty_agent_subscriptions?agent_email=ilike.' + e + '&select=id'))
-      .concat(await rows('realty_agreement_signatures?signer_email=ilike.' + e + '&select=id'));
-    if (lic) hits = hits.concat(await rows('realty_members?license_number=ilike.' + encodeURIComponent(lic) + '&select=id'));
-    if (hits.length) {
-      return { ok: false, status: 409, error: 'not_eligible', message: 'This offer is for agents new to Aari Realty only.' };
-    }
+    var r = await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/promo_check', {
+      method: 'POST',
+      headers: { 'apikey': anon, 'Authorization': 'Bearer ' + anon, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_code: key, p_email: email, p_license: license || '', p_max: rule.maxRedemptions })
+    });
+    if (!r.ok) throw new Error('rpc ' + r.status);
+    var out = await r.json();
+    if (out.ok) return { ok: true };
+    if (out.reason === 'exhausted') return { ok: false, status: 410, error: 'coupon_exhausted', message: 'All ' + rule.maxRedemptions + ' spots have been taken.' };
+    if (out.reason === 'email_required') return { ok: false, status: 400, error: 'email_required', message: 'Enter your email before applying a code.' };
+    return { ok: false, status: 409, error: 'not_eligible', message: 'This offer is for agents new to Aari Realty only.' };
   } catch (err) {
     return { ok: false, status: 500, error: 'promo_unavailable', detail: String(err.message || err).slice(0, 80), message: 'Promo validation unavailable. Contact support.' };
   }
-  return { ok: true };
 }
 
 module.exports = { PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon, checkPromoEligibility };

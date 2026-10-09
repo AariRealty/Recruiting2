@@ -117,21 +117,18 @@ module.exports = async function handler(req, res) {
     // 4b) Record a promo spot (Exhibit A 41.3) only once the payment or card setup succeeded.
     try {
       const intentId = String(body.payment_id || '').trim();
-      const svcKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-      if (intentId && svcKey) {
+      if (intentId) {
         const intent = intentId.indexOf('seti_') === 0
           ? await stripe.setupIntents.retrieve(intentId)
           : await stripe.paymentIntents.retrieve(intentId);
         const code = String((intent.metadata && intent.metadata.coupon) || '').toUpperCase();
         if (intent.status === 'succeeded' && PROMO_RULES[code]) {
-          const base = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/promo_redemptions';
-          const hdr = { 'apikey': svcKey, 'Authorization': 'Bearer ' + svcKey, 'Content-Type': 'application/json' };
-          const dup = await fetch(base + '?payment_intent_id=eq.' + encodeURIComponent(intentId) + '&select=id', { headers: hdr });
-          const dupRows = dup.ok ? await dup.json() : [];
-          if (!dupRows.length) {
-            await fetch(base, { method: 'POST', headers: Object.assign({ 'Prefer': 'return=minimal' }, hdr), body: JSON.stringify({ code: code, payment_intent_id: intentId, agent_email: (intent.metadata.agent_email || email).toLowerCase(), amount_waived: Math.round(Number(intent.metadata.discount) || 0) }) });
-          }
-          out.promo = code;
+          const r = await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/promo_record', {
+            method: 'POST',
+            headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ p_code: code, p_intent_id: intentId, p_email: intent.metadata.agent_email || email, p_amount: Math.round(Number(intent.metadata.discount) || 0), p_max: PROMO_RULES[code].maxRedemptions })
+          });
+          out.promo = await r.json().catch(function () { return { ok: false }; });
         }
       }
     } catch (e) { out.warnings.push('promo_record: ' + String(e.message || e).slice(0, 140)); }
