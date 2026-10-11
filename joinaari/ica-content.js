@@ -566,10 +566,10 @@ window.ICA_CONTENT = {
 <p>This Section governs which documents an Associate may execute on behalf of the Company and supersedes any contrary statement of signing authority elsewhere in this Agreement or any Incorporated Document.</p>
 
 <h4 id="s-55-1">&sect;55.1 Broker Signature Required for:</h4>
-<p>Commission Disbursement Authorizations (CDAs); Associate Personal Transactions; and any modification to the Independent Contractor Agreement, Exhibit A, or any Aari generated agreement between the Company and the Associate.</p>
+<p>Commission Disbursement Authorizations (CDAs); Associate Personal Transactions; and any modification to the Independent Contractor Agreement, Exhibit A, or any Company generated agreement between the Company and the Associate.</p>
 
 <h4 id="s-55-2">&sect;55.2 Associate Signature Permitted</h4>
-<p>Associates are authorized to execute the following on behalf of the Company without Broker initial or signature: all standard Florida Realtors and NAR contracts (FR/BAR AS IS, FR/BAR Standard, CRSP-17, NABOR, Residential Lease, Vacant Land) and their addenda; Buyer Broker Agreements and Seller to Buyer&rsquo;s Broker Compensation Agreements; and Outside Broker Referral Agreements. Signature block format: Aari Realty LLC | [Associate&rsquo;s Full Name]. By signing on behalf of the Company, the Associate warrants that the form is a Florida Realtors, NAR, or Aari provided template used unmodified, and that terms fall within the standard commission and compensation framework in Exhibit A.</p>
+<p>Associates are authorized to execute the following on behalf of the Company without Broker initial or signature: all standard Florida Realtors and NAR contracts (FR/BAR AS IS, FR/BAR Standard, CRSP-17, NABOR, Residential Lease, Vacant Land) and their addenda; Buyer Broker Agreements and Seller to Buyer&rsquo;s Broker Compensation Agreements; and Outside Broker Referral Agreements. Signature block format: Aari Realty LLC | [Associate&rsquo;s Full Name]. By signing on behalf of the Company, the Associate warrants that the form is a Florida Realtors, NAR, or Company provided template used unmodified, and that terms fall within the standard commission and compensation framework in Exhibit A.</p>
 
 <h4 id="s-55-3">&sect;55.3 Arbitration &amp; Legal Disputes</h4>
 <p>Any arbitration, mediation, or litigation matter is handled by the Company&rsquo;s retained counsel. Associates may not sign, initial, or respond to any arbitration demand, mediation notice, subpoena, or legal correspondence on behalf of the Company. Associates may not execute or initial the arbitration provision within any real estate contract. The arbitration line on any FR/BAR, AS IS, CRSP, or other form is left blank. The arbitration provision is not initialed on behalf of the Company by any person, and neither the Associate nor the Broker completes it after the contract has been executed. All such items must be routed to the Broker within twenty four (24) hours of receipt.</p>
@@ -736,16 +736,16 @@ window.ICA_CONTENT = {
 <h3 id="s-73">&sect;73. POST DEPARTURE COMPENSATION ADDENDUM</h3>
 
 <h4 id="s-73-1">&sect;73.1 Procuring Cause.</h4>
-<p>Under Florida law, all procuring cause rights belong to the brokerage, not the sales associate. Aari retains all procuring cause rights for any buyer or seller introduced to real property through the Company, regardless of whether the Associate remains affiliated with the Company.</p>
+<p>Under Florida law, all procuring cause rights belong to the brokerage, not the sales associate. The Company retains all procuring cause rights for any buyer or seller introduced to real property through the Company, regardless of whether the Associate remains affiliated with the Company.</p>
 
 <h4 id="s-73-2">&sect;73.2 Protection Period.</h4>
-<p>Any protection period contained in a Buyer Brokerage Agreement, Listing Agreement, or compensation agreement survives the Associate&rsquo;s departure from the brokerage. Aari retains full compensation rights for any contract, offer, or closing involving a buyer or seller introduced through Aari during the protection period.</p>
+<p>Any protection period contained in a Buyer Brokerage Agreement, Listing Agreement, or compensation agreement survives the Associate&rsquo;s departure from the brokerage. The Company retains full compensation rights for any contract, offer, or closing involving a buyer or seller introduced through the Company during the protection period.</p>
 
 <h4 id="s-73-3">&sect;73.3 Post Departure Compensation.</h4>
-<p>Compensation on a transaction in which the Associate departs Aari before closing is the Departure Share set forth in Exhibit A, Section 39.4, paid on the conditions and timing stated in the Departure Share provision in Section 7 of the Independent Contractor Agreement. The Associate&rsquo;s prior commission plan determines only the share that is divided under that Section. Transactions originating from a Company Generated Lead remain governed by Section 7 of the Independent Contractor Agreement.</p>
+<p>Compensation on a transaction in which the Associate departs the Company before closing is the Departure Share set forth in Exhibit A, Section 39.4, paid on the conditions and timing stated in the Departure Share provision in Section 7 of the Independent Contractor Agreement. The Associate&rsquo;s prior commission plan determines only the share that is divided under that Section. Transactions originating from a Company Generated Lead remain governed by Section 7 of the Independent Contractor Agreement.</p>
 
-<h4 id="s-73-4">&sect;73.4 Aari Paid First.</h4>
-<p>All compensation due to Aari must be paid directly to Aari Realty LLC. Departing Associates receive their portion only after Aari receives funds in full, confirms accurate disbursement, completes audit compliance, and processes internal accounting.</p>
+<h4 id="s-73-4">&sect;73.4 Company Paid First.</h4>
+<p>All compensation due to the Company must be paid directly to Aari Realty LLC. Departing Associates receive their portion only after the Company receives funds in full, confirms accurate disbursement, completes audit compliance, and processes internal accounting.</p>
 
 <h4 id="s-73-5">&sect;73.5 Prohibition Against Interference.</h4>
 <p>Departing Associates may not interfere with Aari&rsquo;s compensation status, instruct title companies, or attempt to influence representation. Any attempt to manipulate, alter, backdate, or rewrite documents to bypass Aari&rsquo;s rights is strictly prohibited.</p>
