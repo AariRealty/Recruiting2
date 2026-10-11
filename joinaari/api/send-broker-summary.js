@@ -1,4 +1,6 @@
 var sendViaProxy = require('./_send-via-proxy');
+var Stripe = require('stripe');
+var lookupAffiliation = require('./_affiliation').lookupAffiliation;
 
 function esc(x) {
   return String(x == null ? '' : x).replace(/[&<>"']/g, function (c) {
@@ -25,6 +27,14 @@ module.exports = async function handler(req, res) {
 
     if (!name || !email) {
       return res.status(400).json({ error: 'name and email are required' });
+    }
+
+    // A no charge re sign is only valid for an email with a live plan subscription (decision #75).
+    let planLine = plan;
+    if (String(payment_id || '').indexOf('NO CHARGE') === 0) {
+      let st = 'unknown';
+      try { if (process.env.STRIPE_SECRET_KEY) st = await lookupAffiliation(Stripe(process.env.STRIPE_SECRET_KEY), email); } catch (e) { st = 'unknown'; }
+      planLine = (st === 'current' ? 'VERIFIED CURRENT AGENT (live subscription in Stripe). ' : 'NOT VERIFIED: no live subscription found. Do not countersign. ') + (plan || '');
     }
 
     if (pdf_base64 && pdf_base64.length > 5 * 1024 * 1024) {
@@ -66,7 +76,7 @@ module.exports = async function handler(req, res) {
 
       <div style="margin-bottom:28px;">
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#888;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid #0a0a0a;">Plan & Payment</div>
-        ${row('Plan', esc(plan || 'N/A'))}
+        ${row('Plan', esc(planLine || 'N/A'))}
         ${row('Monthly', esc(monthlyFormatted))}
 
         ${coupon_code && coupon_code !== 'None' ? row('Coupon', esc(coupon_code), 'color:#27ae60;') : ''}
@@ -95,7 +105,7 @@ module.exports = async function handler(req, res) {
     var emailOpts = {
       lane: 'internal',
       to: 'join@aarirealty.com',
-      subject: 'New Agent Signed — ' + name + ' (' + (plan || 'N/A') + ')',
+      subject: 'New Agent Signed — ' + name + ' (' + (planLine || 'N/A') + ')',
       html: html,
       emailType: 'broker_summary',
     };

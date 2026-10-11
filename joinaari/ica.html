@@ -2410,6 +2410,16 @@ function initialAllPages() {
       window._icaPdfFilename = icaCopyData.pdf_filename || '';
       window._icaAlreadySigned = true;
       signBtn.style.display = 'none';
+      var _aff = await aariCheckAffiliation(_agent.email);
+      if (_aff === 'current') {
+        fetch('/api/send-broker-summary', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
+          name: _agent.name, email: _agent.email, phone: _agent.phone, license: _agent.license, plan: _agent.plan + ' (CURRENT AGENT, ICA re sign, no charge, existing billing continues)',
+          signature: _agent.signature, ica_date: _agent.date, mls: _agent.mls, years_licensed: _agent.years_licensed, closings: _agent.closings_last_12_months,
+          region: _agent.region, how_did_you_hear: _agent.realtor_association, amount: '0', monthly_amount: '', payment_id: 'NO CHARGE: current agent',
+          pdf_base64: window._icaPdfBase64 || '', pdf_filename: window._icaPdfFilename || '' }) }).catch(function(){});
+        if (signMsg) { signMsg.textContent = 'Signed. We found your active membership, so nothing is charged today and your billing continues as before. Your broker countersigns and your signed copy is in your email.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
+        return;
+      }
       var payBlock = document.getElementById('payment-block');
       if (payBlock) { payBlock.style.display = 'block'; }
       if (signMsg) { signMsg.textContent = 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
@@ -2596,6 +2606,16 @@ function aariApplyMentorshipRule(){
 document.addEventListener('change',function(e){ if(e.target && e.target.id==='associate-closings-select') aariApplyMentorshipRule(); });
 </script>
 <script>
+// Decision #75: billing history in Stripe decides new, returning or current. The form cannot override it.
+async function aariCheckAffiliation(email){
+  var st = 'new';
+  try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; } catch (e) {}
+  var sel = document.getElementById('associate-status'); var n = document.getElementById('associate-status-note');
+  if (st === 'returning' && sel) { sel.value = 'returning'; sel.disabled = true; aariStatusNote(); }
+  else if (st === 'current' && n) { if (sel) sel.disabled = true; n.textContent = 'We found your active membership. You sign the new version here, nothing is charged today, and your billing continues without interruption (Manual Section 68.1).'; n.style.display = 'block'; }
+  return st;
+}
+document.addEventListener('DOMContentLoaded', function(){ var e = document.getElementById('associate-email'); if (e) e.addEventListener('change', function(){ if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) aariCheckAffiliation(e.value); }); });
 function aariStatusNote(){ var v=(document.getElementById('associate-status')||{}).value; var n=document.getElementById('associate-status-note'); if(!n) return;
   if(v==='returning'){ n.textContent='The free first month applies only to a first affiliation, so your plan fee for your Start Date month is also charged today (Exhibit A, Section 41.1).'; n.style.display='block'; }
   else { n.style.display='none'; } }

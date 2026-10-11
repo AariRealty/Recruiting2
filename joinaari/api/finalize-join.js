@@ -1,5 +1,6 @@
 const Stripe = require('stripe');
 const { PROMO_RULES, SUPABASE_ANON_PUBLIC } = require('./_pricing');
+const { lookupAffiliation } = require('./_affiliation');
 
 // Live recurring prices (Aari Realty, acct_1Qo5qRHTQU4zpF23)
 const PLAN_MAP = {
@@ -53,7 +54,7 @@ module.exports = async function handler(req, res) {
     const phone = String(body.phone || '').trim();
     const license = String(body.license || body.license_number || '').trim();
     const startDate = String(body.start_date || '').trim();
-    const affiliation = String(body.affiliation_status || 'new').trim().toLowerCase();
+    let affiliation = String(body.affiliation_status || 'new').trim().toLowerCase();
     if (!email) return res.status(400).json({ error: 'email is required' });
     if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
 
@@ -85,8 +86,18 @@ module.exports = async function handler(req, res) {
       catch (e) { out.warnings.push('default_pm: ' + String(e.message || e).slice(0, 120)); }
     }
 
+    // 2b) Billing history decides affiliation, not the form (decision #75). Runs before any new subscription exists.
+    let detected = null;
+    try { detected = await lookupAffiliation(stripe, email); } catch (e) { out.warnings.push('affiliation_lookup: ' + String(e.message || e).slice(0, 120)); }
+    if (detected === 'returning' && affiliation !== 'returning') { out.warnings.push('affiliation set to returning from billing history'); affiliation = 'returning'; }
+    out.affiliation = affiliation;
+    if (detected === 'current') {
+      out.warnings.push('CURRENT AGENT went through checkout: no new subscriptions created; broker to review the payment');
+      out.affiliation = 'current';
+    }
+
     // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
-    if (customer && pmId && planInfo) {
+    if (customer && pmId && planInfo && detected !== 'current') {
       try {
         // Exhibit A 41.1 and Manual 68.1: the Start Date month is waived only on a first affiliation.
         // A returning Associate pays the Start Date month now, then is billed on the 1st as usual.
