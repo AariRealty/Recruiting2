@@ -748,10 +748,10 @@ window.ICA_CONTENT = {
 <p>All compensation due to the Company must be paid directly to Aari Realty LLC. Departing Associates receive their portion only after the Company receives funds in full, confirms accurate disbursement, completes audit compliance, and processes internal accounting.</p>
 
 <h4 id="s-73-5">&sect;73.5 Prohibition Against Interference.</h4>
-<p>Departing Associates may not interfere with Aari&rsquo;s compensation status, instruct title companies, or attempt to influence representation. Any attempt to manipulate, alter, backdate, or rewrite documents to bypass Aari&rsquo;s rights is strictly prohibited.</p>
+<p>Departing Associates may not interfere with the Company&rsquo;s compensation status, instruct title companies, or attempt to influence representation. Any attempt to manipulate, alter, backdate, or rewrite documents to bypass the Company&rsquo;s rights is strictly prohibited.</p>
 
 <h4 id="s-73-6">&sect;73.6 Survival.</h4>
-<p>This Addendum remains binding after the Associate&rsquo;s departure. Aari&rsquo;s rights to compensation survive termination of the ICA.</p>
+<p>This Addendum remains binding after the Associate&rsquo;s departure. The Company&rsquo;s rights to compensation survive termination of the ICA.</p>
 
 <h3 id="s-74">&sect;74. FORCE MAJEURE</h3>
 <p>Force majeure events, the extension of affected deadlines, and the notice and documentation requirements are governed by Section 17. The Broker may extend deadlines beyond the period provided in Section 17 in the Broker&rsquo;s discretion where circumstances warrant.</p>
