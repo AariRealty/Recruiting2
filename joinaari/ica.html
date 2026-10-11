@@ -955,15 +955,15 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
       </div>
 
       <div class="ica-field">
-        <label for="associate-closings-select">Closings in the Last 12 Months</label>
+        <label for="associate-closings-select">Closed residential sales in the last 24 months</label>
         <select id="associate-closings-select">
-          <option value="" disabled selected>Select range</option>
-          <option>0 - Getting started</option>
-          <option>1-3</option>
-          <option>4-10</option>
-          <option>11-20</option>
-          <option>20+</option>
+          <option value="" disabled selected>Select one</option>
+          <option value="0">0</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3+">3 or more</option>
         </select>
+        <p id="mentorship-note" style="display:none;font-size:12px;margin-top:6px;color:rgba(10,10,10,.6)">With fewer than 3 closed residential sales in the last 24 months, you start on the Mentorship Path (Exhibit A, Section 38.1). Your plan has been set to Mentorship.</p>
       </div>
 
       <div class="ica-field">
@@ -1820,10 +1820,11 @@ function validateLicenseFields() {
   if (!closingsSel.value) {
     closingsSel.style.borderColor = '#c0392b';
     closingsSel.focus();
-    alert('Please select your closings in the last 12 months.');
+    alert('Please select your closed residential sales in the last 24 months.');
     return;
   }
   closingsSel.style.borderColor = '';
+  aariApplyMentorshipRule();
 
   // Validate region → association → MLS (cascading order)
   var regionSel = document.getElementById('associate-region');
@@ -2133,6 +2134,7 @@ function initialAllPages() {
       var selectedPlan = '';
       var planRadio = document.querySelector('input[name="selected_plan"]:checked');
       if (planRadio) selectedPlan = planRadio.value;
+      if (typeof aariNeedsMentorship==='function' && aariNeedsMentorship()) { selectedPlan = 'Aari Mentorship 75/25'; }
 
       var formName = document.getElementById('associate-name').value.trim();
       var formLicense = document.getElementById('associate-license').value.trim() || 'N/A';
@@ -2566,6 +2568,21 @@ function initialAllPages() {
   document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && !modal.hidden) close(); });
   modal.querySelector('.promo-cta').addEventListener('click', function(){ clearTimeout(timer); });
 })();
+</script>
+<script>
+/* Exhibit A 38.1: fewer than three closed residential sales in 24 months starts on the Mentorship Path. */
+function aariNeedsMentorship(){ var c=document.getElementById('associate-closings-select'); return !!(c && ['0','1','2'].indexOf(c.value)!==-1); }
+function aariApplyMentorshipRule(){
+  var need=aariNeedsMentorship(); var note=document.getElementById('mentorship-note');
+  ['plan-growth','plan-max'].forEach(function(id){ var el=document.getElementById(id); if(el){ el.disabled=need; if(need) el.checked=false; } });
+  if(need){
+    var m=document.getElementById('plan-mentorship'); if(m) m.checked=true;
+    try{ var u=new URL(window.location.href); if(!/mentorship/i.test(u.searchParams.get('plan_name')||'')){ u.searchParams.set('plan_name','Aari Mentorship 75/25'); history.replaceState(null,'',u.toString()); } }catch(e){}
+    try{ if(window._icaData){ window._icaData.plan='Aari Mentorship 75/25'; } var sd=JSON.parse(sessionStorage.getItem('ica_data')||'null'); if(sd){ sd.plan='Aari Mentorship 75/25'; sessionStorage.setItem('ica_data',JSON.stringify(sd)); } }catch(e){}
+  }
+  if(note) note.style.display=need?'block':'none';
+}
+document.addEventListener('change',function(e){ if(e.target && e.target.id==='associate-closings-select') aariApplyMentorshipRule(); });
 </script>
 </body>
 </html>
