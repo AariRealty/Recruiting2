@@ -1,10 +1,10 @@
 // ============================================================================
 // Aari Realty — server-authoritative pricing (audit fix C1)
 // Single source of truth for onboarding amounts. Client-supplied dollar
-// figures are NEVER trusted; the browser may choose WHICH plan / add-ons /
+// figures are NEVER trusted; the browser may choose WHICH plan /
 // coupon, but the price is always computed here from these tables.
 //
-// Keep PLAN_PRICES / ADDON_PRICES / ANNUAL_FEE in sync with the displayed
+// Keep PLAN_PRICES / ANNUAL_FEE in sync with the displayed
 // prices in index.html. If they drift, legit checkouts will be rejected.
 // ============================================================================
 
@@ -14,10 +14,7 @@ const PLAN_PRICES = {
   'Aari Max 100%': 99,
 };
 
-const ADDON_PRICES = {
-  'CRM System': 49,
-  'Brand Builder': 79,
-};
+// No paid add ons: Exhibit A lists none, so the checkout charges none (audit 50).
 
 const ANNUAL_FEE = 199; // E&O + compliance, due today, also billed annually
 
@@ -63,7 +60,6 @@ function resolveCoupon(code) {
 
 // Compute the authoritative amounts from a plan selection.
 //   opts.plan_name   : string (must exist in PLAN_PRICES)
-//   opts.addons      : array of add-on names (strings) or [{name}]
 //   opts.coupon_code : string | null
 // Returns { ok:true, totalDueToday, monthlyAmount, ... } or { ok:false, error }.
 function computePrice(opts) {
@@ -75,25 +71,12 @@ function computePrice(opts) {
   }
   const planMonthly = PLAN_PRICES[planName];
 
-  let addonMonthly = 0;
-  const addonInput = Array.isArray(opts.addons) ? opts.addons : [];
-  const isMentorship = planName.indexOf('Mentorship') !== -1;
-  for (let i = 0; i < addonInput.length; i++) {
-    const a = addonInput[i];
-    const name = a && a.name ? a.name : a;
-    if (!(name in ADDON_PRICES)) {
-      return { ok: false, error: 'unknown_addon', addon: name || null };
-    }
-    // Brand Builder is complimentary for the first 6 months on Mentorship.
-    if (isMentorship && name === 'Brand Builder') continue;
-    addonMonthly += ADDON_PRICES[name];
-  }
-
-  const fullMonthly = planMonthly + addonMonthly;
+  // Add ons sent by a client are ignored: nothing outside Exhibit A is billable.
+  const fullMonthly = planMonthly;
 
   // Flat annual fee due at signup. No proration: the recurring monthly
   // subscription already starts clean on the 1st of next month (see
-  // setup-recurring.js billing_cycle_anchor), so the join month itself
+  // finalize-join.js billing_cycle_anchor), so the join month itself
   // is never billed.
   const subtotal = ANNUAL_FEE;
 
@@ -167,4 +150,4 @@ async function checkPromoEligibility(code, email, license) {
   }
 }
 
-module.exports = { SUPABASE_ANON_PUBLIC, PLAN_PRICES, ADDON_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon, checkPromoEligibility };
+module.exports = { SUPABASE_ANON_PUBLIC, PLAN_PRICES, ANNUAL_FEE, PROMO_RULES, computePrice, resolveCoupon, checkPromoEligibility };
