@@ -832,11 +832,10 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
       <p class="ica-text" style="margin-bottom:24px;">We&rsquo;ll use this to prepare your Independent Contractor Agreement. Takes about 2 minutes.</p>
 
       <div class="ica-field">
-        <label for="associate-status">Are you new to Aari Realty, returning, or a current Aari Realty agent?</label>
+        <label for="associate-status">Are you new to Aari Realty or returning?</label>
         <select id="associate-status" onchange="aariStatusNote()">
           <option value="new" selected>New to Aari Realty</option>
           <option value="returning">Returning, I was with Aari Realty before</option>
-          <option value="current">Current Aari Realty agent signing the new version</option>
         </select>
         <p id="associate-status-note" style="display:none;font-size:12px;margin-top:6px;color:rgba(10,10,10,.6)"></p>
       </div>
@@ -2411,16 +2410,6 @@ function initialAllPages() {
       window._icaPdfFilename = icaCopyData.pdf_filename || '';
       window._icaAlreadySigned = true;
       signBtn.style.display = 'none';
-      if (((document.getElementById('associate-status')||{}).value) === 'current') {
-        fetch('/api/send-broker-summary', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-          name: _agent.name, email: _agent.email, phone: _agent.phone, license: _agent.license, plan: _agent.plan + ' (CURRENT AGENT, ICA re-sign, no charge, existing billing continues)',
-          signature: _agent.signature, ica_date: _agent.date, mls: _agent.mls, years_licensed: _agent.years_licensed, closings: _agent.closings_last_12_months,
-          region: _agent.region, how_did_you_hear: _agent.realtor_association, amount: '0', monthly_amount: '', payment_id: 'NO CHARGE: current agent',
-          pdf_base64: window._icaPdfBase64 || '', pdf_filename: window._icaPdfFilename || '' }) }).catch(function(){});
-        if (signMsg) { signMsg.textContent = 'Signed. Nothing is charged today; your current billing continues.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
-        setTimeout(function(){ var rp = new URLSearchParams(); rp.set('resigned', 'true'); rp.set('first_name', (_agent.name || '').split(' ')[0]); rp.set('email', _agent.email || ''); window.location.href = '/thank-you.html?' + rp.toString(); }, 1500);
-        return;
-      }
       var payBlock = document.getElementById('payment-block');
       if (payBlock) { payBlock.style.display = 'block'; }
       if (signMsg) { signMsg.textContent = 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
@@ -2608,8 +2597,7 @@ document.addEventListener('change',function(e){ if(e.target && e.target.id==='as
 </script>
 <script>
 function aariStatusNote(){ var v=(document.getElementById('associate-status')||{}).value; var n=document.getElementById('associate-status-note'); if(!n) return;
-  if(v==='current'){ n.textContent='You sign the new version here. Nothing is charged today, and your current billing continues without interruption (Manual Section 68.1).'; n.style.display='block'; }
-  else if(v==='returning'){ n.textContent='The free first month applies only to a first affiliation, so your plan fee for your Start Date month is also charged today (Exhibit A, Section 41.1).'; n.style.display='block'; }
+  if(v==='returning'){ n.textContent='The free first month applies only to a first affiliation, so your plan fee for your Start Date month is also charged today (Exhibit A, Section 41.1).'; n.style.display='block'; }
   else { n.style.display='none'; } }
 </script>
 </body>

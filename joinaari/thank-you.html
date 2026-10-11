@@ -233,7 +233,7 @@ main{max-width:440px;margin:0 auto;padding:28px 20px 60px}
 </main>
 <script>
 (function(){
-  var p=new URLSearchParams(location.search);if(p.get('resigned')==='true'){var ts=document.getElementById('ty-sub');if(ts)ts.textContent='You\'re signed on the new version. Nothing was charged today, and your billing continues as before.';var t1=document.getElementById('ty-step1');if(t1)t1.querySelector('b').textContent='Signed.';var t1p=t1&&t1.querySelector('p');if(t1p)t1p.textContent='Your signed agreement is on file with your broker.';}var f=(p.get('first_name')||'').replace(/[^a-zA-ZÀ-ɏ\s'-]/g,'').trim();if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
+  var p=new URLSearchParams(location.search);var f=(p.get('first_name')||'').replace(/[^a-zA-ZÀ-ɏ\s'-]/g,'').trim();if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
 
   var h=document.getElementById('hero'),cols=['#ffffff','#c9c4ba','#8f8a80','#d4c9b8'];
   for(var i=0;i<24;i++){var c=document.createElement('span');c.className='conf';c.style.left=(3+Math.random()*94)+'%';c.style.background=cols[i%4];c.style.animationDuration=(2+Math.random()*2)+'s';c.style.animationDelay=(Math.random()*.8)+'s';c.style.width=(6+Math.random()*6)+'px';c.style.height=(8+Math.random()*8)+'px';h.appendChild(c);}
