@@ -16,7 +16,6 @@ module.exports = async function handler(req, res) {
     // NOTE: test backdoors TEST1 ($1) and AARIVIP100 ($0) removed before go-live.
     // Add real promo codes via the COUPON_CODES env var (format CODE:type:value).
     const coupons = {
-      'VIP': { type: 'percent_off', value: 50 },
       'SWITCH199': { type: 'flat_off', value: 199 }
     };
 

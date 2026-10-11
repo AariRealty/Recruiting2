@@ -34,11 +34,11 @@ function round2(n) {
 }
 
 // Resolve a coupon code to {type, value}. Mirrors validate-coupon.js:
-// built-in VIP plus any codes in the COUPON_CODES env var.
+// built-in SWITCH199 plus any codes in the COUPON_CODES env var.
 // Returns null for empty/unknown codes. (Test backdoors removed in go-live.)
 function resolveCoupon(code) {
   if (!code) return null;
-  const coupons = { VIP: { type: 'percent_off', value: 50 }, SWITCH199: { type: 'flat_off', value: 199 } };
+  const coupons = { SWITCH199: { type: 'flat_off', value: 199 } };
   const raw = process.env.COUPON_CODES || '';
   raw.split(',').forEach(function (entry) {
     const parts = entry.trim().split(':');
