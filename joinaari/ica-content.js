@@ -1065,7 +1065,7 @@ window.ICA_CONTENT = {
 
 <h3 id="s-89" data-page-break="true">MLS Rules Acknowledgment</h3>
 
-<p>This acknowledgment is accepted at onboarding as part of the ICA signing, before the Associate may access or use any MLS system under Aari Realty LLC&rsquo;s membership. Aari Realty LLC maintains membership in multiple MLS boards. The Associate&rsquo;s obligations under this Acknowledgment apply equally to all boards through which they conduct business.</p>
+<p>This acknowledgment is accepted at onboarding as part of the ICA signing, before the Associate may access or use any MLS system under Aari Realty LLC&rsquo;s membership. The Associate may access an MLS through the Company only where Aari Realty LLC is a participant in that MLS. The Associate&rsquo;s obligations under this Acknowledgment apply equally to all boards through which they conduct business.</p>
 
 <h3 id="s-89-1">&sect;89.1 MLS Membership Information</h3>
 <p>Associate Full Legal Name, Primary MLS Board, MLS Member ID (Primary Board), Additional MLS Boards (if any), and Florida License Number are collected and verified at onboarding.</p>
