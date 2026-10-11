@@ -53,6 +53,7 @@ module.exports = async function handler(req, res) {
     const phone = String(body.phone || '').trim();
     const license = String(body.license || body.license_number || '').trim();
     const startDate = String(body.start_date || '').trim();
+    const affiliation = String(body.affiliation_status || 'new').trim().toLowerCase();
     if (!email) return res.status(400).json({ error: 'email is required' });
     if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'STRIPE_SECRET_KEY not configured' });
 
@@ -87,13 +88,21 @@ module.exports = async function handler(req, res) {
     // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
     if (customer && pmId && planInfo) {
       try {
+        // Exhibit A 41.1 and Manual 68.1: the Start Date month is waived only on a first affiliation.
+        // A returning Associate pays the Start Date month now, then is billed on the 1st as usual.
+        let addItems = [];
+        if (affiliation === 'returning') {
+          const pr = await stripe.prices.retrieve(planInfo.price);
+          addItems = [{ price_data: { currency: pr.currency, product: typeof pr.product === 'string' ? pr.product : pr.product.id, unit_amount: pr.unit_amount } }];
+        }
         const monthly = await stripe.subscriptions.create({
           customer: customer.id,
           items: [{ price: planInfo.price }],
+          add_invoice_items: addItems,
           trial_end: firstOfMonthAfterStartTs(startDate),
           proration_behavior: 'none',
           default_payment_method: pmId,
-          metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '' }
+          metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '', affiliation: affiliation }
         }, { idempotencyKey: 'aari-monthly:' + email });
         out.subscriptions.monthly = monthly.id;
       } catch (e) { out.warnings.push('monthly_sub: ' + String(e.message || e).slice(0, 140)); }
