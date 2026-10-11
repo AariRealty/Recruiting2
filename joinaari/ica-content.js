@@ -937,7 +937,7 @@ window.ICA_CONTENT = {
 <h4 id="s-84-9">&sect;84.9 Contact Lists.</h4>
 <p>The Associate must not import, purchase, rent, scrape, or upload any contact list the Associate did not personally generate with documented consent.</p>
 <h4 id="s-84-10">&sect;84.10 Third Party Tools.</h4>
-<p>The Associate is solely responsible for the compliance of every CRM, dialer, texting platform, lead vendor, or automation tool the Associate uses, including any tool made available through the Company as an optional add on. Availability of a tool through the Company is not approval of any particular use of it.</p>
+<p>The Associate is solely responsible for the compliance of every CRM, dialer, texting platform, lead vendor, or automation tool the Associate uses, including any tool the Company makes available. Availability of a tool through the Company is not approval of any particular use of it.</p>
 <h4 id="s-84-11">&sect;84.11 Liability.</h4>
 <p>The Associate indemnifies the Company for all claims, statutory damages, penalties, and costs arising from the Associate&rsquo;s violation of this Section. This obligation survives termination.</p>
 

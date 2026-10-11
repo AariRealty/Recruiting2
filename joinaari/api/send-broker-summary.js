@@ -68,7 +68,7 @@ module.exports = async function handler(req, res) {
         <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#888;margin:0 0 14px;padding-bottom:8px;border-bottom:2px solid #0a0a0a;">Plan & Payment</div>
         ${row('Plan', esc(plan || 'N/A'))}
         ${row('Monthly', esc(monthlyFormatted))}
-        ${addons && addons !== 'None' ? row('Add-Ons', esc(addons)) : ''}
+
         ${coupon_code && coupon_code !== 'None' ? row('Coupon', esc(coupon_code), 'color:#27ae60;') : ''}
         ${row('Date', date)}
         <div style="background:#0a0a0a;color:#fff;display:flex;justify-content:space-between;padding:16px 24px;border-radius:8px;font-size:16px;margin-top:8px;">
