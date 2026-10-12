@@ -45,9 +45,11 @@ function eoRenewalTs(startISO) {
 }
 // Current Associates (decision 103): nothing is charged when they sign in the Hub. The monthly fee is
 // charged on the day of the month they originally joined, starting the next time that day comes around.
-function nextMonthDayTs(joinISO) {
+// Decision 108: a fee prepaid through a date (paidThroughISO) starts the first charge after that date.
+function nextMonthDayTs(joinISO, paidThroughISO) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(joinISO || ''))) return null;
-  const t = todayFL(); let y = Number(t.slice(0, 4)), m0 = Number(t.slice(5, 7)) - 1; const td = Number(t.slice(8, 10));
+  const today = todayFL(); const pt = String(paidThroughISO || '');
+  const t = (/^\d{4}-\d{2}-\d{2}$/.test(pt) && pt > today) ? pt : today; let y = Number(t.slice(0, 4)), m0 = Number(t.slice(5, 7)) - 1; const td = Number(t.slice(8, 10));
   const jd = Number(String(joinISO).slice(8, 10));
   let d = Math.min(jd, daysIn(y, m0));
   if (d <= td) { m0 += 1; if (m0 > 11) { m0 = 0; y += 1; } d = Math.min(jd, daysIn(y, m0)); }
@@ -159,7 +161,7 @@ module.exports = async function handler(req, res) {
     // 3) Monthly plan subscription on the Associate's own day (decisions 102 and 103)
     if (customer && pmId && planInfo && !alreadyBilled) {
       try {
-        const firstTs = rosterCurrent ? nextMonthDayTs(detail.startDate) : monthlyStartTs(startDate);
+        const firstTs = rosterCurrent ? nextMonthDayTs(detail.startDate, detail.paidThrough) : monthlyStartTs(startDate);
         if (rosterCurrent && !firstTs) out.warnings.push('Monthly fee not scheduled: roster join date MISSING DATA');
         if (!(rosterCurrent && !firstTs)) {
           const params = {

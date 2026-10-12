@@ -61,7 +61,7 @@ button:disabled{opacity:.5;cursor:default}
   function fmt(d){return d.toLocaleDateString('en-US',{timeZone:'UTC',month:'long',day:'numeric',year:'numeric'});}
   // Decision 103: current Associates are charged on the day of the month they joined, and the E&O on their join anniversary.
   function dIn(y,m0){return new Date(Date.UTC(y,m0+1,0)).getUTCDate();}
-  function firstNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+t.slice(5,7)-1,td=+t.slice(8,10),jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0));if(d<=td){m0++;if(m0>11){m0=0;y++;}d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
+  function firstNext(s,pt){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=(/^\d{4}-\d{2}-\d{2}$/.test(pt||'')&&pt>todayFL())?pt:todayFL(),y=+t.slice(0,4),m0=+t.slice(5,7)-1,td=+t.slice(8,10),jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0));if(d<=td){m0++;if(m0>11){m0=0;y++;}d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
   function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+s.slice(5,7)-1,jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0)),iso=function(yy,dd){return yy+'-'+String(m0+1).padStart(2,'0')+'-'+String(dd).padStart(2,'0');};if(iso(y,d)<=t){y++;d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
   function fail(t){hd.textContent='This link is not active.';kick.textContent='';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d">'+esc(t)+' Questions? Email join@aarirealty.com.</p>';}
   function done(first,paid){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='Done';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent=paid?('Paid. Card saved. $'+paid.toFixed(2)+' charged today.'):'Card saved. $0 charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">That&rsquo;s it. Your plan fee runs on its own from here. Back to business.</p><p style="margin-top:22px"><a href="https://hub.joinaari.com/" style="display:inline-block;background:#141210;color:#fff;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:14px 28px;border-radius:50px">Take me to my hub</a></p>';}
@@ -82,7 +82,7 @@ button:disabled{opacity:.5;cursor:default}
     kick.textContent=owed>0?('Two minutes. $'+owed.toFixed(2)+' today.'):'Two minutes. $0 today.';
     body.innerHTML='<div class="plan"><div class="hd">Your plan</div>'
       +'<div><span class="l">Plan</span><span class="v">'+esc(p.name)+'</span></div>'
-      +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+(firstNext(inv.start_date)?fmt(firstNext(inv.start_date)):'on your join day')+'</span></div>'
+      +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+(firstNext(inv.start_date,inv.paid_through)?fmt(firstNext(inv.start_date,inv.paid_through)):'on your join day')+'</span></div>'
       +'<div><span class="l">E&amp;O + Compliance Fee</span><span class="v">renews '+(eo?fmt(eo):'on your anniversary')+'</span></div>'
       +'<div><span class="l">Charged today</span><span class="v"><b>$'+owed.toFixed(2)+'</b>'+(owed>0?'<br>'+esc(owedLabel):'')+'</span></div></div>'
       +'<div id="pay"><div class="hd" style="font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8a7f6a;font-weight:700">Card on file</div><div id="stripe-el"></div></div>'
