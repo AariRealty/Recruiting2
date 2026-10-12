@@ -268,11 +268,9 @@
             + '<div style="font-family:Georgia,serif;font-size:24px;font-weight:600;color:#141210;margin-bottom:10px">Save your card</div>'
             + '<div style="font-size:15px;color:#4a4740;line-height:1.6;max-width:400px;margin:0 auto">Your agreement is signed and a copy is on its way to your email. Under it, your monthly plan fee is charged to a card on file. Save yours once and you are done.</div>'
             + '<div style="margin:18px auto 0;max-width:340px;background:#f5f1e8;border-radius:10px;padding:12px 14px;font-size:13px;color:#2a2620"><b>Charged today: nothing.</b></div>'
-            + '<div style="margin-top:22px"><a id="aariSaveCard" href="' + r.json.billing_url + '" target="_blank" rel="noopener" style="display:inline-block;background:#101010;color:#fff;text-decoration:none;padding:14px 30px;border-radius:50px;font-size:14px;font-weight:600">Save my card</a></div>'
-            + '<div style="margin-top:14px"><button type="button" id="aariCardLater" style="background:none;border:none;color:#6b675f;font-size:12.5px;text-decoration:underline;cursor:pointer;font-family:inherit">Return to my hub. The link is also in your email.</button></div>'
+            + '<div style="margin-top:22px"><a id="aariSaveCard" href="' + r.json.billing_url + '" style="display:inline-block;background:#101010;color:#fff;text-decoration:none;padding:14px 30px;border-radius:50px;font-size:14px;font-weight:600">Save my card</a></div>'
+            + '<div style="margin-top:14px;font-size:12px;color:#8a857c">Required to finish onboarding. Takes two minutes.</div>'
             + '</div>';
-          var lat = card.querySelector('#aariCardLater');
-          if (lat) lat.onclick = function(){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); };
           return;
         }
         card.innerHTML = '<div class=\"hd\"><div class=\"hd-txt\"><h2>Agreement signed</h2><p>AARI REALTY LLC</p></div></div><div class=\"bd\" style=\"text-align:center;padding:40px 30px\"><div style=\"font-size:44px;margin-bottom:16px;color:#1c6b2e\">&#10003;</div><div style=\"font-family:Georgia,serif;font-size:22px;font-weight:600;color:#141210;margin-bottom:12px\">You are all set.</div><div style=\"font-size:15px;color:#4a4740;line-height:1.6;max-width:380px;margin:0 auto\">Your Independent Contractor Agreement has been signed and a copy has been emailed to you.</div><div style=\"margin-top:24px\"><button type=\"button\" style=\"background:#101010;color:#fff;border:none;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit\" onclick=\"if(window.__aariExitPreview)window.__aariExitPreview();location.reload()\">Return to my hub</button></div></div>';
