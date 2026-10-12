@@ -60,6 +60,7 @@
     + '#aariGateBtns button{flex:1;padding:14px;border-radius:6px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid #d8d4ca;background:#fff;color:#1a1a1a;font-family:inherit}'
     + '#aariGateBtns button.p{background:#101010;color:#fff;border-color:#101010}'
     + '#aariGateBtns button[disabled]{opacity:.45;cursor:not-allowed}'
+    + '#aariGateCard .quiet{display:block;margin:10px auto 0;background:none;border:none;color:#a39e94;font-size:11.5px;text-decoration:underline;cursor:pointer;padding:4px 8px;font-family:inherit}'
     + '#aariGateMsg{margin-top:14px;font-size:13px;padding:10px 12px;border-radius:6px;display:none}'
     + '#aariGateMsg.e{display:block;background:#fdecec;color:#8a1c1c}'
     + '#aariGateMsg.o{display:block;background:#eaf6ec;color:#1c6b2e}'
@@ -150,7 +151,7 @@
     }
 
     var g = el('<div id="aariGate"><div id="aariGateCard">'
-      + '<div class="hd"><div class="hd-txt"><h2>' + head + '</h2><p>AARI REALTY LLC</p></div><button class="exit" id="aariGateOutTop">Sign out</button></div>'
+      + '<div class="hd"><div class="hd-txt"><h2>' + head + '</h2><p>AARI REALTY LLC</p></div></div>'
       + '<div class="bd">'
       + '<p style="margin:0 0 4px">' + sub + '</p>'
       + '<div id="aariDocBox"><div id="aariDocLoad">Loading the agreement...</div></div>'
@@ -169,7 +170,7 @@
       + '</div>'
       + '<div class="ft"><div id="aariGateBtns">'
       + (canDismiss ? '<button id="aariGateLater">Continue to the hub</button>' : '')
-      + '<button id="aariGateOut">Sign out</button><button class="p" id="aariGateGo">Sign agreement</button></div>'
+      + '<button class="p" id="aariGateGo">Sign agreement</button></div><button type="button" class="quiet" id="aariGateOut">Not you? Sign out</button>'
       + '<div class="blocked" style="margin-top:12px">Your hub opens as soon as you sign. Signing the current agreement comes first.</div>'
       + '</div>'
       + '</div></div>');
@@ -230,7 +231,6 @@
 
     var out = function(){ try { client.auth.signOut().then(function(){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); }); } catch(e){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); } };
     g.querySelector('#aariGateOut').onclick = out;
-    g.querySelector('#aariGateOutTop').onclick = out;
 
     /* Continue is allowed only once the notice is recorded. The evidence is the
        whole reason the gate was softened, so a dismissal that could not be
@@ -363,7 +363,7 @@
     var s=document.createElement('style'); s.textContent=CSS; document.head.appendChild(s);
     var url='https://joinaari.com/billing.html?t=' + token;
     var g = el('<div id="aariGate"><div id="aariGateCard">' + cardStep(url, true)
-      + '<div class="ft"><div id="aariGateBtns"><button id="aariGateOut">Sign out</button></div></div></div></div>');
+      + '<div class="ft" style="padding:8px 20px"><button type="button" class="quiet" id="aariGateOut" style="margin:0 auto">Not you? Sign out</button></div></div></div>');
     var hd=g.querySelector('.hd p'); if(hd) hd.textContent='BEFORE YOUR HUB OPENS';
     document.body.appendChild(g);
     fillDue(g);
