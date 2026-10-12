@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
     // refresh after session loss should never fall through to a fake
     // default charge — bounce straight back to the plan grid instead.
     (function () {
+      // Remember for this visit that the agent came from the CRM or Hub, so no new agent promo shows (Exhibit A 41.3).
+      try { var r = document.referrer ? new URL(document.referrer).hostname : ''; if (window.self !== window.top || (r && !/(^|\.)joinaari\.com$/.test(r) && /supabase\.co|netlify\.app|vercel\.app|hub|crm|portal|app\./i.test(r))) sessionStorage.setItem('aariNoPromo', '1'); } catch (e) {}
       var p = new URLSearchParams(window.location.search);
       var planName = p.get('plan_name') || '';
       var totalDue = parseFloat(p.get('total_due'));
@@ -2544,6 +2546,14 @@ function initialAllPages() {
   var bar   = document.getElementById('promo-bar');
   var modal = document.getElementById('promo-modal');
   if (!bar || !modal) return;
+  // SWITCH199 is for new agents only (Exhibit A 41.3). Never show it to an agent re signing from the CRM or Hub
+  // (page opened inside another app, or from any site other than joinaari.com), or once billing history says not new.
+  var embedded = false; try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+  var ref = ''; try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+  var fromOutside = ref && !/(^|\.)joinaari\.com$/.test(ref) && /supabase\.co|netlify\.app|vercel\.app|hub|crm|portal|app\./i.test(ref);
+  var seenOutside = false; try { if (embedded || fromOutside) sessionStorage.setItem('aariNoPromo', '1'); seenOutside = sessionStorage.getItem('aariNoPromo') === '1'; } catch (e) {}
+  if (embedded || fromOutside || seenOutside || /[?&](resign|current)=/.test(location.search)) return;
+  window.aariHidePromo = function(){ bar.hidden = true; modal.hidden = true; modal.classList.remove('show'); };
 
   function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   function read(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
@@ -2614,6 +2624,7 @@ async function aariCheckAffiliation(email){
   var sel = document.getElementById('associate-status'); var n = document.getElementById('associate-status-note');
   if (st === 'returning' && sel) { sel.value = 'returning'; sel.disabled = true; aariStatusNote(); }
   else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'We found your active membership. You sign the new version here, nothing is charged today, and your current plan and billing continue without interruption (Manual Section 68.1). To change plans, ask your broker (ICA Section 38.3).'; n.style.display = 'block'; }
+  if (st !== 'new' && window.aariHidePromo) window.aariHidePromo();
   return st;
 }
 document.addEventListener('DOMContentLoaded', function(){ var e = document.getElementById('associate-email'); if (e) e.addEventListener('change', function(){ if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) aariCheckAffiliation(e.value); }); });

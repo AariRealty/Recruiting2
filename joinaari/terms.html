@@ -198,6 +198,14 @@
   var bar   = document.getElementById('promo-bar');
   var modal = document.getElementById('promo-modal');
   if (!bar || !modal) return;
+  // SWITCH199 is for new agents only (Exhibit A 41.3). Never show it to an agent re signing from the CRM or Hub
+  // (page opened inside another app, or from any site other than joinaari.com), or once billing history says not new.
+  var embedded = false; try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+  var ref = ''; try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+  var fromOutside = ref && !/(^|\.)joinaari\.com$/.test(ref) && /supabase\.co|netlify\.app|vercel\.app|hub|crm|portal|app\./i.test(ref);
+  var seenOutside = false; try { if (embedded || fromOutside) sessionStorage.setItem('aariNoPromo', '1'); seenOutside = sessionStorage.getItem('aariNoPromo') === '1'; } catch (e) {}
+  if (embedded || fromOutside || seenOutside || /[?&](resign|current)=/.test(location.search)) return;
+  window.aariHidePromo = function(){ bar.hidden = true; modal.hidden = true; modal.classList.remove('show'); };
 
   function store(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
   function read(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
