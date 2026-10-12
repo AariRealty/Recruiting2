@@ -34,7 +34,7 @@ module.exports = async function handler(req, res) {
     if (String(payment_id || '').indexOf('NO CHARGE') === 0) {
       let st = 'unknown';
       try { if (process.env.STRIPE_SECRET_KEY) st = await lookupAffiliation(Stripe(process.env.STRIPE_SECRET_KEY), email); } catch (e) { st = 'unknown'; }
-      planLine = (st === 'current' ? 'VERIFIED CURRENT AGENT (live subscription in Stripe). ' : 'NOT VERIFIED: no live subscription found. Do not countersign. ') + (plan || '');
+      planLine = (st === 'current' ? 'VERIFIED CURRENT AGENT (live plan subscription in Stripe). ' : st === 'review' ? 'NEEDS BROKER REVIEW: live monthly subscription on a price not mapped to a plan. Confirm before onboarding. ' : 'NOT VERIFIED: no live subscription found. Do not onboard. ') + (plan || '');
     }
 
     if (pdf_base64 && pdf_base64.length > 5 * 1024 * 1024) {

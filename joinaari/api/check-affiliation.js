@@ -1,5 +1,5 @@
 const Stripe = require('stripe');
-const { lookupAffiliation } = require('./_affiliation');
+const { lookupAffiliationDetail } = require('./_affiliation');
 
 // Returns only new, returning or current for an email. No billing details leave the server.
 module.exports = async function handler(req, res) {
@@ -13,8 +13,8 @@ module.exports = async function handler(req, res) {
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'valid email required' });
   if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'not configured' });
   try {
-    const status = await lookupAffiliation(Stripe(process.env.STRIPE_SECRET_KEY), email);
-    return res.status(200).json({ status: status });
+    const d = await lookupAffiliationDetail(Stripe(process.env.STRIPE_SECRET_KEY), email);
+    return res.status(200).json({ status: d.status, plan: d.plan });
   } catch (e) {
     return res.status(502).json({ error: 'lookup_failed' });
   }

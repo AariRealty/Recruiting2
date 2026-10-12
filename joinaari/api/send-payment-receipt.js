@@ -22,7 +22,9 @@ module.exports = async function handler(req, res) {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
     let actualAmount;
-    if (payment_id) {
+    if (payment_id && String(payment_id).indexOf('seti_') === 0) {
+      actualAmount = '0.00'; // card saved, nothing charged today (SWITCH199)
+    } else if (payment_id) {
       const pi = await stripe.paymentIntents.retrieve(payment_id);
       actualAmount = (pi.amount / 100).toFixed(2);
     } else {

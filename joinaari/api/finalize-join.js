@@ -62,11 +62,23 @@ module.exports = async function handler(req, res) {
     const planInfo = PLAN_MAP[planName] || null;
     const out = { ok: true, subscriptions: {}, account: null, warnings: [] };
 
+    // 0) Recurring billing starts only for a payment or card setup that succeeded for this same email.
+    const verifyId = String(body.payment_id || '').trim();
+    if (!/^(pi|seti)_/.test(verifyId)) return res.status(400).json({ error: 'payment_required' });
+    let verified = null;
+    try {
+      verified = verifyId.indexOf('seti_') === 0 ? await stripe.setupIntents.retrieve(verifyId) : await stripe.paymentIntents.retrieve(verifyId);
+    } catch (e) { return res.status(400).json({ error: 'payment_not_found' }); }
+    if (!verified || verified.status !== 'succeeded') return res.status(409).json({ error: 'payment_not_succeeded', status: verified && verified.status });
+    const verifiedEmail = String(((verified.metadata || {}).agent_email) || '').trim().toLowerCase();
+    if (verifiedEmail !== email) return res.status(403).json({ error: 'payment_email_mismatch' });
+
     // 1) Find the Stripe customer created at checkout (most recent for this email)
     let customer = null;
     try {
-      const list = await stripe.customers.list({ email: email, limit: 3 });
-      customer = (list.data && list.data[0]) || null;
+      const custId = typeof verified.customer === 'string' ? verified.customer : (verified.customer && verified.customer.id);
+      if (custId) customer = await stripe.customers.retrieve(custId);
+      else { const list = await stripe.customers.list({ email: email, limit: 3 }); customer = (list.data && list.data[0]) || null; }
     } catch (e) { out.warnings.push('customer_lookup: ' + String(e.message || e).slice(0, 120)); }
 
     let pmId = null;
@@ -91,13 +103,13 @@ module.exports = async function handler(req, res) {
     try { detected = await lookupAffiliation(stripe, email); } catch (e) { out.warnings.push('affiliation_lookup: ' + String(e.message || e).slice(0, 120)); }
     if (detected === 'returning' && affiliation !== 'returning') { out.warnings.push('affiliation set to returning from billing history'); affiliation = 'returning'; }
     out.affiliation = affiliation;
-    if (detected === 'current') {
+    if (detected === 'current' || detected === 'review') {
       out.warnings.push('CURRENT AGENT went through checkout: no new subscriptions created; broker to review the payment');
       out.affiliation = 'current';
     }
 
     // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
-    if (customer && pmId && planInfo && detected !== 'current') {
+    if (customer && pmId && planInfo && detected !== 'current' && detected !== 'review') {
       try {
         // Manual 68.1: the Start Date month is waived only on a first affiliation. A returning Associate
         // pays it with the first Monthly Brokerage Fee on the 1st after the Start Date, never at signup (decision #78).

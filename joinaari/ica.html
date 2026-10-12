@@ -772,7 +772,7 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
   <div class="promo-card">
     <button class="promo-x" type="button" aria-label="Close">&times;</button>
     <p class="promo-eyebrow">Limited to 25 agents</p>
-    <h2 id="promo-modal-title">Getting started costs money. This covers it.</h2>
+    <h2 id="promo-modal-title">Getting started costs money. We cover your first year compliance charge.</h2>
     <p>Moving is the expensive part. Board transfer, new signage, the gap while your files settle. We are waiving $199 of your first year compliance cost so the move itself is not the reason you stay.</p>
     <p>Use this code at checkout.</p>
     <span class="promo-code-big">SWITCH199</span>
@@ -2411,13 +2411,13 @@ function initialAllPages() {
       window._icaAlreadySigned = true;
       signBtn.style.display = 'none';
       var _aff = await aariCheckAffiliation(_agent.email);
-      if (_aff === 'current') {
+      if (_aff === 'current' || _aff === 'review') {
         fetch('/api/send-broker-summary', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({
-          name: _agent.name, email: _agent.email, phone: _agent.phone, license: _agent.license, plan: _agent.plan + ' (CURRENT AGENT, ICA re sign, no charge, existing billing continues)',
+          name: _agent.name, email: _agent.email, phone: _agent.phone, license: _agent.license, plan: 'Plan of record stays ' + (window._aariBilledPlan || 'as billed') + '; selected on form: ' + _agent.plan + ' (CURRENT AGENT, ICA re sign, no charge, existing billing continues; plan changes only under ICA 38.3)',
           signature: _agent.signature, ica_date: _agent.date, mls: _agent.mls, years_licensed: _agent.years_licensed, closings: _agent.closings_last_12_months,
           region: _agent.region, how_did_you_hear: _agent.realtor_association, amount: '0', monthly_amount: '', payment_id: 'NO CHARGE: current agent',
           pdf_base64: window._icaPdfBase64 || '', pdf_filename: window._icaPdfFilename || '' }) }).catch(function(){});
-        if (signMsg) { signMsg.textContent = 'Signed. We found your active membership, so nothing is charged today and your billing continues as before. Your broker countersigns and your signed copy is in your email.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
+        if (signMsg) { signMsg.textContent = 'Signed. We found your active membership, so nothing is charged today and your current plan and billing continue as before. Your signed copy is on its way to your email.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
         return;
       }
       var payBlock = document.getElementById('payment-block');
@@ -2610,10 +2610,10 @@ document.addEventListener('change',function(e){ if(e.target && e.target.id==='as
 // Decision #75: billing history in Stripe decides new, returning or current. The form cannot override it.
 async function aariCheckAffiliation(email){
   var st = 'new';
-  try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; } catch (e) {}
+  try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; window._aariBilledPlan = (j && j.plan) || ''; } catch (e) {}
   var sel = document.getElementById('associate-status'); var n = document.getElementById('associate-status-note');
   if (st === 'returning' && sel) { sel.value = 'returning'; sel.disabled = true; aariStatusNote(); }
-  else if (st === 'current' && n) { if (sel) sel.disabled = true; n.textContent = 'We found your active membership. You sign the new version here, nothing is charged today, and your billing continues without interruption (Manual Section 68.1).'; n.style.display = 'block'; }
+  else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'We found your active membership. You sign the new version here, nothing is charged today, and your current plan and billing continue without interruption (Manual Section 68.1). To change plans, ask your broker (ICA Section 38.3).'; n.style.display = 'block'; }
   return st;
 }
 document.addEventListener('DOMContentLoaded', function(){ var e = document.getElementById('associate-email'); if (e) e.addEventListener('change', function(){ if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) aariCheckAffiliation(e.value); }); });

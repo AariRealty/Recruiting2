@@ -81,7 +81,7 @@ module.exports = async function handler(req, res) {
       const setupIntent = await stripe.setupIntents.create({
         customer: customer.id,
         usage: 'off_session',
-        automatic_payment_methods: { enabled: true },
+        payment_method_types: ['card'], // ICA and Manual 68.1: card on file only
         description: 'Aari Realty Onboarding: ' + (plan_name || 'Commission Plan'),
         metadata: intentMeta
       });
@@ -101,7 +101,7 @@ module.exports = async function handler(req, res) {
       currency: 'usd',
       customer: customer.id,
       setup_future_usage: 'off_session',
-      automatic_payment_methods: { enabled: true },
+      payment_method_types: ['card'], // ICA and Manual 68.1: card on file only
       description: 'Aari Realty Onboarding: ' + (plan_name || 'Commission Plan'),
       metadata: {
         kind: 'agent_membership',

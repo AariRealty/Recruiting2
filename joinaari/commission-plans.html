@@ -258,7 +258,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
   <div class="promo-card">
     <button class="promo-x" type="button" aria-label="Close">&times;</button>
     <p class="promo-eyebrow">Limited to 25 agents</p>
-    <h2 id="promo-modal-title">Getting started costs money. This covers it.</h2>
+    <h2 id="promo-modal-title">Getting started costs money. We cover your first year compliance charge.</h2>
     <p>Moving is the expensive part. Board transfer, new signage, the gap while your files settle. We are waiving $199 of your first year compliance cost so the move itself is not the reason you stay.</p>
     <p>Use this code at checkout.</p>
     <span class="promo-code-big">SWITCH199</span>
@@ -481,6 +481,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
 
     var diff=aNet-tNet;
     document.getElementById('r-diff').textContent=money(diff);
+    // Say "less" when Aari nets less; never show a loss as a gain.
+    var eye=document.querySelector('.diff-eye'), sub=document.querySelector('.diff-sub');
+    if(eye&&sub){ if(diff>=0){ eye.textContent='You could keep'; sub.textContent='more per year with Aari'; } else { eye.textContent='With these numbers you would keep'; sub.textContent='less per year with Aari'; } }
 
     var maxNet=Math.max(tNet,aNet,1);
     document.getElementById('bar-them').style.width=Math.max(0,Math.round(tNet/maxNet*100))+'%';
