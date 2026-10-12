@@ -462,6 +462,14 @@ Deno.serve(async (req: Request) => {
 
   const { data:sigRow } = await admin.from('realty_agreement_signatures').insert({ agent_id:signer.id, signer_email:signer.email, signer_name:signer.name, version_id:ver.id, version_label:ver.version_label, commission_plan: (signer.plan && signer.plan!=='—')?signer.plan:null, source: isTest?'website':'hub', signed_at:now.toISOString(), ip_address:ip||null, user_agent:ua||null, signature_image_path:storedSigPath, pdf_path:pdfPath, pdf_sha256:sha, record_origin:'signed', plan_acknowledged_at: planAcknowledged ? now.toISOString() : null, broker_countersigned_at: now.toISOString() }).select('id').single();
 
+  // Decision 95/97: the trigger realty_billing_invite_after_sign creates the save your card
+  // invite inside the same insert, so the Hub can show the step right away.
+  let billingUrl: string | null = null;
+  if (!isTest && sigRow?.id) {
+    const { data: inv } = await admin.from('realty_billing_invites').select('token,card_saved_at').eq('signature_id', sigRow.id).maybeSingle();
+    if (inv?.token && !inv.card_saved_at) billingUrl = 'https://joinaari.com/billing.html?t=' + inv.token;
+  }
+
   const pdfB64 = bytesToB64(outBytes);
 
   const agentRows: Array<[string,string]> = [
@@ -491,5 +499,5 @@ Deno.serve(async (req: Request) => {
     agentRes = await sendEmail(BRAND_FROM, signer.email, agentSubject, agentSignedHtml({ first: firstName(signer.name), resign: isResign, rows: agentRows }), pdfB64, filename);
   }
 
-  return json({ ok:true, signature_id:sigRow?.id||null, pdf_path:pdfPath, signature_image_path:storedSigPath, sha256:sha, version_label:ver.version_label, plan_guard:planGuard, resign:isResign, emailed_broker:brokerRes.ok, emailed_agent:agentRes.ok, errors:[brokerRes.err,agentRes.err].filter(Boolean) });
+  return json({ ok:true, signature_id:sigRow?.id||null, pdf_path:pdfPath, signature_image_path:storedSigPath, sha256:sha, version_label:ver.version_label, plan_guard:planGuard, resign:isResign, emailed_broker:brokerRes.ok, emailed_agent:agentRes.ok, billing_url:billingUrl, errors:[brokerRes.err,agentRes.err].filter(Boolean) });
 });
