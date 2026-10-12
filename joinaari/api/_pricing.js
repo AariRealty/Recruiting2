@@ -76,7 +76,7 @@ function computePrice(opts) {
   const fullMonthly = planMonthly;
 
   // Flat annual fee due at signup. No proration: the recurring monthly
-  // subscription already starts clean on the 1st of next month (see
+  // subscription starts on the Start Date (see
   // finalize-join.js billing_cycle_anchor), so the join month itself
   // is never billed.
   const subtotal = ANNUAL_FEE;

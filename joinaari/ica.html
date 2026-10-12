@@ -1182,9 +1182,9 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
         <div style="border:2px solid #0a0a0a;border-radius:10px;padding:20px 22px;margin-bottom:16px;">
           <p style="font-size:9px;font-family:'Montserrat',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:rgba(10,10,10,0.35);margin:0 0 10px;">Due Today</p>
           <div id="payment-due-amount" style="font-family:'Montserrat',sans-serif;font-size:34px;font-weight:700;color:#0a0a0a;line-height:1;">$199.00</div>
-          <p id="payment-due-breakdown" style="font-size:12px;color:rgba(10,10,10,0.55);margin-top:8px;line-height:1.5;">Annual E&amp;O + compliance fee. Your monthly plan fee starts on the 1st of the month after your Start Date. Nothing else is charged today.</p>
+          <p id="payment-due-breakdown" style="font-size:12px;color:rgba(10,10,10,0.55);margin-top:8px;line-height:1.5;">Annual E&amp;O + compliance fee. Your monthly plan fee is charged on your Start Date, then on that same day every month. Nothing else is charged today.</p>
         </div>
-        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Today&rsquo;s charge is shown above. Your card on file is then charged your monthly plan fee on the 1st of the month after your Start Date, and the E&amp;O + Compliance Fee each year, as set out in Exhibit A and Manual Section 68.</p>
+        <p style="font-family:'Lato',sans-serif;font-size:11px;color:rgba(10,10,10,0.4);margin:0 0 16px;line-height:1.6">Today&rsquo;s charge is shown above. Your card on file is then charged your monthly plan fee on your Start Date and on that same day every month, and the E&amp;O + Compliance Fee each year on your Start Date, as set out in Exhibit A and Manual Section 68.</p>
 
         <!-- Promo code (Exhibit A 41.3) -->
         <div id="coupon-box" style="margin:0 0 16px;">
@@ -2211,7 +2211,7 @@ function initialAllPages() {
         var dueEl = document.getElementById('payment-due-amount');
         var breakdownEl = document.getElementById('payment-due-breakdown');
         if (dueEl) dueEl.textContent = '$' + totalDue.toFixed(2);
-        if (breakdownEl) breakdownEl.textContent = 'Annual E&O + compliance fee. Your monthly plan fee starts on the 1st of the month after your Start Date. Nothing else is charged today.';
+        if (breakdownEl) breakdownEl.textContent = 'Annual E&O + compliance fee. Your monthly plan fee is charged on your Start Date, then on that same day every month. Nothing else is charged today.';
       }
 
       // Move to Step 4 (payment)
@@ -2417,7 +2417,7 @@ function initialAllPages() {
       var _aff = await aariCheckAffiliation(_agent.email);
       var payBlock = document.getElementById('payment-block');
       if (payBlock) { payBlock.style.display = 'block'; }
-      if (signMsg) { signMsg.textContent = (_aff === 'current' || _aff === 'review') ? 'Signed. You are already with Aari Realty, so nothing is charged today. Save your card below; your monthly plan fee starts on the 1st of next month.' : 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
+      if (signMsg) { signMsg.textContent = (_aff === 'current' || _aff === 'review') ? 'Signed. You are already with Aari Realty, so nothing is charged today. Save your card below; your monthly plan fee is charged on the day of the month you first joined Aari.' : 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
     } catch (e) {
       signBtn.disabled = false;
       signBtn.textContent = 'Sign Agreement';
@@ -2618,13 +2618,13 @@ async function aariCheckAffiliation(email){
   try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; window._aariBilledPlan = (j && j.plan) || ''; } catch (e) {}
   var sel = document.getElementById('associate-status'); var n = document.getElementById('associate-status-note');
   if (st === 'returning' && sel) { sel.value = 'returning'; sel.disabled = true; aariStatusNote(); }
-  else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'You are already with Aari Realty. You sign the new version here and nothing is charged today. You save your card, and your monthly plan fee starts on the 1st of next month, with no free month (Manual Section 68.1).'; n.style.display = 'block'; }
+  else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'You are already with Aari Realty. You sign the new version here and nothing is charged today. You save your card, and your monthly plan fee is charged on the day of the month you first joined Aari (Manual Section 68.1).'; n.style.display = 'block'; }
   if (st !== 'new' && window.aariHidePromo) window.aariHidePromo();
   return st;
 }
 document.addEventListener('DOMContentLoaded', function(){ var e = document.getElementById('associate-email'); if (e) e.addEventListener('change', function(){ if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) aariCheckAffiliation(e.value); }); });
 function aariStatusNote(){ var v=(document.getElementById('associate-status')||{}).value; var n=document.getElementById('associate-status-note'); if(!n) return;
-  if(v==='returning'){ n.textContent='The free first month applies only to a first affiliation, so your plan fee for your Start Date month is charged with your first monthly fee on the 1st of the month after your Start Date. Nothing extra is charged today (Manual Section 68.1).'; n.style.display='block'; }
+  if(v==='returning'){ n.textContent='Welcome back. Your plan fee is charged on your Start Date, then on that same day every month. Today you pay only the E&O + Compliance Fee (Manual Section 68.1).'; n.style.display='block'; }
   else { n.style.display='none'; } }
 </script>
 </body>

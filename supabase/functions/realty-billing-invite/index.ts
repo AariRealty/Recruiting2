@@ -35,12 +35,22 @@ function billingInviteHtml(o) {
 }
 function fmtDate(d) { return d.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }); }
 function todayFL() { return new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); }
-function firstOfNextMonth() { var t = todayFL(); return new Date(Date.UTC(Number(t.slice(0, 4)), Number(t.slice(5, 7)), 1, 12)); }
-function eoAfterNextAnniversary(startISO) {
+// Decision 103: current Associates are charged on the day of the month they joined, and the E&O on their join anniversary.
+function dIn(y, m0) { return new Date(Date.UTC(y, m0 + 1, 0)).getUTCDate(); }
+function nextMonthDay(startISO) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(startISO || ''))) return null;
-  var t = todayFL(); var y = Number(t.slice(0, 4)); var md = String(startISO).slice(5);
-  if ((y + '-' + md) < t) y = y + 1;
-  return new Date(Date.UTC(y, Number(md.slice(0, 2)), 1, 12));
+  var t = todayFL(); var y = Number(t.slice(0, 4)), m0 = Number(t.slice(5, 7)) - 1, td = Number(t.slice(8, 10)), jd = Number(String(startISO).slice(8, 10));
+  var d = Math.min(jd, dIn(y, m0));
+  if (d <= td) { m0++; if (m0 > 11) { m0 = 0; y++; } d = Math.min(jd, dIn(y, m0)); }
+  return new Date(Date.UTC(y, m0, d, 16));
+}
+function nextAnniversary(startISO) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(startISO || ''))) return null;
+  var t = todayFL(); var y = Number(t.slice(0, 4)), m0 = Number(String(startISO).slice(5, 7)) - 1, jd = Number(String(startISO).slice(8, 10));
+  var d = Math.min(jd, dIn(y, m0));
+  var iso = function (yy, dd) { return yy + '-' + String(m0 + 1).padStart(2, '0') + '-' + String(dd).padStart(2, '0'); };
+  if (iso(y, d) <= t) { y++; d = Math.min(jd, dIn(y, m0)); }
+  return new Date(Date.UTC(y, m0, d, 16));
 }
 // END TEMPLATE
 
@@ -56,8 +66,8 @@ Deno.serve(async (req: Request) => {
   if (inv.emailed_at) return new Response(JSON.stringify({ ok: true, already: true }), { status: 200 });
   const { data: m } = await admin.from('realty_members').select('commission_plan,start_date,fee_exempt,status').eq('user_id', inv.agent_id).maybeSingle();
   if (!m || m.status !== 'active' || m.fee_exempt) return new Response(JSON.stringify({ ok: true, skipped: true }), { status: 200 });
-  const eo = eoAfterNextAnniversary(m.start_date);
-  const html = billingInviteHtml({ token: inv.token, first: String(inv.full_name || '').split(/\s+/)[0], plan: m.commission_plan, firstCharge: fmtDate(firstOfNextMonth()), eoDate: eo ? fmtDate(eo) : 'on your anniversary' });
+  const eo = nextAnniversary(m.start_date); const fc = nextMonthDay(m.start_date);
+  const html = billingInviteHtml({ token: inv.token, first: String(inv.full_name || '').split(/\s+/)[0], plan: m.commission_plan, firstCharge: fc ? fmtDate(fc) : 'on your join day', eoDate: eo ? fmtDate(eo) : 'on your anniversary' });
   if (!RESEND_KEY) return new Response('no_email_key', { status: 500 });
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',

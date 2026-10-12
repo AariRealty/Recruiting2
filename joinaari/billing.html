@@ -58,8 +58,10 @@ button:disabled{opacity:.5;cursor:default}
   function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function todayFL(){return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});}
   function fmt(d){return d.toLocaleDateString('en-US',{timeZone:'UTC',month:'long',day:'numeric',year:'numeric'});}
-  function firstNext(){var t=todayFL();return new Date(Date.UTC(+t.slice(0,4),+t.slice(5,7),1,12));}
-  function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),md=s.slice(5);if((y+'-'+md)<t)y++;return new Date(Date.UTC(y,+md.slice(0,2),1,12));}
+  // Decision 103: current Associates are charged on the day of the month they joined, and the E&O on their join anniversary.
+  function dIn(y,m0){return new Date(Date.UTC(y,m0+1,0)).getUTCDate();}
+  function firstNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+t.slice(5,7)-1,td=+t.slice(8,10),jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0));if(d<=td){m0++;if(m0>11){m0=0;y++;}d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
+  function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+s.slice(5,7)-1,jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0)),iso=function(yy,dd){return yy+'-'+String(m0+1).padStart(2,'0')+'-'+String(dd).padStart(2,'0');};if(iso(y,d)<=t){y++;d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
   function fail(t){hd.textContent='This link is not active.';kick.textContent='';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d">'+esc(t)+' Questions? Email join@aarirealty.com.</p>';}
   function done(first){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='Done';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent='Card saved. $0 charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">That&rsquo;s it. Your plan fee runs on its own from here. Back to business.</p><p style="margin-top:22px"><a href="https://hub.joinaari.com/" style="display:inline-block;background:#141210;color:#fff;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:14px 28px;border-radius:50px">Take me to my hub</a></p>';}
   async function load(){
@@ -78,12 +80,12 @@ button:disabled{opacity:.5;cursor:default}
     kick.textContent='Two minutes. $0 today.';
     body.innerHTML='<div class="plan"><div class="hd">Your plan</div>'
       +'<div><span class="l">Plan</span><span class="v">'+esc(p.name)+'</span></div>'
-      +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+fmt(firstNext())+'</span></div>'
+      +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+(firstNext(inv.start_date)?fmt(firstNext(inv.start_date)):'on your join day')+'</span></div>'
       +'<div><span class="l">E&amp;O + Compliance Fee</span><span class="v">renews '+(eo?fmt(eo):'on your anniversary')+'</span></div>'
       +'<div><span class="l">Charged today</span><span class="v"><b>$0.00</b></span></div></div>'
       +'<div id="pay"><div class="hd" style="font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8a7f6a;font-weight:700">Card on file</div><div id="stripe-el"></div></div>'
       +'<button id="save">Save my card</button><div class="msg" id="msg"></div>'
-      +'<p class="fine">By saving your card you authorize Aari Realty LLC to charge it for your Monthly Brokerage Fee on the 1st of each month and your E&amp;O + Compliance Fee each year, as your signed agreement states. Card payments only.</p>';
+      +'<p class="fine">By saving your card you authorize Aari Realty LLC to charge it for your Monthly Brokerage Fee each month on your billing day and your E&amp;O + Compliance Fee each year, as your signed agreement states. Card payments only.</p>';
     var btn=document.getElementById('save'), msg=document.getElementById('msg');
     if(preview){document.getElementById('stripe-el').innerHTML='<div class="mock">Card number &nbsp; MM / YY &nbsp; CVC &nbsp; ZIP<br><small>(secure Stripe card box appears here)</small></div>';btn.onclick=function(){done(first);};return;}
     var nm=String(inv.full_name||'').trim().split(/\s+/);

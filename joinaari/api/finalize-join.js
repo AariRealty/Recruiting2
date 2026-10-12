@@ -16,35 +16,52 @@ const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
 
 // Today's date in Florida (America/New_York) as YYYY-MM-DD.
 function todayFL() { return new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); }
-// First Monthly Brokerage Fee: the 1st of the month after the Associate's Start Date
-// (Exhibit A 41.1, Manual 68.1). A missing, invalid or past Start Date falls back to today.
-// A Start Date more than one year out is capped at one year.
-function firstOfMonthAfterStartTs(startISO) {
+// Decisions 100 to 103 (12 Oct 2026), Manual 68.1 and Exhibit A 41: fees run on the Associate's own day.
+// New and returning Associates: the E&O + Compliance Fee is charged at signing; the first Monthly
+// Brokerage Fee is charged on the Start Date and then on that day each month; the E&O renews on the
+// Start Date each year. A missing, invalid or past Start Date falls back to today; more than one year
+// out is capped at one year.
+function clampStartISO(startISO) {
   const today = todayFL();
   let start = /^\d{4}-\d{2}-\d{2}$/.test(String(startISO || '')) ? String(startISO) : today;
   if (start < today) start = today;
-  const t = new Date(today + 'T12:00:00Z'); const cap = new Date(Date.UTC(t.getUTCFullYear() + 1, t.getUTCMonth(), t.getUTCDate(), 12)).toISOString().slice(0, 10);
+  const t = new Date(today + 'T12:00:00Z');
+  const cap = new Date(Date.UTC(t.getUTCFullYear() + 1, t.getUTCMonth(), t.getUTCDate(), 12)).toISOString().slice(0, 10);
   if (start > cap) start = cap;
-  const y = Number(start.slice(0, 4)), m = Number(start.slice(5, 7));
-  return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
+  return start;
 }
-// Current Associates (decision #91): the monthly fee starts the 1st of next month (no waived month, Manual 68.1).
-function firstOfNextMonthTs() {
-  const t = todayFL(); const y = Number(t.slice(0, 4)), m = Number(t.slice(5, 7));
-  return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
+function isoNoonTs(iso) { return Math.floor(Date.UTC(Number(iso.slice(0, 4)), Number(iso.slice(5, 7)) - 1, Number(iso.slice(8, 10)), 16, 0, 0) / 1000); }
+function daysIn(y, m0) { return new Date(Date.UTC(y, m0 + 1, 0)).getUTCDate(); }
+// Monthly fee for a new or returning Associate: null means charge now (Start Date is today).
+function monthlyStartTs(startISO) {
+  const s = clampStartISO(startISO);
+  return s === todayFL() ? null : isoNoonTs(s);
 }
-// E&O renews on the 1st of the month after the next Onboarding Anniversary of the roster start date.
-function eoAfterNextAnniversaryTs(startISO) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(startISO || ''))) return null;
-  const t = todayFL(); const ty = Number(t.slice(0, 4));
-  const md = String(startISO).slice(5);
-  let y = ty; if ((y + '-' + md) < t) y = ty + 1;
-  const m = Number(md.slice(0, 2));
-  return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
+// E&O renewal for a new or returning Associate: one year after the Start Date (year one paid at signing).
+function eoRenewalTs(startISO) {
+  const s = clampStartISO(startISO);
+  const y = Number(s.slice(0, 4)) + 1, m0 = Number(s.slice(5, 7)) - 1, d = Math.min(Number(s.slice(8, 10)), daysIn(y, m0));
+  return Math.floor(Date.UTC(y, m0, d, 16, 0, 0) / 1000);
 }
-function firstOfNextMonthNextYearTs() {
-  const now = new Date();
-  return Math.floor(Date.UTC(now.getUTCFullYear() + 1, now.getUTCMonth() + 1, 1, 12, 0, 0) / 1000);
+// Current Associates (decision 103): nothing is charged when they sign in the Hub. The monthly fee is
+// charged on the day of the month they originally joined, starting the next time that day comes around.
+function nextMonthDayTs(joinISO) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(joinISO || ''))) return null;
+  const t = todayFL(); let y = Number(t.slice(0, 4)), m0 = Number(t.slice(5, 7)) - 1; const td = Number(t.slice(8, 10));
+  const jd = Number(String(joinISO).slice(8, 10));
+  let d = Math.min(jd, daysIn(y, m0));
+  if (d <= td) { m0 += 1; if (m0 > 11) { m0 = 0; y += 1; } d = Math.min(jd, daysIn(y, m0)); }
+  return Math.floor(Date.UTC(y, m0, d, 16, 0, 0) / 1000);
+}
+// Current Associates: the E&O renews on the next anniversary of the original join date (the date itself).
+function nextAnniversaryTs(joinISO) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(joinISO || ''))) return null;
+  const t = todayFL(); let y = Number(t.slice(0, 4));
+  const m0 = Number(String(joinISO).slice(5, 7)) - 1, jd = Number(String(joinISO).slice(8, 10));
+  let d = Math.min(jd, daysIn(y, m0));
+  const iso = (yy, dd) => yy + '-' + String(m0 + 1).padStart(2, '0') + '-' + String(dd).padStart(2, '0');
+  if (iso(y, d) <= t) { y += 1; d = Math.min(jd, daysIn(y, m0)); }
+  return Math.floor(Date.UTC(y, m0, d, 16, 0, 0) / 1000);
 }
 
 module.exports = async function handler(req, res) {
@@ -127,37 +144,28 @@ module.exports = async function handler(req, res) {
       out.affiliation = 'current';
     }
 
-    // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
+    // 3) Monthly plan subscription on the Associate's own day (decisions 102 and 103)
     if (customer && pmId && planInfo && !alreadyBilled) {
       try {
-        // Manual 68.1: the Start Date month is waived only on a first affiliation. A returning Associate
-        // pays it with the first Monthly Brokerage Fee on the 1st after the Start Date, never at signup (decision #78).
-        const monthly = await stripe.subscriptions.create({
-          customer: customer.id,
-          items: [{ price: planInfo.price }],
-          trial_end: rosterCurrent ? firstOfNextMonthTs() : firstOfMonthAfterStartTs(startDate),
-          proration_behavior: 'none',
-          default_payment_method: pmId,
-          metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '', affiliation: affiliation }
-        }, { idempotencyKey: 'aari-monthly:' + email });
-        out.subscriptions.monthly = monthly.id;
-        if (affiliation === 'returning') {
-          try {
-            const pr = await stripe.prices.retrieve(planInfo.price);
-            // A pending item tied to the subscription is billed on its next invoice: the 1st after the Start Date.
-            await stripe.invoiceItems.create({
-              customer: customer.id,
-              subscription: monthly.id,
-              price_data: { currency: pr.currency, product: typeof pr.product === 'string' ? pr.product : pr.product.id, unit_amount: pr.unit_amount },
-              description: 'Start Date month, returning Associate (Manual 68.1)'
-            }, { idempotencyKey: 'aari-startmonth:' + email + ':' + monthly.id });
-            out.start_month_billed_with_first_fee = true;
-          } catch (e) { out.warnings.push('start_month_item: ' + String(e.message || e).slice(0, 140)); }
+        const firstTs = rosterCurrent ? nextMonthDayTs(detail.startDate) : monthlyStartTs(startDate);
+        if (rosterCurrent && !firstTs) out.warnings.push('Monthly fee not scheduled: roster join date MISSING DATA');
+        if (!(rosterCurrent && !firstTs)) {
+          const params = {
+            customer: customer.id,
+            items: [{ price: planInfo.price }],
+            proration_behavior: 'none',
+            default_payment_method: pmId,
+            metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '', affiliation: affiliation }
+          };
+          if (firstTs) params.trial_end = firstTs;
+          const monthly = await stripe.subscriptions.create(params, { idempotencyKey: 'aari-monthly:' + email });
+          out.subscriptions.monthly = monthly.id;
+          out.monthly_first_charge = firstTs ? new Date(firstTs * 1000).toISOString().slice(0, 10) : 'today';
         }
       } catch (e) { out.warnings.push('monthly_sub: ' + String(e.message || e).slice(0, 140)); }
 
-      // 4) Annual E&O subscription, first renewal one year out (year one collected today)
-      const eoTrial = rosterCurrent ? eoAfterNextAnniversaryTs(detail.startDate) : firstOfNextMonthNextYearTs();
+      // 4) Annual E&O subscription: renews on the Start Date each year (current Associates: original join date)
+      const eoTrial = rosterCurrent ? nextAnniversaryTs(detail.startDate) : eoRenewalTs(startDate);
       if (!eoTrial) out.warnings.push('E&O renewal not scheduled: roster start date MISSING DATA');
       if (eoTrial) try {
         const eo = await stripe.subscriptions.create({

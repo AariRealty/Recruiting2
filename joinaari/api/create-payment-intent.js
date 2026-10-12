@@ -34,7 +34,7 @@ module.exports = async function handler(req, res) {
     }
 
     // Decision #91: an agent active on the Hub roster (or billed in Stripe) is current. Nothing is charged today;
-    // the card is saved for the monthly plan fee from the 1st of next month (Manual 68.1, no waived month).
+    // the card is saved for the monthly plan fee on the day of the month the agent first joined (Manual 68.1, decision 103).
     var affDetail = null;
     try { affDetail = await lookupAffiliationDetail(Stripe(process.env.STRIPE_SECRET_KEY), email); } catch (e) { console.warn('[create-payment-intent] affiliation lookup failed:', e && e.message); }
     var isCurrent = !!(affDetail && affDetail.status === 'current');
