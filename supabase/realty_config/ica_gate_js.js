@@ -92,7 +92,7 @@
       + '<div style="position:relative">'
       + '<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#1c6b2e;font-weight:700;margin-bottom:12px">&#10003; Agreement signed</div>'
       + '<div style="font-family:Georgia,serif;font-size:28px;font-weight:600;color:#141210;margin-bottom:14px">One last thing.</div>'
-      + '<div style="font-size:15px;color:#4a4740;line-height:1.6;max-width:400px;margin:0 auto">' + (locked ? 'Your agreement is signed and your copy is in your inbox.' : 'Your agreement is signed and your copy is already on its way to your inbox.') + '</div>'
+      + '<div style="font-size:15px;color:#4a4740;line-height:1.6;max-width:400px;margin:0 auto">Your agreement is signed.</div>'
       + '<div style="font-size:15px;color:#4a4740;line-height:1.6;max-width:400px;margin:12px auto 0">Now save your card. <b style="color:#141210">Once.</b> Your plan fee runs on its own from there, so you never chase an invoice and we never chase you.</div>'
       + '<div style="margin:20px auto 0;max-width:300px;background:#f5f1e8;border-radius:10px;padding:12px 14px;font-size:14px;color:#141210"><b>Charged today: $0</b></div>'
       + '<div style="margin:14px auto 0;max-width:400px;font-size:13px;color:#4a4740;line-height:1.55">This card will be used for your Monthly Brokerage Fee and your yearly E&amp;O + Compliance Fee. To change it, contact the Broker.</div>'

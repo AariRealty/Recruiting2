@@ -16,3 +16,6 @@ returns uuid language sql stable security definer set search_path = public as $$
 $$;
 revoke all on function public.my_card_gate() from public, anon;
 grant execute on function public.my_card_gate() to authenticated;
+
+-- Decision 105 supersedes 99: no save your card email at all. The Hub lock is the only path.
+select cron.unschedule('realty-billing-invite-backup') where exists (select 1 from cron.job where jobname = 'realty-billing-invite-backup');
