@@ -36,7 +36,8 @@ function round2(n) {
 function resolveCoupon(code) {
   if (!code) return null;
   const coupons = { SWITCH199: { type: 'flat_off', value: 199 } };
-  const raw = process.env.COUPON_CODES || '';
+  // Exhibit A 41.3 is the only offer (#45). Codes in the COUPON_CODES env var are ignored; a new offer goes into Exhibit A and this file first.
+  const raw = '';
   raw.split(',').forEach(function (entry) {
     const parts = entry.trim().split(':');
     if (parts.length >= 2) {

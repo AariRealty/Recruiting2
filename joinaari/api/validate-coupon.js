@@ -26,7 +26,8 @@ module.exports = async function handler(req, res) {
     //   waive_annual     — waive the $199 annual E&O + Compliance fee
     //   percent_off:N    — N% off total due today
     //   flat_off:N       — $N off total due today
-    const raw = process.env.COUPON_CODES || '';
+    // Exhibit A 41.3 is the only offer (#45). Codes in the COUPON_CODES env var are ignored; a new offer goes into Exhibit A and this file first.
+    const raw = '';
     raw.split(',').forEach(function(entry) {
       const parts = entry.trim().split(':');
       if (parts.length >= 2) {
