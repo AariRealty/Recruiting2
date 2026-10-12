@@ -2618,7 +2618,7 @@ async function aariCheckAffiliation(email){
 }
 document.addEventListener('DOMContentLoaded', function(){ var e = document.getElementById('associate-email'); if (e) e.addEventListener('change', function(){ if (/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(e.value.trim())) aariCheckAffiliation(e.value); }); });
 function aariStatusNote(){ var v=(document.getElementById('associate-status')||{}).value; var n=document.getElementById('associate-status-note'); if(!n) return;
-  if(v==='returning'){ n.textContent='The free first month applies only to a first affiliation, so your plan fee for your Start Date month is also charged today (Exhibit A, Section 41.1).'; n.style.display='block'; }
+  if(v==='returning'){ n.textContent='The free first month applies only to a first affiliation, so your plan fee for your Start Date month is charged with your first monthly fee on the 1st of the month after your Start Date. Nothing extra is charged today (Manual Section 68.1).'; n.style.display='block'; }
   else { n.style.display='none'; } }
 </script>
 </body>

@@ -99,23 +99,30 @@ module.exports = async function handler(req, res) {
     // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
     if (customer && pmId && planInfo && detected !== 'current') {
       try {
-        // Exhibit A 41.1 and Manual 68.1: the Start Date month is waived only on a first affiliation.
-        // A returning Associate pays the Start Date month now, then is billed on the 1st as usual.
-        let addItems = [];
-        if (affiliation === 'returning') {
-          const pr = await stripe.prices.retrieve(planInfo.price);
-          addItems = [{ price_data: { currency: pr.currency, product: typeof pr.product === 'string' ? pr.product : pr.product.id, unit_amount: pr.unit_amount } }];
-        }
+        // Manual 68.1: the Start Date month is waived only on a first affiliation. A returning Associate
+        // pays it with the first Monthly Brokerage Fee on the 1st after the Start Date, never at signup (decision #78).
         const monthly = await stripe.subscriptions.create({
           customer: customer.id,
           items: [{ price: planInfo.price }],
-          add_invoice_items: addItems,
           trial_end: firstOfMonthAfterStartTs(startDate),
           proration_behavior: 'none',
           default_payment_method: pmId,
           metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '', affiliation: affiliation }
         }, { idempotencyKey: 'aari-monthly:' + email });
         out.subscriptions.monthly = monthly.id;
+        if (affiliation === 'returning') {
+          try {
+            const pr = await stripe.prices.retrieve(planInfo.price);
+            // A pending item tied to the subscription is billed on its next invoice: the 1st after the Start Date.
+            await stripe.invoiceItems.create({
+              customer: customer.id,
+              subscription: monthly.id,
+              price_data: { currency: pr.currency, product: typeof pr.product === 'string' ? pr.product : pr.product.id, unit_amount: pr.unit_amount },
+              description: 'Start Date month, returning Associate (Manual 68.1)'
+            }, { idempotencyKey: 'aari-startmonth:' + email + ':' + monthly.id });
+            out.start_month_billed_with_first_fee = true;
+          } catch (e) { out.warnings.push('start_month_item: ' + String(e.message || e).slice(0, 140)); }
+        }
       } catch (e) { out.warnings.push('monthly_sub: ' + String(e.message || e).slice(0, 140)); }
 
       // 4) Annual E&O subscription, first renewal one year out (year one collected today)
