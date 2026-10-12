@@ -1,5 +1,6 @@
 const Stripe = require('stripe');
 const { computePrice, PROMO_RULES, checkPromoEligibility } = require('./_pricing');
+const { lookupAffiliation } = require('./_affiliation');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -35,6 +36,11 @@ module.exports = async function handler(req, res) {
     if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
       var elig = await checkPromoEligibility(pricing.couponApplied, email, license_number);
       if (!elig.ok) return res.status(elig.status).json({ error: elig.error, message: elig.message });
+      // Exhibit A 41.3: the offer is for Associates new to Aari Realty. Billing history decides (decision #75).
+      try {
+        var aff = await lookupAffiliation(Stripe(process.env.STRIPE_SECRET_KEY), email);
+        if (aff !== 'new') return res.status(403).json({ error: 'promo_not_eligible', message: 'This offer is for agents new to Aari Realty. Remove the code to continue.' });
+      } catch (e) { console.warn('[create-payment-intent] affiliation lookup failed:', e && e.message); }
     }
 
     // Loud (non-fatal) signal if the browser's number disagrees with ours.

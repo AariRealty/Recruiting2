@@ -69,9 +69,9 @@ module.exports = async function handler(req, res) {
         ${row('License', esc(license || 'N/A'))}
         ${mls ? row('MLS', esc(mls)) : ''}
         ${years_licensed ? row('Years Licensed', esc(years_licensed)) : ''}
-        ${closings ? row('Closings (12 Mo.)', esc(closings)) : ''}
+        ${closings ? row('Closed Sales (24 Mo.)', esc(closings)) : ''}
         ${region ? row('Region', esc(region)) : ''}
-        ${how_did_you_hear ? row('How They Found Us', esc(how_did_you_hear)) : ''}
+        ${how_did_you_hear ? row('REALTOR Association', esc(how_did_you_hear)) : ''}
       </div>
 
       <div style="margin-bottom:28px;">

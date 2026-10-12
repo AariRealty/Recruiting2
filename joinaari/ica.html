@@ -2459,8 +2459,9 @@ function initialAllPages() {
         return;
       }
 
-      // Payment succeeded
-      payBtn.textContent = 'Payment Successful!';
+      // Only a succeeded intent is called paid; anything else is shown as processing.
+      var _payStatus = ((result.paymentIntent || result.setupIntent || {}).status) || 'succeeded';
+      payBtn.textContent = _payStatus === 'succeeded' ? 'Payment Successful!' : 'Payment processing';
       payBtn.style.background = '#0a0a0a';
       payBtn.style.borderColor = '#0a0a0a';
 
@@ -2515,7 +2516,7 @@ function initialAllPages() {
       setTimeout(function() {
         var params = new URLSearchParams(window.location.search);
         var returnParams = new URLSearchParams();
-        returnParams.set('payment_success', 'true');
+        returnParams.set('payment_success', _payStatus === 'succeeded' ? 'true' : 'processing');
         returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
         returnParams.set('email', icaData.email || '');
         window.location.href = '/thank-you.html?' + returnParams.toString();
