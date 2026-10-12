@@ -2265,7 +2265,8 @@ function initialAllPages() {
           phone: phone,
           amount: totalDue,
           license_number: ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || ''), plan_name: planName,
-          coupon_code: appliedCoupon ? appliedCoupon.code : ''
+          coupon_code: appliedCoupon ? appliedCoupon.code : '',
+          affiliation_status: (document.getElementById('associate-status')||{}).value || 'new'
         })
       });
 
@@ -2352,6 +2353,7 @@ function initialAllPages() {
     var _em = document.getElementById('associate-email');
     var email = ((_em && _em.value) ? _em.value.trim() : '') || data0.email || '';
     var license = ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || '').trim();
+    if (((document.getElementById('associate-status')||{}).value) === 'returning') { show('This offer is for agents new to Aari Realty (Exhibit A, Section 41.3).', false); return; }
     if (btn) btn.disabled = true;
     try {
       var resp = await fetch('/api/validate-coupon', {

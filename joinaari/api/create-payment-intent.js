@@ -11,7 +11,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code, license_number } = req.body || {};
+    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code, license_number, affiliation_status } = req.body || {};
 
     if (!first_name || !last_name || !email) {
       return res.status(400).json({ error: 'first_name, last_name, and email are required' });
@@ -37,6 +37,7 @@ module.exports = async function handler(req, res) {
       var elig = await checkPromoEligibility(pricing.couponApplied, email, license_number);
       if (!elig.ok) return res.status(elig.status).json({ error: elig.error, message: elig.message });
       // Exhibit A 41.3: the offer is for Associates new to Aari Realty. Billing history decides (decision #75).
+      if (String(affiliation_status || '').toLowerCase() === 'returning') return res.status(403).json({ error: 'promo_not_eligible', message: 'This offer is for agents new to Aari Realty. Remove the code to continue.' });
       try {
         var aff = await lookupAffiliation(Stripe(process.env.STRIPE_SECRET_KEY), email);
         if (aff !== 'new') return res.status(403).json({ error: 'promo_not_eligible', message: 'This offer is for agents new to Aari Realty. Remove the code to continue.' });
