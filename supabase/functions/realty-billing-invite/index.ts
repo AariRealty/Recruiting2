@@ -1,5 +1,6 @@
 // Decision 94: after a current agent re signs ICA 5.1 in the Hub, email one private link to save a card.
-// Called only by the realty_billing_invite_on_sign trigger (x-aari-cron secret). Charges nothing.
+// Decision 99: backup only. Called by the hourly realty_billing_invite_backup_run job (x-aari-cron secret)
+// for invites still without a saved card 24 hours after signing. Charges nothing.
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
@@ -61,9 +62,10 @@ Deno.serve(async (req: Request) => {
   if (!secret || req.headers.get('x-aari-cron') !== secret) return new Response('forbidden', { status: 403 });
   const body = await req.json().catch(() => ({}));
   const token = String((body as any)?.token ?? '');
-  const { data: inv } = await admin.from('realty_billing_invites').select('token,agent_id,email,full_name,emailed_at').eq('token', token).maybeSingle();
+  const { data: inv } = await admin.from('realty_billing_invites').select('token,agent_id,email,full_name,emailed_at,card_saved_at').eq('token', token).maybeSingle();
   if (!inv) return new Response('not_found', { status: 404 });
   if (inv.emailed_at) return new Response(JSON.stringify({ ok: true, already: true }), { status: 200 });
+  if (inv.card_saved_at) return new Response(JSON.stringify({ ok: true, card_saved: true }), { status: 200 });
   const { data: m } = await admin.from('realty_members').select('commission_plan,start_date,fee_exempt,status').eq('user_id', inv.agent_id).maybeSingle();
   if (!m || m.status !== 'active' || m.fee_exempt) return new Response(JSON.stringify({ ok: true, skipped: true }), { status: 200 });
   const eo = nextAnniversary(m.start_date); const fc = nextMonthDay(m.start_date);
