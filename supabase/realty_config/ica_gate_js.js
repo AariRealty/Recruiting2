@@ -94,11 +94,22 @@
       + '<div style="font-family:Georgia,serif;font-size:28px;font-weight:600;color:#141210;margin-bottom:14px">One last thing.</div>'
       + '<div style="font-size:15px;color:#4a4740;line-height:1.6;max-width:400px;margin:0 auto">Your agreement is signed.</div>'
       + '<div style="font-size:15px;color:#4a4740;line-height:1.6;max-width:400px;margin:12px auto 0">Now save your card. <b style="color:#141210">Once.</b> Your plan fee runs on its own from there, so you never chase an invoice and we never chase you.</div>'
-      + '<div style="margin:20px auto 0;max-width:300px;background:#f5f1e8;border-radius:10px;padding:12px 14px;font-size:14px;color:#141210"><b>Charged today: $0</b></div>'
+      + '<div style="margin:20px auto 0;max-width:300px;background:#f5f1e8;border-radius:10px;padding:12px 14px;font-size:14px;color:#141210"><b>Charged today: <span class="aariDue">$0</span></b></div>'
       + '<div style="margin:14px auto 0;max-width:400px;font-size:13px;color:#4a4740;line-height:1.55">This card will be used for your Monthly Brokerage Fee and your yearly E&amp;O + Compliance Fee. To change it, contact the Broker.</div>'
       + '<div style="margin-top:22px"><a id="aariSaveCard" href="' + url + '" style="display:inline-block;background:#101010;color:#fff;text-decoration:none;padding:15px 34px;border-radius:50px;font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase">Save my card</a></div>'
       + '<div style="margin-top:14px;font-size:12px;color:#8a857c">' + (locked ? 'Your hub opens as soon as your card is saved.' : 'Two minutes. This step finishes your onboarding.') + '</div>'
       + '</div></div>';
+  }
+
+  /* Decision 103a: an agent who owes a past fee sees the amount here and pays it on the
+     next screen. The amount comes from the Hub record (my_card_due), never the page. */
+  function fillDue(root){
+    try { if(!client.rpc) return; client.rpc('my_card_due').then(function(c){
+      var n = Number(c && c.data) || 0; if (n <= 0) return;
+      var t = '$' + (n/100).toFixed(2) + ' (past due E&amp;O)';
+      Array.prototype.forEach.call(root.querySelectorAll('.aariDue'), function(x){ x.innerHTML = t; });
+      var b = root.querySelector('#aariSaveCard'); if (b) b.textContent = 'Pay and save my card';
+    }).catch(function(){}); } catch(e) {}
   }
 
   function el(html){ var d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
@@ -285,6 +296,7 @@
            email with the same link stays as the backup. */
         if (r.json.billing_url && /^https:\/\/joinaari\.com\/billing\.html\?t=[0-9a-f-]{36}$/.test(r.json.billing_url)) {
           card.innerHTML = cardStep(r.json.billing_url, false);
+          fillDue(card);
           return;
         }
         card.innerHTML = '<div class=\"hd\"><div class=\"hd-txt\"><h2>Agreement signed</h2><p>AARI REALTY LLC</p></div></div><div class=\"bd\" style=\"text-align:center;padding:40px 30px\"><div style=\"font-size:44px;margin-bottom:16px;color:#1c6b2e\">&#10003;</div><div style=\"font-family:Georgia,serif;font-size:22px;font-weight:600;color:#141210;margin-bottom:12px\">You are all set.</div><div style=\"font-size:15px;color:#4a4740;line-height:1.6;max-width:380px;margin:0 auto\">Your Independent Contractor Agreement has been signed and a copy has been emailed to you.</div><div style=\"margin-top:24px\"><button type=\"button\" style=\"background:#101010;color:#fff;border:none;padding:14px 28px;border-radius:50px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit\" onclick=\"if(window.__aariExitPreview)window.__aariExitPreview();location.reload()\">Return to my hub</button></div></div>';
@@ -354,6 +366,7 @@
       + '<div class="ft"><div id="aariGateBtns"><button id="aariGateOut">Sign out</button></div></div></div></div>');
     var hd=g.querySelector('.hd p'); if(hd) hd.textContent='BEFORE YOUR HUB OPENS';
     document.body.appendChild(g);
+    fillDue(g);
     g.querySelector('#aariGateOut').onclick=function(){ try { client.auth.signOut().then(function(){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); }); } catch(e){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); } };
   }
 

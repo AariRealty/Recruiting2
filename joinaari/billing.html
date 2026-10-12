@@ -54,7 +54,7 @@ button:disabled{opacity:.5;cursor:default}
 (function(){
   var SB='https://fnlrgmuvtgwzjsihqxcn.supabase.co', ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y', PK='pk_live_51Qo5qRHTQU4zpF23CsDFS2qsFgJ7pP32si1zp53ABcwGGHWtWooZZZ4yMAfp5X8rLA91QdIRno1EjravY4YzNubU00LLRdoYNp';
   var PLANS={'75_25':{name:'Mentorship Path 75/25',fee:'$59',checkout:'Aari Mentorship 75/25'},'85_15':{name:'Aari Growth 85/15',fee:'$79',checkout:'Aari Growth 85/15'},'100_max':{name:'Aari Max 100%',fee:'$99',checkout:'Aari Max 100%'}};
-  var q=new URLSearchParams(location.search), token=q.get('t')||'', preview=q.get('preview')==='1';
+  var q=new URLSearchParams(location.search), token=q.get('t')||'', preview=q.get('preview')==='1'||q.get('preview')==='owed';
   var hd=document.getElementById('hd'), kick=document.getElementById('kick'), body=document.getElementById('body');
   function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function todayFL(){return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});}
@@ -64,10 +64,10 @@ button:disabled{opacity:.5;cursor:default}
   function firstNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+t.slice(5,7)-1,td=+t.slice(8,10),jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0));if(d<=td){m0++;if(m0>11){m0=0;y++;}d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
   function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+s.slice(5,7)-1,jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0)),iso=function(yy,dd){return yy+'-'+String(m0+1).padStart(2,'0')+'-'+String(dd).padStart(2,'0');};if(iso(y,d)<=t){y++;d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
   function fail(t){hd.textContent='This link is not active.';kick.textContent='';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d">'+esc(t)+' Questions? Email join@aarirealty.com.</p>';}
-  function done(first){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='Done';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent='Card saved. $0 charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">That&rsquo;s it. Your plan fee runs on its own from here. Back to business.</p><p style="margin-top:22px"><a href="https://hub.joinaari.com/" style="display:inline-block;background:#141210;color:#fff;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:14px 28px;border-radius:50px">Take me to my hub</a></p>';}
+  function done(first,paid){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='Done';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent=paid?('Paid. Card saved. $'+paid.toFixed(2)+' charged today.'):'Card saved. $0 charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">That&rsquo;s it. Your plan fee runs on its own from here. Back to business.</p><p style="margin-top:22px"><a href="https://hub.joinaari.com/" style="display:inline-block;background:#141210;color:#fff;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:14px 28px;border-radius:50px">Take me to my hub</a></p>';}
   async function load(){
     var inv;
-    if(preview){inv={email:'preview@example.com',full_name:'Alejandro Paredes',plan:'75_25',start_date:'2026-01-23',card_saved:false};}
+    if(preview){inv=q.get('preview')==='owed'?{email:'preview@example.com',full_name:'Odalis Mora',plan:'75_25',start_date:'2025-09-30',card_saved:false,owed_cents:19900,owed_label:'2026 E&O + Compliance Fee (past due)'}:{email:'preview@example.com',full_name:'Alejandro Paredes',plan:'75_25',start_date:'2026-01-23',card_saved:false};}
     else{
       if(!/^[0-9a-f-]{36}$/i.test(token)) return fail('The link is incomplete.');
       try{var r=await fetch(SB+'/rest/v1/rpc/get_billing_invite',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({p_token:token})});var rows=await r.json();inv=rows&&rows[0];}catch(e){}
@@ -75,36 +75,38 @@ button:disabled{opacity:.5;cursor:default}
     }
     var first=String(inv.full_name||'').split(/\s+/)[0];
     if(inv.card_saved) return done(first);
+    var owed=(Number(inv.owed_cents)||0)/100, owedLabel=inv.owed_label||'';
     var p=PLANS[inv.plan]; if(!p) return fail('Your plan is not set yet. Your broker will reach out.');
     var eo=eoNext(inv.start_date);
     hd.innerHTML='Save your card, <em>'+esc(first)+'</em>.';
-    kick.textContent='Two minutes. $0 today.';
+    kick.textContent=owed>0?('Two minutes. $'+owed.toFixed(2)+' today.'):'Two minutes. $0 today.';
     body.innerHTML='<div class="plan"><div class="hd">Your plan</div>'
       +'<div><span class="l">Plan</span><span class="v">'+esc(p.name)+'</span></div>'
       +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+(firstNext(inv.start_date)?fmt(firstNext(inv.start_date)):'on your join day')+'</span></div>'
       +'<div><span class="l">E&amp;O + Compliance Fee</span><span class="v">renews '+(eo?fmt(eo):'on your anniversary')+'</span></div>'
-      +'<div><span class="l">Charged today</span><span class="v"><b>$0.00</b></span></div></div>'
+      +'<div><span class="l">Charged today</span><span class="v"><b>$'+owed.toFixed(2)+'</b>'+(owed>0?'<br>'+esc(owedLabel):'')+'</span></div></div>'
       +'<div id="pay"><div class="hd" style="font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8a7f6a;font-weight:700">Card on file</div><div id="stripe-el"></div></div>'
       +'<div class="cardnote">This card will be used for your Monthly Brokerage Fee and your yearly E&amp;O + Compliance Fee. To change it, contact the Broker.</div>'
-      +'<button id="save">Save my card</button><div class="msg" id="msg"></div>'
-      +'<p class="fine">By saving your card you authorize Aari Realty LLC to charge it for your Monthly Brokerage Fee each month on your billing day and your E&amp;O + Compliance Fee each year, as your signed agreement states. Card payments only.</p>';
+      +'<button id="save">'+(owed>0?'Pay $'+owed.toFixed(2)+' and save my card':'Save my card')+'</button><div class="msg" id="msg"></div>'
+      +'<p class="fine">'+(owed>0?'By paying you authorize Aari Realty LLC to charge this card $'+owed.toFixed(2)+' today for '+esc(owedLabel)+', and then for':'By saving your card you authorize Aari Realty LLC to charge it for')+' your Monthly Brokerage Fee each month on your billing day and your E&amp;O + Compliance Fee each year, as your signed agreement states. Card payments only.</p>';
     var btn=document.getElementById('save'), msg=document.getElementById('msg');
-    if(preview){document.getElementById('stripe-el').innerHTML='<div class="mock">Card number &nbsp; MM / YY &nbsp; CVC &nbsp; ZIP<br><small>(secure Stripe card box appears here)</small></div>';btn.onclick=function(){done(first);};return;}
+    if(preview){document.getElementById('stripe-el').innerHTML='<div class="mock">Card number &nbsp; MM / YY &nbsp; CVC &nbsp; ZIP<br><small>(secure Stripe card box appears here)</small></div>';btn.onclick=function(){done(first,owed);};return;}
     var nm=String(inv.full_name||'').trim().split(/\s+/);
-    var resp=await fetch('/api/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({first_name:nm[0]||'Agent',last_name:nm.slice(1).join(' ')||nm[0]||'Agent',email:inv.email,phone:'',plan_name:p.checkout,coupon_code:'',affiliation_status:'current'})});
+    var resp=await fetch('/api/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({first_name:nm[0]||'Agent',last_name:nm.slice(1).join(' ')||nm[0]||'Agent',email:inv.email,phone:'',plan_name:p.checkout,coupon_code:'',affiliation_status:'current',invite_token:token})});
     var res=await resp.json().catch(function(){return {};});
-    if(!resp.ok||res.mode!=='setup'){return fail('We could not match you to the current roster.');}
+    if(!resp.ok||(res.mode!=='setup'&&res.mode!=='payment')){return fail('We could not match you to the current roster.');}
+    var paying=res.mode==='payment';
     var stripe=Stripe(PK), els=stripe.elements({clientSecret:res.client_secret,appearance:{theme:'stripe',variables:{fontFamily:"'Montserrat',sans-serif",colorPrimary:'#141210',borderRadius:'6px'}}});
     var pe=els.create('payment',{layout:'tabs'}); pe.mount('#stripe-el');
     btn.onclick=async function(){
-      btn.disabled=true; btn.textContent='Saving'; msg.style.display='none';
-      var out=await stripe.confirmSetup({elements:els,confirmParams:{return_url:location.href},redirect:'if_required'});
-      if(out.error){msg.textContent=out.error.message;msg.style.color='#c0392b';msg.style.display='block';btn.disabled=false;btn.textContent='Save my card';return;}
-      var si=out.setupIntent||{};
+      var label=btn.textContent; btn.disabled=true; btn.textContent=paying?'Paying':'Saving'; msg.style.display='none';
+      var out=paying?await stripe.confirmPayment({elements:els,confirmParams:{return_url:location.href},redirect:'if_required'}):await stripe.confirmSetup({elements:els,confirmParams:{return_url:location.href},redirect:'if_required'});
+      if(out.error){msg.textContent=out.error.message;msg.style.color='#c0392b';msg.style.display='block';btn.disabled=false;btn.textContent=label;return;}
+      var si=(paying?out.paymentIntent:out.setupIntent)||{};
       if(si.status!=='succeeded'){msg.textContent='Your card is still being verified. We email you once it clears.';msg.style.color='#141210';msg.style.display='block';return;}
       await fetch('/api/finalize-join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:inv.email,name:inv.full_name,plan:p.checkout,payment_id:si.id,affiliation_status:'current'})}).catch(function(){});
       await fetch(SB+'/rest/v1/rpc/mark_billing_invite_saved',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({p_token:token})}).catch(function(){});
-      done(first);
+      done(first,paying?res.amount:0);
     };
   }
   load();

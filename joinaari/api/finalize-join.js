@@ -104,6 +104,18 @@ module.exports = async function handler(req, res) {
     const verifiedEmail = String(((verified.metadata || {}).agent_email) || '').trim().toLowerCase();
     if (verifiedEmail !== email) return res.status(403).json({ error: 'payment_email_mismatch' });
 
+    // Decision 103a: a past due fee paid on the card step is marked collected in the Hub record.
+    const vmeta = verified.metadata || {};
+    if (vmeta.kind === 'eo_arrears' && /^[0-9a-f-]{36}$/i.test(String(vmeta.invite_token || ''))) {
+      try {
+        await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/mark_arrears_collected', {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_token: vmeta.invite_token, p_payment_id: verified.id })
+        });
+      } catch (e) { out.warnings.push('arrears_mark: ' + String(e.message || e).slice(0, 120)); }
+    }
+
     // 1) Find the Stripe customer created at checkout (most recent for this email)
     let customer = null;
     try {
