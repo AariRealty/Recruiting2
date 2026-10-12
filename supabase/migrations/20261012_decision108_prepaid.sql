@@ -34,4 +34,4 @@ grant execute on function public.get_billing_invite(uuid) to anon, authenticated
 
 update public.realty_agent_subscriptions set notes = 'Aari Max 100%, monthly $99. Joined 2025-01-28. Monthly fee prepaid up to her next anniversary (Marlenyi, 12 Oct 2026); first Stripe monthly charge 28 Jan 2027. E&O + Compliance $199 renews 28 Jan 2027. Billing moves from SkySlope Books to Stripe the day she saves a card in the Hub (98a). Register 108.', updated_at = now() where id = '10e2e1bf-bb50-4430-be5e-03d9287b6736';
 
-select m.full_name, m.monthly_paid_through, (select paid_through is null from public.aari_member_status('milennys.re@gmail.com') x, lateral (select x.monthly_paid_through as paid_through) y) as missing from realty_members m where m.user_id = 'f346659d-ea0c-40a0-b02f-e099cdb3cd41';
+select * from public.aari_member_status('milennys.re@gmail.com');
