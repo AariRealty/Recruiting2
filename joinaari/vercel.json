@@ -1,5 +1,5 @@
 {
-  "buildCommand": "",
+  "buildCommand": "node .checks/claims.js",
   "outputDirectory": ".",
   "framework": null,
   "functions": {
