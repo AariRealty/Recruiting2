@@ -196,6 +196,29 @@ module.exports = async function handler(req, res) {
       out.warnings.push('missing customer, payment method, or plan; subscriptions skipped');
     }
 
+    // 4a) Decision 109: Stripe now bills this current agent's monthly fee. Tell the Broker to turn off the old
+    // SkySlope Books recurring before its next charge, so the agent is never charged twice for the same month.
+    if (rosterCurrent && out.subscriptions.monthly) {
+      try {
+        const sendViaProxy = require('./_send-via-proxy');
+        const skyTs = nextMonthDayTs(detail.startDate);
+        const skyDate = skyTs ? new Date(skyTs * 1000).toLocaleDateString('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }) : 'their next billing day';
+        const esc = function (x) { return String(x || '').replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+        await sendViaProxy({
+          lane: 'internal',
+          to: 'marlenyi@aarirealty.com',
+          subject: 'Turn off SkySlope Books recurring: ' + (fullName || email) + ' (before ' + skyDate + ')',
+          html: '<div style="font-family:Arial,sans-serif;font-size:14px;color:#141210;line-height:1.6;max-width:560px">'
+            + '<p><b>' + esc(fullName || email) + '</b> just saved a card in the Hub. Stripe now bills their Monthly Brokerage Fee'
+            + (out.monthly_first_charge ? ', first charge ' + esc(out.monthly_first_charge) : '') + '.</p>'
+            + '<p><b>Do this:</b> turn off their recurring monthly charge in SkySlope Books before <b>' + esc(skyDate) + '</b>. Deal fees stay in SkySlope.</p>'
+            + '<p style="color:#6b6b6b;font-size:12px">Register decisions 98a and 109. Sent once, when the card was saved.</p></div>',
+          emailType: 'skyslope_recurring_off'
+        });
+        out.skyslope_alert = 'sent';
+      } catch (e) { out.warnings.push('skyslope_alert: ' + String(e.message || e).slice(0, 120)); }
+    }
+
     // 4b) Record a promo spot (Exhibit A 41.3) only once the payment or card setup succeeded.
     try {
       const intentId = String(body.payment_id || '').trim();
