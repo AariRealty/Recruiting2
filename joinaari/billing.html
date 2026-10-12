@@ -30,6 +30,7 @@ h1 em{font-weight:500}
 button{margin-top:20px;width:100%;background:var(--ink);color:#fff;border:0;border-radius:50px;padding:15px;font:700 12px 'Montserrat';letter-spacing:1.3px;text-transform:uppercase;cursor:pointer}
 button:disabled{opacity:.5;cursor:default}
 .fine{font-size:11.5px;color:var(--lite);line-height:1.55;margin-top:14px}
+.cardnote{font-size:13.5px;color:#2a2620;line-height:1.55;background:#f5f1e8;border-left:3px solid #b0a06a;border-radius:6px;padding:11px 14px;margin:14px 0 4px}
 .msg{font-size:13px;margin-top:12px;display:none}
 .mock{border:1px dashed var(--border);border-radius:8px;padding:14px;color:var(--lite);font-size:13px}
 .done h1{margin-top:6px}
@@ -84,6 +85,7 @@ button:disabled{opacity:.5;cursor:default}
       +'<div><span class="l">E&amp;O + Compliance Fee</span><span class="v">renews '+(eo?fmt(eo):'on your anniversary')+'</span></div>'
       +'<div><span class="l">Charged today</span><span class="v"><b>$0.00</b></span></div></div>'
       +'<div id="pay"><div class="hd" style="font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8a7f6a;font-weight:700">Card on file</div><div id="stripe-el"></div></div>'
+      +'<div class="cardnote">This card will be used for your Monthly Brokerage Fee and your yearly E&amp;O + Compliance Fee. To change it, contact the Broker.</div>'
       +'<button id="save">Save my card</button><div class="msg" id="msg"></div>'
       +'<p class="fine">By saving your card you authorize Aari Realty LLC to charge it for your Monthly Brokerage Fee each month on your billing day and your E&amp;O + Compliance Fee each year, as your signed agreement states. Card payments only.</p>';
     var btn=document.getElementById('save'), msg=document.getElementById('msg');
