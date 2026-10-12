@@ -33,11 +33,14 @@ button:disabled{opacity:.5;cursor:default}
 .msg{font-size:13px;margin-top:12px;display:none}
 .mock{border:1px dashed var(--border);border-radius:8px;padding:14px;color:var(--lite);font-size:13px}
 .done h1{margin-top:6px}
+.card{position:relative;overflow:hidden}
+.card>*{position:relative}
+.card .wm{position:absolute;right:-50px;bottom:-50px;width:280px;height:280px;opacity:.05;pointer-events:none}
 </style>
 </head>
 <body>
-<div class="top"><div class="b">Aari Realty</div><div class="s">Florida Licensed Brokerage</div></div>
-<div class="wrap"><div class="card" id="card">
+<div class="top"><img src="/aari-logo-white.svg" alt="Aari Realty" style="height:34px;width:auto;display:block"><div class="s" style="margin-top:6px">Florida Licensed Brokerage</div></div>
+<div class="wrap"><div class="card" id="card"><img class="wm" src="/favicon.svg" alt="" aria-hidden="true">
   <div class="eye">One last step</div>
   <h1 id="hd">Loading your plan&hellip;</h1>
   <div class="kick" id="kick"></div>
@@ -58,7 +61,7 @@ button:disabled{opacity:.5;cursor:default}
   function firstNext(){var t=todayFL();return new Date(Date.UTC(+t.slice(0,4),+t.slice(5,7),1,12));}
   function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),md=s.slice(5);if((y+'-'+md)<t)y++;return new Date(Date.UTC(y,+md.slice(0,2),1,12));}
   function fail(t){hd.textContent='This link is not active.';kick.textContent='';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d">'+esc(t)+' Questions? Email join@aarirealty.com.</p>';}
-  function done(first){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='All set';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent='Card saved. Nothing was charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">Your plan fee runs on its own from here.</p><p style="margin-top:22px"><a href="https://hub.joinaari.com/" style="display:inline-block;background:#141210;color:#fff;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:14px 28px;border-radius:50px">Go to my hub</a></p>';}
+  function done(first){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='Done';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent='Card saved. $0 charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">That&rsquo;s it. Your plan fee runs on its own from here. Back to business.</p><p style="margin-top:22px"><a href="https://hub.joinaari.com/" style="display:inline-block;background:#141210;color:#fff;text-decoration:none;font-weight:700;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;padding:14px 28px;border-radius:50px">Take me to my hub</a></p>';}
   async function load(){
     var inv;
     if(preview){inv={email:'preview@example.com',full_name:'Alejandro Paredes',plan:'75_25',start_date:'2026-01-23',card_saved:false};}
@@ -72,7 +75,7 @@ button:disabled{opacity:.5;cursor:default}
     var p=PLANS[inv.plan]; if(!p) return fail('Your plan is not set yet. Your broker will reach out.');
     var eo=eoNext(inv.start_date);
     hd.innerHTML='Save your card, <em>'+esc(first)+'</em>.';
-    kick.textContent='Two minutes. Nothing is charged today.';
+    kick.textContent='Two minutes. $0 today.';
     body.innerHTML='<div class="plan"><div class="hd">Your plan</div>'
       +'<div><span class="l">Plan</span><span class="v">'+esc(p.name)+'</span></div>'
       +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+fmt(firstNext())+'</span></div>'
