@@ -43,7 +43,7 @@ async function lookupAffiliationDetail(stripe, email) {
   let stripeDetail = await lookupStripe(stripe, clean);
   if (roster && roster.status === 'active') {
     // On the roster: current. If Stripe already bills a plan, nothing new is created (source stripe).
-    return { status: 'current', plan: stripeDetail.plan || '', source: stripeDetail.status === 'current' || stripeDetail.status === 'review' ? 'stripe' : 'roster', startDate: roster.start_date || '' };
+    return { status: 'current', plan: stripeDetail.plan || '', source: stripeDetail.status === 'current' || stripeDetail.status === 'review' ? 'stripe' : 'roster', startDate: roster.start_date || '', feeExempt: !!roster.fee_exempt };
   }
   if (roster && stripeDetail.status === 'new') stripeDetail = { status: 'returning', plan: '' }; // on the roster before, not active now
   return stripeDetail;

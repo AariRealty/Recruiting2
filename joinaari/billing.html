@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Save your card · Aari Realty</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#141210;--off:#f5f0e8;--mid:#6b6b6b;--lite:#9b948a;--border:#e7e4dc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',sans-serif;background:#f2f1ef;color:var(--ink);-webkit-font-smoothing:antialiased}
+.top{background:var(--ink);color:#fff;padding:18px 24px}
+.top .b{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600}
+.top .s{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:#a59d90;font-weight:600;margin-top:2px}
+.wrap{max-width:560px;margin:28px auto;padding:0 16px}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:30px 26px}
+.eye{font-size:10px;letter-spacing:2.2px;text-transform:uppercase;color:#b0a06a;font-weight:700}
+h1{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:600;line-height:1.05;margin:10px 0 0}
+h1 em{font-weight:500}
+.kick{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:#8a7f6a;margin-top:8px}
+.plan{margin:22px 0 0;background:var(--off);border-radius:12px;padding:16px 18px;font-size:13px}
+.plan .hd{margin-bottom:6px}
+.plan>div:not(.hd){display:flex;justify-content:space-between;gap:14px;line-height:1.45;padding:5px 0;border-top:1px solid #ebe5d8}
+.plan .l{color:#8a857c;flex:0 0 auto}
+.plan .v{text-align:right}
+.plan .hd{font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8a7f6a;font-weight:700}
+#pay{margin-top:22px}
+#stripe-el{min-height:48px;margin-top:10px}
+button{margin-top:20px;width:100%;background:var(--ink);color:#fff;border:0;border-radius:50px;padding:15px;font:700 12px 'Montserrat';letter-spacing:1.3px;text-transform:uppercase;cursor:pointer}
+button:disabled{opacity:.5;cursor:default}
+.fine{font-size:11.5px;color:var(--lite);line-height:1.55;margin-top:14px}
+.msg{font-size:13px;margin-top:12px;display:none}
+.mock{border:1px dashed var(--border);border-radius:8px;padding:14px;color:var(--lite);font-size:13px}
+.done h1{margin-top:6px}
+</style>
+</head>
+<body>
+<div class="top"><div class="b">Aari Realty</div><div class="s">Florida Licensed Brokerage</div></div>
+<div class="wrap"><div class="card" id="card">
+  <div class="eye">One last step</div>
+  <h1 id="hd">Loading your plan&hellip;</h1>
+  <div class="kick" id="kick"></div>
+  <div id="body"></div>
+</div>
+<p class="fine" style="text-align:center">Aari Realty LLC &middot; License CQ1071216 &middot; Fees are set by Exhibit A and Manual Section 68.1 of your agreement.</p>
+</div>
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+(function(){
+  var SB='https://fnlrgmuvtgwzjsihqxcn.supabase.co', ANON='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZubHJnbXV2dGd3empzaWhxeGNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgzODUxNDMsImV4cCI6MjA5Mzk2MTE0M30.C2-9M_OBuDLDDzr6g3DqisZ9OPDoFoKY7uQb7EsgG_Y', PK='pk_live_51Qo5qRHTQU4zpF23CsDFS2qsFgJ7pP32si1zp53ABcwGGHWtWooZZZ4yMAfp5X8rLA91QdIRno1EjravY4YzNubU00LLRdoYNp';
+  var PLANS={'75_25':{name:'Mentorship Path 75/25',fee:'$59',checkout:'Aari Mentorship 75/25'},'85_15':{name:'Aari Growth 85/15',fee:'$79',checkout:'Aari Growth 85/15'},'100_max':{name:'Aari Max 100%',fee:'$99',checkout:'Aari Max 100%'}};
+  var q=new URLSearchParams(location.search), token=q.get('t')||'', preview=q.get('preview')==='1';
+  var hd=document.getElementById('hd'), kick=document.getElementById('kick'), body=document.getElementById('body');
+  function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function todayFL(){return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});}
+  function fmt(d){return d.toLocaleDateString('en-US',{timeZone:'UTC',month:'long',day:'numeric',year:'numeric'});}
+  function firstNext(){var t=todayFL();return new Date(Date.UTC(+t.slice(0,4),+t.slice(5,7),1,12));}
+  function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),md=s.slice(5);if((y+'-'+md)<t)y++;return new Date(Date.UTC(y,+md.slice(0,2),1,12));}
+  function fail(t){hd.textContent='This link is not active.';kick.textContent='';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d">'+esc(t)+' Questions? Email join@aarirealty.com.</p>';}
+  function done(first){document.getElementById('card').classList.add('done');document.querySelector('.eye').textContent='All set';hd.innerHTML='You&rsquo;re all set, <em>'+esc(first)+'</em>.';kick.textContent='Card saved. Nothing was charged today.';body.innerHTML='<p class="fine" style="font-size:14px;color:#4a453d;margin-top:16px">Your plan fee runs on its own from here. You can close this page.</p>';}
+  async function load(){
+    var inv;
+    if(preview){inv={email:'preview@example.com',full_name:'Alejandro Paredes',plan:'75_25',start_date:'2026-01-23',card_saved:false};}
+    else{
+      if(!/^[0-9a-f-]{36}$/i.test(token)) return fail('The link is incomplete.');
+      try{var r=await fetch(SB+'/rest/v1/rpc/get_billing_invite',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({p_token:token})});var rows=await r.json();inv=rows&&rows[0];}catch(e){}
+      if(!inv) return fail('It may have expired or already been used.');
+    }
+    var first=String(inv.full_name||'').split(/\s+/)[0];
+    if(inv.card_saved) return done(first);
+    var p=PLANS[inv.plan]; if(!p) return fail('Your plan is not set yet. Your broker will reach out.');
+    var eo=eoNext(inv.start_date);
+    hd.innerHTML='Save your card, <em>'+esc(first)+'</em>.';
+    kick.textContent='Two minutes. Nothing is charged today.';
+    body.innerHTML='<div class="plan"><div class="hd">Your plan</div>'
+      +'<div><span class="l">Plan</span><span class="v">'+esc(p.name)+'</span></div>'
+      +'<div><span class="l">Monthly plan fee</span><span class="v">'+p.fee+' a month<br>first charge '+fmt(firstNext())+'</span></div>'
+      +'<div><span class="l">E&amp;O + Compliance Fee</span><span class="v">renews '+(eo?fmt(eo):'on your anniversary')+'</span></div>'
+      +'<div><span class="l">Charged today</span><span class="v"><b>$0.00</b></span></div></div>'
+      +'<div id="pay"><div class="hd" style="font-size:9.5px;letter-spacing:1.8px;text-transform:uppercase;color:#8a7f6a;font-weight:700">Card on file</div><div id="stripe-el"></div></div>'
+      +'<button id="save">Save my card</button><div class="msg" id="msg"></div>'
+      +'<p class="fine">By saving your card you authorize Aari Realty LLC to charge it for your Monthly Brokerage Fee on the 1st of each month and your E&amp;O + Compliance Fee each year, as your signed agreement states. Card payments only.</p>';
+    var btn=document.getElementById('save'), msg=document.getElementById('msg');
+    if(preview){document.getElementById('stripe-el').innerHTML='<div class="mock">Card number &nbsp; MM / YY &nbsp; CVC &nbsp; ZIP<br><small>(secure Stripe card box appears here)</small></div>';btn.onclick=function(){done(first);};return;}
+    var nm=String(inv.full_name||'').trim().split(/\s+/);
+    var resp=await fetch('/api/create-payment-intent',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({first_name:nm[0]||'Agent',last_name:nm.slice(1).join(' ')||nm[0]||'Agent',email:inv.email,phone:'',plan_name:p.checkout,coupon_code:'',affiliation_status:'current'})});
+    var res=await resp.json().catch(function(){return {};});
+    if(!resp.ok||res.mode!=='setup'){return fail('We could not match you to the current roster.');}
+    var stripe=Stripe(PK), els=stripe.elements({clientSecret:res.client_secret,appearance:{theme:'stripe',variables:{fontFamily:"'Montserrat',sans-serif",colorPrimary:'#141210',borderRadius:'6px'}}});
+    var pe=els.create('payment',{layout:'tabs'}); pe.mount('#stripe-el');
+    btn.onclick=async function(){
+      btn.disabled=true; btn.textContent='Saving'; msg.style.display='none';
+      var out=await stripe.confirmSetup({elements:els,confirmParams:{return_url:location.href},redirect:'if_required'});
+      if(out.error){msg.textContent=out.error.message;msg.style.color='#c0392b';msg.style.display='block';btn.disabled=false;btn.textContent='Save my card';return;}
+      var si=out.setupIntent||{};
+      if(si.status!=='succeeded'){msg.textContent='Your card is still being verified. We email you once it clears.';msg.style.color='#141210';msg.style.display='block';return;}
+      await fetch('/api/finalize-join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:inv.email,name:inv.full_name,plan:p.checkout,payment_id:si.id,affiliation_status:'current'})}).catch(function(){});
+      await fetch(SB+'/rest/v1/rpc/mark_billing_invite_saved',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({p_token:token})}).catch(function(){});
+      done(first);
+    };
+  }
+  load();
+})();
+</script>
+</body>
+</html>

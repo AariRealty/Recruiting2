@@ -119,7 +119,9 @@ module.exports = async function handler(req, res) {
     if (rosterCurrent) affiliation = 'current';
     if (detected === 'returning' && affiliation !== 'returning') { out.warnings.push('affiliation set to returning from billing history'); affiliation = 'returning'; }
     out.affiliation = affiliation;
-    const alreadyBilled = !rosterCurrent && (detected === 'current' || detected === 'review');
+    const feeExempt = !!(rosterCurrent && detail.feeExempt);
+    if (feeExempt) out.warnings.push('Agent is marked fee exempt in the Hub: no subscriptions created');
+    const alreadyBilled = feeExempt || (!rosterCurrent && (detected === 'current' || detected === 'review'));
     if (alreadyBilled) {
       out.warnings.push('Agent already has a live plan subscription in Stripe: no new subscriptions created; broker to review');
       out.affiliation = 'current';
