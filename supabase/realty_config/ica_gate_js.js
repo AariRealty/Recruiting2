@@ -111,7 +111,9 @@
     /* The one case that stays a hard block. A first agreement is not the same
        as an update to one already signed: there is no earlier version in force
        to work under. agreement_status reports never_signed for exactly that. */
-    var canDismiss = st.reason !== 'never_signed';
+    /* Decision 106, 12 Oct 2026: no skipping. Every agent signs the current
+       version before the hub opens, first agreement or update alike. */
+    var canDismiss = false;
     var head = st.reason === 'version_update'
       ? 'Your agreement has been updated'
       : 'Sign your Independent Contractor Agreement';
@@ -157,7 +159,7 @@
       + '<div class="ft"><div id="aariGateBtns">'
       + (canDismiss ? '<button id="aariGateLater">Continue to the hub</button>' : '')
       + '<button id="aariGateOut">Sign out</button><button class="p" id="aariGateGo">Sign agreement</button></div>'
-      + (canDismiss ? '' : '<div class="blocked" style="margin-top:12px">This is your first Independent Contractor Agreement with Aari Realty, so it has to be signed before the hub opens. An update to an agreement you have already signed can wait. A first one cannot.</div>')
+      + '<div class="blocked" style="margin-top:12px">Your hub opens as soon as you sign. Signing the current agreement comes first.</div>'
       + '</div>'
       + '</div></div>');
     document.body.appendChild(g);
