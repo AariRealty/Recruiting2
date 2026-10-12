@@ -1,6 +1,6 @@
 const Stripe = require('stripe');
 const { computePrice, PROMO_RULES, checkPromoEligibility } = require('./_pricing');
-const { lookupAffiliation } = require('./_affiliation');
+const { lookupAffiliationDetail } = require('./_affiliation');
 
 module.exports = async function handler(req, res) {
   const __allowedOrigins = ['https://joinaari.com', 'https://joinaari.vercel.app'];
@@ -33,15 +33,18 @@ module.exports = async function handler(req, res) {
       return res.status(400).json({ error: 'Invalid plan selection', detail: pricing.error });
     }
 
-    if (pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
+    // Decision #91: an agent active on the Hub roster (or billed in Stripe) is current. Nothing is charged today;
+    // the card is saved for the monthly plan fee from the 1st of next month (Manual 68.1, no waived month).
+    var affDetail = null;
+    try { affDetail = await lookupAffiliationDetail(Stripe(process.env.STRIPE_SECRET_KEY), email); } catch (e) { console.warn('[create-payment-intent] affiliation lookup failed:', e && e.message); }
+    var isCurrent = !!(affDetail && affDetail.status === 'current');
+
+    if (!isCurrent && pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
       var elig = await checkPromoEligibility(pricing.couponApplied, email, license_number);
       if (!elig.ok) return res.status(elig.status).json({ error: elig.error, message: elig.message });
       // Exhibit A 41.3: the offer is for Associates new to Aari Realty. Billing history decides (decision #75).
       if (String(affiliation_status || '').toLowerCase() === 'returning') return res.status(403).json({ error: 'promo_not_eligible', message: 'This offer is for agents new to Aari Realty. Remove the code to continue.' });
-      try {
-        var aff = await lookupAffiliation(Stripe(process.env.STRIPE_SECRET_KEY), email);
-        if (aff !== 'new') return res.status(403).json({ error: 'promo_not_eligible', message: 'This offer is for agents new to Aari Realty. Remove the code to continue.' });
-      } catch (e) { console.warn('[create-payment-intent] affiliation lookup failed:', e && e.message); }
+      if (affDetail && affDetail.status !== 'new') return res.status(403).json({ error: 'promo_not_eligible', message: 'This offer is for agents new to Aari Realty. Remove the code to continue.' });
     }
 
     // Loud (non-fatal) signal if the browser's number disagrees with ours.
@@ -78,7 +81,8 @@ module.exports = async function handler(req, res) {
 
     // Nothing due today (promo covers the full amount): save the card for
     // recurring fees with a SetupIntent instead of charging.
-    if (pricing.totalDueToday <= 0) {
+    if (isCurrent) { intentMeta.affiliation = 'current'; intentMeta.server_total = '0'; intentMeta.coupon = ''; }
+    if (isCurrent || pricing.totalDueToday <= 0) {
       const setupIntent = await stripe.setupIntents.create({
         customer: customer.id,
         usage: 'off_session',
@@ -91,7 +95,8 @@ module.exports = async function handler(req, res) {
         client_secret: setupIntent.client_secret,
         customer_id: customer.id,
         amount: 0,
-        discount: pricing.discount,
+        current: isCurrent,
+        discount: isCurrent ? 0 : pricing.discount,
         monthly: pricing.monthlyAmount
       });
     }

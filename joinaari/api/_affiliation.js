@@ -22,9 +22,34 @@ function planItem(sub) {
   return (sub.metadata || {}).kind === 'agent_membership_monthly' ? {} : null;
 }
 
+// The Hub roster (realty_members) is the source of truth for who is with Aari today (decision #91).
+async function rosterStatus(email) {
+  try {
+    const { SUPABASE_ANON_PUBLIC } = require('./_pricing');
+    const r = await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/aari_member_status', {
+      method: 'POST',
+      headers: { 'apikey': SUPABASE_ANON_PUBLIC, 'Authorization': 'Bearer ' + SUPABASE_ANON_PUBLIC, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_email: email })
+    });
+    const rows = await r.json();
+    return (Array.isArray(rows) && rows[0]) ? rows[0] : null;
+  } catch (e) { return null; }
+}
+
 async function lookupAffiliationDetail(stripe, email) {
   const clean = String(email || '').trim().toLowerCase();
   if (!clean) return { status: 'new', plan: '' };
+  const roster = await rosterStatus(clean);
+  let stripeDetail = await lookupStripe(stripe, clean);
+  if (roster && roster.status === 'active') {
+    // On the roster: current. If Stripe already bills a plan, nothing new is created (source stripe).
+    return { status: 'current', plan: stripeDetail.plan || '', source: stripeDetail.status === 'current' || stripeDetail.status === 'review' ? 'stripe' : 'roster', startDate: roster.start_date || '' };
+  }
+  if (roster && stripeDetail.status === 'new') stripeDetail = { status: 'returning', plan: '' }; // on the roster before, not active now
+  return stripeDetail;
+}
+
+async function lookupStripe(stripe, clean) {
   const customers = await stripe.customers.list({ email: clean, limit: 10 });
   let hadPlan = false;
   for (const c of (customers.data || [])) {

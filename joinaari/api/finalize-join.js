@@ -1,6 +1,6 @@
 const Stripe = require('stripe');
 const { PROMO_RULES, SUPABASE_ANON_PUBLIC } = require('./_pricing');
-const { lookupAffiliation } = require('./_affiliation');
+const { lookupAffiliationDetail } = require('./_affiliation');
 
 // Live recurring prices (Aari Realty, acct_1Qo5qRHTQU4zpF23)
 const PLAN_MAP = {
@@ -26,6 +26,20 @@ function firstOfMonthAfterStartTs(startISO) {
   const t = new Date(today + 'T12:00:00Z'); const cap = new Date(Date.UTC(t.getUTCFullYear() + 1, t.getUTCMonth(), t.getUTCDate(), 12)).toISOString().slice(0, 10);
   if (start > cap) start = cap;
   const y = Number(start.slice(0, 4)), m = Number(start.slice(5, 7));
+  return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
+}
+// Current Associates (decision #91): the monthly fee starts the 1st of next month (no waived month, Manual 68.1).
+function firstOfNextMonthTs() {
+  const t = todayFL(); const y = Number(t.slice(0, 4)), m = Number(t.slice(5, 7));
+  return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
+}
+// E&O renews on the 1st of the month after the next Onboarding Anniversary of the roster start date.
+function eoAfterNextAnniversaryTs(startISO) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(String(startISO || ''))) return null;
+  const t = todayFL(); const ty = Number(t.slice(0, 4));
+  const md = String(startISO).slice(5);
+  let y = ty; if ((y + '-' + md) < t) y = ty + 1;
+  const m = Number(md.slice(0, 2));
   return Math.floor(Date.UTC(y, m, 1, 12, 0, 0) / 1000);
 }
 function firstOfNextMonthNextYearTs() {
@@ -99,24 +113,27 @@ module.exports = async function handler(req, res) {
     }
 
     // 2b) Billing history decides affiliation, not the form (decision #75). Runs before any new subscription exists.
-    let detected = null;
-    try { detected = await lookupAffiliation(stripe, email); } catch (e) { out.warnings.push('affiliation_lookup: ' + String(e.message || e).slice(0, 120)); }
+    let detected = null, detail = null;
+    try { detail = await lookupAffiliationDetail(stripe, email); detected = detail.status; } catch (e) { out.warnings.push('affiliation_lookup: ' + String(e.message || e).slice(0, 120)); }
+    const rosterCurrent = !!(detail && detail.status === 'current' && detail.source === 'roster');
+    if (rosterCurrent) affiliation = 'current';
     if (detected === 'returning' && affiliation !== 'returning') { out.warnings.push('affiliation set to returning from billing history'); affiliation = 'returning'; }
     out.affiliation = affiliation;
-    if (detected === 'current' || detected === 'review') {
-      out.warnings.push('CURRENT AGENT went through checkout: no new subscriptions created; broker to review the payment');
+    const alreadyBilled = !rosterCurrent && (detected === 'current' || detected === 'review');
+    if (alreadyBilled) {
+      out.warnings.push('Agent already has a live plan subscription in Stripe: no new subscriptions created; broker to review');
       out.affiliation = 'current';
     }
 
     // 3) Monthly plan subscription, first charge on the 1st of the month after the Start Date (the Start Date month is free)
-    if (customer && pmId && planInfo && detected !== 'current' && detected !== 'review') {
+    if (customer && pmId && planInfo && !alreadyBilled) {
       try {
         // Manual 68.1: the Start Date month is waived only on a first affiliation. A returning Associate
         // pays it with the first Monthly Brokerage Fee on the 1st after the Start Date, never at signup (decision #78).
         const monthly = await stripe.subscriptions.create({
           customer: customer.id,
           items: [{ price: planInfo.price }],
-          trial_end: firstOfMonthAfterStartTs(startDate),
+          trial_end: rosterCurrent ? firstOfNextMonthTs() : firstOfMonthAfterStartTs(startDate),
           proration_behavior: 'none',
           default_payment_method: pmId,
           metadata: { kind: 'agent_membership_monthly', email: email, full_name: fullName, plan: planInfo.portal, start_date: startDate || '', affiliation: affiliation }
@@ -138,11 +155,13 @@ module.exports = async function handler(req, res) {
       } catch (e) { out.warnings.push('monthly_sub: ' + String(e.message || e).slice(0, 140)); }
 
       // 4) Annual E&O subscription, first renewal one year out (year one collected today)
-      try {
+      const eoTrial = rosterCurrent ? eoAfterNextAnniversaryTs(detail.startDate) : firstOfNextMonthNextYearTs();
+      if (!eoTrial) out.warnings.push('E&O renewal not scheduled: roster start date MISSING DATA');
+      if (eoTrial) try {
         const eo = await stripe.subscriptions.create({
           customer: customer.id,
           items: [{ price: EO_PRICE }],
-          trial_end: firstOfNextMonthNextYearTs(),
+          trial_end: eoTrial,
           proration_behavior: 'none',
           default_payment_method: pmId,
           metadata: { kind: 'agent_eo_annual', email: email, full_name: fullName }
