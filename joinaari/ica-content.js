@@ -37,7 +37,7 @@ window.ICA_CONTENT = {
 <p><strong>&ldquo;Broker&rdquo;</strong>: The licensed Florida real estate broker of record of the Company, acting on behalf of the Company.</p>
 <p><strong>&ldquo;Company&rdquo;</strong>: Aari Realty LLC, a Florida limited liability company.</p>
 <p><strong>&ldquo;Business Day&rdquo;</strong>: Any day other than Saturday, Sunday, or a federal holiday observed by the Company.</p>
-<p><strong>&ldquo;Onboarding Anniversary&rdquo;</strong>: Each yearly anniversary of the date the Associate first affiliated with the Company.</p>
+<p><strong>&ldquo;Onboarding Anniversary&rdquo;</strong>: Each yearly anniversary of the date the Associate paid the E&amp;O + Compliance Fee for the Associate&rsquo;s current affiliation with the Company.</p>
 <p><strong>&ldquo;Incorporated Documents&rdquo;</strong>: All documents referenced in Section 18 and incorporated by reference into this Agreement, including the Commission Structure Addendum, Exhibit A: Commission Fee Schedule, Operations &amp; Compliance Manual, the Acknowledgments in Sections 86 through 91, and all policies and addenda.</p>
 <p><strong>&ldquo;Notice&rdquo;</strong>: Written communication delivered by any method set forth in Section 18. Notice is deemed delivered immediately upon sending or posting.</p>
 <p><strong>&ldquo;Written&rdquo; or &ldquo;Writing&rdquo;</strong>: Includes email, electronic communications, digitally executed documents, and physical documents bearing original or electronic signatures.</p>
