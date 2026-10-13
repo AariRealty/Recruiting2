@@ -397,7 +397,7 @@ window.ICA_CONTENT = {
 <h2>Commission Fee Schedule: Exhibit A</h2>
 
 <p><strong>Aari Realty LLC &middot; Licensed Real Estate Brokerage</strong></p>
-<p><strong>Version 5.1 &middot; Issued October 11, 2026 &middot; Updated October 12, 2026 &middot; Effective on the date the Associate signs the ICA Version 5.1 online</strong></p>
+<p><strong>Version 5.1 &middot; Issued October 11, 2026 &middot; Updated October 13, 2026 &middot; Effective on the date the Associate signs the ICA Version 5.1 online</strong></p>
 <p>This Exhibit A is an Incorporated Document of the Independent Contractor Agreement ("ICA") between Aari Realty LLC ("Company") and the Associate. It governs commission plans, splits, fees, pricing, thresholds, and billing schedules. Section references are to the ICA Version 5.1. Where an Associate's signed agreement uses different numbering, the reference is to the provision of that agreement covering the same subject. Capitalized terms have the meanings given in the ICA. &ldquo;Exhibit Effective Date&rdquo; means the date the Associate signs the ICA Version 5.1 online.</p>
 <p><strong>Associates Affiliated Before the Exhibit Effective Date.</strong> An Associate affiliated with the Company before the Exhibit Effective Date keeps the commission plan, split, and recurring fee stated in the Associate's signed agreement until the day the Associate signs the ICA Version 5.1 online. From that day, all terms of this Exhibit apply to that Associate.</p>
 <h3 id="s-38">&sect;38. Commission Plans</h3>

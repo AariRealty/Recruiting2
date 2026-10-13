@@ -10,9 +10,7 @@ const PLAN_MAP = {
 };
 const EO_PRICE = 'price_1TrolNHTQU4zpF236LAkKbqi';
 
-const PROVISION_URL = 'https://fnlrgmuvtgwzjsihqxcn.supabase.co/functions/v1/realty-agent-provision';
 const SUPABASE_ANON = SUPABASE_ANON_PUBLIC;
-const PROVISION_TOKEN = 'aari-provision-b7Q2xM9';
 
 // Today's date in Florida (America/New_York) as YYYY-MM-DD.
 function todayFL() { return new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' }); }
@@ -251,15 +249,7 @@ module.exports = async function handler(req, res) {
       }
     } catch (e) { out.warnings.push('promo_record: ' + String(e.message || e).slice(0, 140)); }
 
-    // 5) Create the agent's Agent Hub portal account (temp password + welcome email). Idempotent by email.
-    try {
-      const r = await fetch(PROVISION_URL, {
-        method: 'POST',
-        headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: PROVISION_TOKEN, email: email, full_name: fullName, license_number: license, plan: planInfo ? planInfo.portal : '', phone: phone })
-      });
-      out.account = await r.json().catch(function () { return { ok: false }; });
-    } catch (e) { out.warnings.push('provision: ' + String(e.message || e).slice(0, 140)); }
+    // 5) Hub account: created by the Broker once the license transfer shows in DBPR (the automatic provision function is disabled).
 
     return res.status(200).json(out);
   } catch (err) {

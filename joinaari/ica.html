@@ -2422,7 +2422,6 @@ function initialAllPages() {
       window._icaSigId = icaCopyData.signature_id || '';
       signBtn.style.display = 'none';
       var _aff = await aariCheckAffiliation(_agent.email);
-      // Decision 122: a current agent who owes a past fee sees it and pays it here, same as in the Hub.
       window._owedLabel = '';
       if ((_aff === 'current' || _aff === 'review') && window._icaSigId && window.retryPaymentInit) { try { await window.retryPaymentInit(); } catch (e) {} }
       var payBlock = document.getElementById('payment-block');
@@ -2546,7 +2545,7 @@ function initialAllPages() {
 
 <script>
 (function(){
-  return; // SWITCH199 banner and popup paused by the Broker, 11 Oct 2026, until checkout applies the code (Aari Handoffs, CTO).
+  return;
   var END   = new Date('2027-03-31T23:59:59-04:00');
   var NOW   = new Date();
   if (NOW >= END) return;
@@ -2625,7 +2624,6 @@ function aariApplyMentorshipRule(){
 document.addEventListener('change',function(e){ if(e.target && e.target.id==='associate-closings-select') aariApplyMentorshipRule(); });
 </script>
 <script>
-// Decision #75: billing history in Stripe decides new, returning or current. The form cannot override it.
 async function aariCheckAffiliation(email){
   var st = 'new';
   try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; window._aariBilledPlan = (j && j.plan) || ''; } catch (e) {}
@@ -2643,4 +2641,3 @@ function aariStatusNote(){ var v=(document.getElementById('associate-status')||{
 </body>
 </html>
 
-<!-- redeploy trigger -->

@@ -59,7 +59,6 @@ button:disabled{opacity:.5;cursor:default}
   function esc(x){return String(x==null?'':x).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function todayFL(){return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'});}
   function fmt(d){return d.toLocaleDateString('en-US',{timeZone:'UTC',month:'long',day:'numeric',year:'numeric'});}
-  // Decision 103: current Associates are charged on the day of the month they joined, and the E&O on their join anniversary.
   function dIn(y,m0){return new Date(Date.UTC(y,m0+1,0)).getUTCDate();}
   function firstNext(s,pt){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=(/^\d{4}-\d{2}-\d{2}$/.test(pt||'')&&pt>todayFL())?pt:todayFL(),y=+t.slice(0,4),m0=+t.slice(5,7)-1,td=+t.slice(8,10),jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0));if(d<=td){m0++;if(m0>11){m0=0;y++;}d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
   function eoNext(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s||''))return null;var t=todayFL(),y=+t.slice(0,4),m0=+s.slice(5,7)-1,jd=+s.slice(8,10),d=Math.min(jd,dIn(y,m0)),iso=function(yy,dd){return yy+'-'+String(m0+1).padStart(2,'0')+'-'+String(dd).padStart(2,'0');};if(iso(y,d)<=t){y++;d=Math.min(jd,dIn(y,m0));}return new Date(Date.UTC(y,m0,d,16));}
