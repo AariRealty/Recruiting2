@@ -117,6 +117,16 @@ module.exports = async function handler(req, res) {
         });
       } catch (e) { out.warnings.push('arrears_mark: ' + String(e.message || e).slice(0, 120)); }
     }
+    // Decision 122: same mark when the past due fee was paid on joinaari.com (keyed by the signature id).
+    else if (vmeta.kind === 'eo_arrears' && /^[0-9a-f-]{36}$/i.test(String(vmeta.sig_id || ''))) {
+      try {
+        await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/mark_arrears_collected_sig', {
+          method: 'POST',
+          headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ p_sig: vmeta.sig_id, p_payment_id: verified.id })
+        });
+      } catch (e) { out.warnings.push('arrears_mark: ' + String(e.message || e).slice(0, 120)); }
+    }
 
     // 1) Find the Stripe customer created at checkout (most recent for this email)
     let customer = null;

@@ -11,7 +11,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code, license_number, affiliation_status, invite_token } = req.body || {};
+    const { first_name, last_name, email, phone, amount, plan_name, addons, coupon_code, license_number, affiliation_status, invite_token, sig_id } = req.body || {};
 
     if (!first_name || !last_name || !email) {
       return res.status(400).json({ error: 'first_name, last_name, and email are required' });
@@ -84,18 +84,23 @@ module.exports = async function handler(req, res) {
     if (isCurrent) { intentMeta.affiliation = 'current'; intentMeta.server_total = '0'; intentMeta.coupon = ''; }
     // Decision 103a: a current agent who owes a past fee pays it now, on the same card that gets saved.
     // The amount comes only from the Hub record behind the private card link, never from the browser.
-    if (isCurrent && /^[0-9a-f-]{36}$/i.test(String(invite_token || ''))) {
+    // Decision 122: the same rule when the agent signs on joinaari.com. The key there is the signature id
+    // that only the signer receives, never the email alone. Either way the amount comes from the Hub record.
+    const UUIDRE = /^[0-9a-f-]{36}$/i;
+    const hasToken = UUIDRE.test(String(invite_token || ''));
+    const hasSig = UUIDRE.test(String(sig_id || ''));
+    if (isCurrent && (hasToken || hasSig)) {
       let owed = 0, inv = null;
       try {
         const { SUPABASE_ANON_PUBLIC } = require('./_pricing');
-        const r = await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/get_billing_invite', {
+        const r = await fetch('https://fnlrgmuvtgwzjsihqxcn.supabase.co/rest/v1/rpc/' + (hasToken ? 'get_billing_invite' : 'web_owed_for_signature'), {
           method: 'POST',
           headers: { 'apikey': SUPABASE_ANON_PUBLIC, 'Authorization': 'Bearer ' + SUPABASE_ANON_PUBLIC, 'Content-Type': 'application/json' },
-          body: JSON.stringify({ p_token: invite_token })
+          body: JSON.stringify(hasToken ? { p_token: invite_token } : { p_sig: sig_id, p_email: String(email || '').trim().toLowerCase() })
         });
         const rows = await r.json(); inv = Array.isArray(rows) ? rows[0] : null;
-      } catch (e) { console.warn('[create-payment-intent] invite lookup failed:', e && e.message); }
-      if (inv && String(inv.email || '').toLowerCase() === String(email || '').trim().toLowerCase()) owed = Number(inv.owed_cents) || 0;
+      } catch (e) { console.warn('[create-payment-intent] past due lookup failed:', e && e.message); }
+      if (inv && (hasToken ? String(inv.email || '').toLowerCase() === String(email || '').trim().toLowerCase() : true)) owed = Number(inv.owed_cents) || 0;
       if (owed >= 50) {
         const arrearsIntent = await stripe.paymentIntents.create({
           amount: owed,
@@ -104,7 +109,7 @@ module.exports = async function handler(req, res) {
           setup_future_usage: 'off_session',
           payment_method_types: ['card'],
           description: 'Aari Realty: ' + (inv.owed_label || 'past due fee'),
-          metadata: Object.assign({}, intentMeta, { kind: 'eo_arrears', server_total: String(owed / 100), invite_token: String(invite_token) })
+          metadata: Object.assign({}, intentMeta, { kind: 'eo_arrears', server_total: String(owed / 100) }, hasToken ? { invite_token: String(invite_token) } : { sig_id: String(sig_id) })
         });
         return res.status(200).json({ mode: 'payment', client_secret: arrearsIntent.client_secret, customer_id: customer.id, amount: owed / 100, current: true, owed_label: inv.owed_label || '' });
       }

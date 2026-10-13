@@ -2266,7 +2266,8 @@ function initialAllPages() {
           amount: totalDue,
           license_number: ((document.getElementById('associate-license-input')||{}).value || (document.getElementById('associate-license')||{}).value || ''), plan_name: planName,
           coupon_code: appliedCoupon ? appliedCoupon.code : '',
-          affiliation_status: (document.getElementById('associate-status')||{}).value || 'new'
+          affiliation_status: (document.getElementById('associate-status')||{}).value || 'new',
+          sig_id: window._icaSigId || ''
         })
       });
 
@@ -2280,6 +2281,7 @@ function initialAllPages() {
       currentClientSecret = result.client_secret;
       currentCustomerId = result.customer_id;
       window._payMode = result.mode || 'payment';
+      window._owedLabel = (result.current && result.mode === 'payment') ? (result.owed_label || 'past due fee') : '';
       var _dueSrv = document.getElementById('payment-due-amount');
       if (_dueSrv && typeof result.amount === 'number') _dueSrv.textContent = '$' + result.amount.toFixed(2);
       var _payBtnM = document.getElementById('pay-btn');
@@ -2340,7 +2342,7 @@ function initialAllPages() {
 
   window.retryPaymentInit = function() {
     paymentMounted = false;
-    initPaymentElement();
+    return initPaymentElement();
   };
 
   window.applyCoupon = async function() {
@@ -2413,11 +2415,18 @@ function initialAllPages() {
       window._icaPdfBase64 = icaCopyData.pdf_base64 || '';
       window._icaPdfFilename = icaCopyData.pdf_filename || '';
       window._icaAlreadySigned = true;
+      window._icaSigId = icaCopyData.signature_id || '';
       signBtn.style.display = 'none';
       var _aff = await aariCheckAffiliation(_agent.email);
+      // Decision 122: a current agent who owes a past fee sees it and pays it here, same as in the Hub.
+      window._owedLabel = '';
+      if ((_aff === 'current' || _aff === 'review') && window._icaSigId && window.retryPaymentInit) { try { await window.retryPaymentInit(); } catch (e) {} }
       var payBlock = document.getElementById('payment-block');
       if (payBlock) { payBlock.style.display = 'block'; }
-      if (signMsg) { signMsg.textContent = (_aff === 'current' || _aff === 'review') ? 'Signed. You are already with Aari Realty, so nothing is charged today. Save your card below; your monthly plan fee is charged on the day of the month you first joined Aari.' : 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
+      var _curMsg = window._owedLabel
+        ? 'Signed. You are already with Aari Realty. Due today: ' + ((document.getElementById('payment-due-amount') || {}).textContent || '') + ' for your ' + window._owedLabel + '. Pay below and the same card is saved; your monthly plan fee is charged on the day of the month you first joined Aari.'
+        : 'Signed. You are already with Aari Realty, so nothing is charged today. Save your card below; your monthly plan fee is charged on the day of the month you first joined Aari.';
+      if (signMsg) { signMsg.textContent = (_aff === 'current' || _aff === 'review') ? _curMsg : 'Signed. Complete payment below to finish joining.'; signMsg.style.color = '#0a0a0a'; signMsg.style.display = 'block'; }
     } catch (e) {
       signBtn.disabled = false;
       signBtn.textContent = 'Sign Agreement';
@@ -2618,7 +2627,7 @@ async function aariCheckAffiliation(email){
   try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; window._aariBilledPlan = (j && j.plan) || ''; } catch (e) {}
   var sel = document.getElementById('associate-status'); var n = document.getElementById('associate-status-note');
   if (st === 'returning' && sel) { sel.value = 'returning'; sel.disabled = true; aariStatusNote(); }
-  else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'You are already with Aari Realty. You sign the new version here and nothing is charged today. You save your card, and your monthly plan fee is charged on the day of the month you first joined Aari (Manual Section 68.1).'; n.style.display = 'block'; }
+  else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'You are already with Aari Realty. You sign the new version here and nothing is charged today unless a fee is already past due. You save your card, and your monthly plan fee is charged on the day of the month you first joined Aari (Manual Section 68.1).'; n.style.display = 'block'; }
   if (st !== 'new' && window.aariHidePromo) window.aariHidePromo();
   return st;
 }
