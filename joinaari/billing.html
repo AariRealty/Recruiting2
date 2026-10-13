@@ -102,7 +102,7 @@ button:disabled{opacity:.5;cursor:default}
       var out=paying?await stripe.confirmPayment({elements:els,confirmParams:{return_url:location.href},redirect:'if_required'}):await stripe.confirmSetup({elements:els,confirmParams:{return_url:location.href},redirect:'if_required'});
       if(out.error){msg.textContent=out.error.message;msg.style.color='#c0392b';msg.style.display='block';btn.disabled=false;btn.textContent=label;return;}
       var si=(paying?out.paymentIntent:out.setupIntent)||{};
-      if(si.status!=='succeeded'){msg.textContent='Your card is still being verified. We email you once it clears.';msg.style.color='#141210';msg.style.display='block';return;}
+      if(si.status!=='succeeded'){msg.textContent='Your card is still being verified. A member of the Aari team will confirm with you once it clears.';msg.style.color='#141210';msg.style.display='block';return;}
       await fetch('/api/finalize-join',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:inv.email,name:inv.full_name,plan:p.checkout,payment_id:si.id,affiliation_status:'current'})}).catch(function(){});
       await fetch(SB+'/rest/v1/rpc/mark_billing_invite_saved',{method:'POST',headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},body:JSON.stringify({p_token:token})}).catch(function(){});
       done(first,paying?res.amount:0);

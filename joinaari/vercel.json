@@ -30,6 +30,11 @@
       "source": "/.checks/:path*",
       "destination": "/",
       "permanent": false
+    },
+    {
+      "source": "/api/_:path*",
+      "destination": "/",
+      "permanent": false
     }
   ]
 }
