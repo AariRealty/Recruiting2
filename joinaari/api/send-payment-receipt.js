@@ -67,7 +67,8 @@ module.exports = async function handler(req, res) {
       '</td></tr>' +
       '<tr><td style="padding:24px 30px 4px;">' +
       '<div style="font-size:10px;letter-spacing:2.5px;color:#9a9a92;text-transform:uppercase;font-weight:600;">Payment received</div>' +
-      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">You are in, <em>' + esc(firstName) + '</em>.</div>' +
+      '<div style="font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-weight:500;font-size:38px;color:#111111;line-height:1.05;margin:10px 0 14px;">Payment received, <em>' + esc(firstName) + '</em>.</div>' +
+      '<div style="font-size:14px;color:#111111;line-height:1.5;margin:0 0 6px;">Your broker confirms your affiliation once your transfer shows in DBPR.</div>' +
       '</td></tr>' +
       '<tr><td style="padding:0 30px 8px;">' +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0">' +
