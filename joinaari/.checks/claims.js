@@ -22,5 +22,10 @@ for (const f of files) {
   const lines = fs.readFileSync(f, 'utf8').split('\n');
   lines.forEach((l, i) => banned.forEach(re => { if (re.test(l)) bad.push(path.relative(root, f) + ':' + (i + 1) + '  ' + re); }));
 }
+// Decision 120: preview and sample data never use a real agent's name.
+const agents = /(Alejandro|Alied|Eileen|Flavia|Milennys|Odalis|Roosevelt)/;
+for (const f of files) {
+  fs.readFileSync(f, 'utf8').split('\n').forEach((l, i) => { if (/preview|sample|mock/i.test(l) && agents.test(l)) bad.push(path.relative(root, f) + ':' + (i + 1) + '  real agent name in preview data'); });
+}
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
