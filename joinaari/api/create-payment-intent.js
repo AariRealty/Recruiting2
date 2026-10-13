@@ -37,7 +37,8 @@ module.exports = async function handler(req, res) {
     // the card is saved for the monthly plan fee on the day of the month the agent first joined (Manual 68.1, decision 103).
     var affDetail = null;
     try { affDetail = await lookupAffiliationDetail(Stripe(process.env.STRIPE_SECRET_KEY), email); } catch (e) { console.warn('[create-payment-intent] affiliation lookup failed:', e && e.message); }
-    var isCurrent = !!(affDetail && affDetail.status === 'current');
+    // Decision 140: a 'review' agent (live plan billing on a price not mapped to a plan) is already billed, as decided in #82: $0 today, card saved, broker reviews.
+    var isCurrent = !!(affDetail && (affDetail.status === 'current' || affDetail.status === 'review'));
 
     if (!isCurrent && pricing.couponApplied && PROMO_RULES[pricing.couponApplied]) {
       var elig = await checkPromoEligibility(pricing.couponApplied, email, license_number);
