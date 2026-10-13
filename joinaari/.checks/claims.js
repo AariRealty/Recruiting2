@@ -30,5 +30,7 @@ const agents = /(Alejandro|Alied|Eileen|Flavia|Milennys|Odalis|Roosevelt)/;
 for (const f of files) {
   fs.readFileSync(f, 'utf8').split('\n').forEach((l, i) => { if (/preview|sample|mock/i.test(l) && agents.test(l)) bad.push(path.relative(root, f) + ':' + (i + 1) + '  real agent name in preview data'); });
 }
+// Decision 157: no signature image may sit in the public site.
+for (const n of fs.readdirSync(root)) if (/signature/i.test(n) && /\.(png|jpe?g|gif|svg|webp)$/i.test(n)) bad.push(n + '  signature image in public site (decision 157)');
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');

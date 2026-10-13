@@ -1201,6 +1201,6 @@ window.ICA_CONTENT = {
 
 <p>By executing this Agreement, the Associate acknowledges that they have read, understand, and agree to all terms and conditions set forth in this Independent Contractor Agreement and all Incorporated Documents. Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
 
-<div class="broker-sig"><p><strong>For the Company: Aari Realty LLC</strong></p><p><img src="broker-signature.png" alt="Broker signature" style="height:70px"></p><p>Marlenyi L. Paredes, Broker of Record, BK3530153</p><p>The Broker&rsquo;s electronic signature is applied in advance on behalf of the Company and takes effect on the date the Associate signs this Agreement.</p></div>`,
+<div class="broker-sig"><p><strong>For the Company: Aari Realty LLC</strong></p><p style="font-family:Georgia,serif;font-style:italic;font-size:20px">/s/ Marlenyi L. Paredes</p><p>Marlenyi L. Paredes, Broker of Record, BK3530153</p><p>The Broker&rsquo;s electronic signature is applied in advance on behalf of the Company and takes effect on the date the Associate signs this Agreement.</p></div>`,
 
 };
