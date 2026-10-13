@@ -13,7 +13,9 @@ const banned = [
   /11 monthly fees/i,
   /99\s*\*\s*11/,
   /keep 100% at/i,
-  /Keep up to 100%\.</i
+  /Keep up to 100%\.</i,
+  /100% yours/i,
+  /100%(<br>|\s)+Commission</i,
 ];
 const files = fs.readdirSync(root).filter(f => /\.(html|js)$/.test(f)).map(f => path.join(root, f))
   .concat(fs.readdirSync(path.join(root, 'api')).filter(f => f.endsWith('.js')).map(f => path.join(root, 'api', f)));
