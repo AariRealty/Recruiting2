@@ -1,5 +1,5 @@
 {
-  "buildCommand": "node .checks/claims.js",
+  "buildCommand": "node .checks/claims.js && node .checks/fees.js",
   "outputDirectory": ".",
   "framework": null,
   "functions": {
