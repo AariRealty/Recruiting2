@@ -39,5 +39,9 @@ for (const n of fs.readdirSync(root)) if (/signature/i.test(n) && /\.(png|jpe?g|
   if (dates.size !== 1) bad.push('ICA date label differs across surfaces: ' + [...dates].join(' / ') + ' (decision 161)'); }
 // Decision 172: newer agents start on Mentorship, so no "no tiers", "nothing to unlock" or "yours from day one" claims.
 for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/nothing to unlock|yours from day one|\bno tiers\b/i.test(t)) bad.push(path.relative(root, f) + '  plan claim conflicts with the Mentorship start rule (decision 172)'); }
+// Decisions 187 to 189: no outcome promises or personal promises in recruiting copy and chatbot.
+for (const f of files) { const t = fs.readFileSync(f, 'utf8'); const m = t.match(/ends careers|every file (is )?reviewed by your broker|reviews every file|personally reviews your files|Text Marlenyi directly|never have a compliance headache/i); if (m) bad.push(path.relative(root, f) + '  ' + m[0] + ' (decisions 187 to 189)'); }
+// Decision 190: the chatbot E&O answer keeps the Personal Transactions exclusion.
+for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/How does E&O insurance work/.test(t) && !/Personal Transactions are not covered/.test(t)) bad.push(path.relative(root, f) + '  E&O answer missing Personal Transactions exclusion (decision 190)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
