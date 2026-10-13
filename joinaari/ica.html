@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
     <div class="ica-section ica-substep" id="substep-1e" style="display:none;text-align:center;">
       <div class="ica-section-title">You&rsquo;re Closer Than You Think</div>
       <p class="ica-text" style="margin-bottom:8px;font-size:16px;line-height:1.7;">Most agents spend months looking for the right brokerage after getting licensed. You&rsquo;re already one step ahead.</p>
-      <p class="ica-text" style="margin-bottom:28px;line-height:1.7;">Get your license, and everything here will be waiting for you. Your plan, your tools, your broker on speed dial.</p>
+      <p class="ica-text" style="margin-bottom:28px;line-height:1.7;">Get your license and come back. Your application and the Aari team will be here.</p>
 
       <div style="margin-bottom:32px;">
         <p style="font-family:'Lato',sans-serif;font-size:15px;color:rgba(10,10,10,0.7);margin-bottom:16px;font-weight:700;">Got questions? Don&rsquo;t wait. Text the Aari team.</p>
@@ -1075,7 +1075,7 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
 
     <!-- UNLICENSED BANNER -->
     <div class="ica-top-banner" id="unlicensed-banner" style="display:none;">
-      <a href="https://calendly.com/join-aarirealty/30min" target="_blank" rel="noopener">Meet Your Future Broker</a>
+      <a href="https://calendly.com/join-aarirealty/30min" target="_blank" rel="noopener">Meet the Broker</a>
       <a href="https://wa.me/12396881770?text=Hi%20Aari%20team!" target="_blank" rel="noopener" class="wa-btn">Text the Aari team</a>
     </div>
 
@@ -1109,7 +1109,7 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
       <div id="step2-unlicensed-cta" style="display:none;margin-top:20px;">
         <p class="ica-text" style="margin-bottom:12px;">Ready to get started? Get your license and come back to sign.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
-          <a href="https://calendly.com/join-aarirealty/30min" target="_blank" rel="noopener" class="ica-nav-btn primary" style="text-decoration:none;">Meet Your Future Broker</a>
+          <a href="https://calendly.com/join-aarirealty/30min" target="_blank" rel="noopener" class="ica-nav-btn primary" style="text-decoration:none;">Meet the Broker</a>
           <a href="https://wa.me/12396881770?text=Hi%20Aari%20team!" target="_blank" rel="noopener" class="ica-nav-btn" style="text-decoration:none;background:#25D366;color:#fff;border-color:#25D366;">Text the Aari team</a>
         </div>
       </div>
@@ -1210,7 +1210,7 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
         <p style="font-family:'Lato',sans-serif;font-size:13.5px;color:#2a2620;line-height:1.55;margin:16px 0 20px;text-align:left;background:#f5f1e8;border-left:3px solid #b0a06a;border-radius:6px;padding:11px 14px">Today this card pays the total due. It is then saved and used for your Monthly Brokerage Fee and your yearly E&amp;O + Compliance Fee, as Exhibit A and Manual Section 68 state. To change it, contact the Broker.</p>
 
         <div class="ica-nav-row" style="margin-top:16px;justify-content:center;">
-          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:240px;">Pay &amp; Join Aari Realty &rarr;</button>
+          <button type="button" class="ica-nav-btn primary" id="pay-btn" onclick="processPayment()" style="min-width:240px;">Sign and pay &rarr;</button>
         </div>
         <p id="form-msg" style="display:none;font-size:11px;font-weight:500;margin-top:16px;text-align:center"></p>
         </div><!-- end payment-block -->
@@ -2288,7 +2288,7 @@ function initialAllPages() {
       var _dueSrv = document.getElementById('payment-due-amount');
       if (_dueSrv && typeof result.amount === 'number') _dueSrv.textContent = '$' + result.amount.toFixed(2);
       var _payBtnM = document.getElementById('pay-btn');
-      if (_payBtnM) _payBtnM.innerHTML = window._payMode === 'setup' ? 'Save Card &amp; Join Aari Realty &rarr;' : 'Pay &amp; Join Aari Realty &rarr;';
+      if (_payBtnM) _payBtnM.innerHTML = window._payMode === 'setup' ? 'Save Card &amp; Join Aari Realty &rarr;' : 'Sign and pay &rarr;';
 
       // Clear any previous Stripe mount
       var mountEl = document.getElementById('stripe-payment-element');
@@ -2462,7 +2462,7 @@ function initialAllPages() {
         formMsg.style.color = '#c0392b';
         formMsg.style.display = 'block';
         payBtn.disabled = false;
-        payBtn.textContent = 'Pay & Join Aari Realty \u2192';
+        payBtn.textContent = 'Sign and pay \u2192';
         return;
       }
 
@@ -2536,7 +2536,7 @@ function initialAllPages() {
       formMsg.style.color = '#c0392b';
       formMsg.style.display = 'block';
       payBtn.disabled = false;
-      payBtn.textContent = 'Pay & Join Aari Realty \u2192';
+      payBtn.textContent = 'Sign and pay \u2192';
     }
   };
 
