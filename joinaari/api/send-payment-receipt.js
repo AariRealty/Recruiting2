@@ -22,13 +22,16 @@ module.exports = async function handler(req, res) {
     const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
     let actualAmount;
-    if (payment_id && String(payment_id).indexOf('seti_') === 0) {
-      actualAmount = '0.00'; // card saved, nothing charged today (SWITCH199)
-    } else if (payment_id) {
-      const pi = await stripe.paymentIntents.retrieve(payment_id);
-      actualAmount = (pi.amount / 100).toFixed(2);
+    // Decision 159: a receipt goes out only when Stripe confirms the payment or card setup succeeded.
+    if (!payment_id) return res.status(409).json({ error: 'no_payment_to_confirm' });
+    if (String(payment_id).indexOf('seti_') === 0) {
+      const si = await stripe.setupIntents.retrieve(payment_id);
+      if (si.status !== 'succeeded') return res.status(409).json({ error: 'payment_not_succeeded', status: si.status });
+      actualAmount = '0.00'; // card saved, nothing charged today
     } else {
-      actualAmount = Number(amount || 0).toFixed(2);
+      const pi = await stripe.paymentIntents.retrieve(payment_id);
+      if (pi.status !== 'succeeded') return res.status(409).json({ error: 'payment_not_succeeded', status: pi.status });
+      actualAmount = (pi.amount_received / 100).toFixed(2);
     }
 
     const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });

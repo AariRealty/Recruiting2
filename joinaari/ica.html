@@ -2502,7 +2502,7 @@ function initialAllPages() {
           })
         }).catch(function() {});
         if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', license: _v('associate-license') || 'N/A', plan: _plan, signature: _v('associate-signature') || _v('associate-name'), initials: ((document.getElementById('initials-input') || {}).value || '').trim() }) }).catch(function() {}); }
-        fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', plan: _plan, amount: _amtStr, payment_id: _payId, addons: [], monthly_amount: '' }) }).catch(function() {});
+        if (_payStatus === 'succeeded') fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', plan: _plan, amount: _amtStr, payment_id: _payId, addons: [], monthly_amount: '' }) }).catch(function() {});
         // Trigger finalize-join for recurring subscriptions + account provisioning
         fetch('/api/finalize-join', {
           method: 'POST',
