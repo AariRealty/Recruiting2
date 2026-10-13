@@ -376,30 +376,58 @@
     g.querySelector('#aariGateOut').onclick=function(){ try { client.auth.signOut().then(function(){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); }); } catch(e){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); } };
   }
 
+  /* Decision 121: fail closed. If the signing or card check cannot get a clear
+     answer (network, server error, unreadable reply), an agent's Hub stays locked
+     behind a retry screen. One silent retry first, so a blip costs nothing. The
+     broker account is never locked, so the broker can always reach the Hub.
+     401 and 403 are clear answers: the server already refuses Hub data. */
+  var BROKER_ID = '9fa206b8-45e9-46bb-ba98-79c2e8361661';
+  var tries = 0;
+  function failClosed(why, uid){
+    if (uid === BROKER_ID) return;
+    if (tries < 1) { tries++; setTimeout(boot, 2000); return; }
+    gateBroken(why);
+    if (document.getElementById('aariGate')) return;
+    var s=document.createElement('style'); s.textContent=CSS; document.head.appendChild(s);
+    var g = el('<div id="aariGate"><div id="aariGateCard">'
+      + '<div class="hd"><div class="hd-txt"><h2>We couldn\'t confirm your account.</h2><p>BEFORE YOUR HUB OPENS</p></div></div>'
+      + '<div class="bd"><p style="margin:0 0 14px">Your Hub opens once we confirm your agreement and card. This is usually a connection blip.</p>'
+      + '<div id="aariGateBtns"><button type="button" class="primary" id="aariRetry" style="background:#141210;color:#fff;border-color:#141210">Try again</button></div>'
+      + '<p style="margin:14px 0 0;font-size:12.5px;color:#6b675f">Still stuck? Call <a href="tel:+12397894701" style="color:#141210;font-weight:600">239.789.4701</a> or text <a href="sms:+12396881770" style="color:#141210;font-weight:600">239.688.1770</a>.</p></div>'
+      + '<div class="ft" style="padding:8px 20px"><button type="button" class="quiet" id="aariGateOut" style="margin:0 auto">Not you? Sign out</button></div></div></div>');
+    document.body.appendChild(g);
+    g.querySelector('#aariRetry').onclick=function(){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); };
+    g.querySelector('#aariGateOut').onclick=function(){ try { client.auth.signOut().then(function(){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); }); } catch(e){ if(window.__aariExitPreview)window.__aariExitPreview();location.reload(); } };
+  }
+
   function boot(){
+    var uid = '';
     tok().then(function(a){
       var t = a.token;
       if(!t){
-        if (a.why && a.why.indexOf('session is empty') === -1) gateBroken(a.why);
+        if (a.why && a.why.indexOf('session is empty') === -1) failClosed(a.why, '');
         return;
       }
+      try { uid = JSON.parse(atob(t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).sub || ''; } catch(e) { uid = ''; }
       return post('/realty-hub', t, { action:'agreement_status' }).then(function(r){
         var st=r.json||{};
-        if(r.status===200 && st.required===true){
+        if (r.status===401 || r.status===403) return;
+        if (r.status!==200 || typeof st.required !== 'boolean') { failClosed('agreement_status ' + r.status, uid); return; }
+        if(st.required===true){
           /* Recorded before the card paints, so a row exists even if the tab is
              closed straight away, and recorded on every load rather than once. */
           notice('shown', t).catch(function(){});
           render(st, t);
           return;
         }
-        if(r.status===200 && client.rpc){
-          return client.rpc('my_card_gate').then(function(c){
-            var tk = c && c.data;
-            if (typeof tk === 'string' && /^[0-9a-f-]{36}$/.test(tk)) lockForCard(tk);
-          });
-        }
+        if(!client.rpc){ failClosed('no rpc', uid); return; }
+        return client.rpc('my_card_gate').then(function(c){
+          if (!c || c.error) { failClosed('my_card_gate ' + ((c && c.error && c.error.message) || 'no reply'), uid); return; }
+          var tk = c.data;
+          if (typeof tk === 'string' && /^[0-9a-f-]{36}$/.test(tk)) lockForCard(tk);
+        });
       });
-    }).catch(function(){ /* never block the hub on gate failure */ });
+    }).catch(function(e){ failClosed('gate error ' + ((e && e.message) || e), uid); });
   }
 
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot);
