@@ -32,5 +32,10 @@ for (const f of files) {
 }
 // Decision 157: no signature image may sit in the public site.
 for (const n of fs.readdirSync(root)) if (/signature/i.test(n) && /\.(png|jpe?g|gif|svg|webp)$/i.test(n)) bad.push(n + '  signature image in public site (decision 157)');
+// Decision 161: the ICA is labeled by its date, never a version number, and every surface shows the same date.
+{ const ic = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'), pr = fs.readFileSync(path.join(root, 'ica-print.html'), 'utf8');
+  if (/ICA Version \d|Version \d+\.\d+ &middot;/.test(ic + pr)) bad.push('ica-content.js/ica-print.html  version number label (decision 161)');
+  const dates = new Set([...(ic + pr).matchAll(/ICA dated ([A-Z][a-z]+ \d{1,2}, \d{4})/g)].map(m => m[1]));
+  if (dates.size !== 1) bad.push('ICA date label differs across surfaces: ' + [...dates].join(' / ') + ' (decision 161)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
