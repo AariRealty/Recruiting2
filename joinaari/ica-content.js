@@ -221,7 +221,7 @@ window.ICA_CONTENT = {
 <h3 id="s-12">&sect;12. Term &amp; Termination</h3>
 
 <h4>Term</h4>
-<p>This Agreement begins on the Effective Date and continues until terminated by either party under this Section. There is no minimum term and no renewal requirement. Recurring fees are billed as set forth in Exhibit A and Section 68 of the Operations and Compliance Manual.</p>
+<p>This Agreement begins on the Effective Date and continues until terminated by either party under this Section. There is no minimum term and no renewal requirement. Recurring fee amounts are set forth in Exhibit A, and when they are billed is set forth in Section 68.1 of the Operations and Compliance Manual.</p>
 
 <h4>Termination At Will</h4>
 <p>Either party may terminate this Agreement at any time, with or without cause, upon written notice. Termination by the Company is effective immediately upon delivery of written notice. Termination by the Associate is effective thirty (30) days after the Company receives the Associate's written notice, or on an earlier date the Broker accepts in writing, and recurring fees continue through the effective date. Nothing in this Section limits the Associate's right to transfer the Associate's license at any time. If the Associate transfers the license or otherwise ends affiliation without giving thirty (30) days' written notice, the affiliation ends on that date, and the Associate owes one additional Monthly Brokerage Fee in place of the notice period, plus the Short Notice Fee set forth in Exhibit A: Commission Fee Schedule. Termination shall not affect the Company&rsquo;s right to collect any earned but unpaid fees, commissions, transaction charges, or other amounts due under this Agreement. All provisions relating to compensation, file retention, compliance, confidentiality, recordkeeping, and any obligations that by their nature are intended to survive termination shall survive termination of this Agreement.</p>
@@ -1202,6 +1202,6 @@ window.ICA_CONTENT = {
 
 <p>By executing this Agreement, the Associate acknowledges that they have read, understand, and agree to all terms and conditions set forth in this Independent Contractor Agreement and all Incorporated Documents. Electronic signatures shall have the same force and effect as original signatures under Florida&rsquo;s Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).</p>
 
-<div class="broker-sig"><p><strong>For the Company: Aari Realty LLC</strong></p><p style="font-family:Georgia,serif;font-style:italic;font-size:20px">/s/ Marlenyi L. Paredes</p><p>Marlenyi L. Paredes, Broker of Record, BK3530153</p><p>The Broker&rsquo;s electronic signature is applied in advance on behalf of the Company and takes effect on the date the Associate signs this Agreement.</p></div>`,
+<div class="broker-sig"><p><strong>For the Company: Aari Realty LLC</strong></p><p style="font-family:Georgia,serif;font-style:italic;font-size:20px">/s/ Marlenyi L. Paredes</p><p>Marlenyi L. Paredes, Broker of Record, BK3530153</p><p>The Broker&rsquo;s electronic signature is applied on behalf of the Company and takes effect on the date the Associate signs this Agreement.</p></div>`,
 
 };
