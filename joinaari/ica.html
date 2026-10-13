@@ -2149,7 +2149,7 @@ function initialAllPages() {
       if (typeof aariNeedsMentorship==='function' && aariNeedsMentorship()) { selectedPlan = 'Aari Mentorship 75/25'; }
 
       var _sdEl = document.getElementById('associate-date'); var _stat = ((document.getElementById('associate-status')||{}).value || 'new');
-      if (_stat !== 'current' && _stat !== 'review' && (!_sdEl || !_sdEl.value || _sdEl.value < aariTomorrowISO())) { alert('Please choose your Start Date: the day your license moves to Aari Realty. It can be tomorrow or later.'); if (_sdEl) _sdEl.focus(); return; }
+      if (_stat !== 'current' && _stat !== 'review' && (!_sdEl || !_sdEl.value || _sdEl.value < aariTomorrowISO())) { alert('Please choose your Start Date: the date you plan to move your license to Aari Realty. It can be tomorrow or later.'); if (_sdEl) _sdEl.focus(); return; }
       var formName = document.getElementById('associate-name').value.trim();
       var formLicense = document.getElementById('associate-license').value.trim() || 'N/A';
       var formEmail = document.getElementById('associate-email').value.trim();
