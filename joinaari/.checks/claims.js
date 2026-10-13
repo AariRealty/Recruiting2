@@ -15,6 +15,7 @@ const banned = [
   /keep 100% at/i,
   /Keep up to 100%\.</i,
   /100% yours/i,
+  /whole check/i,
   /100%(<br>|\s)+Commission</i,
 ];
 const files = fs.readdirSync(root).filter(f => /\.(html|js)$/.test(f)).map(f => path.join(root, f))
