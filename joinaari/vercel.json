@@ -24,5 +24,12 @@
       "source": "/blog/:slug",
       "destination": "/api/blog?slug=:slug"
     }
+  ],
+  "redirects": [
+    {
+      "source": "/.checks/:path*",
+      "destination": "/",
+      "permanent": false
+    }
   ]
 }

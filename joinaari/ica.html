@@ -5,7 +5,6 @@
 /* Signing date is always the real date of signing in Florida (America/New_York). The Start Date the Associate picks is separate. */
 function aariTodayISO(){ return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'}); }
 function aariSignedDateLong(){ return new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',year:'numeric',month:'long',day:'numeric'}); }
-/* Decision 139: the Start Date is the day the license moves to Aari, never signing day, so signing only ever charges the E&O + Compliance Fee. Earliest choice is tomorrow; no default. */
 function aariTomorrowISO(){ var t=aariTodayISO(); var d=new Date(t+'T12:00:00Z'); d.setUTCDate(d.getUTCDate()+1); return d.toISOString().slice(0,10); }
 document.addEventListener('DOMContentLoaded',function(){ var f=document.getElementById('associate-date'); if(f){ f.min=aariTomorrowISO(); if(f.value && f.value<aariTomorrowISO()) f.value=''; } });
 </script>
