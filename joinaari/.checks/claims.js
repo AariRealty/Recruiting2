@@ -37,5 +37,7 @@ for (const n of fs.readdirSync(root)) if (/signature/i.test(n) && /\.(png|jpe?g|
   if (/ICA Version \d|Version \d+\.\d+ &middot;/.test(ic + pr)) bad.push('ica-content.js/ica-print.html  version number label (decision 161)');
   const dates = new Set([...(ic + pr).matchAll(/ICA dated ([A-Z][a-z]+ \d{1,2}, \d{4})/g)].map(m => m[1]));
   if (dates.size !== 1) bad.push('ICA date label differs across surfaces: ' + [...dates].join(' / ') + ' (decision 161)'); }
+// Decision 172: newer agents start on Mentorship, so no "no tiers", "nothing to unlock" or "yours from day one" claims.
+for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/nothing to unlock|yours from day one|\bno tiers\b/i.test(t)) bad.push(path.relative(root, f) + '  plan claim conflicts with the Mentorship start rule (decision 172)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
