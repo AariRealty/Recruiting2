@@ -5,7 +5,9 @@
 /* Signing date is always the real date of signing in Florida (America/New_York). The Start Date the Associate picks is separate. */
 function aariTodayISO(){ return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'}); }
 function aariSignedDateLong(){ return new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',year:'numeric',month:'long',day:'numeric'}); }
-document.addEventListener('DOMContentLoaded',function(){ var f=document.getElementById('associate-date'); if(f){ f.min=aariTodayISO(); if(!f.value) f.value=aariTodayISO(); } });
+/* Decision 139: the Start Date is the day the license moves to Aari, never signing day, so signing only ever charges the E&O + Compliance Fee. Earliest choice is tomorrow; no default. */
+function aariTomorrowISO(){ var t=aariTodayISO(); var d=new Date(t+'T12:00:00Z'); d.setUTCDate(d.getUTCDate()+1); return d.toISOString().slice(0,10); }
+document.addEventListener('DOMContentLoaded',function(){ var f=document.getElementById('associate-date'); if(f){ f.min=aariTomorrowISO(); if(f.value && f.value<aariTomorrowISO()) f.value=''; } });
 </script>
 <script>
     // Entry guard: this page should only be reached with a real plan and
@@ -2086,7 +2088,7 @@ function initialAllPages() {
   if (licenseField && license) licenseField.value = license;
   if (emailField && email) emailField.value = email;
   if (phoneField && phone) phoneField.value = phone;
-  if (dateField) dateField.value = effectiveDate;
+  if (dateField && params.get('effective_date') && params.get('effective_date') >= aariTomorrowISO()) dateField.value = params.get('effective_date');
 
   // Pre-fill signature fields
   const sigPrintedName = document.getElementById('sig-printed-name');
@@ -2147,6 +2149,8 @@ function initialAllPages() {
       if (planRadio) selectedPlan = planRadio.value;
       if (typeof aariNeedsMentorship==='function' && aariNeedsMentorship()) { selectedPlan = 'Aari Mentorship 75/25'; }
 
+      var _sdEl = document.getElementById('associate-date'); var _stat = ((document.getElementById('associate-status')||{}).value || 'new');
+      if (_stat !== 'current' && _stat !== 'review' && (!_sdEl || !_sdEl.value || _sdEl.value < aariTomorrowISO())) { alert('Please choose your Start Date: the day your license moves to Aari Realty. It can be tomorrow or later.'); if (_sdEl) _sdEl.focus(); return; }
       var formName = document.getElementById('associate-name').value.trim();
       var formLicense = document.getElementById('associate-license').value.trim() || 'N/A';
       var formEmail = document.getElementById('associate-email').value.trim();

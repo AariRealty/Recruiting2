@@ -19,12 +19,15 @@ function todayFL() { return new Date().toLocaleDateString('en-CA', { timeZone: '
 // Decisions 100 to 103 (12 Oct 2026), Manual 68.1 and Exhibit A 41: fees run on the Associate's own day.
 // New and returning Associates: the E&O + Compliance Fee is charged at signing; the first Monthly
 // Brokerage Fee is charged on the Start Date and then on that day each month; the E&O renews on the
-// Start Date each year. A missing, invalid or past Start Date falls back to today; more than one year
+// Start Date each year. A missing, invalid, past or same day Start Date becomes tomorrow; more than one year
 // out is capped at one year.
 function clampStartISO(startISO) {
   const today = todayFL();
-  let start = /^\d{4}-\d{2}-\d{2}$/.test(String(startISO || '')) ? String(startISO) : today;
-  if (start < today) start = today;
+  // Decision 139: never signing day. A missing, invalid, past or same day Start Date becomes tomorrow,
+  // so a new or returning Associate is charged only the E&O + Compliance Fee at signing.
+  const tm = new Date(today + 'T12:00:00Z'); tm.setUTCDate(tm.getUTCDate() + 1); const tomorrow = tm.toISOString().slice(0, 10);
+  let start = /^\d{4}-\d{2}-\d{2}$/.test(String(startISO || '')) ? String(startISO) : tomorrow;
+  if (start < tomorrow) start = tomorrow;
   const t = new Date(today + 'T12:00:00Z');
   const cap = new Date(Date.UTC(t.getUTCFullYear() + 1, t.getUTCMonth(), t.getUTCDate(), 12)).toISOString().slice(0, 10);
   if (start > cap) start = cap;
