@@ -214,17 +214,17 @@ main{max-width:440px;margin:0 auto;padding:28px 20px 60px}
       </div>
       <div class="cs live">
         <div class="num">3</div>
-        <div class="ci"><b>Your Hub turns on with your transfer.</b><p>Your Hub and tools turn on once your license transfer to Aari shows in DBPR.</p><span class="badge-c">Next step</span></div>
+        <div class="ci" id="ty-step3"><b>Your Hub turns on with your transfer.</b><p>Your Hub and tools turn on once your license transfer to Aari shows in DBPR.</p><span class="badge-c">Next step</span></div>
       </div>
       <div class="cs next">
         <div class="num">4</div>
-        <div class="ci"><b>Then the real work begins.</b><p>Log in, set your password, and meet your tools. Then let's go build something big.</p><span class="badge-c">Next</span></div>
+        <div class="ci" id="ty-step4"><b>Then the real work begins.</b><p>Log in, set your password, and meet your tools. Then let's go build something big.</p><span class="badge-c">Next</span></div>
       </div>
     </div>
   </div>
 
   <div class="cta-card">
-    <p>Give the email a minute to land (email loves the drama)&hellip; then watch for your Hub login once your transfer shows in DBPR. So glad you're here.</p>
+    <p id="ty-cta">Give the email a minute to land (email loves the drama)&hellip; then watch for your Hub login once your transfer shows in DBPR. So glad you're here.</p>
     <a href="index.html" class="btn">Back to joinaari.com &rarr;</a>
   </div>
   <div class="back-link"><a href="https://joinaari.com">Back to joinaari.com</a></div>
@@ -233,7 +233,7 @@ main{max-width:440px;margin:0 auto;padding:28px 20px 60px}
 </main>
 <script>
 (function(){
-  var p=new URLSearchParams(location.search);if(p.get('saved')==='1'&&p.get('payment_success')==='true'){var ts0=document.getElementById('ty-sub');if(ts0)ts0.textContent='You\'re signed and your card is saved. Nothing was charged today. Here\'s everything happening on our end.';var t0=document.getElementById('ty-step1');if(t0)t0.querySelector('b').textContent='Signed and card saved.';}if(p.get('payment_success')!=='true'){var ts=document.getElementById('ty-sub');if(ts)ts.textContent='You\'re signed. Your payment is processing. A member of the Aari team will confirm with you once it clears. No need to pay again.';var t1=document.getElementById('ty-step1');if(t1){t1.querySelector('b').textContent='Signed. Payment processing.';var bc=t1.querySelector('.badge-c');if(bc)bc.textContent='Pending';}var t2=document.getElementById('ty-step2');if(t2){t2.querySelector('b').textContent='Your signed agreement is on its way to your inbox.';t2.querySelector('p').textContent='Your receipt comes once the payment clears.';}}var f=(p.get('first_name')||'').replace(/[^a-zA-ZÀ-ɏ\s'-]/g,'').trim();if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
+  var p=new URLSearchParams(location.search);if(p.get('current')==='1'){var c1=document.getElementById('ty-step1');if(c1){c1.querySelector('b').textContent='Signed and on file.';c1.querySelector('p').textContent='Your updated agreement is signed and on file.';}var c3=document.getElementById('ty-step3');if(c3){c3.querySelector('b').textContent='Your Hub and tools stay on.';c3.querySelector('p').textContent='Nothing changes. Keep working your deals.';var b3=c3.querySelector('.badge-c');if(b3)b3.textContent='Done';}var c4=document.getElementById('ty-step4');if(c4)c4.parentNode.style.display='none';var cc=document.getElementById('ty-cta');if(cc)cc.textContent='Your updated agreement is on file. Your Hub and tools stay on, nothing changes. Thank you for building with Aari.';}if(p.get('saved')==='1'&&p.get('payment_success')==='true'){var ts0=document.getElementById('ty-sub');if(ts0)ts0.textContent='You\'re signed and your card is saved. Nothing was charged today. Here\'s everything happening on our end.';var t0=document.getElementById('ty-step1');if(t0)t0.querySelector('b').textContent='Signed and card saved.';}if(p.get('payment_success')!=='true'){var ts=document.getElementById('ty-sub');if(ts)ts.textContent='You\'re signed. Your payment is processing. A member of the Aari team will confirm with you once it clears. No need to pay again.';var t1=document.getElementById('ty-step1');if(t1){t1.querySelector('b').textContent='Signed. Payment processing.';var bc=t1.querySelector('.badge-c');if(bc)bc.textContent='Pending';}var t2=document.getElementById('ty-step2');if(t2){t2.querySelector('b').textContent='Your signed agreement is on its way to your inbox.';t2.querySelector('p').textContent='Your receipt comes once the payment clears.';}}var f=(p.get('first_name')||'').replace(/[^a-zA-ZÀ-ɏ\s'-]/g,'').trim();if(f){document.getElementById('first-name').textContent=f;}else{document.getElementById('name-wrap').style.display='none';}
 
   var h=document.getElementById('hero'),cols=['#ffffff','#c9c4ba','#8f8a80','#d4c9b8'];
   for(var i=0;i<24;i++){var c=document.createElement('span');c.className='conf';c.style.left=(3+Math.random()*94)+'%';c.style.background=cols[i%4];c.style.animationDuration=(2+Math.random()*2)+'s';c.style.animationDelay=(Math.random()*.8)+'s';c.style.width=(6+Math.random()*6)+'px';c.style.height=(8+Math.random()*8)+'px';h.appendChild(c);}

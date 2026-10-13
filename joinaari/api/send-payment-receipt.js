@@ -12,7 +12,7 @@ module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { name, email, plan, amount, payment_id, addons, monthly_amount } = req.body;
+    const { name, email, plan, amount, payment_id, addons, monthly_amount, current_agent } = req.body;
     if (!email || !name) {
       return res.status(400).json({ error: 'email and name are required' });
     }
@@ -76,7 +76,7 @@ module.exports = async function handler(req, res) {
       '<td align="right" style="padding:14px 0 0;font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-size:22px;color:#111111;">' + amountFormatted + ' &nbsp;<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2d6a4f;background:#e7f0ea;padding:3px 9px;border-radius:20px;">Paid</span></td></tr>' +
       '</table></td></tr>' +
       '<tr><td style="padding:16px 30px 6px;">' +
-      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + 'Your Agent Hub login arrives once your license transfer to Aari shows in DBPR.</div>' +
+      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + (current_agent ? 'Your updated agreement is signed and on file. Your Hub and tools stay on, nothing changes.' : 'Your Agent Hub login arrives once your license transfer to Aari shows in DBPR.') + '</div>' +
       '</td></tr>' +
       '<tr><td style="padding:14px 30px 4px;">' +
       '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +

@@ -2421,6 +2421,7 @@ function initialAllPages() {
       window._icaSigId = icaCopyData.signature_id || '';
       signBtn.style.display = 'none';
       var _aff = await aariCheckAffiliation(_agent.email);
+      window._icaCurrent = (_aff === 'current' || _aff === 'review');
       window._owedLabel = '';
       if ((_aff === 'current' || _aff === 'review') && window._icaSigId && window.retryPaymentInit) { try { await window.retryPaymentInit(); } catch (e) {} }
       var payBlock = document.getElementById('payment-block');
@@ -2502,7 +2503,7 @@ function initialAllPages() {
           })
         }).catch(function() {});
         if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', license: _v('associate-license') || 'N/A', plan: _plan, signature: _v('associate-signature') || _v('associate-name'), initials: ((document.getElementById('initials-input') || {}).value || '').trim() }) }).catch(function() {}); }
-        if (_payStatus === 'succeeded') fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', plan: _plan, amount: _amtStr, payment_id: _payId, addons: [], monthly_amount: '' }) }).catch(function() {});
+        if (_payStatus === 'succeeded') fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', plan: _plan, amount: _amtStr, payment_id: _payId, addons: [], monthly_amount: '', current_agent: !!window._icaCurrent }) }).catch(function() {});
         // Trigger finalize-join for recurring subscriptions + account provisioning
         fetch('/api/finalize-join', {
           method: 'POST',
@@ -2524,6 +2525,7 @@ function initialAllPages() {
         var returnParams = new URLSearchParams();
         returnParams.set('payment_success', _payStatus === 'succeeded' ? 'true' : 'processing');
         if (window._payMode === 'setup') returnParams.set('saved', '1');
+        if (window._icaCurrent) returnParams.set('current', '1');
         returnParams.set('first_name', icaData.name ? icaData.name.split(' ')[0] : '');
         returnParams.set('email', icaData.email || '');
         window.location.href = '/thank-you.html?' + returnParams.toString();
