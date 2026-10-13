@@ -24,9 +24,9 @@ if (bad.length) { console.error('Fee amount or payout math outside Exhibit A (de
 
 // Decision 149: fee TIMING lives only in Manual 68.1. Fail if Exhibit A states when a fee is charged.
 {
-  const t = C.commission; const i = t.indexOf('EXHIBIT A: COMMISSION FEE SCHEDULE'); const j = t.indexOf('OPERATIONS & COMPLIANCE MANUAL', i);
+  const t = C.commission; const i = t.indexOf('<h2>Commission Fee Schedule: Exhibit A</h2>'); if (i < 0) { console.error('Exhibit A heading not found (decision 165)'); process.exit(1); } const e2 = t.indexOf('<!-- =====', i + 10); const j = e2 > 0 ? e2 : -1;
   const ex = (j > 0 ? t.slice(i, j) : t.slice(i)).replace(/<[^>]+>/g, ' ').replace(/&rsquo;/g, "'").replace(/&[a-z]+;/g, ' ').replace(/\s+/g, ' ');
-  const T = /[^.]{0,80}\b(is charged (on|beginning|when|at)|charged beginning on|billing day|charged on the)\b[^.]{0,60}/gi;
+  const T = /[^.]{0,80}\b(is charged (on|beginning|when|at)|charged beginning on|billing day|charged on the|ends with the billing cycle|not charged for any later)\b[^.]{0,60}/gi;
   let m, tb = []; while ((m = T.exec(ex))) tb.push(m[0].trim());
   if (tb.length) { console.error('Fee timing stated in Exhibit A (decision 149). Move it to Manual 68.1:'); tb.forEach(x => console.error('  ' + x)); process.exit(1); }
 }
