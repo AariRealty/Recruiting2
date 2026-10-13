@@ -226,7 +226,7 @@ module.exports = async function handler(req, res) {
 
     const html = shell({
       title: 'The Aari Blog · Contracts, compliance, and the stuff nobody teaches you',
-      desc: 'Compliance, contracts, forms, and the Florida law changes that actually hit your deals. Written by a Southwest Florida broker who reads every file.',
+      desc: 'Compliance, contracts, forms, and the Florida law changes that actually hit your deals. Written by a Southwest Florida broker of record.',
       canonical: `${SITE}/blog`,
       ogImage: `${SITE}/images/og-cover.jpg`,
       jsonLd: {
