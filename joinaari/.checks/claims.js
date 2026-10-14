@@ -92,5 +92,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/not an upsel
   if (sha !== lock.sha256 && d !== lock.date) bad.push('ica-content.js  new ICA date ' + d + ': update .checks/ica-date-lock.json to this date and hash in the same commit (decision 161)'); }
 // Decision 425: the affiliation lookup never returns the plan of record.
 { const ca = fs.readFileSync(path.join(root, 'api', 'check-affiliation.js'), 'utf8'); if (/plan:\s*d\.plan/.test(ca)) bad.push('api/check-affiliation.js  returns the plan of record (decision 425)'); }
+// Decision 426: current agents who sign again stay Active from the signing date.
+{ const ic7 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (!/already affiliated with the Company when signing this Agreement, the Start Date is the signing date and the Associate stays Active without interruption/.test(ic7)) bad.push('ica-content.js  current agent Start Date sentence missing (decision 426)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
