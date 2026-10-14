@@ -83,7 +83,7 @@ module.exports = async function handler(req, res) {
       to: email,
       cc: 'join@aarirealty.com',
       subject: 'We received your signature, Aari Realty LLC (' + formattedDate + ')',
-      html: '<div style="font-family:-apple-system,Arial,sans-serif;max-width:560px;color:#141210;line-height:1.6"><p style="font-size:14px">Hi ' + esc(firstNm) + ', we received your signature on your Aari Realty Independent Contractor Agreement. Your fully executed copy will arrive shortly. If you do not see it within a day, reply to this email.</p><p style="font-size:11px;color:#9b948a">Aari Realty LLC &middot; License BK3530153</p></div>',
+      html: '<div style="font-family:-apple-system,Arial,sans-serif;max-width:560px;color:#141210;line-height:1.6"><p style="font-size:14px">Hi ' + esc(firstNm) + ', we received your signature on your Aari Realty Independent Contractor Agreement. Your fully executed copy will arrive shortly. If you do not see it within a day, reply to this email.</p><p style="font-size:11px;color:#9b948a">Aari Realty LLC &middot; CQ1071216</p></div>',
       emailType: 'ica_copy_fallback',
     });
     return res.status(200).json({ success: true, executed_copy: false, note: 'fallback sent; broker alerted' });

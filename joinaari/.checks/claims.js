@@ -17,6 +17,14 @@ const banned = [
   /100% yours/i,
   /whole check/i,
   /100%(<br>|\s)+Commission</i,
+  // Decisions 281 to 288 (re scan 11).
+  /100% of nothing/i,
+  /protection you'?ll be glad/i,
+  /100% commission/i,
+  /not used for model training/i,
+  /Aari Realty LLC &middot; License BK/,
+  /signed agreement and your receipt come by email/i,
+  /"Effective" date above reflects/i,
 ];
 const files = fs.readdirSync(root).filter(f => /\.(html|js)$/.test(f)).map(f => path.join(root, f))
   .concat(fs.readdirSync(path.join(root, 'api')).filter(f => f.endsWith('.js')).map(f => path.join(root, 'api', f)));
