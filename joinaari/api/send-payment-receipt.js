@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
         '<tr><td style="padding:11px 0;border-bottom:1px solid #eceae4;font-size:13px;color:#9a9a92;">Plan</td><td align="right" style="padding:11px 0;border-bottom:1px solid #eceae4;font-size:13px;color:#111111;">' + planName + '</td></tr>';
     }
 
-    const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + ' a month, starting on your Start Date and on that same day each month. ') : '';
+    const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + ' a month, starting the day you become Active and on that same day each month. ') : '';
     const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + esc(name);
 
     const html =
