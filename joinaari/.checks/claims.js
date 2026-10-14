@@ -48,6 +48,6 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/How does E&O
 // Decision 247: the decline right before Active is shown on the thank you page.
 { const ty = fs.readFileSync(path.join(root, 'thank-you.html'), 'utf8'); if (!/subject to broker review and acceptance before you become Active/.test(ty)) bad.push('thank-you.html  decline right line missing (decision 247)'); }
 // Decision 216: named agent testimonials stay hidden until each written release is on file.
-{ const ix = fs.readFileSync(path.join(root, 'index.html'), 'utf8'); if (/<section class="testi" id="agents">/.test(ix)) bad.push('index.html  testimonial section shown before releases are on file (decision 216)'); if (/still no surprises/i.test(ix)) bad.push('index.html  still no surprises (decision 216)'); }
+{ const ix = fs.readFileSync(path.join(root, 'index.html'), 'utf8'); if (/<section class="testi" id="agents">/.test(ix)) bad.push('index.html  testimonial section shown before releases are on file (decision 216)'); if (!/Jose Alejandro Paredes<\/div><div class="rl">Aari Realty Agent and family member/.test(ix)) bad.push('index.html  family tie label missing (decision 216)'); if (/still no surprises/i.test(ix)) bad.push('index.html  still no surprises (decision 216)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
