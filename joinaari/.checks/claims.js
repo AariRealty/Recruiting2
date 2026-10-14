@@ -38,6 +38,8 @@ const banned = [
   // Ripples of 288 and 150 (re scan 14).
   /Your signed agreement is in your inbox now/i,
   /\/\/ Decision 2[0-9][0-9]:/,
+  // Decision 387a: WhatsApp links are labeled WhatsApp.
+  /wa\.me\/[^"']*"[^>]*>[^<]*Text the Aari team/i,
 ];
 const files = fs.readdirSync(root).filter(f => /\.(html|js)$/.test(f)).map(f => path.join(root, f))
   .concat(fs.readdirSync(path.join(root, 'api')).filter(f => f.endsWith('.js')).map(f => path.join(root, 'api', f)));
