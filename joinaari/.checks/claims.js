@@ -82,5 +82,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/How does E&O
 { const ic3 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/required by federal law to obtain a completed W-9/.test(ic3)) bad.push('ica-content.js  W-9 hold presented as law (decision 411)'); }
 // Decision 412: text consent on the application is a separate optional unchecked box.
 { const ic4 = fs.readFileSync(path.join(root, 'ica.html'), 'utf8'); if (/contact you by phone, text or email regarding your application/.test(ic4) || !/id="associate-sms-consent" value="yes"/.test(ic4) || /id="associate-sms-consent"[^>]*checked/.test(ic4)) bad.push('ica.html  text consent must be a separate optional unchecked box (decision 412)'); }
+// Decision 413: no implied no cost line on the plan that requires paid coordination.
+for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/not an upsell/i.test(t)) bad.push(path.relative(root, f) + '  not an upsell (decision 413)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
