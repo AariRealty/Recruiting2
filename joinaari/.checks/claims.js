@@ -90,5 +90,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/not an upsel
 { const crypto = require('crypto'); const lock = JSON.parse(fs.readFileSync(path.join(root, '.checks', 'ica-date-lock.json'), 'utf8')); const ic6 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); const sha = crypto.createHash('sha256').update(ic6).digest('hex'); const m = ic6.match(/ICA dated ([A-Z][a-z]+ \d{1,2}, \d{4})/); const d = m ? m[1] : '';
   if (sha !== lock.sha256 && d === lock.date) bad.push('ica-content.js  ICA text changed but its date did not (decision 161). Give the ICA a new date and update .checks/ica-date-lock.json');
   if (sha !== lock.sha256 && d !== lock.date) bad.push('ica-content.js  new ICA date ' + d + ': update .checks/ica-date-lock.json to this date and hash in the same commit (decision 161)'); }
+// Decision 425: the affiliation lookup never returns the plan of record.
+{ const ca = fs.readFileSync(path.join(root, 'api', 'check-affiliation.js'), 'utf8'); if (/plan:\s*d\.plan/.test(ca)) bad.push('api/check-affiliation.js  returns the plan of record (decision 425)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');

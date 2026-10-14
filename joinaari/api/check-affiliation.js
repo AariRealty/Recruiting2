@@ -14,7 +14,8 @@ module.exports = async function handler(req, res) {
   if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'not configured' });
   try {
     const d = await lookupAffiliationDetail(Stripe(process.env.STRIPE_SECRET_KEY), email);
-    return res.status(200).json({ status: d.status, plan: d.plan });
+    // Decision 425: status only; the plan of record never leaves the server.
+    return res.status(200).json({ status: d.status });
   } catch (e) {
     return res.status(502).json({ error: 'lookup_failed' });
   }

@@ -2637,7 +2637,7 @@ document.addEventListener('change',function(e){ if(e.target && e.target.id==='as
 <script>
 async function aariCheckAffiliation(email){
   var st = 'new';
-  try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; window._aariBilledPlan = (j && j.plan) || ''; } catch (e) {}
+  try { var r = await fetch('/api/check-affiliation', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: String(email || '').trim() }) }); var j = await r.json(); if (j && j.status) st = j.status; } catch (e) {}
   var sel = document.getElementById('associate-status'); var n = document.getElementById('associate-status-note');
   if (st === 'returning' && sel) { sel.value = 'returning'; sel.disabled = true; aariStatusNote(); }
   else if ((st === 'current' || st === 'review') && n) { if (sel) sel.disabled = true; n.textContent = 'You are already with Aari Realty. You sign the new version here and nothing is charged today unless a fee is already past due. You save your card, and your monthly plan fee is charged on the day of the month you first joined Aari (Manual Section 68.1).'; n.style.display = 'block'; }
