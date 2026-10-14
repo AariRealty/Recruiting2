@@ -53,7 +53,7 @@ module.exports = async function handler(req, res) {
         '<tr><td style="padding:11px 0;border-bottom:1px solid #eceae4;font-size:13px;color:#9a9a92;">Plan</td><td align="right" style="padding:11px 0;border-bottom:1px solid #eceae4;font-size:13px;color:#111111;">' + planName + '</td></tr>';
     }
 
-    const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + '/mo, billed monthly. ') : '';
+    const monthlyLine = monthly_amount ? ('Then $' + Number(monthly_amount).toFixed(2) + ' a month, starting on your Start Date and on that same day each month. ') : '';
     const metaLine = 'Receipt ' + (payment_id ? (payment_id + ' &middot; ') : '') + date + ' &middot; ' + esc(name);
 
     const html =
@@ -77,7 +77,7 @@ module.exports = async function handler(req, res) {
       '<td align="right" style="padding:14px 0 0;font-family:&quot;Cormorant Garamond&quot;,Georgia,serif;font-size:22px;color:#111111;">' + amountFormatted + ' &nbsp;<span style="font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#2d6a4f;background:#e7f0ea;padding:3px 9px;border-radius:20px;">Paid</span></td></tr>' +
       '</table></td></tr>' +
       '<tr><td style="padding:16px 30px 6px;">' +
-      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + (current_agent ? 'Your updated agreement is signed and on file. Your Hub and tools stay on, nothing changes.' : 'Your Agent Hub login arrives once your license transfer to Aari shows in DBPR.') + '</div>' +
+      '<div style="font-size:12px;color:#9a9a92;line-height:1.7;">' + monthlyLine + (current_agent ? 'Your updated agreement is signed and on file. Your Hub and tools stay on, nothing changes.' : 'Your Agent Hub login arrives when you become Active, as your agreement defines it.') + '</div>' +
       '</td></tr>' +
       '<tr><td style="padding:14px 30px 4px;">' +
       '<div style="font-size:11px;color:#b7b4ab;line-height:1.6;">' + metaLine + '</div>' +
