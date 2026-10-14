@@ -553,7 +553,7 @@ window.ICA_CONTENT = {
   <li>Solicitation of Company clients or Associates upon termination</li>
   <li>Repeated or willful failure to submit transaction documents or respond to Broker requests within required timeframes, after written notice. A single late submission is addressed under Section 8 and Exhibit A and is not a Material Breach.</li>
   <li>Engaging in real estate activity under another broker&rsquo;s license while affiliated with the Company</li>
-  <li>Accepting, demanding, or retaining compensation in excess of the amount stated in an executed buyer brokerage agreement or listing agreement without a written amendment signed by all required parties</li>
+  <li>Accepting, demanding, or retaining compensation in excess of the amount stated in an executed buyer brokerage agreement or listing agreement without a written amendment signed by all required parties. An overpayment the Company handles under &sect;67.5 is not compensation for this purpose.</li>
   <li>Engaging in subject to, creative financing, foreclosure rescue, short sale negotiation on behalf of a seller, or similar distressed property transactions without prior transaction specific written approval from the Broker</li>
   <li>Initiating or transmitting any call, text message, prerecorded message, automated dialing communication, or email campaign without documented prior express written consent where required by the Telephone Consumer Protection Act, the Florida Telephone Solicitation Act, or applicable do not call rules</li>
 </ul>
@@ -682,6 +682,9 @@ window.ICA_CONTENT = {
 
 <h4 id="s-67-4">&sect;67.4 Compensation Received Directly</h4>
 <p>All compensation for brokerage services, including any retainer, cancellation fee, or other fee paid by a client, is payable only to Aari Realty LLC. An Associate who receives any such compensation directly from a client or any other person shall deliver it to the Company by the end of the next business day following receipt. Once the Company receives it, the Company pays the Associate the amount set forth in Exhibit A for that payment. Failure to deliver the compensation within that time is a Material Breach, and the Company may offset the full amount received against any commission or other amount payable to the Associate until it is delivered. This Section does not reduce or forfeit any share the Associate has earned.</p>
+
+<h4 id="s-67-5">&sect;67.5 Client Overpayments</h4>
+<p>When the Company receives more than the amount due from a client or any other payer, including money an Associate delivers to the Company under &sect;67.4, the excess is not compensation for brokerage services and is not paid to the Associate. The Company refunds the excess to the payer by the original payment method, or another method the payer confirms in writing, within ten (10) business days after the Company confirms the excess and the payment method. The Company keeps the excess only if the payer declines the refund in writing. If the payer does not answer the Company&rsquo;s written notice, an excess small enough that Chapter 717, Florida Statutes, does not presume it unclaimed may be kept by the Company after one more written notice, and any other excess is held for the payer and handled as Chapter 717 requires. An Associate may not keep, apply or promise any excess to a client. Money received as an escrow deposit is not covered by this Section and follows the escrow rules of the Florida Real Estate Commission.</p>
 
 <h3 id="s-68">&sect;68. BILLING ADDENDUM</h3>
 

@@ -84,5 +84,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/How does E&O
 { const ic4 = fs.readFileSync(path.join(root, 'ica.html'), 'utf8'); if (/contact you by phone, text or email regarding your application/.test(ic4) || !/id="associate-sms-consent" value="yes"/.test(ic4) || /id="associate-sms-consent"[^>]*checked/.test(ic4)) bad.push('ica.html  text consent must be a separate optional unchecked box (decision 412)'); }
 // Decision 413: no implied no cost line on the plan that requires paid coordination.
 for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/not an upsell/i.test(t)) bad.push(path.relative(root, f) + '  not an upsell (decision 413)'); }
+// Decisions 420 and 421: Manual 67.5 overpayment rule and the prohibited conduct carve out stay in the ICA.
+{ const ic5 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (!/&sect;67.5 Client Overpayments/.test(ic5) || !/within ten \(10\) business days after the Company confirms the excess/.test(ic5) || !/An overpayment the Company handles under &sect;67.5 is not compensation/.test(ic5)) bad.push('ica-content.js  overpayment rule missing (decisions 420 and 421)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
