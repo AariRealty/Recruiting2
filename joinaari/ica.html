@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
   <script>
-  // Decision 260: the stored e sign consent is the exact text the agent saw and checked.
   function _consentTextNow(){ var el=document.querySelector('#esign-consent + span'); return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; }
 
 /* Signing date is always the real date of signing in Florida (America/New_York). The Start Date the Associate picks is separate. */

@@ -35,6 +35,9 @@ const banned = [
   // Decisions 374 and 376 (re scan 13).
   /if you choose to upload a photo of your real estate license/i,
   /Start where you are, move up as you grow/i,
+  // Ripples of 288 and 150 (re scan 14).
+  /Your signed agreement is in your inbox now/i,
+  /\/\/ Decision 2[0-9][0-9]:/,
 ];
 const files = fs.readdirSync(root).filter(f => /\.(html|js)$/.test(f)).map(f => path.join(root, f))
   .concat(fs.readdirSync(path.join(root, 'api')).filter(f => f.endsWith('.js')).map(f => path.join(root, 'api', f)));
