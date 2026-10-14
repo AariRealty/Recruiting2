@@ -985,7 +985,7 @@ window.ICA_CONTENT = {
 <p>The Associate will submit to Aari Realty LLC, before the first commission disbursement, a valid IRS Form W-9 containing their legal name, business name or DBA (if applicable), federal tax classification, Taxpayer Identification Number (TIN) or Social Security Number (SSN), and certification signature.</p>
 
 <h4 id="s-86-2">&sect;86.2</h4>
-<p>The Associate acknowledges that Aari Realty LLC is required by federal law to obtain a completed W-9 prior to issuing any commission payments. Failure to provide a valid W-9 will result in commission withholding until the form is received.</p>
+<p>The Associate acknowledges that Aari Realty LLC requires a completed W-9 before issuing any commission payment, so it can report payments to the IRS as federal law requires. Commission is held until a valid W-9 is received.</p>
 
 <h3 id="s-86-3">&sect;86.3 Tax Reporting Acknowledgment</h3>
 <p>The Associate acknowledges and understands that:</p>

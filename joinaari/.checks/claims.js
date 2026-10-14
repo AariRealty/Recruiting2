@@ -78,5 +78,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/How does E&O
 { const bs = fs.readFileSync(path.join(root, 'api', 'send-broker-summary.js'), 'utf8'); if (/row\('REALTOR Association', esc\(how_did_you_hear\)\)/.test(bs)) bad.push('api/send-broker-summary.js  REALTOR Association row shows the wrong field (decision 13)'); }
 // Decision 410: one payout clock after a cure (ICA 7); ICA 8, CSA 23(b) and Manual 50 point to it.
 { const ic = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/thirty \(30\) days of the Associate curing|completion of the required action, disbursement shall be released within three \(3\) business days/.test(ic)) bad.push('ica-content.js  payout timing after cure must follow Section 7 (decision 410)'); }
+// Decision 411: the W-9 hold is brokerage policy, not a federal requirement to collect before paying.
+{ const ic3 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/required by federal law to obtain a completed W-9/.test(ic3)) bad.push('ica-content.js  W-9 hold presented as law (decision 411)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
