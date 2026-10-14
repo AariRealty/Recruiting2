@@ -745,7 +745,7 @@ window.ICA_CONTENT = {
 <h3 id="s-73">&sect;73. POST DEPARTURE COMPENSATION ADDENDUM</h3>
 
 <h4 id="s-73-1">&sect;73.1 Procuring Cause.</h4>
-<p>Under Florida law, all procuring cause rights belong to the brokerage, not the sales associate. The Company retains all procuring cause rights for any buyer or seller introduced to real property through the Company, regardless of whether the Associate remains affiliated with the Company.</p>
+<p>A sales associate may receive compensation only through the employing broker (F.S. 475.42), and under this Agreement all procuring cause rights belong to the Company, not the Associate. The Company retains all procuring cause rights for any buyer or seller introduced to real property through the Company, regardless of whether the Associate remains affiliated with the Company.</p>
 
 <h4 id="s-73-2">&sect;73.2 Protection Period.</h4>
 <p>Any protection period contained in a Buyer Brokerage Agreement, Listing Agreement, or compensation agreement survives the Associate&rsquo;s departure from the brokerage. The Company retains full compensation rights for any contract, offer, or closing involving a buyer or seller introduced through the Company during the protection period.</p>

@@ -98,5 +98,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/not an upsel
 { const ic8 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/excess to the Company within five \(5\) business days of receipt|remit payment within ten \(10\) business days of written notice/.test(ic8)) bad.push('ica-content.js  agent overpayment clocks differ (decision 427)'); }
 // Decision 428: the first Monthly Brokerage Fee is charged the day the Associate becomes Active, never before.
 for (const f of files.concat([path.join(root, 'ica-content.js'), path.join(root, 'api', 'send-payment-receipt.js')])) { const t = fs.readFileSync(f, 'utf8'); if (/(plan fee|Monthly Brokerage Fee)[^.]{0,40}(charged|starts|starting) on (your|the Associate&rsquo;s) Start Date/i.test(t)) bad.push(path.relative(root, f) + '  monthly fee before Active (decision 428)'); }
+// Decision 429: procuring cause is a contract right, not stated as Florida law.
+{ const ic9 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/Under Florida law, all procuring cause rights/.test(ic9)) bad.push('ica-content.js  procuring cause stated as Florida law (decision 429)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
