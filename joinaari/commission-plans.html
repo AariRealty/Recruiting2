@@ -458,6 +458,8 @@ footer{background:var(--ink);color:rgba(255,255,255,.45);text-align:center;paddi
     var grossPerDeal=price*commPct;
     var tGross=grossPerDeal*deals;
 
+    var _splitEl=document.getElementById('t-split');
+    if(!_splitEl || String(_splitEl.value).trim()===''){ var _e=document.querySelector('.diff-eye'), _s=document.querySelector('.diff-sub'); if(_e) _e.textContent='Add your current split'; if(_s) _s.textContent='to see a comparison'; document.getElementById('r-diff').textContent=''; return; }
     var tSplit=val('t-split')/100;
     var tFranchise=val('t-franchise')/100;
     var tMonthly=val('t-monthly');

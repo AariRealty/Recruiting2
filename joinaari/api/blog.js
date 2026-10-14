@@ -237,7 +237,7 @@ module.exports = async function handler(req, res) {
       body: `<div class="bhead">
   <span class="beb">The Aari Blog</span>
   <h1>The stuff nobody <em>teaches you.</em></h1>
-  <p>Contracts. Compliance. Forms. The Florida law changes that actually hit your deals, and the near misses I catch on real files.</p>
+  <p>Contracts. Compliance. Forms. The Florida law changes that actually hit your deals, and lessons from common file mistakes, with no client details.</p>
 </div>
 <div class="plist">${list}</div>`,
     });
