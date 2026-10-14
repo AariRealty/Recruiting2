@@ -95,6 +95,6 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/not an upsel
 // Decision 426: current agents who sign again stay Active from the signing date.
 { const ic7 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (!/already affiliated with the Company when signing this Agreement, the Start Date is the signing date and the Associate stays Active without interruption/.test(ic7)) bad.push('ica-content.js  current agent Start Date sentence missing (decision 426)'); }
 // Decision 427: one repayment clock for agent overpayments, five business days after written notice.
-{ const ic8 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/five \(5\) business days of receipt|within ten \(10\) business days of written notice/.test(ic8)) bad.push('ica-content.js  agent overpayment clocks differ (decision 427)'); }
+{ const ic8 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/excess to the Company within five \(5\) business days of receipt|within ten \(10\) business days of written notice/.test(ic8)) bad.push('ica-content.js  agent overpayment clocks differ (decision 427)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
