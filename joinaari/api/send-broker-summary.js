@@ -71,7 +71,8 @@ module.exports = async function handler(req, res) {
         ${years_licensed ? row('Years Licensed', esc(years_licensed)) : ''}
         ${closings ? row('Closed Sales (24 Mo.)', esc(closings)) : ''}
         ${region ? row('Region', esc(region)) : ''}
-        ${how_did_you_hear ? row('REALTOR Association', esc(how_did_you_hear)) : ''}
+        ${realtor_association ? row('REALTOR Association', esc(realtor_association)) : ''}
+        ${how_did_you_hear ? row('How they heard about us', esc(how_did_you_hear)) : ''}
       </div>
 
       <div style="margin-bottom:28px;">

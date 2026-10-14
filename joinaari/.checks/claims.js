@@ -74,5 +74,7 @@ for (const f of files) { const t = fs.readFileSync(f, 'utf8'); if (/How does E&O
 { const ic2 = fs.readFileSync(path.join(root, 'ica.html'), 'utf8'); if (/consent_text: "I agree to sign this Independent Contractor Agreement/.test(ic2) || !/function _consentTextNow/.test(ic2)) bad.push('ica.html  consent record does not match the visible consent (decision 260)'); }
 // Decision 216: named agent testimonials stay hidden until each written release is on file.
 { const ix = fs.readFileSync(path.join(root, 'index.html'), 'utf8'); if (/<section class="testi" id="agents">/.test(ix)) bad.push('index.html  testimonial section shown before releases are on file (decision 216)'); if (!/Jose Alejandro Paredes<\/div><div class="rl">Aari Realty Agent and family member/.test(ix)) bad.push('index.html  family tie label missing (decision 216)'); if (/still no surprises/i.test(ix)) bad.push('index.html  still no surprises (decision 216)'); }
+// Re scan 15 (decision 13 ripple): the broker email shows the REALTOR association answer, not how they heard about us.
+{ const bs = fs.readFileSync(path.join(root, 'api', 'send-broker-summary.js'), 'utf8'); if (/row\('REALTOR Association', esc\(how_did_you_hear\)\)/.test(bs)) bad.push('api/send-broker-summary.js  REALTOR Association row shows the wrong field (decision 13)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
