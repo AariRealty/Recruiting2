@@ -2467,7 +2467,7 @@ function initialAllPages() {
       }
 
       // Only a succeeded intent is called paid; anything else is shown as processing.
-      var _payStatus = ((result.paymentIntent || result.setupIntent || {}).status) || 'succeeded';
+      var _payStatus = ((result.paymentIntent || result.setupIntent || {}).status) || 'processing';
       payBtn.textContent = _payStatus === 'succeeded' ? 'Payment Successful!' : 'Payment processing';
       payBtn.style.background = '#0a0a0a';
       payBtn.style.borderColor = '#0a0a0a';
