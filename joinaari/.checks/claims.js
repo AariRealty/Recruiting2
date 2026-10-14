@@ -25,6 +25,13 @@ const banned = [
   /Aari Realty LLC &middot; License BK/,
   /signed agreement and your receipt come by email/i,
   /"Effective" date above reflects/i,
+  // Decisions 301 and 322 to 327 (re scan 12).
+  /Violation means immediate termination/i,
+  /shouldn't cost your license/i,
+  /left to sink/i,
+  /a desk, a login/i,
+  /Most agents spend months/i,
+  /so you stay compliant/i,
 ];
 const files = fs.readdirSync(root).filter(f => /\.(html|js)$/.test(f)).map(f => path.join(root, f))
   .concat(fs.readdirSync(path.join(root, 'api')).filter(f => f.endsWith('.js')).map(f => path.join(root, 'api', f)));
