@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
       name, email, phone, license, plan, addons,
       amount, monthly_amount, payment_id, coupon_code,
       signature, ica_date, mls, years_licensed, closings,
-      region, realtor_association, how_did_you_hear,
+      region, realtor_association, how_did_you_hear, sms_consent, sms_consent_version,
       pdf_base64, pdf_filename
     } = req.body;
 
@@ -73,6 +73,7 @@ module.exports = async function handler(req, res) {
         ${region ? row('Region', esc(region)) : ''}
         ${realtor_association ? row('REALTOR Association', esc(realtor_association)) : ''}
         ${how_did_you_hear ? row('How they heard about us', esc(how_did_you_hear)) : ''}
+        ${row('Text consent', sms_consent === true ? esc('Yes, optional box checked (' + (sms_consent_version || '') + ')') : 'No. Do not text this applicant.')}
       </div>
 
       <div style="margin-bottom:28px;">

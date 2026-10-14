@@ -875,7 +875,8 @@ document.addEventListener('DOMContentLoaded',function(){ var f=document.getEleme
         </select>
       </div>
 
-      <p class="ica-text" style="font-size:10px;color:rgba(10,10,10,0.4);line-height:1.6;margin:0 0 16px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you by phone, text or email regarding your application and onboarding. Consent is not a condition of any service. Message and data rates may apply. Reply STOP to opt out of texts at any time.</p>
+      <p class="ica-text" style="font-size:10px;color:rgba(10,10,10,0.4);line-height:1.6;margin:0 0 16px;">By providing your information, you agree to Aari Realty LLC&rsquo;s privacy policy and authorize Aari Realty to contact you by phone or email regarding your application and onboarding.</p>
+      <label class="ica-text" style="display:flex;gap:8px;align-items:flex-start;font-size:10px;color:rgba(10,10,10,0.55);line-height:1.6;margin:0 0 16px;"><input type="checkbox" id="associate-sms-consent" value="yes" style="margin-top:2px;flex-shrink:0"><span>Optional: Aari Realty LLC may text me about my application and onboarding. Consent is not a condition of any service. Message and data rates may apply. Message frequency varies. Reply STOP to opt out, HELP for help.</span></label>
 
       <div class="ica-nav-row">
         <button type="button" class="ica-nav-btn primary" onclick="goSubstep('1b')">Next &rarr;</button>
@@ -2502,6 +2503,8 @@ function initialAllPages() {
             region: _v('associate-region-val') || 'N/A',
             realtor_association: _v('associate-association-val') || 'N/A',
             how_did_you_hear: _v('associate-hear-about') || 'N/A',
+            sms_consent: !!((document.getElementById('associate-sms-consent')||{}).checked),
+            sms_consent_version: 'SMS-2026-10-14',
             amount: _amtStr.replace(/[^0-9.]/g, ''),
             monthly_amount: new URLSearchParams(location.search).get('monthly') || '',
             payment_id: _payId,
