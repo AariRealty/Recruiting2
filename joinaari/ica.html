@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <script>
+  // Decision 260: the stored e sign consent is the exact text the agent saw and checked.
+  function _consentTextNow(){ var el=document.querySelector('#esign-consent + span'); return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; }
+
 /* Signing date is always the real date of signing in Florida (America/New_York). The Start Date the Associate picks is separate. */
 function aariTodayISO(){ return new Date().toLocaleDateString('en-CA',{timeZone:'America/New_York'}); }
 function aariSignedDateLong(){ return new Date().toLocaleDateString('en-US',{timeZone:'America/New_York',year:'numeric',month:'long',day:'numeric'}); }
@@ -2188,7 +2191,8 @@ function initialAllPages() {
         start_date: document.getElementById('associate-date').value,
         signed_date: aariTodayISO(),
         consent_esign: !!(_consentEl && _consentEl.checked),
-        consent_text: "I agree to sign this Independent Contractor Agreement electronically, and I understand my electronic signature and initials are legally binding under Florida's Uniform Electronic Transactions Act (Chapter 668, Florida Statutes).",
+        consent_text: _consentTextNow(),
+        consent_at: new Date().toISOString(),
         initials: _initialsArr.join(', '),
         initials_count: _initialsArr.filter(function(x){ return x; }).length,
         signed_at_client: new Date().toISOString(),
@@ -2399,6 +2403,9 @@ function initialAllPages() {
       var _v = function(id){ var e = document.getElementById(id); return e ? (e.value || e.textContent || '').trim() : ''; };
       var _plan = new URLSearchParams(location.search).get('plan_name') || icaData.plan || icaData.plan_name || '';
       var _agent = {
+        consent_esign: !!((document.getElementById('esign-consent')||{}).checked),
+        consent_text: _consentTextNow(),
+        consent_at: new Date().toISOString(),
         name: _v('associate-name') || icaData.name || '',
         email: _v('associate-email') || icaData.email || '',
         license: _v('associate-license') || 'N/A',
@@ -2502,7 +2509,7 @@ function initialAllPages() {
             pdf_filename: window._icaPdfFilename || ''
           })
         }).catch(function() {});
-        if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', license: _v('associate-license') || 'N/A', plan: _plan, signature: _v('associate-signature') || _v('associate-name'), initials: ((document.getElementById('initials-input') || {}).value || '').trim() }) }).catch(function() {}); }
+        if (!window._icaAlreadySigned) { fetch('/api/send-ica-copy', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', license: _v('associate-license') || 'N/A', plan: _plan, signature: _v('associate-signature') || _v('associate-name'), initials: ((document.getElementById('initials-input') || {}).value || '').trim(), consent_esign: !!((document.getElementById('esign-consent')||{}).checked), consent_text: _consentTextNow(), consent_at: new Date().toISOString() }) }).catch(function() {}); }
         if (_payStatus === 'succeeded') fetch('/api/send-payment-receipt', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: _v('associate-name') || icaData.name || '', email: _v('associate-email') || icaData.email || '', plan: _plan, amount: _amtStr, payment_id: _payId, addons: [], monthly_amount: '', current_agent: !!window._icaCurrent }) }).catch(function() {});
         // Trigger finalize-join for recurring subscriptions + account provisioning
         fetch('/api/finalize-join', {
