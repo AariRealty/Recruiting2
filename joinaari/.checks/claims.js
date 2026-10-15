@@ -105,3 +105,6 @@ console.log('claims check passed: ' + files.length + ' files');
 
 // Decision 433: the CDA issues once the documents the Broker needs to issue it are in (Section 50), never "all required closing documentation".
 { const t = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/only after the Associate submits all required closing documentation/.test(t)) { console.error('Decision 433 check failed: Exhibit A CDA wording'); process.exit(1); } console.log('decision 433 check passed'); }
+
+// Decision 434: one appeal clock, 30 calendar days after written notice; no "knew or reasonably should have known".
+{ const t = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/knew or reasonably should have known|appeal to the Broker within thirty \(30\) calendar days, including/.test(t)) { console.error('Decision 434 check failed: appeal clock'); process.exit(1); } console.log('decision 434 check passed'); }
