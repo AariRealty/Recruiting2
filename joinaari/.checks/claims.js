@@ -102,3 +102,6 @@ for (const f of files.concat([path.join(root, 'ica-content.js'), path.join(root,
 { const ic9 = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/Under Florida law, all procuring cause rights/.test(ic9)) bad.push('ica-content.js  procuring cause stated as Florida law (decision 429)'); }
 if (bad.length) { console.error('Retired billing claim found (decision 110). Fix before deploy:\n' + bad.join('\n')); process.exit(1); }
 console.log('claims check passed: ' + files.length + ' files');
+
+// Decision 433: the CDA issues once the documents the Broker needs to issue it are in (Section 50), never "all required closing documentation".
+{ const t = fs.readFileSync(path.join(root, 'ica-content.js'), 'utf8'); if (/only after the Associate submits all required closing documentation/.test(t)) { console.error('Decision 433 check failed: Exhibit A CDA wording'); process.exit(1); } console.log('decision 433 check passed'); }
